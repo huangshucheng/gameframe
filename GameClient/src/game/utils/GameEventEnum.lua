@@ -10,6 +10,7 @@ function postEvent(eventname,data)
 end
 
 ServerEvents = ServerEvents or {}
+
 ServerEvents.ON_SERVER_EVENT_DATA		    		= "on_server_event_data"
 ServerEvents.ON_SERVER_EVENT_MSG_SEND  				= "on_server_event_msg_send"
 ServerEvents.ON_SERVER_EVENT_NET_CONNECT 			= "on_server_event_net_connect"
