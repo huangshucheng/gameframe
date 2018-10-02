@@ -29,7 +29,11 @@ Debug.win32/
 moba_game_server/moba_server/build/proj.win32/Debug/
 moba_game_server/moba_server/build/proj.win32/maba_gameserver.vcxproj.user
 moba_game_server/moba_server/build/bin/logger/
+
 moba_game_server/moba_game_client/class_protobuf/proj.win32/protobuf/
+moba_game_server/moba_game_client/class_protobuf/proj.win32/Debug/
+moba_game_server/class_client/proj.win32/Debug/
+moba_game_server/class_udp_client/proj.win32/Debug/
 
 Thumbs.db
 
