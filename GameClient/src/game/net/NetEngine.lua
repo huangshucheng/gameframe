@@ -5,8 +5,6 @@ local NetEngine = class("NetEngine", EventProtocol)
 local socket = require "socket"
 -- cc.utils.init = require("framework.cc.utils.init")
 
-local ByteArrayVarint = require("net.ByteArrayVarint")
-
 local ByteArray = require("framework.cc.utils.ByteArray")
 
 local PRINT_DEBUG = true
@@ -102,7 +100,7 @@ function NetEngine:onMessage(event)
     if event.data == nil then
         return
     end
-    local ba =ByteArray.new(ByteArrayVarint.ENDIAN_BIG)
+    local ba =ByteArray.new(ByteArray.ENDIAN_BIG)
     ba:writeBuf(event.data)
     ba:setPos(1)
 --  有连包的情况，所以要读取数据长度
@@ -120,7 +118,7 @@ function NetEngine:decodeData(event)
     local repData = event.data
 
     if  self.isEncrypt then
-        local msg_byte = ByteArray.new(ByteArrayVarint.ENDIAN_BIG)
+        local msg_byte = ByteArray.new(ByteArray.ENDIAN_BIG)
         msg_byte:writeBuf(event.data)
         msg_byte:setPos(1)
         local len = msg_byte:readInt()
@@ -218,12 +216,12 @@ end
 function NetEngine:sendMsg(packet)
     print("==========SendMsg ==================="..packet)
     -- 长度计算
-    local c_byte = ByteArray.new(ByteArrayVarint.ENDIAN_BIG)
+    local c_byte = ByteArray.new(ByteArray.ENDIAN_BIG)
     c_byte:writeStringBytes(packet)
     c_byte:setPos(1)
     local content_len = c_byte:getAvailable()
     -- 写入数据流
-    local msg_byte = ByteArray.new(ByteArrayVarint.ENDIAN_BIG)
+    local msg_byte = ByteArray.new(ByteArray.ENDIAN_BIG)
     msg_byte:writeInt(content_len)
     msg_byte:writeStringBytes(packet)
     self.socket:send(msg_byte:getPack())

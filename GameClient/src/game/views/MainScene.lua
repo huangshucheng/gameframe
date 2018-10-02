@@ -3,7 +3,6 @@
 local MainScene = class("MainScene", cc.load("mvc").ViewBase)
 
 local ByteArray         = require("game.utils.ByteArray")
-local ByteArrayVarint   = require("game.utils.ByteArrayVarint")
 local NetEngine         = require("game.net.NetEngineNew")
 local ProtoMan          = require("game.utils.ProtoMan")
 local cmd_name_map      = require("game.net.cmd_name_map")
@@ -11,12 +10,8 @@ local cmd_name_map      = require("game.net.cmd_name_map")
 local tmpStr = ''
 function MainScene:onCreate()
 
---    display.newSprite("HelloWorld.png")
---        :move(display.center)
---        :addTo(self)
-
      self._lb = cc.Label:createWithSystemFont("Hello World", "Arial", 25)
-     self._lb:move(display.cx + 200, display.cy + 200)
+     self._lb:move(display.cx + 200, display.cy)
      self._lb:addTo(self)
 
     self._net = NetEngine:getInstance()
@@ -28,11 +23,11 @@ function MainScene:onCreate()
         for i = 1 , maxsize do
             msg = msg .. 'c'
         end
-        -- msg = 'cocos,hello,hcc!!!!'
+        msg = 'cocos,hello,hcc!!!!'
         
         local LoginReq = {      
-            name    = msg,     
-            age     = 25,   
+            name    = msg,
+            age     = 25,  
             email   = '827773271@qq.com',
             int_set = 1000,
         }
@@ -47,8 +42,11 @@ function MainScene:onCreate()
     end)
 
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
+
     -- self:testProtoBuf()
-    self:testByteArray()
+    --self:testByteArray()
+    -- local test = ''
+    -- assert(test , 'test must be not nil')
 end
 
 function MainScene:onEventData(event)
@@ -58,7 +56,7 @@ function MainScene:onEventData(event)
     if data.body then
         dump(data.body)
         if self._lb then
-            local _str = data.body.status
+            local _str = data.body.name
             tmpStr = tmpStr .. tostring(_str) .. '\n'
             self._lb:setString(tmpStr)
         end
@@ -98,7 +96,7 @@ end
 
 function MainScene:testByteArray()
     local _string = 'hccfuckyou'
-    local c_byte = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)    --Сβ
+    local c_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)    --Сβ
     c_byte:writeStringBytes(_string)
     c_byte:setPos(1)
     local content_len = c_byte:getLen()

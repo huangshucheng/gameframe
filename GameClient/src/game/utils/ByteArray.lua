@@ -47,19 +47,19 @@ function ByteArray:ctor(__endian)
 	self._buf = {}
 	self._pos = 1
 end
---æ€»é•¿å�?
+--蹇欓埀顑濆够鈹锯挋妫点�?
 function ByteArray:getLen()
 	return #self._buf
 end
--- å¯è¯»å–çš„é•¿åº�?
+-- 姘撹伀鐐夌尗鐐夌姘撹伀閳ユ拋顬ｂ檧鐏烩斁鈷欐５銉傞�?
 function ByteArray:getAvailable()
 	return #self._buf - self._pos + 1
 end
--- å½“å‰æŒ‡é’ˆä½ç½�?
+-- 姘撻檰閳ユ簫銉㈠ゥ宓溛垫巻鈭垛斁娅靛枹銇㈤摪宓滎灎閾?
 function ByteArray:getPos()
 	return self._pos
 end
--- è®¾ç½®å½“å‰æŒ‡é’ˆä½ç½�?
+-- 鐚簮鎴幗闄嗗簮姘撻檰閳ユ簫銉㈠ゥ宓溛垫巻鈭垛斁娅靛枹銇㈤摪宓滎灎�?
 function ByteArray:setPos(__pos)
 	self._pos = __pos
 	return self
@@ -317,7 +317,7 @@ function ByteArray:writeStringUShort(__string)
 end
 
 --- Read some bytes from buf
--- @return a bit string -- 将当前对象实例写到__bytes，写的位置从__bytes的offset开始，__length长度的字�?
+-- @return a bit string 
 function ByteArray:readBytes(__bytes, __offset, __length)
 	assert(iskindof(__bytes, "ByteArray"), "Need a ByteArray instance!")
 	local __selfLen = #self._buf
@@ -332,7 +332,7 @@ function ByteArray:readBytes(__bytes, __offset, __length)
 	end
 end
 
---- Write some bytes into buf --将__bytes 写到当前对象实例
+--- Write some bytes into buf
 function ByteArray:writeBytes(__bytes, __offset, __length)
 	assert(iskindof(__bytes, "ByteArray"), "Need a ByteArray instance!")
 	local __bytesLen = __bytes:getLen()

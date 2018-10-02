@@ -1,7 +1,6 @@
 local ProtoMan = class(ProtoMan)
 
 local ByteArray         = require("game.utils.ByteArray")
-local ByteArrayVarint   = require("game.utils.ByteArrayVarint")
 local ConfigKeyWord 	= require("game.net.ConfigKeyWord")
 local cmd_name_map 		= require("game.net.cmd_name_map")
 
@@ -33,7 +32,7 @@ function ProtoMan:pack_protobuf_cmd(stype, ctype, proto_msg)
 		buf = protobuf.encode(cmd_name_map[ctype],proto_msg) 
 	end
 
-    local msg_byte = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+    local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
     msg_byte:writeShort(stype)
     msg_byte:writeShort(ctype)	
     msg_byte:writeInt(0)	--utag(default 0)
@@ -44,7 +43,7 @@ end
 -- 解protobuf包
 function ProtoMan:unpack_protobuf_cmd(recvData) -- stype , ctype ,utag , body
 	if not recvData then return end
-	local msg_byte = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+	local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
     msg_byte:writeStringBytes(recvData)
     msg_byte:setPos(1)
 
@@ -65,14 +64,13 @@ function ProtoMan:unpack_protobuf_cmd(recvData) -- stype , ctype ,utag , body
     if body then
     	tb.body = protobuf.decode(cmd_name_map[ctype], body)
     end
-
     return tb
 end
 -- 打 json 包
 function ProtoMan:pack_json_cmd(stype, ctype, json_msg)
 	if (not stype) or (not ctype) then return end
 
-    local msg_byte = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+    local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
     msg_byte:writeShort(stype)
     msg_byte:writeShort(ctype)	
     msg_byte:writeInt(0)	--utag(default 0)
@@ -85,7 +83,7 @@ end
 -- 不带解析的解包
 function ProtoMan:unpack_cmd_msg(recvData) -- stype , ctype ,utag , body
 	if not recvData then return end
-	local msg_byte = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+	local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
     msg_byte:writeStringBytes(recvData)
     msg_byte:setPos(1)
 
@@ -94,7 +92,7 @@ function ProtoMan:unpack_cmd_msg(recvData) -- stype , ctype ,utag , body
     if msg_len < HEADER_SIZE then
     	return tb
     end
-    
+
     local stype = msg_byte:readShort()
     local ctype = msg_byte:readShort()
     local utag  = msg_byte:readInt()

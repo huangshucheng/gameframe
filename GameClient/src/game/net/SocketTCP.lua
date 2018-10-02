@@ -1,3 +1,5 @@
+local SocketTCP = class("SocketTCP")
+
 local SOCKET_RECONNECT_TIME 		= 5			-- socket reconnect try interval
 local SOCKET_CONNECT_FAIL_TIMEOUT 	= 3			-- socket failure timeout
 
@@ -9,8 +11,6 @@ local STATUS_TIMEOUT                = "timeout"
 
 local Scheduler     = require("game.utils.scheduler")
 local socket        = require "socket"
-
-local SocketTCP = class("SocketTCP")
 
 SocketTCP.EVENT_DATA                = "SOCKET_TCP_DATA"
 SocketTCP.EVENT_CLOSE               = "SOCKET_TCP_CLOSE"

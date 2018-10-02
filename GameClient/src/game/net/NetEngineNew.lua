@@ -1,7 +1,7 @@
 local NetEngine         = class("NetEngine")
+
 local SocketTCP         = require("game.net.SocketTCP")
 local ByteArray         = require("game.utils.ByteArray")
-local ByteArrayVarint   = require("game.utils.ByteArrayVarint")
 local BitUtil           = require("game.utils.BitUtil")
 local TCPPacker         = require("game.utils.TCPPacker")
 local ConfigKeyWord     = require("game.net.ConfigKeyWord")
@@ -12,7 +12,7 @@ local socket            = require "socket"
 local HEADER_SIZE       = 2
 
 local __name            = 'NetEngine>> '
-local __buf             = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+local __buf             = ByteArray.new(ByteArray.ENDIAN_LITTLE)
 
 function NetEngine:getInstance()
     if not self._instance then
@@ -64,12 +64,12 @@ function NetEngine:onMessage(event)
         return
     end
     --[[
-    local ba = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+    local ba = ByteArray.new(ByteArray.ENDIAN_LITTLE)
     ba:writeBuf(event.data) --可能有两个包
     ba:setPos(1)
     -- 有连包的情况，所以要读取数据长度
     if  ba:getAvailable() <= ba:getLen() then
-        local msg_byte = ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+        local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
         msg_byte:writeBuf(event.data)
         msg_byte:setPos(1)
         local len = msg_byte:readShort()
@@ -163,10 +163,10 @@ function NetEngine:_onReciveMsg(msg)
     __buf:setPos(1)
 
     while __buf:getAvailable() >= HEADER_SIZE do  --可读取长度 >= 消息体长度
-        local bodyLen = __buf:readShort()   -- 10
+        local bodyLen = __buf:readShort()
         
-        if __buf:getAvailable() < bodyLen - HEADER_SIZE then -- 6 < 8
-            __buf:setPos(__buf:getPos() - HEADER_SIZE) -- 3 - 2 = 1
+        if __buf:getAvailable() < bodyLen - HEADER_SIZE then
+            __buf:setPos(__buf:getPos() - HEADER_SIZE)
             break
         end
         msgs_tb[#msgs_tb+1] = __buf:readStringBytes(bodyLen - HEADER_SIZE)
@@ -185,7 +185,7 @@ end
 -------- interface end --------
 
 function NetEngine.getBaseBA()
-    return ByteArray.new(ByteArrayVarint.ENDIAN_LITTLE)
+    return ByteArray.new(ByteArray.ENDIAN_LITTLE)
 end
 
 return NetEngine
