@@ -50,9 +50,9 @@
   <ItemGroup>
     <Compile Include="src\game\MyApp.lua" />
     <Compile Include="src\game\net\cmd_name_map.lua" />
+    <Compile Include="src\game\net\cmd_opcode_map.lua" />
     <Compile Include="src\game\net\ConfigKeyWord.lua" />
-    <Compile Include="src\game\net\NetEngine.lua" />
-    <Compile Include="src\game\net\NetEngineNew.lua" />
+    <Compile Include="src\game\net\NetWork.lua" />
     <Compile Include="src\game\net\SocketTCP.lua" />
     <Compile Include="src\game\utils\bit.lua" />
     <Compile Include="src\game\utils\BitUtil.lua" />

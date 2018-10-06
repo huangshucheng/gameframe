@@ -1,5 +1,5 @@
 
-local session_set = {} -- 保存所有客户端的集合
+local session_set = {} -- 保存所有客户端的session集合
 
 function broadcast_except(msg, except_session)
 	for i = 1, #session_set do 
@@ -78,7 +78,7 @@ function on_trm_recv_cmd(s, msg)
   end
 
 end
--- 并没有调用c层的s->close 
+
 function on_trm_session_disconnect(s)
   local ip, port = Session.get_address(s)
 	print("on_trm_session_disconnect ip: " .. ip .. "port: " .. port )
@@ -93,8 +93,6 @@ function on_trm_session_disconnect(s)
 			return
 		end
 	end
-  
-
 end
 
 

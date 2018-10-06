@@ -27,16 +27,16 @@ Netbus.tcp_listen(6080)
 print("start service success !!!!\n")
 print('------------------------------\n')
 
---[[
+
 local trm_server = require("trm_server")
 local ret = Service.register(trm_server.stype, trm_server.service)
 if ret then 
-  print("register trm service success!!!hcc")
+  print("register trm service success!!!")
 else
   print("register trm service failed!!!")
 end
-]]
 
+--[[
 local echo_server = require("echo_server")
 local ret = Service.register(echo_server.stype, echo_server.service)
 if ret then 
@@ -44,5 +44,5 @@ if ret then
 else
   print("register echo_server failed!!!")
 end
-
+]]
 print('------------------------------\n')

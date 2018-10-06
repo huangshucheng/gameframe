@@ -154,7 +154,7 @@ ws_protocol::package_ws_send_data(const unsigned char* raw_data, int len, int* w
 	}
 	// cache malloc
 	unsigned char* data_buf = (unsigned char*)cache_alloc(wbuf_allocer, head_size + len);
-	data_buf[0] = 0x81;
+	data_buf[0] = 0x82; // 0x81 字符串 0x82 二进制;
 	if (len <= 125) {
 		data_buf[1] = len;
 	}

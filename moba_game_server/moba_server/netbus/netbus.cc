@@ -25,18 +25,17 @@ struct connect_cb {
 extern "C" {
 	static void
 	on_recv_client_cmd(session* s, unsigned char* body, int len) {
-		printf("on_recv_client_cmd, %s \n",body);
-		struct cmd_msg* msg = NULL;
-		if (proto_man::decode_cmd_msg(body, len, &msg)) {
-			if (!service_man::on_recv_cmd_msg((session*)s, msg)) {
-				//s->close();
+		
+		struct raw_cmd raw;
+		if (proto_man::decode_raw_cmd(body, len, &raw)) {
+			if (!service_man::on_recv_raw_cmd((session*)s, &raw)) {
+				s->close();
 			}
 			//test
 			//LoginReq* tmp = (LoginReq*)(msg->body);
 			//printf("receive: %d , name: %s , email: %s \n", tmp->age(), tmp->name().c_str(), tmp->email().c_str());
 			//s->send_msg(msg);
 			//end
-			proto_man::cmd_msg_free(msg);
 		}
 	}
 
@@ -52,11 +51,12 @@ extern "C" {
 				break;
 			}
 
-			if (s->recved < pkg_size) {
+			if (pkg_size == 0 || head_size == 0 || pkg_size <= head_size){
+				s->close();
 				break;
 			}
 
-			if (pkg_size == 0 || head_size == 0){
+			if (s->recved < pkg_size) {
 				break;
 			}
 
@@ -96,7 +96,8 @@ extern "C" {
 				break;
 			}
 
-			if (pkg_size == 0 || head_size == 0 ){
+			if (pkg_size == 0 || head_size == 0 || pkg_size <= head_size){
+				s->close();
 				break;
 			}
 
@@ -251,9 +252,10 @@ extern "C" {
 		s->c_port = ntohs(addr.sin_port);
 		s->socket_type = (int)(server->data);
 		
-		printf("hcc>> client connect>> ip: %s, port: %d \n",(char*)s->c_address,s->c_port);
+		printf("client connect>> ip: %s, port: %d \n",(char*)s->c_address,s->c_port);
 
 		uv_read_start((uv_stream_t*)client, uv_alloc_buf, after_read);
+		service_man::on_session_connect((session*)s);
 	}
 
 	static void
@@ -355,7 +357,7 @@ netbus::init() {
 }
 
 void 
-netbus::tcp_connect(char* server_ip, int port,
+netbus::tcp_connect(const char* server_ip, int port,
                     void(*on_connected)(int err, session* s, void* udata),
 					void* udata) {
 	struct sockaddr_in bind_addr;

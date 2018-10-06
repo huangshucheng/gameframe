@@ -45,9 +45,7 @@ extern "C" {
 	static void
 	after_write(uv_write_t* req, int status) {
 		if (status == 0) {
-			// printf("write success\n");
 		}
-		// free(req);
 		cache_free(wr_allocer, req);
 	}
 
@@ -63,22 +61,25 @@ extern "C" {
 	}
 }
 
+void* uv_session::operator new(size_t size){
+	return cache_alloc(session_allocer, sizeof(uv_session));
+}
+
+void uv_session::operator delete(void* mem){
+	cache_free(session_allocer, mem);
+}
+
 uv_session*
 uv_session::create() {
-	uv_session* uv_s = (uv_session*)cache_alloc(session_allocer, sizeof(uv_session));
-	uv_s->uv_session::uv_session();
-
+	uv_session* uv_s = new uv_session();
 	uv_s->init();
-
 	return uv_s;
 }
 
 void
 uv_session::destroy(uv_session* s) {
 	s->exit();
-
-	s->uv_session::~uv_session();
-	cache_free(session_allocer, s);
+	delete s;
 }
 
 void 
@@ -111,7 +112,10 @@ uv_session::close() {
 	this->is_shutdown = true;
 	uv_shutdown_t* reg = &this->shutdown;
 	memset(reg, 0, sizeof(uv_shutdown_t));
-	uv_shutdown(reg, (uv_stream_t*)&this->tcp_handler, on_shutdown);
+	int ret = uv_shutdown(reg, (uv_stream_t*)&this->tcp_handler, on_shutdown);
+	if (ret != 0){
+		uv_close((uv_handle_t*)&this->tcp_handler, on_close);
+	}
 	printf("uv_session->close and shutdown\n");
 }
 
@@ -133,7 +137,7 @@ uv_session::send_data(unsigned char* body, int len) {
 			uv_write(w_req, (uv_stream_t*)&this->tcp_handler, &w_buf, 1, after_write);
 		}
 	}
-	else { // tcp, 
+	else { // tcp
 		int tp_pkg_len;
 		unsigned char* tp_pkg = tp_protocol::package(body, len, &tp_pkg_len);
 		w_buf = uv_buf_init((char*)tp_pkg, tp_pkg_len);
@@ -158,4 +162,9 @@ uv_session::send_msg(struct cmd_msg* msg) {
 		this->send_data(encode_pkg, encode_len);
 		proto_man::msg_raw_free(encode_pkg);
 	}
+}
+
+void 
+uv_session::send_raw_cmd(struct raw_cmd* raw) {
+	this->send_data(raw->raw_data, raw->raw_len);
 }

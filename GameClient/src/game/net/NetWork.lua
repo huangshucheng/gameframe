@@ -1,9 +1,9 @@
-local NetEngine         = class("NetEngine")
+local NetWork         = class("NetWork")
 
 local SocketTCP         = require("game.net.SocketTCP")
 local ByteArray         = require("game.utils.ByteArray")
 local BitUtil           = require("game.utils.BitUtil")
-local TCPPacker         = require("game.utils.TCPPacker")
+local TcpPacker         = require("game.utils.TcpPacker")
 local ConfigKeyWord     = require("game.net.ConfigKeyWord")
 local ProtoMan          = require("game.utils.ProtoMan")
 
@@ -11,17 +11,17 @@ local socket            = require "socket"
 
 local HEADER_SIZE       = 2
 
-local __name            = 'NetEngine>> '
+local __name            = 'NetWork>> '
 local __buf             = ByteArray.new(ByteArray.ENDIAN_LITTLE)
 
-function NetEngine:getInstance()
+function NetWork:getInstance()
     if not self._instance then
-        self._instance = NetEngine.new()
+        self._instance = NetWork.new()
     end
     return self._instance
 end
 
-function NetEngine:ctor()
+function NetWork:ctor()
     self._ip         	= ConfigKeyWord.ip
     self._port       	= ConfigKeyWord.port
     self._isEncrypt  	= false
@@ -35,10 +35,9 @@ function NetEngine:ctor()
     self:addEventListenner()
 
     print(__name .. "  ip: " .. self._ip .. "  ,port: " .. tostring(self._port))
-
 end
 
-function NetEngine:addEventListenner()
+function NetWork:addEventListenner()
     if self._socketTCP then
         self._socketTCP:addEventListener(SocketTCP.EVENT_CONNECTED, handler(self,self.onConnect))
         self._socketTCP:addEventListener(SocketTCP.EVENT_DATA, handler(self, self.onMessage))
@@ -49,25 +48,21 @@ function NetEngine:addEventListenner()
 end
 -------- event start --------
 
-function NetEngine:onConnect(stats)
+function NetWork:onConnect(stats)
 	print(__name .. "onConnect>> 连接成功")
     self._lastRecvHeartbeat = os.time()
     postEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT)
 end
 
 -- 接收数据
-function NetEngine:onMessage(event)
+function NetWork:onMessage(event)
 	print(__name .. " onMessage>> 收到消息------------start\n")
 
-   if event.data == nil then
-        print(__name .. " onMessage>> 收到空消息------------end\n")
-        return
-    end
+   if event.data == nil then return end
     --[[
     local ba = ByteArray.new(ByteArray.ENDIAN_LITTLE)
     ba:writeBuf(event.data) --可能有两个包
     ba:setPos(1)
-    -- 有连包的情况，所以要读取数据长度
     if  ba:getAvailable() <= ba:getLen() then
         local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
         msg_byte:writeBuf(event.data)
@@ -78,11 +73,14 @@ function NetEngine:onMessage(event)
         print("可读长度2：" .. msg_byte:getAvailable())
         print("包长度：" .. tostring(len))
         print("数据：" .. data)    --proto buf msg
-        postEvent(ServerEvents.ON_SERVER_EVENT_DATA, data)
+        local tb = ProtoMan:getInstance():unpack_protobuf_cmd(data)
+        dump(tb)
+        postEvent(ServerEvents.ON_SERVER_EVENT_DATA, tb)
     end
     ]]
+    -- 解连包
     local data_tb = self:_onReciveMsg(event.data)
-    dump(data_tb)
+    print("size: >>>>  " .. #data_tb)
     for _ , v in pairs(data_tb) do
         local tb = ProtoMan:getInstance():unpack_protobuf_cmd(v)
         postEvent(ServerEvents.ON_SERVER_EVENT_DATA , tb)
@@ -90,17 +88,17 @@ function NetEngine:onMessage(event)
     print(__name .. " onMessage>> 收到消息------------end\n")
 end
 
-function NetEngine:onClose()
+function NetWork:onClose()
 	print(__name .. " onClose>> 连接失败1")
     postEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE)
 end
 
-function NetEngine:onClosed()
+function NetWork:onClosed()
 	print(__name .. " onClosed>> 连接失败2")
     postEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED)
 end
 
-function NetEngine:onConnectFail()
+function NetWork:onConnectFail()
     print(__name .. " onConnectFail>> 连接失败")
     postEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL)
 end
@@ -109,7 +107,7 @@ end
 
 -------- interface start --------
 
-function NetEngine:start()
+function NetWork:start()
    self._lastRecvHeartbeat = os.time()
 
    if self._socketTCP then
@@ -117,7 +115,7 @@ function NetEngine:start()
    end
 end
 
-function NetEngine:reConnect()
+function NetWork:reConnect()
     self._lastRecvHeartbeat = os.time()
     self._socketTCP = SocketTCP.new(self._ip,self._port,false)
 
@@ -126,28 +124,28 @@ function NetEngine:reConnect()
     end
 end
 
-function NetEngine:stop()
+function NetWork:stop()
 	if self._socketTCP then
    		self._socketTCP:disconnect()
 	end
 end
 
-function NetEngine:isConnected()
+function NetWork:isConnected()
     if self._socketTCP then
         return self._socketTCP.isConnected
     end
 end
 
-function NetEngine:disconnect()
+function NetWork:disconnect()
     if self._socketTCP then
     	self._socketTCP:disconnect()
     end
 end
 
-function NetEngine:sendMsg(stype, ctype, packet)
+function NetWork:sendMsg(stype, ctype, packet)
     local proto_cmd = ProtoMan:getInstance():pack_protobuf_cmd(stype,ctype,packet)
     if proto_cmd then
-        local pkt = TCPPacker:getInstance():tcp_pack(proto_cmd)
+        local pkt = TcpPacker:getInstance():tcp_pack(proto_cmd)
         if self._socketTCP and pkt then
          	self._socketTCP:send(pkt)
             postEvent(ServerEvents.ON_SERVER_EVENT_MSG_SEND, pkt)
@@ -155,14 +153,14 @@ function NetEngine:sendMsg(stype, ctype, packet)
     end
 end
 -- 粘包处理
-function NetEngine:_onReciveMsg(msg)
+function NetWork:_onReciveMsg(msg)
     if not __buf then return end
     local msgs_tb = {}
-    __buf:setPos(__buf:getLen()+1)  -- 1
+    __buf:setPos(__buf:getLen()+1)
     __buf:writeStringBytes(msg)
     __buf:setPos(1)
 
-    while __buf:getAvailable() >= HEADER_SIZE do  --可读取长度 >= 消息体长度
+    while __buf:getAvailable() >= HEADER_SIZE do  -- 可读取长度 >= 消息体长度
         local bodyLen = __buf:readShort()
         
         if __buf:getAvailable() < bodyLen - HEADER_SIZE then
@@ -173,9 +171,11 @@ function NetEngine:_onReciveMsg(msg)
     end
 
     if __buf:getAvailable() <= 0 then
-        __buf = NetEngine.getBaseBA()
+        -- clear buffer on exhausted
+        __buf = NetWork.getBaseBA()
     else
-        local tmpBuf = NetEngine.getBaseBA()
+        -- some datas in buffer yet, write them to a new blank buffer.
+        local tmpBuf = NetWork.getBaseBA()
         __buf:readBytes(tmpBuf, 1, __buf:getAvailable())    -- 将__buf 写到 tmpBuf
         __buf = tmpBuf
     end
@@ -184,8 +184,8 @@ function NetEngine:_onReciveMsg(msg)
 end
 -------- interface end --------
 
-function NetEngine.getBaseBA()
+function NetWork.getBaseBA()
     return ByteArray.new(ByteArray.ENDIAN_LITTLE)
 end
 
-return NetEngine
+return NetWork

@@ -34,7 +34,6 @@ tp_protocol::package(const unsigned char* raw_data, int len, int* pkg_len) {
 
 void 
 tp_protocol::release_package(unsigned char* tp_pkg) {
-	// free(tp_pkg);
 	cache_free(wbuf_allocer, tp_pkg);
 }
 

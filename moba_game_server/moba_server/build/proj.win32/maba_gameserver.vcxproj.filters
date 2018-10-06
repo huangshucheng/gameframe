@@ -361,6 +361,9 @@
     <ClCompile Include="..\..\apps\lua_test\pf_cmd_map.cc">
       <Filter>apps\lua_test</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lua_wrapper\utils_export_to_lua.cc">
+      <Filter>lua_wrapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\3rd\libuv\include\android-ifaddrs.h">
@@ -620,6 +623,9 @@
     </ClInclude>
     <ClInclude Include="..\..\apps\lua_test\pf_cmd_map.h">
       <Filter>apps\lua_test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lua_wrapper\utils_export_to_lua.h">
+      <Filter>lua_wrapper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -47,19 +47,19 @@ function ByteArray:ctor(__endian)
 	self._buf = {}
 	self._pos = 1
 end
---蹇欓埀顑濆够鈹锯挋妫点�?
+
 function ByteArray:getLen()
 	return #self._buf
 end
--- 姘撹伀鐐夌尗鐐夌姘撹伀閳ユ拋顬ｂ檧鐏烩斁鈷欐５銉傞�?
+
 function ByteArray:getAvailable()
 	return #self._buf - self._pos + 1
 end
--- 姘撻檰閳ユ簫銉㈠ゥ宓溛垫巻鈭垛斁娅靛枹銇㈤摪宓滎灎閾?
+
 function ByteArray:getPos()
 	return self._pos
 end
--- 鐚簮鎴幗闄嗗簮姘撻檰閳ユ簫銉㈠ゥ宓溛垫巻鈭垛斁娅靛枹銇㈤摪宓滎灎�?
+
 function ByteArray:setPos(__pos)
 	self._pos = __pos
 	return self

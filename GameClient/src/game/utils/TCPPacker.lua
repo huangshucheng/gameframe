@@ -1,20 +1,18 @@
-local TCPPacker         = class(TCPPacker)
+local TcpPacker         = class(TcpPacker)
 
 local ByteArray         = require("game.utils.ByteArray")
 
 local HEADER_SIZE = 2
 local MAX_PKT_LEN = 65535 - 2
 
-function TCPPacker:getInstance()
+function TcpPacker:getInstance()
     if not self._instance then
-        self._instance = TCPPacker.new()
+        self._instance = TcpPacker.new()
     end
     return self._instance
 end
 
--- 头两个字节表示长度，后面接body
--- 服务端用小尾(高位存储在高内存地址，低位存在低内存地址)
-function TCPPacker:tcp_pack(packet)
+function TcpPacker:tcp_pack(packet)
     if type(packet) ~= 'string' then return end
     local c_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)    --小尾
     c_byte:writeStringBytes(packet)
@@ -32,4 +30,4 @@ function TCPPacker:tcp_pack(packet)
     return msg_byte:getPack()
 end
 
-return TCPPacker
+return TcpPacker

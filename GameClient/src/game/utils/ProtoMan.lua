@@ -66,7 +66,7 @@ function ProtoMan:unpack_protobuf_cmd(recvData) -- stype , ctype ,utag , body
     end
     return tb
 end
--- 打 json 包
+
 function ProtoMan:pack_json_cmd(stype, ctype, json_msg)
 	if (not stype) or (not ctype) then return end
 
@@ -80,7 +80,7 @@ function ProtoMan:pack_json_cmd(stype, ctype, json_msg)
     end
     return msg_byte:getPack()
 end
--- 不带解析的解包
+
 function ProtoMan:unpack_cmd_msg(recvData) -- stype , ctype ,utag , body
 	if not recvData then return end
 	local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
