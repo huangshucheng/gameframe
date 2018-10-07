@@ -1,16 +1,40 @@
 local cmd_name_map = {
-	"LoginReq",
-	"LoginRes",
+	"GuestLoginReq",
+	"GuestLoginRes",
+	"Relogin",
+	"UserLostConn",
+	"EditProfileReq",
+	"EditProfileRes",
+	"AccountUpgradeReq",
+	"AccountUpgradeRes",
+	"UnameLoginReq",
+	"UnameLoginRes",
+	"LoginOutReq",
+	"LoginOutRes",
+	"GetUgameInfoReq",
+	"GetUgameInfoRes",
 
-	"ExitReq",
-	"ExitRes",
+	"RecvLoginBonuesReq",
+	"RecvLoginBonuesRes",
 
-	"SendMsgReq",
-	"SendMsgRes",
+	"GetWorldRankUchipReq",
+	"GetWorldRankUchipRes",
 
-	"OnUserLogin",
-	"OnUserExit",
-	"OnSendMsg",
+	"GetSysMsgReq",
+	"GetSysMsgRes",
+
+	"LoginLogicReq",
+	"LoginLogicRes",
+
+	"EnterZoneReq",
+	"EnterZoneRes",
+
+	"EnterMatch",
+	"UserArrived",
+	"ExitMatchReq",
+	"ExitMatchRes",
+	"UserExitMatch",
+	"GameStart",
 }
 
 return cmd_name_map

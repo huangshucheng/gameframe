@@ -27,22 +27,22 @@ remote_servers[Stype.Logic] = {
 
 
 local game_config = {
-	gateway_tcp_ip = "127.0.0.1",
-	gateway_tcp_port = 6080,
+	gateway_tcp_ip 		= "127.0.0.1",
+	gateway_tcp_port 	= 6080,
 
-	gateway_ws_ip = "127.0.0.1",
-	gateway_ws_port = 6081,
+	gateway_ws_ip 		= "127.0.0.1",
+	gateway_ws_port 	= 6081,
 
 	servers = remote_servers,
 
 	auth_mysql = {
-		host = "127.0.0.1", -- 数据库所在的host
-		port = 3306,        -- 数据库所在的端口
-		db_name = "auth_center",  -- 数据库的名字
-		uname = "root",      -- 登陆数据库的账号
-		upwd = "123456",     -- 登陆数据库的密码
+		host 		= "127.0.0.1", -- 数据库所在的host
+		port 		= 3306,        -- 数据库所在的端口
+		db_name 	= "auth_center",  -- 数据库的名字
+		uname 		= "root",      -- 登陆数据库的账号
+		upwd 		= "123456",     -- 登陆数据库的密码
 	},
-
+--[[
 	center_redis = {
 		host = "127.0.0.1", -- redis所在的host
 		port = 6379, -- reidis 端口
@@ -69,6 +69,7 @@ local game_config = {
 		port = 6379, -- reidis 端口
 		db_index = 3, -- 数据库3
 	},
+	]]
 }
 
 return game_config

@@ -4,7 +4,7 @@
     <Content>
       <Animation Duration="0" Speed="1.0000" />
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
-        <Size X="960.0000" Y="640.0000" />
+        <Size X="1280.0000" Y="720.0000" />
         <Children>
           <AbstractNodeData Name="btn_enter_room" ActionTag="262528791" Tag="3" IconVisible="False" LeftMargin="793.0442" RightMargin="66.9558" TopMargin="243.9149" BottomMargin="360.0851" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="100.0000" Y="36.0000" />

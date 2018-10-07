@@ -605,7 +605,8 @@ function decodeTable(tbl)
    for k,v in pairs(tbl) do
        if type(v) == "table" then
           --这里的xxxx请自行替换成protobuf的package
-          if(type(v[1]) == "string" and string.find(v[1],"XXXXX.")) then
+          -- if(type(v[1]) == "string" and string.find(v[1],"XXXXX.")) then
+          if type(v[1]) == "string" then
                local ret = decode(v[1], v[2])
                if ret then
                   tbl[k] = ret

@@ -3,6 +3,70 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="game_scene">
+          <Image Name="PVPload001.png" />
+        </Folder>
+        <Folder Name="home_scene">
+          <Folder Name="login_bonues">
+            <Image Name="bonues_icon.png" />
+            <Image Name="login_bg.png" />
+            <Image Name="recv.png" />
+            <Image Name="zw.png" />
+          </Folder>
+          <Folder Name="user_info">
+            <Image Name="012.png" />
+            <Image Name="013.png" />
+            <Image Name="019.png" />
+            <Image Name="020.png" />
+            <Image Name="021.png" />
+            <Image Name="022.png" />
+            <Image Name="023.png" />
+            <Image Name="025.png" />
+            <Image Name="026.png" />
+            <Image Name="048.png" />
+            <Image Name="049.png" />
+            <Image Name="120.png" />
+            <Image Name="136.png" />
+            <Image Name="137.png" />
+            <Image Name="141.png" />
+            <Image Name="145.png" />
+            <Image Name="149.png" />
+            <Image Name="169.png" />
+            <Image Name="320.png" />
+            <Image Name="321.png" />
+            <Image Name="97.png" />
+            <File Name="user_info_dlg.prefab" />
+          </Folder>
+          <Image Name="bottom_bg.png" />
+          <Image Name="coin.png" />
+          <Image Name="coin_bg.png" />
+          <Image Name="demaon.png" />
+          <Image Name="friend_down.png" />
+          <Image Name="friend_up.png" />
+          <Image Name="home_scene_bg.png" />
+          <Image Name="hp_down.png" />
+          <Image Name="hp_up.png" />
+          <Image Name="level_process.png" />
+          <Image Name="mail_down.png" />
+          <Image Name="mail_up.png" />
+          <Image Name="mall_down.png" />
+          <Image Name="mall_up.png" />
+          <Image Name="msg_down.png" />
+          <Image Name="msg_up.png" />
+          <Image Name="setting_down.png" />
+          <Image Name="setting_up.png" />
+          <Image Name="top.png" />
+          <Image Name="uinfo_bg.png" />
+          <Image Name="vip.png" />
+          <Image Name="war_down.png" />
+          <Image Name="war_up.png" />
+        </Folder>
+        <Folder Name="login_scene">
+          <Image Name="guest_login_normal.png" />
+          <Image Name="guest_login_press.png" />
+          <Image Name="login_bg.png" />
+        </Folder>
+        <Project Name="LoginScene.csd" Type="Scene" />
         <Project Name="MainScene.csd" Type="Scene" />
       </RootFolder>
     </Group>

@@ -41,10 +41,7 @@ function gw_service_init()
 		server_session_man[v.stype] = nil
 		do_connecting[v.stype] = false
 	end
-
-	-- 启动一个定时器
 	Scheduler.schedule(check_server_connect, 1000, -1, 5000)
-	-- end 
 end
 
 function is_login_return_cmd(ctype)
@@ -52,14 +49,13 @@ function is_login_return_cmd(ctype)
 		ctype == Cmd.eUnameLoginRes then 
 		return true
 	end
-
 	return false
 end
 
 function send_to_client(server_session, raw_cmd)
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
 	local client_session = nil
-	print('gateway>>  send_to_client>> ',stype,ctype,utag)
+	-- print('gateway>>  send_to_client>> ',stype,ctype,utag)
 
 	if is_login_return_cmd(ctype) then
 		client_session = client_sessions_ukey[utag]
@@ -122,7 +118,7 @@ end
 function send_to_server(client_session, raw_cmd)
 
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
-	print(stype, ctype, utag)
+	-- print('gateway>>  send_to_server>> ',stype,ctype,utag)
 
 	local server_session = server_session_man[stype]
 	if server_session == nil then --可以回一个命令给客户端，系统错误
@@ -144,8 +140,7 @@ function send_to_server(client_session, raw_cmd)
 			return
 		end
 	end
-
-	-- 打上utag然后转发给我们的服务器
+	-- 打上utag然后转发给服务器
 	RawCmd.set_utag(raw_cmd, utag)
 	Session.send_raw_cmd(server_session, raw_cmd)
 	

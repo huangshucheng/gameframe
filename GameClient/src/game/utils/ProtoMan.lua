@@ -62,7 +62,8 @@ function ProtoMan:unpack_protobuf_cmd(recvData) -- stype , ctype ,utag , body
     tb.ctype = ctype
     tb.utag  = utag
     if body then
-    	tb.body = protobuf.decode(cmd_name_map[ctype], body)
+        -- tb.body = protobuf.decode(cmd_name_map[ctype], body)
+    	tb.body = protobuf.decodeAll(cmd_name_map[ctype], body)
     end
     return tb
 end

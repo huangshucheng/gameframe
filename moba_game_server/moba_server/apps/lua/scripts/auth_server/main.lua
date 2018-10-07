@@ -2,8 +2,8 @@
 Logger.init("logger/auth_server/", "auth", true)
 --end
 
--- 连接到我们的auth center mysql 数据库
--- require("database/mysql_auth_center")
+-- 连接到auth center mysql 数据库
+require("database/mysql_auth_center")
 --end 
 
 -- 初始化协议模块
@@ -28,8 +28,6 @@ local Stype = require("Stype")
 -- 开启网关端口监听
 Netbus.tcp_listen(servers[Stype.Auth].port)
 print("Auth Server Start at ".. servers[Stype.Auth].port)
---Netbus.udp_listen(8002)
---end
 
 local auth_service = require("auth_server/auth_service")
 local ret = Service.register(Stype.Auth, auth_service)
