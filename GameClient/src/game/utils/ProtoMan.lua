@@ -12,7 +12,7 @@ function ProtoMan:getInstance()
     end
     return self._instance
 end
--- ×¢²ápb
+-- æ³¨å†Œpb
 function ProtoMan:regist_pb()
 	local fileUtils = cc.FileUtils:getInstance()
 	local pbFilePath = fileUtils:fullPathForFilename(ConfigKeyWord.pb_file_name)
@@ -24,7 +24,7 @@ function ProtoMan:regist_pb()
     local buffer = read_protobuf_file_c(pbFilePath)
     protobuf.register(buffer)
 end
--- ´ò protobuf °ü
+-- æ‰“ protobuf åŒ…
 function ProtoMan:pack_protobuf_cmd(stype, ctype, proto_msg)
 	if (not stype) or (not ctype) then return end
 	local buf = nil
@@ -40,7 +40,7 @@ function ProtoMan:pack_protobuf_cmd(stype, ctype, proto_msg)
     msg_byte:setPos(1)
     return msg_byte:getPack()
 end
--- ½âprotobuf°ü
+-- è§£protobufåŒ…
 function ProtoMan:unpack_protobuf_cmd(recvData) -- stype , ctype ,utag , body
 	if not recvData then return end
 	local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)

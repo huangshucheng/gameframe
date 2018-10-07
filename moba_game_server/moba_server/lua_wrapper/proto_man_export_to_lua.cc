@@ -154,8 +154,8 @@ lua_raw_set_utag(lua_State* tolua_S) {
 
 	unsigned int utag = (unsigned int)luaL_checkinteger(tolua_S, 2);
 	raw->utag = utag;
-	// 修改我们的body内存;
 
+	// 修改body内存;
 	unsigned char* utag_ptr = raw->raw_data + 4;
 	utag_ptr[0] = (utag & 0x000000FF);
 	utag_ptr[1] = ((utag & 0x0000FF00) >> 8);

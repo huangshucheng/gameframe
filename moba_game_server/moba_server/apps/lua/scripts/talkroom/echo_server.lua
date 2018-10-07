@@ -14,12 +14,6 @@ function echo_recv_cmd(s, msg)
   -- send to client
   local to_client = {1, 2, 0, {status = 200}}
   Session.send_msg(s, to_client)
-  -- if body then
-      -- local to_client = {1, 1, 0, {name = body.name, email = body.email, age = body.age, int_set = body.int_set }}
-    -- for i = 1 , 500 do
-      -- Session.send_msg(s, to_client)
-    -- end
-  -- end
   print('echo_recv_cmd-----------------end\n')
 end
 

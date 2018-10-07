@@ -7,8 +7,8 @@
 
 #include "service.h"
 
-service::service() {
-	this->using_raw_cmd = false;
+service::service() :using_raw_cmd(false){
+
 }
 // bool if return false, close socket
 bool 

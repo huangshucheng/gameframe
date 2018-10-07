@@ -10,7 +10,8 @@
 
 #define MAX_SERVICE 512 // 0 ~1024-1
 
-static service* g_service_set[MAX_SERVICE];
+//static service* g_service_set[MAX_SERVICE];
+static std::map<int, service*> g_service_set;
 
 bool 
 service_man::register_service(int stype, service* s) {
@@ -71,5 +72,6 @@ service_man::on_session_connect(session* s) {
 
 void
 service_man::init() {
-	memset(g_service_set, 0, sizeof(g_service_set));
+	//memset(g_service_set, 0, sizeof(g_service_set));
+	g_service_set.clear();
 }

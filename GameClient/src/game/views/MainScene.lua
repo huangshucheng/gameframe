@@ -7,7 +7,6 @@ local cmd_name_map      = require("game.net.cmd_name_map")
 local cmd_opcode_map    = require("game.net.cmd_opcode_map")
 
 local resFileName       = 'MainScene.csb'
-local sendString        = "hccteststring!!"
 
 function MainScene:onCreate()
 
@@ -43,6 +42,17 @@ function MainScene:onCreate()
         btn_send:addClickEventListener(handler(self,self.onBtnEventSendMessage))
     end
 
+    local editboxPosNode = self.m_rootNode:getChildByName('editbox_pos_node')
+
+    self.selectCount = ccui.EditBox:create(cc.size(600,40),'dikuang.png') 
+    self.selectCount:setPosition(cc.p(editboxPosNode:getPositionX() + 200,editboxPosNode:getPositionY()))
+    self.selectCount:setAnchorPoint(cc.p(0.5,0.5))
+    self.selectCount:setFontSize(26)
+    self.selectCount:setFontColor(cc.c3b(255,255,255))
+    self.selectCount:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND )
+    self.selectCount:setPlaceHolder('input please')
+    self:addChild(self.selectCount)
+
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
 end
 
@@ -70,47 +80,46 @@ end
 function MainScene:on_login_return(data)
     print('MainScene:on_login_return')
     if data.status == 1 then
-        self:add_status_option("enter talkroom success !")
+        self:add_status_option("您已经进入房间 !")
     elseif data.status == -1 then
-        self:add_status_option("already in then talkroom !")
+        self:add_status_option("您早已在房间 !")
     end
 end
 
 function MainScene:on_exit_return(data)
     print('MainScene:on_exit_return')
     if data.status == 1 then
-        self:add_status_option("exit talkroom success !")
+        self:add_status_option("成功退出房间 !")
     elseif  data.status == -1 then
-        self:add_status_option("you are not in the talkroom !")
+        self:add_status_option("您早已不在房间!")
     end
 end
 
 function MainScene:on_send_msg_return(data)
     print(' MainScene:on_send_msg_return')
     if data.status == 1 then
+        local sendString = self.selectCount:getText()
        self:add_status_option(sendString) 
     elseif data.status == -1 then
-        self:add_status_option("send failed,you are not in the talkroom !")
+        self:add_status_option("发送失败，您不在房间!")
     end
 end
 
 function MainScene:on_other_user_enter(data)
-    print('MainScene:on_other_user_enter')
-    self:add_status_option(tostring(data.ip) .. ': ' .. tostring(data.port) .. '  enter talkroom!')
+    self:add_status_option(tostring(data.ip) .. ': ' .. tostring(data.port) .. '进入房间!')
 end
 
 function MainScene:on_other_user_exit(data)
-    print('MainScene:on_other_user_exit')
 
-    self:add_status_option(tostring(data.ip) .. ': ' .. tostring(data.port) .. '  exit talkroom!')
+    self:add_status_option(tostring(data.ip) .. ': ' .. tostring(data.port) .. '  退出房间!')
 end
 
 function MainScene:on_other_user_send_msg(data)
-    print('MainScene:on_other_user_send_msg')
-    self:add_status_option(tostring(data.ip) .. ': ' .. tostring(data.port) .. ' say: ' .. tostring(data.content))
+    self:add_status_option(tostring(data.ip) .. ': ' .. tostring(data.port) .. ' 说: ' .. tostring(data.content))
 end
 
 function MainScene:onBtnEventEnterTalkRoom(sender,eventType)
+    -- self._net:sendMsg(1,cmd_opcode_map.LoginReq,nil)
     self._net:sendMsg(1,cmd_opcode_map.LoginReq,nil)
 end
 
@@ -119,6 +128,7 @@ function MainScene:onBtnEventExitTalkRoom(sender,eventType)
 end
 
 function MainScene:onBtnEventSendMessage(sender,eventType)
+    local sendString = self.selectCount:getText()
     self._net:sendMsg(1,cmd_opcode_map.SendMsgReq,{content = sendString})
 end
 

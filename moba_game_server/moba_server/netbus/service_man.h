@@ -1,6 +1,8 @@
 #ifndef __SERVICE_MAN_H__
 #define __SERVICE_MAN_H__
 
+#include <map>
+
 class session;
 class service;
 struct cmd_msg;

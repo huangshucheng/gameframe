@@ -35,6 +35,11 @@ function NetWork:ctor()
     self:addEventListenner()
 
     print(__name .. "  ip: " .. self._ip .. "  ,port: " .. tostring(self._port))
+    -- TODO 
+    --[[
+        加密
+        心跳
+    ]]
 end
 
 function NetWork:addEventListenner()

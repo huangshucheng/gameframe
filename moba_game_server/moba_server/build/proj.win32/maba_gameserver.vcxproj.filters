@@ -47,11 +47,11 @@
     <Filter Include="3rd\tolua">
       <UniqueIdentifier>{341df334-d2be-41a8-975d-2230fa31eb31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="apps\lua_test">
+    <Filter Include="apps\lua">
       <UniqueIdentifier>{9be8deca-9add-4568-9070-d37b9709f6ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="apps\lua_test\proto">
-      <UniqueIdentifier>{e7a1f443-ebf9-467e-ac83-22b51c49a756}</UniqueIdentifier>
+    <Filter Include="apps\lua\proto">
+      <UniqueIdentifier>{eaa9cd5c-2fe7-482a-92c2-b14d401ad783}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -349,20 +349,17 @@
     <ClCompile Include="..\..\lua_wrapper\proto_man_export_to_lua.cc">
       <Filter>lua_wrapper</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\apps\lua_test\main.cc">
-      <Filter>apps\lua_test</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\apps\lua_test\proto\game.pb.cc">
-      <Filter>apps\lua_test\proto</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\utils\small_alloc.c">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\apps\lua_test\pf_cmd_map.cc">
-      <Filter>apps\lua_test</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\lua_wrapper\utils_export_to_lua.cc">
       <Filter>lua_wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\apps\lua\main.cc">
+      <Filter>apps\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\apps\lua\proto\game.pb.cc">
+      <Filter>apps\lua\proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -615,17 +612,14 @@
     <ClInclude Include="..\..\lua_wrapper\proto_man_export_to_lua.h">
       <Filter>lua_wrapper</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\apps\lua_test\proto\game.pb.h">
-      <Filter>apps\lua_test\proto</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\utils\small_alloc.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\apps\lua_test\pf_cmd_map.h">
-      <Filter>apps\lua_test</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\lua_wrapper\utils_export_to_lua.h">
       <Filter>lua_wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\apps\lua\proto\game.pb.h">
+      <Filter>apps\lua\proto</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

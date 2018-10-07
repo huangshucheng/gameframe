@@ -129,6 +129,15 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
+          <AbstractNodeData Name="editbox_pos_node" ActionTag="-179675031" Tag="21" IconVisible="True" LeftMargin="339.1637" RightMargin="620.8363" TopMargin="597.6046" BottomMargin="42.3954" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint />
+            <Position X="339.1637" Y="42.3954" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3533" Y="0.0662" />
+            <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>
