@@ -25,13 +25,10 @@ function NetWork:ctor()
     self._ip         	= ConfigKeyWord.ip
     self._port       	= ConfigKeyWord.port
     self._isEncrypt  	= false
-    self._key        	= "123456"
-    self._lastDealStr 	= ""
 
     self._socketTCP     = SocketTCP.new(self._ip,self._port,true)
     self._socketTCP:setReconnTime(0)
     
-    self._lastRecvHeartbeat = 0
     self:addEventListenner()
 
     print(__name .. "  ip: " .. self._ip .. "  ,port: " .. tostring(self._port))
@@ -55,7 +52,6 @@ end
 
 function NetWork:onConnect(stats)
 	print(__name .. "onConnect>> 连接成功")
-    self._lastRecvHeartbeat = os.time()
     postEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT)
 end
 
@@ -113,7 +109,6 @@ end
 -------- interface start --------
 
 function NetWork:start()
-   self._lastRecvHeartbeat = os.time()
 
    if self._socketTCP then
    		self._socketTCP:connect()
@@ -121,7 +116,6 @@ function NetWork:start()
 end
 
 function NetWork:reConnect()
-    self._lastRecvHeartbeat = os.time()
     self._socketTCP = SocketTCP.new(self._ip,self._port,false)
 
     if self._socketTCP then
