@@ -161,7 +161,7 @@
 -- Return the outline effect size value.
 -- @function [parent=#Label] getOutlineSize 
 -- @param self
--- @return float#float ret (return value: float)
+-- @return int#int ret (return value: int)
         
 --------------------------------
 --  Sets a new bitmap font to Label 

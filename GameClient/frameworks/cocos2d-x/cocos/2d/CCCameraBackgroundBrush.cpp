@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2015-2017 Chukong Technologies Inc.
+ Copyright (c) 2015 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -95,17 +95,9 @@ CameraBackgroundDepthBrush::~CameraBackgroundDepthBrush()
 CameraBackgroundDepthBrush* CameraBackgroundDepthBrush::create(float depth)
 {
     auto ret = new (std::nothrow) CameraBackgroundDepthBrush();
-    
-    if (nullptr != ret && ret->init())
-    {
-        ret->_depth = depth;
-        ret->autorelease();
-    }
-    else
-    {
-        CC_SAFE_DELETE(ret);
-    }
-
+    ret->_depth = depth;
+    ret->init();
+    ret->autorelease();
     return ret;
 }
 
@@ -129,7 +121,7 @@ bool CameraBackgroundDepthBrush::init()
     return true;
 }
 
-void CameraBackgroundDepthBrush::drawBackground(Camera* /*camera*/)
+void CameraBackgroundDepthBrush::drawBackground(Camera* camera)
 {
     GLboolean oldDepthTest;
     GLint oldDepthFunc;
@@ -226,18 +218,11 @@ void CameraBackgroundColorBrush::setColor(const Color4F& color)
 CameraBackgroundColorBrush* CameraBackgroundColorBrush::create(const Color4F& color, float depth)
 {
     auto ret = new (std::nothrow) CameraBackgroundColorBrush();
-
-    if (nullptr != ret && ret->init())
-    {
-        ret->setColor(color);
-        ret->setDepth(depth);
-        ret->autorelease();
-    }
-    else
-    {
-        CC_SAFE_DELETE(ret);
-    }
-
+    ret->init();
+    ret->setColor(color);
+    ret->setDepth(depth);
+    
+    ret->autorelease();
     return ret;
 }
 
@@ -279,64 +264,35 @@ CameraBackgroundSkyBoxBrush::~CameraBackgroundSkyBoxBrush()
     }
 }
 
-CameraBackgroundSkyBoxBrush* CameraBackgroundSkyBoxBrush::create(
-    const std::string& positive_x,
-    const std::string& negative_x,
-    const std::string& positive_y,
-    const std::string& negative_y,
-    const std::string& positive_z,
-    const std::string& negative_z
-    )
+CameraBackgroundSkyBoxBrush* CameraBackgroundSkyBoxBrush::create(const std::string& positive_x, const std::string& negative_x, const std::string& positive_y, const std::string& negative_y, const std::string& positive_z, const std::string& negative_z)
 {
-    CameraBackgroundSkyBoxBrush* ret = nullptr;
-
-    auto texture = TextureCube::create(positive_x,
-                                       negative_x,
-                                       positive_y,
-                                       negative_y,
-                                       positive_z,
-                                       negative_z);
-
-    if (texture != nullptr)
-    {
-
-        Texture2D::TexParams tRepeatParams;
-        tRepeatParams.magFilter = GL_LINEAR;
-        tRepeatParams.minFilter = GL_LINEAR;
-        tRepeatParams.wrapS = GL_CLAMP_TO_EDGE;
-        tRepeatParams.wrapT = GL_CLAMP_TO_EDGE;
-        texture->setTexParameters(tRepeatParams);
-
-        ret = new (std::nothrow) CameraBackgroundSkyBoxBrush;
-
-        if (nullptr != ret && ret->init())
-        {
-            ret->setTexture(texture);
-            ret->autorelease();
-        }
-        else
-        {
-            CC_SAFE_DELETE(texture);
-            CC_SAFE_DELETE(ret);
-        }
-    }
-
+    auto texture = TextureCube::create(positive_x, negative_x, positive_y, negative_y, positive_z, negative_z);
+    if (texture == nullptr)
+        return nullptr;
+    
+    Texture2D::TexParams tRepeatParams;
+    tRepeatParams.magFilter = GL_LINEAR;
+    tRepeatParams.minFilter = GL_LINEAR;
+    tRepeatParams.wrapS = GL_CLAMP_TO_EDGE;
+    tRepeatParams.wrapT = GL_CLAMP_TO_EDGE;
+    texture->setTexParameters(tRepeatParams);
+    
+    auto ret = new(std::nothrow)CameraBackgroundSkyBoxBrush();
+    
+    ret->init();
+    ret->setTexture(texture);
+    
+    ret->autorelease();
     return ret;
 }
 
 CameraBackgroundSkyBoxBrush* CameraBackgroundSkyBoxBrush::create()
 {
-    auto ret = new (std::nothrow) CameraBackgroundSkyBoxBrush();
+    auto ret = new(std::nothrow)CameraBackgroundSkyBoxBrush();
     
-    if (nullptr != ret && ret->init())
-    {
-        ret->autorelease();
-    }
-    else
-    {
-        CC_SAFE_DELETE(ret);
-    }
-
+    ret->init();
+    
+    ret->autorelease();
     return ret;
 }
 

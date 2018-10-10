@@ -80,10 +80,10 @@
       <UniqueIdentifier>{fa8be49e-8b79-4dc5-8f28-febde1347eda}</UniqueIdentifier>
     </Filter>
     <Filter Include="lpack">
-      <UniqueIdentifier>{4412b526-3a49-40b2-b2bf-87a1c841fca8}</UniqueIdentifier>
+      <UniqueIdentifier>{66d7b3e3-63f4-4c04-bc45-bee71a815298}</UniqueIdentifier>
     </Filter>
     <Filter Include="manual\pbc">
-      <UniqueIdentifier>{7315ade3-662c-47a6-9a3e-63c69563f5d2}</UniqueIdentifier>
+      <UniqueIdentifier>{c866dfd1-1b52-4d26-b1b1-c1843a1567ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,6 @@ function LoginScene:createResourceNode(resourceFilename)
     if btn_guest_login then
         btn_guest_login:addClickEventListener(handler(self,self.onEventBtnGuestLogin))
     end
-
 end
 
 function LoginScene:onCreate()

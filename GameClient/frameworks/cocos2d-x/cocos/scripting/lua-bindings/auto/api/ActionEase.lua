@@ -28,9 +28,21 @@
         
 --------------------------------
 -- 
+-- @function [parent=#ActionEase] clone 
+-- @param self
+-- @return ActionEase#ActionEase ret (return value: cc.ActionEase)
+        
+--------------------------------
+-- 
 -- @function [parent=#ActionEase] stop 
 -- @param self
 -- @return ActionEase#ActionEase self (return value: cc.ActionEase)
+        
+--------------------------------
+-- 
+-- @function [parent=#ActionEase] reverse 
+-- @param self
+-- @return ActionEase#ActionEase ret (return value: cc.ActionEase)
         
 --------------------------------
 -- 

@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2014-2017 Chukong Technologies Inc.
+ Copyright (c) 2014 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -179,15 +179,11 @@ namespace cocos2d {
             }
 
             void WebViewImpl::loadHTMLString(const std::string &string, const std::string &baseURL) {
-                JniHelper::callStaticVoidMethod(className, "loadHTMLString", _viewTag, string, getFixedBaseUrl(baseURL));
+                JniHelper::callStaticVoidMethod(className, "loadHTMLString", _viewTag, string, baseURL);
             }
 
             void WebViewImpl::loadURL(const std::string &url) {
-                this->loadURL(url, false);
-            }
-
-            void WebViewImpl::loadURL(const std::string &url, bool cleanCachedData) {
-                JniHelper::callStaticVoidMethod(className, "loadUrl", _viewTag, url, cleanCachedData);
+                JniHelper::callStaticVoidMethod(className, "loadUrl", _viewTag, url);
             }
 
             void WebViewImpl::loadFile(const std::string &fileName) {

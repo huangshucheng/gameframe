@@ -80,10 +80,4 @@
 -- @param #string subCmdName
 -- @return Console#Console self (return value: cc.Console)
 
---------------------------------
---  Checks whether the server for console is bound with ipv6 address 
--- @function [parent=#Console] isIpv6Server 
--- @param self
--- @return bool#bool ret (return value: bool)
-        
 return nil

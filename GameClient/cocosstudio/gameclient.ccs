@@ -35,7 +35,6 @@
             <Image Name="320.png" />
             <Image Name="321.png" />
             <Image Name="97.png" />
-            <File Name="user_info_dlg.prefab" />
           </Folder>
           <Image Name="bottom_bg.png" />
           <Image Name="coin.png" />
@@ -65,6 +64,9 @@
           <Image Name="guest_login_normal.png" />
           <Image Name="guest_login_press.png" />
           <Image Name="login_bg.png" />
+        </Folder>
+        <Folder Name="PopLayer">
+          <Project Name="GameSetLayer.csd" Type="Layer" />
         </Folder>
         <Folder Name="rectheader">
           <Image Name="11.png" />

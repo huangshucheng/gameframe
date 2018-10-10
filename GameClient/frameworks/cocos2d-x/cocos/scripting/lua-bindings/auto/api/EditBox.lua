@@ -5,13 +5,6 @@
 -- @parent_module ccui
 
 --------------------------------
--- Get the font size.<br>
--- return The font size.
--- @function [parent=#EditBox] getFontSize 
--- @param self
--- @return int#int ret (return value: int)
-        
---------------------------------
 -- js NA<br>
 -- lua NA
 -- @function [parent=#EditBox] keyboardDidShow 
@@ -35,20 +28,6 @@
 -- @return char#char ret (return value: char)
         
 --------------------------------
--- Get the input mode of the edit box.<br>
--- return One of the EditBox::InputMode constants.
--- @function [parent=#EditBox] getInputMode 
--- @param self
--- @return int#int ret (return value: int)
-        
---------------------------------
--- Get the placeholder's font name. only system font is allowed.<br>
--- return The font name.
--- @function [parent=#EditBox] getPlaceholderFontName 
--- @param self
--- @return char#char ret (return value: char)
-        
---------------------------------
 -- js NA<br>
 -- lua NA
 -- @function [parent=#EditBox] keyboardDidHide 
@@ -63,13 +42,6 @@
 -- @param self
 -- @param #char pFontName
 -- @return EditBox#EditBox self (return value: ccui.EditBox)
-        
---------------------------------
--- Get the placeholder's font size.<br>
--- return The font size.
--- @function [parent=#EditBox] getPlaceholderFontSize 
--- @param self
--- @return int#int ret (return value: int)
         
 --------------------------------
 -- Get a text in the edit box that acts as a placeholder when an<br>
@@ -154,13 +126,6 @@
 -- @return EditBox#EditBox self (return value: ccui.EditBox)
 
 --------------------------------
--- Get the return type that are to be applied to the edit box.<br>
--- return One of the EditBox::KeyboardReturnType constants.
--- @function [parent=#EditBox] getReturnType 
--- @param self
--- @return int#int ret (return value: int)
-        
---------------------------------
 -- @overload self, color4b_table         
 -- @overload self, color3b_table         
 -- @function [parent=#EditBox] setFontColor
@@ -168,13 +133,6 @@
 -- @param #color3b_table color
 -- @return EditBox#EditBox self (return value: ccui.EditBox)
 
---------------------------------
--- Get the font name.<br>
--- return The font name.
--- @function [parent=#EditBox] getFontName 
--- @param self
--- @return char#char ret (return value: char)
-        
 --------------------------------
 -- js NA<br>
 -- lua NA
@@ -190,25 +148,6 @@
 -- @param #cc.Ref sender
 -- @param #int controlEvent
 -- @return EditBox#EditBox self (return value: ccui.EditBox)
-        
---------------------------------
--- Get the font color of the widget's text.
--- @function [parent=#EditBox] getFontColor 
--- @param self
--- @return color4b_table#color4b_table ret (return value: color4b_table)
-        
---------------------------------
--- Get the input flags that are to be applied to the edit box.<br>
--- return One of the EditBox::InputFlag constants.
--- @function [parent=#EditBox] getInputFlag 
--- @param self
--- @return int#int ret (return value: int)
-        
---------------------------------
--- Get the text horizontal alignment.
--- @function [parent=#EditBox] getTextHorizontalAlignment 
--- @param self
--- @return int#int ret (return value: int)
         
 --------------------------------
 -- Set the placeholder's font. Only system font is allowed.<br>
@@ -279,12 +218,6 @@
 -- @return EditBox#EditBox self (return value: ccui.EditBox)
         
 --------------------------------
--- Get the font color of the placeholder text when the edit box is empty.
--- @function [parent=#EditBox] getPlaceholderFontColor 
--- @param self
--- @return color4b_table#color4b_table ret (return value: color4b_table)
-        
---------------------------------
 -- Sets the maximum input length of the edit box.<br>
 -- Setting this value enables multiline input mode by default.<br>
 -- Available on Android, iOS and Windows Phone.<br>
@@ -302,13 +235,6 @@
 -- @param self
 -- @param #char pFontName
 -- @param #int fontSize
--- @return EditBox#EditBox self (return value: ccui.EditBox)
-        
---------------------------------
--- Set the text horizontal alignment.
--- @function [parent=#EditBox] setTextHorizontalAlignment 
--- @param self
--- @param #int alignment
 -- @return EditBox#EditBox self (return value: ccui.EditBox)
         
 --------------------------------

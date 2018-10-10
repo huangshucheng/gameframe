@@ -800,12 +800,6 @@
 -- @return ParticleSystem#ParticleSystem ret (return value: cc.ParticleSystem)
         
 --------------------------------
---  Gets all ParticleSystem references
--- @function [parent=#ParticleSystem] getAllParticleSystems 
--- @param self
--- @return array_table#array_table ret (return value: array_table)
-        
---------------------------------
 -- 
 -- @function [parent=#ParticleSystem] setScaleY 
 -- @param self

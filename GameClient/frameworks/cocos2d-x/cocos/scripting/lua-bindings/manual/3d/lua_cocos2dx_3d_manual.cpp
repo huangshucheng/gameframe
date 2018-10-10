@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2013-2017 Chukong Technologies Inc.
+ Copyright (c) 2013-2014 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
 
@@ -2044,17 +2044,15 @@ int lua_cocos2dx_3d_Ray_intersects(lua_State* L)
         if (!ok)
             return 0;
 
-        float distance;
-        bool ret = self->intersects(*arg0, &distance);
+        bool ret = self->intersects(*arg0);
         tolua_pushboolean(L, ret);
-        tolua_pushnumber(L, (lua_Number)distance);
-        return 2;
+        return 1;
     }
     luaL_error(L, "%s has wrong number of arguments: %d, was expecting %d \n",  "cc.Ray:intersects",argc, 1);
     return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
-    tolua_error(L,"#ferror in function 'lua_cocos2dx_3d_Ray_intersects'.",&tolua_err);
+    tolua_error(L,"#ferror in function 'lua_cocos2dx_3d_get_OBB_center'.",&tolua_err);
     return 0;
 #endif
 }

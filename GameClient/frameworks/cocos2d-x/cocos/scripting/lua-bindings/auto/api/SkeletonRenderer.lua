@@ -39,31 +39,11 @@
 -- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
         
 --------------------------------
--- @overload self, string, string, float         
--- @overload self, string, spAtlas, float         
--- @function [parent=#SkeletonRenderer] initWithJsonFile
--- @param self
--- @param #string skeletonDataFile
--- @param #spAtlas atlas
--- @param #float scale
--- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
-
---------------------------------
 -- 
 -- @function [parent=#SkeletonRenderer] setSlotsToSetupPose 
 -- @param self
 -- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
         
---------------------------------
--- @overload self, string, string, float         
--- @overload self, string, spAtlas, float         
--- @function [parent=#SkeletonRenderer] initWithBinaryFile
--- @param self
--- @param #string skeletonDataFile
--- @param #spAtlas atlas
--- @param #float scale
--- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
-
 --------------------------------
 -- 
 -- @function [parent=#SkeletonRenderer] setToSetupPose 
@@ -101,6 +81,16 @@
 -- @param self
 -- @return float#float ret (return value: float)
         
+--------------------------------
+-- @overload self, string, string, float         
+-- @overload self, string, spAtlas, float         
+-- @function [parent=#SkeletonRenderer] initWithFile
+-- @param self
+-- @param #string skeletonDataFile
+-- @param #spAtlas atlas
+-- @param #float scale
+-- @return SkeletonRenderer#SkeletonRenderer self (return value: sp.SkeletonRenderer)
+
 --------------------------------
 -- 
 -- @function [parent=#SkeletonRenderer] setBlendFunc 

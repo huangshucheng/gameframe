@@ -456,6 +456,8 @@ class NativeField(object):
 
     @staticmethod
     def can_parse(ntype):
+        if ntype.kind == cindex.TypeKind.POINTER:
+            return False
         native_type = NativeType.from_type(ntype)
         if ntype.kind == cindex.TypeKind.UNEXPOSED and native_type.name != "std::string":
             return False

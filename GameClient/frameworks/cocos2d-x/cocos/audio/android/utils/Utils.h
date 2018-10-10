@@ -1,5 +1,5 @@
 /****************************************************************************
-Copyright (c) 2016-2017 Chukong Technologies Inc.
+Copyright (c) 2016 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -25,5 +25,5 @@ THE SOFTWARE.
 #include <string>
 
 namespace cocos2d { namespace experimental {
-	extern int getSDKVersion();
+	extern int getSystemProperty(const std::string& property);
 }}

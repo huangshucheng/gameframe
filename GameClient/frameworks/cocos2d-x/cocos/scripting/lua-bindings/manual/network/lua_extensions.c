@@ -13,7 +13,7 @@ extern "C" {
 static luaL_Reg luax_exts[] = {
     {"socket.core", luaopen_socket_core},
     {"mime.core", luaopen_mime_core},
-	{"pack",luaopen_pack},
+	{ "pack", luaopen_pack },
     {NULL, NULL}
 };
 

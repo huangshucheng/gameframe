@@ -49,14 +49,13 @@
 -- @return experimental::ui::WebView#experimental::ui::WebView self (return value: cc.experimental::ui::WebView)
         
 --------------------------------
--- @overload self, string, bool         
--- @overload self, string         
--- @function [parent=#WebView] loadURL
+-- Loads the given URL.<br>
+-- param url Content URL.
+-- @function [parent=#WebView] loadURL 
 -- @param self
 -- @param #string url
--- @param #bool cleanCachedData
 -- @return experimental::ui::WebView#experimental::ui::WebView self (return value: cc.experimental::ui::WebView)
-
+        
 --------------------------------
 -- Set whether the webview bounces at end of scroll of WebView.
 -- @function [parent=#WebView] setBounces 

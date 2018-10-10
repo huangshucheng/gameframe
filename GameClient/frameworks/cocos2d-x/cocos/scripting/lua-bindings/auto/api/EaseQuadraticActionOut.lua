@@ -5,7 +5,9 @@
 -- @parent_module cc
 
 --------------------------------
--- 
+-- brief Create the action with the inner action.<br>
+-- param action The pointer of the inner action.<br>
+-- return A pointer of EaseQuadraticActionOut action. If creation failed, return nil.
 -- @function [parent=#EaseQuadraticActionOut] create 
 -- @param self
 -- @param #cc.ActionInterval action
@@ -28,7 +30,7 @@
 -- 
 -- @function [parent=#EaseQuadraticActionOut] reverse 
 -- @param self
--- @return ActionEase#ActionEase ret (return value: cc.ActionEase)
+-- @return EaseQuadraticActionOut#EaseQuadraticActionOut ret (return value: cc.EaseQuadraticActionOut)
         
 --------------------------------
 -- 

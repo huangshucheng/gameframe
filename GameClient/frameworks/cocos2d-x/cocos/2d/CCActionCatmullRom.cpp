@@ -2,7 +2,7 @@
  * Copyright (c) 2008 Radu Gruian
  * Copyright (c) 2011 Vit Valentin
  * Copyright (c) 2012 cocos2d-x.org
- * Copyright (c) 2013-2017 Chukong Technologies Inc.
+ * Copyright (c) 2013-2016 Chukong Technologies Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -67,9 +67,10 @@ bool PointArray::initWithCapacity(ssize_t capacity)
 PointArray* PointArray::clone() const
 {
     vector<Vec2*> *newArray = new (std::nothrow) vector<Vec2*>();
-    for (auto& controlPoint : *_controlPoints)
+    vector<Vec2*>::iterator iter;
+    for (iter = _controlPoints->begin(); iter != _controlPoints->end(); ++iter)
     {
-        newArray->push_back(new Vec2(controlPoint->x, controlPoint->y));
+        newArray->push_back(new Vec2((*iter)->x, (*iter)->y));
     }
     
     PointArray *points = new (std::nothrow) PointArray();
@@ -84,9 +85,10 @@ PointArray::~PointArray()
 {
     CCLOGINFO("deallocing PointArray: %p", this);
 
-    for (auto& controlPoint : *_controlPoints)
+    vector<Vec2*>::iterator iter;
+    for (iter = _controlPoints->begin(); iter != _controlPoints->end(); ++iter)
     {
-        delete controlPoint;
+        delete *iter;
     }
     delete _controlPoints;
 }
@@ -104,9 +106,9 @@ void PointArray::setControlPoints(vector<Vec2*> *controlPoints)
     
     // delete old points
     vector<Vec2*>::iterator iter;
-    for (auto& controlPoint : *_controlPoints)
+    for (iter = _controlPoints->begin(); iter != _controlPoints->end(); ++iter)
     {
-        delete controlPoint;
+        delete *iter;
     }
     delete _controlPoints;
     
@@ -153,8 +155,9 @@ ssize_t PointArray::count() const
 PointArray* PointArray::reverse() const
 {
     vector<Vec2*> *newArray = new (std::nothrow) vector<Vec2*>();
+    vector<Vec2*>::reverse_iterator iter;
     Vec2 *point = nullptr;
-    for (auto iter = _controlPoints->rbegin(), iterRend = _controlPoints->rend(); iter != iterRend; ++iter)
+    for (iter = _controlPoints->rbegin(); iter != _controlPoints->rend(); ++iter)
     {
         point = *iter;
         newArray->push_back(new Vec2(point->x, point->y));

@@ -1,5 +1,5 @@
 /****************************************************************************
-Copyright (c) 2016-2017 Chukong Technologies Inc.
+Copyright (c) 2016 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -22,13 +22,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 #include "audio/android/utils/Utils.h"
-#include "platform/android/jni/JniHelper.h"
+
+#include <cstdio>
+#include <cstdlib>
 
 namespace cocos2d { namespace experimental {
 
-int getSDKVersion()
+int getSystemProperty(const std::string& property)
 {
-    return JniHelper::callStaticIntMethod("org/cocos2dx/lib/Cocos2dxHelper", "getSDKVersion");
+    int ret = -1;
+    std::string command = "getprop " + property;
+    FILE* file = popen(command.c_str(), "r");
+    if (file)
+    {
+        char output[100];
+        if (std::fgets(output, sizeof(output), file) != nullptr)
+            ret = std::atoi(output);
+
+        pclose(file);
+    }
+    
+    return ret;
 }
 
 }} // end of namespace cocos2d { namespace experimental

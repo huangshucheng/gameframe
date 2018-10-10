@@ -387,6 +387,21 @@
 
 
 --------------------------------------------------------
+-- the cc EaseIn
+-- @field [parent=#cc] EaseIn#EaseIn EaseIn preloaded module
+
+
+--------------------------------------------------------
+-- the cc EaseOut
+-- @field [parent=#cc] EaseOut#EaseOut EaseOut preloaded module
+
+
+--------------------------------------------------------
+-- the cc EaseInOut
+-- @field [parent=#cc] EaseInOut#EaseInOut EaseInOut preloaded module
+
+
+--------------------------------------------------------
 -- the cc EaseExponentialIn
 -- @field [parent=#cc] EaseExponentialIn#EaseExponentialIn EaseExponentialIn preloaded module
 
@@ -414,6 +429,26 @@
 --------------------------------------------------------
 -- the cc EaseSineInOut
 -- @field [parent=#cc] EaseSineInOut#EaseSineInOut EaseSineInOut preloaded module
+
+
+--------------------------------------------------------
+-- the cc EaseElastic
+-- @field [parent=#cc] EaseElastic#EaseElastic EaseElastic preloaded module
+
+
+--------------------------------------------------------
+-- the cc EaseElasticIn
+-- @field [parent=#cc] EaseElasticIn#EaseElasticIn EaseElasticIn preloaded module
+
+
+--------------------------------------------------------
+-- the cc EaseElasticOut
+-- @field [parent=#cc] EaseElasticOut#EaseElasticOut EaseElasticOut preloaded module
+
+
+--------------------------------------------------------
+-- the cc EaseElasticInOut
+-- @field [parent=#cc] EaseElasticInOut#EaseElasticInOut EaseElasticInOut preloaded module
 
 
 --------------------------------------------------------
@@ -449,6 +484,11 @@
 --------------------------------------------------------
 -- the cc EaseBackInOut
 -- @field [parent=#cc] EaseBackInOut#EaseBackInOut EaseBackInOut preloaded module
+
+
+--------------------------------------------------------
+-- the cc EaseBezierAction
+-- @field [parent=#cc] EaseBezierAction#EaseBezierAction EaseBezierAction preloaded module
 
 
 --------------------------------------------------------
@@ -524,46 +564,6 @@
 --------------------------------------------------------
 -- the cc EaseCubicActionInOut
 -- @field [parent=#cc] EaseCubicActionInOut#EaseCubicActionInOut EaseCubicActionInOut preloaded module
-
-
---------------------------------------------------------
--- the cc EaseIn
--- @field [parent=#cc] EaseIn#EaseIn EaseIn preloaded module
-
-
---------------------------------------------------------
--- the cc EaseOut
--- @field [parent=#cc] EaseOut#EaseOut EaseOut preloaded module
-
-
---------------------------------------------------------
--- the cc EaseInOut
--- @field [parent=#cc] EaseInOut#EaseInOut EaseInOut preloaded module
-
-
---------------------------------------------------------
--- the cc EaseElastic
--- @field [parent=#cc] EaseElastic#EaseElastic EaseElastic preloaded module
-
-
---------------------------------------------------------
--- the cc EaseElasticIn
--- @field [parent=#cc] EaseElasticIn#EaseElasticIn EaseElasticIn preloaded module
-
-
---------------------------------------------------------
--- the cc EaseElasticOut
--- @field [parent=#cc] EaseElasticOut#EaseElasticOut EaseElasticOut preloaded module
-
-
---------------------------------------------------------
--- the cc EaseElasticInOut
--- @field [parent=#cc] EaseElasticInOut#EaseElasticInOut EaseElasticInOut preloaded module
-
-
---------------------------------------------------------
--- the cc EaseBezierAction
--- @field [parent=#cc] EaseBezierAction#EaseBezierAction EaseBezierAction preloaded module
 
 
 --------------------------------------------------------

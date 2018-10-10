@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2014-2017 Chukong Technologies Inc.
+ Copyright (c) 2014-2015 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
 
@@ -49,8 +49,7 @@
 #include "audio/android/IAudioPlayer.h"
 #include "audio/android/ICallerThreadUtils.h"
 #include "audio/android/AudioPlayerProvider.h"
-#include "audio/android/cutils/log.h"
-#include "audio/android/UrlAudioPlayer.h"
+#include "audio/android/cutils/log.h" 
 
 using namespace cocos2d;
 using namespace cocos2d::experimental;
@@ -84,7 +83,7 @@ static CallerThreadUtils __callerThreadUtils;
 
 static int fdGetter(const std::string& url, off_t* start, off_t* length)
 {
-    int fd = -1;
+    int fd = 0;
     if (cocos2d::FileUtilsAndroid::getObbFile() != nullptr)
     {
         fd = getObbAssetFileDescriptorJNI(url.c_str(), start, length);
@@ -107,14 +106,14 @@ static int fdGetter(const std::string& url, off_t* start, off_t* length)
 
 //====================================================
 AudioEngineImpl::AudioEngineImpl()
-    : _engineObject(nullptr)
+    : _audioIDIndex(0)
+    , _engineObject(nullptr)
     , _engineEngine(nullptr)
     , _outputMixObject(nullptr)
+    , _lazyInitLoop(true)
     , _audioPlayerProvider(nullptr)
     , _onPauseListener(nullptr)
     , _onResumeListener(nullptr)
-    , _audioIDIndex(0)
-    , _lazyInitLoop(true)
 {
     __callerThreadUtils.setCallerThreadId(std::this_thread::get_id());
 }
@@ -176,53 +175,24 @@ bool AudioEngineImpl::init()
 
         _audioPlayerProvider = new AudioPlayerProvider(_engineEngine, _outputMixObject, getDeviceSampleRate(), getDeviceAudioBufferSizeInFrames(), fdGetter, &__callerThreadUtils);
 
-        _onPauseListener = Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_COME_TO_BACKGROUND, CC_CALLBACK_1(AudioEngineImpl::onEnterBackground, this));
+        _onPauseListener = Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_COME_TO_BACKGROUND, [this](EventCustom*){
+            if (_audioPlayerProvider != nullptr)
+            {
+                _audioPlayerProvider->pause();
+            }
+        });
 
-        _onResumeListener = Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_COME_TO_FOREGROUND, CC_CALLBACK_1(AudioEngineImpl::onEnterForeground, this));
+        _onResumeListener = Director::getInstance()->getEventDispatcher()->addCustomEventListener(EVENT_COME_TO_FOREGROUND, [this](EventCustom*){
+            if (_audioPlayerProvider != nullptr)
+            {
+                _audioPlayerProvider->resume();
+            }
+        });
 
         ret = true;
     }while (false);
 
     return ret;
-}
-
-void AudioEngineImpl::onEnterBackground(EventCustom* event)
-{
-    // _audioPlayerProvider->pause() pauses AudioMixer and PcmAudioService,
-    // but UrlAudioPlayers could not be paused.
-    if (_audioPlayerProvider != nullptr)
-    {
-        _audioPlayerProvider->pause();
-    }
-
-    // pause UrlAudioPlayers which are playing.
-    for (auto&& e : _audioPlayers)
-    {
-        auto player = e.second;
-        if (dynamic_cast<UrlAudioPlayer*>(player) != nullptr
-            && player->getState() == IAudioPlayer::State::PLAYING)
-        {
-            _urlAudioPlayersNeedResume.push_back(player);
-            player->pause();
-        }
-    }
-}
-
-void AudioEngineImpl::onEnterForeground(EventCustom* event)
-{
-    // _audioPlayerProvider->resume() resumes AudioMixer and PcmAudioService,
-    // but UrlAudioPlayers could not be resumed.
-    if (_audioPlayerProvider != nullptr)
-    {
-        _audioPlayerProvider->resume();
-    }
-
-    // resume UrlAudioPlayers
-    for (auto&& player : _urlAudioPlayersNeedResume)
-    {
-        player->resume();
-    }
-    _urlAudioPlayersNeedResume.clear();
 }
 
 int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume)
@@ -249,27 +219,21 @@ int AudioEngineImpl::play2d(const std::string &filePath ,bool loop ,float volume
 
                 if (state != IAudioPlayer::State::OVER && state != IAudioPlayer::State::STOPPED)
                 {
-                    ALOGV("Ignore state: %d", static_cast<int>(state));
+                    ALOGV("Ignore state: %d", state);
                     return;
                 }
 
                 int id = player->getId();
-                std::string filePath = *AudioEngine::_audioIDInfoMap[id].filePath;
 
-                ALOGV("Removing player id=%d, state:%d", id, (int)state);
-
-                AudioEngine::remove(id);
-                _audioPlayers.erase(id);
-
+                ALOGV("Removing player id=%d", id);
                 auto iter = _callbackMap.find(id);
                 if (iter != _callbackMap.end())
                 {
-                    if (state == IAudioPlayer::State::OVER)
-                    {
-                        iter->second(id, filePath);
-                    }
+                    iter->second(id, *AudioEngine::_audioIDInfoMap[id].filePath);
                     _callbackMap.erase(iter);
                 }
+                AudioEngine::remove(id);
+                _audioPlayers.erase(id);
             });
 
             player->setLoop(loop);

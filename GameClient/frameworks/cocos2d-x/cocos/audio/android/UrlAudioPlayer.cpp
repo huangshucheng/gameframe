@@ -1,5 +1,5 @@
 /****************************************************************************
-Copyright (c) 2016-2017 Chukong Technologies Inc.
+Copyright (c) 2016 Chukong Technologies Inc.
 
 http://www.cocos2d-x.org
 
@@ -169,7 +169,7 @@ void UrlAudioPlayer::stop()
     }
     else
     {
-        ALOGW("UrlAudioPlayer (%p, state:%d) isn't playing or paused, could not invoke stop!", this, static_cast<int>(_state));
+        ALOGW("UrlAudioPlayer (%p, state:%d) isn't playing or paused, could not invoke stop!", this, _state);
     }
 }
 
@@ -183,7 +183,7 @@ void UrlAudioPlayer::pause()
     }
     else
     {
-        ALOGW("UrlAudioPlayer (%p, state:%d) isn't playing, could not invoke pause!", this, static_cast<int>(_state));
+        ALOGW("UrlAudioPlayer (%p, state:%d) isn't playing, could not invoke pause!", this, _state);
     }
 }
 
@@ -197,7 +197,7 @@ void UrlAudioPlayer::resume()
     }
     else
     {
-        ALOGW("UrlAudioPlayer (%p, state:%d) isn't paused, could not invoke resume!", this, static_cast<int>(_state));
+        ALOGW("UrlAudioPlayer (%p, state:%d) isn't paused, could not invoke resume!", this, _state);
     }
 }
 
@@ -211,7 +211,7 @@ void UrlAudioPlayer::play()
     }
     else
     {
-        ALOGW("UrlAudioPlayer (%p, state:%d) isn't paused or initialized, could not invoke play!", this, static_cast<int>(_state));
+        ALOGW("UrlAudioPlayer (%p, state:%d) isn't paused or initialized, could not invoke play!", this, _state);
     }
 }
 
@@ -276,18 +276,7 @@ bool UrlAudioPlayer::prepare(const std::string &url, SLuint32 locatorType, std::
     _url = url;
     _assetFd = assetFd;
 
-    const char* locatorTypeStr= "UNKNOWN";
-    if (locatorType == SL_DATALOCATOR_ANDROIDFD)
-        locatorTypeStr = "SL_DATALOCATOR_ANDROIDFD";
-    else if (locatorType == SL_DATALOCATOR_URI)
-        locatorTypeStr = "SL_DATALOCATOR_URI";
-    else
-    {
-        ALOGE("Oops, invalid locatorType: %d", (int)locatorType);
-        return false;
-    }
-
-    ALOGV("UrlAudioPlayer::prepare: %s, %s, %d, %d, %d", _url.c_str(), locatorTypeStr, _assetFd->getFd(), start,
+    ALOGV("UrlAudioPlayer::prepare: %s, %d, %d, %d, %d", _url.c_str(), (int)locatorType, assetFd->getFd(), start,
          length);
     SLDataSource audioSrc;
 
@@ -313,6 +302,11 @@ bool UrlAudioPlayer::prepare(const std::string &url, SLuint32 locatorType, std::
         locUri = {locatorType, (SLchar *) _url.c_str()};
         audioSrc.pLocator = &locUri;
         ALOGV("locUri: locatorType: %d", (int)locUri.locatorType);
+    }
+    else
+    {
+        ALOGE("Oops, invalid locatorType: %d", (int)locatorType);
+        return false;
     }
 
     // configure audio sink

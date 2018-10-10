@@ -100,7 +100,7 @@
 -- @function [parent=#AbstractCheckButton] init 
 -- @param self
 -- @param #string backGround
--- @param #string backGroundSelected
+-- @param #string backGroundSeleted
 -- @param #string cross
 -- @param #string backGroundDisabled
 -- @param #string frontCrossDisabled

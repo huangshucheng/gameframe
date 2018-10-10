@@ -2,7 +2,7 @@
 Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
-Copyright (c) 2013-2017 Chukong Technologies Inc.
+Copyright (c) 2013-2014 Chukong Technologies Inc.
  
 http://www.cocos2d-x.org
 
@@ -95,11 +95,8 @@ int Layer::executeScriptTouchHandler(EventTouch::EventCode eventType, Touch* tou
         ScriptEvent scriptEvent(kTouchEvent, &data);
         return ScriptEngineManager::getInstance()->getScriptEngine()->sendEvent(&scriptEvent);
     }
-#else
-    CC_UNUSED_PARAM(eventType);
-    CC_UNUSED_PARAM(touch);
-    CC_UNUSED_PARAM(event);
 #endif
+    //can not reach it
     return 0;
 }
 
@@ -112,22 +109,9 @@ int Layer::executeScriptTouchesHandler(EventTouch::EventCode eventType, const st
         ScriptEvent scriptEvent(kTouchesEvent, &data);
         return ScriptEngineManager::getInstance()->getScriptEngine()->sendEvent(&scriptEvent);
     }
-#else
-    CC_UNUSED_PARAM(eventType);
-    CC_UNUSED_PARAM(touches);
-    CC_UNUSED_PARAM(event);
 #endif
     return 0;
 }
-
-bool Layer::ccTouchBegan(Touch* /*pTouch*/, Event* /*pEvent*/) {return false;};
-void Layer::ccTouchMoved(Touch* /*pTouch*/, Event* /*pEvent*/) {}
-void Layer::ccTouchEnded(Touch* /*pTouch*/, Event* /*pEvent*/) {}
-void Layer::ccTouchCancelled(Touch* /*pTouch*/, Event* /*pEvent*/) {}
-void Layer::ccTouchesBegan(__Set* /*pTouches*/, Event* /*pEvent*/) {}
-void Layer::ccTouchesMoved(__Set* /*pTouches*/, Event* /*pEvent*/) {}
-void Layer::ccTouchesEnded(__Set* /*pTouches*/, Event* /*pEvent*/) {}
-void Layer::ccTouchesCancelled(__Set* /*pTouches*/, Event* /*pEvent*/) {}
 
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -262,8 +246,10 @@ void Layer::setAccelerometerInterval(double interval) {
     }
 }
 
-void Layer::onAcceleration(Acceleration* acc, Event* /*unused_event*/)
+void Layer::onAcceleration(Acceleration* acc, Event* unused_event)
 {
+    CC_UNUSED_PARAM(acc);
+    CC_UNUSED_PARAM(unused_event);
 #if CC_ENABLE_SCRIPT_BINDING
     if(kScriptTypeNone != _scriptType)
     {
@@ -271,17 +257,18 @@ void Layer::onAcceleration(Acceleration* acc, Event* /*unused_event*/)
         ScriptEvent event(kAccelerometerEvent,&data);
         ScriptEngineManager::getInstance()->getScriptEngine()->sendEvent(&event);
     }
-#else
-    CC_UNUSED_PARAM(acc);
 #endif
 }
 
-void Layer::onKeyPressed(EventKeyboard::KeyCode /*keyCode*/, Event* /*unused_event*/)
+void Layer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* unused_event)
 {
+    CC_UNUSED_PARAM(keyCode);
+    CC_UNUSED_PARAM(unused_event);
 }
 
-void Layer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* /*unused_event*/)
+void Layer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* unused_event)
 {
+    CC_UNUSED_PARAM(unused_event);
 #if CC_ENABLE_SCRIPT_BINDING
     if(kScriptTypeNone != _scriptType)
     {
@@ -289,8 +276,6 @@ void Layer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* /*unused_event*
         ScriptEvent event(kKeypadEvent,&data);
         ScriptEngineManager::getInstance()->getScriptEngine()->sendEvent(&event);
     }
-#else
-    CC_UNUSED_PARAM(keyCode);
 #endif
 }
 
@@ -334,10 +319,8 @@ bool Layer::onTouchBegan(Touch *touch, Event *event)
     {
         return executeScriptTouchHandler(EventTouch::EventCode::BEGAN, touch, event) == 0 ? false : true;
     }
-#else
-    CC_UNUSED_PARAM(touch);
-    CC_UNUSED_PARAM(event);
 #endif
+    CC_UNUSED_PARAM(event);
     CCASSERT(false, "Layer#ccTouchBegan override me");
     return true;
 }
@@ -350,10 +333,9 @@ void Layer::onTouchMoved(Touch *touch, Event *event)
         executeScriptTouchHandler(EventTouch::EventCode::MOVED, touch, event);
         return;
     }
-#else
-    CC_UNUSED_PARAM(touch);
-    CC_UNUSED_PARAM(event);
 #endif
+    
+    CC_UNUSED_PARAM(event);
 }
 
 void Layer::onTouchEnded(Touch *touch, Event *event)
@@ -364,10 +346,9 @@ void Layer::onTouchEnded(Touch *touch, Event *event)
         executeScriptTouchHandler(EventTouch::EventCode::ENDED, touch, event);
         return;
     }
-#else
-    CC_UNUSED_PARAM(touch);
-    CC_UNUSED_PARAM(event);
 #endif
+    
+    CC_UNUSED_PARAM(event);
 }
 
 void Layer::onTouchCancelled(Touch *touch, Event *event)
@@ -378,10 +359,9 @@ void Layer::onTouchCancelled(Touch *touch, Event *event)
         executeScriptTouchHandler(EventTouch::EventCode::CANCELLED, touch, event);
         return;
     }
-#else
-    CC_UNUSED_PARAM(touch);
-    CC_UNUSED_PARAM(event);
 #endif
+    
+    CC_UNUSED_PARAM(event);
 }    
 
 void Layer::onTouchesBegan(const std::vector<Touch*>& touches, Event *event)
@@ -392,10 +372,8 @@ void Layer::onTouchesBegan(const std::vector<Touch*>& touches, Event *event)
         executeScriptTouchesHandler(EventTouch::EventCode::BEGAN, touches, event);
         return;
     }
-#else
-    CC_UNUSED_PARAM(touches);
-    CC_UNUSED_PARAM(event);
 #endif
+    CC_UNUSED_PARAM(event);
 }
 
 void Layer::onTouchesMoved(const std::vector<Touch*>& touches, Event *event)
@@ -406,10 +384,9 @@ void Layer::onTouchesMoved(const std::vector<Touch*>& touches, Event *event)
         executeScriptTouchesHandler(EventTouch::EventCode::MOVED, touches, event);
         return;
     }
-#else
-    CC_UNUSED_PARAM(touches);
-    CC_UNUSED_PARAM(event);
 #endif
+    
+    CC_UNUSED_PARAM(event);
 }
 
 void Layer::onTouchesEnded(const std::vector<Touch*>& touches, Event *event)
@@ -420,10 +397,8 @@ void Layer::onTouchesEnded(const std::vector<Touch*>& touches, Event *event)
         executeScriptTouchesHandler(EventTouch::EventCode::ENDED, touches, event);
         return;
     }
-#else
-    CC_UNUSED_PARAM(touches);
-    CC_UNUSED_PARAM(event);
 #endif
+    CC_UNUSED_PARAM(event);
 }
 
 void Layer::onTouchesCancelled(const std::vector<Touch*>& touches, Event *event)
@@ -434,10 +409,8 @@ void Layer::onTouchesCancelled(const std::vector<Touch*>& touches, Event *event)
         executeScriptTouchesHandler(EventTouch::EventCode::CANCELLED, touches, event);
         return;
     }
-#else
-    CC_UNUSED_PARAM(touches);
-    CC_UNUSED_PARAM(event);
 #endif
+    CC_UNUSED_PARAM(event);
 }
 
 std::string Layer::getDescription() const
@@ -610,7 +583,7 @@ void LayerColor::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
     }
 }
 
-void LayerColor::onDraw(const Mat4& transform, uint32_t /*flags*/)
+void LayerColor::onDraw(const Mat4& transform, uint32_t flags)
 {
     getGLProgram()->use();
     getGLProgram()->setUniformsForBuiltins(transform);

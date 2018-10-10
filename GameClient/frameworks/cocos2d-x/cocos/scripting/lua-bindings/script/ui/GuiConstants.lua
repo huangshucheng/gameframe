@@ -180,10 +180,8 @@ ccui.PageViewEventType = {
 }
 
 ccui.PageViewDirection = {
-  NONE = 0,
-  VERTICAL = 1,
-  HORIZONTAL = 2,
-  BOTH = 3
+  HORIZONTAL = 0,
+  VERTICAL = 1
 }
 
 ccui.PVTouchDir = {

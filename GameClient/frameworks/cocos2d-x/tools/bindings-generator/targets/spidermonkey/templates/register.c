@@ -27,11 +27,7 @@ void js_${current_class.underlined_class_name}_finalize(JSFreeOp *fop, JSObject 
 
         if (nobj) {
             jsb_remove_proxy(nproxy, jsproxy);
-            JS::RootedValue flagValue(cx);
-            JS_GetProperty(cx, jsobj, "__cppCreated", &flagValue);
-            if (flagValue.isNullOrUndefined()){
-                delete nobj;
-            }
+            delete nobj;
         }
         else
             jsb_remove_proxy(nullptr, jsproxy);

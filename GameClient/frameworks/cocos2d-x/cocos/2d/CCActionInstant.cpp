@@ -2,7 +2,7 @@
  Copyright (c) 2008-2010 Ricardo Quesada
  Copyright (c) 2010-2012 cocos2d-x.org
  Copyright (c) 2011      Zynga Inc.
- Copyright (c) 2013-2017 Chukong Technologies Inc.
+ Copyright (c) 2013-2016 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
 
@@ -45,8 +45,9 @@ bool ActionInstant::isDone() const
     return true;
 }
 
-void ActionInstant::step(float /*dt*/)
+void ActionInstant::step(float dt)
 {
+    CC_UNUSED_PARAM(dt);
     float updateDt = 1;
 #if CC_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeJavascript)
@@ -58,8 +59,9 @@ void ActionInstant::step(float /*dt*/)
     update(updateDt);
 }
 
-void ActionInstant::update(float /*time*/)
+void ActionInstant::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     // nothing
 }
 
@@ -79,8 +81,9 @@ Show* Show::create()
     return ret;
 }
 
-void Show::update(float /*time*/)
+void Show::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     _target->setVisible(true);
 }
 
@@ -110,8 +113,9 @@ Hide * Hide::create()
     return ret;
 }
 
-void Hide::update(float /*time*/)
+void Hide::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     _target->setVisible(false);
 }
 
@@ -141,8 +145,9 @@ ToggleVisibility * ToggleVisibility::create()
     return ret;
 }
 
-void ToggleVisibility::update(float /*time*/)
+void ToggleVisibility::update(float time) 
 {
+    CC_UNUSED_PARAM(time);
     _target->setVisible(!_target->isVisible());
 }
 
@@ -178,8 +183,9 @@ bool RemoveSelf::init(bool isNeedCleanUp)
     return true;
 }
 
-void RemoveSelf::update(float /*time*/)
+void RemoveSelf::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     _target->removeFromParentAndCleanup(_isNeedCleanUp);
 }
 
@@ -218,8 +224,9 @@ bool FlipX::initWithFlipX(bool x)
     return true;
 }
 
-void FlipX::update(float /*time*/)
+void FlipX::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     static_cast<Sprite*>(_target)->setFlippedX(_flipX);
 }
 
@@ -257,8 +264,9 @@ bool FlipY::initWithFlipY(bool y)
     return true;
 }
 
-void FlipY::update(float /*time*/)
+void FlipY::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     static_cast<Sprite*>(_target)->setFlippedY(_flipY);
 }
 
@@ -309,8 +317,9 @@ Place * Place::reverse() const
     return this->clone();
 }
 
-void Place::update(float /*time*/)
+void Place::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     _target->setPosition(_position);
 }
 
@@ -398,8 +407,9 @@ CallFunc * CallFunc::reverse() const
     return this->clone();
 }
 
-void CallFunc::update(float /*time*/)
+void CallFunc::update(float time)
 {
+    CC_UNUSED_PARAM(time);
     this->execute();
 }
 
