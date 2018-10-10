@@ -7,5 +7,17 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="Lobby/LobbyScene.csd" />
+          <FilePathData Path="Lobby/PopLayer/GameSetLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/MyCenterLayer.csd" />
+          <FilePathData Path="Lobby/MainScene.csd" />
+          <FilePathData Path="Lobby/LoginScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="Lobby/LobbyScene.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

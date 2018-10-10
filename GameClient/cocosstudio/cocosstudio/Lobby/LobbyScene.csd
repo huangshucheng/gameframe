@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="Normal" Path="home_scene/home_scene_bg.png" Plist="" />
+            <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/home_scene_bg.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="IMG_TOP_BG" ActionTag="1128370919" Tag="19" IconVisible="False" TopMargin="-0.4037" BottomMargin="610.4037" Scale9Enable="True" LeftEage="337" RightEage="337" TopEage="36" BottomEage="36" Scale9OriginX="337" Scale9OriginY="36" Scale9Width="350" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="1280.0000" Y="110.0000" />
@@ -31,9 +31,9 @@
                     <PrePosition X="0.7992" Y="0.5117" />
                     <PreSize X="0.1900" Y="0.6333" />
                     <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Normal" Path="home_scene/setting_down.png" Plist="" />
-                    <PressedFileData Type="Normal" Path="home_scene/setting_down.png" Plist="" />
-                    <NormalFileData Type="Normal" Path="home_scene/setting_up.png" Plist="" />
+                    <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/setting_down.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/setting_down.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/setting_up.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -46,9 +46,9 @@
                     <PrePosition X="0.5253" Y="0.5147" />
                     <PreSize X="0.1867" Y="0.6222" />
                     <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Normal" Path="home_scene/msg_down.png" Plist="" />
-                    <PressedFileData Type="Normal" Path="home_scene/msg_down.png" Plist="" />
-                    <NormalFileData Type="Normal" Path="home_scene/msg_up.png" Plist="" />
+                    <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/msg_down.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/msg_down.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/msg_up.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -61,9 +61,9 @@
                     <PrePosition X="0.2502" Y="0.4763" />
                     <PreSize X="0.1867" Y="0.6333" />
                     <TextColor A="255" R="65" G="65" B="70" />
-                    <DisabledFileData Type="Normal" Path="home_scene/mail_down.png" Plist="" />
-                    <PressedFileData Type="Normal" Path="home_scene/mail_down.png" Plist="" />
-                    <NormalFileData Type="Normal" Path="home_scene/mail_up.png" Plist="" />
+                    <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/mail_down.png" Plist="" />
+                    <PressedFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/mail_down.png" Plist="" />
+                    <NormalFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/mail_up.png" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -90,7 +90,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.1180" Y="0.4844" />
                     <PreSize X="1.2667" Y="0.8889" />
-                    <FileData Type="Normal" Path="home_scene/user_info/012.png" Plist="" />
+                    <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/012.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="PANEL_HEAD_BG" ActionTag="-665061179" Tag="21" IconVisible="False" LeftMargin="36.1798" RightMargin="160.8202" TopMargin="-12.6414" BottomMargin="-0.3586" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="103.0000" Y="103.0000" />
@@ -103,7 +103,7 @@
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5000" Y="0.5000" />
                         <PreSize X="1.0000" Y="1.0000" />
-                        <FileData Type="Normal" Path="home_scene/user_info/169.png" Plist="" />
+                        <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/169.png" Plist="" />
                       </AbstractNodeData>
                       <AbstractNodeData Name="IMG_HEAD" ActionTag="-368679624" Tag="20" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="2.5647" RightMargin="-2.5647" TopMargin="-9.0640" BottomMargin="9.0640" LeftEage="33" RightEage="33" TopEage="33" BottomEage="33" Scale9OriginX="33" Scale9OriginY="33" Scale9Width="37" Scale9Height="37" ctype="ImageViewObjectData">
                         <Size X="103.0000" Y="103.0000" />
@@ -113,7 +113,7 @@
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5249" Y="0.5880" />
                         <PreSize X="1.0000" Y="1.0000" />
-                        <FileData Type="Normal" Path="rectheader/16.png" Plist="" />
+                        <FileData Type="Normal" Path="Lobby/LobbyRes/rectheader/16.png" Plist="" />
                       </AbstractNodeData>
                     </Children>
                     <AnchorPoint />
@@ -172,7 +172,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.1339" Y="0.5298" />
                     <PreSize X="0.1859" Y="0.8571" />
-                    <FileData Type="Normal" Path="home_scene/coin.png" Plist="" />
+                    <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/coin.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="TEXT_COIN" ActionTag="1437019821" Tag="37" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="95.4000" RightMargin="55.6000" TopMargin="12.5000" BottomMargin="12.5000" FontSize="24" LabelText="9999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="48.0000" Y="24.0000" />
@@ -192,9 +192,9 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4363" Y="0.5774" />
                 <PreSize X="0.1555" Y="0.4455" />
-                <FileData Type="Normal" Path="home_scene/coin_bg.png" Plist="" />
+                <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/coin_bg.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_8" ActionTag="1155413099" Tag="39" IconVisible="False" LeftMargin="274.2212" RightMargin="874.7788" TopMargin="17.4982" BottomMargin="28.5018" TouchEnable="True" FontSize="14" ButtonText="Button" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="101" Scale9Height="42" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_8" ActionTag="1155413099" Tag="39" IconVisible="False" LeftMargin="274.2212" RightMargin="874.7788" TopMargin="17.4982" BottomMargin="28.5018" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="101" Scale9Height="42" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="131.0000" Y="64.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="339.7212" Y="60.5018" />
@@ -203,9 +203,9 @@
                 <PrePosition X="0.2654" Y="0.5500" />
                 <PreSize X="0.1023" Y="0.5818" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="home_scene/mall_down.png" Plist="" />
-                <PressedFileData Type="Normal" Path="home_scene/mall_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="home_scene/mall_up.png" Plist="" />
+                <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/mall_down.png" Plist="" />
+                <PressedFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/mall_down.png" Plist="" />
+                <NormalFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/mall_up.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -220,7 +220,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.1287" Y="0.5104" />
                     <PreSize X="0.2111" Y="0.8163" />
-                    <FileData Type="Normal" Path="home_scene/demaon.png" Plist="" />
+                    <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/demaon.png" Plist="" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="TEXT_DIAMOND" ActionTag="1331751265" Tag="38" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="95.4000" RightMargin="55.6000" TopMargin="12.5000" BottomMargin="12.5000" FontSize="24" LabelText="9999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="48.0000" Y="24.0000" />
@@ -240,7 +240,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6211" Y="0.5774" />
                 <PreSize X="0.1555" Y="0.4455" />
-                <FileData Type="Normal" Path="home_scene/coin_bg.png" Plist="" />
+                <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/coin_bg.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
@@ -249,12 +249,12 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="1.0006" />
             <PreSize X="1.0000" Y="0.1528" />
-            <FileData Type="Normal" Path="home_scene/top.png" Plist="" />
+            <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/top.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="PANEL_CENTER" ActionTag="84736729" Tag="40" IconVisible="False" LeftMargin="210.6357" RightMargin="169.3643" TopMargin="146.5467" BottomMargin="73.4533" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="900.0000" Y="500.0000" />
             <Children>
-              <AbstractNodeData Name="IMG_JOIN_ROOM" ActionTag="2070188978" Tag="41" IconVisible="False" LeftMargin="105.3936" RightMargin="494.6064" TopMargin="74.7811" BottomMargin="75.2189" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="IMG_JOIN_ROOM" ActionTag="2070188978" Tag="41" IconVisible="False" LeftMargin="105.3936" RightMargin="494.6064" TopMargin="74.7811" BottomMargin="75.2189" TouchEnable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
                 <Size X="300.0000" Y="350.0000" />
                 <Children>
                   <AbstractNodeData Name="TEXT_JOIN_ROOM" ActionTag="-479596716" Tag="44" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="70.0000" RightMargin="70.0000" TopMargin="155.0000" BottomMargin="155.0000" FontSize="40" LabelText="加入房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -275,9 +275,9 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2838" Y="0.5004" />
                 <PreSize X="0.3333" Y="0.7000" />
-                <FileData Type="Normal" Path="home_scene/user_info/169.png" Plist="" />
+                <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/169.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="IMG_CREATE_ROOM" ActionTag="-638889419" Tag="42" IconVisible="False" LeftMargin="503.3323" RightMargin="96.6677" TopMargin="74.7811" BottomMargin="75.2189" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="IMG_CREATE_ROOM" ActionTag="-638889419" Tag="42" IconVisible="False" LeftMargin="503.3323" RightMargin="96.6677" TopMargin="74.7811" BottomMargin="75.2189" TouchEnable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
                 <Size X="300.0000" Y="350.0000" />
                 <Children>
                   <AbstractNodeData Name="TEXT_CREATE_ROOM" ActionTag="898619876" Tag="45" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="70.0000" RightMargin="70.0000" TopMargin="155.0000" BottomMargin="155.0000" FontSize="40" LabelText="创建房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -298,9 +298,9 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.7259" Y="0.5004" />
                 <PreSize X="0.3333" Y="0.7000" />
-                <FileData Type="Normal" Path="home_scene/user_info/169.png" Plist="" />
+                <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/169.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="IMG_BACK_ROOM" Visible="False" ActionTag="-1730077679" VisibleForFrame="False" Tag="43" IconVisible="False" LeftMargin="503.3300" RightMargin="96.6700" TopMargin="74.7811" BottomMargin="75.2189" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="IMG_BACK_ROOM" Visible="False" ActionTag="-1730077679" VisibleForFrame="False" Tag="43" IconVisible="False" LeftMargin="503.3300" RightMargin="96.6700" TopMargin="74.7811" BottomMargin="75.2189" TouchEnable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
                 <Size X="300.0000" Y="350.0000" />
                 <Children>
                   <AbstractNodeData Name="TEXT_BACK_ROOM" ActionTag="-1461949009" Tag="46" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="70.0000" RightMargin="70.0000" TopMargin="155.0000" BottomMargin="155.0000" FontSize="40" LabelText="返回房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -321,7 +321,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.7259" Y="0.5004" />
                 <PreSize X="0.3333" Y="0.7000" />
-                <FileData Type="Normal" Path="home_scene/user_info/169.png" Plist="" />
+                <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/169.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="0.5000" />

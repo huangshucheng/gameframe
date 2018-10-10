@@ -7,7 +7,7 @@ local cmd_name_map      = require("game.net.cmd_name_map")
 local Cmd               = require("game.net.Cmd")
 local Stype             = require("game.net.Stype")
 
-LoginScene.RESOURCE_FILENAME = 'LoginScene.csb'
+LoginScene.RESOURCE_FILENAME = 'Lobby/LoginScene.csb'
 
 function LoginScene:createResourceNode(resourceFilename)
     LoginScene.super.createResourceNode(self,resourceFilename)
