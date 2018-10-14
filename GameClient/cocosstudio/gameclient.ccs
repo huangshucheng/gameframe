@@ -4,13 +4,6 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="Lobby">
-          <Folder Name="PopLayer">
-            <Project Name="GameSetLayer.csd" Type="Layer" />
-            <Project Name="MyCenterLayer.csd" Type="Layer" />
-          </Folder>
-          <Project Name="LobbyScene.csd" Type="Scene" />
-          <Project Name="LoginScene.csd" Type="Scene" />
-          <Project Name="MainScene.csd" Type="Scene" />
           <Folder Name="LobbyRes">
             <Folder Name="game_scene">
               <Image Name="PVPload001.png" />
@@ -172,6 +165,14 @@
               <Image Name="99.png" />
             </Folder>
           </Folder>
+          <Folder Name="PopLayer">
+            <Project Name="GameSetLayer.csd" Type="Layer" />
+            <Project Name="MyCenterLayer.csd" Type="Layer" />
+            <Project Name="UpgradeLayer.csd" Type="Layer" />
+          </Folder>
+          <Project Name="LobbyScene.csd" Type="Scene" />
+          <Project Name="LoginScene.csd" Type="Scene" />
+          <Project Name="MainScene.csd" Type="Scene" />
         </Folder>
       </RootFolder>
     </Group>

@@ -19,6 +19,9 @@ ServerEvents.ON_SERVER_EVENT_NET_CLOSE  			= "on_server_event_net_close"
 ServerEvents.ON_SERVER_EVENT_NET_CLOSED  			= "on_server_event_net_closed"
 ServerEvents.ON_SERVER_EVENT_NET_NETLOWER  			= "on_server_event_net_netlower"
 
+ClientEvents = ClientEvents or {}
+
+ClientEvents.ON_ASYC_USER_INFO 						= 'on_asyc_user_info'
 
 -- for use
 --[[

@@ -81,7 +81,6 @@ function NetWork:onMessage(event)
     ]]
     -- 解连包
     local data_tb = self:_onReciveMsg(event.data)
-    print("size: >>>>  " .. #data_tb)
     for _ , v in pairs(data_tb) do
         local tb = ProtoMan:getInstance():unpack_protobuf_cmd(v)
         postEvent(ServerEvents.ON_SERVER_EVENT_DATA , tb)

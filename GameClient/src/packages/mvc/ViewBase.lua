@@ -5,6 +5,8 @@ function ViewBase:ctor(app, name)
     self:enableNodeEvents()
     self.app_ = app
     self.name_ = name
+    self._haveBackGroud = true
+    self._canTouchBackground = false
 
     -- check CSB resource file
     local res = rawget(self.class, "RESOURCE_FILENAME")
@@ -16,8 +18,9 @@ function ViewBase:ctor(app, name)
     if res and binding then
         self:createResourceBinding(binding)
     end
-
+    
     if self.onCreate then self:onCreate() end
+    if self.addEventListenner then self:addEventListenner() end
 end
 
 function ViewBase:getApp()
@@ -37,9 +40,27 @@ function ViewBase:createResourceNode(resourceFilename)
         self.resourceNode_:removeSelf()
         self.resourceNode_ = nil
     end
+
+    if self._haveBackGroud then
+        self._popLayer = ccui.Layout:create() 
+        self._popLayer:setBackGroundColorType(ccui.LayoutBackGroundColorType.solid)
+        self._popLayer:setBackGroundColor(cc.c3b(0,0,0)) 
+        self._popLayer:setTouchEnabled(self._haveBackGroud)
+       
+        self._popLayer:setContentSize(cc.size(2000,2000))
+        self._popLayer:setAnchorPoint(cc.p(0,0))      
+        self._popLayer:setPosition( cc.p(0,0))
+        self._popLayer:setOpacity(100)
+        self:addChild(self._popLayer,-1)
+        self._popLayer:addTouchEventListener(handler(self,self.onTouchEventBackground))
+    end
+
     self.resourceNode_ = cc.CSLoader:createNode(resourceFilename)
     assert(self.resourceNode_, string.format("ViewBase:createResourceNode() - load resouce node from file \"%s\" failed", resourceFilename))
     self:addChild(self.resourceNode_)
+
+    self.resourceNode_:setContentSize(display.size)
+    ccui.Helper:doLayout(self.resourceNode_)
 end
 
 function ViewBase:createResourceBinding(binding)
@@ -63,6 +84,18 @@ function ViewBase:showWithScene(transition, time, more)
     scene:addChild(self)
     display.runScene(scene, transition, time, more)
     return self
+end
+
+function ViewBase:onTouchEventBackground(send,eventType)
+    if eventType ~= ccui.TouchEventType.ended then
+        return
+    end
+
+    if self._canTouchBackground == false then
+        return
+    end
+    
+    self:setVisible(false)
 end
 
 return ViewBase

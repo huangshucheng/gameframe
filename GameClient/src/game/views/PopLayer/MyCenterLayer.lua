@@ -1,0 +1,191 @@
+local MyCenterLayer = class("MyCenterLayer", cc.load("mvc").ViewBase)
+
+local NetWork           = require("game.net.NetWork")
+local Cmd               = require("game.net.Cmd")
+local Stype             = require("game.net.Stype")
+local Respones 			= require("game.net.Respones")
+local UserInfo 			= require("game.clientdata.UserInfo")
+
+MyCenterLayer.RESOURCE_FILENAME = 'Lobby/PopLayer/MyCenterLayer.csb'
+
+local IMG_BG = 'IMG_BG'
+local BTN_CLOSE = 'BTN_CLOSE'
+local BTN_UPGRADE = 'BTN_UPGRADE'
+local BTN_MODIFY = 'BTN_MODIFY'
+local BTN_LOGOUT = 'BTN_LOGOUT'
+local CHECK_BOY = 'CHECK_BOY'
+local CHECK_GIRL = 'CHECK_GIRL'
+local PANEL_HEAD_BG = 'PANEL_HEAD_BG'
+local IMG_HEAD = 'IMG_HEAD'
+local TEXTFIELD_NAME = 'TEXTFIELD_NAME'
+
+function MyCenterLayer:ctor(app, name)
+	self._login_textfield_name = nil
+	self._checkbox_boy = nil
+	self._checkbox_girl = nil
+	self._user_sex = 1
+	self._head_img_index = 1
+	MyCenterLayer.super.ctor(self,app,name)
+end
+
+function MyCenterLayer:onCreate()
+	self._canTouchBackground = true
+	local img_bg = self:getResourceNode():getChildByName(IMG_BG)
+	if not img_bg then return end
+
+	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
+	if btn_close then
+		btn_close:addClickEventListener(handler(self,function()
+			self:removeSelf()
+		end))
+	end
+	local btn_modify = ccui.Helper:seekWidgetByName(img_bg,BTN_MODIFY)
+	if btn_modify then
+		btn_modify:addClickEventListener(handler(self,self.onEventBtnUpgrade))
+	end
+
+	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
+	if btn_upgrade then
+		btn_upgrade:addClickEventListener(handler(self,function()
+			local upgradeLayer = require('game.views.PopLayer.UpgradeLayer'):create()
+		    if upgradeLayer then self:addChild(upgradeLayer) end
+		end))
+	end
+
+	local login_textfield_name = ccui.Helper:seekWidgetByName(img_bg,TEXTFIELD_NAME)
+    local textfieldSize             = cc.size(300,51)
+    local textfieldImg              = 'Lobby/LobbyRes/home_scene/user_info/120.png'
+    if login_textfield_name then
+        local textfdParent = login_textfield_name:getParent()
+        self._login_textfield_name = ccui.EditBox:create(textfieldSize,textfieldImg) 
+        self._login_textfield_name:setAnchorPoint(cc.p(0.5,0.5))
+        self._login_textfield_name:setPosition(cc.p(textfdParent:getPositionX(), textfdParent:getPositionY()))
+        self._login_textfield_name:setFontSize(35)
+        self._login_textfield_name:setFontColor(cc.c3b(255,255,255))
+        self._login_textfield_name:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND)
+        -- self._login_textfield_name:setPlaceHolder('小玩家')
+        textfdParent:getParent():addChild(self._login_textfield_name)
+        textfdParent:removeSelf()
+    end
+
+    self._checkbox_boy = ccui.Helper:seekWidgetByName(img_bg,CHECK_BOY)
+    self._checkbox_girl = ccui.Helper:seekWidgetByName(img_bg,CHECK_GIRL)
+
+    if (not self._checkbox_boy) or (not self._checkbox_girl)  then
+    	return
+    end
+
+    local setSex = function(isBoy)
+    	if isBoy == true then
+			self._checkbox_boy:setSelected(true)
+			self._checkbox_girl:setSelected(false)
+		else
+			self._checkbox_girl:setSelected(true)
+			self._checkbox_boy:setSelected(false)
+    	end
+    end
+
+	self._checkbox_boy:addEventListener(handler(self,function(sender,eventType)
+		-- if eventType == ccui.CheckBoxEventType.selected then
+		-- elseif eventType == ccui.CheckBoxEventType.unselected then
+		-- end
+		setSex(true)
+	end))
+
+	self._checkbox_girl:addEventListener(handler(self,function(sender,eventType)
+		setSex(false)
+	end))
+
+	local btn_logout = ccui.Helper:seekWidgetByName(img_bg,BTN_LOGOUT)
+	if btn_logout then
+		btn_logout:addClickEventListener(handler(self,self.onEventBtnLoginOut))
+	end
+    -- load data
+    if self._login_textfield_name then
+    	self._login_textfield_name:setText(UserInfo.getUserName())
+    end
+
+	local sex = UserInfo.getUserSex()
+	if tonumber(sex) == 1 then
+		setSex(true)
+	else
+		setSex(false)
+	end
+
+	if btn_upgrade then
+		btn_upgrade:setVisible(UserInfo.getUserIsGuest())
+	end
+end
+
+function MyCenterLayer:addEventListenner()
+	addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
+	addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
+end
+
+function MyCenterLayer:onEventData(event)
+   local data = event._usedata
+    if not data then
+        return
+    end
+    local ctype = data.ctype
+    if ctype == Cmd.eEditProfileRes then
+    	local body = data.body
+        if body.status == Respones.OK then
+        	UserInfo.setUserName(self._login_textfield_name:getText())
+        	UserInfo.setUserSex(self._user_sex)
+        	UserInfo.setUserface(1)
+        	UserInfo.flush()
+        	postEvent(ClientEvents.ON_ASYC_USER_INFO)
+        	self:removeSelf()
+        end
+    end
+end
+
+function MyCenterLayer:onEventBtnUpgrade(sender,eventType)
+	local namestr = ''
+
+	if self._login_textfield_name then
+		namestr = self._login_textfield_name:getText()
+	end
+
+	if self._checkbox_girl and self._checkbox_boy then
+		local isboysel = self._checkbox_boy:isSelected()
+		local isgirlsel =  self._checkbox_girl:isSelected()
+		if isboysel then
+			self._user_sex = 1
+		elseif isgirlsel then
+			self._user_sex = 0
+		end
+	end
+
+	if namestr == '' then
+		return
+	end
+
+	local msg = {
+		unick = namestr,
+		uface = 1,
+		usex = self._user_sex,
+	}
+
+	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eEditProfileReq,msg)
+end
+
+function MyCenterLayer:onEventBtnLoginOut(sender, eventType)
+	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eLoginOutReq,nil)
+end
+
+function MyCenterLayer:onEventAsycUserInfo(event)
+    local uname = UserInfo.getUserName()
+    if uname and uname ~= '' then
+        self._login_textfield_name:setText(tostring(uname))
+    end
+
+    local isguest = UserInfo.getUserIsGuest()
+
+	local img_bg = self:getResourceNode():getChildByName(IMG_BG)
+	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
+	btn_upgrade:setVisible(isguest) 
+end
+
+return MyCenterLayer

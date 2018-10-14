@@ -1,25 +1,35 @@
 local LobbyScene = class("LobbyScene", cc.load("mvc").ViewBase)
 
-local ByteArray         = require("game.utils.ByteArray")
 local NetWork           = require("game.net.NetWork")
-local ProtoMan          = require("game.utils.ProtoMan")
-local cmd_name_map      = require("game.net.cmd_name_map")
 local Cmd               = require("game.net.Cmd")
 local Stype             = require("game.net.Stype")
+local Respones          = require("game.net.Respones")
+local UserInfo          = require("game.clientdata.UserInfo")
 
 LobbyScene.RESOURCE_FILENAME = 'Lobby/LobbyScene.csb'
 
-function LobbyScene:createResourceNode(resourceFilename)
-    LobbyScene.super.createResourceNode(self,resourceFilename)
-    self:getResourceNode():setContentSize(display.size)
-    ccui.Helper:doLayout(self:getResourceNode())
+local PANEL_CENTER = 'PANEL_CENTER'
+local IMG_JOIN_ROOM = 'IMG_JOIN_ROOM'
+local IMG_CREATE_ROOM = 'IMG_CREATE_ROOM'
+local IMG_BACK_ROOM = 'IMG_BACK_ROOM'
+local PANEL_HEAD_BG = 'PANEL_HEAD_BG'
+local IMG_TOP_BG = 'IMG_TOP_BG'
+local TEXT_USER_NAME = 'TEXT_USER_NAME'
+local TEXT_USER_ID = 'TEXT_USER_ID'
 
-    local panel_center          = self:getResourceNode():getChildByName('PANEL_CENTER')
+function LobbyScene:ctor(app, name)
+    self._user_name_text    = nil
+    self._user_id_text      = nil
+    LobbyScene.super.ctor(self, app, name)
+end
+
+function LobbyScene:onCreate()
+    local panel_center          = self:getResourceNode():getChildByName(PANEL_CENTER)
     if  not panel_center then return end
 
-    local btn_join_room         = panel_center:getChildByName('IMG_JOIN_ROOM')
-    local btn_create_room       = panel_center:getChildByName('IMG_CREATE_ROOM')
-    local btn_back_room         = panel_center:getChildByName('IMG_BACK_ROOM')
+    local btn_join_room         = panel_center:getChildByName(IMG_JOIN_ROOM)
+    local btn_create_room       = panel_center:getChildByName(IMG_CREATE_ROOM)
+    local btn_back_room         = panel_center:getChildByName(IMG_BACK_ROOM)
 
     if btn_join_room then
         btn_join_room:addTouchEventListener(handler(self,self.onTouchJoinRoomBtn))
@@ -31,6 +41,23 @@ function LobbyScene:createResourceNode(resourceFilename)
 
     if btn_back_room then
         btn_back_room:addTouchEventListener(handler(self,self.onTouchBackRoomBtn))
+    end
+
+    local img_top_bg = self:getResourceNode():getChildByName(IMG_TOP_BG)
+    if not img_top_bg then return end
+
+    local panel_head_bg = ccui.Helper:seekWidgetByName(img_top_bg, PANEL_HEAD_BG)
+    if panel_head_bg then
+        panel_head_bg:addTouchEventListener(handler(self,self.onTouchEventHeadImgBg))
+    end
+
+    self._user_name_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_NAME)
+    self._user_id_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_ID)
+    if self._user_name_text then
+        self._user_name_text:setString(UserInfo.getUserName())
+    end
+    if self._user_id_text then
+        self._user_id_text:setString('ID:00000' .. UserInfo.getUserId())
     end
 end
 
@@ -77,8 +104,22 @@ function LobbyScene:onTouchBackRoomBtn(send,eventType)
     end
 end
 
-function LobbyScene:onCreate()
-    self:addEventListenner()
+function LobbyScene:onTouchEventHeadImgBg(send,eventType)
+      if eventType == ccui.TouchEventType.began then
+        send:setScale(0.9)
+        send:setColor(cc.c3b(160,160,160))
+    elseif eventType == ccui.TouchEventType.ended or
+        eventType == ccui.TouchEventType.canceled then
+        send:setScale(1)
+        send:setColor(cc.c3b(255,255,255))
+    end
+    if eventType ~= ccui.TouchEventType.ended then
+        return
+    end
+    local myCenterLayer = require('game.views.PopLayer.MyCenterLayer'):create()
+    if myCenterLayer then
+        self:addChild(myCenterLayer)
+    end
 end
 
 function LobbyScene:addEventListenner()
@@ -89,6 +130,9 @@ function LobbyScene:addEventListenner()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED, self, self.onEventClosed)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_NETLOWER, self, self.onEventNetLower)
+
+    -- clientEvent
+    addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
 end
 
 
@@ -98,7 +142,20 @@ function LobbyScene:onEventData(event)
         return
     end
     dump(data)
-end
+    local ctype = data.ctype
+
+    if ctype == Cmd.eEditProfileRes then
+        
+    elseif ctype == Cmd.eAccountUpgradeRes then
+    
+    elseif ctype == Cmd.eUnameLoginRes then
+    
+    elseif ctype == Cmd.eLoginOutRes then
+        self:getApp():enterScene('LoginScene')
+    elseif ctype == Cmd.eGetUgameInfoRes then
+
+    end
+end 
 
 function LobbyScene:onEventMsgSend(envet)
     
@@ -124,8 +181,23 @@ function LobbyScene:onEventNetLower(envet)
 
 end
 
+function LobbyScene:onEventAsycUserInfo(event)
+    local uname = UserInfo.getUserName()
+    if uname and uname ~= '' then
+        self._user_name_text:setString(tostring(uname))
+    end
+end
+--------------------
 function LobbyScene:onEventBtnGuestLogin(sender,eventType)
    
+end
+
+function LobbyScene:onEnter()
+    print('LobbyScene:onEnter')
+end
+
+function LobbyScene:onExit()
+    print('LobbyScene:onExit')
 end
 
 return LobbyScene
