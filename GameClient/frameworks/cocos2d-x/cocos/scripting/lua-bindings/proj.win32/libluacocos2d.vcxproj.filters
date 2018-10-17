@@ -85,6 +85,9 @@
     <Filter Include="manual\pbc">
       <UniqueIdentifier>{c866dfd1-1b52-4d26-b1b1-c1843a1567ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="quick">
+      <UniqueIdentifier>{3c91be00-9672-45c0-a8aa-2e3fa593b3a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\auto\lua_cocos2dx_auto.cpp">

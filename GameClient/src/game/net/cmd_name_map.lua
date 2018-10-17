@@ -11,6 +11,9 @@ local cmd_name_map = {
 	"UnameLoginRes",
 	"LoginOutReq",
 	"LoginOutRes",
+	"UserRegistReq",
+	"UserRegistRes",
+	--[[
 	"GetUgameInfoReq",
 	"GetUgameInfoRes",
 
@@ -35,6 +38,7 @@ local cmd_name_map = {
 	"ExitMatchRes",
 	"UserExitMatch",
 	"GameStart",
+	]]
 }
 
 return cmd_name_map

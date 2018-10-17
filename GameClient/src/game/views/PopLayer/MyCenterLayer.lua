@@ -8,16 +8,16 @@ local UserInfo 			= require("game.clientdata.UserInfo")
 
 MyCenterLayer.RESOURCE_FILENAME = 'Lobby/PopLayer/MyCenterLayer.csb'
 
-local IMG_BG = 'IMG_BG'
-local BTN_CLOSE = 'BTN_CLOSE'
-local BTN_UPGRADE = 'BTN_UPGRADE'
-local BTN_MODIFY = 'BTN_MODIFY'
-local BTN_LOGOUT = 'BTN_LOGOUT'
-local CHECK_BOY = 'CHECK_BOY'
-local CHECK_GIRL = 'CHECK_GIRL'
-local PANEL_HEAD_BG = 'PANEL_HEAD_BG'
-local IMG_HEAD = 'IMG_HEAD'
-local TEXTFIELD_NAME = 'TEXTFIELD_NAME'
+local IMG_BG 					= 'IMG_BG'
+local BTN_CLOSE 				= 'BTN_CLOSE'
+local BTN_UPGRADE 				= 'BTN_UPGRADE'
+local BTN_MODIFY 				= 'BTN_MODIFY'
+local BTN_LOGOUT 				= 'BTN_LOGOUT'
+local CHECK_BOY 				= 'CHECK_BOY'
+local CHECK_GIRL 				= 'CHECK_GIRL'
+local PANEL_HEAD_BG 			= 'PANEL_HEAD_BG'
+local IMG_HEAD 					= 'IMG_HEAD'
+local TEXTFIELD_NAME 			= 'TEXTFIELD_NAME'
 
 function MyCenterLayer:ctor(app, name)
 	self._login_textfield_name = nil
@@ -63,7 +63,9 @@ function MyCenterLayer:onCreate()
         self._login_textfield_name:setFontSize(35)
         self._login_textfield_name:setFontColor(cc.c3b(255,255,255))
         self._login_textfield_name:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND)
-        -- self._login_textfield_name:setPlaceHolder('小玩家')
+        self._login_textfield_name:setReturnType(cc.KEYBOARD_RETURNTYPE_DEFAULT)
+        self._login_textfield_name:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
+        self._login_textfield_name:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
         textfdParent:getParent():addChild(self._login_textfield_name)
         textfdParent:removeSelf()
     end

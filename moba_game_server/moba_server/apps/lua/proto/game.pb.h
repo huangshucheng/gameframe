@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[25];
+  static const ::google::protobuf::internal::ParseTable schema[27];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -93,6 +93,10 @@ void InitDefaultsUserExitMatchImpl();
 void InitDefaultsUserExitMatch();
 void InitDefaultsGameStartImpl();
 void InitDefaultsGameStart();
+void InitDefaultsUserRegistReqImpl();
+void InitDefaultsUserRegistReq();
+void InitDefaultsUserRegistResImpl();
+void InitDefaultsUserRegistRes();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -119,6 +123,8 @@ inline void InitDefaults() {
   InitDefaultsExitMatchRes();
   InitDefaultsUserExitMatch();
   InitDefaultsGameStart();
+  InitDefaultsUserRegistReq();
+  InitDefaultsUserRegistRes();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -193,6 +199,12 @@ extern UserExitMatchDefaultTypeInternal _UserExitMatch_default_instance_;
 class UserGameInfo;
 class UserGameInfoDefaultTypeInternal;
 extern UserGameInfoDefaultTypeInternal _UserGameInfo_default_instance_;
+class UserRegistReq;
+class UserRegistReqDefaultTypeInternal;
+extern UserRegistReqDefaultTypeInternal _UserRegistReq_default_instance_;
+class UserRegistRes;
+class UserRegistResDefaultTypeInternal;
+extern UserRegistResDefaultTypeInternal _UserRegistRes_default_instance_;
 class WorldChipRankInfo;
 class WorldChipRankInfoDefaultTypeInternal;
 extern WorldChipRankInfoDefaultTypeInternal _WorldChipRankInfo_default_instance_;
@@ -232,28 +244,12 @@ enum Cmd {
   eUnameLoginRes = 10,
   eLoginOutReq = 11,
   eLoginOutRes = 12,
-  eGetUgameInfoReq = 13,
-  eGetUgameInfoRes = 14,
-  eRecvLoginBonuesReq = 15,
-  eRecvLoginBonuesRes = 16,
-  eGetWorldRankUchipReq = 17,
-  eGetWorldRankUchipRes = 18,
-  eGetSysMsgReq = 19,
-  eGetSysMsgRes = 20,
-  eLoginLogicReq = 21,
-  eLoginLogicRes = 22,
-  eEnterZoneReq = 23,
-  eEnterZoneRes = 24,
-  eEnterMatch = 25,
-  eUserArrived = 26,
-  eExitMatchReq = 27,
-  eExitMatchRes = 28,
-  eUserExitMatch = 29,
-  eGameStart = 30
+  eUserRegistReq = 13,
+  eUserRegistRes = 14
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
-const Cmd Cmd_MAX = eGameStart;
+const Cmd Cmd_MAX = eUserRegistRes;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();
@@ -3490,6 +3486,255 @@ class GameStart : public ::google::protobuf::Message /* @@protoc_insertion_point
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsGameStartImpl();
 };
+// -------------------------------------------------------------------
+
+class UserRegistReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserRegistReq) */ {
+ public:
+  UserRegistReq();
+  virtual ~UserRegistReq();
+
+  UserRegistReq(const UserRegistReq& from);
+
+  inline UserRegistReq& operator=(const UserRegistReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UserRegistReq(UserRegistReq&& from) noexcept
+    : UserRegistReq() {
+    *this = ::std::move(from);
+  }
+
+  inline UserRegistReq& operator=(UserRegistReq&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserRegistReq& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UserRegistReq* internal_default_instance() {
+    return reinterpret_cast<const UserRegistReq*>(
+               &_UserRegistReq_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    25;
+
+  void Swap(UserRegistReq* other);
+  friend void swap(UserRegistReq& a, UserRegistReq& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UserRegistReq* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserRegistReq* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserRegistReq& from);
+  void MergeFrom(const UserRegistReq& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserRegistReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string uname = 1;
+  bool has_uname() const;
+  void clear_uname();
+  static const int kUnameFieldNumber = 1;
+  const ::std::string& uname() const;
+  void set_uname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_uname(::std::string&& value);
+  #endif
+  void set_uname(const char* value);
+  void set_uname(const char* value, size_t size);
+  ::std::string* mutable_uname();
+  ::std::string* release_uname();
+  void set_allocated_uname(::std::string* uname);
+
+  // required string upwd_md5 = 2;
+  bool has_upwd_md5() const;
+  void clear_upwd_md5();
+  static const int kUpwdMd5FieldNumber = 2;
+  const ::std::string& upwd_md5() const;
+  void set_upwd_md5(const ::std::string& value);
+  #if LANG_CXX11
+  void set_upwd_md5(::std::string&& value);
+  #endif
+  void set_upwd_md5(const char* value);
+  void set_upwd_md5(const char* value, size_t size);
+  ::std::string* mutable_upwd_md5();
+  ::std::string* release_upwd_md5();
+  void set_allocated_upwd_md5(::std::string* upwd_md5);
+
+  // @@protoc_insertion_point(class_scope:UserRegistReq)
+ private:
+  void set_has_uname();
+  void clear_has_uname();
+  void set_has_upwd_md5();
+  void clear_has_upwd_md5();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr uname_;
+  ::google::protobuf::internal::ArenaStringPtr upwd_md5_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUserRegistReqImpl();
+};
+// -------------------------------------------------------------------
+
+class UserRegistRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserRegistRes) */ {
+ public:
+  UserRegistRes();
+  virtual ~UserRegistRes();
+
+  UserRegistRes(const UserRegistRes& from);
+
+  inline UserRegistRes& operator=(const UserRegistRes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UserRegistRes(UserRegistRes&& from) noexcept
+    : UserRegistRes() {
+    *this = ::std::move(from);
+  }
+
+  inline UserRegistRes& operator=(UserRegistRes&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserRegistRes& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UserRegistRes* internal_default_instance() {
+    return reinterpret_cast<const UserRegistRes*>(
+               &_UserRegistRes_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    26;
+
+  void Swap(UserRegistRes* other);
+  friend void swap(UserRegistRes& a, UserRegistRes& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UserRegistRes* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserRegistRes* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserRegistRes& from);
+  void MergeFrom(const UserRegistRes& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserRegistRes* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 status = 1;
+  bool has_status() const;
+  void clear_status();
+  static const int kStatusFieldNumber = 1;
+  ::google::protobuf::int32 status() const;
+  void set_status(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:UserRegistRes)
+ private:
+  void set_has_status();
+  void clear_has_status();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::int32 status_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUserRegistResImpl();
+};
 // ===================================================================
 
 
@@ -5535,9 +5780,171 @@ GameStart::mutable_heroes() {
   return &heroes_;
 }
 
+// -------------------------------------------------------------------
+
+// UserRegistReq
+
+// required string uname = 1;
+inline bool UserRegistReq::has_uname() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserRegistReq::set_has_uname() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserRegistReq::clear_has_uname() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserRegistReq::clear_uname() {
+  uname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_uname();
+}
+inline const ::std::string& UserRegistReq::uname() const {
+  // @@protoc_insertion_point(field_get:UserRegistReq.uname)
+  return uname_.GetNoArena();
+}
+inline void UserRegistReq::set_uname(const ::std::string& value) {
+  set_has_uname();
+  uname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserRegistReq.uname)
+}
+#if LANG_CXX11
+inline void UserRegistReq::set_uname(::std::string&& value) {
+  set_has_uname();
+  uname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserRegistReq.uname)
+}
+#endif
+inline void UserRegistReq::set_uname(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_uname();
+  uname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserRegistReq.uname)
+}
+inline void UserRegistReq::set_uname(const char* value, size_t size) {
+  set_has_uname();
+  uname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserRegistReq.uname)
+}
+inline ::std::string* UserRegistReq::mutable_uname() {
+  set_has_uname();
+  // @@protoc_insertion_point(field_mutable:UserRegistReq.uname)
+  return uname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserRegistReq::release_uname() {
+  // @@protoc_insertion_point(field_release:UserRegistReq.uname)
+  clear_has_uname();
+  return uname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserRegistReq::set_allocated_uname(::std::string* uname) {
+  if (uname != NULL) {
+    set_has_uname();
+  } else {
+    clear_has_uname();
+  }
+  uname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uname);
+  // @@protoc_insertion_point(field_set_allocated:UserRegistReq.uname)
+}
+
+// required string upwd_md5 = 2;
+inline bool UserRegistReq::has_upwd_md5() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UserRegistReq::set_has_upwd_md5() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UserRegistReq::clear_has_upwd_md5() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UserRegistReq::clear_upwd_md5() {
+  upwd_md5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_upwd_md5();
+}
+inline const ::std::string& UserRegistReq::upwd_md5() const {
+  // @@protoc_insertion_point(field_get:UserRegistReq.upwd_md5)
+  return upwd_md5_.GetNoArena();
+}
+inline void UserRegistReq::set_upwd_md5(const ::std::string& value) {
+  set_has_upwd_md5();
+  upwd_md5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserRegistReq.upwd_md5)
+}
+#if LANG_CXX11
+inline void UserRegistReq::set_upwd_md5(::std::string&& value) {
+  set_has_upwd_md5();
+  upwd_md5_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserRegistReq.upwd_md5)
+}
+#endif
+inline void UserRegistReq::set_upwd_md5(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_upwd_md5();
+  upwd_md5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserRegistReq.upwd_md5)
+}
+inline void UserRegistReq::set_upwd_md5(const char* value, size_t size) {
+  set_has_upwd_md5();
+  upwd_md5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserRegistReq.upwd_md5)
+}
+inline ::std::string* UserRegistReq::mutable_upwd_md5() {
+  set_has_upwd_md5();
+  // @@protoc_insertion_point(field_mutable:UserRegistReq.upwd_md5)
+  return upwd_md5_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserRegistReq::release_upwd_md5() {
+  // @@protoc_insertion_point(field_release:UserRegistReq.upwd_md5)
+  clear_has_upwd_md5();
+  return upwd_md5_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserRegistReq::set_allocated_upwd_md5(::std::string* upwd_md5) {
+  if (upwd_md5 != NULL) {
+    set_has_upwd_md5();
+  } else {
+    clear_has_upwd_md5();
+  }
+  upwd_md5_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), upwd_md5);
+  // @@protoc_insertion_point(field_set_allocated:UserRegistReq.upwd_md5)
+}
+
+// -------------------------------------------------------------------
+
+// UserRegistRes
+
+// required int32 status = 1;
+inline bool UserRegistRes::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserRegistRes::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserRegistRes::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserRegistRes::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::google::protobuf::int32 UserRegistRes::status() const {
+  // @@protoc_insertion_point(field_get:UserRegistRes.status)
+  return status_;
+}
+inline void UserRegistRes::set_status(::google::protobuf::int32 value) {
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:UserRegistRes.status)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

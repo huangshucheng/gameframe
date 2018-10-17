@@ -8,12 +8,12 @@ local Stype             = require("game.net.Stype")
 local Respones 			= require("game.net.Respones")
 local UserInfo 			= require("game.clientdata.UserInfo")
 
-local IMG_BG = 'IMG_BG'
-local BTN_CLOSE = 'BTN_CLOSE'
-local BTN_COMMIT = 'BTN_COMMIT'
-local TEXTFIELD_ACCOUNT = 'TEXTFIELD_ACCOUNT'
-local TEXTFIELD_PWD = 'TEXTFIELD_PWD'
-local TEXTFIELD_PWD_CONF = 'TEXTFIELD_PWD_CONF'
+local IMG_BG                = 'IMG_BG'
+local BTN_CLOSE             = 'BTN_CLOSE'
+local BTN_COMMIT            = 'BTN_COMMIT'
+local TEXTFIELD_ACCOUNT     = 'TEXTFIELD_ACCOUNT'
+local TEXTFIELD_PWD         = 'TEXTFIELD_PWD'
+local TEXTFIELD_PWD_CONF    = 'TEXTFIELD_PWD_CONF'
 
 function UpgradeLayer:ctor()
 	self._textfield_account = nil
@@ -27,7 +27,7 @@ function UpgradeLayer:ctor()
 end
 
 function UpgradeLayer:onCreate()
-	self._canTouchBackground = true
+	self._canTouchBackground = false
 
 	local img_bg = self:getResourceNode():getChildByName(IMG_BG)
 	if not img_bg then

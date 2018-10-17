@@ -8,14 +8,14 @@ local UserInfo          = require("game.clientdata.UserInfo")
 
 LobbyScene.RESOURCE_FILENAME = 'Lobby/LobbyScene.csb'
 
-local PANEL_CENTER = 'PANEL_CENTER'
-local IMG_JOIN_ROOM = 'IMG_JOIN_ROOM'
-local IMG_CREATE_ROOM = 'IMG_CREATE_ROOM'
-local IMG_BACK_ROOM = 'IMG_BACK_ROOM'
-local PANEL_HEAD_BG = 'PANEL_HEAD_BG'
-local IMG_TOP_BG = 'IMG_TOP_BG'
-local TEXT_USER_NAME = 'TEXT_USER_NAME'
-local TEXT_USER_ID = 'TEXT_USER_ID'
+local PANEL_CENTER          = 'PANEL_CENTER'
+local IMG_JOIN_ROOM         = 'IMG_JOIN_ROOM'
+local IMG_CREATE_ROOM       = 'IMG_CREATE_ROOM'
+local IMG_BACK_ROOM         = 'IMG_BACK_ROOM'
+local PANEL_HEAD_BG         = 'PANEL_HEAD_BG'
+local IMG_TOP_BG            = 'IMG_TOP_BG'
+local TEXT_USER_NAME        = 'TEXT_USER_NAME'
+local TEXT_USER_ID          = 'TEXT_USER_ID'
 
 function LobbyScene:ctor(app, name)
     self._user_name_text    = nil
@@ -147,9 +147,10 @@ function LobbyScene:onEventData(event)
     if ctype == Cmd.eEditProfileRes then
         
     elseif ctype == Cmd.eAccountUpgradeRes then
-    
+
+    elseif ctype == Cmd.eRelogin then
+        self:getApp():enterScene('LoginScene')
     elseif ctype == Cmd.eUnameLoginRes then
-    
     elseif ctype == Cmd.eLoginOutRes then
         self:getApp():enterScene('LoginScene')
     elseif ctype == Cmd.eGetUgameInfoRes then

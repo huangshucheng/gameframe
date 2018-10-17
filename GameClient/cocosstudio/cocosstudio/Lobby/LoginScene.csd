@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="IMG_BG" ActionTag="-825079392" Tag="33" IconVisible="False" TopMargin="-450.0000" BottomMargin="-110.0000" LeftEage="337" RightEage="337" TopEage="142" BottomEage="142" Scale9OriginX="337" Scale9OriginY="142" Scale9Width="350" Scale9Height="740" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="IMG_BG" CanEdit="False" Visible="False" ActionTag="-825079392" Tag="33" IconVisible="False" TopMargin="-450.0000" BottomMargin="-110.0000" LeftEage="337" RightEage="337" TopEage="142" BottomEage="142" Scale9OriginX="337" Scale9OriginY="142" Scale9Width="350" Scale9Height="740" ctype="ImageViewObjectData">
             <Size X="1280.0000" Y="1280.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="640.0000" Y="530.0000" />
@@ -16,10 +16,10 @@
             <PreSize X="1.0000" Y="1.7778" />
             <FileData Type="Normal" Path="Lobby/LobbyRes/game_scene/PVPload001.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="BTN_GUEST_LOGIN" ActionTag="1306541883" Tag="34" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="535.4995" RightMargin="535.5005" TopMargin="573.6290" BottomMargin="71.3709" TouchEnable="True" FontSize="32" ButtonText="游客登录" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="179" Scale9Height="53" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="BTN_GUEST_LOGIN" ActionTag="1306541883" Tag="34" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="535.5000" RightMargin="535.5000" TopMargin="573.6360" BottomMargin="71.3640" TouchEnable="True" FontSize="32" ButtonText="游客登录" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="179" Scale9Height="53" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="209.0000" Y="75.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="639.9995" Y="108.8709" />
+            <Position X="640.0000" Y="108.8640" />
             <Scale ScaleX="1.2000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.1512" />
@@ -34,7 +34,7 @@
           <AbstractNodeData Name="IMG_LOGIN_BG" ActionTag="1094770644" Tag="45" IconVisible="False" LeftMargin="315.0000" RightMargin="315.0000" TopMargin="115.0331" BottomMargin="227.9669" Scale9Enable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="341" Scale9Height="170" ctype="ImageViewObjectData">
             <Size X="650.0000" Y="377.0000" />
             <Children>
-              <AbstractNodeData Name="PANEL_LOGIN" ActionTag="-630130522" Tag="47" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="PANEL_LOGIN" ActionTag="-630130522" Tag="47" IconVisible="False" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="650.0000" Y="377.0000" />
                 <Children>
                   <AbstractNodeData Name="TEXT_TITLE_LOGIN" ActionTag="65088306" Tag="46" IconVisible="False" LeftMargin="287.1111" RightMargin="282.8889" TopMargin="32.0086" BottomMargin="304.9914" FontSize="40" LabelText="登录" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -168,7 +168,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="TEXT_TITLE_ACCOUNT" CanEdit="False" ActionTag="2081568504" Tag="60" IconVisible="False" LeftMargin="102.9076" RightMargin="459.0924" TopMargin="107.0814" BottomMargin="234.9187" FontSize="35" LabelText="帐号:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="TEXT_TITLE_ACCOUNT" CanEdit="False" ActionTag="2081568504" Tag="60" IconVisible="False" LeftMargin="102.9076" RightMargin="459.0924" TopMargin="107.0813" BottomMargin="234.9187" FontSize="35" LabelText="帐号:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="88.0000" Y="35.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="146.9076" Y="252.4187" />
@@ -190,7 +190,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="TEXT_TITLE_PWD_CONF" CanEdit="False" ActionTag="-1195378312" Tag="67" IconVisible="False" LeftMargin="32.9076" RightMargin="459.0924" TopMargin="219.8556" BottomMargin="122.1444" FontSize="35" LabelText="确认密码:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                  <AbstractNodeData Name="TEXT_TITLE_PWD_CONF" CanEdit="False" ActionTag="-1195378312" Tag="67" IconVisible="False" LeftMargin="32.9057" RightMargin="459.0943" TopMargin="219.8571" BottomMargin="122.1429" FontSize="35" LabelText="确认密码:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                     <Size X="158.0000" Y="35.0000" />
                     <AnchorPoint ScaleX="0.4920" ScaleY="-0.6084" />
                     <Position X="110.6417" Y="100.8489" />
@@ -216,7 +216,7 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="IMG_BG_ACCOUNT" CanEdit="False" ActionTag="-1556172854" Tag="63" IconVisible="False" LeftMargin="230.0000" RightMargin="120.0000" TopMargin="103.7401" BottomMargin="222.2600" Scale9Enable="True" LeftEage="79" RightEage="79" TopEage="16" BottomEage="16" Scale9OriginX="79" Scale9OriginY="16" Scale9Width="83" Scale9Height="19" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="IMG_BG_ACCOUNT" CanEdit="False" ActionTag="-1556172854" Tag="63" IconVisible="False" LeftMargin="230.0000" RightMargin="120.0000" TopMargin="103.7400" BottomMargin="222.2600" Scale9Enable="True" LeftEage="79" RightEage="79" TopEage="16" BottomEage="16" Scale9OriginX="79" Scale9OriginY="16" Scale9Width="83" Scale9Height="19" ctype="ImageViewObjectData">
                     <Size X="300.0000" Y="51.0000" />
                     <Children>
                       <AbstractNodeData Name="TEXTFIELD_ACCOUNT" ActionTag="-1175196893" Tag="64" IconVisible="False" LeftMargin="8.2316" RightMargin="11.7684" TopMargin="5.8092" BottomMargin="5.1908" TouchEnable="True" FontSize="35" IsCustomSize="True" LabelText="" PlaceHolderText="输入帐号" MaxLengthText="10" ctype="TextFieldObjectData">
@@ -309,7 +309,7 @@
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="640.0000" Y="416.4669" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="1.2000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5784" />
             <PreSize X="0.5078" Y="0.5236" />

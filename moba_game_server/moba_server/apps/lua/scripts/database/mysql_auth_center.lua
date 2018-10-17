@@ -52,6 +52,34 @@ function do_guest_account_upgrade(uid, uname, upwd_md5, ret_handler)
 	end)
 end
 
+function do_create_account(uname, upwd_md5, ret_handler)
+	if mysql_conn == nil then 
+		if ret_handler then 
+			ret_handler("mysql is not connected!", nil)
+		end
+		return
+	end
+
+	local unick = "gst" .. math.random(100000, 999999)
+	local uface = math.random(1, 9)
+	local usex = math.random(0, 1)
+	local sql = "insert into uinfo(`guest_key`, `unick`,`usex`, `uface`,`uname`,`upwd`, `is_guest`)values(\"%s\", \"%s\", %d, %d, \"%s\", \"%s\", %d)"
+	local sql_cmd = string.format(sql,'0', unick, usex, uface, uname, upwd_md5, 0)
+
+	Mysql.query(mysql_conn, sql_cmd, function (err, ret)
+		if err then 
+			if ret_handler then
+				ret_handler(err, nil)
+			end
+			return
+		else
+			if ret_handler then
+				ret_handler(nil, nil)
+			end
+		end
+	end)
+end
+
 function check_uname_exist(uname, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
@@ -60,7 +88,7 @@ function check_uname_exist(uname, ret_handler)
 		return
 	end
 
-	local sql = "select uid from uinfo where uname = \"%s\""
+	local sql = "select uid from uinfo where binary uname = \"%s\""
 	local sql_cmd = string.format(sql, uname)
 	Mysql.query(mysql_conn, sql_cmd, function(err, ret)
 		if err then
@@ -135,7 +163,7 @@ function get_uinfo_by_uname_upwd(uname, upwd, ret_handler)
 		return
 	end
 
-	local sql = "select uid, unick, usex, uface, uvip, status, is_guest from uinfo where uname = \"%s\" and upwd = \"%s\" limit 1"
+	local sql = "select uid, unick, usex, uface, uvip, status, is_guest from uinfo where binary uname = \"%s\" and upwd = \"%s\" limit 1"
 	local sql_cmd = string.format(sql, uname, upwd)	
 	
 	Mysql.query(mysql_conn, sql_cmd, function(err, ret)
@@ -178,7 +206,7 @@ function get_guest_uinfo(g_key, ret_handler)
 		return
 	end
 
-	local sql = "select uid, unick, usex, uface, uvip, status, is_guest from uinfo where guest_key = \"%s\" limit 1"
+	local sql = "select uid, unick, usex, uface, uvip, status, is_guest from uinfo where binary guest_key = \"%s\" limit 1"
 	local sql_cmd = string.format(sql, g_key)	
 
 	Mysql.query(mysql_conn, sql_cmd, function(err, ret)
@@ -259,14 +287,15 @@ function edit_profile(uid, unick, uface, usex, ret_handler)
 end
 
 local mysql_auth_center = {
-	get_guest_uinfo = get_guest_uinfo,
-	insert_guest_user = insert_guest_user,
-	edit_profile = edit_profile,
-	check_uname_exist = check_uname_exist,
+	get_guest_uinfo 		= get_guest_uinfo,
+	insert_guest_user 		= insert_guest_user,
+	edit_profile 			= edit_profile,
+	check_uname_exist 		= check_uname_exist,
 	do_guest_account_upgrade = do_guest_account_upgrade,
-	get_uinfo_by_uid = get_uinfo_by_uid,
+	do_create_account 		= do_create_account,
+	get_uinfo_by_uid 		= get_uinfo_by_uid,
 	get_uinfo_by_uname_upwd = get_uinfo_by_uname_upwd,
-	is_connected = is_connected,
+	is_connected 			= is_connected,
 }
 
 return mysql_auth_center

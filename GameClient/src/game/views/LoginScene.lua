@@ -8,18 +8,18 @@ local UserInfo          = require("game.clientdata.UserInfo")
 
 LoginScene.RESOURCE_FILENAME = 'Lobby/LoginScene.csb'
 
-local BTN_GUEST_LOGIN = 'BTN_GUEST_LOGIN'
-local BTN_LOBBY_REGISTER = 'BTN_LOBBY_REGISTER'
-local IMG_LOGIN_BG = 'IMG_LOGIN_BG'
-local PANEL_LOGIN = 'PANEL_LOGIN'
-local PANEL_REGISTER = 'PANEL_REGISTER'
-local BTN_LOGIN = 'BTN_LOGIN'
-local BTN_GOTO_REGISTER = 'BTN_GOTO_REGISTER'
-local BTN_REG_CLOSE = 'BTN_REG_CLOSE'
-local BTN_REGISTER = 'BTN_REGISTER'
-local TEXTFIELD_ACCOUNT = 'TEXTFIELD_ACCOUNT'
-local TEXTFIELD_PWD = 'TEXTFIELD_PWD'
-local TEXTFIELD_PWD_CONF = 'TEXTFIELD_PWD_CONF'
+local BTN_GUEST_LOGIN               = 'BTN_GUEST_LOGIN'
+local BTN_LOBBY_REGISTER            = 'BTN_LOBBY_REGISTER'
+local IMG_LOGIN_BG                  = 'IMG_LOGIN_BG'
+local PANEL_LOGIN                   = 'PANEL_LOGIN'
+local PANEL_REGISTER                = 'PANEL_REGISTER'
+local BTN_LOGIN                     = 'BTN_LOGIN'
+local BTN_GOTO_REGISTER             = 'BTN_GOTO_REGISTER'
+local BTN_REG_CLOSE                 = 'BTN_REG_CLOSE'
+local BTN_REGISTER                  = 'BTN_REGISTER'
+local TEXTFIELD_ACCOUNT             = 'TEXTFIELD_ACCOUNT'
+local TEXTFIELD_PWD                 = 'TEXTFIELD_PWD'
+local TEXTFIELD_PWD_CONF            = 'TEXTFIELD_PWD_CONF'
 
 function LoginScene:onCreate()
     local btn_guest_login = self:getResourceNode():getChildByName(BTN_GUEST_LOGIN)
@@ -76,8 +76,11 @@ function LoginScene:onCreate()
         self._login_textfield_account:setPosition(cc.p(textfdParent:getPositionX(), textfdParent:getPositionY()))
         self._login_textfield_account:setFontSize(35)
         self._login_textfield_account:setFontColor(cc.c3b(255,255,255))
-        -- self._login_textfield_account:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND)
+        self._login_textfield_account:setReturnType(cc.KEYBOARD_RETURNTYPE_DEFAULT)
+        self._login_textfield_account:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
+        self._login_textfield_account:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
         self._login_textfield_account:setPlaceHolder('请输入帐号')
+
         textfdParent:getParent():addChild(self._login_textfield_account)
         textfdParent:removeSelf()
     end
@@ -89,7 +92,9 @@ function LoginScene:onCreate()
         self._login_textfield_pwd:setPosition(cc.p(textfdParent:getPositionX(), textfdParent:getPositionY()))
         self._login_textfield_pwd:setFontSize(35)
         self._login_textfield_pwd:setFontColor(cc.c3b(255,255,255))
-        -- self._login_textfield_pwd:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND)
+        self._login_textfield_pwd:setReturnType(cc.KEYBOARD_RETURNTYPE_DEFAULT)
+        self._login_textfield_pwd:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
+        self._login_textfield_pwd:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
         self._login_textfield_pwd:setPlaceHolder('请输入密码')
         textfdParent:getParent():addChild(self._login_textfield_pwd)
         textfdParent:removeSelf()
@@ -102,7 +107,9 @@ function LoginScene:onCreate()
         self._reg_textfield_account:setPosition(cc.p(textfdParent:getPositionX(), textfdParent:getPositionY()))
         self._reg_textfield_account:setFontSize(35)
         self._reg_textfield_account:setFontColor(cc.c3b(255,255,255))
-        -- self._reg_textfield_account:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND)
+        self._reg_textfield_account:setReturnType(cc.KEYBOARD_RETURNTYPE_DEFAULT)
+        self._reg_textfield_account:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
+        self._reg_textfield_account:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
         self._reg_textfield_account:setPlaceHolder('请输入帐号')
         textfdParent:getParent():addChild(self._reg_textfield_account)
         textfdParent:removeSelf()
@@ -115,7 +122,9 @@ function LoginScene:onCreate()
         self._reg_textfield_pwd:setPosition(cc.p(textfdParent:getPositionX(), textfdParent:getPositionY()))
         self._reg_textfield_pwd:setFontSize(35)
         self._reg_textfield_pwd:setFontColor(cc.c3b(255,255,255))
-        -- self._reg_textfield_pwd:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND)
+        self._reg_textfield_pwd:setReturnType(cc.KEYBOARD_RETURNTYPE_DEFAULT)
+        self._reg_textfield_pwd:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
+        self._reg_textfield_pwd:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
         self._reg_textfield_pwd:setPlaceHolder('请输入密码')
         textfdParent:getParent():addChild(self._reg_textfield_pwd)
         textfdParent:removeSelf()
@@ -128,7 +137,9 @@ function LoginScene:onCreate()
         self._reg_textfield_pwd_conf:setPosition(cc.p(textfdParent:getPositionX(), textfdParent:getPositionY()))
         self._reg_textfield_pwd_conf:setFontSize(35)
         self._reg_textfield_pwd_conf:setFontColor(cc.c3b(255,255,255))
-        -- self._reg_textfield_pwd_conf:setReturnType(cc.KEYBOARD_RETURNTYPE_SEND)
+        self._reg_textfield_pwd_conf:setReturnType(cc.KEYBOARD_RETURNTYPE_DEFAULT)
+        self._reg_textfield_pwd_conf:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
+        self._reg_textfield_pwd_conf:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
         self._reg_textfield_pwd_conf:setPlaceHolder('请确认密码')
         textfdParent:getParent():addChild(self._reg_textfield_pwd_conf)
         textfdParent:removeSelf()
@@ -245,7 +256,24 @@ function LoginScene:onEventBtnLogin(sender, eventType)
 end
 
 function LoginScene:onEventBtnReg(sender, eventType)
-    print('reg...')
+    local accountStr    = self._reg_textfield_account:getText()
+    local pwdStr        = self._reg_textfield_pwd:getText()
+    local pwdStrConf    = self._reg_textfield_pwd_conf:getText()
+    -- todo: NO space,chinese,daxiaoxie
+    print(accountStr , pwdStr , pwdStrConf)
+    if accountStr == '' or pwdStr == '' or pwdStrConf == '' then
+        return
+    end
+
+    if pwdStr ~= pwdStrConf then
+        return
+    end
+
+    if string.len(accountStr) < 6 or string.len(pwdStr) < 6 or string.len(pwdStrConf) < 6 then
+        return
+    end
+
+    NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eUserRegistReq,{uname = accountStr,upwd_md5 = pwdStr}) 
 end
 
 function LoginScene:onEventBtnGoToLogin(sender,eventType)

@@ -13,6 +13,17 @@ local Stype 				= require("Stype")
 local Cmd 					= require("Cmd")
 local Respones 				= require("Respones")
 
+function tablesize(table)
+	if type(table) ~= 'table' then
+		return 0
+	end
+	local size = 0
+	for _ , v in pairs(table) do
+		size = size + 1
+	end
+	return size
+end
+
 function connect_to_server(stype, ip, port)
 	Netbus.tcp_connect(ip, port, function(err, session)
 		do_connecting[stype] = false
@@ -55,7 +66,6 @@ end
 function send_to_client(server_session, raw_cmd)
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
 	local client_session = nil
-	-- print('gateway>>  send_to_client>> ',stype,ctype,utag)
 
 	if is_login_return_cmd(ctype) then
 		client_session = client_sessions_ukey[utag]
@@ -83,13 +93,24 @@ function send_to_client(server_session, raw_cmd)
 			Session.send_msg(client_sessions_uid[uid], relogin_cmd)
 			Session.close(client_sessions_uid[uid])
 		end
-
 		client_sessions_uid[uid] = client_session
 		Session.set_uid(client_session, uid)
 
 		body.uinfo.uid = 0;
 		local login_res = {stype, ctype, 0, body}
 		Session.send_msg(client_session, login_res)
+		return
+	end
+
+	if ctype == Cmd.eUserRegistRes then
+		client_session = client_sessions_ukey[utag]
+		client_sessions_ukey[utag] = nil
+
+		if client_session == nil then 
+			return
+		end
+		RawCmd.set_utag(raw_cmd, 0)
+		Session.send_raw_cmd(client_session, raw_cmd)
 		return
 	end
 
@@ -103,6 +124,8 @@ function send_to_client(server_session, raw_cmd)
 			client_sessions_uid[utag] = nil
 		end
 	end
+	-- print("send_to_client client_sessions_ukey size: " .. tablesize(client_sessions_ukey))
+	-- print("send_to_client client_sessions_uid size: " .. tablesize(client_sessions_uid))
 end
 
 function is_login_request_cmd(ctype)
@@ -118,7 +141,6 @@ end
 function send_to_server(client_session, raw_cmd)
 
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
-	-- print('gateway>>  send_to_server>> ',stype,ctype,utag)
 
 	local server_session = server_session_man[stype]
 	if server_session == nil then --可以回一个命令给客户端，系统错误
@@ -133,17 +155,27 @@ function send_to_server(client_session, raw_cmd)
 			Session.set_utag(client_session, utag)
 		end
 		client_sessions_ukey[utag] = client_session
+	elseif ctype == Cmd.eUserRegistReq then
+		utag = Session.get_utag(client_session)
+		if utag == 0 then 
+			utag = g_ukey
+			g_ukey = g_ukey + 1
+			Session.set_utag(client_session, utag)
+		else
+		end
+		client_sessions_ukey[utag] = client_session
 	else
 		local uid = Session.get_uid(client_session)
 		utag = uid
-		if utag == 0 then --改操作要先登陆
+		if utag == 0 then --该操作要先登陆
 			return
 		end
 	end
 	-- 打上utag然后转发给服务器
 	RawCmd.set_utag(raw_cmd, utag)
 	Session.send_raw_cmd(server_session, raw_cmd)
-	
+	-- print("send_to_server client_sessions_ukey size: " .. tablesize(client_sessions_ukey))
+	-- print("send_to_server client_sessions_uid size: " .. tablesize(client_sessions_uid))
 end
 
 -- {stype, ctype, utag, body}

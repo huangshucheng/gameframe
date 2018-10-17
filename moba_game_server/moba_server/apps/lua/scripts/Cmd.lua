@@ -15,6 +15,10 @@ local Cmd = {
 	eLoginOutReq = 11,
 	eLoginOutRes = 12,
 
+	eUserRegistReq = 13,
+	eUserRegistRes = 14,
+
+	--[[
 	eGetUgameInfoReq = 13,
 	eGetUgameInfoRes = 14,
 
@@ -41,6 +45,7 @@ local Cmd = {
 	eUserExitMatch = 29,
 
 	eGameStart = 30,
+	]]
 }
 
 return Cmd

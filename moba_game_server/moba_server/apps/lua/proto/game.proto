@@ -26,32 +26,35 @@ enum Cmd {
 	eLoginOutReq = 11;
 	eLoginOutRes = 12;
 
-	eGetUgameInfoReq = 13;
-	eGetUgameInfoRes = 14;
+	eUserRegistReq = 13;
+	eUserRegistRes = 14;
 
-	eRecvLoginBonuesReq = 15;
-	eRecvLoginBonuesRes = 16;
+	//eGetUgameInfoReq = 13;
+	//eGetUgameInfoRes = 14;
 
-	eGetWorldRankUchipReq = 17;
-	eGetWorldRankUchipRes = 18;
+	//eRecvLoginBonuesReq = 15;
+	//eRecvLoginBonuesRes = 16;
 
-	eGetSysMsgReq = 19;
-	eGetSysMsgRes = 20;
+	//eGetWorldRankUchipReq = 17;
+	//eGetWorldRankUchipRes = 18;
 
-	eLoginLogicReq = 21;
-	eLoginLogicRes = 22;
+	//eGetSysMsgReq = 19;
+	//eGetSysMsgRes = 20;
 
-	eEnterZoneReq = 23;
-	eEnterZoneRes = 24;
+	//eLoginLogicReq = 21;
+	//eLoginLogicRes = 22;
 
-	eEnterMatch = 25;
-	eUserArrived = 26;
+	//eEnterZoneReq = 23;
+	//eEnterZoneRes = 24;
 
-	eExitMatchReq = 27;
-	eExitMatchRes = 28;
-	eUserExitMatch = 29;
+	//eEnterMatch = 25;
+	//eUserArrived = 26;
 
-	eGameStart = 30;
+	//eExitMatchReq = 27;
+	//eExitMatchRes = 28;
+	//eUserExitMatch = 29;
+
+	//eGameStart = 30;
 }
 
 message GuestLoginReq {
@@ -188,4 +191,13 @@ message UserExitMatch {
 
 message GameStart {
 	repeated int32 heroes = 1; 
+}
+
+message UserRegistReq {
+	required string uname = 1;
+	required string upwd_md5 = 2;	
+}
+
+message UserRegistRes {
+	required int32 status = 1;	
 }
