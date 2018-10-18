@@ -29,6 +29,7 @@ local function regist(s, req)
 	print("hcc >> regist: uname: " .. user_regist_req.uname .. ' upwd_md5: ' .. user_regist_req.upwd_md5)
 	local uname 	= user_regist_req.uname
 	local upwd_md5 	= user_regist_req.upwd_md5
+
 	-- 检查参数
 	-- if string.len(uname_login_req.uname) <= 0 or string.len(uname_login_req.upwd) ~= 32 then 	-- TODO md5 check 
 	local nameLen = string.len(uname)

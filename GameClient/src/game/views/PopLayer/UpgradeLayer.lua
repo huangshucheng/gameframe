@@ -15,7 +15,7 @@ local TEXTFIELD_ACCOUNT     = 'TEXTFIELD_ACCOUNT'
 local TEXTFIELD_PWD         = 'TEXTFIELD_PWD'
 local TEXTFIELD_PWD_CONF    = 'TEXTFIELD_PWD_CONF'
 
-function UpgradeLayer:ctor()
+function UpgradeLayer:ctor(app, name)
 	self._textfield_account = nil
 	self._textfield_pwd = nil
 	self._textfield_pwd_conf = nil

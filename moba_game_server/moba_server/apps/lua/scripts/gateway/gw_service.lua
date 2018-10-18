@@ -174,8 +174,6 @@ function send_to_server(client_session, raw_cmd)
 	-- 打上utag然后转发给服务器
 	RawCmd.set_utag(raw_cmd, utag)
 	Session.send_raw_cmd(server_session, raw_cmd)
-	-- print("send_to_server client_sessions_ukey size: " .. tablesize(client_sessions_ukey))
-	-- print("send_to_server client_sessions_uid size: " .. tablesize(client_sessions_uid))
 end
 
 -- {stype, ctype, utag, body}

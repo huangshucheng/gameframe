@@ -57,7 +57,7 @@ end
 
 -- 接收数据
 function NetWork:onMessage(event)
-	print(__name .. " onMessage>> 收到消息------------start\n")
+	print('\n' .. __name .. " onMessage>> 收到消息------------start")
 
    if event.data == nil then return end
     --[[
