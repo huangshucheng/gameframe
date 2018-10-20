@@ -6,6 +6,8 @@ local Stype             = require("game.net.Stype")
 local Respones          = require("game.net.Respones")
 local UserInfo          = require("game.clientdata.UserInfo")
 
+local RootLayer     = require('game.views.Base.RootLayer')
+
 LoginScene.RESOURCE_FILENAME = 'Lobby/LoginScene.csb'
 
 local BTN_GUEST_LOGIN               = 'BTN_GUEST_LOGIN'
@@ -22,6 +24,9 @@ local TEXTFIELD_PWD                 = 'TEXTFIELD_PWD'
 local TEXTFIELD_PWD_CONF            = 'TEXTFIELD_PWD_CONF'
 
 function LoginScene:onCreate()
+
+    RootLayer:getInstance():init()
+
     local btn_guest_login = self:getResourceNode():getChildByName(BTN_GUEST_LOGIN)
     local btn_lobby_register = self:getResourceNode():getChildByName(BTN_LOBBY_REGISTER)
 
@@ -173,33 +178,45 @@ function LoginScene:onEventData(event)
     dump(data)
     if data.ctype == Cmd.eGuestLoginRes then
        if data.body then
+                GT.popLayer('LoadingLayer')
+            if data.body.status == Respones.OK then
+                local uinfo = data.body.uinfo
+                UserInfo.setUserName(uinfo.unick)
+                UserInfo.setUserface(uinfo.uface)
+                UserInfo.setUserSex(uinfo.usex)
+                UserInfo.setUserVip(uinfo.uvip)
+                UserInfo.setUserId(uinfo.uid)
+                UserInfo.setUserIsGuest(true)
+                UserInfo.flush()
+                
+                self:getApp():enterScene('LobbyScene')
+                GT.showPopLayer('TipsLayer',{"游客登录成功!"})
+            else
+                GT.showPopLayer('TipsLayer',{"游客登录失败，您帐号已升级成正式帐号!"})
+            end
+       end
+    elseif data.ctype == Cmd.eUnameLoginRes then
+        GT.popLayer('LoadingLayer')
+        if data.body.status == Respones.OK then
             local uinfo = data.body.uinfo
             UserInfo.setUserName(uinfo.unick)
             UserInfo.setUserface(uinfo.uface)
             UserInfo.setUserSex(uinfo.usex)
             UserInfo.setUserVip(uinfo.uvip)
             UserInfo.setUserId(uinfo.uid)
-            UserInfo.setUserIsGuest(true)
             UserInfo.flush()
-
-            if data.body.status == Respones.OK then
-                 self:getApp():enterScene('LobbyScene')
-            end
-       end
-    end
-    if data.ctype == Cmd.eUnameLoginRes then
-        local uinfo = data.body.uinfo
-        UserInfo.setUserName(uinfo.unick)
-        UserInfo.setUserface(uinfo.uface)
-        UserInfo.setUserSex(uinfo.usex)
-        UserInfo.setUserVip(uinfo.uvip)
-        UserInfo.setUserId(uinfo.uid)
-        UserInfo.flush()
-
-        if data.body.status == Respones.OK then
-             self:getApp():enterScene('LobbyScene')
+            self:getApp():enterScene('LobbyScene')
+            GT.showPopLayer('TipsLayer',{"登录成功!"})
+        else
+            GT.showPopLayer('TipsLayer',{"登录失败!"})
         end
-
+    elseif data.ctype == Cmd.eUserRegistRes then
+            GT.popLayer('LoadingLayer')
+        if data.body.status == Respones.OK then
+            GT.showPopLayer('TipsLayer',{"注册成功!"})
+        else
+            GT.showPopLayer('TipsLayer',{"注册失败!"})
+        end
     end
 end
 
@@ -208,23 +225,23 @@ function LoginScene:onEventMsgSend(envet)
 end
 
 function LoginScene:onEventNetConnect(envet)
-    
+    GT.showPopLayer('TipsLayer',{"网络连接成功!"})
 end
 
 function LoginScene:onEventNetConnectFail(envet)
-
+   GT.showPopLayer('TipsLayer',{"网络连接失败!"}) 
 end
 
 function LoginScene:onEventClose(envet)
-
+    GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
 end
 
 function LoginScene:onEventClosed(envet)
-
+    GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
 end
 
 function LoginScene:onEventNetLower(envet)
-
+    GT.showPopLayer('TipsLayer',{"网络连接不稳定!"})
 end
 
 function LoginScene:onEventBtnGuestLogin(sender,eventType)
@@ -236,10 +253,7 @@ function LoginScene:onEventBtnGuestLogin(sender,eventType)
     end
     print('loginKey: ' .. keystr)
     NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eGuestLoginReq,{guest_key = keystr})
-end
-
-function LoginScene:onEventBtnRegister(sender, eventType)
-    
+    GT.showPopLayer('LoadingLayer')
 end
 
 function LoginScene:onEventBtnLogin(sender, eventType)
@@ -247,12 +261,14 @@ function LoginScene:onEventBtnLogin(sender, eventType)
     local pwdStr        = self._login_textfield_pwd:getText()
     print('login...' .. ' ' .. accountStr .. '  ' .. pwdStr)
     if accountStr == '' or pwdStr == '' then
+        GT.showPopLayer('TipsLayer',{"帐号或密码错误!"})
         return
     end
 
     NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eUnameLoginReq,{uname = accountStr,upwd = pwdStr}) 
     UserInfo.setUserAccount(accountStr)
     UserInfo.setUserPwd(pwdStr)
+    GT.showPopLayer('LoadingLayer')
 end
 
 function LoginScene:onEventBtnReg(sender, eventType)
@@ -262,18 +278,22 @@ function LoginScene:onEventBtnReg(sender, eventType)
     -- todo: NO space,chinese,daxiaoxie
     print(accountStr , pwdStr , pwdStrConf)
     if accountStr == '' or pwdStr == '' or pwdStrConf == '' then
+        GT.showPopLayer('TipsLayer',{"帐号或密码错误!"})
         return
     end
 
     if pwdStr ~= pwdStrConf then
+        GT.showPopLayer('TipsLayer',{"两次密码不一样!"})
         return
     end
 
     if string.len(accountStr) < 6 or string.len(pwdStr) < 6 or string.len(pwdStrConf) < 6 then
+        GT.showPopLayer('TipsLayer',{"密码需要大于6位!"})
         return
     end
 
     NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eUserRegistReq,{uname = accountStr,upwd_md5 = pwdStr}) 
+    GT.showPopLayer('LoadingLayer')
 end
 
 function LoginScene:onEventBtnGoToLogin(sender,eventType)
@@ -309,10 +329,17 @@ end
 
 function LoginScene:onEnter()
     print('LoginScene:onEnter')
+    print("\nall layer start \n")
+    local allLayer = GT.RootLayer:getInstance():getAllLayers()
+    for k,v in pairs(allLayer) do
+        print(v:getName())
+    end
+    print("\nall layer end \n")
 end
 
 function LoginScene:onExit()
     print('LoginScene:onExit')
+    GT.clearLayers()
 end
 
 return LoginScene

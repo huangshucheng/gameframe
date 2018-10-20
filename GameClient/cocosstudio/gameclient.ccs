@@ -89,6 +89,10 @@
               <Image Name="18.png" />
               <Image Name="19.png" />
             </Folder>
+            <Folder Name="tips">
+              <Image Name="tips_1.png" />
+              <Image Name="tips_2.png" />
+            </Folder>
             <Folder Name="UI02">
               <Image Name="063.png" />
               <Image Name="064.png" />
@@ -169,6 +173,7 @@
             <Project Name="GameSetLayer.csd" Type="Layer" />
             <Project Name="MyCenterLayer.csd" Type="Layer" />
             <Project Name="UpgradeLayer.csd" Type="Layer" />
+            <Project Name="TipsLayer.csd" Type="Layer" />
           </Folder>
           <Project Name="LobbyScene.csd" Type="Scene" />
           <Project Name="LoginScene.csd" Type="Scene" />

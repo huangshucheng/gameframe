@@ -6,13 +6,13 @@
       <ObjectData Name="Layer" Tag="47" ctype="GameLayerObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="IMG_BG" ActionTag="-423985720" Tag="74" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="198.2247" RightMargin="159.7753" TopMargin="72.8061" BottomMargin="67.1939" TouchEnable="True" Scale9Enable="True" LeftEage="50" RightEage="50" TopEage="50" BottomEage="50" Scale9OriginX="50" Scale9OriginY="50" Scale9Width="361" Scale9Height="190" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="IMG_BG" ActionTag="-423985720" Tag="74" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="198.2000" RightMargin="159.8000" TopMargin="72.8061" BottomMargin="67.1939" TouchEnable="True" Scale9Enable="True" LeftEage="50" RightEage="50" TopEage="50" BottomEage="50" Scale9OriginX="50" Scale9OriginY="50" Scale9Width="361" Scale9Height="190" ctype="ImageViewObjectData">
             <Size X="922.0000" Y="580.0000" />
             <Children>
               <AbstractNodeData Name="IMG_NAME_BG" ActionTag="-812282307" Tag="81" IconVisible="False" LeftMargin="207.6409" RightMargin="414.3591" TopMargin="149.7811" BottomMargin="379.2189" LeftEage="79" RightEage="79" TopEage="16" BottomEage="16" Scale9OriginX="79" Scale9OriginY="16" Scale9Width="83" Scale9Height="19" ctype="ImageViewObjectData">
                 <Size X="300.0000" Y="51.0000" />
                 <Children>
-                  <AbstractNodeData Name="TEXTFIELD_NAME" ActionTag="665478335" Tag="83" IconVisible="False" LeftMargin="11.3651" RightMargin="8.6349" TopMargin="8.4788" BottomMargin="7.5212" TouchEnable="True" FontSize="30" IsCustomSize="True" LabelText="小玩家666666" PlaceHolderText="name" MaxLengthText="10" ctype="TextFieldObjectData">
+                  <AbstractNodeData Name="TEXTFIELD_NAME" ActionTag="665478335" Tag="83" IconVisible="False" LeftMargin="11.3651" RightMargin="8.6349" TopMargin="8.4788" BottomMargin="7.5212" TouchEnable="True" FontSize="30" IsCustomSize="True" LabelText="正在获取.." PlaceHolderText="name" MaxLengthText="10" ctype="TextFieldObjectData">
                     <Size X="280.0000" Y="35.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="151.3651" Y="25.0212" />
@@ -53,7 +53,7 @@
                 <PreSize X="0.6573" Y="0.2034" />
                 <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/97.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="PANEL_HEAD_BG" ActionTag="-1462426378" Tag="78" IconVisible="False" LeftMargin="18.6920" RightMargin="753.3080" TopMargin="129.3716" BottomMargin="300.6284" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="PANEL_HEAD_BG" ActionTag="-1462426378" Tag="78" IconVisible="False" LeftMargin="18.6920" RightMargin="753.3080" TopMargin="129.3716" BottomMargin="300.6284" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="150.0000" Y="150.0000" />
                 <Children>
                   <AbstractNodeData Name="IMG_HEAD_BG" CanEdit="False" ActionTag="-679616512" Tag="79" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftEage="48" RightEage="48" TopEage="51" BottomEage="51" Scale9OriginX="48" Scale9OriginY="51" Scale9Width="52" Scale9Height="53" ctype="ImageViewObjectData">
@@ -200,7 +200,7 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="659.2247" Y="357.1939" />
+            <Position X="659.2000" Y="357.1939" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5150" Y="0.4961" />

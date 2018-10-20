@@ -1,6 +1,5 @@
-local UpgradeLayer = class("UpgradeLayer", cc.load("mvc").ViewBase)
-
-UpgradeLayer.RESOURCE_FILENAME = 'Lobby/PopLayer/UpgradeLayer.csb'
+local PopLayer = require('game.views.Base.PopLayer')
+local UpgradeLayer = class("UpgradeLayer", PopLayer)
 
 local NetWork           = require("game.net.NetWork")
 local Cmd               = require("game.net.Cmd")
@@ -15,28 +14,30 @@ local TEXTFIELD_ACCOUNT     = 'TEXTFIELD_ACCOUNT'
 local TEXTFIELD_PWD         = 'TEXTFIELD_PWD'
 local TEXTFIELD_PWD_CONF    = 'TEXTFIELD_PWD_CONF'
 
-function UpgradeLayer:ctor(app, name)
-	self._textfield_account = nil
-	self._textfield_pwd = nil
-	self._textfield_pwd_conf = nil
+UpgradeLayer._csbResourcePath = 'Lobby/PopLayer/UpgradeLayer.csb'
 
-	self._text_account = ''
-	self._text_pwd = ''
+function UpgradeLayer:ctor()
+	UpgradeLayer.super.ctor(self)
+    self._textfield_account = nil
+    self._textfield_pwd = nil
+    self._textfield_pwd_conf = nil
 
-	UpgradeLayer.super.ctor(self,app,name)
+    self._text_account = ''
+    self._text_pwd = ''
+    print("hcc>> UpgradeLayer name: " .. tostring(self.__cname))
+end
+
+function UpgradeLayer:init()
+    self._canTouchBackground = false
+    UpgradeLayer.super.init(self)
 end
 
 function UpgradeLayer:onCreate()
-	self._canTouchBackground = false
-
-	local img_bg = self:getResourceNode():getChildByName(IMG_BG)
-	if not img_bg then
-		return
-	end
+    local img_bg = self:getCsbNode():getChildByName(IMG_BG)
 	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
 	if btn_close then
 		btn_close:addClickEventListener(handler(self,function()
-			self:removeSelf()
+			self:showLayer(false)
 		end))
 	end
 
@@ -110,7 +111,10 @@ function UpgradeLayer:onEventData(event)
         	UserInfo.setUserIsGuest(false)
         	UserInfo.flush()
         	postEvent(ClientEvents.ON_ASYC_USER_INFO)
-        	self:removeSelf()
+        	self:showLayer(false)
+            GT.showPopLayer('TipsLayer',{"升级成功"})
+        else
+            GT.showPopLayer('TipsLayer',{"升级失败"})
         end
     end
 end
@@ -130,6 +134,7 @@ function UpgradeLayer:onEventBtnCommint(sender, evnetType)
 		text_pwd == '' or 
 		text_pwd_conf == '' or 
 	 	text_pwd ~=  text_pwd_conf then
+        GT.showPopLayer('TipsLayer',{"帐号或密码错误!"})
 		return
 	end
 

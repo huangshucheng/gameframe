@@ -16,6 +16,7 @@ local PANEL_HEAD_BG         = 'PANEL_HEAD_BG'
 local IMG_TOP_BG            = 'IMG_TOP_BG'
 local TEXT_USER_NAME        = 'TEXT_USER_NAME'
 local TEXT_USER_ID          = 'TEXT_USER_ID'
+local BTN_SESTTING          = 'BTN_SESTTING'
 
 function LobbyScene:ctor(app, name)
     self._user_name_text    = nil
@@ -49,6 +50,11 @@ function LobbyScene:onCreate()
     local panel_head_bg = ccui.Helper:seekWidgetByName(img_top_bg, PANEL_HEAD_BG)
     if panel_head_bg then
         panel_head_bg:addTouchEventListener(handler(self,self.onTouchEventHeadImgBg))
+    end
+
+    local btn_setting   = ccui.Helper:seekWidgetByName(img_top_bg,BTN_SESTTING)
+    if btn_setting then
+        btn_setting:addClickEventListener(handler(self,self.onTouchSettingBtn))
     end
 
     self._user_name_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_NAME)
@@ -116,10 +122,17 @@ function LobbyScene:onTouchEventHeadImgBg(send,eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
-    local myCenterLayer = require('game.views.PopLayer.MyCenterLayer'):create()
-    if myCenterLayer then
-        self:addChild(myCenterLayer)
+    GT.showPopLayer('MyCenterLayer')
+end
+
+function LobbyScene:onTouchSettingBtn(send, eventType)
+    local count = GT.RootLayer:getInstance():getLayerCount()
+    print("\nall layer start \n")
+    local allLayer = GT.RootLayer:getInstance():getAllLayers()
+    for k,v in pairs(allLayer) do
+        print(v:getName())
     end
+    print("\nall layer end \n")
 end
 
 function LobbyScene:addEventListenner()
@@ -145,16 +158,20 @@ function LobbyScene:onEventData(event)
     local ctype = data.ctype
 
     if ctype == Cmd.eEditProfileRes then
-        
+        GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eAccountUpgradeRes then
-
+        GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eRelogin then
         self:getApp():enterScene('LoginScene')
+        GT.popLayer('LoadingLayer')
+        gt.showPopLayer('TipsLayer',{'帐号在其他地放登录!'})
     elseif ctype == Cmd.eUnameLoginRes then
+        GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eLoginOutRes then
         self:getApp():enterScene('LoginScene')
+        GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eGetUgameInfoRes then
-
+        GT.popLayer('LoadingLayer')
     end
 end 
 
@@ -163,23 +180,23 @@ function LobbyScene:onEventMsgSend(envet)
 end
 
 function LobbyScene:onEventNetConnect(envet)
-
+        GT.showPopLayer('TipsLayer',{"网络连接成功!"})
 end
 
 function LobbyScene:onEventNetConnectFail(envet)
-
+        GT.showPopLayer('TipsLayer',{"网络连接失败!"}) 
 end
 
 function LobbyScene:onEventClose(envet)
-
+        GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
 end
 
 function LobbyScene:onEventClosed(envet)
-
+        GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
 end
 
 function LobbyScene:onEventNetLower(envet)
-
+        GT.showPopLayer('TipsLayer',{"网络连接不稳定!"})
 end
 
 function LobbyScene:onEventAsycUserInfo(event)
@@ -189,16 +206,20 @@ function LobbyScene:onEventAsycUserInfo(event)
     end
 end
 --------------------
-function LobbyScene:onEventBtnGuestLogin(sender,eventType)
-   
-end
 
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
+    print("\nall layer start \n")
+    local allLayer = GT.RootLayer:getInstance():getAllLayers()
+    for k,v in pairs(allLayer) do
+        print(v:getName())
+    end
+    print("\nall layer end \n")
 end
 
 function LobbyScene:onExit()
     print('LobbyScene:onExit')
+    GT.clearLayers()
 end
 
 return LobbyScene

@@ -1,4 +1,5 @@
-local MyCenterLayer = class("MyCenterLayer", cc.load("mvc").ViewBase)
+local PopLayer = require('game.views.Base.PopLayer')
+local MyCenterLayer = class("MyCenterLayer", PopLayer)
 
 local NetWork           = require("game.net.NetWork")
 local Cmd               = require("game.net.Cmd")
@@ -6,7 +7,7 @@ local Stype             = require("game.net.Stype")
 local Respones 			= require("game.net.Respones")
 local UserInfo 			= require("game.clientdata.UserInfo")
 
-MyCenterLayer.RESOURCE_FILENAME = 'Lobby/PopLayer/MyCenterLayer.csb'
+MyCenterLayer._csbResourcePath = 'Lobby/PopLayer/MyCenterLayer.csb'
 
 local IMG_BG 					= 'IMG_BG'
 local BTN_CLOSE 				= 'BTN_CLOSE'
@@ -19,36 +20,43 @@ local PANEL_HEAD_BG 			= 'PANEL_HEAD_BG'
 local IMG_HEAD 					= 'IMG_HEAD'
 local TEXTFIELD_NAME 			= 'TEXTFIELD_NAME'
 
-function MyCenterLayer:ctor(app, name)
+function MyCenterLayer:ctor()
 	self._login_textfield_name = nil
 	self._checkbox_boy = nil
 	self._checkbox_girl = nil
 	self._user_sex = 1
 	self._head_img_index = 1
-	MyCenterLayer.super.ctor(self,app,name)
+	MyCenterLayer.super.ctor(self)
+    print("hcc>> MyCenterLayer name: " .. tostring(self.__cname))
+
+end
+
+function MyCenterLayer:init()
+	self._canTouchBackground = false
+	MyCenterLayer.super.init(self)
 end
 
 function MyCenterLayer:onCreate()
-	self._canTouchBackground = true
-	local img_bg = self:getResourceNode():getChildByName(IMG_BG)
+	
+	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
 	if not img_bg then return end
 
 	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
 	if btn_close then
 		btn_close:addClickEventListener(handler(self,function()
-			self:removeSelf()
+			self:showLayer(false)
 		end))
 	end
 	local btn_modify = ccui.Helper:seekWidgetByName(img_bg,BTN_MODIFY)
 	if btn_modify then
-		btn_modify:addClickEventListener(handler(self,self.onEventBtnUpgrade))
+		btn_modify:addClickEventListener(handler(self,self.onEventBtnModify))
 	end
 
 	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
 	if btn_upgrade then
 		btn_upgrade:addClickEventListener(handler(self,function()
-			local upgradeLayer = require('game.views.PopLayer.UpgradeLayer'):create()
-		    if upgradeLayer then self:addChild(upgradeLayer) end
+		    GT.showPopLayer('UpgradeLayer')
+		    -- GT.showPopLayer('TipsLayer',{"黄塾城啊啊啊啊"})
 		end))
 	end
 
@@ -138,12 +146,18 @@ function MyCenterLayer:onEventData(event)
         	UserInfo.setUserface(1)
         	UserInfo.flush()
         	postEvent(ClientEvents.ON_ASYC_USER_INFO)
-        	self:removeSelf()
+        	GT.popLayer('LoadingLayer')
+        	GT.showPopLayer('TipsLayer',{"修改成功"})
         end
+ 	elseif ctype == Cmd.eLoginOutRes then
+        	GT.popLayer('LoadingLayer')
+ 		if data.body.status == Respones.OK then
+ 			self:showLayer(false)
+ 		end
     end
 end
 
-function MyCenterLayer:onEventBtnUpgrade(sender,eventType)
+function MyCenterLayer:onEventBtnModify(sender,eventType)
 	local namestr = ''
 
 	if self._login_textfield_name then
@@ -171,10 +185,12 @@ function MyCenterLayer:onEventBtnUpgrade(sender,eventType)
 	}
 
 	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eEditProfileReq,msg)
+	GT.showPopLayer('LoadingLayer')
 end
 
 function MyCenterLayer:onEventBtnLoginOut(sender, eventType)
 	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eLoginOutReq,nil)
+	GT.showPopLayer('LoadingLayer')
 end
 
 function MyCenterLayer:onEventAsycUserInfo(event)
@@ -185,7 +201,7 @@ function MyCenterLayer:onEventAsycUserInfo(event)
 
     local isguest = UserInfo.getUserIsGuest()
 
-	local img_bg = self:getResourceNode():getChildByName(IMG_BG)
+	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
 	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
 	btn_upgrade:setVisible(isguest) 
 end
