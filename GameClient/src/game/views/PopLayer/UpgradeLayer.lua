@@ -24,7 +24,6 @@ function UpgradeLayer:ctor()
 
     self._text_account = ''
     self._text_pwd = ''
-    print("hcc>> UpgradeLayer name: " .. tostring(self.__cname))
 end
 
 function UpgradeLayer:init()

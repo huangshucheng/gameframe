@@ -27,7 +27,6 @@ function MyCenterLayer:ctor()
 	self._user_sex = 1
 	self._head_img_index = 1
 	MyCenterLayer.super.ctor(self)
-    print("hcc>> MyCenterLayer name: " .. tostring(self.__cname))
 
 end
 

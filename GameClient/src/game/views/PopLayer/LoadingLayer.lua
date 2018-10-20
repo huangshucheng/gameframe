@@ -8,11 +8,11 @@ end
 function LoadingLayer:init()
 	LoadingLayer.super.init(self)
 
-    local tmpNode = cc.Node:create() 
-    tmpNode:setAnchorPoint(cc.p(0,0))      
-    tmpNode:setPosition(cc.p( 0, 0))
-    self:addChild(tmpNode)
-    GT.UIFunction.playNodeAniWithTargetPos(tmpNode,cc.p(display.cx,display.cy),"animation/loading_mini/loading_mini.ExportJson","loading_mini","loading",1) 
+    local node = cc.Node:create() 
+    node:setAnchorPoint(cc.p(0,0))      
+    node:setPosition(cc.p( 0, 0))
+    self:addChild(node)
+    GT.UIFunction.playNodeAnimation(node,cc.p(display.cx,display.cy),"animation/loading_mini/loading_mini.ExportJson","loading_mini","loading",1) 
     self._canTouchBackground = false    
 
     local delay = cc.DelayTime:create(5)
