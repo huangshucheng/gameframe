@@ -18,19 +18,19 @@ local Cmd = {
 	eUserRegistReq = 13,
 	eUserRegistRes = 14,
 
+	eGetUgameInfoReq = 15,
+	eGetUgameInfoRes = 16,
+
+	eRecvLoginBonuesReq = 17,
+	eRecvLoginBonuesRes = 18,
+	
+	eGetWorldRankUchipReq = 19,
+	eGetWorldRankUchipRes = 20,
+
+	eGetSysMsgReq = 21,
+	eGetSysMsgRes = 22,
+
 	--[[
-	eGetUgameInfoReq = 13,
-	eGetUgameInfoRes = 14,
-
-	eRecvLoginBonuesReq = 15,
-	eRecvLoginBonuesRes = 16,
-
-	eGetWorldRankUchipReq = 17,
-	eGetWorldRankUchipRes = 18,
-
-	eGetSysMsgReq = 19,
-	eGetSysMsgRes = 20,
-
 	eLoginLogicReq = 21,
 	eLoginLogicRes = 22,
 

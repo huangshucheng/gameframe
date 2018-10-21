@@ -208,7 +208,7 @@ function LoginScene:onEventData(event)
             self:getApp():enterScene('LobbyScene')
             GT.showPopLayer('TipsLayer',{"登录成功!"})
         else
-            GT.showPopLayer('TipsLayer',{"登录失败!"})
+            GT.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
         end
     elseif data.ctype == Cmd.eUserRegistRes then
             GT.popLayer('LoadingLayer')
@@ -329,12 +329,14 @@ end
 
 function LoginScene:onEnter()
     print('LoginScene:onEnter')
-    print("\nall layer start \n")
+    print("all layer start \n")
     local allLayer = GT.RootLayer:getInstance():getAllLayers()
+    print( 'allLayers: ' .. tostring(allLayer) .. '   size: ' .. #allLayer )
+
     for k,v in pairs(allLayer) do
-        print(v:getName())
+        print('layer: '.. tostring(v) .. "  ,name: " .. v:getName())
     end
-    print("\nall layer end \n")
+    print("all layer end \n")
 end
 
 function LoginScene:onExit()

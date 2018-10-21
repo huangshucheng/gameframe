@@ -15,7 +15,7 @@ function TipsLayer:init(str)
     self._canTouchBackground = false  
 	TipsLayer.super.init(self)
 
-    self:setBgOpacity(0)
+    self:getBgLayer():setVisible(false)
     
     self._tips_text = self:getCsbNode():getChildByName(KW_TEXT_TIPS)
     

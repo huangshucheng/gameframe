@@ -21,7 +21,7 @@ function PopLayer:init()
     local popLayer = ccui.Layout:create() 
     popLayer:setBackGroundColorType(ccui.LayoutBackGroundColorType.solid)
     popLayer:setBackGroundColor(cc.c3b(0,0,0))  
-    popLayer:setTouchEnabled(self._canTouchBackground)
+    popLayer:setTouchEnabled(true)
     popLayer:setContentSize(cc.size(2000,2000))
     popLayer:setAnchorPoint(cc.p(0,0))
     popLayer:setPosition(cc.p(0,0))
@@ -79,6 +79,10 @@ function PopLayer:setBgOpacity(opacity)
     if bg then
         bg:setOpacity(opacity)
     end
+end
+
+function PopLayer:getBgLayer()
+    return self:getChildByName('__popLayer')
 end
 
 function PopLayer:setAfterCloseLayerFunc(func)

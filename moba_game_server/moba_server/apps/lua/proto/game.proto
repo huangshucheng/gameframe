@@ -29,32 +29,32 @@ enum Cmd {
 	eUserRegistReq = 13;
 	eUserRegistRes = 14;
 
-	//eGetUgameInfoReq = 13;
-	//eGetUgameInfoRes = 14;
+	eGetUgameInfoReq = 15;
+	eGetUgameInfoRes = 16;
 
-	//eRecvLoginBonuesReq = 15;
-	//eRecvLoginBonuesRes = 16;
+	eRecvLoginBonuesReq = 17;
+	eRecvLoginBonuesRes = 18;
 
-	//eGetWorldRankUchipReq = 17;
-	//eGetWorldRankUchipRes = 18;
+	eGetWorldRankUchipReq = 19;
+	eGetWorldRankUchipRes = 20;
 
-	//eGetSysMsgReq = 19;
-	//eGetSysMsgRes = 20;
+	eGetSysMsgReq = 21;
+	eGetSysMsgRes = 22;
 
-	//eLoginLogicReq = 21;
-	//eLoginLogicRes = 22;
+	//eLoginLogicReq = 23;
+	//eLoginLogicRes = 24;
 
-	//eEnterZoneReq = 23;
-	//eEnterZoneRes = 24;
+	//eEnterZoneReq = 25;
+	//eEnterZoneRes = 26;
 
-	//eEnterMatch = 25;
-	//eUserArrived = 26;
+	//eEnterMatch = 27;
+	//eUserArrived = 28;
 
-	//eExitMatchReq = 27;
-	//eExitMatchRes = 28;
-	//eUserExitMatch = 29;
+	//eExitMatchReq = 29;
+	//eExitMatchRes = 30;
+	//eUserExitMatch = 31;
 
-	//eGameStart = 30;
+	//eGameStart = 32;
 }
 
 message GuestLoginReq {

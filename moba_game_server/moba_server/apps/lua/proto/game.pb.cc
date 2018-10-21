@@ -1113,7 +1113,7 @@ void AddDescriptorsImpl() {
       "eroes\030\001 \003(\005\"0\n\rUserRegistReq\022\r\n\005uname\030\001 "
       "\002(\t\022\020\n\010upwd_md5\030\002 \002(\t\"\037\n\rUserRegistRes\022\016"
       "\n\006status\030\001 \002(\005*<\n\005Stype\022\022\n\016INVALIDI_STYP"
-      "E\020\000\022\010\n\004Auth\020\001\022\n\n\006System\020\002\022\t\n\005Logic\020\003*\255\002\n"
+      "E\020\000\022\010\n\004Auth\020\001\022\n\n\006System\020\002\022\t\n\005Logic\020\003*\347\003\n"
       "\003Cmd\022\017\n\013INVALID_CMD\020\000\022\022\n\016eGuestLoginReq\020"
       "\001\022\022\n\016eGuestLoginRes\020\002\022\014\n\010eRelogin\020\003\022\021\n\re"
       "UserLostConn\020\004\022\023\n\017eEditProfileReq\020\005\022\023\n\017e"
@@ -1121,10 +1121,15 @@ void AddDescriptorsImpl() {
       "\022\026\n\022eAccountUpgradeRes\020\010\022\022\n\016eUnameLoginR"
       "eq\020\t\022\022\n\016eUnameLoginRes\020\n\022\020\n\014eLoginOutReq"
       "\020\013\022\020\n\014eLoginOutRes\020\014\022\022\n\016eUserRegistReq\020\r"
-      "\022\022\n\016eUserRegistRes\020\016"
+      "\022\022\n\016eUserRegistRes\020\016\022\024\n\020eGetUgameInfoReq"
+      "\020\017\022\024\n\020eGetUgameInfoRes\020\020\022\027\n\023eRecvLoginBo"
+      "nuesReq\020\021\022\027\n\023eRecvLoginBonuesRes\020\022\022\031\n\025eG"
+      "etWorldRankUchipReq\020\023\022\031\n\025eGetWorldRankUc"
+      "hipRes\020\024\022\021\n\reGetSysMsgReq\020\025\022\021\n\reGetSysMs"
+      "gRes\020\026"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1900);
+      descriptor, 2086);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game.proto", &protobuf_RegisterTypes);
 }
@@ -1177,6 +1182,14 @@ bool Cmd_IsValid(int value) {
     case 12:
     case 13:
     case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 22:
       return true;
     default:
       return false;

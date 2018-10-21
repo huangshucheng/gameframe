@@ -17,10 +17,17 @@ local IMG_TOP_BG            = 'IMG_TOP_BG'
 local TEXT_USER_NAME        = 'TEXT_USER_NAME'
 local TEXT_USER_ID          = 'TEXT_USER_ID'
 local BTN_SESTTING          = 'BTN_SESTTING'
+local BTN_MESSAGE           = 'BTN_MESSAGE'
+local BTN_MAIL              = 'BTN_MAIL'
+local TEXT_COIN             = 'TEXT_COIN'
+local TEXT_DIAMOND          = 'TEXT_DIAMOND'
 
 function LobbyScene:ctor(app, name)
     self._user_name_text    = nil
     self._user_id_text      = nil
+    self._coin_text         = nil
+    self._diamond_text      = nil
+
     LobbyScene.super.ctor(self, app, name)
 end
 
@@ -57,8 +64,20 @@ function LobbyScene:onCreate()
         btn_setting:addClickEventListener(handler(self,self.onTouchSettingBtn))
     end
 
+    local btn_message = ccui.Helper:seekWidgetByName(img_top_bg,BTN_MESSAGE)
+    if btn_message then
+         btn_message:addClickEventListener(handler(self,self.onTouchMessageBtn))
+    end 
+
+    local btn_mail = ccui.Helper:seekWidgetByName(img_top_bg,BTN_MAIL)
+    if btn_mail then
+         btn_mail:addClickEventListener(handler(self,self.onTouchMailBtn))
+    end 
+
     self._user_name_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_NAME)
     self._user_id_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_ID)
+    self._coin_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_COIN)
+    self._diamond_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_DIAMOND)
     if self._user_name_text then
         self._user_name_text:setString(UserInfo.getUserName())
     end
@@ -127,12 +146,26 @@ end
 
 function LobbyScene:onTouchSettingBtn(send, eventType)
     local count = GT.RootLayer:getInstance():getLayerCount()
-    print("\nall layer start \n")
+    print("all layer start \n")
     local allLayer = GT.RootLayer:getInstance():getAllLayers()
+    print( 'allLayers: ' .. tostring(allLayer) .. '   size: ' .. #allLayer )
+
     for k,v in pairs(allLayer) do
-        print(v:getName())
+        print('layer: '.. tostring(v) .. "  ,name: " .. v:getName())
     end
-    print("\nall layer end \n")
+    print("all layer end \n")
+end
+
+function LobbyScene:onTouchMessageBtn(send, evnetType)
+    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)     --游戏信息 OK
+    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eRecvLoginBonuesReq,nil)  --登录奖励  NO
+    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetWorldRankUchipReq,nil)   --排行榜 OK
+    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetSysMsgReq,{ver_num = 1}) --系统消息  OK
+    -- GT.showPopLayer("LoadingLayer")
+end
+
+function LobbyScene:onTouchMailBtn(send, evnetType)
+    
 end
 
 function LobbyScene:addEventListenner()
@@ -172,6 +205,26 @@ function LobbyScene:onEventData(event)
         GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eGetUgameInfoRes then
         GT.popLayer('LoadingLayer')
+        local body = data.body
+        if body.status == 1 then
+            if self._coin_text and self._diamond_text then
+                self._coin_text:setString(tostring(body.uinfo.uchip))
+                self._diamond_text:setString(tostring(body.uinfo.uchip2))
+            end
+        end
+    elseif ctype == Cmd.eRecvLoginBonuesRes then
+        if data.body.status == 1 then
+            NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)
+        end
+        GT.popLayer('LoadingLayer')
+    elseif ctype == Cmd.eGetWorldRankUchipRes then
+        local body = data.body
+        if body.status == 1 then
+            local rank_info = body.rank_info
+            print('rank-----------------------------start')
+            dump(rank_info)
+            print('rank-----------------------------end')
+        end
     end
 end 
 
@@ -209,12 +262,16 @@ end
 
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
-    print("\nall layer start \n")
+    print("all layer start \n")
     local allLayer = GT.RootLayer:getInstance():getAllLayers()
+    print( 'allLayers: ' .. tostring(allLayer) .. '   size: ' .. #allLayer )
+
     for k,v in pairs(allLayer) do
-        print(v:getName())
+        print('layer: '.. tostring(v) .. "  ,name: " .. v:getName())
     end
-    print("\nall layer end \n")
+    print("all layer end \n")
+    --获取用户信息
+    NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)
 end
 
 function LobbyScene:onExit()

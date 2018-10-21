@@ -22,13 +22,13 @@
               <AbstractNodeData Name="PANEL_RIGHT_TOP" ActionTag="64835941" Tag="27" IconVisible="False" LeftMargin="978.0543" RightMargin="1.9457" TopMargin="23.9347" BottomMargin="36.0653" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="90.0000" />
                 <Children>
-                  <AbstractNodeData Name="BTN_SESTTING" ActionTag="1735748905" Tag="24" IconVisible="False" LeftMargin="211.2567" RightMargin="31.7433" TopMargin="15.4436" BottomMargin="17.5564" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="27" Scale9Height="35" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="BTN_SESTTING" ActionTag="1735748905" Tag="24" IconVisible="False" LeftMargin="211.2570" RightMargin="31.7430" TopMargin="12.4481" BottomMargin="20.5519" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="27" Scale9Height="35" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="57.0000" Y="57.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="239.7567" Y="46.0564" />
+                    <Position X="239.7570" Y="49.0519" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7992" Y="0.5117" />
+                    <PrePosition X="0.7992" Y="0.5450" />
                     <PreSize X="0.1900" Y="0.6333" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/setting_down.png" Plist="" />
@@ -37,13 +37,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BTN_MESSAGE" ActionTag="548497243" Tag="25" IconVisible="False" LeftMargin="129.5869" RightMargin="114.4131" TopMargin="15.6802" BottomMargin="18.3198" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="26" Scale9Height="34" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="BTN_MESSAGE" ActionTag="548497243" Tag="25" IconVisible="False" LeftMargin="32.6349" RightMargin="211.3651" TopMargin="12.4481" BottomMargin="21.5519" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="26" Scale9Height="34" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="56.0000" Y="56.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="157.5869" Y="46.3198" />
+                    <Position X="60.6349" Y="49.5519" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.5253" Y="0.5147" />
+                    <PrePosition X="0.2021" Y="0.5506" />
                     <PreSize X="0.1867" Y="0.6222" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/msg_down.png" Plist="" />
@@ -52,13 +52,13 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="BTN_MAIL" ActionTag="-1848125584" Tag="26" IconVisible="False" LeftMargin="47.0490" RightMargin="196.9510" TopMargin="18.6339" BottomMargin="14.3661" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="26" Scale9Height="35" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                  <AbstractNodeData Name="BTN_MAIL" ActionTag="-1848125584" Tag="26" IconVisible="False" LeftMargin="121.9459" RightMargin="122.0541" TopMargin="12.4481" BottomMargin="20.5519" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="26" Scale9Height="35" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                     <Size X="56.0000" Y="57.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="75.0490" Y="42.8661" />
+                    <Position X="149.9459" Y="49.0519" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.2502" Y="0.4763" />
+                    <PrePosition X="0.4998" Y="0.5450" />
                     <PreSize X="0.1867" Y="0.6333" />
                     <TextColor A="255" R="65" G="65" B="70" />
                     <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/mail_down.png" Plist="" />
@@ -82,7 +82,7 @@
               <AbstractNodeData Name="PANEL_LEFG_TOP" ActionTag="-1656357106" Tag="32" IconVisible="False" RightMargin="980.0000" TopMargin="10.7397" BottomMargin="49.2603" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="300.0000" Y="90.0000" />
                 <Children>
-                  <AbstractNodeData Name="IMG_USER_INFO_BG" ActionTag="-718998908" Tag="23" IconVisible="False" LeftMargin="26.2229" RightMargin="-126.2230" TopMargin="-2.9031" BottomMargin="-22.0969" Scale9Enable="True" LeftEage="55" RightEage="55" TopEage="23" BottomEage="23" Scale9OriginX="55" Scale9OriginY="23" Scale9Width="58" Scale9Height="25" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="IMG_USER_INFO_BG" ActionTag="-718998908" Tag="23" IconVisible="False" LeftMargin="26.2229" RightMargin="-126.2229" TopMargin="-2.9031" BottomMargin="-22.0969" Scale9Enable="True" LeftEage="55" RightEage="55" TopEage="23" BottomEage="23" Scale9OriginX="55" Scale9OriginY="23" Scale9Width="58" Scale9Height="25" ctype="ImageViewObjectData">
                     <Size X="400.0000" Y="115.0000" />
                     <AnchorPoint ScaleY="1.0000" />
                     <Position X="26.2229" Y="92.9031" />
@@ -105,10 +105,10 @@
                         <PreSize X="0.9364" Y="0.9364" />
                         <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/169.png" Plist="" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="IMG_HEAD" ActionTag="-368679624" Tag="20" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="5.6403" RightMargin="1.3597" TopMargin="-4.0089" BottomMargin="11.0089" LeftEage="33" RightEage="33" TopEage="33" BottomEage="33" Scale9OriginX="33" Scale9OriginY="33" Scale9Width="37" Scale9Height="37" ctype="ImageViewObjectData">
+                      <AbstractNodeData Name="IMG_HEAD" ActionTag="-368679624" Tag="20" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="5.6450" RightMargin="1.3550" TopMargin="-4.0130" BottomMargin="11.0130" LeftEage="33" RightEage="33" TopEage="33" BottomEage="33" Scale9OriginX="33" Scale9OriginY="33" Scale9Width="37" Scale9Height="37" ctype="ImageViewObjectData">
                         <Size X="103.0000" Y="103.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="57.1403" Y="62.5089" />
+                        <Position X="57.1450" Y="62.5130" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5195" Y="0.5683" />

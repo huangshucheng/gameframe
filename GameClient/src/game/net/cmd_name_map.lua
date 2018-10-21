@@ -13,7 +13,6 @@ local cmd_name_map = {
 	"LoginOutRes",
 	"UserRegistReq",
 	"UserRegistRes",
-	--[[
 	"GetUgameInfoReq",
 	"GetUgameInfoRes",
 
@@ -25,6 +24,7 @@ local cmd_name_map = {
 
 	"GetSysMsgReq",
 	"GetSysMsgRes",
+	--[[
 
 	"LoginLogicReq",
 	"LoginLogicRes",

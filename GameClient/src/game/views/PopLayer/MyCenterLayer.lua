@@ -31,7 +31,7 @@ function MyCenterLayer:ctor()
 end
 
 function MyCenterLayer:init()
-	self._canTouchBackground = false
+	self._canTouchBackground = true
 	MyCenterLayer.super.init(self)
 end
 

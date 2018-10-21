@@ -1,5 +1,4 @@
 local mysql_center = require("database/mysql_auth_center")
--- local redis_center = require("database/redis_center")
 
 local Respones = require("Respones")
 local Stype = require("Stype")
