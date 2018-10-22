@@ -43,6 +43,14 @@ function get_sys_msg(s, req)
 	local uid = req[3]
 	local body = req[4]
 	
+	if body == nil or body.ver_num == nil then
+		local msg = {Stype.System, Cmd.eGetSysMsgRes, uid, {
+			status = Respones.OK,
+			ver_num = sys_msg_version,
+		}}
+		Session.send_msg(s, msg)
+		return
+	end
 
 	if (body.ver_num == sys_msg_version) then
 		local msg = {Stype.System, Cmd.eGetSysMsgRes, uid, {

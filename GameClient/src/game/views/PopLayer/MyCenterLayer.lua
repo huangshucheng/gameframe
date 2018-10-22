@@ -24,6 +24,7 @@ function MyCenterLayer:ctor()
 	self._login_textfield_name = nil
 	self._checkbox_boy = nil
 	self._checkbox_girl = nil
+	self._img_head = nil
 	self._user_sex = 1
 	self._head_img_index = 1
 	MyCenterLayer.super.ctor(self)
@@ -55,7 +56,19 @@ function MyCenterLayer:onCreate()
 	if btn_upgrade then
 		btn_upgrade:addClickEventListener(handler(self,function()
 		    GT.showPopLayer('UpgradeLayer')
-		    -- GT.showPopLayer('TipsLayer',{"黄塾城啊啊啊啊"})
+		end))
+	end
+
+	local panel_head_bg = ccui.Helper:seekWidgetByName(img_bg,PANEL_HEAD_BG)
+	if panel_head_bg then
+		panel_head_bg:addClickEventListener(handler(self,function(sender, eventType)
+			self._head_img_index = self._head_img_index + 1
+			if self._head_img_index > 9 then
+				self._head_img_index = 1
+			end
+		    if self._img_head then
+    			self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%d.png',self._head_img_index))
+    		end
 		end))
 	end
 
@@ -113,6 +126,10 @@ function MyCenterLayer:onCreate()
     if self._login_textfield_name then
     	self._login_textfield_name:setText(UserInfo.getUserName())
     end
+    self._img_head = ccui.Helper:seekWidgetByName(img_bg,IMG_HEAD)
+    if self._img_head then
+    	self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
+    end
 
 	local sex = UserInfo.getUserSex()
 	if tonumber(sex) == 1 then
@@ -124,6 +141,8 @@ function MyCenterLayer:onCreate()
 	if btn_upgrade then
 		btn_upgrade:setVisible(UserInfo.getUserIsGuest())
 	end
+
+	self._head_img_index = tonumber(UserInfo.getUserface())
 end
 
 function MyCenterLayer:addEventListenner()
@@ -142,7 +161,7 @@ function MyCenterLayer:onEventData(event)
         if body.status == Respones.OK then
         	UserInfo.setUserName(self._login_textfield_name:getText())
         	UserInfo.setUserSex(self._user_sex)
-        	UserInfo.setUserface(1)
+        	UserInfo.setUserface(self._head_img_index)
         	UserInfo.flush()
         	postEvent(ClientEvents.ON_ASYC_USER_INFO)
         	GT.popLayer('LoadingLayer')
@@ -179,7 +198,7 @@ function MyCenterLayer:onEventBtnModify(sender,eventType)
 
 	local msg = {
 		unick = namestr,
-		uface = 1,
+		uface = self._head_img_index,
 		usex = self._user_sex,
 	}
 
@@ -203,6 +222,10 @@ function MyCenterLayer:onEventAsycUserInfo(event)
 	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
 	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
 	btn_upgrade:setVisible(isguest) 
+
+    if self._img_head then
+        self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
+    end
 end
 
 return MyCenterLayer

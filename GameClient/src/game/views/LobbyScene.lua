@@ -21,12 +21,14 @@ local BTN_MESSAGE           = 'BTN_MESSAGE'
 local BTN_MAIL              = 'BTN_MAIL'
 local TEXT_COIN             = 'TEXT_COIN'
 local TEXT_DIAMOND          = 'TEXT_DIAMOND'
+local IMG_HEAD              = 'IMG_HEAD'
 
 function LobbyScene:ctor(app, name)
     self._user_name_text    = nil
     self._user_id_text      = nil
     self._coin_text         = nil
     self._diamond_text      = nil
+    self._img_head          = nil
 
     LobbyScene.super.ctor(self, app, name)
 end
@@ -78,11 +80,15 @@ function LobbyScene:onCreate()
     self._user_id_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_ID)
     self._coin_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_COIN)
     self._diamond_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_DIAMOND)
+    self._img_head = ccui.Helper:seekWidgetByName(img_top_bg, IMG_HEAD)
     if self._user_name_text then
         self._user_name_text:setString(UserInfo.getUserName())
     end
     if self._user_id_text then
         self._user_id_text:setString('ID:00000' .. UserInfo.getUserId())
+    end
+    if self._img_head then
+        self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
     end
 end
 
@@ -154,18 +160,17 @@ function LobbyScene:onTouchSettingBtn(send, eventType)
         print('layer: '.. tostring(v) .. "  ,name: " .. v:getName())
     end
     print("all layer end \n")
+
+    GT.showPopLayer('SetLayer')
 end
 
 function LobbyScene:onTouchMessageBtn(send, evnetType)
-    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)     --游戏信息 OK
     -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eRecvLoginBonuesReq,nil)  --登录奖励  NO
-    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetWorldRankUchipReq,nil)   --排行榜 OK
-    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetSysMsgReq,{ver_num = 1}) --系统消息  OK
-    -- GT.showPopLayer("LoadingLayer")
+    GT.showPopLayer("RankLayer")
 end
 
 function LobbyScene:onTouchMailBtn(send, evnetType)
-    
+    GT.showPopLayer("MsgLayer")
 end
 
 function LobbyScene:addEventListenner()
@@ -206,25 +211,18 @@ function LobbyScene:onEventData(event)
     elseif ctype == Cmd.eGetUgameInfoRes then
         GT.popLayer('LoadingLayer')
         local body = data.body
-        if body.status == 1 then
+        if body.status == Respones.OK then
             if self._coin_text and self._diamond_text then
                 self._coin_text:setString(tostring(body.uinfo.uchip))
                 self._diamond_text:setString(tostring(body.uinfo.uchip2))
             end
         end
     elseif ctype == Cmd.eRecvLoginBonuesRes then
-        if data.body.status == 1 then
+        if data.body.status == Respones.OK then
             NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)
         end
         GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eGetWorldRankUchipRes then
-        local body = data.body
-        if body.status == 1 then
-            local rank_info = body.rank_info
-            print('rank-----------------------------start')
-            dump(rank_info)
-            print('rank-----------------------------end')
-        end
     end
 end 
 
@@ -256,6 +254,10 @@ function LobbyScene:onEventAsycUserInfo(event)
     local uname = UserInfo.getUserName()
     if uname and uname ~= '' then
         self._user_name_text:setString(tostring(uname))
+    end
+
+    if self._img_head then
+        self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
     end
 end
 --------------------

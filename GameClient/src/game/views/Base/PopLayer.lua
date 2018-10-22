@@ -40,7 +40,6 @@ function PopLayer:init()
     else
         print('hcc>> waring:PopLayer:init() >> self._csbResourceNode is nil')
     end
-
     self._isRender = false
     if self.onCreate then self:onCreate() end
     if self.addEventListenner then self:addEventListenner() end
