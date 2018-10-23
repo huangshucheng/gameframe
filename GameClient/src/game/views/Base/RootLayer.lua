@@ -64,7 +64,8 @@ function RootLayer:popLayer(layername)
     if self._popLayers[removeLayerIndex] == nil then
         return
     end
-    if self._popLayers[removeLayerIndex].__cname ~= className and self._popLayers[removeLayerIndex].__cname ~= string.match(className,self._popLayers[removeLayerIndex].__cname) then
+    if self._popLayers[removeLayerIndex].__cname ~= className and 
+        self._popLayers[removeLayerIndex].__cname ~= string.match(className,self._popLayers[removeLayerIndex].__cname) then
         return
     end
 

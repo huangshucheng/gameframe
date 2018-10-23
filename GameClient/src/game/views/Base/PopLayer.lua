@@ -42,7 +42,7 @@ function PopLayer:init()
     end
     self._isRender = false
     if self.onCreate then self:onCreate() end
-    if self.addEventListenner then self:addEventListenner() end
+    if self.addClientEventListener then self:addClientEventListener() end
 end
 
 function PopLayer:showLayer(render)

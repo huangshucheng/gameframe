@@ -22,7 +22,7 @@ function on_auth_recv_cmd(s, msg)
 		auth_service_handlers[msg[2]](s, msg)
 	end
 	-- test
-	print('auth_service>> stype: ' .. msg[1] .. '  ,ctype:  ' .. msg[2] .. '  ,utag: ' .. msg[3] )
+	-- print('auth_service>> stype: ' .. msg[1] .. '  ,ctype:  ' .. msg[2] .. '  ,utag: ' .. msg[3] )
 end
 
 function on_auth_session_disconnect(s, stype) 

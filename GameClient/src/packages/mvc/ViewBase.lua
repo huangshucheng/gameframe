@@ -19,7 +19,8 @@ function ViewBase:ctor(app, name)
     end
     
     if self.onCreate then self:onCreate() end
-    if self.addEventListenner then self:addEventListenner() end
+    if self.addServerEventListener then self:addServerEventListener() end
+    if self.addClientEventListener then self:addClientEventListener() end
 end
 
 function ViewBase:getApp()

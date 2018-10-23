@@ -41,19 +41,12 @@ function SetLayer:onCreate()
     end
 end
 
-function SetLayer:addEventListenner()
-	addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
+function SetLayer:addClientEventListener()
+	addEvent('LoginOutRes', self, self.onEventLoginOutRes)
 end
 
-function SetLayer:onEventData(event)
-   local data = event._usedata
-    if not data then
-        return
-    end
-    local ctype = data.ctype
-    if ctype == Cmd.eLoginOutRes then
-    	GT.popLayer('LoadingLayer')
-    end
+function SetLayer:onEventLoginOutRes(event)
+	GT.popLayer('LoadingLayer')
 end
 
 return SetLayer

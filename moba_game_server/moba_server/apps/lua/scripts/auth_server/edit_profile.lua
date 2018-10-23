@@ -8,10 +8,8 @@ local Cmd = require("Cmd")
 function do_edit_profile(s, req) 
 	local uid = req[3]
 	local edit_profile_req = req[4]
-
-
-	print(uid, edit_profile_req.unick, edit_profile_req.uface, edit_profile_req.usex)
 	
+	-- print(uid, edit_profile_req.unick, edit_profile_req.uface, edit_profile_req.usex)
 	if (string.len(edit_profile_req.unick) <= 0) or 
 	   (edit_profile_req.uface <= 0 or edit_profile_req.uface > 9) or 
 	   (edit_profile_req.usex ~= 0 and edit_profile_req.usex ~= 1) then -- 参数错误

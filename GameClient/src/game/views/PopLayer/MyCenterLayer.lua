@@ -72,7 +72,7 @@ function MyCenterLayer:onCreate()
 		end))
 	end
 
-	local login_textfield_name = ccui.Helper:seekWidgetByName(img_bg,TEXTFIELD_NAME)
+	local login_textfield_name 		= ccui.Helper:seekWidgetByName(img_bg,TEXTFIELD_NAME)
     local textfieldSize             = cc.size(300,51)
     local textfieldImg              = 'Lobby/LobbyRes/home_scene/user_info/120.png'
     if login_textfield_name then
@@ -145,33 +145,38 @@ function MyCenterLayer:onCreate()
 	self._head_img_index = tonumber(UserInfo.getUserface())
 end
 
-function MyCenterLayer:addEventListenner()
-	addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
+function MyCenterLayer:addClientEventListener()
+	addEvent('LoginOutRes', self, self.onEventLoginOutRes)
+	addEvent('EditProfileRes', self, self.onEventEditProFileRes)
 	addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
 end
 
-function MyCenterLayer:onEventData(event)
+function MyCenterLayer:onEventLoginOutRes(event)
    local data = event._usedata
     if not data then
         return
     end
-    local ctype = data.ctype
-    if ctype == Cmd.eEditProfileRes then
-    	local body = data.body
-        if body.status == Respones.OK then
-        	UserInfo.setUserName(self._login_textfield_name:getText())
-        	UserInfo.setUserSex(self._user_sex)
-        	UserInfo.setUserface(self._head_img_index)
-        	UserInfo.flush()
-        	postEvent(ClientEvents.ON_ASYC_USER_INFO)
-        	GT.popLayer('LoadingLayer')
-        	GT.showPopLayer('TipsLayer',{"修改成功"})
-        end
- 	elseif ctype == Cmd.eLoginOutRes then
-        	GT.popLayer('LoadingLayer')
- 		if data.body.status == Respones.OK then
- 			self:showLayer(false)
- 		end
+    GT.popLayer('LoadingLayer')
+	if data.status == Respones.OK then
+		self:showLayer(false)
+	end
+end
+
+function MyCenterLayer:onEventEditProFileRes(event)
+   local data = event._usedata
+    if not data then
+        return
+    end
+
+	GT.popLayer('LoadingLayer')
+    
+    if data.status == Respones.OK then
+    	UserInfo.setUserName(self._login_textfield_name:getText())
+    	UserInfo.setUserSex(self._user_sex)
+    	UserInfo.setUserface(self._head_img_index)
+    	UserInfo.flush()
+    	postEvent(ClientEvents.ON_ASYC_USER_INFO)
+    	GT.showPopLayer('TipsLayer',{"修改成功"})
     end
 end
 

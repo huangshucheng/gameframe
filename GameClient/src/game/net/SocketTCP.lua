@@ -174,8 +174,6 @@ end
 
 function SocketTCP:_reconnect(__immediately)
 	if not self.isRetryConnect then return end
-	-- print(tostring(self.name) .. " _reconnect")
-	
 	if __immediately then self:connect() return end
 	
 	if self.reconnectScheduler then 

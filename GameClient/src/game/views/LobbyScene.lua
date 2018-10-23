@@ -4,6 +4,7 @@ local NetWork           = require("game.net.NetWork")
 local Cmd               = require("game.net.Cmd")
 local Stype             = require("game.net.Stype")
 local Respones          = require("game.net.Respones")
+local cmd_name_map      = require("game.net.cmd_name_map")
 local UserInfo          = require("game.clientdata.UserInfo")
 
 LobbyScene.RESOURCE_FILENAME = 'Lobby/LobbyScene.csb'
@@ -76,11 +77,11 @@ function LobbyScene:onCreate()
          btn_mail:addClickEventListener(handler(self,self.onTouchMailBtn))
     end 
 
-    self._user_name_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_NAME)
-    self._user_id_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_ID)
-    self._coin_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_COIN)
-    self._diamond_text = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_DIAMOND)
-    self._img_head = ccui.Helper:seekWidgetByName(img_top_bg, IMG_HEAD)
+    self._user_name_text    = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_NAME)
+    self._user_id_text      = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_USER_ID)
+    self._coin_text         = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_COIN)
+    self._diamond_text      = ccui.Helper:seekWidgetByName(img_top_bg, TEXT_DIAMOND)
+    self._img_head          = ccui.Helper:seekWidgetByName(img_top_bg, IMG_HEAD)
     if self._user_name_text then
         self._user_name_text:setString(UserInfo.getUserName())
     end
@@ -173,7 +174,7 @@ function LobbyScene:onTouchMailBtn(send, evnetType)
     GT.showPopLayer("MsgLayer")
 end
 
-function LobbyScene:addEventListenner()
+function LobbyScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
     addEvent(ServerEvents.ON_SERVER_EVENT_MSG_SEND, self, self.onEventMsgSend)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
@@ -181,20 +182,21 @@ function LobbyScene:addEventListenner()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED, self, self.onEventClosed)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_NETLOWER, self, self.onEventNetLower)
+end
 
-    -- clientEvent
+function LobbyScene:addClientEventListener()
     addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
 end
 
-
 function LobbyScene:onEventData(event)
     local data = event._usedata
-    if not data then
-        return
-    end
-    dump(data)
-    local ctype = data.ctype
+    if not data then return end
 
+    postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
+
+    dump(data)
+
+    local ctype = data.ctype
     if ctype == Cmd.eEditProfileRes then
         GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eAccountUpgradeRes then
@@ -202,7 +204,7 @@ function LobbyScene:onEventData(event)
     elseif ctype == Cmd.eRelogin then
         self:getApp():enterScene('LoginScene')
         GT.popLayer('LoadingLayer')
-        gt.showPopLayer('TipsLayer',{'帐号在其他地放登录!'})
+        gt.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
     elseif ctype == Cmd.eUnameLoginRes then
         GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eLoginOutRes then
@@ -218,11 +220,7 @@ function LobbyScene:onEventData(event)
             end
         end
     elseif ctype == Cmd.eRecvLoginBonuesRes then
-        if data.body.status == Respones.OK then
-            NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)
-        end
         GT.popLayer('LoadingLayer')
-    elseif ctype == Cmd.eGetWorldRankUchipRes then
     end
 end 
 
@@ -239,11 +237,11 @@ function LobbyScene:onEventNetConnectFail(envet)
 end
 
 function LobbyScene:onEventClose(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
+        GT.showPopLayer('TipsLayer',{"网络连接关闭111!"})
 end
 
 function LobbyScene:onEventClosed(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
+        GT.showPopLayer('TipsLayer',{"网络连接关闭222!"})
 end
 
 function LobbyScene:onEventNetLower(envet)

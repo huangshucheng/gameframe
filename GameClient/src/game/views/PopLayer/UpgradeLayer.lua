@@ -18,12 +18,12 @@ UpgradeLayer._csbResourcePath = 'Lobby/PopLayer/UpgradeLayer.csb'
 
 function UpgradeLayer:ctor()
 	UpgradeLayer.super.ctor(self)
-    self._textfield_account = nil
-    self._textfield_pwd = nil
-    self._textfield_pwd_conf = nil
+    self._textfield_account     = nil
+    self._textfield_pwd         = nil
+    self._textfield_pwd_conf    = nil
 
-    self._text_account = ''
-    self._text_pwd = ''
+    self._text_account  = ''
+    self._text_pwd      = ''
 end
 
 function UpgradeLayer:init()
@@ -92,29 +92,25 @@ function UpgradeLayer:onCreate()
     end
 end
 
-function UpgradeLayer:addEventListenner()
-	addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
+function UpgradeLayer:addClientEventListener()
+	addEvent('AccountUpgradeRes', self, self.onEventAccountUpgradeRes)
 end
 
-function UpgradeLayer:onEventData(event)
+function UpgradeLayer:onEventAccountUpgradeRes(event)
    local data = event._usedata
     if not data then
         return
     end
-    local ctype = data.ctype
-    if ctype == Cmd.eAccountUpgradeRes then
-    	local body = data.body
-        if body.status == Respones.OK then
-        	UserInfo.setUserAccount(self._text_account)
-        	UserInfo.setUserPwd(self._text_pwd)
-        	UserInfo.setUserIsGuest(false)
-        	UserInfo.flush()
-        	postEvent(ClientEvents.ON_ASYC_USER_INFO)
-        	self:showLayer(false)
-            GT.showPopLayer('TipsLayer',{"升级成功"})
-        else
-            GT.showPopLayer('TipsLayer',{"升级失败"})
-        end
+    if data.status == Respones.OK then
+    	UserInfo.setUserAccount(self._text_account)
+    	UserInfo.setUserPwd(self._text_pwd)
+    	UserInfo.setUserIsGuest(false)
+    	UserInfo.flush()
+    	postEvent(ClientEvents.ON_ASYC_USER_INFO)
+    	self:showLayer(false)
+        GT.showPopLayer('TipsLayer',{"升级成功"})
+    else
+        GT.showPopLayer('TipsLayer',{"升级失败"})
     end
 end
 

@@ -14,24 +14,17 @@ function load_sys_msg()
 		end
 
 		sys_msg_version = Utils.timestamp()
-		--
+		
 		if ret == nil or #ret <= 0 then
 			sys_msg_data = {}
 			return
 		end 
-		-- 
 
 		sys_msg_data = ret
 
 		-- 过了晚上1点，在更新一下
 		local tormorow = Utils.timestamp_today() + 25 * 60 * 60
 		Scheduler.once(load_sys_msg, (tormorow - sys_msg_version) * 1000) 
-		--[[
-		local k, v 
-		for k,v in pairs(sys_msg_data) do
-			print(v) 
-		end
-		]]
 	end)
 end
 

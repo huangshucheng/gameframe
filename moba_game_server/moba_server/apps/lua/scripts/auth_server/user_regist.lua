@@ -26,7 +26,7 @@ end
 local function regist(s, req)
 	local utag = req[3]
 	local user_regist_req = req[4]		--{uname='' , upwd_md5 = ''}
-	print("hcc >> regist: uname: " .. user_regist_req.uname .. ' upwd_md5: ' .. user_regist_req.upwd_md5)
+	-- print("hcc >> regist: uname: " .. user_regist_req.uname .. ' upwd_md5: ' .. user_regist_req.upwd_md5)
 	local uname 	= user_regist_req.uname
 	local upwd_md5 	= user_regist_req.upwd_md5
 

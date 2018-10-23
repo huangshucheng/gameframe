@@ -160,7 +160,7 @@ function LoginScene:onCreate()
     end
 end
 
-function LoginScene:addEventListenner()
+function LoginScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
     addEvent(ServerEvents.ON_SERVER_EVENT_MSG_SEND, self, self.onEventMsgSend)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
@@ -168,6 +168,10 @@ function LoginScene:addEventListenner()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED, self, self.onEventClosed)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_NETLOWER, self, self.onEventNetLower)
+end
+
+function LoginScene:addClientEventListener()
+
 end
 
 function LoginScene:onEventData(event)
@@ -205,6 +209,7 @@ function LoginScene:onEventData(event)
             UserInfo.setUserVip(uinfo.uvip)
             UserInfo.setUserId(uinfo.uid)
             UserInfo.flush()
+            
             self:getApp():enterScene('LobbyScene')
             GT.showPopLayer('TipsLayer',{"登录成功!"})
         else
@@ -233,11 +238,11 @@ function LoginScene:onEventNetConnectFail(envet)
 end
 
 function LoginScene:onEventClose(envet)
-    GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
+    GT.showPopLayer('TipsLayer',{"网络连接关闭111!"})
 end
 
 function LoginScene:onEventClosed(envet)
-    GT.showPopLayer('TipsLayer',{"网络连接关闭!"})
+    GT.showPopLayer('TipsLayer',{"网络连接关闭222!"})
 end
 
 function LoginScene:onEventNetLower(envet)

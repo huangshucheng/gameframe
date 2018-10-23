@@ -5,6 +5,7 @@ local NetWork           = require("game.net.NetWork")
 local Cmd               = require("game.net.Cmd")
 local Stype             = require("game.net.Stype")
 local Respones 			= require("game.net.Respones")
+local cmd_name_map      = require("game.net.cmd_name_map")
 
 RankLayer._csbResourcePath = 'Lobby/PopLayer/RankLayer.csb'
 
@@ -30,7 +31,6 @@ function RankLayer:init()
 	RankLayer.super.init(self)
 
 	NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetWorldRankUchipReq,nil)
-	GT.showPopLayer('LoadingLayer')
 end
 
 function RankLayer:onCreate()
@@ -54,42 +54,38 @@ function RankLayer:onCreate()
 	end
 end
 
-function RankLayer:addEventListenner()
-	addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
+function RankLayer:addClientEventListener()
+	addEvent('GetWorldRankUchipRes', self, self.onEventWorldRankUchipRes)
 end
 
-function RankLayer:onEventData(event)
+function RankLayer:onEventWorldRankUchipRes(event)
    local data = event._usedata
     if not data then
         return
     end
-    local ctype = data.ctype
-    if ctype == Cmd.eGetWorldRankUchipRes then
-    	GT.popLayer('LoadingLayer')
-        local body = data.body
-        if body.status == Respones.OK then
-            local rank_info = body.rank_info
-            for i,v in ipairs(rank_info) do
-       			if self._list_view then
-       			    self._list_view:pushBackDefaultItem()
-                  	local products = self._list_view:getItems()
-                    local uinfoItem = products[#products]
-                    uinfoItem:setVisible(true)
-                    uinfoItem:setSwallowTouches(false)        --单个子item node
-                    local text_rank = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_RANK)
-                    local text_uchip = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_UCHIP)
-                    local img_head = ccui.Helper:seekWidgetByName(uinfoItem,IMG_HEAD)
-                    local text_name = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_NAME)
-                    local text_uvip = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_UVIP)
-                    if text_rank then text_rank:setString(tostring(i)) end
-                    if text_uchip then text_uchip:setString(tostring(v.uchip)) end
-                    if text_name then text_name:setString(tostring(v.unick)) end
-                    if text_uvip then text_uvip:setString(tostring('VIP'.. v.uvip)) end
-                    if img_head and v.uface >= 1 and v.uface <= 9 then
-                     	img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%d.png',v.uface))
-                    end
-				end     	
-            end
+	GT.popLayer('LoadingLayer')
+    if data.status == Respones.OK then
+        local rank_info = data.rank_info
+        for i,v in ipairs(rank_info) do
+   			if self._list_view then
+   			    self._list_view:pushBackDefaultItem()
+              	local products = self._list_view:getItems()
+                local uinfoItem = products[#products]
+                uinfoItem:setVisible(true)
+                uinfoItem:setSwallowTouches(false)        --单个子item node
+                local text_rank     = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_RANK)
+                local text_uchip    = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_UCHIP)
+                local img_head  = ccui.Helper:seekWidgetByName(uinfoItem,IMG_HEAD)
+                local text_name = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_NAME)
+                local text_uvip = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_UVIP)
+                if text_rank then text_rank:setString(tostring(i)) end
+                if text_uchip then text_uchip:setString(tostring(v.uchip)) end
+                if text_name then text_name:setString(tostring(v.unick)) end
+                if text_uvip then text_uvip:setString(tostring('VIP'.. v.uvip)) end
+                if img_head and v.uface >= 1 and v.uface <= 9 then
+                 	img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%d.png',v.uface))
+                end
+			end     	
         end
     end
 end

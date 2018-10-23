@@ -26,7 +26,6 @@ function MsgLayer:init()
 	MsgLayer.super.init(self)
 	
     NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetSysMsgReq,{ver_num = 1})
-	GT.showPopLayer('LoadingLayer')
 end
 
 function MsgLayer:onCreate()
@@ -50,37 +49,32 @@ function MsgLayer:onCreate()
 	end
 end
 
-function MsgLayer:addEventListenner()
-	addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
+function MsgLayer:addClientEventListener()
+	addEvent('GetSysMsgRes', self, self.onEventGetSysMsgRes)
 end
 
-function MsgLayer:onEventData(event)
+function MsgLayer:onEventGetSysMsgRes(event)
    local data = event._usedata
     if not data then
         return
     end
-    local ctype = data.ctype
-    if ctype == Cmd.eGetSysMsgRes then
-    	GT.popLayer('LoadingLayer')
-        local body = data.body
-        dump(body)
-        if body.status == Respones.OK then
-            local ver_num = body.ver_num
-            local sys_msgs = body.sys_msgs
-            print('ver_num  '.. ver_num)
-            for i,v in ipairs(sys_msgs) do
-                if self._list_view then
-                    self._list_view:pushBackDefaultItem()
-                    local products = self._list_view:getItems()
-                    local infoItem = products[#products]
-                    infoItem:setVisible(true)
-                    infoItem:setSwallowTouches(false)
-                    local text_id = ccui.Helper:seekWidgetByName(infoItem,KW_TEXT_ID)
-                    local text_msg = ccui.Helper:seekWidgetByName(infoItem,KW_TEXT_MSG)
-                    if text_id then text_id:setString(tostring(i)) end
-                    if text_msg then text_msg:setString(tostring(v)) end
-                end  
-            end
+	GT.popLayer('LoadingLayer')
+    if data.status == Respones.OK then
+        local ver_num = data.ver_num
+        local sys_msgs = data.sys_msgs
+        print('ver_num  '.. ver_num)
+        for i,v in ipairs(sys_msgs) do
+            if self._list_view then
+                self._list_view:pushBackDefaultItem()
+                local products = self._list_view:getItems()
+                local infoItem = products[#products]
+                infoItem:setVisible(true)
+                infoItem:setSwallowTouches(false)
+                local text_id   = ccui.Helper:seekWidgetByName(infoItem,KW_TEXT_ID)
+                local text_msg  = ccui.Helper:seekWidgetByName(infoItem,KW_TEXT_MSG)
+                if text_id then text_id:setString(tostring(i)) end
+                if text_msg then text_msg:setString(tostring(v)) end
+            end  
         end
     end
 end

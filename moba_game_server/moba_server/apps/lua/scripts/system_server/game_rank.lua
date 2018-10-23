@@ -15,9 +15,9 @@ function get_rank_user_center_info(index, rank_uid, success_func, failed_func)
 			end
 			return
 		end
-		-- if success_func then
+		if success_func then
 			success_func(index, uinfo)
-		-- end
+		end
 	end)
 end
 
@@ -29,9 +29,9 @@ function get_rank_user_ugame_info(index, rank_uid, success_func, failed_func)
 			end
 			return
 		end
-		-- if success_func then
+		if success_func then
 			success_func(index, ugame_info)
-		-- end
+		end
 	end)
 end
 
@@ -49,13 +49,6 @@ function send_rank_info_to_client(s, uid, rank_uids, rank_user_info, rank_ugame_
 		}
 		rank_info_body[i] = user_rank_info
 	end
-
-	for k,v in pairs(rank_info_body) do
-		for _k,_v in pairs(v) do
-			print(_k,_v)
-		end
-	end
-
 	local msg = {Stype.System, Cmd.eGetWorldRankUchipRes, uid, {
 		status = Respones.OK,
 		rank_info = rank_info_body,
@@ -91,7 +84,6 @@ end
 -- {stype, ctype, utag, body}
 function get_world_uchip_rank(s, req)
 	local uid = req[3]
-	print('get_world_uchip_rank: ' .. uid)
 	-- 拉取排行榜的前30个
 	redis_rank.get_world_rank_with_uchip_inredis(30, function(err, rank_uids)
 		if err or rank_uids == nil then
@@ -112,7 +104,6 @@ function get_world_uchip_rank(s, req)
 			return 
 		end
 
-
 		-- 获得了我们的排在前面的uid的集合{first_uid, second_uid, ...}
 		local rank_user_info = {}
 		local failed_func = function()
@@ -131,14 +122,9 @@ function get_world_uchip_rank(s, req)
 				get_rank_ugame_info(s, uid, rank_uids, rank_user_info)
 			else
 				index = index + 1
-				print('index: ' .. index)
-				print('success_func: '.. tostring(success_func))
-				-- TODO
 				get_rank_user_center_info(index, rank_uids[index], success_func, failed_func)
 			end
 		end
-
-		print('success_func111: '.. tostring(success_func))
 		get_rank_user_center_info(1, rank_uids[1], success_func, failed_func)
 	end)
 end
