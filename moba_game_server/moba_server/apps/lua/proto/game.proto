@@ -41,20 +41,20 @@ enum Cmd {
 	eGetSysMsgReq = 21;
 	eGetSysMsgRes = 22;
 
-	//eLoginLogicReq = 23;
-	//eLoginLogicRes = 24;
+	eLoginLogicReq = 23;
+	eLoginLogicRes = 24;
 
-	//eEnterZoneReq = 25;
-	//eEnterZoneRes = 26;
+	eEnterZoneReq = 25;
+	eEnterZoneRes = 26;
 
-	//eEnterMatch = 27;
-	//eUserArrived = 28;
+	eEnterMatch = 27;
+	eUserArrived = 28;
 
-	//eExitMatchReq = 29;
-	//eExitMatchRes = 30;
-	//eUserExitMatch = 31;
+	eExitMatchReq = 29;
+	eExitMatchRes = 30;
+	eUserExitMatch = 31;
 
-	//eGameStart = 32;
+	eGameStart = 32;
 }
 
 message GuestLoginReq {

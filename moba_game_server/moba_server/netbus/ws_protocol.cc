@@ -76,7 +76,7 @@ bool ws_protocol::ws_shake_hand(session* s, char* body, int len) {
 	http_parser_execute(&p, &settings, body, len);
 
 	if (has_sec_key && is_shaker_ended) { // ½âÎöµ½ÁËwebsocketÀïÃæµÄSec-WebSocket-Key
-		printf("Sec-WebSocket-Key: %s\n", value_sec_key);
+		//printf("Sec-WebSocket-Key: %s\n", value_sec_key);
 		// key + migic
 		static char key_migic[512];
 		static char sha1_key_migic[SHA1_DIGEST_SIZE];

@@ -252,7 +252,7 @@ extern "C" {
 		s->c_port = ntohs(addr.sin_port);
 		s->socket_type = (int)(server->data);
 		
-		printf("client connect>> ip: %s, port: %d \n",(char*)s->c_address,s->c_port);
+		//printf("client connect>> ip: %s, port: %d \n",(char*)s->c_address,s->c_port);
 
 		uv_read_start((uv_stream_t*)client, uv_alloc_buf, after_read);
 		service_man::on_session_connect((session*)s);

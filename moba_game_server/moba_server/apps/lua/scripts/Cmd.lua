@@ -30,9 +30,10 @@ local Cmd = {
 	eGetSysMsgReq = 21,
 	eGetSysMsgRes = 22,
 
+	eLoginLogicReq = 23,
+	eLoginLogicRes = 24,
+
 	--[[
-	eLoginLogicReq = 21,
-	eLoginLogicRes = 22,
 
 	eEnterZoneReq = 23,
 	eEnterZoneRes = 24,

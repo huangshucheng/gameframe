@@ -21,14 +21,13 @@ local cmd_name_map = {
 	"GetWorldRankUchipRes",
 	"GetSysMsgReq",
 	"GetSysMsgRes",
-	--[[
-
 	"LoginLogicReq",
 	"LoginLogicRes",
 
+	--[[
+	
 	"EnterZoneReq",
 	"EnterZoneRes",
-
 	"EnterMatch",
 	"UserArrived",
 	"ExitMatchReq",

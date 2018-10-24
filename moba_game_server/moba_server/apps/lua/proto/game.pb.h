@@ -253,11 +253,21 @@ enum Cmd {
   eGetWorldRankUchipReq = 19,
   eGetWorldRankUchipRes = 20,
   eGetSysMsgReq = 21,
-  eGetSysMsgRes = 22
+  eGetSysMsgRes = 22,
+  eLoginLogicReq = 23,
+  eLoginLogicRes = 24,
+  eEnterZoneReq = 25,
+  eEnterZoneRes = 26,
+  eEnterMatch = 27,
+  eUserArrived = 28,
+  eExitMatchReq = 29,
+  eExitMatchRes = 30,
+  eUserExitMatch = 31,
+  eGameStart = 32
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
-const Cmd Cmd_MAX = eGetSysMsgRes;
+const Cmd Cmd_MAX = eGameStart;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();

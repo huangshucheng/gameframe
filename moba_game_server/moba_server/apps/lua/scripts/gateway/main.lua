@@ -1,6 +1,5 @@
 --初始化日志模块
 Logger.init("logger/gateway/", "gateway", true)
---end
 
 -- 初始化协议模块
 local proto_type = {
@@ -15,15 +14,11 @@ if ProtoMan.proto_type() == proto_type.PROTO_BUF then
     ProtoMan.register_protobuf_cmd_map(cmd_name_map)
   end
 end
---end
 
 local game_config = require("game_config")
 -- 开启网关端口监听
 Netbus.tcp_listen(game_config.gateway_tcp_port)
 print("Tcp server listen At "..game_config.gateway_tcp_port)
--- Netbus.ws_listen(game_config.gateway_ws_port)
--- print("Ws server listen At "..game_config.gateway_ws_port)
---end
 
 local servers = game_config.servers
 local gw_service = require("gateway/gw_service")

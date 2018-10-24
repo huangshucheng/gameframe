@@ -153,7 +153,7 @@ end
 
 function LobbyScene:onTouchSettingBtn(send, eventType)
     local count = GT.RootLayer:getInstance():getLayerCount()
-    print("all layer start \n")
+    print("all layer start ")
     local allLayer = GT.RootLayer:getInstance():getAllLayers()
     print( 'allLayers: ' .. tostring(allLayer) .. '   size: ' .. #allLayer )
 
@@ -166,8 +166,9 @@ function LobbyScene:onTouchSettingBtn(send, eventType)
 end
 
 function LobbyScene:onTouchMessageBtn(send, evnetType)
-    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eRecvLoginBonuesReq,nil)  --登录奖励  NO
     GT.showPopLayer("RankLayer")
+    -- NetWork:getInstance():sendMsg(Stype.System,Cmd.eRecvLoginBonuesReq,nil)  --登录奖励  TODO
+    -- NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eLoginLogicReq,nil)   -- 进入逻辑服 TODO
 end
 
 function LobbyScene:onTouchMailBtn(send, evnetType)
@@ -262,7 +263,7 @@ end
 
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
-    print("all layer start \n")
+    print("all layer start ")
     local allLayer = GT.RootLayer:getInstance():getAllLayers()
     print( 'allLayers: ' .. tostring(allLayer) .. '   size: ' .. #allLayer )
 

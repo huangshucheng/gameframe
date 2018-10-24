@@ -30,21 +30,22 @@ local Cmd = {
 	eGetSysMsgReq = 21,
 	eGetSysMsgRes = 22,
 
+	eLoginLogicReq = 23,
+	eLoginLogicRes = 24,
+
 	--[[
-	eLoginLogicReq = 21,
-	eLoginLogicRes = 22,
+	
+	eEnterZoneReq = 25,
+	eEnterZoneRes = 26,
 
-	eEnterZoneReq = 23,
-	eEnterZoneRes = 24,
+	eEnterMatch = 27,
+	eUserArrived = 28,
 
-	eEnterMatch = 25,
-	eUserArrived = 26,
+	eExitMatchReq = 29,
+	eExitMatchRes = 30,
+	eUserExitMatch = 31,
 
-	eExitMatchReq = 27,
-	eExitMatchRes = 28,
-	eUserExitMatch = 29,
-
-	eGameStart = 30,
+	eGameStart = 32,
 	]]
 }
 

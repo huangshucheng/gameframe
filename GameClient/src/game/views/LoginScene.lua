@@ -334,7 +334,7 @@ end
 
 function LoginScene:onEnter()
     print('LoginScene:onEnter')
-    print("all layer start \n")
+    print("all layer start ")
     local allLayer = GT.RootLayer:getInstance():getAllLayers()
     print( 'allLayers: ' .. tostring(allLayer) .. '   size: ' .. #allLayer )
 

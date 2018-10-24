@@ -186,7 +186,7 @@ function on_gw_recv_raw_cmd(s, raw_cmd)
 end
 
 function on_gw_session_disconnect(s, stype) 
-	-- 网关连接到服务器的session断线了
+	--与网关连接的服务器的seession 断线了
 	if Session.asclient(s) == 1 then 
 		for k, v in pairs(server_session_man) do 
 			if v == s then 

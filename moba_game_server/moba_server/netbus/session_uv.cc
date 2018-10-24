@@ -116,7 +116,6 @@ uv_session::close() {
 	if (ret != 0){
 		uv_close((uv_handle_t*)&this->tcp_handler, on_close);
 	}
-	printf("uv_session->close and shutdown\n");
 }
 
 void
