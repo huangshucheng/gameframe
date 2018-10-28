@@ -2,7 +2,7 @@ local ProtoMan = class(ProtoMan)
 
 local ByteArray         = require("game.utils.ByteArray")
 local ConfigKeyWord 	= require("game.net.ConfigKeyWord")
-local cmd_name_map 		= require("game.net.cmd_name_map")
+local cmd_name_map 		= require("game.net.protocol.cmd_name_map")
 
 local HEADER_SIZE = 8		-- 2 stype, 2 ctype, 4 utag,  body;
 

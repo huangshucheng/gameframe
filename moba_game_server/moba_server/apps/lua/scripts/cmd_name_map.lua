@@ -24,7 +24,6 @@ local cmd_name_map = {
 	"LoginLogicReq",
 	"LoginLogicRes",
 
-	--[[
 	
 	"EnterZoneReq",
 	"EnterZoneRes",
@@ -34,7 +33,6 @@ local cmd_name_map = {
 	"ExitMatchRes",
 	"UserExitMatch",
 	"GameStart",
-	]]
 }
 
 return cmd_name_map

@@ -4,7 +4,7 @@ GT = GT or {}
 local CURRENT_MOUDEL_NAME = ...
 
 function Function.showPopLayer(layerClassName,initArvg,...)
-    local PopLayerClass = import("game.views.PopLayer."..layerClassName,CURRENT_MOUDEL_NAME)
+    local PopLayerClass = import("game.Lobby.PopLayer."..layerClassName,CURRENT_MOUDEL_NAME)
     local popclass = PopLayerClass.new()
     popclass:init(unpack(initArvg or {}))
     popclass:showLayer(true)
@@ -13,7 +13,7 @@ function Function.showPopLayer(layerClassName,initArvg,...)
     popclass:setStartCloseLayerFunc(function()
          GT.RootLayer:getInstance():popLayer(layerClassName)
     end)  
-    return popclass  
+    return popclass
 end
 
 function Function.popLayer(layerClassName)
@@ -22,11 +22,6 @@ end
 
 function Function.getLayer(layerClassName)
     return GT.RootLayer:getInstance():getLayer(layerClassName)
-end
-
-function Function.getPopLayerClass(layerClassName)
-    local PopLayerClass = import("game.views.PopLayer."..layerClassName,CURRENT_MOUDEL_NAME)
-    return PopLayerClass
 end
 
 function Function.clearLayers()

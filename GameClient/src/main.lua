@@ -13,7 +13,8 @@ require "game.utils.GameEventEnum"
 require "game.utils.protobuf.protobuf"
 
 local function main()
-    require("game.MyApp"):create():run()
+    local game = require('game.GameApp'):create()
+    game:showScene()
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)

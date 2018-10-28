@@ -146,7 +146,6 @@ function NetWork:sendMsg(stype, ctype, packet)
         local pkt = TcpPacker:getInstance():tcp_pack(proto_cmd)
         if self._socketTCP and pkt then
          	self._socketTCP:send(pkt)
-            postEvent(ServerEvents.ON_SERVER_EVENT_MSG_SEND, pkt)
         end
     end
 end

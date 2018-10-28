@@ -56,8 +56,6 @@ function player:init(uid, s, ret_handler)
 		end)
 		
 	end)
-	-- end
-
 	-- ...其他信息后面再读
 	-- end 
 end

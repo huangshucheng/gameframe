@@ -1,0 +1,230 @@
+<Solution>
+  <PropertyGroup Name="gameclient" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="Lobby">
+          <Folder Name="LobbyRes">
+            <Folder Name="game_scene">
+              <Image Name="PVPload001.png" />
+            </Folder>
+            <Folder Name="home_scene">
+              <Folder Name="login_bonues">
+                <Image Name="bonues_icon.png" />
+                <Image Name="login_bg.png" />
+                <Image Name="recv.png" />
+                <Image Name="zw.png" />
+              </Folder>
+              <Folder Name="user_info">
+                <Image Name="012.png" />
+                <Image Name="013.png" />
+                <Image Name="019.png" />
+                <Image Name="020.png" />
+                <Image Name="021.png" />
+                <Image Name="022.png" />
+                <Image Name="023.png" />
+                <Image Name="025.png" />
+                <Image Name="026.png" />
+                <Image Name="048.png" />
+                <Image Name="049.png" />
+                <Image Name="120.png" />
+                <Image Name="136.png" />
+                <Image Name="137.png" />
+                <Image Name="141.png" />
+                <Image Name="145.png" />
+                <Image Name="149.png" />
+                <Image Name="169.png" />
+                <Image Name="320.png" />
+                <Image Name="321.png" />
+                <Image Name="97.png" />
+              </Folder>
+              <Image Name="bottom_bg.png" />
+              <Image Name="coin.png" />
+              <Image Name="coin_bg.png" />
+              <Image Name="demaon.png" />
+              <Image Name="friend_down.png" />
+              <Image Name="friend_up.png" />
+              <Image Name="home_scene_bg.png" />
+              <Image Name="hp_down.png" />
+              <Image Name="hp_up.png" />
+              <Image Name="level_process.png" />
+              <Image Name="mail_down.png" />
+              <Image Name="mail_up.png" />
+              <Image Name="mall_down.png" />
+              <Image Name="mall_up.png" />
+              <Image Name="msg_down.png" />
+              <Image Name="msg_up.png" />
+              <Image Name="setting_down.png" />
+              <Image Name="setting_up.png" />
+              <Image Name="top.png" />
+              <Image Name="uinfo_bg.png" />
+              <Image Name="vip.png" />
+              <Image Name="war_down.png" />
+              <Image Name="war_up.png" />
+            </Folder>
+            <Folder Name="joinRoom">
+              <Image Name="btn_clear_normal.png" />
+              <Image Name="btn_clear_pressed.png" />
+              <Image Name="guanbi.png" />
+              <Image Name="guanbi_on.png" />
+              <Image Name="joinroom_atlas_0.png" />
+              <Image Name="joinroom_atlas_1.png" />
+              <Image Name="joinroom_atlas_2.png" />
+              <Image Name="joinroom_atlas_3.png" />
+              <Image Name="joinroom_atlas_4.png" />
+              <Image Name="joinroom_atlas_5.png" />
+              <Image Name="joinroom_atlas_6.png" />
+              <Image Name="joinroom_atlas_7.png" />
+              <Image Name="joinroom_atlas_8.png" />
+              <Image Name="joinroom_atlas_9.png" />
+              <Image Name="joinroom_btn_number0_normal.png" />
+              <Image Name="joinroom_btn_number0_pressed.png" />
+              <Image Name="joinroom_btn_number1_normal.png" />
+              <Image Name="joinroom_btn_number1_pressed.png" />
+              <Image Name="joinroom_btn_number2_normal.png" />
+              <Image Name="joinroom_btn_number2_pressed.png" />
+              <Image Name="joinroom_btn_number3_normal.png" />
+              <Image Name="joinroom_btn_number3_pressed.png" />
+              <Image Name="joinroom_btn_number4_normal.png" />
+              <Image Name="joinroom_btn_number4_pressed.png" />
+              <Image Name="joinroom_btn_number5_normal.png" />
+              <Image Name="joinroom_btn_number5_pressed.png" />
+              <Image Name="joinroom_btn_number6_normal.png" />
+              <Image Name="joinroom_btn_number6_pressed.png" />
+              <Image Name="joinroom_btn_number7_normal.png" />
+              <Image Name="joinroom_btn_number7_pressed.png" />
+              <Image Name="joinroom_btn_number8_normal.png" />
+              <Image Name="joinroom_btn_number8_pressed.png" />
+              <Image Name="joinroom_btn_number9_normal.png" />
+              <Image Name="joinroom_btn_number9_pressed.png" />
+              <Image Name="joinroom_img_bg.png" />
+              <Image Name="joinroom_input_bg.png" />
+              <Image Name="joinroom_title_bg.png" />
+            </Folder>
+            <Folder Name="login_scene">
+              <Image Name="guest_login_normal.png" />
+              <Image Name="guest_login_press.png" />
+              <Image Name="login_bg.png" />
+            </Folder>
+            <Folder Name="rectheader">
+              <Image Name="11.png" />
+              <Image Name="12.png" />
+              <Image Name="13.png" />
+              <Image Name="14.png" />
+              <Image Name="15.png" />
+              <Image Name="16.png" />
+              <Image Name="17.png" />
+              <Image Name="18.png" />
+              <Image Name="19.png" />
+            </Folder>
+            <Folder Name="roundheader">
+              <Image Name="11.png" />
+              <Image Name="12.png" />
+              <Image Name="13.png" />
+              <Image Name="14.png" />
+              <Image Name="15.png" />
+              <Image Name="16.png" />
+              <Image Name="17.png" />
+              <Image Name="18.png" />
+              <Image Name="19.png" />
+            </Folder>
+            <Folder Name="tips">
+              <Image Name="tips_1.png" />
+              <Image Name="tips_2.png" />
+            </Folder>
+            <Folder Name="UI02">
+              <Image Name="063.png" />
+              <Image Name="064.png" />
+              <Image Name="065.png" />
+              <Image Name="066.png" />
+              <Image Name="067.png" />
+              <Image Name="068.png" />
+              <Image Name="069.png" />
+              <Image Name="070.png" />
+              <Image Name="071.png" />
+              <Image Name="072.png" />
+              <Image Name="073.png" />
+              <Image Name="074.png" />
+              <Image Name="075.png" />
+              <Image Name="076.png" />
+              <Image Name="077.png" />
+              <Image Name="078.png" />
+              <Image Name="079.png" />
+              <Image Name="080.png" />
+              <Image Name="081.png" />
+              <Image Name="100.png" />
+              <Image Name="101.png" />
+              <Image Name="102.png" />
+              <Image Name="113.png" />
+              <Image Name="145.png" />
+              <Image Name="146.png" />
+              <Image Name="147.png" />
+              <Image Name="148.png" />
+              <Image Name="149.png" />
+              <Image Name="150.png" />
+              <Image Name="151.png" />
+              <Image Name="152.png" />
+              <Image Name="153.png" />
+              <Image Name="154.png" />
+              <Image Name="155.png" />
+              <Image Name="156.png" />
+              <Image Name="157.png" />
+              <Image Name="158.png" />
+              <Image Name="159.png" />
+              <Image Name="160.png" />
+              <Image Name="161.png" />
+              <Image Name="162.png" />
+              <Image Name="169.png" />
+              <Image Name="170.png" />
+              <Image Name="271.png" />
+              <Image Name="290.png" />
+              <Image Name="318.png" />
+              <Image Name="319.png" />
+              <Image Name="320.png" />
+              <Image Name="321.png" />
+              <Image Name="322.png" />
+              <Image Name="323.png" />
+              <Image Name="324.png" />
+              <Image Name="325.png" />
+              <Image Name="326.png" />
+              <Image Name="327.png" />
+              <Image Name="328.png" />
+              <Image Name="83.png" />
+              <Image Name="84.png" />
+              <Image Name="85.png" />
+              <Image Name="86.png" />
+              <Image Name="87.png" />
+              <Image Name="88.png" />
+              <Image Name="89.png" />
+              <Image Name="90.png" />
+              <Image Name="91.png" />
+              <Image Name="92.png" />
+              <Image Name="93.png" />
+              <Image Name="94.png" />
+              <Image Name="95.png" />
+              <Image Name="96.png" />
+              <Image Name="97.png" />
+              <Image Name="98.png" />
+              <Image Name="99.png" />
+              <Image Name="anniu.png" />
+              <Image Name="yingliangjindukuang.png" />
+              <Image Name="yingliangjindukuang_2.png" />
+            </Folder>
+          </Folder>
+          <Folder Name="PopLayer">
+            <Project Name="MsgLayer.csd" Type="Layer" />
+            <Project Name="MyCenterLayer.csd" Type="Layer" />
+            <Project Name="RankLayer.csd" Type="Layer" />
+            <Project Name="SetLayer.csd" Type="Layer" />
+            <Project Name="TipsLayer.csd" Type="Layer" />
+            <Project Name="UpgradeLayer.csd" Type="Layer" />
+            <Project Name="JoinRoomLayer.csd" Type="Layer" />
+          </Folder>
+          <Project Name="LobbyScene.csd" Type="Scene" />
+          <Project Name="LoginScene.csd" Type="Scene" />
+          <Project Name="MainScene.csd" Type="Scene" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

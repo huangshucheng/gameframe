@@ -6,7 +6,6 @@ function PopLayer:ctor()
     self._isRender              = false
     self._canTouchBackground    = true
 
-    self._afterCloseLayerFunc   = function()end
     self._startCloseLayerFunc   = function()end
     self._startShowLayerFunc    = function()end
     self:setName(self.__cname)
@@ -38,7 +37,7 @@ function PopLayer:init()
         self._csbResourceNode:setContentSize(display.size)
         ccui.Helper:doLayout(self._csbResourceNode)
     else
-        print('hcc>> waring:PopLayer:init() >> self._csbResourceNode is nil')
+        print('hcc>> warning:PopLayer:init() >> self._csbResourceNode is nil')
     end
     self._isRender = false
     if self.onCreate then self:onCreate() end
@@ -84,10 +83,6 @@ function PopLayer:getBgLayer()
     return self:getChildByName('__popLayer')
 end
 
-function PopLayer:setAfterCloseLayerFunc(func)
-    self._afterCloseLayerFunc = func
-end
-
 function PopLayer:setStartCloseLayerFunc(func)
     self._startCloseLayerFunc = func
 end
@@ -98,6 +93,15 @@ end
 
 function PopLayer:getCsbNode()
     return self._csbResourceNode
+end
+
+function PopLayer:enterScene(scenePath)
+    local gameLayer = require(scenePath):create()
+    if gameLayer then
+        local scene = display.newScene()
+        scene:addChild(gameLayer)
+        display.runScene(scene)
+    end
 end
 
 return PopLayer

@@ -33,20 +33,17 @@ local Cmd = {
 	eLoginLogicReq = 23,
 	eLoginLogicRes = 24,
 
-	--[[
+	eEnterZoneReq = 25,
+	eEnterZoneRes = 26,
+	
+	eEnterMatch = 27,
+	eUserArrived = 28,
 
-	eEnterZoneReq = 23,
-	eEnterZoneRes = 24,
+	eExitMatchReq = 29,
+	eExitMatchRes = 30,
+	eUserExitMatch = 31,
 
-	eEnterMatch = 25,
-	eUserArrived = 26,
-
-	eExitMatchReq = 27,
-	eExitMatchRes = 28,
-	eUserExitMatch = 29,
-
-	eGameStart = 30,
-	]]
+	eGameStart = 32,
 }
 
 return Cmd
