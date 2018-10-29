@@ -10,7 +10,7 @@ local function is_connected()
 	return true
 end
 
-function mysql_connect_to_auth_center()
+local function mysql_connect_to_auth_center()
 	local auth_conf = game_config.auth_mysql
 	Mysql.connect(auth_conf.host, auth_conf.port, 
 	              auth_conf.db_name, auth_conf.uname, 
@@ -28,7 +28,7 @@ end
 
 mysql_connect_to_auth_center()
 
-function do_guest_account_upgrade(uid, uname, upwd_md5, ret_handler)
+local function do_guest_account_upgrade(uid, uname, upwd_md5, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -52,7 +52,7 @@ function do_guest_account_upgrade(uid, uname, upwd_md5, ret_handler)
 	end)
 end
 
-function do_create_account(uname, upwd_md5, ret_handler)
+local function do_create_account(uname, upwd_md5, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -80,7 +80,7 @@ function do_create_account(uname, upwd_md5, ret_handler)
 	end)
 end
 
-function check_uname_exist(uname, ret_handler)
+local function check_uname_exist(uname, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -112,7 +112,7 @@ function check_uname_exist(uname, ret_handler)
 
 end
 
-function get_uinfo_by_uid(uid, ret_handler)
+local function get_uinfo_by_uid(uid, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -155,7 +155,7 @@ function get_uinfo_by_uid(uid, ret_handler)
 	end)
 end
 
-function get_uinfo_by_uname_upwd(uname, upwd, ret_handler)
+local function get_uinfo_by_uname_upwd(uname, upwd, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -198,7 +198,7 @@ function get_uinfo_by_uname_upwd(uname, upwd, ret_handler)
 	end)
 end
 
-function get_guest_uinfo(g_key, ret_handler)
+local function get_guest_uinfo(g_key, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -241,7 +241,7 @@ function get_guest_uinfo(g_key, ret_handler)
 	end)
 end
 
-function insert_guest_user(g_key, ret_handler)
+local function insert_guest_user(g_key, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -265,7 +265,7 @@ function insert_guest_user(g_key, ret_handler)
 	end)
 end
 
-function edit_profile(uid, unick, uface, usex, ret_handler)
+local function edit_profile(uid, unick, uface, usex, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)

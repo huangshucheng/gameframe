@@ -17,7 +17,7 @@ auth_service_handlers[Cmd.eLoginOutReq] 		= login_out.do_login_out
 auth_service_handlers[Cmd.eUserRegistReq] 		= user_regist.regist
 
 -- {stype, ctype, utag, body}
-function on_auth_recv_cmd(s, msg)
+local function on_auth_recv_cmd(s, msg)
 	if auth_service_handlers[msg[2]] then 
 		auth_service_handlers[msg[2]](s, msg)
 	end
@@ -25,7 +25,7 @@ function on_auth_recv_cmd(s, msg)
 	-- print('auth_service>> stype: ' .. msg[1] .. '  ,ctype:  ' .. msg[2] .. '  ,utag: ' .. msg[3] )
 end
 
-function on_auth_session_disconnect(s, stype) 
+local function on_auth_session_disconnect(s, stype) 
 	print('on_auth_session_disconnect:  ' .. tostring(stype))
 end
 

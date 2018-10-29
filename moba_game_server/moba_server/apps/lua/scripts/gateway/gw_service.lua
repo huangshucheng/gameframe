@@ -13,7 +13,7 @@ local Stype 				= require("Stype")
 local Cmd 					= require("Cmd")
 local Respones 				= require("Respones")
 
-function tablesize(table)
+local function tablesize(table)
 	if type(table) ~= 'table' then
 		return 0
 	end
@@ -24,7 +24,7 @@ function tablesize(table)
 	return size
 end
 
-function connect_to_server(stype, ip, port)
+local function connect_to_server(stype, ip, port)
 	Netbus.tcp_connect(ip, port, function(err, session)
 		do_connecting[stype] = false
 		if err ~= 0 then 
@@ -36,7 +36,7 @@ function connect_to_server(stype, ip, port)
 	end)
 end
 
-function check_server_connect()
+local function check_server_connect()
 	for k, v in pairs(game_config.servers) do 
 		if server_session_man[v.stype] == nil and 
 		    do_connecting[v.stype] == false then 
@@ -47,7 +47,7 @@ function check_server_connect()
 	end	
 end
 
-function gw_service_init()
+local function gw_service_init()
 	for k, v in pairs(game_config.servers) do 
 		server_session_man[v.stype] = nil
 		do_connecting[v.stype] = false
@@ -55,7 +55,7 @@ function gw_service_init()
 	Scheduler.schedule(check_server_connect, 1000, -1, 5000)
 end
 
-function is_login_return_cmd(ctype)
+local function is_login_return_cmd(ctype)
 	if ctype == Cmd.eGuestLoginRes or 
 		ctype == Cmd.eUnameLoginRes then 
 		return true
@@ -63,7 +63,7 @@ function is_login_return_cmd(ctype)
 	return false
 end
 
-function send_to_client(server_session, raw_cmd)
+local function send_to_client(server_session, raw_cmd)
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
 	local client_session = nil
 
@@ -128,7 +128,7 @@ function send_to_client(server_session, raw_cmd)
 	-- print("send_to_client client_sessions_uid size: " .. tablesize(client_sessions_uid))
 end
 
-function is_login_request_cmd(ctype)
+local function is_login_request_cmd(ctype)
 	if ctype == Cmd.eGuestLoginReq or 
 		ctype == Cmd.eUnameLoginReq then 
 		return true
@@ -138,7 +138,7 @@ function is_login_request_cmd(ctype)
 end
 
 -- s 来自于客户端
-function send_to_server(client_session, raw_cmd)
+local function send_to_server(client_session, raw_cmd)
 
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
 
@@ -177,7 +177,7 @@ function send_to_server(client_session, raw_cmd)
 end
 
 -- {stype, ctype, utag, body}
-function on_gw_recv_raw_cmd(s, raw_cmd)
+local function on_gw_recv_raw_cmd(s, raw_cmd)
 	if Session.asclient(s) == 0 then --转发给服务器
 		send_to_server(s, raw_cmd)
 	else
@@ -185,7 +185,7 @@ function on_gw_recv_raw_cmd(s, raw_cmd)
 	end
 end
 
-function on_gw_session_disconnect(s, stype) 
+local function on_gw_session_disconnect(s, stype) 
 	--与网关连接的服务器的seession 断线了
 	if Session.asclient(s) == 1 then 
 		for k, v in pairs(server_session_man) do 

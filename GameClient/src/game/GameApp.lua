@@ -7,8 +7,6 @@ GT = {}
 local Function 		= require('game.views.Base.Function')
 local UIFunction 	= require('game.views.Base.UIFunction')
 
-require('game.views.Base.RootLayer')
-
 function GameApp:ctor()
     math.randomseed(os.time())
 

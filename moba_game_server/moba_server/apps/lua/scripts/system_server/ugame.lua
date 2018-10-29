@@ -7,7 +7,7 @@ local redis_game = require("database/redis_game")
 local redis_rank = require("database/redis_rank")
 
 -- {stype, ctype, utag, body}
-function get_ugame_info(s, req)
+local function get_ugame_info(s, req)
 	local uid = req[3];
 	print("get_ugame_info ".. uid)
 	mysql_game.get_ugame_info(uid, function (err, ugame_info)
@@ -94,4 +94,5 @@ end
 local ugame = {
 	get_ugame_info = get_ugame_info,
 }
+
 return ugame

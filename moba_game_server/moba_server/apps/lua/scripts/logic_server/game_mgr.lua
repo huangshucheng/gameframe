@@ -1,28 +1,18 @@
-local Respones = require("Respones")
-local Stype = require("Stype")
-local Cmd = require("Cmd")
-local mysql_game = require("database/mysql_game")
-local redis_game = require("database/redis_game")
-local mysql_center = require("database/mysql_auth_center")
-local redis_center = require("database/redis_center")
+local Respones 	= require("Respones")
+local Stype 	= require("Stype")
+local Cmd 		= require("Cmd")
+local mysql_game 	= require("database/mysql_game")
+local redis_game 	= require("database/redis_game")
+local mysql_center 	= require("database/mysql_auth_center")
+local redis_center 	= require("database/redis_center")
+local Player 		= require("logic_server/Player")
 
-local player = require("logic_server/player")
--- local Zone = require("logic_server/Zone")
--- local State = require("logic_server/State")
--- local match_mgr = require("logic_server/match_mgr")
-
--- uid --> player
-local logic_server_players 		= {}
+local logic_server_players 		= {} 	-- uid --> Player
 local online_player_num 		= 0
---[[
-local zone_wait_list = {} -- zone_wait_list[Zone.SGYD] = {} --> uid --> p;
-local zone_match_list = {} -- 当前开的比赛的列表
-zone_match_list[Zone.SGYD] = {}
-zone_match_list[Zone.ASSY] = {}
-]]
 
+local function send_status(s, stype, ctype, uid, status)
+	if not s then return end
 
-function send_status(s, stype, ctype, uid, status) 
 	local msg = {stype, ctype, uid, {
 		status = status,
 	}}
@@ -32,40 +22,39 @@ end
 
 --登录逻辑服务器
 -- {stype, ctype, utag, body}
-function login_logic_server(s, req)
-	print('login_logic_server !!! ')
+local function login_logic_server(s, req)
 	local uid = req[3]
 	local stype = req[1]
 
-	local p = logic_server_players[uid] -- player对象
-	if p then -- 玩家对象已经存在了，更新一下session就可以了; 
+	local p = logic_server_players[uid]
+	if p then
 		p:set_session(s)
 		send_status(s, stype, Cmd.eLoginLogicRes, uid, Respones.OK)
-		print('login_logic_server is in logic !!! ')
 		print('login_logic_server111 >> user size: '..  online_player_num)
 		return
 	end
 
-	p = player:new()
+	p = Player:new()
 	p:init(uid, s, function(status)
 		if status == Respones.OK then
 			logic_server_players[uid] = p
 			online_player_num = online_player_num + 1
 		end
 		send_status(s, stype, Cmd.eLoginLogicRes, uid, status)
+		print('login_logic_server333 >> user size: '..  online_player_num)
 	end)
-	print('login_logic_server222 >> user size: '..  online_player_num)	--asyc so first get is 0
+	print('login_logic_server222 >> user size: '..  online_player_num)
 end
 
 -- 玩家离开了逻辑服务器
-function on_player_disconnect(s, req)
+local function on_player_disconnect(s, req)
 	local uid = req[3]
 	local p = logic_server_players[uid]
 	if not p then
 		return 
 	end
 	if p then
-		print("player uid " .. uid .. " disconnect!")
+		print("Player uid " .. uid .. " disconnect!")
 		logic_server_players[uid] = nil
 		online_player_num = online_player_num - 1
 		if online_player_num <= 0 then
@@ -75,7 +64,7 @@ function on_player_disconnect(s, req)
 	print('on_player_disconnect >> user size: '..  online_player_num)
 end
 
-function on_gateway_connect(s)
+local function on_gateway_connect(s)
 	--[[
 	for k, v in pairs(logic_server_players) do 
 		v:set_session(s)	--TODO 有问题
@@ -86,7 +75,7 @@ function on_gateway_connect(s)
 	print('on_gateway_connect----------')
 end
 
-function on_gateway_disconnect(s) 
+local function on_gateway_disconnect(s) 
 	--[[
 	for k, v in pairs(logic_server_players) do 
 		v:set_session(nil) 	--TODO 可能有问题
@@ -97,23 +86,11 @@ function on_gateway_disconnect(s)
 	print('on_gateway_disconnect-------------')
 end
 
--- {stype, ctype, utag, body}
-function enter_zone(s, req)
-	
-end
-
-function do_exit_match(s, req) 
-	
-end
-
 local game_mgr = {
 	login_logic_server 		= login_logic_server,
 	on_player_disconnect 	= on_player_disconnect,
 	on_gateway_disconnect 	= on_gateway_disconnect,
 	on_gateway_connect 		= on_gateway_connect,
-
-	-- enter_zone = enter_zone,
-	-- do_exit_match = do_exit_match,
 }
 
 return game_mgr

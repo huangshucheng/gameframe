@@ -9,7 +9,7 @@ local function is_connected()
 	return true
 end
 
-function redis_connect_to_game()
+local function redis_connect_to_game()
 	local host = game_config.game_redis.host
 	local port = game_config.game_redis.port
 	local db_index = game_config.game_redis.db_index
@@ -31,7 +31,7 @@ end
 
 redis_connect_to_game()
 
-function set_ugame_info_inredis(uid, ugame_info)
+local function set_ugame_info_inredis(uid, ugame_info)
 	if redis_conn == nil then 
 		Logger.error("redis game disconnected")
 		return
@@ -50,7 +50,7 @@ function set_ugame_info_inredis(uid, ugame_info)
 end
 
 -- ret_handler(err, uinfo)
-function get_ugame_info_inredis(uid, ret_handler)
+local function get_ugame_info_inredis(uid, ret_handler)
 	if redis_conn == nil then 
 		Logger.error("redis game disconnected")
 		return
@@ -75,7 +75,7 @@ function get_ugame_info_inredis(uid, ret_handler)
 	end)
 end
 
-function add_chip_inredis(uid, add_chip)
+local function add_chip_inredis(uid, add_chip)
 	if redis_conn == nil then 
 		Logger.error("redis game disconnected")
 		return

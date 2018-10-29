@@ -9,7 +9,7 @@ local function is_connected()
 	return true
 end
 
-function redis_connect_to_rank()
+local function redis_connect_to_rank()
 	local host = game_config.rank_redis.host
 	local port = game_config.rank_redis.port
 	local db_index = game_config.rank_redis.db_index
@@ -36,7 +36,7 @@ redis_connect_to_rank()
 
 local WOLD_CHIP_RANK = "WOLD_CHIP_RANK"
 
-function flush_world_rank_with_uchip_inredis(uid, uchip)
+local function flush_world_rank_with_uchip_inredis(uid, uchip)
 	if redis_conn == nil then 
 		Logger.error("redis rank disconnected")
 		return
@@ -54,7 +54,7 @@ end
 
 -- n：要刷的排行榜的数目,
 -- ret_handler: 回掉函数
-function get_world_rank_with_uchip_inredis(n, ret_handler)
+local function get_world_rank_with_uchip_inredis(n, ret_handler)
 	if redis_conn == nil then 
 		Logger.error("redis rank disconnected")
 		return

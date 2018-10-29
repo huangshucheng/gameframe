@@ -6,7 +6,7 @@ local moba_game_config = require("moba_game_config")
 local redis_game = require("database/redis_game")
 
 
-function send_bonues_to_user(uid, bonues_info, ret_handler)
+local function send_bonues_to_user(uid, bonues_info, ret_handler)
 	-- 要更新发放奖励;
 	if bonues_info.bonues_time < Utils.timestamp_today() then -- TODO
 		if bonues_info.bonues_time >= Utils.timestamp_yesterday() then -- 连续登陆
@@ -38,7 +38,7 @@ function send_bonues_to_user(uid, bonues_info, ret_handler)
 end
 
 -- ret_handler(err, bonues_info)
-function check_login_bonues(uid, ret_handler)
+local function check_login_bonues(uid, ret_handler)
 	mysql_game.get_bonues_info(uid, function (err, bonues_info)
 		if err then
 			ret_handler(err, nil)
@@ -62,7 +62,7 @@ function check_login_bonues(uid, ret_handler)
 end
 
 -- {stype, ctype, utag, body}
-function recv_login_bonues(s, req)
+local function recv_login_bonues(s, req)
 	local uid = req[3];
 	mysql_game.get_bonues_info(uid, function (err, bonues_info)
 		if err then
@@ -107,7 +107,7 @@ function recv_login_bonues(s, req)
 
 end
 
-login_bonues = {
+local login_bonues = {
 	check_login_bonues = check_login_bonues,
 	recv_login_bonues = recv_login_bonues,
 }

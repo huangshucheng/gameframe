@@ -8,7 +8,7 @@ local function is_connected()
 	return true
 end
 
-function redis_connect_to_center()
+local function redis_connect_to_center()
 	local host = game_config.center_redis.host
 	local port = game_config.center_redis.port
 	local db_index = game_config.center_redis.db_index
@@ -30,7 +30,7 @@ end
 
 redis_connect_to_center()
 
-function set_uinfo_inredis(uid, uinfo)
+local function set_uinfo_inredis(uid, uinfo)
 	if redis_conn == nil then 
 		Logger.error("redis center disconnected")
 		return
@@ -51,7 +51,7 @@ function set_uinfo_inredis(uid, uinfo)
 end
 
 -- ret_handler(err, uinfo)
-function get_uinfo_inredis(uid, ret_handler)
+local function get_uinfo_inredis(uid, ret_handler)
 	local redis_cmd = "hgetall moba_auth_center_user_uid_" .. uid
 	Redis.query(redis_conn, redis_cmd, function (err, ret)
 		if err then
@@ -73,7 +73,7 @@ function get_uinfo_inredis(uid, ret_handler)
 	end)
 end
 
-function edit_profile(uid, unick, uface, usex)
+local function edit_profile(uid, unick, uface, usex)
 	get_uinfo_inredis(uid, function (err, uinfo)
 		if err then
 			Logger.error("get uinfo inredis error")

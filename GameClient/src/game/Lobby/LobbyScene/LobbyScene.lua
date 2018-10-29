@@ -250,20 +250,14 @@ end
 
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
-    print("all layer start ")
-    local allLayer = GT.RootLayer:getInstance():getAllLayers()
-    for k,v in pairs(allLayer) do
-        print('layer: '.. tostring(v) .. "  ,name: " .. v:getName())
-    end
-    print("all layer end \n")
     --获取用户信息
-    LogicServiceProxy:getInstance():sendLoginLogicServer()
-    SystemServiceProxy:getInstance():sendGetUgameInfo()
-    GT.clearLayers()
+    -- LogicServiceProxy:getInstance():sendLoginLogicServer()
+    -- SystemServiceProxy:getInstance():sendGetUgameInfo()
+    -- GT.clearLayers()
 end
 
 function LobbyScene:onExit()
-    GT.clearLayers()
+    
 end
 
 return LobbyScene

@@ -6,7 +6,6 @@ local Respones          = require("game.net.Respones")
 local UserInfo          = require("game.clientdata.UserInfo")
 local AuthServiceProxy  = require("game.modules.AuthServiceProxy")
 
-local RootLayer         = require('game.views.Base.RootLayer')
 local Function          = require('game.views.Base.Function')
 
 LoginScene.RESOURCE_FILENAME = 'Lobby/LoginScene.csb'
@@ -33,8 +32,6 @@ function LoginScene:ctor()
 end
 
 function LoginScene:onCreate()
-
-    RootLayer:getInstance():init()
 
     local btn_guest_login = self:getResourceNode():getChildByName(BTN_GUEST_LOGIN)
     local btn_lobby_register = self:getResourceNode():getChildByName(BTN_LOBBY_REGISTER)
@@ -332,17 +329,10 @@ end
 
 function LoginScene:onEnter()
     print('LoginScene:onEnter')
-    print("all layer start ")
-    local allLayer = GT.RootLayer:getInstance():getAllLayers()
-    for k,v in pairs(allLayer) do
-        print('layer: '.. tostring(v) .. "  ,name: " .. v:getName())
-    end
-    print("all layer end \n")
-    GT.clearLayers()
 end
 
 function LoginScene:onExit()
-    GT.clearLayers()
+
 end
 
 return LoginScene

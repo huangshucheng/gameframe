@@ -13,10 +13,6 @@ function Function.showPopLayer(layerClassName,initArvg, ...)
         local popclass = PopLayerClass.new()
         popclass:init(unpack(initArvg or {}))
         popclass:showLayer(true)
-        GT.RootLayer:getInstance():pushLayer(popclass)          
-        popclass:setStartCloseLayerFunc(function()
-             GT.RootLayer:getInstance():popLayer(layerClassName)
-        end)  
         return popclass 
     else
         return GT.showPopLayer(layerClassName,initArvg, ...)

@@ -5,9 +5,6 @@ function PopLayer:ctor()
     self._csbResourceNode       = nil
     self._isRender              = false
     self._canTouchBackground    = true
-
-    self._startCloseLayerFunc   = function()end
-    self._startShowLayerFunc    = function()end
     self:setName(self.__cname)
 end
 
@@ -45,15 +42,15 @@ function PopLayer:init()
 end
 
 function PopLayer:showLayer(render)
-    if self._isRender == render then
-        return
+    if render then
+        local runScene = display.getRunningScene()
+        if runScene then 
+            runScene:addChild(self, 999)
+        end
+    else
+        self:removeSelf()
     end
     self._isRender = render
-    if render then
-        self._startShowLayerFunc()
-    else
-        self._startCloseLayerFunc()
-    end
 end
 
 function PopLayer:isShow()
@@ -81,14 +78,6 @@ end
 
 function PopLayer:getBgLayer()
     return self:getChildByName('__popLayer')
-end
-
-function PopLayer:setStartCloseLayerFunc(func)
-    self._startCloseLayerFunc = func
-end
-
-function PopLayer:setStartShowLayerFunc(func)
-    self._startShowLayerFunc = func
 end
 
 function PopLayer:getCsbNode()

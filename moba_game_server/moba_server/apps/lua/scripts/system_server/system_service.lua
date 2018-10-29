@@ -11,13 +11,13 @@ system_service_handlers[Cmd.eRecvLoginBonuesReq] = login_bonues.recv_login_bonue
 system_service_handlers[Cmd.eGetWorldRankUchipReq] = game_rank.get_world_uchip_rank
 system_service_handlers[Cmd.eGetSysMsgReq] = sys_msg.get_sys_msg
 -- {stype, ctype, utag, body}
-function on_system_recv_cmd(s, msg)
+local function on_system_recv_cmd(s, msg)
 	if system_service_handlers[msg[2]] then 
 		system_service_handlers[msg[2]](s, msg)
 	end
 end
 
-function on_system_session_disconnect(s, stype) 
+local function on_system_session_disconnect(s, stype) 
 end
 
 local system_service = {

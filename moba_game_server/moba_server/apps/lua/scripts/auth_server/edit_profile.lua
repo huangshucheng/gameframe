@@ -5,7 +5,7 @@ local Stype = require("Stype")
 local Cmd = require("Cmd")
 
 -- {stype, ctype, utag, body}
-function do_edit_profile(s, req) 
+local function do_edit_profile(s, req) 
 	local uid = req[3]
 	local edit_profile_req = req[4]
 	

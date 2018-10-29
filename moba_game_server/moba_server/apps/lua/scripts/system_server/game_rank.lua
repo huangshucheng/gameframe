@@ -7,7 +7,7 @@ local redis_game = require("database/redis_game")
 local redis_rank = require("database/redis_rank")
 local redis_center = require("database/redis_center")
 
-function get_rank_user_center_info(index, rank_uid, success_func, failed_func)
+local function get_rank_user_center_info(index, rank_uid, success_func, failed_func)
 	redis_center.get_uinfo_inredis(rank_uid, function (err, uinfo)
 		if err or uinfo == nil then
 			if failed_func then
@@ -21,7 +21,7 @@ function get_rank_user_center_info(index, rank_uid, success_func, failed_func)
 	end)
 end
 
-function get_rank_user_ugame_info(index, rank_uid, success_func, failed_func)
+local function get_rank_user_ugame_info(index, rank_uid, success_func, failed_func)
 	redis_game.get_ugame_info_inredis(rank_uid, function (err, ugame_info)
 		if err or ugame_info == nil then
 			if failed_func then
@@ -35,7 +35,7 @@ function get_rank_user_ugame_info(index, rank_uid, success_func, failed_func)
 	end)
 end
 
-function send_rank_info_to_client(s, uid, rank_uids, rank_user_info, rank_ugame_info)
+local function send_rank_info_to_client(s, uid, rank_uids, rank_user_info, rank_ugame_info)
 	local rank_info_body = {}
 	local i
 	for i = 1, #rank_uids do
@@ -56,7 +56,7 @@ function send_rank_info_to_client(s, uid, rank_uids, rank_user_info, rank_ugame_
 	Session.send_msg(s, msg)
 end
 -- {stype, ctype, utag, body}
-function get_rank_ugame_info(s, uid, rank_uids, rank_uinfo)
+local function get_rank_ugame_info(s, uid, rank_uids, rank_uinfo)
 	
 	local rank_ugame_info = {}
 
@@ -82,7 +82,7 @@ function get_rank_ugame_info(s, uid, rank_uids, rank_uinfo)
 	get_rank_user_ugame_info(1, rank_uids[1], success_func, failed_func)	
 end
 -- {stype, ctype, utag, body}
-function get_world_uchip_rank(s, req)
+local function get_world_uchip_rank(s, req)
 	local uid = req[3]
 	-- 拉取排行榜的前30个
 	redis_rank.get_world_rank_with_uchip_inredis(30, function(err, rank_uids)

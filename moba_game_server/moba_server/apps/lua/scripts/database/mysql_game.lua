@@ -11,7 +11,7 @@ local function is_connected()
 	return true
 end
 
-function mysql_connect_to_moba_game()
+local function mysql_connect_to_moba_game()
 	local conf = game_config.game_mysql
 	Mysql.connect(conf.host, conf.port, 
 	              conf.db_name, conf.uname, 
@@ -29,7 +29,7 @@ end
 
 mysql_connect_to_moba_game()
 
-function get_robots_ugame_info(ret_handler)
+local function get_robots_ugame_info(ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -81,7 +81,7 @@ function get_robots_ugame_info(ret_handler)
 	end)
 end
 
-function get_ugame_info(uid, ret_handler)
+local function get_ugame_info(uid, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -126,7 +126,7 @@ function get_ugame_info(uid, ret_handler)
 	end)
 end
 
-function insert_ugame_info(uid, ret_handler)
+local function insert_ugame_info(uid, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -150,7 +150,7 @@ function insert_ugame_info(uid, ret_handler)
 	end)
 end
 
-function get_bonues_info(uid, ret_handler)
+local function get_bonues_info(uid, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -189,7 +189,7 @@ function get_bonues_info(uid, ret_handler)
 	end)
 end
 
-function insert_bonues_info(uid, ret_handler)
+local function insert_bonues_info(uid, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -210,7 +210,7 @@ function insert_bonues_info(uid, ret_handler)
 	end)
 end
 
-function update_login_bonues(uid, bonues_info, ret_handler)
+local function update_login_bonues(uid, bonues_info, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -235,7 +235,7 @@ function update_login_bonues(uid, bonues_info, ret_handler)
 	end)
 end
 
-function update_login_bonues_status(uid, ret_handler) 
+local function update_login_bonues_status(uid, ret_handler) 
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -260,7 +260,7 @@ function update_login_bonues_status(uid, ret_handler)
 	end)
 end
 
-function  add_chip(uid, chip, ret_handler)
+local function  add_chip(uid, chip, ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)
@@ -285,7 +285,7 @@ function  add_chip(uid, chip, ret_handler)
 	end)
 end
 
-function get_sys_msg(ret_handler)
+local function get_sys_msg(ret_handler)
 	if mysql_conn == nil then 
 		if ret_handler then 
 			ret_handler("mysql is not connected!", nil)

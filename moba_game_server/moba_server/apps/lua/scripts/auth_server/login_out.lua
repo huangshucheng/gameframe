@@ -4,7 +4,7 @@ local Respones = require("Respones")
 local Stype = require("Stype")
 local Cmd = require("Cmd")
 
-function do_login_out(s, req)
+local function do_login_out(s, req)
 	local uid = req[3];
 	Logger.debug("user ".. uid .. " login out!")
 
