@@ -16,7 +16,6 @@ function GameApp:ctor()
     GT.showPopLayer 		= Function.showPopLayer
     GT.popLayer 			= Function.popLayer
     GT.getLayer 			= Function.getLayer
-    GT.clearLayers 			= Function.clearLayers
 end
 
 function GameApp:showScene(transition, time, more)

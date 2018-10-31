@@ -82,11 +82,11 @@ function GameScene:onTouchSettingBtn(sender, eventType)
 end
 
 function GameScene:onEnter()
-	GT.clearLayers()
+	
 end
 
 function GameScene:onExit()
-	GT.clearLayers()
+	
 end
 
 return GameScene

@@ -9,11 +9,19 @@ function Function.showPopLayer(layerClassName,initArvg, ...)
 
     if  cc.FileUtils:getInstance():isFileExist(luaFullPath) 
         or cc.FileUtils:getInstance():isFileExist(luacFullPath) then
-        local PopLayerClass = import("game.Mahjong.PopLayer."..layerClassName,CURRENT_MODULE_NAME)
-        local popclass = PopLayerClass.new()
-        popclass:init(unpack(initArvg or {}))
-        popclass:showLayer(true)
-        return popclass 
+        local layerFile = import("game.Mahjong.PopLayer."..layerClassName,CURRENT_MODULE_NAME)
+        local runScene  = display.getRunningScene()
+        if runScene then
+            local layer = runScene:getChildByName(layerClassName)
+            if not layer then
+                local popclass = layerFile.new()
+                popclass:init(unpack(initArvg or {}))
+                runScene:addChild(popclass, 999)
+                return popclass
+            else
+                return layer
+            end
+        end
     else
         return GT.showPopLayer(layerClassName,initArvg, ...)
     end   

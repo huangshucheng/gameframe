@@ -3,7 +3,6 @@ local PopLayer = class("PopLayer",cc.Layer)
 function PopLayer:ctor()
     self:enableNodeEvents()
     self._csbResourceNode       = nil
-    self._isRender              = false
     self._canTouchBackground    = true
     self:setName(self.__cname)
 end
@@ -34,9 +33,8 @@ function PopLayer:init()
         self._csbResourceNode:setContentSize(display.size)
         ccui.Helper:doLayout(self._csbResourceNode)
     else
-        print('hcc>> warning:PopLayer:init() >> self._csbResourceNode is nil')
+        print('warning:PopLayer:init() >> self._csbResourceNode is nil')
     end
-    self._isRender = false
     if self.onCreate then self:onCreate() end
     if self.addClientEventListener then self:addClientEventListener() end
 end
@@ -45,16 +43,17 @@ function PopLayer:showLayer(render)
     if render then
         local runScene = display.getRunningScene()
         if runScene then 
-            runScene:addChild(self, 999)
+            local layer = runScene:getChildByName(self:getName())
+            if layer then
+                layer:setVisible(render)
+            else
+                runScene:addChild(self, 999)
+                self:setName(self.__cname)
+            end
         end
     else
         self:removeSelf()
     end
-    self._isRender = render
-end
-
-function PopLayer:isShow()
-    return self._isRender
 end
 
 function PopLayer:onTouchEventBackground(send,eventType)

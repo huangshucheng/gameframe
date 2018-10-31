@@ -34,8 +34,6 @@ function LobbyScene:ctor(app, name)
     self._img_head          = nil
 
     GT.showPopLayer         = Function.showPopLayer
-    GT.clearLayers          = Function.clearLayers
-
     LobbyScene.super.ctor(self, app, name)
 end
 
@@ -251,9 +249,8 @@ end
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
     --获取用户信息
-    -- LogicServiceProxy:getInstance():sendLoginLogicServer()
-    -- SystemServiceProxy:getInstance():sendGetUgameInfo()
-    -- GT.clearLayers()
+    LogicServiceProxy:getInstance():sendLoginLogicServer()
+    SystemServiceProxy:getInstance():sendGetUgameInfo()
 end
 
 function LobbyScene:onExit()

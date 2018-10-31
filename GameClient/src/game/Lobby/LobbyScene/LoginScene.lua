@@ -26,9 +26,8 @@ local TEXTFIELD_PWD_CONF            = 'TEXTFIELD_PWD_CONF'
 function LoginScene:ctor()
 
     GT.showPopLayer         = Function.showPopLayer
-    GT.clearLayers          = Function.clearLayers
-
     LoginScene.super.ctor(self)
+    
 end
 
 function LoginScene:onCreate()
