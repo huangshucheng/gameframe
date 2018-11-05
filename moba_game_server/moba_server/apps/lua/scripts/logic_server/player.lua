@@ -4,15 +4,12 @@ local Cmd = require("Cmd")
 local mysql_game = require("database/mysql_game")
 local redis_game = require("database/redis_game")
 local redis_center = require("database/redis_center")
+local InterFace = require("logic_server/InterFace")
 
-local Player = {}
+local Player = class("Player", InterFace)
 
-function Player:new(instant) 
-	if not instant then 
-		instant = {}
-	end
-	setmetatable(instant, {__index = self})
-	return instant
+function Player:ctor()
+	Player.super.ctor(self)
 end
 
 function Player:init(uid, s, ret_handler)
@@ -89,7 +86,11 @@ function Player:send_cmd(stype, ctype, body)
 	end
 
 	local msg = {stype, ctype, self._uid, body}
-	Session.send_msg(self._session, msg)
+	self:send_msg(self._session, msg)
+end
+
+function Player:getUID()
+	return self._uid
 end
 
 return Player

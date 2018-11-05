@@ -1,6 +1,7 @@
 Logger.init("logger/logic_server/", "logic", true)
 
 require("database/mysql_game")
+require("functions")
 
 local proto_type = { PROTO_JSON = 0, PROTO_BUF = 1,}
 

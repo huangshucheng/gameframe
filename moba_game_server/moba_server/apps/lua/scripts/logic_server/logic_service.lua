@@ -1,28 +1,27 @@
 local Respones 		= require("Respones")
 local Stype 		= require("Stype")
 local Cmd 			= require("Cmd")
-local game_mgr 		= require("logic_server/game_mgr")
+local PlayerManager = require("logic_server/PlayerManager")
 
-local logic_service_handlers = {}
-logic_service_handlers[Cmd.eLoginLogicReq] 	= game_mgr.login_logic_server
-logic_service_handlers[Cmd.eUserLostConn] 	= game_mgr.on_player_disconnect
-logic_service_handlers[Cmd.eEnterZoneReq] 	= game_mgr.enter_zone
--- logic_service_handlers[Cmd.eExitMatchReq] = game_mgr.do_exit_match
+local _playerManager = PlayerManager:create()
 
-local function on_logic_recv_cmd(s, msg)
-	if logic_service_handlers[msg[2]] then 
-		logic_service_handlers[msg[2]](s, msg)
+local function on_logic_recv_cmd(session, msg)
+	if not msg then return end
+	if _playerManager then
+		_playerManager:receive_msg(session, msg)
 	end
 end
 
-local function on_gateway_disconnect(s, stype) 
-	print("Logic service disconnect with gateway !!!")
-	game_mgr.on_gateway_disconnect(s)
+local function on_gateway_disconnect(session, stype) 
+	if _playerManager then
+		_playerManager:on_gateway_disconnect(session)
+	end
 end
 
-local function on_gateway_connect(s, stype)
-	print("gateway connect to Logic !!!")
-	game_mgr.on_gateway_connect(s)
+local function on_gateway_connect(session, stype)
+	if _playerManager then
+		_playerManager:on_gateway_connect(session)
+	end
 end
 
 local logic_service = {
