@@ -14,6 +14,13 @@ local PlayerManager = class('PlayerManager', InterFace)
 local logic_server_players 		= {} 	-- uid --> Player
 local online_player_num 		= 0
 
+function PlayerManager:getInstance()
+	if not PlayerManager._instance then
+		PlayerManager._instance = PlayerManager.new()
+	end
+	return PlayerManager._instance
+end
+
 function PlayerManager:ctor()
 	PlayerManager.super.ctor(self)
 	self._cmd_handler_map = 

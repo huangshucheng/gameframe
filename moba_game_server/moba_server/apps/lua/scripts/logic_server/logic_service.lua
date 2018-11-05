@@ -3,25 +3,17 @@ local Stype 		= require("Stype")
 local Cmd 			= require("Cmd")
 local PlayerManager = require("logic_server/PlayerManager")
 
-local _playerManager = PlayerManager:create()
-
 local function on_logic_recv_cmd(session, msg)
 	if not msg then return end
-	if _playerManager then
-		_playerManager:receive_msg(session, msg)
-	end
+	PlayerManager:getInstance():receive_msg(session, msg)
 end
 
 local function on_gateway_disconnect(session, stype) 
-	if _playerManager then
-		_playerManager:on_gateway_disconnect(session)
-	end
+	PlayerManager:getInstance():on_gateway_disconnect(session)
 end
 
 local function on_gateway_connect(session, stype)
-	if _playerManager then
-		_playerManager:on_gateway_connect(session)
-	end
+	PlayerManager:getInstance():on_gateway_connect(session)
 end
 
 local logic_service = {

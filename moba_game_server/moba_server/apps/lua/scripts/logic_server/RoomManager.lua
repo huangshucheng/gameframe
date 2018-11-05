@@ -11,6 +11,13 @@ local RoomManager 	= class("RoomManager")
 local rooms 		= {}
 local totalRooms 	= 0
 
+function RoomManager:getInstance()
+	if not RoomManager._instance then
+		RoomManager._instance = RoomManager.new()
+	end
+	return RoomManager._instance
+end
+
 function RoomManager:ctor()
 	math.newrandomseed()
 end
