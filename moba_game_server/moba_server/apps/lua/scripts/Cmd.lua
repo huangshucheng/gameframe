@@ -32,7 +32,7 @@ local Cmd = {
 
 	eLoginLogicReq = 23,
 	eLoginLogicRes = 24,
-
+	--
 	eEnterZoneReq = 25,
 	eEnterZoneRes = 26,
 	
@@ -42,8 +42,15 @@ local Cmd = {
 	eExitMatchReq = 29,
 	eExitMatchRes = 30,
 	eUserExitMatch = 31,
-
-	eGameStart = 32,
+	--
+	-- hcc
+	eCreateRoomReq = 32,
+	eCreateRoomRes = 33,
+	eJoinRoomReq = 34,
+	eJoinRoomRes = 35,
+	eExitRoomReq = 36,
+	eExitRoomRes = 37,
+	eGameStart = 38,
 }
 
 return Cmd

@@ -31,11 +31,22 @@ function PlayerManager:ctor()
 end
 
 function PlayerManager:receive_msg(session, msg)
+	if not msg then 
+		return false
+	end
+
 	local ctype = msg[2]
-	if not ctype then return end
+
+	if not ctype then
+	 	return false
+	end
+
 	if self._cmd_handler_map[ctype] then
 		self._cmd_handler_map[ctype](self, session, msg)
+		return true
 	end
+	
+	return false
 end
 
 --登录逻辑服务器
@@ -86,34 +97,23 @@ end
 function PlayerManager:on_gateway_connect(s)
 	logic_server_players 	= {}
 	online_player_num 		= 0
-	print('on_gateway_connect----------')
 end
 
 function PlayerManager:on_gateway_disconnect(s) 
 	logic_server_players 	= {}
 	online_player_num 		= 0
-	print('on_gateway_disconnect-------------')
 end
 
-function PlayerManager:on_player_create_room(s, req)
-	local uid = req[3]
-	local stype = req[1]
-	local p = logic_server_players[uid]
-	local config = ''
-	if not p then return end
-	RoomManager.createRoom(p, config, function(status)
-		if status == Respones.OK then
-		
-		end
-	end)
+function PlayerManager:get_players()
+	return logic_server_players
 end
 
-function PlayerManager:on_player_exit_room(s, req)
-
+function PlayerManager:get_player_by_uid(uid)
+	return logic_server_players[uid]
 end
 
-function PlayerManager:on_player_join_room(s, req)
-
+function PlayerManager:get_online_player_num()
+	return online_player_num
 end
 
 return PlayerManager
