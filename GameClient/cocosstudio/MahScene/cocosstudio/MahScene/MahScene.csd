@@ -26,6 +26,17 @@
             <PreSize X="0.0555" Y="0.0944" />
             <FileData Type="Normal" Path="MahScene/MahRes/shezhi.png" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="KW_ROOM_NUM" ActionTag="-842439534" Tag="12" IconVisible="False" LeftMargin="30.2872" RightMargin="1054.7129" TopMargin="19.9794" BottomMargin="670.0206" FontSize="30" LabelText="房间号:000000" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="195.0000" Y="30.0000" />
+            <AnchorPoint ScaleY="1.0000" />
+            <Position X="30.2872" Y="700.0206" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0237" Y="0.9723" />
+            <PreSize X="0.1523" Y="0.0417" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

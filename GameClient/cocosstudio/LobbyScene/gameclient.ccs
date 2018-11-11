@@ -212,13 +212,13 @@
             </Folder>
           </Folder>
           <Folder Name="PopLayer">
+            <Project Name="JoinRoomLayer.csd" Type="Layer" />
             <Project Name="MsgLayer.csd" Type="Layer" />
             <Project Name="MyCenterLayer.csd" Type="Layer" />
             <Project Name="RankLayer.csd" Type="Layer" />
             <Project Name="SetLayer.csd" Type="Layer" />
             <Project Name="TipsLayer.csd" Type="Layer" />
             <Project Name="UpgradeLayer.csd" Type="Layer" />
-            <Project Name="JoinRoomLayer.csd" Type="Layer" />
           </Folder>
           <Project Name="LobbyScene.csd" Type="Scene" />
           <Project Name="LoginScene.csd" Type="Scene" />

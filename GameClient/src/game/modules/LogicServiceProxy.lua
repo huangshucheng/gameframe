@@ -19,4 +19,29 @@ function LogicServiceProxy:sendLoginLogicServer()
  	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eLoginLogicReq,nil)
 end
 
+function LogicServiceProxy:sendCreateRoom(room_info)
+	if type(room_info) ~= 'string' then return end 
+	local msg = {
+		room_info = room_info 
+	}
+
+	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eCreateRoomReq, msg)
+end
+
+function LogicServiceProxy:sendDessolveRoom()
+	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eDessolveReq, nil)
+end
+
+function LogicServiceProxy:sendExitRoom()
+	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eExitRoomReq, nil)
+end
+
+function LogicServiceProxy:sendJoinRoom(roomid)
+	if type(roomid) ~= 'string' then return end 
+	local msg = {
+		room_id = roomid,
+	}
+	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eJoinRoomReq, msg)
+end
+
 return LogicServiceProxy

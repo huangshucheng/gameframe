@@ -50,7 +50,10 @@ local Cmd = {
 	eJoinRoomRes = 35,
 	eExitRoomReq = 36,
 	eExitRoomRes = 37,
-	eGameStart = 38,
+	eDessolveReq = 38,
+	eDessolveRes = 39,
+	--
+	eGameStart 	 = 40,
 }
 
 return Cmd

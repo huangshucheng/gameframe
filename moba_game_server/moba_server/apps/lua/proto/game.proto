@@ -54,7 +54,16 @@ enum Cmd {
 	eExitMatchRes = 30;
 	eUserExitMatch = 31;
 
-	eGameStart = 32;
+	eCreateRoomReq = 32;
+	eCreateRoomRes = 33;
+	eJoinRoomReq = 34;
+	eJoinRoomRes = 35;
+	eExitRoomReq = 36;
+	eExitRoomRes = 37;
+	eDessolveReq = 38;
+	eDessolveRes = 39;
+
+	eGameStart 	 = 40;
 }
 
 message GuestLoginReq {
@@ -179,6 +188,8 @@ message UserArrived {
 	required int32 usex = 3;
 	required int32 seatid = 4;
 	required int32 side = 5;
+	required int32 roomid = 6;
+	required bool  ishost = 7;
 }
 
 message ExitMatchRes {
@@ -199,5 +210,34 @@ message UserRegistReq {
 }
 
 message UserRegistRes {
-	required int32 status = 1;	
+	required int32 status = 1;
+}
+
+message CreateRoomReq {
+	required string room_info = 1;
+}
+
+message CreateRoomRes {
+	required int32 status 			= 1;
+	optional string room_info 		= 2;
+	optional UserArrived user_info  = 3;
+}
+
+message JoinRoomReq {
+	required int32 room_id = 1;
+}
+
+message JoinRoomRes {
+	required int32 status = 1;
+	optional string room_info = 2;
+	repeated UserArrived users_info = 3;
+}
+
+message ExitRoomRes {
+	required int32 status = 1;
+	optional UserArrived user_info = 2;
+}
+
+message DessolveRes {
+	required int32 status = 1;
 }

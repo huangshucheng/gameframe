@@ -15,9 +15,11 @@ end
 function Player:init(uid, s, ret_handler)
 	self._session 	= s
 	self._uid 		= uid
-	self._zid 		= -1 -- 玩家所在的空间, -1,不在任何游戏场
-	self._matchid 	= -1 -- 玩家所在的比赛房间的id
+	self._room_id 	= -1 -- 玩家所在的room, -1,不在任何room
 	self._seatid 	= -1 -- 玩家在比赛中的序列号
+	self._is_host   = false
+
+	self._matchid 	= -1 -- 玩家所在的比赛房间的id
 	self._side 		= -1 -- 玩家在游戏里面所在的边, 0(lhs), 1(rhs) 
 	self._heroid 	= -1 -- 玩家的英雄号 [1, 5]
 	self._is_robot 		= false    -- 玩家是否为机器人
@@ -59,6 +61,8 @@ function Player:get_user_arrived_info()
 		usex 	= self._uinfo.usex,
 		seatid 	= self._seatid,
 		side 	= self._side,
+		roomid  = self._room_id,
+		ishost  = self._is_host,
 	}
 	return body
 end
@@ -66,7 +70,7 @@ end
 function Player:reset()
 	self._session 		= nil
 	self._uid 			= -1
-	self._zid 			= -1
+	self._room_id 		= -1
 	self._matchid 		= -1
 	self._seatid 		= -1
 	self._side 			= -1
@@ -74,6 +78,42 @@ function Player:reset()
 	self._ugame_info 	= nil
 	self._uinfo 		= nil
 	self._is_robot 		= false
+	self._is_host 		= false
+end
+
+function Player:exit_room_and_reset()
+	self._room_id = -1
+	self._matchid = -1
+	self._seatid  = -1
+	self._is_host = false
+end
+
+function Player:set_room_id(room_id)
+	self._room_id = room_id
+end
+
+function Player:reset_room_id()
+	self._room_id = -1
+end
+
+function Player:get_room_id()
+	return self._room_id	
+end
+
+function Player:set_seat_id(seat_id)
+	self._seatid = seat_id
+end
+
+function Player:get_seat_id()
+	return self._seatid
+end
+
+function Player:set_is_host(is_host)
+	self._is_host = is_host
+end
+
+function Player:get_is_host()
+	return self._is_host
 end
 
 function Player:set_session(s)

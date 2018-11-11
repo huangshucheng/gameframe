@@ -2,6 +2,7 @@ local PopLayer = require('game.views.Base.PopLayer')
 local SetLayer = class("SetLayer", PopLayer)
 
 local AuthServiceProxy 	= require("game.modules.AuthServiceProxy")
+local LogicServiceProxy = require("game.modules.LogicServiceProxy")
 
 SetLayer._csbResourcePath = 'MahScene/PopLayer/SetLayer.csb'
 
@@ -33,7 +34,8 @@ function SetLayer:onCreate()
     local btn_logout = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_EXIT)
     if btn_logout then
         btn_logout:addClickEventListener(handler(self,function(sender, eventType)
-            self:enterScene('game.Lobby.LobbyScene.LobbyScene')
+            LogicServiceProxy:getInstance():sendDessolveRoom()
+            -- LogicServiceProxy:getInstance():sendExitRoom()
         end))
     end
 end

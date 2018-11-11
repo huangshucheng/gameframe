@@ -23,8 +23,7 @@ local cmd_name_map = {
 	"GetSysMsgRes",
 	"LoginLogicReq",
 	"LoginLogicRes",
-
-	
+		
 	"EnterZoneReq",
 	"EnterZoneRes",
 	"EnterMatch",
@@ -32,6 +31,16 @@ local cmd_name_map = {
 	"ExitMatchReq",
 	"ExitMatchRes",
 	"UserExitMatch",
+
+	"CreateRoomReq",
+	"CreateRoomRes",
+	"JoinRoomReq",
+	"JoinRoomRes",
+	"ExitRoomReq",
+	"ExitRoomRes",
+	"DessolveReq",
+	"DessolveRes",
+
 	"GameStart",
 }
 

@@ -4,7 +4,6 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="MahScene">
-          <Project Name="MahScene.csd" Type="Scene" />
           <Folder Name="MahRes">
             <Folder Name="img_bg">
               <Image Name="2dmj_img_mainGameBackground1.png" />
@@ -45,6 +44,7 @@
           <Folder Name="PopLayer">
             <Project Name="SetLayer.csd" Type="Layer" />
           </Folder>
+          <Project Name="MahScene.csd" Type="Scene" />
         </Folder>
       </RootFolder>
     </Group>
