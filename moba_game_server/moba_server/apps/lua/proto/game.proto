@@ -56,14 +56,23 @@ enum Cmd {
 
 	eCreateRoomReq = 32;
 	eCreateRoomRes = 33;
+
 	eJoinRoomReq = 34;
 	eJoinRoomRes = 35;
+
 	eExitRoomReq = 36;
 	eExitRoomRes = 37;
+
 	eDessolveReq = 38;
 	eDessolveRes = 39;
 
-	eGameStart 	 = 40;
+	eGetCreateStatusReq = 40;
+	eGetCreateStatusRes = 41;
+	
+	eBackRoomReq = 42;
+	eBackRoomRes = 43;
+
+	eGameStart 	 = 44;
 }
 
 message GuestLoginReq {
@@ -240,4 +249,14 @@ message ExitRoomRes {
 
 message DessolveRes {
 	required int32 status = 1;
+}
+
+message GetCreateStatusRes {
+	required int32 status = 1;
+}
+
+message BackRoomRes {
+	required int32 status = 1;
+	optional string room_info = 2;
+	repeated UserArrived users_info = 3;
 }

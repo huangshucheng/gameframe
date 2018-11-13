@@ -1,15 +1,15 @@
-local Respones = require("Respones")
-local Stype = require("Stype")
-local Cmd = require("Cmd")
-local mysql_game = require("database/mysql_game")
-local redis_game = require("database/redis_game")
-local redis_center = require("database/redis_center")
-local InterFace = require("logic_server/InterFace")
+local Respones 		= require("Respones")
+local Stype 		= require("Stype")
+local Cmd 			= require("Cmd")
+local mysql_game 	= require("database/mysql_game")
+local redis_game 	= require("database/redis_game")
+local redis_center 	= require("database/redis_center")
+local NetWork 		= require("logic_server/NetWork")
 
-local Player = class("Player", InterFace)
+local Player = class("Player")
 
 function Player:ctor()
-	Player.super.ctor(self)
+
 end
 
 function Player:init(uid, s, ret_handler)
@@ -17,12 +17,11 @@ function Player:init(uid, s, ret_handler)
 	self._uid 		= uid
 	self._room_id 	= -1 -- 玩家所在的room, -1,不在任何room
 	self._seatid 	= -1 -- 玩家在比赛中的序列号
-	self._is_host   = false
-
 	self._matchid 	= -1 -- 玩家所在的比赛房间的id
 	self._side 		= -1 -- 玩家在游戏里面所在的边, 0(lhs), 1(rhs) 
 	self._heroid 	= -1 -- 玩家的英雄号 [1, 5]
 	self._is_robot 		= false    -- 玩家是否为机器人
+	self._is_host   	= false
 	self._ugame_info 	= nil 	   -- 玩家游戏信息（金币，经验）
 	self._uinfo 		= nil 	   -- 玩家帐号信息（名称，头像）
 
@@ -120,16 +119,31 @@ function Player:set_session(s)
 	self._session = s
 end
 
-function Player:send_cmd(stype, ctype, body)
+function Player:send_msg(stype, ctype, body)
 	if not self._session or self._is_robot then 
 		return
 	end
 
 	local msg = {stype, ctype, self._uid, body}
-	self:send_msg(self._session, msg)
+	NetWork:getInstance():send_msg(self._session, msg)
 end
 
-function Player:getUID()
+function Player:copy_room_info(player)
+	if type(player) ~= 'table' then
+		return
+	end
+
+	self._uid 	  = player._uid
+	self._room_id = player._room_id
+	self._matchid = player._matchid
+	self._seatid  = player._seatid
+	self._side 	  = player._side
+	self._heroid  = player._heroid
+	self._is_robot = player._is_robot
+	self._is_host  = player._is_host
+end
+
+function Player:get_uid()
 	return self._uid
 end
 

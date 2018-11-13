@@ -31,7 +31,7 @@ local cmd_name_map = {
 	"ExitMatchReq",
 	"ExitMatchRes",
 	"UserExitMatch",
-
+	-- hcc
 	"CreateRoomReq",
 	"CreateRoomRes",
 	"JoinRoomReq",
@@ -40,7 +40,11 @@ local cmd_name_map = {
 	"ExitRoomRes",
 	"DessolveReq",
 	"DessolveRes",
-
+	"GetCreateStatusReq",
+	"GetCreateStatusRes",
+	"BackRoomReq",
+	"BackRoomRes",
+	--
 	"GameStart",
 }
 

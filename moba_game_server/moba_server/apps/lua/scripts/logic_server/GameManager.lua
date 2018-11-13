@@ -1,4 +1,4 @@
-local GameManager = class("GameManager")
+local GameManager 	= class("GameManager")
 
 function GameManager:getInstance()
 	if not GameManager._instance then

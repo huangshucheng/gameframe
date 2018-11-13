@@ -5,6 +5,7 @@ local Cmd               = require("game.net.protocol.Cmd")
 local Respones          = require("game.net.Respones")
 local UserInfo          = require("game.clientdata.UserInfo")
 local AuthServiceProxy  = require("game.modules.AuthServiceProxy")
+local LogicServiceProxy = require("game.modules.LogicServiceProxy")
 
 local Function          = require('game.views.Base.Function')
 
@@ -211,7 +212,8 @@ function LoginScene:onEventData(event)
             UserInfo.setUserVip(uinfo.uvip)
             UserInfo.setUserId(uinfo.uid)
             UserInfo.flush()
-            
+            -- login logic server
+            LogicServiceProxy:getInstance():sendLoginLogicServer()
             self:enterScene('game.Lobby.LobbyScene.LobbyScene')
             GT.showPopLayer('TipsLayer',{"登录成功!"})
         else

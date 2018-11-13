@@ -26,35 +26,39 @@ function Room:get_room_players()
 	return self._players
 end
 
-function Room:is_player_in_room(player)
-	for i = 1 , #self._players do
-		if self._players[i] == player then
-			return true
-		end
-	end
-end
-
 function Room:enter_player(player)
-	if not player then 
+	if type(player) ~= 'table' then
 		return false
 	end
-
+	-- player already in room
 	if self:is_player_in_room(player) then
-		print("hcc>> room: enter_player already in room , id:  " .. player:getUID())
+		print("hcc>> room: enter_player already in room , id:  " .. player:get_uid())
 		return true
+	end
+	-- player reconnect to logic and enter room
+	local uid = player:get_uid()
+	for i = 1 , #self._players do
+		local r_uid = self._players[i]:get_uid()
+		if r_uid == uid then
+			local old_player = self._players[i]
+			self._players[i] = player
+			self._players[i]:copy_room_info(old_player)
+			print('hcc>> enter_player  user re_enter_room id: '.. player:get_uid() .. '  ,playerNum: ' .. self:get_room_player_num())
+			return true
+		end
 	end
 
 	table.insert(self._players, player)
 	player:set_room_id(self._room_id)
 	if not player:get_is_host() then
-		player:set_seat_id(#self:get_room_players() + 1)
+		player:set_seat_id(#self:get_room_players())
 	end
-	print("hcc>> room: enter_player  id: " .. player:getUID() .. '  playerNum: '.. self:get_room_player_num())
+	print("hcc>> room: enter_player  id: " .. player:get_uid() .. '  playerNum: '.. self:get_room_player_num())
 	return true
 end
 
 function Room:exit_player(player)
-	if not player then 
+	if type(player) ~= 'table' then
 		return false
 	end
 
@@ -67,7 +71,7 @@ function Room:exit_player(player)
 	end
 
 	if index then
-		if not player:get_is_host() then
+		if not player:get_is_host() then 	-- room host can back to lobby and can enter next time
 			table.remove(self._players,index)
 			player:exit_room_and_reset()
 		end
@@ -83,9 +87,10 @@ function Room:kick_all_players_in_room()
 		return
 	end
 
-	for _ , player in ipairs(self._players) do
-		player:exit_room_and_reset()
+	for i = 1 , #self._players do
+		self._players[i]:exit_room_and_reset()
 	end
+
 	self._players = {}
 end
 
@@ -94,12 +99,34 @@ function Room:broacast_in_room(stype, ctype, body, not_to_player)
 		return
 	end
 
-	for _ , player in pairs(self._players) do
-		if player ~= not_to_player then
-			player:send_cmd(stype, ctype, body)
-			print("hcc>> player:send_cmd .. id:  " .. player:getUID())
+	for i = 1 , #self._players do
+		if self._players[i] ~= not_to_player then
+			self._players[i]:send_msg(stype, ctype, body)
 		end
 	end
+end
+
+function Room:is_player_in_room(player)
+	if type(player) ~= 'table' then
+		return false
+	end
+	for i = 1 , #self._players do
+		if self._players[i] == player then
+			return true
+		end
+	end
+end
+
+function Room:is_player_uid_in_room(player)
+	if type(player) ~= 'table' then
+		return false
+	end
+	for i = 1 , #self._players do
+		if player:get_uid() == self._players[i]:get_uid() then
+			return true			
+		end
+	end
+	return false
 end
 
 function Room:get_room_player_num()

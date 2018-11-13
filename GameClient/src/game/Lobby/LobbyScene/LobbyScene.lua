@@ -35,6 +35,9 @@ function LobbyScene:ctor(app, name)
     self._diamond_text      = nil
     self._img_head          = nil
 
+    self._img_back_room     = nil
+    self._img_create_room   = nil
+
     GT.showPopLayer         = Function.showPopLayer
     LobbyScene.super.ctor(self, app, name)
     -- self:setMetaTable()
@@ -81,19 +84,19 @@ function LobbyScene:onCreate()
     if  not panel_center then return end
 
     local btn_join_room         = panel_center:getChildByName(IMG_JOIN_ROOM)
-    local btn_create_room       = panel_center:getChildByName(IMG_CREATE_ROOM)
-    local btn_back_room         = panel_center:getChildByName(IMG_BACK_ROOM)
+    self._img_back_room         = panel_center:getChildByName(IMG_BACK_ROOM)
+    self._img_create_room       = panel_center:getChildByName(IMG_CREATE_ROOM)
 
     if btn_join_room then
         btn_join_room:addTouchEventListener(handler(self,self.onTouchJoinRoomBtn))
     end
 
-    if btn_create_room then
-        btn_create_room:addTouchEventListener(handler(self,self.onTouchCreateRoomBtn))
+    if self._img_create_room then
+        self._img_create_room:addTouchEventListener(handler(self,self.onTouchCreateRoomBtn))
     end
 
-    if btn_back_room then
-        btn_back_room:addTouchEventListener(handler(self,self.onTouchBackRoomBtn))
+    if self._img_back_room then
+        self._img_back_room:addTouchEventListener(handler(self,self.onTouchBackRoomBtn))
     end
 
     local img_top_bg = self:getResourceNode():getChildByName(IMG_TOP_BG)
@@ -178,6 +181,7 @@ function LobbyScene:onTouchBackRoomBtn(send,eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
+    LogicServiceProxy:getInstance():sendBackRoomReq()
 end
 
 function LobbyScene:onTouchEventHeadImgBg(send,eventType)
@@ -218,8 +222,10 @@ end
 
 function LobbyScene:addClientEventListener()
     addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
-    addEvent("CreateRoomRes",self,self.onEventCreateRoom)
-    addEvent("JoinRoomRes",self,self.onEventJoinRoom)
+    addEvent("CreateRoomRes", self, self.onEventCreateRoom)
+    addEvent("JoinRoomRes", self, self.onEventJoinRoom)
+    addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
+    addEvent("BackRoomRes", self, self.onEventBackRoom)
 end
 
 function LobbyScene:onEventData(event)
@@ -228,7 +234,6 @@ function LobbyScene:onEventData(event)
     dump(data)
 
     postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
-
 
     local ctype = data.ctype
     if ctype == Cmd.eEditProfileRes then
@@ -257,6 +262,9 @@ function LobbyScene:onEventData(event)
         GT.popLayer('LoadingLayer')
     elseif ctype == Cmd.eLoginLogicRes then
         GT.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
+        print('hcc>> success login to logic server')
+        -- TODO request is player create one room
+        LogicServiceProxy:getInstance():sendGetCreateStatus()
     end
 end
 
@@ -307,13 +315,47 @@ function LobbyScene:onEventJoinRoom(event)
     end
 end
 
+function LobbyScene:onEvnetGetCreateStatus(event)
+    local data = event._usedata
+    local status = data.status
+    if status == Respones.OK then
+       print('hcc>> you have create one room')
+        if self._img_back_room then
+            self._img_back_room:setVisible(true)
+        end
+        if self._img_create_room then
+            self._img_create_room:setVisible(false)
+        end
+    else
+       print('hcc>> you do not create one room')
+        if self._img_back_room then
+            self._img_back_room:setVisible(false)
+        end
+        if self._img_create_room then
+            self._img_create_room:setVisible(true)
+        end
+    end
+end
+
+function LobbyScene:onEventBackRoom(event)
+    local data = event._usedata
+    local status = data.status
+    if status == Respones.OK then
+        self:enterScene('game.Mahjong.GameScene.GameScene')
+        print("hcc >> back room success")
+    else
+        print("hcc >> back room failed")
+        GT.showPopLayer('TipsLayer',{"返回房间失败"})
+    end
+end
+
 --------------------
 
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
     --获取用户信息
-    LogicServiceProxy:getInstance():sendLoginLogicServer()
     SystemServiceProxy:getInstance():sendGetUgameInfo()
+    LogicServiceProxy:getInstance():sendGetCreateStatus()
 end
 
 function LobbyScene:onExit()

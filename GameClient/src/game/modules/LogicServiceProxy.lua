@@ -44,4 +44,12 @@ function LogicServiceProxy:sendJoinRoom(roomid)
 	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eJoinRoomReq, msg)
 end
 
+function LogicServiceProxy:sendGetCreateStatus()
+	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eGetCreateStatusReq, nil)
+end
+
+function LogicServiceProxy:sendBackRoomReq()
+	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eBackRoomReq, nil)
+end
+
 return LogicServiceProxy

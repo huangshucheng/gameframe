@@ -6,9 +6,9 @@ local redis_game 	= require("database/redis_game")
 local mysql_center 	= require("database/mysql_auth_center")
 local redis_center 	= require("database/redis_center")
 local Player 		= require("logic_server/Player")
-local InterFace 	= require("logic_server/InterFace")
+local NetWork 		= require("logic_server/NetWork")
 
-local PlayerManager = class('PlayerManager', InterFace)
+local PlayerManager = class('PlayerManager')
 
 local logic_server_players 		= {} 	-- uid --> Player
 local online_player_num 		= 0
@@ -21,10 +21,9 @@ function PlayerManager:getInstance()
 end
 
 function PlayerManager:ctor()
-	PlayerManager.super.ctor(self)
 	self._cmd_handler_map = 
 	{
-		[Cmd.eLoginLogicReq] 	= self.login_logic_server,
+		[Cmd.eLoginLogicReq] 	= self.on_login_logic_server,
 		[Cmd.eUserLostConn]  	= self.on_player_disconnect,
 	}
 end
@@ -50,7 +49,7 @@ end
 
 --登录逻辑服务器
 -- {stype, ctype, utag, body}
-function PlayerManager:login_logic_server(s, req)
+function PlayerManager:on_login_logic_server(s, req)
 	print('PlayerManager:login_logic_server>>  '.. tostring(self))
 	local uid = req[3]
 	local stype = req[1]
@@ -58,7 +57,7 @@ function PlayerManager:login_logic_server(s, req)
 	local p = logic_server_players[uid]
 	if p then
 		p:set_session(s)
-		self:send_status(s, stype, Cmd.eLoginLogicRes, uid, Respones.OK)
+		NetWork:getInstance():send_status(s, stype, Cmd.eLoginLogicRes, uid, Respones.OK)
 		print('login_logic_server111 >> user size: '..  online_player_num)
 		return
 	end
@@ -69,7 +68,7 @@ function PlayerManager:login_logic_server(s, req)
 			logic_server_players[uid] = p
 			online_player_num = online_player_num + 1
 		end
-		self:send_status(s, stype, Cmd.eLoginLogicRes, uid, status)
+		NetWork:getInstance():send_status(s, stype, Cmd.eLoginLogicRes, uid, status)
 		print('login_logic_server333 >> user size: '..  online_player_num)
 	end)
 	print('login_logic_server222 >> user size: '..  online_player_num)
@@ -98,7 +97,7 @@ function PlayerManager:on_gateway_connect(s)
 	online_player_num 		= 0
 end
 
-function PlayerManager:on_gateway_disconnect(s) 
+function PlayerManager:on_gateway_disconnect(s)
 	logic_server_players 	= {}
 	online_player_num 		= 0
 end

@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[33];
+  static const ::google::protobuf::internal::ParseTable schema[35];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -109,6 +109,10 @@ void InitDefaultsExitRoomResImpl();
 void InitDefaultsExitRoomRes();
 void InitDefaultsDessolveResImpl();
 void InitDefaultsDessolveRes();
+void InitDefaultsGetCreateStatusResImpl();
+void InitDefaultsGetCreateStatusRes();
+void InitDefaultsBackRoomResImpl();
+void InitDefaultsBackRoomRes();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -143,6 +147,8 @@ inline void InitDefaults() {
   InitDefaultsJoinRoomRes();
   InitDefaultsExitRoomRes();
   InitDefaultsDessolveRes();
+  InitDefaultsGetCreateStatusRes();
+  InitDefaultsBackRoomRes();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -151,6 +157,9 @@ extern AccountUpgradeReqDefaultTypeInternal _AccountUpgradeReq_default_instance_
 class AccountUpgradeRes;
 class AccountUpgradeResDefaultTypeInternal;
 extern AccountUpgradeResDefaultTypeInternal _AccountUpgradeRes_default_instance_;
+class BackRoomRes;
+class BackRoomResDefaultTypeInternal;
+extern BackRoomResDefaultTypeInternal _BackRoomRes_default_instance_;
 class CreateRoomReq;
 class CreateRoomReqDefaultTypeInternal;
 extern CreateRoomReqDefaultTypeInternal _CreateRoomReq_default_instance_;
@@ -184,6 +193,9 @@ extern ExitRoomResDefaultTypeInternal _ExitRoomRes_default_instance_;
 class GameStart;
 class GameStartDefaultTypeInternal;
 extern GameStartDefaultTypeInternal _GameStart_default_instance_;
+class GetCreateStatusRes;
+class GetCreateStatusResDefaultTypeInternal;
+extern GetCreateStatusResDefaultTypeInternal _GetCreateStatusRes_default_instance_;
 class GetSysMsgReq;
 class GetSysMsgReqDefaultTypeInternal;
 extern GetSysMsgReqDefaultTypeInternal _GetSysMsgReq_default_instance_;
@@ -307,7 +319,11 @@ enum Cmd {
   eExitRoomRes = 37,
   eDessolveReq = 38,
   eDessolveRes = 39,
-  eGameStart = 40
+  eGetCreateStatusReq = 40,
+  eGetCreateStatusRes = 41,
+  eBackRoomReq = 42,
+  eBackRoomRes = 43,
+  eGameStart = 44
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
@@ -4558,6 +4574,257 @@ class DessolveRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsDessolveResImpl();
 };
+// -------------------------------------------------------------------
+
+class GetCreateStatusRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:GetCreateStatusRes) */ {
+ public:
+  GetCreateStatusRes();
+  virtual ~GetCreateStatusRes();
+
+  GetCreateStatusRes(const GetCreateStatusRes& from);
+
+  inline GetCreateStatusRes& operator=(const GetCreateStatusRes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  GetCreateStatusRes(GetCreateStatusRes&& from) noexcept
+    : GetCreateStatusRes() {
+    *this = ::std::move(from);
+  }
+
+  inline GetCreateStatusRes& operator=(GetCreateStatusRes&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GetCreateStatusRes& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GetCreateStatusRes* internal_default_instance() {
+    return reinterpret_cast<const GetCreateStatusRes*>(
+               &_GetCreateStatusRes_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    33;
+
+  void Swap(GetCreateStatusRes* other);
+  friend void swap(GetCreateStatusRes& a, GetCreateStatusRes& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GetCreateStatusRes* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  GetCreateStatusRes* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const GetCreateStatusRes& from);
+  void MergeFrom(const GetCreateStatusRes& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(GetCreateStatusRes* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 status = 1;
+  bool has_status() const;
+  void clear_status();
+  static const int kStatusFieldNumber = 1;
+  ::google::protobuf::int32 status() const;
+  void set_status(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GetCreateStatusRes)
+ private:
+  void set_has_status();
+  void clear_has_status();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::int32 status_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsGetCreateStatusResImpl();
+};
+// -------------------------------------------------------------------
+
+class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:BackRoomRes) */ {
+ public:
+  BackRoomRes();
+  virtual ~BackRoomRes();
+
+  BackRoomRes(const BackRoomRes& from);
+
+  inline BackRoomRes& operator=(const BackRoomRes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  BackRoomRes(BackRoomRes&& from) noexcept
+    : BackRoomRes() {
+    *this = ::std::move(from);
+  }
+
+  inline BackRoomRes& operator=(BackRoomRes&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BackRoomRes& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const BackRoomRes* internal_default_instance() {
+    return reinterpret_cast<const BackRoomRes*>(
+               &_BackRoomRes_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    34;
+
+  void Swap(BackRoomRes* other);
+  friend void swap(BackRoomRes& a, BackRoomRes& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline BackRoomRes* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  BackRoomRes* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const BackRoomRes& from);
+  void MergeFrom(const BackRoomRes& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(BackRoomRes* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .UserArrived users_info = 3;
+  int users_info_size() const;
+  void clear_users_info();
+  static const int kUsersInfoFieldNumber = 3;
+  const ::UserArrived& users_info(int index) const;
+  ::UserArrived* mutable_users_info(int index);
+  ::UserArrived* add_users_info();
+  ::google::protobuf::RepeatedPtrField< ::UserArrived >*
+      mutable_users_info();
+  const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
+      users_info() const;
+
+  // optional string room_info = 2;
+  bool has_room_info() const;
+  void clear_room_info();
+  static const int kRoomInfoFieldNumber = 2;
+  const ::std::string& room_info() const;
+  void set_room_info(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_info(::std::string&& value);
+  #endif
+  void set_room_info(const char* value);
+  void set_room_info(const char* value, size_t size);
+  ::std::string* mutable_room_info();
+  ::std::string* release_room_info();
+  void set_allocated_room_info(::std::string* room_info);
+
+  // required int32 status = 1;
+  bool has_status() const;
+  void clear_status();
+  static const int kStatusFieldNumber = 1;
+  ::google::protobuf::int32 status() const;
+  void set_status(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:BackRoomRes)
+ private:
+  void set_has_status();
+  void clear_has_status();
+  void set_has_room_info();
+  void clear_has_room_info();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::UserArrived > users_info_;
+  ::google::protobuf::internal::ArenaStringPtr room_info_;
+  ::google::protobuf::int32 status_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsBackRoomResImpl();
+};
 // ===================================================================
 
 
@@ -7280,9 +7547,162 @@ inline void DessolveRes::set_status(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:DessolveRes.status)
 }
 
+// -------------------------------------------------------------------
+
+// GetCreateStatusRes
+
+// required int32 status = 1;
+inline bool GetCreateStatusRes::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GetCreateStatusRes::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GetCreateStatusRes::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GetCreateStatusRes::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::google::protobuf::int32 GetCreateStatusRes::status() const {
+  // @@protoc_insertion_point(field_get:GetCreateStatusRes.status)
+  return status_;
+}
+inline void GetCreateStatusRes::set_status(::google::protobuf::int32 value) {
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:GetCreateStatusRes.status)
+}
+
+// -------------------------------------------------------------------
+
+// BackRoomRes
+
+// required int32 status = 1;
+inline bool BackRoomRes::has_status() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void BackRoomRes::set_has_status() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void BackRoomRes::clear_has_status() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void BackRoomRes::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::google::protobuf::int32 BackRoomRes::status() const {
+  // @@protoc_insertion_point(field_get:BackRoomRes.status)
+  return status_;
+}
+inline void BackRoomRes::set_status(::google::protobuf::int32 value) {
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:BackRoomRes.status)
+}
+
+// optional string room_info = 2;
+inline bool BackRoomRes::has_room_info() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void BackRoomRes::set_has_room_info() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void BackRoomRes::clear_has_room_info() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void BackRoomRes::clear_room_info() {
+  room_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_room_info();
+}
+inline const ::std::string& BackRoomRes::room_info() const {
+  // @@protoc_insertion_point(field_get:BackRoomRes.room_info)
+  return room_info_.GetNoArena();
+}
+inline void BackRoomRes::set_room_info(const ::std::string& value) {
+  set_has_room_info();
+  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:BackRoomRes.room_info)
+}
+#if LANG_CXX11
+inline void BackRoomRes::set_room_info(::std::string&& value) {
+  set_has_room_info();
+  room_info_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:BackRoomRes.room_info)
+}
+#endif
+inline void BackRoomRes::set_room_info(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_room_info();
+  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:BackRoomRes.room_info)
+}
+inline void BackRoomRes::set_room_info(const char* value, size_t size) {
+  set_has_room_info();
+  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:BackRoomRes.room_info)
+}
+inline ::std::string* BackRoomRes::mutable_room_info() {
+  set_has_room_info();
+  // @@protoc_insertion_point(field_mutable:BackRoomRes.room_info)
+  return room_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* BackRoomRes::release_room_info() {
+  // @@protoc_insertion_point(field_release:BackRoomRes.room_info)
+  clear_has_room_info();
+  return room_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void BackRoomRes::set_allocated_room_info(::std::string* room_info) {
+  if (room_info != NULL) {
+    set_has_room_info();
+  } else {
+    clear_has_room_info();
+  }
+  room_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_info);
+  // @@protoc_insertion_point(field_set_allocated:BackRoomRes.room_info)
+}
+
+// repeated .UserArrived users_info = 3;
+inline int BackRoomRes::users_info_size() const {
+  return users_info_.size();
+}
+inline void BackRoomRes::clear_users_info() {
+  users_info_.Clear();
+}
+inline const ::UserArrived& BackRoomRes::users_info(int index) const {
+  // @@protoc_insertion_point(field_get:BackRoomRes.users_info)
+  return users_info_.Get(index);
+}
+inline ::UserArrived* BackRoomRes::mutable_users_info(int index) {
+  // @@protoc_insertion_point(field_mutable:BackRoomRes.users_info)
+  return users_info_.Mutable(index);
+}
+inline ::UserArrived* BackRoomRes::add_users_info() {
+  // @@protoc_insertion_point(field_add:BackRoomRes.users_info)
+  return users_info_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::UserArrived >*
+BackRoomRes::mutable_users_info() {
+  // @@protoc_insertion_point(field_mutable_list:BackRoomRes.users_info)
+  return &users_info_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
+BackRoomRes::users_info() const {
+  // @@protoc_insertion_point(field_list:BackRoomRes.users_info)
+  return users_info_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

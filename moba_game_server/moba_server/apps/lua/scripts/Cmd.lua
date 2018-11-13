@@ -46,14 +46,23 @@ local Cmd = {
 	-- hcc
 	eCreateRoomReq = 32,
 	eCreateRoomRes = 33,
+
 	eJoinRoomReq = 34,
 	eJoinRoomRes = 35,
+
 	eExitRoomReq = 36,
 	eExitRoomRes = 37,
+
 	eDessolveReq = 38,
 	eDessolveRes = 39,
+
+	eGetCreateStatusReq = 40,
+	eGetCreateStatusRes = 41,
+
+	eBackRoomReq = 42,
+	eBackRoomRes = 43,
 	--
-	eGameStart 	 = 40,
+	eGameStart 	 = 44,
 }
 
 return Cmd

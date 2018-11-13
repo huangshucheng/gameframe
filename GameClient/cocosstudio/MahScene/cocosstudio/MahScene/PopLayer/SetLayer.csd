@@ -24,18 +24,48 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_EXIT" ActionTag="-851988177" Tag="10" IconVisible="False" LeftMargin="241.2922" RightMargin="240.7078" TopMargin="308.0382" BottomMargin="43.9618" TouchEnable="True" FontSize="20" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="212" Scale9Height="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="242.0000" Y="72.0000" />
+              <AbstractNodeData Name="KW_BTN_EXIT" ActionTag="-2064390434" Tag="13" IconVisible="False" LeftMargin="108.8933" RightMargin="475.1067" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" ButtonText="退出房间" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="140.0000" Y="50.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="362.2922" Y="79.9618" />
+                <Position X="178.8933" Y="76.4941" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5004" Y="0.1886" />
-                <PreSize X="0.3343" Y="0.1698" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="MahScene/MahRes/setting_btn_exit_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="MahScene/MahRes/setting_btn_exit_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="MahScene/MahRes/setting_btn_exit_normal.png" Plist="" />
+                <PrePosition X="0.2471" Y="0.1804" />
+                <PreSize X="0.1934" Y="0.1179" />
+                <TextColor A="255" R="255" G="0" B="0" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="KW_BTN_BACK" ActionTag="18867438" Tag="14" IconVisible="False" LeftMargin="291.4626" RightMargin="292.5374" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" ButtonText="返回大厅" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="140.0000" Y="50.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="361.4626" Y="76.4941" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4993" Y="0.1804" />
+                <PreSize X="0.1934" Y="0.1179" />
+                <TextColor A="255" R="255" G="0" B="0" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="KW_BTN_DESSOLVE" ActionTag="1464579411" Tag="15" IconVisible="False" LeftMargin="474.0319" RightMargin="109.9681" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" ButtonText="解散房间" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="140.0000" Y="50.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="544.0319" Y="76.4941" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.7514" Y="0.1804" />
+                <PreSize X="0.1934" Y="0.1179" />
+                <TextColor A="255" R="255" G="0" B="0" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

@@ -9,6 +9,8 @@ SetLayer._csbResourcePath = 'MahScene/PopLayer/SetLayer.csb'
 local KW_IMG_BG 				= 'KW_IMG_BG'
 local KW_BTN_CLOSE 				= 'KW_BTN_CLOSE'
 local KW_BTN_EXIT               = 'KW_BTN_EXIT'
+local KW_BTN_BACK 				= 'KW_BTN_BACK'
+local KW_BTN_DESSOLVE 			= 'KW_BTN_DESSOLVE'
 
 function SetLayer:ctor()
 	SetLayer.super.ctor(self)
@@ -30,12 +32,37 @@ function SetLayer:onCreate()
 			self:showLayer(false)
 		end))
 	end
-
-    local btn_logout = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_EXIT)
-    if btn_logout then
-        btn_logout:addClickEventListener(handler(self,function(sender, eventType)
+	--[[
+	   退出房间:
+	   非房主>> 直接退出到大厅
+	   房主>> 信息还在房间，相当于在房间断线,可以返回房间 （目前房主不能返回大厅）
+	]]
+    local btn_exit = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_EXIT)
+    if btn_exit then
+        btn_exit:addClickEventListener(handler(self,function(sender, eventType)
+            LogicServiceProxy:getInstance():sendExitRoom()
+        end))
+    end
+    --[[
+     返回大厅
+	  非房主：直接退出到大厅
+	  房主：信息还在房间，相当于在房间断线,可以返回房间 （目前房主不能返回大厅）
+    ]]
+    local btn_back = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_BACK)
+    if btn_back then
+        btn_back:addClickEventListener(handler(self,function(sender, eventType)
+            LogicServiceProxy:getInstance():sendExitRoom()
+        end))
+    end
+    --[[
+       解散房间:
+		非房主：不能解散房间，只能退出房间
+		房主：可以解散房间
+    ]]
+    local btn_dsv = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_DESSOLVE)
+    if btn_dsv then
+        btn_dsv:addClickEventListener(handler(self,function(sender, eventType)
             LogicServiceProxy:getInstance():sendDessolveRoom()
-            -- LogicServiceProxy:getInstance():sendExitRoom()
         end))
     end
 end
