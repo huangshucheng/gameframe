@@ -24,22 +24,46 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="KW_TEXT_EIXT_0" ActionTag="-988727686" VisibleForFrame="False" Tag="17" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="269.7408" RightMargin="350.2592" TopMargin="339.6837" BottomMargin="58.3163" FontSize="26" LabelText="退出房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="104.0000" Y="26.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="321.7408" Y="71.3163" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="0" B="0" />
+                <PrePosition X="0.4444" Y="0.1682" />
+                <PreSize X="0.1436" Y="0.0613" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
               <AbstractNodeData Name="KW_BTN_EXIT" ActionTag="-2064390434" Tag="13" IconVisible="False" LeftMargin="108.8933" RightMargin="475.1067" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" ButtonText="退出房间" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="140.0000" Y="50.0000" />
+                <Children>
+                  <AbstractNodeData Name="KW_TEXT_EIXT" ActionTag="1178539059" Tag="15" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="18.0000" RightMargin="18.0000" TopMargin="12.0000" BottomMargin="12.0000" FontSize="26" LabelText="退出房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="104.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="70.0000" Y="25.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="0" B="0" />
+                    <PrePosition X="0.5000" Y="0.5000" />
+                    <PreSize X="0.7429" Y="0.5200" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="178.8933" Y="76.4941" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
+                <CColor A="255" R="144" G="238" B="144" />
                 <PrePosition X="0.2471" Y="0.1804" />
                 <PreSize X="0.1934" Y="0.1179" />
-                <TextColor A="255" R="255" G="0" B="0" />
+                <TextColor A="255" R="255" G="255" B="255" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
                 <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
                 <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_BACK" ActionTag="18867438" Tag="14" IconVisible="False" LeftMargin="291.4626" RightMargin="292.5374" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" ButtonText="返回大厅" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="KW_BTN_BACK" ActionTag="18867438" VisibleForFrame="False" Tag="14" IconVisible="False" LeftMargin="291.4626" RightMargin="292.5374" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" ButtonText="返回大厅" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="140.0000" Y="50.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="361.4626" Y="76.4941" />
@@ -54,12 +78,25 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_DESSOLVE" ActionTag="1464579411" Tag="15" IconVisible="False" LeftMargin="474.0319" RightMargin="109.9681" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" ButtonText="解散房间" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="KW_BTN_DESSOLVE" ActionTag="1464579411" Tag="15" IconVisible="False" LeftMargin="474.0319" RightMargin="109.9681" TopMargin="322.5059" BottomMargin="51.4941" TouchEnable="True" FontSize="26" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="140.0000" Y="50.0000" />
+                <Children>
+                  <AbstractNodeData Name="KW_TEXT_DSV" ActionTag="98347508" Tag="16" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="18.0000" RightMargin="18.0000" TopMargin="12.0000" BottomMargin="12.0000" FontSize="26" LabelText="解散房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="104.0000" Y="26.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="70.0000" Y="25.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="0" B="0" />
+                    <PrePosition X="0.5000" Y="0.5000" />
+                    <PreSize X="0.7429" Y="0.5200" />
+                    <OutlineColor A="255" R="255" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="544.0319" Y="76.4941" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
+                <CColor A="255" R="144" G="238" B="144" />
                 <PrePosition X="0.7514" Y="0.1804" />
                 <PreSize X="0.1934" Y="0.1179" />
                 <TextColor A="255" R="255" G="0" B="0" />

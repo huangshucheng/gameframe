@@ -2,6 +2,7 @@ local CURRENT_MODULE_NAME = ...
 
 local BaseScene     = require("game.views.Base.BaseScene")
 local LobbyScene    = class("LobbyScene", BaseScene)
+GT.LobbyScene       = LobbyScene
 
 local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
@@ -10,6 +11,11 @@ local UserInfo              = require("game.clientdata.UserInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local SystemServiceProxy    = require("game.modules.SystemServiceProxy")
 local Function              = require('game.views.Base.Function')
+
+--------------拓展
+require('game.Lobby.LobbyScene.LobbySceneReceiveMsg')
+
+---------------end
 
 LobbyScene.RESOURCE_FILENAME = 'Lobby/LobbyScene.csb'
 
@@ -28,7 +34,7 @@ local TEXT_COIN             = 'TEXT_COIN'
 local TEXT_DIAMOND          = 'TEXT_DIAMOND'
 local IMG_HEAD              = 'IMG_HEAD'
 
-function LobbyScene:ctor(app, name)
+function LobbyScene:ctor()
     self._user_name_text    = nil
     self._user_id_text      = nil
     self._coin_text         = nil
@@ -39,44 +45,7 @@ function LobbyScene:ctor(app, name)
     self._img_create_room   = nil
 
     GT.showPopLayer         = Function.showPopLayer
-    LobbyScene.super.ctor(self, app, name)
-    -- self:setMetaTable()
-end
-
-function LobbyScene.getAllFunction(class,meathon)
-    meathon = meathon or {}
-
-    if class.super ~= nil then
-        meathon = LobbyScene.getAllFunction(class.super,meathon)
-    end
-
-    local neat_tb = getmetatable(class)
-    if neat_tb == nil then
-        neat_tb = class
-    end
-    for i,v in pairs(neat_tb) do
-        meathon[i] = v
-    end
-    return meathon
-end
-
-function LobbyScene:setMetaTable()
-    local scriptPath = {}
-    table.insert(scriptPath,".LobbySceneReceiveServerMsg")
-    local tmpmetatable = {}
-    for i,v in ipairs(scriptPath) do
-        local script = import(v,CURRENT_MODULE_NAME)
-        local object = script.new()
-        local objectemetatable = getmetatable(object)
-        for scripti,scriptv in pairs(objectemetatable) do
-            tmpmetatable[scripti] = scriptv
-        end
-    end
-    local metatable = LobbyScene.getAllFunction(self)
-    for i,v in pairs(metatable) do
-        tmpmetatable[i] = v
-    end
-    setmetatable(LobbyScene, {__index = tmpmetatable}) 
+    LobbyScene.super.ctor(self)
 end
 
 function LobbyScene:onCreate()
@@ -165,7 +134,6 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
-    -- self:enterScene('game.Mahjong.GameScene.GameScene')
     LogicServiceProxy:getInstance():sendCreateRoom("hc>> room_info")
 end
 
@@ -212,145 +180,6 @@ function LobbyScene:onTouchMailBtn(send, evnetType)
     GT.showPopLayer("MsgLayer")
 end
 
-function LobbyScene:addServerEventListener()
-    addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED, self, self.onEventClosed)
-end
-
-function LobbyScene:addClientEventListener()
-    addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
-    addEvent("CreateRoomRes", self, self.onEventCreateRoom)
-    addEvent("JoinRoomRes", self, self.onEventJoinRoom)
-    addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
-    addEvent("BackRoomRes", self, self.onEventBackRoom)
-end
-
-function LobbyScene:onEventData(event)
-    local data = event._usedata
-    if not data then return end
-    dump(data)
-
-    postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
-
-    local ctype = data.ctype
-    if ctype == Cmd.eEditProfileRes then
-        GT.popLayer('LoadingLayer')
-    elseif ctype == Cmd.eAccountUpgradeRes then
-        GT.popLayer('LoadingLayer')
-    elseif ctype == Cmd.eRelogin then
-        self:enterScene('game.Lobby.LobbyScene.LoginScene')
-        GT.popLayer('LoadingLayer')
-        GT.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
-    elseif ctype == Cmd.eUnameLoginRes then
-        GT.popLayer('LoadingLayer')
-    elseif ctype == Cmd.eLoginOutRes then
-        self:enterScene('game.Lobby.LobbyScene.LoginScene')
-        GT.popLayer('LoadingLayer')
-    elseif ctype == Cmd.eGetUgameInfoRes then
-        GT.popLayer('LoadingLayer')
-        local body = data.body
-        if body.status == Respones.OK then
-            if self._coin_text and self._diamond_text then
-                self._coin_text:setString(tostring(body.uinfo.uchip))
-                self._diamond_text:setString(tostring(body.uinfo.uchip2))
-            end
-        end
-    elseif ctype == Cmd.eRecvLoginBonuesRes then
-        GT.popLayer('LoadingLayer')
-    elseif ctype == Cmd.eLoginLogicRes then
-        GT.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
-        print('hcc>> success login to logic server')
-        -- TODO request is player create one room
-        LogicServiceProxy:getInstance():sendGetCreateStatus()
-    end
-end
-
-function LobbyScene:onEventNetConnect(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接成功!"})
-end
-
-function LobbyScene:onEventNetConnectFail(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接失败!"}) 
-end
-
-function LobbyScene:onEventClose(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接关闭111!"})
-end
-
-function LobbyScene:onEventClosed(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接关闭222!"})
-end
-
-function LobbyScene:onEventAsycUserInfo(event)
-    local uname = UserInfo.getUserName()
-    if uname and uname ~= '' then
-        self._user_name_text:setString(tostring(uname))
-    end
-
-    if self._img_head then
-        self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
-    end
-end
-
-function LobbyScene:onEventCreateRoom(event)
-    local data = event._usedata
-    local status = data.status
-    if status == Respones.OK then
-        self:enterScene('game.Mahjong.GameScene.GameScene')
-    else
-        GT.showPopLayer('TipsLayer',{"创建房间失败"})
-    end
-end
-
-function LobbyScene:onEventJoinRoom(event)
-    local data = event._usedata
-    local status = data.status
-    if status == Respones.OK then
-        self:enterScene('game.Mahjong.GameScene.GameScene')
-    else
-        GT.showPopLayer('TipsLayer',{"加入房间失败"})
-    end
-end
-
-function LobbyScene:onEvnetGetCreateStatus(event)
-    local data = event._usedata
-    local status = data.status
-    if status == Respones.OK then
-       print('hcc>> you have create one room')
-        if self._img_back_room then
-            self._img_back_room:setVisible(true)
-        end
-        if self._img_create_room then
-            self._img_create_room:setVisible(false)
-        end
-    else
-       print('hcc>> you do not create one room')
-        if self._img_back_room then
-            self._img_back_room:setVisible(false)
-        end
-        if self._img_create_room then
-            self._img_create_room:setVisible(true)
-        end
-    end
-end
-
-function LobbyScene:onEventBackRoom(event)
-    local data = event._usedata
-    local status = data.status
-    if status == Respones.OK then
-        self:enterScene('game.Mahjong.GameScene.GameScene')
-        print("hcc >> back room success")
-    else
-        print("hcc >> back room failed")
-        GT.showPopLayer('TipsLayer',{"返回房间失败"})
-    end
-end
-
---------------------
-
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
     --获取用户信息
@@ -359,7 +188,7 @@ function LobbyScene:onEnter()
 end
 
 function LobbyScene:onExit()
-    
+
 end
 
 return LobbyScene

@@ -16,6 +16,7 @@ function GameApp:ctor()
     GT.showPopLayer 		= Function.showPopLayer
     GT.popLayer 			= Function.popLayer
     GT.getLayer 			= Function.getLayer
+    GT.LobbyScene           = nil           
 end
 
 function GameApp:showScene(transition, time, more)
