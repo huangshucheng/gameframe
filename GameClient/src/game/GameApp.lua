@@ -4,8 +4,8 @@ local NetWork       = require("game.net.NetWork")
 
 GT = {}
 
-local Function 		= require('game.views.Base.Function')
-local UIFunction 	= require('game.views.Base.UIFunction')
+local Function 		= require('game.Base.Function')
+local UIFunction 	= require('game.Base.UIFunction')
 
 function GameApp:ctor()
     math.randomseed(os.time())

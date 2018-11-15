@@ -1,5 +1,6 @@
-local BaseScene     = require("game.views.Base.BaseScene")
+local BaseScene     = require("game.Base.BaseScene")
 local LoginScene    = class("LoginScene", BaseScene)
+GT.LoginScene       = LoginScene
 
 local Cmd               = require("game.net.protocol.Cmd")
 local Respones          = require("game.net.Respones")
@@ -7,7 +8,12 @@ local UserInfo          = require("game.clientdata.UserInfo")
 local AuthServiceProxy  = require("game.modules.AuthServiceProxy")
 local LogicServiceProxy = require("game.modules.LogicServiceProxy")
 
-local Function          = require('game.views.Base.Function')
+local Function          = require('game.Base.Function')
+
+--------------拓展
+require('game.Lobby.LobbyScene.LoginSceneReceiveMsg')
+
+---------------end
 
 LoginScene.RESOURCE_FILENAME = 'Lobby/LoginScene.csb'
 
@@ -25,10 +31,8 @@ local TEXTFIELD_PWD                 = 'TEXTFIELD_PWD'
 local TEXTFIELD_PWD_CONF            = 'TEXTFIELD_PWD_CONF'
 
 function LoginScene:ctor()
-
     GT.showPopLayer         = Function.showPopLayer
     LoginScene.super.ctor(self)
-    
 end
 
 function LoginScene:onCreate()
@@ -163,86 +167,6 @@ function LoginScene:onCreate()
     if self._login_textfield_pwd then
         self._login_textfield_pwd:setText(UserInfo.getUserPwd())
     end
-end
-
-function LoginScene:addServerEventListener()
-    addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED, self, self.onEventClosed)
-end
-
-function LoginScene:addClientEventListener()
-
-end
-
-function LoginScene:onEventData(event)
-    local data = event._usedata
-    if not data then
-        return
-    end
-    dump(data)
-    if data.ctype == Cmd.eGuestLoginRes then
-       if data.body then
-                GT.popLayer('LoadingLayer')
-            if data.body.status == Respones.OK then
-                local uinfo = data.body.uinfo
-                UserInfo.setUserName(uinfo.unick)
-                UserInfo.setUserface(uinfo.uface)
-                UserInfo.setUserSex(uinfo.usex)
-                UserInfo.setUserVip(uinfo.uvip)
-                UserInfo.setUserId(uinfo.uid)
-                UserInfo.setUserIsGuest(true)
-                UserInfo.flush()
-                
-                self:enterScene('game.Lobby.LobbyScene.LobbyScene')
-                GT.showPopLayer('TipsLayer',{"游客登录成功!"})
-            else
-                GT.showPopLayer('TipsLayer',{"游客登录失败，您帐号已升级成正式帐号!"})
-            end
-       end
-    elseif data.ctype == Cmd.eUnameLoginRes then
-        GT.popLayer('LoadingLayer')
-        if data.body.status == Respones.OK then
-            local uinfo = data.body.uinfo
-            UserInfo.setUserName(uinfo.unick)
-            UserInfo.setUserface(uinfo.uface)
-            UserInfo.setUserSex(uinfo.usex)
-            UserInfo.setUserVip(uinfo.uvip)
-            UserInfo.setUserId(uinfo.uid)
-            UserInfo.flush()
-            -- login logic server
-            LogicServiceProxy:getInstance():sendLoginLogicServer()
-            self:enterScene('game.Lobby.LobbyScene.LobbyScene')
-            GT.showPopLayer('TipsLayer',{"登录成功!"})
-        else
-            GT.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
-        end
-    elseif data.ctype == Cmd.eUserRegistRes then
-            GT.popLayer('LoadingLayer')
-        if data.body.status == Respones.OK then
-            GT.showPopLayer('TipsLayer',{"注册成功!"})
-        else
-            GT.showPopLayer('TipsLayer',{"注册失败!"})
-        end
-    end
-end
-
-function LoginScene:onEventNetConnect(envet)
-    GT.showPopLayer('TipsLayer',{"网络连接成功!"})
-end
-
-function LoginScene:onEventNetConnectFail(envet)
-   GT.showPopLayer('TipsLayer',{"网络连接失败!"}) 
-end
-
-function LoginScene:onEventClose(envet)
-    GT.showPopLayer('TipsLayer',{"网络连接关闭111!"})
-end
-
-function LoginScene:onEventClosed(envet)
-    GT.showPopLayer('TipsLayer',{"网络连接关闭222!"})
 end
 
 function LoginScene:onEventBtnGuestLogin(sender,eventType)

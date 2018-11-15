@@ -1,4 +1,4 @@
-local PopLayer = require('game.views.Base.PopLayer')
+local PopLayer = require('game.Base.PopLayer')
 local MyCenterLayer = class("MyCenterLayer", PopLayer)
 
 local NetWork           = require("game.net.NetWork")

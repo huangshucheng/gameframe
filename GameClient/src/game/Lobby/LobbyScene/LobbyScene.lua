@@ -1,6 +1,4 @@
-local CURRENT_MODULE_NAME = ...
-
-local BaseScene     = require("game.views.Base.BaseScene")
+local BaseScene     = require("game.Base.BaseScene")
 local LobbyScene    = class("LobbyScene", BaseScene)
 GT.LobbyScene       = LobbyScene
 
@@ -8,9 +6,10 @@ local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
 local cmd_name_map          = require("game.net.protocol.cmd_name_map")
 local UserInfo              = require("game.clientdata.UserInfo")
+local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local SystemServiceProxy    = require("game.modules.SystemServiceProxy")
-local Function              = require('game.views.Base.Function')
+local Function              = require('game.Base.Function')
 
 --------------拓展
 require('game.Lobby.LobbyScene.LobbySceneReceiveMsg')
@@ -134,7 +133,7 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
-    LogicServiceProxy:getInstance():sendCreateRoom("hc>> room_info")
+    LogicServiceProxy:getInstance():sendCreateRoom("房间配置:~~~~~~~~~~~~~~~~~~")
 end
 
 function LobbyScene:onTouchBackRoomBtn(send,eventType)
@@ -185,6 +184,7 @@ function LobbyScene:onEnter()
     --获取用户信息
     SystemServiceProxy:getInstance():sendGetUgameInfo()
     LogicServiceProxy:getInstance():sendGetCreateStatus()
+    UserRoomInfo.reset()
 end
 
 function LobbyScene:onExit()

@@ -1,4 +1,4 @@
-local PopLayer = require('game.views.Base.PopLayer')
+local PopLayer = require('game.Base.PopLayer')
 local SetLayer = class("SetLayer", PopLayer)
 
 local AuthServiceProxy 	= require("game.modules.AuthServiceProxy")

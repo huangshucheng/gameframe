@@ -1,4 +1,4 @@
-local PopLayer = require('game.views.Base.PopLayer')
+local PopLayer = require('game.Base.PopLayer')
 local TipsLayer = class("TipsLayer", PopLayer)
 
 local KW_TIPS_BG 		= 'KW_TIPS_BG'

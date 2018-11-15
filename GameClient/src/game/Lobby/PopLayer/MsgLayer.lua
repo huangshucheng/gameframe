@@ -1,4 +1,4 @@
-local PopLayer = require('game.views.Base.PopLayer')
+local PopLayer = require('game.Base.PopLayer')
 local MsgLayer = class("MsgLayer", PopLayer)
 
 local Respones 			= require("game.net.Respones")

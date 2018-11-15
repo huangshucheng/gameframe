@@ -4,7 +4,9 @@ local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
 local cmd_name_map          = require("game.net.protocol.cmd_name_map")
 local UserInfo              = require("game.clientdata.UserInfo")
+local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
+
 
 function LobbyScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
@@ -113,6 +115,9 @@ function LobbyScene:onEventCreateRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
+        local seatid = data.user_info.seatid
+        UserRoomInfo.setUserRoomInfoBySeatId(seatid, data.user_info)
+        UserRoomInfo.setRoomInfo(data.room_info)
         self:enterScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"创建房间失败"})
@@ -123,6 +128,13 @@ function LobbyScene:onEventJoinRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
+        UserRoomInfo.setRoomInfo(data.room_info)
+        local users_info = data.users_info
+        if next(users_info) then
+            for i,v in ipairs(users_info) do
+                UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
+            end
+        end
         self:enterScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"加入房间失败"})
@@ -153,6 +165,13 @@ function LobbyScene:onEventBackRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
+        UserRoomInfo.setRoomInfo(data.room_info)
+        local users_info = data.users_info
+        if next(users_info) then
+            for i,v in ipairs(users_info) do
+                UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
+            end
+        end
         self:enterScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"返回房间失败"})
