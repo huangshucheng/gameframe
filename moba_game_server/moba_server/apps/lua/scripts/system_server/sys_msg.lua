@@ -1,10 +1,10 @@
-local Respones = require("Respones")
-local Stype = require("Stype")
-local Cmd = require("Cmd")
-local mysql_game = require("database/mysql_game")
+local Respones 		= require("Respones")
+local Stype 		= require("Stype")
+local Cmd 			= require("Cmd")
+local mysql_game 	= require("database/mysql_game")
 
-local sys_msg_data = {} -- 如果你加载进来，就会存放到这个表里面
-local sys_msg_version = 0 -- 什么时候时候加载的，搞一个时间戳，可以作为我们版本号;
+local sys_msg_data 		= {} -- 如果你加载进来，就会存放到这个表里面
+local sys_msg_version 	= 0 -- 什么时候时候加载的，搞一个时间戳，可以作为我们版本号;
 
 local function load_sys_msg() 
 	mysql_game.get_sys_msg(function (err, ret)
@@ -31,7 +31,6 @@ end
 
 Scheduler.once(load_sys_msg, 5000)
 
--- {stype, ctype, utag, body}
 local function get_sys_msg(s, req)
 	local uid = req[3]
 	local body = req[4]

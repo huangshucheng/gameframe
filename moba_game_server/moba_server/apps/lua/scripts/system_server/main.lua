@@ -16,20 +16,20 @@ if ProtoMan.proto_type() == proto_type.PROTO_BUF then
   end
 end
 
-local game_config = require("game_config")
-local servers = game_config.servers
-local Stype = require("Stype")
+local game_config 	= require("game_config")
+local Stype 		= require("Stype")
+local servers 		= game_config.servers
 
 -- 开启网关端口监听
 Netbus.tcp_listen(servers[Stype.System].port)
-print("System Server Start at ".. servers[Stype.System].port)
+print("[System Server]>>>>> Start at ".. servers[Stype.System].port)
 
 local system_service = require("system_server/system_service")
 local ret = Service.register(Stype.System, system_service)
 if ret then 
-  print("register System service:[" .. Stype.System.. "] success!!!")
+  print("register [System service]: success!!!")
 else
-  print("register System service:[" .. Stype.System.. "] failed!!!")
+  print("register [System service]: failed!!!")
 end
 
 

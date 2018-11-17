@@ -49,7 +49,6 @@ function RoomManager:receive_msg(session, msg)
 end
 
 function RoomManager:generate_room_id()
-	
 	local function general_rand_id()
 		local room_id = ''
 		for i = 1 , 6 do
@@ -66,7 +65,6 @@ function RoomManager:generate_room_id()
 end
 
 function RoomManager:on_create_room(s, req)
-	print('hcc>> create_room')
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -123,7 +121,6 @@ function RoomManager:on_create_room(s, req)
 end
 
 function RoomManager:on_exit_room(s, req)
-	print("hcc>> exit_room")
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -172,7 +169,6 @@ function RoomManager:on_exit_room(s, req)
 end
 
 function RoomManager:on_join_room(s, req)
-	print("hcc>> join_room")
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -227,7 +223,6 @@ function RoomManager:on_join_room(s, req)
 end
 
 function RoomManager:on_dessolve_room(s, req)
-	print("hcc>> dessolve_room")
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -268,7 +263,6 @@ function RoomManager:on_dessolve_room(s, req)
 end
 
 function RoomManager:on_get_create_status(s, req)
-	print("hcc>> on_get_create_status")
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -292,7 +286,6 @@ function RoomManager:on_get_create_status(s, req)
 end
 
 function RoomManager:on_back_room(s, req)
-	print("hcc>> on_back_room")
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -354,11 +347,7 @@ function RoomManager:delete_room(room_id)
 end
 
 function RoomManager:get_total_rooms()
-	local num = 0
-	for _ ,v in pairs(server_rooms) do
-		num = num + 1
-	end
-	return num
+	return table.nums(server_rooms)
 end
 
 function RoomManager:get_room_by_room_id(room_id)

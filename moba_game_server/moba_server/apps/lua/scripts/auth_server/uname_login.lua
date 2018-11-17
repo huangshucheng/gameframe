@@ -1,16 +1,13 @@
 local mysql_center = require("database/mysql_auth_center")
 local redis_center = require("database/redis_center")
 
-local Respones = require("Respones")
-local Stype = require("Stype")
-local Cmd = require("Cmd")
+local Respones 	= require("Respones")
+local Stype 	= require("Stype")
+local Cmd 		= require("Cmd")
 
-
--- {stype, ctype, utag, body}
 local function login(s, req)
 	local utag = req[3]
 	local uname_login_req = req[4]
-	
 	-- 检查参数
 	-- if string.len(uname_login_req.uname) <= 0 or string.len(uname_login_req.upwd) ~= 32 then 	-- TODO md5 check 
 	if string.len(uname_login_req.uname) <= 0 then 	-- TODO md5 check 
@@ -21,10 +18,9 @@ local function login(s, req)
 		Session.send_msg(s, msg)
 		return
 	end
-
 	-- 检查用户名和密码是否正确
 	mysql_center.get_uinfo_by_uname_upwd(uname_login_req.uname, uname_login_req.upwd, function (err, uinfo)
-		if err then -- 告诉客户端系统错误信息;
+		if err then
 			local msg = {Stype.Auth, Cmd.eUnameLoginRes, utag, {
 				status = Respones.SystemErr,
 			}}
@@ -50,10 +46,8 @@ local function login(s, req)
 			Session.send_msg(s, msg)
 			return
 		end
-		-- end
 
 		redis_center.set_uinfo_inredis(uinfo.uid, uinfo)
-
 		local msg = { Stype.Auth, Cmd.eUnameLoginRes, utag, {
 			status = Respones.OK,
 			uinfo = {
@@ -65,8 +59,8 @@ local function login(s, req)
 			}
 		}}
 		Session.send_msg(s, msg)
+		print('authserver>> username login, id: ' .. tostring(msg[4].uinfo.uid))
 	end)
-	--end
 end
 
 local uname_login = {

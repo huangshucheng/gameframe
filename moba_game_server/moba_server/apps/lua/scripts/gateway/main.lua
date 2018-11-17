@@ -18,7 +18,7 @@ end
 local game_config = require("game_config")
 -- 开启网关端口监听
 Netbus.tcp_listen(game_config.gateway_tcp_port)
-print("Tcp server listen At "..game_config.gateway_tcp_port)
+print("[gateway Server]>>>>> Start at ".. game_config.gateway_tcp_port)
 
 local servers = game_config.servers
 local gw_service = require("gateway/gw_service")
@@ -26,9 +26,9 @@ local gw_service = require("gateway/gw_service")
 for k, v in pairs(servers) do 
 	local ret = Service.register_with_raw(v.stype, gw_service)
 	if ret then 
-  		print("register gw_servce:[" .. v.stype.. "] success!!!")
+  		print("register [gw_servce] success!!!")
 	else
-  		print("register gw_servce:[" .. v.stype.. "] failed!!!")
+  		print("register [gw_servce] failed!!!")
 	end
 end
 

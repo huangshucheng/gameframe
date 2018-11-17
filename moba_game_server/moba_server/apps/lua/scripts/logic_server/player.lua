@@ -21,7 +21,7 @@ function Player:init(uid, s, ret_handler)
 	self._side 		= -1 -- 玩家在游戏里面所在的边, 0(lhs), 1(rhs) 
 	self._heroid 	= -1 -- 玩家的英雄号 [1, 5]
 	self._is_robot 		= false    -- 玩家是否为机器人
-	self._is_host   	= false
+	self._is_host   	= false    -- 是否房主
 	self._ugame_info 	= nil 	   -- 玩家游戏信息（金币，经验）
 	self._uinfo 		= nil 	   -- 玩家帐号信息（名称，头像）
 

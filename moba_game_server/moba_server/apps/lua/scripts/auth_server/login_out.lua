@@ -6,8 +6,7 @@ local Cmd = require("Cmd")
 
 local function do_login_out(s, req)
 	local uid = req[3];
-	Logger.debug("user ".. uid .. " login out!")
-
+	print('authserver>> user login out, id: ' .. tostring(uid))
 	-- todo other things
 	-- end
 	local msg = {Stype.Auth, Cmd.eLoginOutRes, uid, {

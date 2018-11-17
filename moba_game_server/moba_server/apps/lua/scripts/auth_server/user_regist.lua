@@ -1,8 +1,7 @@
 local mysql_center = require("database/mysql_auth_center")
-
-local Respones = require("Respones")
-local Stype = require("Stype")
-local Cmd = require("Cmd")
+local Respones 	= require("Respones")
+local Stype 	= require("Stype")
+local Cmd 		= require("Cmd")
 
 local function _do_create_account(s, utag, uname, upwd_md5)
 	mysql_center.do_create_account(uname, upwd_md5, function (err, ret)

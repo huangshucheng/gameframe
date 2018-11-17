@@ -133,7 +133,14 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
-    LogicServiceProxy:getInstance():sendCreateRoom("房间配置:~~~~~~~~~~~~~~~~~~")
+    --[[    
+    local str = 'start<< '
+    for idx = 1 , 500 do
+        str = str .. idx
+    end
+    str = str .. '  end>>'
+    ]]
+    LogicServiceProxy:getInstance():sendCreateRoom('hcc: gamerole~~~~~~~~')
 end
 
 function LobbyScene:onTouchBackRoomBtn(send,eventType)

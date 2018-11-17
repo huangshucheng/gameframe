@@ -6,7 +6,7 @@ local RoomManager   = require("logic_server/RoomManager")
 
 local function on_logic_recv_cmd(session, msg)
 	if PlayerManager:getInstance():receive_msg(session, msg) then return end
-	if RoomManager:getInstance():receive_msg(session, msg) then return end
+	if RoomManager:getInstance():receive_msg(session, msg) 	 then return end
 end
 
 local function on_gateway_disconnect(session, stype) 

@@ -1,10 +1,9 @@
-local Respones = require("Respones")
-local Stype = require("Stype")
-local Cmd = require("Cmd")
-local mysql_game = require("database/mysql_game")
+local Respones 	= require("Respones")
+local Stype 	= require("Stype")
+local Cmd 		= require("Cmd")
+local mysql_game 	= require("database/mysql_game")
+local redis_game 	= require("database/redis_game")
 local moba_game_config = require("moba_game_config")
-local redis_game = require("database/redis_game")
-
 
 local function send_bonues_to_user(uid, bonues_info, ret_handler)
 	-- 要更新发放奖励;

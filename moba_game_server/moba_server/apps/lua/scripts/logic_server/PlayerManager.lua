@@ -50,9 +50,9 @@ end
 --登录逻辑服务器
 -- {stype, ctype, utag, body}
 function PlayerManager:on_login_logic_server(s, req)
-	print('PlayerManager:login_logic_server>>  '.. tostring(self))
 	local uid = req[3]
 	local stype = req[1]
+	print('PlayerManager:login_logic_server>>  uid: '.. tostring(uid))
 
 	local p = logic_server_players[uid]
 	if p then

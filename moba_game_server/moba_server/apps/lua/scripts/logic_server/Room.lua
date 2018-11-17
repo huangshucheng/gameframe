@@ -78,7 +78,6 @@ function Room:exit_player(player)
 		print("hcc>> room: exit_player " ..  'playerNum: '.. self:get_room_player_num())
 		return true
 	end
-
 	return false
 end
 

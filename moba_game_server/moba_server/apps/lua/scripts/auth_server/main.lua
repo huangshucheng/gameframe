@@ -22,14 +22,14 @@ local Stype = require("Stype")
 
 -- 开启网关端口监听
 Netbus.tcp_listen(servers[Stype.Auth].port)
-print("Auth Server Start at ".. servers[Stype.Auth].port)
+print("[Auth Server]>>>>> Start at ".. servers[Stype.Auth].port)
 
 local auth_service = require("auth_server/auth_service")
 local ret = Service.register(Stype.Auth, auth_service)
 if ret then 
-  print("register Auth service:[" .. Stype.Auth.. "] success!!!")
+  print("register [Auth service] success!!!")
 else
-  print("register Auth service:[" .. Stype.Auth.. "] failed!!!")
+  print("register [Auth service] failed!!!")
 end
 
 

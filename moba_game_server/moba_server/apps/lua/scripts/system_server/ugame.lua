@@ -1,15 +1,14 @@
-local Respones = require("Respones")
-local Stype = require("Stype")
-local Cmd = require("Cmd")
-local mysql_game = require("database/mysql_game")
-local login_bonues = require("system_server/login_bonues")
-local redis_game = require("database/redis_game")
-local redis_rank = require("database/redis_rank")
+local Respones 	= require("Respones")
+local Stype 	= require("Stype")
+local Cmd 		= require("Cmd")
+local mysql_game 	= require("database/mysql_game")
+local login_bonues 	= require("system_server/login_bonues")
+local redis_game 	= require("database/redis_game")
+local redis_rank 	= require("database/redis_rank")
 
--- {stype, ctype, utag, body}
 local function get_ugame_info(s, req)
-	local uid = req[3];
-	print("get_ugame_info ".. uid)
+	local uid = req[3]
+	print('systemserver>> get_ugame_info, uid:' .. tostring(uid))
 	mysql_game.get_ugame_info(uid, function (err, ugame_info)
 		if err then -- 告诉客户端系统错误信息;
 			local msg = {Stype.System, Cmd.eGetUgameInfoRes, uid, {
@@ -36,8 +35,7 @@ local function get_ugame_info(s, req)
 			return
 		end
 
-		-- 读取到了
-		-- 找到了我们gkey所对应的游客数据;
+		-- 找到gkey所对应的游客数据;
 		if ugame_info.ustatus ~= 0 then --账号被查封
 			local msg = {Stype.System, Cmd.eGetUgameInfoRes, uid, {
 				status = Respones.UserIsFreeze,
@@ -50,11 +48,8 @@ local function get_ugame_info(s, req)
 
 		-- 更新reidis数据库里面的数据;
 		redis_game.set_ugame_info_inredis(uid, ugame_info)
-		-- end 
-
-		-- 刷新一下世界排行榜
+		-- 刷新世界排行榜
 		redis_rank.flush_world_rank_with_uchip_inredis(uid, ugame_info.uchip)
-		-- end
 
 		-- 检查登陆奖励
 		login_bonues.check_login_bonues(uid, function (err, bonues_info)
@@ -66,7 +61,6 @@ local function get_ugame_info(s, req)
 				Session.send_msg(s, msg)
 				return
 			end
-
 			-- 返回给客户端
 			local msg = { Stype.System, Cmd.eGetUgameInfoRes, uid, {
 				status = Respones.OK,
@@ -87,7 +81,6 @@ local function get_ugame_info(s, req)
 			}}
 			Session.send_msg(s, msg)
 		end)
-		--end
 	end)
 end
 

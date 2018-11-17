@@ -1,13 +1,10 @@
 local game_config = require("game_config")
--- stype --> session的一个映射
-local server_session_man 	= {}
--- 当前正在做连接的服务器
-local do_connecting 		= {}
--- 临时的ukey 来找client session
-local g_ukey = 1
+
+local server_session_man 	= {}     -- stype --> session的一个映射
+local do_connecting 		= {}     -- 当前正在做连接的服务器
+local g_ukey = 1	 		         -- 临时的ukey 来找client session
 local client_sessions_ukey 	= {}
--- uid来找client session
-local client_sessions_uid 	= {}
+local client_sessions_uid 	= {}     -- uid来找client session
 
 local Stype 				= require("Stype")
 local Cmd 					= require("Cmd")
@@ -176,7 +173,6 @@ local function send_to_server(client_session, raw_cmd)
 	Session.send_raw_cmd(server_session, raw_cmd)
 end
 
--- {stype, ctype, utag, body}
 local function on_gw_recv_raw_cmd(s, raw_cmd)
 	if Session.asclient(s) == 0 then --转发给服务器
 		send_to_server(s, raw_cmd)
@@ -205,20 +201,17 @@ local function on_gw_session_disconnect(s, stype)
 		client_sessions_ukey[utag] = nil -- 保证utag --> value 删除
  		Session.set_utag(s, 0)
 	end
-	-- end
 
 	-- 把客户端从uid映射表里移除
 	local uid = Session.get_uid(s)
 	if client_sessions_uid[uid] ~= nil and client_sessions_uid[uid] == s then 
 		client_sessions_uid[uid] = nil
 	end
-	-- end
 
 	local server_session = server_session_man[stype]
 	if server_session == nil then
 		return
 	end
-
 	-- 客户端uid用户掉线了，我要把这个事件告诉和网关所连接的stype类服务器
 	if uid ~= 0 then 
 		local user_lost = {stype, Cmd.eUserLostConn, uid, nil}
