@@ -118,6 +118,11 @@ function RoomManager:on_create_room(s, req)
 
 	player:send_msg(stype, Cmd.eCreateRoomRes, msg_body)
 	print('hcc>> create_room success roomid: ' .. tostring(roomid) .. '  ,roomNum: ' .. self:get_total_rooms())
+	--test
+	-- local body_msg = {
+	-- 	user_info = player:get_user_arrived_info(),
+	-- }
+	-- room:broacast_in_room(stype, Cmd.eUserOffLine, body_msg)
 end
 
 function RoomManager:on_exit_room(s, req)
@@ -148,8 +153,12 @@ function RoomManager:on_exit_room(s, req)
 		return
 	end
 
-	local tmp_user_info = player:get_user_arrived_info()
+	local ishost = player:get_is_host()
+	if ishost then
+		player:set_is_offline(true)
+	end
 
+	local tmp_user_info = player:get_user_arrived_info()
 	local ret = room:exit_player(player)
 	if not ret then
 		NetWork:getInstance():send_status(s, stype, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
@@ -256,7 +265,10 @@ function RoomManager:on_dessolve_room(s, req)
 		return
 	end
 
-	NetWork:getInstance():send_status(s, stype, Cmd.eDessolveRes, uid, Respones.OK)
+	local msg = {
+		status = Respones.OK
+	}
+	room:broacast_in_room(stype, Cmd.eDessolveRes, msg)
 	room:kick_all_players_in_room()
 	self:delete_room(room_id)
 	print('hcc>> dessolve_room success roomNum: '.. self:get_total_rooms())
@@ -326,6 +338,33 @@ function RoomManager:on_back_room(s, req)
 	player:send_msg(stype, Cmd.eBackRoomRes, msg_body)
 	room:broacast_in_room(stype, Cmd.eUserArrived, player:get_user_arrived_info(), player)
 	print('hcc>> on_back_room usccess roomNum: ' .. self:get_total_rooms())
+end
+-- TODO
+function RoomManager:on_player_disconnect(player)
+	print('hcc>> on_player_disconnect')
+	if type(player) ~= 'table' then
+		return
+	end
+
+	local room_id = player:get_room_id()
+
+	if room_id == -1 then
+		print('hcc>> on_player_disconnect 1')
+		return
+	end
+
+	local room = server_rooms[room_id]
+	if not room then
+		print('hcc>> on_player_disconnect 2')
+		return
+	end
+
+	player:set_is_offline(true)
+	local body_msg = {
+		user_info = player:get_user_arrived_info(),
+	}
+	room:broacast_in_room(Stype.Logic, Cmd.eUserOffLine, body_msg)
+	print("hcc>> on_player_disconnect roomNum: " .. self:get_total_rooms())
 end
 
 function RoomManager:get_is_player_uid_in_room(player)

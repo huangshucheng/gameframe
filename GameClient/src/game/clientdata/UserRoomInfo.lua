@@ -15,6 +15,7 @@ local room_user_info = {}
 			uface = 0,
 			unick = '',
 			usex = 0,
+			isoffline = false,
 		}
 	}
 ]]
@@ -55,6 +56,18 @@ function UserRoomInfo.setUserRoomInfoBySeatId(seatId, user_info)
 		return
 	end
 	room_user_info[seatId] = user_info
+end
+
+function UserRoomInfo.removeUserRoomInfoBySeatId(seatId)
+	if type(seatId) ~= 'number' then
+		return
+	end
+	for k,v in pairs(room_user_info) do
+		if k == seatId then
+			table.remove(room_user_info, k)
+			break
+		end
+	end
 end
 
 function UserRoomInfo.getUserRoomInfoBySeatId(seatId)

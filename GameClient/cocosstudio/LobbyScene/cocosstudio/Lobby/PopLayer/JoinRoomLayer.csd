@@ -6,12 +6,90 @@
       <ObjectData Name="Layer" Tag="47" ctype="GameLayerObjectData">
         <Size X="1280.0000" Y="720.0000" />
         <Children>
-          <AbstractNodeData Name="KW_IMG_BG" ActionTag="-423985720" Tag="74" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="240.4330" RightMargin="238.5670" TopMargin="17.0000" BottomMargin="17.0000" TouchEnable="True" Scale9Enable="True" LeftEage="50" RightEage="50" TopEage="50" BottomEage="50" Scale9OriginX="50" Scale9OriginY="50" Scale9Width="701" Scale9Height="586" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="KW_IMG_BG" ActionTag="-423985720" Tag="74" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="240.3960" RightMargin="238.6040" TopMargin="17.0000" BottomMargin="17.0000" TouchEnable="True" Scale9Enable="True" LeftEage="50" RightEage="50" TopEage="50" BottomEage="50" Scale9OriginX="50" Scale9OriginY="50" Scale9Width="701" Scale9Height="586" ctype="ImageViewObjectData">
             <Size X="801.0000" Y="686.0000" />
             <Children>
-              <AbstractNodeData Name="KW_PANEL_NUM" ActionTag="-1958332212" Tag="49" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="50.5000" RightMargin="50.5000" TopMargin="115.8779" BottomMargin="470.1221" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="KW_PANEL_NUM" ActionTag="-1958332212" Tag="49" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="50.5000" RightMargin="50.5000" TopMargin="115.8779" BottomMargin="470.1221" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="700.0000" Y="100.0000" />
                 <Children>
+                  <AbstractNodeData Name="KW_PANEL_1" ActionTag="1825903047" Tag="51" IconVisible="False" LeftMargin="53.6357" RightMargin="566.3643" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+                    <Size X="80.0000" Y="100.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="93.6357" Y="48.3647" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.1338" Y="0.4836" />
+                    <PreSize X="0.1143" Y="1.0000" />
+                    <SingleColor A="255" R="255" G="255" B="255" />
+                    <FirstColor A="255" R="150" G="200" B="255" />
+                    <EndColor A="255" R="255" G="255" B="255" />
+                    <ColorVector ScaleY="1.0000" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="KW_PANEL_2" ActionTag="2137472143" Tag="53" IconVisible="False" LeftMargin="157.2553" RightMargin="462.7447" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                    <Size X="80.0000" Y="100.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="197.2553" Y="48.3647" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2818" Y="0.4836" />
+                    <PreSize X="0.1143" Y="1.0000" />
+                    <SingleColor A="255" R="255" G="255" B="255" />
+                    <FirstColor A="255" R="150" G="200" B="255" />
+                    <EndColor A="255" R="255" G="255" B="255" />
+                    <ColorVector ScaleY="1.0000" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="KW_PANEL_3" ActionTag="1666803508" Tag="54" IconVisible="False" LeftMargin="260.8749" RightMargin="359.1251" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                    <Size X="80.0000" Y="100.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="300.8749" Y="48.3647" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4298" Y="0.4836" />
+                    <PreSize X="0.1143" Y="1.0000" />
+                    <SingleColor A="255" R="255" G="255" B="255" />
+                    <FirstColor A="255" R="150" G="200" B="255" />
+                    <EndColor A="255" R="255" G="255" B="255" />
+                    <ColorVector ScaleY="1.0000" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="KW_PANEL_4" ActionTag="-1831528388" Tag="55" IconVisible="False" LeftMargin="364.4945" RightMargin="255.5055" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                    <Size X="80.0000" Y="100.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="404.4945" Y="48.3647" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5778" Y="0.4836" />
+                    <PreSize X="0.1143" Y="1.0000" />
+                    <SingleColor A="255" R="255" G="255" B="255" />
+                    <FirstColor A="255" R="150" G="200" B="255" />
+                    <EndColor A="255" R="255" G="255" B="255" />
+                    <ColorVector ScaleY="1.0000" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="KW_PANEL_5" ActionTag="-586281915" Tag="56" IconVisible="False" LeftMargin="468.1142" RightMargin="151.8859" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                    <Size X="80.0000" Y="100.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="508.1142" Y="48.3647" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.7259" Y="0.4836" />
+                    <PreSize X="0.1143" Y="1.0000" />
+                    <SingleColor A="255" R="255" G="255" B="255" />
+                    <FirstColor A="255" R="150" G="200" B="255" />
+                    <EndColor A="255" R="255" G="255" B="255" />
+                    <ColorVector ScaleY="1.0000" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="KW_PANEL_6" ActionTag="-1969194053" Tag="57" IconVisible="False" LeftMargin="571.7338" RightMargin="48.2662" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                    <Size X="80.0000" Y="100.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="611.7338" Y="48.3647" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.8739" Y="0.4836" />
+                    <PreSize X="0.1143" Y="1.0000" />
+                    <SingleColor A="255" R="255" G="255" B="255" />
+                    <FirstColor A="255" R="150" G="200" B="255" />
+                    <EndColor A="255" R="255" G="255" B="255" />
+                    <ColorVector ScaleY="1.0000" />
+                  </AbstractNodeData>
                   <AbstractNodeData Name="KW_TEXT_NUM_1" ActionTag="-1926619005" Tag="164" IconVisible="False" LeftMargin="67.7986" RightMargin="582.2014" TopMargin="0.5379" BottomMargin="-0.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
                     <Size X="50.0000" Y="100.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -125,13 +203,13 @@
                 <PreSize X="0.3620" Y="0.0773" />
                 <FileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/joinroom_title_bg.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_0" ActionTag="-1421348616" Tag="151" IconVisible="False" LeftMargin="82.5841" RightMargin="524.4159" TopMargin="537.5577" BottomMargin="49.4423" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="164" Scale9Height="77" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="KW_BTN_0" ActionTag="-1421348616" Tag="151" IconVisible="False" LeftMargin="85.8346" RightMargin="521.1653" TopMargin="537.5577" BottomMargin="49.4423" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="164" Scale9Height="77" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="194.0000" Y="99.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="179.5841" Y="98.9423" />
+                <Position X="182.8346" Y="98.9423" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2242" Y="0.1442" />
+                <PrePosition X="0.2283" Y="0.1442" />
                 <PreSize X="0.2422" Y="0.1443" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/joinroom_btn_number0_pressed.png" Plist="" />
@@ -260,13 +338,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_9" ActionTag="-230122280" Tag="160" IconVisible="False" LeftMargin="522.9331" RightMargin="84.0669" TopMargin="426.5275" BottomMargin="165.4725" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="164" Scale9Height="72" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="KW_BTN_9" ActionTag="-230122280" Tag="160" IconVisible="False" LeftMargin="523.9329" RightMargin="83.0671" TopMargin="426.5275" BottomMargin="165.4725" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="164" Scale9Height="72" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="194.0000" Y="94.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="619.9331" Y="212.4725" />
+                <Position X="620.9329" Y="212.4725" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.7739" Y="0.3097" />
+                <PrePosition X="0.7752" Y="0.3097" />
                 <PreSize X="0.2422" Y="0.1370" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/joinroom_btn_number9_pressed.png" Plist="" />
@@ -292,7 +370,7 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="640.9330" Y="360.0000" />
+            <Position X="640.8960" Y="360.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5007" Y="0.5000" />

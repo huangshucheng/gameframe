@@ -15,6 +15,17 @@
               <Image Name="mj_img_virtualBg.jpg" />
               <Image Name="mj_img_virtualBg.png" />
             </Folder>
+            <Folder Name="rectheader">
+              <Image Name="11.png" />
+              <Image Name="12.png" />
+              <Image Name="13.png" />
+              <Image Name="14.png" />
+              <Image Name="15.png" />
+              <Image Name="16.png" />
+              <Image Name="17.png" />
+              <Image Name="18.png" />
+              <Image Name="19.png" />
+            </Folder>
             <Image Name="anniu.png" />
             <Image Name="dialog_btn_cancel_normal.png" />
             <Image Name="dialog_btn_cancel_pressed.png" />
@@ -28,6 +39,7 @@
             <Image Name="dikuang2.png" />
             <Image Name="head_yellow.png" />
             <Image Name="kuang.png" />
+            <Image Name="offline_flag.png" />
             <Image Name="setting_btn_exit_normal.png" />
             <Image Name="setting_btn_exit_pressed.png" />
             <Image Name="shezhi.png" />

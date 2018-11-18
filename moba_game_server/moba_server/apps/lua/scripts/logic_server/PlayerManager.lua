@@ -82,6 +82,8 @@ function PlayerManager:on_player_disconnect(s, req)
 		return 
 	end
 	if p then
+		local RoomManager = require("logic_server/RoomManager")
+		RoomManager:getInstance():on_player_disconnect(p)
 		print("Player uid " .. uid .. " disconnect!")
 		logic_server_players[uid] = nil
 		online_player_num = online_player_num - 1

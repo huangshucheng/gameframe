@@ -46,4 +46,17 @@ function BaseScene:enterScene(scenePath)
     end
 end
 
+function BaseScene:pushScene(scenePath)
+    local gameLayer = require(scenePath):create()
+    if gameLayer then
+        local scene = display.newScene()
+        scene:addChild(gameLayer)
+        cc.Director:getInstance():pushScene(scene)
+    end
+end
+
+function BaseScene:popScene()
+    cc.Director:getInstance():popScene()
+end
+
 return BaseScene

@@ -71,8 +71,11 @@ enum Cmd {
 	
 	eBackRoomReq = 42;
 	eBackRoomRes = 43;
+	
+	eUserOffLine = 44;
+	eUserReconnected = 45;
 
-	eGameStart 	 = 44;
+	eGameStart 	 = 46;
 }
 
 message GuestLoginReq {
@@ -199,6 +202,7 @@ message UserArrived {
 	required int32 side = 5;
 	required int32 roomid = 6;
 	required bool  ishost = 7;
+	required bool  isoffline = 8;
 }
 
 message ExitMatchRes {
@@ -256,6 +260,16 @@ message GetCreateStatusRes {
 }
 
 message BackRoomRes {
+	required int32 status = 1;
+	optional string room_info = 2;
+	repeated UserArrived users_info = 3;
+}
+
+message UserOffLine {
+	required UserArrived user_info = 1;
+}
+
+message UserReconnected {	
 	required int32 status = 1;
 	optional string room_info = 2;
 	repeated UserArrived users_info = 3;

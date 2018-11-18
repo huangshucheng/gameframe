@@ -200,6 +200,7 @@ local function on_gw_session_disconnect(s, stype)
 	if client_sessions_ukey[utag] ~= nil and client_sessions_ukey[utag] == s then 
 		client_sessions_ukey[utag] = nil -- 保证utag --> value 删除
  		Session.set_utag(s, 0)
+ 		print('hcc>> on_gw_session_disconnect 111 utag: ' .. uid)
 	end
 
 	-- 把客户端从uid映射表里移除
@@ -216,6 +217,7 @@ local function on_gw_session_disconnect(s, stype)
 	if uid ~= 0 then 
 		local user_lost = {stype, Cmd.eUserLostConn, uid, nil}
 		Session.send_msg(server_session, user_lost)
+		print('hcc>> on_gw_session_disconnect 222 uid: ' .. uid)
 	end
 end
 

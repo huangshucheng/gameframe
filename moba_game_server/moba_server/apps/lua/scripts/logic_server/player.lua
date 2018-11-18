@@ -22,6 +22,7 @@ function Player:init(uid, s, ret_handler)
 	self._heroid 	= -1 -- 玩家的英雄号 [1, 5]
 	self._is_robot 		= false    -- 玩家是否为机器人
 	self._is_host   	= false    -- 是否房主
+	self._is_offline 	= false    -- 是否掉线
 	self._ugame_info 	= nil 	   -- 玩家游戏信息（金币，经验）
 	self._uinfo 		= nil 	   -- 玩家帐号信息（名称，头像）
 
@@ -62,6 +63,7 @@ function Player:get_user_arrived_info()
 		side 	= self._side,
 		roomid  = self._room_id,
 		ishost  = self._is_host,
+		isoffline = self._is_offline
 	}
 	return body
 end
@@ -78,6 +80,7 @@ function Player:reset()
 	self._uinfo 		= nil
 	self._is_robot 		= false
 	self._is_host 		= false
+	self._is_offline 	= false
 end
 
 function Player:exit_room_and_reset()
@@ -115,6 +118,14 @@ function Player:get_is_host()
 	return self._is_host
 end
 
+function Player:get_is_offline()
+	return self._is_offline
+end
+
+function Player:set_is_offline(is_offline)
+	self._is_offline = is_offline
+end
+
 function Player:set_session(s)
 	self._session = s
 end
@@ -141,6 +152,7 @@ function Player:copy_room_info(player)
 	self._heroid  = player._heroid
 	self._is_robot = player._is_robot
 	self._is_host  = player._is_host
+	self._is_offline = player._is_offline
 end
 
 function Player:get_uid()

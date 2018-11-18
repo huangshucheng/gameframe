@@ -118,7 +118,7 @@ function LobbyScene:onEventCreateRoom(event)
         local seatid = data.user_info.seatid
         UserRoomInfo.setUserRoomInfoBySeatId(seatid, data.user_info)
         UserRoomInfo.setRoomInfo(data.room_info)
-        self:enterScene('game.Mahjong.GameScene.GameScene')
+        self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"创建房间失败"})
     end
@@ -135,7 +135,7 @@ function LobbyScene:onEventJoinRoom(event)
                 UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
             end
         end
-        self:enterScene('game.Mahjong.GameScene.GameScene')
+        self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"加入房间失败"})
     end
@@ -172,7 +172,7 @@ function LobbyScene:onEventBackRoom(event)
                 UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
             end
         end
-        self:enterScene('game.Mahjong.GameScene.GameScene')
+        self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"返回房间失败"})
     end

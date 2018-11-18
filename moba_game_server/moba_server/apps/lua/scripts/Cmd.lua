@@ -61,8 +61,11 @@ local Cmd = {
 
 	eBackRoomReq = 42,
 	eBackRoomRes = 43,
+
+	eUserOffLine = 44,
+	eUserReconnected = 45,
 	--
-	eGameStart 	 = 44,
+	eGameStart 	 = 46,
 }
 
 return Cmd

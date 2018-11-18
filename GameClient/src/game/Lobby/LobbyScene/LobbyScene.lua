@@ -43,7 +43,6 @@ function LobbyScene:ctor()
     self._img_back_room     = nil
     self._img_create_room   = nil
 
-    GT.showPopLayer         = Function.showPopLayer
     LobbyScene.super.ctor(self)
 end
 
@@ -140,7 +139,7 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
     end
     str = str .. '  end>>'
     ]]
-    LogicServiceProxy:getInstance():sendCreateRoom('hcc: gamerole~~~~~~~~')
+    LogicServiceProxy:getInstance():sendCreateRoom('房间规则')
 end
 
 function LobbyScene:onTouchBackRoomBtn(send,eventType)
@@ -188,6 +187,7 @@ end
 
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
+    GT.showPopLayer         = Function.showPopLayer
     --获取用户信息
     SystemServiceProxy:getInstance():sendGetUgameInfo()
     LogicServiceProxy:getInstance():sendGetCreateStatus()
@@ -195,7 +195,7 @@ function LobbyScene:onEnter()
 end
 
 function LobbyScene:onExit()
-
+    print('LobbyScene:onExit')
 end
 
 return LobbyScene

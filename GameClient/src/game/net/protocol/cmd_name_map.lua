@@ -44,6 +44,8 @@ local cmd_name_map = {
 	"GetCreateStatusRes",
 	"BackRoomReq",
 	"BackRoomRes",
+	"UserOffLine",
+	"UserReconnected",
 	--
 	"GameStart",
 }

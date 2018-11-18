@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[35];
+  static const ::google::protobuf::internal::ParseTable schema[37];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -113,6 +113,10 @@ void InitDefaultsGetCreateStatusResImpl();
 void InitDefaultsGetCreateStatusRes();
 void InitDefaultsBackRoomResImpl();
 void InitDefaultsBackRoomRes();
+void InitDefaultsUserOffLineImpl();
+void InitDefaultsUserOffLine();
+void InitDefaultsUserReconnectedImpl();
+void InitDefaultsUserReconnected();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -149,6 +153,8 @@ inline void InitDefaults() {
   InitDefaultsDessolveRes();
   InitDefaultsGetCreateStatusRes();
   InitDefaultsBackRoomRes();
+  InitDefaultsUserOffLine();
+  InitDefaultsUserReconnected();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -247,6 +253,12 @@ extern UserExitMatchDefaultTypeInternal _UserExitMatch_default_instance_;
 class UserGameInfo;
 class UserGameInfoDefaultTypeInternal;
 extern UserGameInfoDefaultTypeInternal _UserGameInfo_default_instance_;
+class UserOffLine;
+class UserOffLineDefaultTypeInternal;
+extern UserOffLineDefaultTypeInternal _UserOffLine_default_instance_;
+class UserReconnected;
+class UserReconnectedDefaultTypeInternal;
+extern UserReconnectedDefaultTypeInternal _UserReconnected_default_instance_;
 class UserRegistReq;
 class UserRegistReqDefaultTypeInternal;
 extern UserRegistReqDefaultTypeInternal _UserRegistReq_default_instance_;
@@ -323,7 +335,9 @@ enum Cmd {
   eGetCreateStatusRes = 41,
   eBackRoomReq = 42,
   eBackRoomRes = 43,
-  eGameStart = 44
+  eUserOffLine = 44,
+  eUserReconnected = 45,
+  eGameStart = 46
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
@@ -3218,6 +3232,13 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool ishost() const;
   void set_ishost(bool value);
 
+  // required bool isoffline = 8;
+  bool has_isoffline() const;
+  void clear_isoffline();
+  static const int kIsofflineFieldNumber = 8;
+  bool isoffline() const;
+  void set_isoffline(bool value);
+
   // @@protoc_insertion_point(class_scope:UserArrived)
  private:
   void set_has_unick();
@@ -3234,6 +3255,8 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void clear_has_roomid();
   void set_has_ishost();
   void clear_has_ishost();
+  void set_has_isoffline();
+  void clear_has_isoffline();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -3248,6 +3271,7 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::int32 side_;
   ::google::protobuf::int32 roomid_;
   bool ishost_;
+  bool isoffline_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserArrivedImpl();
 };
@@ -4824,6 +4848,259 @@ class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::int32 status_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsBackRoomResImpl();
+};
+// -------------------------------------------------------------------
+
+class UserOffLine : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserOffLine) */ {
+ public:
+  UserOffLine();
+  virtual ~UserOffLine();
+
+  UserOffLine(const UserOffLine& from);
+
+  inline UserOffLine& operator=(const UserOffLine& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UserOffLine(UserOffLine&& from) noexcept
+    : UserOffLine() {
+    *this = ::std::move(from);
+  }
+
+  inline UserOffLine& operator=(UserOffLine&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserOffLine& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UserOffLine* internal_default_instance() {
+    return reinterpret_cast<const UserOffLine*>(
+               &_UserOffLine_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    35;
+
+  void Swap(UserOffLine* other);
+  friend void swap(UserOffLine& a, UserOffLine& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UserOffLine* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserOffLine* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserOffLine& from);
+  void MergeFrom(const UserOffLine& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserOffLine* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .UserArrived user_info = 1;
+  bool has_user_info() const;
+  void clear_user_info();
+  static const int kUserInfoFieldNumber = 1;
+  const ::UserArrived& user_info() const;
+  ::UserArrived* release_user_info();
+  ::UserArrived* mutable_user_info();
+  void set_allocated_user_info(::UserArrived* user_info);
+
+  // @@protoc_insertion_point(class_scope:UserOffLine)
+ private:
+  void set_has_user_info();
+  void clear_has_user_info();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::UserArrived* user_info_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUserOffLineImpl();
+};
+// -------------------------------------------------------------------
+
+class UserReconnected : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserReconnected) */ {
+ public:
+  UserReconnected();
+  virtual ~UserReconnected();
+
+  UserReconnected(const UserReconnected& from);
+
+  inline UserReconnected& operator=(const UserReconnected& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UserReconnected(UserReconnected&& from) noexcept
+    : UserReconnected() {
+    *this = ::std::move(from);
+  }
+
+  inline UserReconnected& operator=(UserReconnected&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserReconnected& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UserReconnected* internal_default_instance() {
+    return reinterpret_cast<const UserReconnected*>(
+               &_UserReconnected_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    36;
+
+  void Swap(UserReconnected* other);
+  friend void swap(UserReconnected& a, UserReconnected& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UserReconnected* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserReconnected* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserReconnected& from);
+  void MergeFrom(const UserReconnected& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserReconnected* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .UserArrived users_info = 3;
+  int users_info_size() const;
+  void clear_users_info();
+  static const int kUsersInfoFieldNumber = 3;
+  const ::UserArrived& users_info(int index) const;
+  ::UserArrived* mutable_users_info(int index);
+  ::UserArrived* add_users_info();
+  ::google::protobuf::RepeatedPtrField< ::UserArrived >*
+      mutable_users_info();
+  const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
+      users_info() const;
+
+  // optional string room_info = 2;
+  bool has_room_info() const;
+  void clear_room_info();
+  static const int kRoomInfoFieldNumber = 2;
+  const ::std::string& room_info() const;
+  void set_room_info(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_info(::std::string&& value);
+  #endif
+  void set_room_info(const char* value);
+  void set_room_info(const char* value, size_t size);
+  ::std::string* mutable_room_info();
+  ::std::string* release_room_info();
+  void set_allocated_room_info(::std::string* room_info);
+
+  // required int32 status = 1;
+  bool has_status() const;
+  void clear_status();
+  static const int kStatusFieldNumber = 1;
+  ::google::protobuf::int32 status() const;
+  void set_status(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:UserReconnected)
+ private:
+  void set_has_status();
+  void clear_has_status();
+  void set_has_room_info();
+  void clear_has_room_info();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::UserArrived > users_info_;
+  ::google::protobuf::internal::ArenaStringPtr room_info_;
+  ::google::protobuf::int32 status_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUserReconnectedImpl();
 };
 // ===================================================================
 
@@ -6828,6 +7105,30 @@ inline void UserArrived::set_ishost(bool value) {
   // @@protoc_insertion_point(field_set:UserArrived.ishost)
 }
 
+// required bool isoffline = 8;
+inline bool UserArrived::has_isoffline() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void UserArrived::set_has_isoffline() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void UserArrived::clear_has_isoffline() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void UserArrived::clear_isoffline() {
+  isoffline_ = false;
+  clear_has_isoffline();
+}
+inline bool UserArrived::isoffline() const {
+  // @@protoc_insertion_point(field_get:UserArrived.isoffline)
+  return isoffline_;
+}
+inline void UserArrived::set_isoffline(bool value) {
+  set_has_isoffline();
+  isoffline_ = value;
+  // @@protoc_insertion_point(field_set:UserArrived.isoffline)
+}
+
 // -------------------------------------------------------------------
 
 // ExitMatchRes
@@ -7696,9 +7997,192 @@ BackRoomRes::users_info() const {
   return users_info_;
 }
 
+// -------------------------------------------------------------------
+
+// UserOffLine
+
+// required .UserArrived user_info = 1;
+inline bool UserOffLine::has_user_info() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserOffLine::set_has_user_info() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserOffLine::clear_has_user_info() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserOffLine::clear_user_info() {
+  if (user_info_ != NULL) user_info_->Clear();
+  clear_has_user_info();
+}
+inline const ::UserArrived& UserOffLine::user_info() const {
+  const ::UserArrived* p = user_info_;
+  // @@protoc_insertion_point(field_get:UserOffLine.user_info)
+  return p != NULL ? *p : *reinterpret_cast<const ::UserArrived*>(
+      &::_UserArrived_default_instance_);
+}
+inline ::UserArrived* UserOffLine::release_user_info() {
+  // @@protoc_insertion_point(field_release:UserOffLine.user_info)
+  clear_has_user_info();
+  ::UserArrived* temp = user_info_;
+  user_info_ = NULL;
+  return temp;
+}
+inline ::UserArrived* UserOffLine::mutable_user_info() {
+  set_has_user_info();
+  if (user_info_ == NULL) {
+    user_info_ = new ::UserArrived;
+  }
+  // @@protoc_insertion_point(field_mutable:UserOffLine.user_info)
+  return user_info_;
+}
+inline void UserOffLine::set_allocated_user_info(::UserArrived* user_info) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete user_info_;
+  }
+  if (user_info) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      user_info = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, user_info, submessage_arena);
+    }
+    set_has_user_info();
+  } else {
+    clear_has_user_info();
+  }
+  user_info_ = user_info;
+  // @@protoc_insertion_point(field_set_allocated:UserOffLine.user_info)
+}
+
+// -------------------------------------------------------------------
+
+// UserReconnected
+
+// required int32 status = 1;
+inline bool UserReconnected::has_status() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UserReconnected::set_has_status() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UserReconnected::clear_has_status() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UserReconnected::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::google::protobuf::int32 UserReconnected::status() const {
+  // @@protoc_insertion_point(field_get:UserReconnected.status)
+  return status_;
+}
+inline void UserReconnected::set_status(::google::protobuf::int32 value) {
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:UserReconnected.status)
+}
+
+// optional string room_info = 2;
+inline bool UserReconnected::has_room_info() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserReconnected::set_has_room_info() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserReconnected::clear_has_room_info() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserReconnected::clear_room_info() {
+  room_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_room_info();
+}
+inline const ::std::string& UserReconnected::room_info() const {
+  // @@protoc_insertion_point(field_get:UserReconnected.room_info)
+  return room_info_.GetNoArena();
+}
+inline void UserReconnected::set_room_info(const ::std::string& value) {
+  set_has_room_info();
+  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserReconnected.room_info)
+}
+#if LANG_CXX11
+inline void UserReconnected::set_room_info(::std::string&& value) {
+  set_has_room_info();
+  room_info_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserReconnected.room_info)
+}
+#endif
+inline void UserReconnected::set_room_info(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_room_info();
+  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserReconnected.room_info)
+}
+inline void UserReconnected::set_room_info(const char* value, size_t size) {
+  set_has_room_info();
+  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserReconnected.room_info)
+}
+inline ::std::string* UserReconnected::mutable_room_info() {
+  set_has_room_info();
+  // @@protoc_insertion_point(field_mutable:UserReconnected.room_info)
+  return room_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserReconnected::release_room_info() {
+  // @@protoc_insertion_point(field_release:UserReconnected.room_info)
+  clear_has_room_info();
+  return room_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserReconnected::set_allocated_room_info(::std::string* room_info) {
+  if (room_info != NULL) {
+    set_has_room_info();
+  } else {
+    clear_has_room_info();
+  }
+  room_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_info);
+  // @@protoc_insertion_point(field_set_allocated:UserReconnected.room_info)
+}
+
+// repeated .UserArrived users_info = 3;
+inline int UserReconnected::users_info_size() const {
+  return users_info_.size();
+}
+inline void UserReconnected::clear_users_info() {
+  users_info_.Clear();
+}
+inline const ::UserArrived& UserReconnected::users_info(int index) const {
+  // @@protoc_insertion_point(field_get:UserReconnected.users_info)
+  return users_info_.Get(index);
+}
+inline ::UserArrived* UserReconnected::mutable_users_info(int index) {
+  // @@protoc_insertion_point(field_mutable:UserReconnected.users_info)
+  return users_info_.Mutable(index);
+}
+inline ::UserArrived* UserReconnected::add_users_info() {
+  // @@protoc_insertion_point(field_add:UserReconnected.users_info)
+  return users_info_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::UserArrived >*
+UserReconnected::mutable_users_info() {
+  // @@protoc_insertion_point(field_mutable_list:UserReconnected.users_info)
+  return &users_info_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
+UserReconnected::users_info() const {
+  // @@protoc_insertion_point(field_list:UserReconnected.users_info)
+  return users_info_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
