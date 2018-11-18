@@ -290,7 +290,7 @@
       <UniqueIdentifier>{5cbd879f-02ae-4f28-af33-2c4f980dd6f0}</UniqueIdentifier>
     </Filter>
     <Filter Include="external\pbc">
-      <UniqueIdentifier>{3d3e23d7-4910-4f46-9ef0-92e450ae014e}</UniqueIdentifier>
+      <UniqueIdentifier>{3d44bc23-cf91-4f45-a161-359029f02448}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1973,6 +1973,18 @@
     </ClCompile>
     <ClCompile Include="..\vr\CCVRGenericRenderer.cpp">
       <Filter>vr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\win32\AudioDecoder.cpp">
+      <Filter>audioengine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\win32\AudioDecoderMp3.cpp">
+      <Filter>audioengine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\win32\AudioDecoderOgg.cpp">
+      <Filter>audioengine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\audio\win32\AudioDecoderManager.cpp">
+      <Filter>audioengine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\external\pbc\alloc.c">
       <Filter>external\pbc</Filter>
@@ -3892,6 +3904,21 @@
     </ClInclude>
     <ClInclude Include="..\vr\CCVRGenericRenderer.h">
       <Filter>vr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\win32\AudioDecoder.h">
+      <Filter>audioengine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\win32\AudioMacros.h">
+      <Filter>audioengine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\win32\AudioDecoderMp3.h">
+      <Filter>audioengine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\win32\AudioDecoderOgg.h">
+      <Filter>audioengine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\audio\win32\AudioDecoderManager.h">
+      <Filter>audioengine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\external\pbc\alloc.h">
       <Filter>external\pbc</Filter>

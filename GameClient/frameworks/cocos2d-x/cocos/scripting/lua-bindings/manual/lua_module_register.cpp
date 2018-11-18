@@ -13,7 +13,6 @@
 #include "scripting/lua-bindings/manual/navmesh/lua_cocos2dx_navmesh_manual.h"
 #include "scripting/lua-bindings/manual/pbc/lua_cocos2dx_pbc_manual.h"
 
-
 int lua_module_register(lua_State* L)
 {
     // Don't change the module register order unless you know what your are doing
