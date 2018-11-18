@@ -1,0 +1,46 @@
+<UserData Version="3.10.0.0">
+  <Properties>
+    <Item Key="CocosRecentOperation">
+      <Value ctype="CocosRecentOperation">
+        <LastPublishType Value="Resource" />
+        <IsLastPublish Value="True" />
+        <LastRunType Value="Windows" />
+      </Value>
+    </Item>
+    <Item Key="PackageParamsKey">
+      <Value ctype="PackageParams">
+        <LuaIsEncrypt Value="False" />
+        <LuaEncryptKey Value="" />
+        <LuaEncryptSign Value="" />
+        <Android_PackageName Value="org.cocos.gameclient" />
+        <AndroidkeyStore Value="" />
+        <AndroidVersion Value="" />
+        <iOS_Target Value="gameclient-mobile" />
+        <iOS_BundleID Value="" />
+        <Platform Value="None" />
+        <RunPlatform Value="None" />
+        <FrameworkVersion Value="cocos2d-x-3.10" />
+        <IsDebugKeystore Value="True" />
+        <EnableSourceMap Value="False" />
+        <EnableHTML5Advanced Value="False" />
+      </Value>
+    </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="Lobby/LobbyScene.csd" />
+          <FilePathData Path="Lobby/PopLayer/MyCenterLayer.csd" />
+          <FilePathData Path="Lobby/MainScene.csd" />
+          <FilePathData Path="Lobby/LoginScene.csd" />
+          <FilePathData Path="Lobby/PopLayer/UpgradeLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/TipsLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/RankLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/MsgLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/SetLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/JoinRoomLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="Lobby/LobbyScene.csd" />
+      </Value>
+    </Item>
+  </Properties>
+</UserData>

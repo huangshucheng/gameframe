@@ -1,0 +1,51 @@
+<Solution>
+  <PropertyGroup Name="MahScene" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="MahScene">
+          <Folder Name="MahRes">
+            <Folder Name="img_bg">
+              <Image Name="2dmj_img_mainGameBackground1.png" />
+              <Image Name="2dmj_img_mainGameBackground2.png" />
+              <Image Name="2dmj_img_mainGameBackground3.png" />
+              <Image Name="3dmj_img_bg1.jpg" />
+              <Image Name="3dmj_img_bg2.jpg" />
+              <Image Name="3dmj_img_bg3.jpg" />
+              <Image Name="mj_img_virtualBg.jpg" />
+              <Image Name="mj_img_virtualBg.png" />
+            </Folder>
+            <Image Name="anniu.png" />
+            <Image Name="dialog_btn_cancel_normal.png" />
+            <Image Name="dialog_btn_cancel_pressed.png" />
+            <Image Name="dialog_btn_close_normal.png" />
+            <Image Name="dialog_btn_close_pressed.png" />
+            <Image Name="dialog_btn_confirm_normal.png" />
+            <Image Name="dialog_btn_confirm_pressed.png" />
+            <Image Name="dialog_img_bg.png" />
+            <Image Name="dikuang.png" />
+            <Image Name="dikuang1.png" />
+            <Image Name="dikuang2.png" />
+            <Image Name="head_yellow.png" />
+            <Image Name="kuang.png" />
+            <Image Name="setting_btn_exit_normal.png" />
+            <Image Name="setting_btn_exit_pressed.png" />
+            <Image Name="shezhi.png" />
+            <Image Name="tuichu_01.png" />
+            <Image Name="xialakuang.png" />
+            <Image Name="yingliang.png" />
+            <Image Name="yingliangjindukuang.png" />
+            <Image Name="yingliangjindukuang_2.png" />
+            <Image Name="yinyue.png" />
+            <Image Name="zhunbei_01.png" />
+            <Image Name="zhunbei_02.png" />
+          </Folder>
+          <Folder Name="PopLayer">
+            <Project Name="SetLayer.csd" Type="Layer" />
+          </Folder>
+          <Project Name="MahScene.csd" Type="Scene" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

@@ -1,0 +1,13 @@
+<Solution>
+  <PropertyGroup Name="MahLayer" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="MahLayer">
+          <Image Name="HelloWorld.png" />
+          <Project Name="MahLayer.csd" Type="Scene" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
