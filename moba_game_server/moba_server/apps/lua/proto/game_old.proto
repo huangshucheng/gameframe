@@ -92,30 +92,30 @@ message UnameLoginReq {
 
 message UserCenterInfo {
 	required string unick = 1;
-	required sint32 uface = 2;
-	required sint32 usex = 3;
-	required sint32 uvip = 4;
-	required sint32 uid = 5;
+	required int32 uface = 2;
+	required int32 usex = 3;
+	required int32 uvip = 4;
+	required int32 uid = 5;
 }
 
 message GuestLoginRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 	optional UserCenterInfo uinfo = 2; 
 }
 
 message UnameLoginRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 	optional UserCenterInfo uinfo = 2; 
 }
 
 message EditProfileReq {
 	required string unick = 1;
-	required sint32 uface = 2;
-	required sint32 usex = 3;
+	required int32 uface = 2;
+	required int32 usex = 3;
 }
 
 message EditProfileRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message AccountUpgradeReq {
@@ -124,100 +124,100 @@ message AccountUpgradeReq {
 }
 
 message AccountUpgradeRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message LoginOutRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message UserGameInfo {
-	required sint32 uchip = 1;
-	required sint32 uexp = 2;
-	required sint32 uvip = 3;
-	required sint32 uchip2 = 4;
-	required sint32 uchip3 = 5;
-	required sint32 udata1 = 6;
-	required sint32 udata2 = 7;
-	required sint32 udata3 = 8;
+	required int32 uchip = 1;
+	required int32 uexp = 2;
+	required int32 uvip = 3;
+	required int32 uchip2 = 4;
+	required int32 uchip3 = 5;
+	required int32 udata1 = 6;
+	required int32 udata2 = 7;
+	required int32 udata3 = 8;
 
-	required sint32 bonues_status = 9;
-	required sint32 bonues = 10;
-	required sint32 days = 11;
+	required int32 bonues_status = 9;
+	required int32 bonues = 10;
+	required int32 days = 11;
 }
 
 message GetUgameInfoRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 	optional UserGameInfo uinfo = 2; 
 }
 
 message RecvLoginBonuesRes {
-	required sint32 status = 1;	
+	required int32 status = 1;	
 }
 
 message WorldChipRankInfo {
 	required string unick = 1;
-	required sint32 uface = 2;
-	required sint32 usex = 3;
-	required sint32 uvip = 4;
-	required sint32 uchip = 5;
+	required int32 uface = 2;
+	required int32 usex = 3;
+	required int32 uvip = 4;
+	required int32 uchip = 5;
 }
 
 message GetWorldRankUchipRes {
-	required sint32 status = 1; 
+	required int32 status = 1; 
 	repeated WorldChipRankInfo rank_info = 2;
 }
 
 message GetSysMsgReq {
-	required sint32 ver_num = 1;
+	required int32 ver_num = 1;
 }
 
 message GetSysMsgRes {
-	required sint32 status = 1;
-	required sint32 ver_num = 2;
+	required int32 status = 1;
+	required int32 ver_num = 2;
 	repeated string sys_msgs = 3;
 }
 
 message LoginLogicRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message EnterZoneReq {
-	required sint32 zid = 1;
+	required int32 zid = 1;
 }
 
 message EnterZoneRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message EnterMatch {
-	required sint32 zid = 1;
-	required sint32 matchid = 2;
-	required sint32 seatid = 3;
-	required sint32 side = 4;
+	required int32 zid = 1;
+	required int32 matchid = 2;
+	required int32 seatid = 3;
+	required int32 side = 4;
 }
 
 message UserArrived {
 	required string unick = 1;
-	required sint32 uface = 2;
-	required sint32 usex = 3;
-	required sint32 seatid = 4;
-	required sint32 side = 5;
-	required sint32 roomid = 6;
+	required int32 uface = 2;
+	required int32 usex = 3;
+	required int32 seatid = 4;
+	required int32 side = 5;
+	required int32 roomid = 6;
 	required bool  ishost = 7;
 	required bool  isoffline = 8;
 }
 
 message ExitMatchRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message UserExitMatch {
-	required sint32 seatid = 1;	
+	required int32 seatid = 1;	
 }
 
 message GameStart {
-	repeated sint32 heroes = 1; 
+	repeated int32 heroes = 1; 
 }
 
 message UserRegistReq {
@@ -226,7 +226,7 @@ message UserRegistReq {
 }
 
 message UserRegistRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message CreateRoomReq {
@@ -234,36 +234,36 @@ message CreateRoomReq {
 }
 
 message CreateRoomRes {
-	required sint32 status 			= 1;
+	required int32 status 			= 1;
 	optional string room_info 		= 2;
 	optional UserArrived user_info  = 3;
 }
 
 message JoinRoomReq {
-	required sint32 room_id = 1;
+	required int32 room_id = 1;
 }
 
 message JoinRoomRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 	optional string room_info = 2;
 	repeated UserArrived users_info = 3;
 }
 
 message ExitRoomRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 	optional UserArrived user_info = 2;
 }
 
 message DessolveRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message GetCreateStatusRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 }
 
 message BackRoomRes {
-	required sint32 status = 1;
+	required int32 status = 1;
 	optional string room_info = 2;
 	repeated UserArrived users_info = 3;
 }
@@ -273,13 +273,9 @@ message UserOffLine {
 }
 
 message UserReconnected {	
-	required sint32 status = 1;
+	required int32 status = 1;
 	optional string room_info = 2;
 	repeated UserArrived users_info = 3;
-}
-
-message HeartBeatRes {
-	optional sint32 status = 1;
 }
 
 

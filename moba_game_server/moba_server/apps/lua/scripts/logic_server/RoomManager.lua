@@ -25,6 +25,7 @@ function RoomManager:ctor()
 		[Cmd.eExitRoomReq]  	= self.on_exit_room,
 		[Cmd.eDessolveReq] 		= self.on_dessolve_room,
 		[Cmd.eBackRoomReq] 		= self.on_back_room,
+		[Cmd.eHeartBeatReq] 	= self.on_heart_beat,
 		[Cmd.eGetCreateStatusReq] = self.on_get_create_status,
 	}
 end
@@ -339,6 +340,37 @@ function RoomManager:on_back_room(s, req)
 	room:broacast_in_room(stype, Cmd.eUserArrived, player:get_user_arrived_info(), player)
 	print('hcc>> on_back_room usccess roomNum: ' .. self:get_total_rooms())
 end
+
+function RoomManager:on_heart_beat(s, req)
+	if not req then return end
+	local stype = req[1]
+	local ctype = req[2]
+	local uid 	= req[3]
+
+	local player = PlayerManager:getInstance():get_player_by_uid(uid)
+	if not player then
+		return
+	end
+	--[[
+	local room = server_rooms[player:get_room_id()]
+	if room then
+		--在房间
+	else
+		--不在房间
+		local msg_body = {
+			status = Respones.OK,
+		}
+		player:send_msg(stype, Cmd.eHeartBeatRes, msg_body)
+	end
+	]]
+	--test
+	local msg_body = {
+		status = Respones.OK,
+	}
+	player:send_msg(stype, Cmd.eHeartBeatRes, msg_body)
+	print('RoomManager: on_heart_beat uid: ' .. uid)
+end
+
 -- TODO
 function RoomManager:on_player_disconnect(player)
 	print('hcc>> on_player_disconnect')

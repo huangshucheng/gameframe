@@ -179,6 +179,8 @@ end
 function LobbyScene:onTouchMessageBtn(send, evnetType)
     GT.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
+    -- local HeartBeat = require('game.Lobby.Base.HeartBeat')
+    -- HeartBeat:getInstance():init(self):start()
 end
 
 function LobbyScene:onTouchMailBtn(send, evnetType)

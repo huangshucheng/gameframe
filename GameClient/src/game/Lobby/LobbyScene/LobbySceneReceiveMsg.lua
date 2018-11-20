@@ -30,6 +30,7 @@ function LobbyScene:addClientEventListener()
     addEvent("JoinRoomRes", self, self.onEventJoinRoom)
     addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
     addEvent("BackRoomRes", self, self.onEventBackRoom)
+    addEvent("HeartBeatRes", self, self.onEventHeartBeat)
 end
 
 function LobbyScene:onEventData(event)
@@ -82,6 +83,7 @@ function LobbyScene:onEventLoginLogic(event)
     GT.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
     -- request player create room status
     LogicServiceProxy:getInstance():sendGetCreateStatus()
+    LogicServiceProxy:getInstance():sendHeartBeat()
 end
 
 function LobbyScene:onEventNetConnect(envet)
@@ -175,5 +177,13 @@ function LobbyScene:onEventBackRoom(event)
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"返回房间失败"})
+    end
+end
+
+function LobbyScene:onEventHeartBeat(event)
+    local data = event._usedata
+    local status = data.status
+    if status == Respones.OK then
+        
     end
 end

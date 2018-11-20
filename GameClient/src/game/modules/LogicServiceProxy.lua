@@ -25,15 +25,15 @@ function LogicServiceProxy:sendCreateRoom(room_info)
 		room_info = room_info 
 	}
 
-	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eCreateRoomReq, msg)
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eCreateRoomReq, msg)
 end
 
 function LogicServiceProxy:sendDessolveRoom()
-	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eDessolveReq, nil)
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eDessolveReq, nil)
 end
 
 function LogicServiceProxy:sendExitRoom()
-	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eExitRoomReq, nil)
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eExitRoomReq, nil)
 end
 
 function LogicServiceProxy:sendJoinRoom(roomid)
@@ -41,15 +41,19 @@ function LogicServiceProxy:sendJoinRoom(roomid)
 	local msg = {
 		room_id = roomid,
 	}
-	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eJoinRoomReq, msg)
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eJoinRoomReq, msg)
 end
 
 function LogicServiceProxy:sendGetCreateStatus()
-	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eGetCreateStatusReq, nil)
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eGetCreateStatusReq, nil)
 end
 
 function LogicServiceProxy:sendBackRoomReq()
-	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eBackRoomReq, nil)
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eBackRoomReq, nil)
+end
+
+function LogicServiceProxy:sendHeartBeat()
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eHeartBeatReq, nil)
 end
 
 return LogicServiceProxy

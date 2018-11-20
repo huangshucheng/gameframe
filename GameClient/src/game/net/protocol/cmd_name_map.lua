@@ -46,6 +46,8 @@ local cmd_name_map = {
 	"BackRoomRes",
 	"UserOffLine",
 	"UserReconnected",
+	"HeartBeatReq",
+	"HeartBeatRes",
 	--
 	"GameStart",
 }

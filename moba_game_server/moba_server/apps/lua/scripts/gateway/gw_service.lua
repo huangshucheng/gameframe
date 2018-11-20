@@ -181,7 +181,8 @@ local function on_gw_recv_raw_cmd(s, raw_cmd)
 	end
 end
 
-local function on_gw_session_disconnect(s, stype) 
+local function on_gw_session_disconnect(s, stype)
+	print('on_gw_session_disconnect ------- stype: ' .. stype)
 	--与网关连接的服务器的seession 断线了
 	if Session.asclient(s) == 1 then 
 		for k, v in pairs(server_session_man) do 
@@ -207,6 +208,7 @@ local function on_gw_session_disconnect(s, stype)
 	local uid = Session.get_uid(s)
 	if client_sessions_uid[uid] ~= nil and client_sessions_uid[uid] == s then 
 		client_sessions_uid[uid] = nil
+		print('hcc>> on_gw_session_disconnect 222 uid: ' .. uid)
 	end
 
 	local server_session = server_session_man[stype]
@@ -217,7 +219,7 @@ local function on_gw_session_disconnect(s, stype)
 	if uid ~= 0 then 
 		local user_lost = {stype, Cmd.eUserLostConn, uid, nil}
 		Session.send_msg(server_session, user_lost)
-		print('hcc>> on_gw_session_disconnect 222 uid: ' .. uid)
+		print('hcc>> on_gw_session_disconnect 333 uid: ' .. uid)
 	end
 end
 

@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[37];
+  static const ::google::protobuf::internal::ParseTable schema[38];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -117,6 +117,8 @@ void InitDefaultsUserOffLineImpl();
 void InitDefaultsUserOffLine();
 void InitDefaultsUserReconnectedImpl();
 void InitDefaultsUserReconnected();
+void InitDefaultsHeartBeatResImpl();
+void InitDefaultsHeartBeatRes();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -155,6 +157,7 @@ inline void InitDefaults() {
   InitDefaultsBackRoomRes();
   InitDefaultsUserOffLine();
   InitDefaultsUserReconnected();
+  InitDefaultsHeartBeatRes();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -220,6 +223,9 @@ extern GuestLoginReqDefaultTypeInternal _GuestLoginReq_default_instance_;
 class GuestLoginRes;
 class GuestLoginResDefaultTypeInternal;
 extern GuestLoginResDefaultTypeInternal _GuestLoginRes_default_instance_;
+class HeartBeatRes;
+class HeartBeatResDefaultTypeInternal;
+extern HeartBeatResDefaultTypeInternal _HeartBeatRes_default_instance_;
 class JoinRoomReq;
 class JoinRoomReqDefaultTypeInternal;
 extern JoinRoomReqDefaultTypeInternal _JoinRoomReq_default_instance_;
@@ -337,7 +343,9 @@ enum Cmd {
   eBackRoomRes = 43,
   eUserOffLine = 44,
   eUserReconnected = 45,
-  eGameStart = 46
+  eHeartBeatReq = 46,
+  eHeartBeatRes = 47,
+  eGameStart = 48
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
@@ -717,28 +725,28 @@ class UserCenterInfo : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_unick();
   void set_allocated_unick(::std::string* unick);
 
-  // required int32 uface = 2;
+  // required sint32 uface = 2;
   bool has_uface() const;
   void clear_uface();
   static const int kUfaceFieldNumber = 2;
   ::google::protobuf::int32 uface() const;
   void set_uface(::google::protobuf::int32 value);
 
-  // required int32 usex = 3;
+  // required sint32 usex = 3;
   bool has_usex() const;
   void clear_usex();
   static const int kUsexFieldNumber = 3;
   ::google::protobuf::int32 usex() const;
   void set_usex(::google::protobuf::int32 value);
 
-  // required int32 uvip = 4;
+  // required sint32 uvip = 4;
   bool has_uvip() const;
   void clear_uvip();
   static const int kUvipFieldNumber = 4;
   ::google::protobuf::int32 uvip() const;
   void set_uvip(::google::protobuf::int32 value);
 
-  // required int32 uid = 5;
+  // required sint32 uid = 5;
   bool has_uid() const;
   void clear_uid();
   static const int kUidFieldNumber = 5;
@@ -872,7 +880,7 @@ class GuestLoginRes : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::UserCenterInfo* mutable_uinfo();
   void set_allocated_uinfo(::UserCenterInfo* uinfo);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -994,7 +1002,7 @@ class UnameLoginRes : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::UserCenterInfo* mutable_uinfo();
   void set_allocated_uinfo(::UserCenterInfo* uinfo);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -1122,14 +1130,14 @@ class EditProfileReq : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_unick();
   void set_allocated_unick(::std::string* unick);
 
-  // required int32 uface = 2;
+  // required sint32 uface = 2;
   bool has_uface() const;
   void clear_uface();
   static const int kUfaceFieldNumber = 2;
   ::google::protobuf::int32 uface() const;
   void set_uface(::google::protobuf::int32 value);
 
-  // required int32 usex = 3;
+  // required sint32 usex = 3;
   bool has_usex() const;
   void clear_usex();
   static const int kUsexFieldNumber = 3;
@@ -1248,7 +1256,7 @@ class EditProfileRes : public ::google::protobuf::Message /* @@protoc_insertion_
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -1497,7 +1505,7 @@ class AccountUpgradeRes : public ::google::protobuf::Message /* @@protoc_inserti
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -1607,7 +1615,7 @@ class LoginOutRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -1717,77 +1725,77 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required int32 uchip = 1;
+  // required sint32 uchip = 1;
   bool has_uchip() const;
   void clear_uchip();
   static const int kUchipFieldNumber = 1;
   ::google::protobuf::int32 uchip() const;
   void set_uchip(::google::protobuf::int32 value);
 
-  // required int32 uexp = 2;
+  // required sint32 uexp = 2;
   bool has_uexp() const;
   void clear_uexp();
   static const int kUexpFieldNumber = 2;
   ::google::protobuf::int32 uexp() const;
   void set_uexp(::google::protobuf::int32 value);
 
-  // required int32 uvip = 3;
+  // required sint32 uvip = 3;
   bool has_uvip() const;
   void clear_uvip();
   static const int kUvipFieldNumber = 3;
   ::google::protobuf::int32 uvip() const;
   void set_uvip(::google::protobuf::int32 value);
 
-  // required int32 uchip2 = 4;
+  // required sint32 uchip2 = 4;
   bool has_uchip2() const;
   void clear_uchip2();
   static const int kUchip2FieldNumber = 4;
   ::google::protobuf::int32 uchip2() const;
   void set_uchip2(::google::protobuf::int32 value);
 
-  // required int32 uchip3 = 5;
+  // required sint32 uchip3 = 5;
   bool has_uchip3() const;
   void clear_uchip3();
   static const int kUchip3FieldNumber = 5;
   ::google::protobuf::int32 uchip3() const;
   void set_uchip3(::google::protobuf::int32 value);
 
-  // required int32 udata1 = 6;
+  // required sint32 udata1 = 6;
   bool has_udata1() const;
   void clear_udata1();
   static const int kUdata1FieldNumber = 6;
   ::google::protobuf::int32 udata1() const;
   void set_udata1(::google::protobuf::int32 value);
 
-  // required int32 udata2 = 7;
+  // required sint32 udata2 = 7;
   bool has_udata2() const;
   void clear_udata2();
   static const int kUdata2FieldNumber = 7;
   ::google::protobuf::int32 udata2() const;
   void set_udata2(::google::protobuf::int32 value);
 
-  // required int32 udata3 = 8;
+  // required sint32 udata3 = 8;
   bool has_udata3() const;
   void clear_udata3();
   static const int kUdata3FieldNumber = 8;
   ::google::protobuf::int32 udata3() const;
   void set_udata3(::google::protobuf::int32 value);
 
-  // required int32 bonues_status = 9;
+  // required sint32 bonues_status = 9;
   bool has_bonues_status() const;
   void clear_bonues_status();
   static const int kBonuesStatusFieldNumber = 9;
   ::google::protobuf::int32 bonues_status() const;
   void set_bonues_status(::google::protobuf::int32 value);
 
-  // required int32 bonues = 10;
+  // required sint32 bonues = 10;
   bool has_bonues() const;
   void clear_bonues();
   static const int kBonuesFieldNumber = 10;
   ::google::protobuf::int32 bonues() const;
   void set_bonues(::google::protobuf::int32 value);
 
-  // required int32 days = 11;
+  // required sint32 days = 11;
   bool has_days() const;
   void clear_days();
   static const int kDaysFieldNumber = 11;
@@ -1939,7 +1947,7 @@ class GetUgameInfoRes : public ::google::protobuf::Message /* @@protoc_insertion
   ::UserGameInfo* mutable_uinfo();
   void set_allocated_uinfo(::UserGameInfo* uinfo);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -2052,7 +2060,7 @@ class RecvLoginBonuesRes : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -2177,28 +2185,28 @@ class WorldChipRankInfo : public ::google::protobuf::Message /* @@protoc_inserti
   ::std::string* release_unick();
   void set_allocated_unick(::std::string* unick);
 
-  // required int32 uface = 2;
+  // required sint32 uface = 2;
   bool has_uface() const;
   void clear_uface();
   static const int kUfaceFieldNumber = 2;
   ::google::protobuf::int32 uface() const;
   void set_uface(::google::protobuf::int32 value);
 
-  // required int32 usex = 3;
+  // required sint32 usex = 3;
   bool has_usex() const;
   void clear_usex();
   static const int kUsexFieldNumber = 3;
   ::google::protobuf::int32 usex() const;
   void set_usex(::google::protobuf::int32 value);
 
-  // required int32 uvip = 4;
+  // required sint32 uvip = 4;
   bool has_uvip() const;
   void clear_uvip();
   static const int kUvipFieldNumber = 4;
   ::google::protobuf::int32 uvip() const;
   void set_uvip(::google::protobuf::int32 value);
 
-  // required int32 uchip = 5;
+  // required sint32 uchip = 5;
   bool has_uchip() const;
   void clear_uchip();
   static const int kUchipFieldNumber = 5;
@@ -2335,7 +2343,7 @@ class GetWorldRankUchipRes : public ::google::protobuf::Message /* @@protoc_inse
   const ::google::protobuf::RepeatedPtrField< ::WorldChipRankInfo >&
       rank_info() const;
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -2446,7 +2454,7 @@ class GetSysMsgReq : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required int32 ver_num = 1;
+  // required sint32 ver_num = 1;
   bool has_ver_num() const;
   void clear_ver_num();
   static const int kVerNumFieldNumber = 1;
@@ -2578,14 +2586,14 @@ class GetSysMsgRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   const ::google::protobuf::RepeatedPtrField< ::std::string>& sys_msgs() const;
   ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_sys_msgs();
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
   ::google::protobuf::int32 status() const;
   void set_status(::google::protobuf::int32 value);
 
-  // required int32 ver_num = 2;
+  // required sint32 ver_num = 2;
   bool has_ver_num() const;
   void clear_ver_num();
   static const int kVerNumFieldNumber = 2;
@@ -2702,7 +2710,7 @@ class LoginLogicRes : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -2812,7 +2820,7 @@ class EnterZoneReq : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required int32 zid = 1;
+  // required sint32 zid = 1;
   bool has_zid() const;
   void clear_zid();
   static const int kZidFieldNumber = 1;
@@ -2922,7 +2930,7 @@ class EnterZoneRes : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -3032,28 +3040,28 @@ class EnterMatch : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   // accessors -------------------------------------------------------
 
-  // required int32 zid = 1;
+  // required sint32 zid = 1;
   bool has_zid() const;
   void clear_zid();
   static const int kZidFieldNumber = 1;
   ::google::protobuf::int32 zid() const;
   void set_zid(::google::protobuf::int32 value);
 
-  // required int32 matchid = 2;
+  // required sint32 matchid = 2;
   bool has_matchid() const;
   void clear_matchid();
   static const int kMatchidFieldNumber = 2;
   ::google::protobuf::int32 matchid() const;
   void set_matchid(::google::protobuf::int32 value);
 
-  // required int32 seatid = 3;
+  // required sint32 seatid = 3;
   bool has_seatid() const;
   void clear_seatid();
   static const int kSeatidFieldNumber = 3;
   ::google::protobuf::int32 seatid() const;
   void set_seatid(::google::protobuf::int32 value);
 
-  // required int32 side = 4;
+  // required sint32 side = 4;
   bool has_side() const;
   void clear_side();
   static const int kSideFieldNumber = 4;
@@ -3190,35 +3198,35 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_unick();
   void set_allocated_unick(::std::string* unick);
 
-  // required int32 uface = 2;
+  // required sint32 uface = 2;
   bool has_uface() const;
   void clear_uface();
   static const int kUfaceFieldNumber = 2;
   ::google::protobuf::int32 uface() const;
   void set_uface(::google::protobuf::int32 value);
 
-  // required int32 usex = 3;
+  // required sint32 usex = 3;
   bool has_usex() const;
   void clear_usex();
   static const int kUsexFieldNumber = 3;
   ::google::protobuf::int32 usex() const;
   void set_usex(::google::protobuf::int32 value);
 
-  // required int32 seatid = 4;
+  // required sint32 seatid = 4;
   bool has_seatid() const;
   void clear_seatid();
   static const int kSeatidFieldNumber = 4;
   ::google::protobuf::int32 seatid() const;
   void set_seatid(::google::protobuf::int32 value);
 
-  // required int32 side = 5;
+  // required sint32 side = 5;
   bool has_side() const;
   void clear_side();
   static const int kSideFieldNumber = 5;
   ::google::protobuf::int32 side() const;
   void set_side(::google::protobuf::int32 value);
 
-  // required int32 roomid = 6;
+  // required sint32 roomid = 6;
   bool has_roomid() const;
   void clear_roomid();
   static const int kRoomidFieldNumber = 6;
@@ -3366,7 +3374,7 @@ class ExitMatchRes : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -3476,7 +3484,7 @@ class UserExitMatch : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
-  // required int32 seatid = 1;
+  // required sint32 seatid = 1;
   bool has_seatid() const;
   void clear_seatid();
   static const int kSeatidFieldNumber = 1;
@@ -3586,7 +3594,7 @@ class GameStart : public ::google::protobuf::Message /* @@protoc_insertion_point
 
   // accessors -------------------------------------------------------
 
-  // repeated int32 heroes = 1;
+  // repeated sint32 heroes = 1;
   int heroes_size() const;
   void clear_heroes();
   static const int kHeroesFieldNumber = 1;
@@ -3838,7 +3846,7 @@ class UserRegistRes : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -4090,7 +4098,7 @@ class CreateRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::UserArrived* mutable_user_info();
   void set_allocated_user_info(::UserArrived* user_info);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -4206,7 +4214,7 @@ class JoinRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // required int32 room_id = 1;
+  // required sint32 room_id = 1;
   bool has_room_id() const;
   void clear_room_id();
   static const int kRoomIdFieldNumber = 1;
@@ -4343,7 +4351,7 @@ class JoinRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_room_info();
   void set_allocated_room_info(::std::string* room_info);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -4466,7 +4474,7 @@ class ExitRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::UserArrived* mutable_user_info();
   void set_allocated_user_info(::UserArrived* user_info);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -4579,7 +4587,7 @@ class DessolveRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -4689,7 +4697,7 @@ class GetCreateStatusRes : public ::google::protobuf::Message /* @@protoc_insert
 
   // accessors -------------------------------------------------------
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -4826,7 +4834,7 @@ class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_room_info();
   void set_allocated_room_info(::std::string* room_info);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -5079,7 +5087,7 @@ class UserReconnected : public ::google::protobuf::Message /* @@protoc_insertion
   ::std::string* release_room_info();
   void set_allocated_room_info(::std::string* room_info);
 
-  // required int32 status = 1;
+  // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 1;
@@ -5101,6 +5109,116 @@ class UserReconnected : public ::google::protobuf::Message /* @@protoc_insertion
   ::google::protobuf::int32 status_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserReconnectedImpl();
+};
+// -------------------------------------------------------------------
+
+class HeartBeatRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:HeartBeatRes) */ {
+ public:
+  HeartBeatRes();
+  virtual ~HeartBeatRes();
+
+  HeartBeatRes(const HeartBeatRes& from);
+
+  inline HeartBeatRes& operator=(const HeartBeatRes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  HeartBeatRes(HeartBeatRes&& from) noexcept
+    : HeartBeatRes() {
+    *this = ::std::move(from);
+  }
+
+  inline HeartBeatRes& operator=(HeartBeatRes&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const HeartBeatRes& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const HeartBeatRes* internal_default_instance() {
+    return reinterpret_cast<const HeartBeatRes*>(
+               &_HeartBeatRes_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    37;
+
+  void Swap(HeartBeatRes* other);
+  friend void swap(HeartBeatRes& a, HeartBeatRes& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline HeartBeatRes* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  HeartBeatRes* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const HeartBeatRes& from);
+  void MergeFrom(const HeartBeatRes& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(HeartBeatRes* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional sint32 status = 1;
+  bool has_status() const;
+  void clear_status();
+  static const int kStatusFieldNumber = 1;
+  ::google::protobuf::int32 status() const;
+  void set_status(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:HeartBeatRes)
+ private:
+  void set_has_status();
+  void clear_has_status();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::int32 status_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsHeartBeatResImpl();
 };
 // ===================================================================
 
@@ -5373,7 +5491,7 @@ inline void UserCenterInfo::set_allocated_unick(::std::string* unick) {
   // @@protoc_insertion_point(field_set_allocated:UserCenterInfo.unick)
 }
 
-// required int32 uface = 2;
+// required sint32 uface = 2;
 inline bool UserCenterInfo::has_uface() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5397,7 +5515,7 @@ inline void UserCenterInfo::set_uface(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserCenterInfo.uface)
 }
 
-// required int32 usex = 3;
+// required sint32 usex = 3;
 inline bool UserCenterInfo::has_usex() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -5421,7 +5539,7 @@ inline void UserCenterInfo::set_usex(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserCenterInfo.usex)
 }
 
-// required int32 uvip = 4;
+// required sint32 uvip = 4;
 inline bool UserCenterInfo::has_uvip() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -5445,7 +5563,7 @@ inline void UserCenterInfo::set_uvip(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserCenterInfo.uvip)
 }
 
-// required int32 uid = 5;
+// required sint32 uid = 5;
 inline bool UserCenterInfo::has_uid() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -5473,7 +5591,7 @@ inline void UserCenterInfo::set_uid(::google::protobuf::int32 value) {
 
 // GuestLoginRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool GuestLoginRes::has_status() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5555,7 +5673,7 @@ inline void GuestLoginRes::set_allocated_uinfo(::UserCenterInfo* uinfo) {
 
 // UnameLoginRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool UnameLoginRes::has_status() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5700,7 +5818,7 @@ inline void EditProfileReq::set_allocated_unick(::std::string* unick) {
   // @@protoc_insertion_point(field_set_allocated:EditProfileReq.unick)
 }
 
-// required int32 uface = 2;
+// required sint32 uface = 2;
 inline bool EditProfileReq::has_uface() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -5724,7 +5842,7 @@ inline void EditProfileReq::set_uface(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:EditProfileReq.uface)
 }
 
-// required int32 usex = 3;
+// required sint32 usex = 3;
 inline bool EditProfileReq::has_usex() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -5752,7 +5870,7 @@ inline void EditProfileReq::set_usex(::google::protobuf::int32 value) {
 
 // EditProfileRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool EditProfileRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5910,7 +6028,7 @@ inline void AccountUpgradeReq::set_allocated_upwd_md5(::std::string* upwd_md5) {
 
 // AccountUpgradeRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool AccountUpgradeRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5938,7 +6056,7 @@ inline void AccountUpgradeRes::set_status(::google::protobuf::int32 value) {
 
 // LoginOutRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool LoginOutRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5966,7 +6084,7 @@ inline void LoginOutRes::set_status(::google::protobuf::int32 value) {
 
 // UserGameInfo
 
-// required int32 uchip = 1;
+// required sint32 uchip = 1;
 inline bool UserGameInfo::has_uchip() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -5990,7 +6108,7 @@ inline void UserGameInfo::set_uchip(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.uchip)
 }
 
-// required int32 uexp = 2;
+// required sint32 uexp = 2;
 inline bool UserGameInfo::has_uexp() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6014,7 +6132,7 @@ inline void UserGameInfo::set_uexp(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.uexp)
 }
 
-// required int32 uvip = 3;
+// required sint32 uvip = 3;
 inline bool UserGameInfo::has_uvip() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -6038,7 +6156,7 @@ inline void UserGameInfo::set_uvip(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.uvip)
 }
 
-// required int32 uchip2 = 4;
+// required sint32 uchip2 = 4;
 inline bool UserGameInfo::has_uchip2() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -6062,7 +6180,7 @@ inline void UserGameInfo::set_uchip2(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.uchip2)
 }
 
-// required int32 uchip3 = 5;
+// required sint32 uchip3 = 5;
 inline bool UserGameInfo::has_uchip3() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -6086,7 +6204,7 @@ inline void UserGameInfo::set_uchip3(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.uchip3)
 }
 
-// required int32 udata1 = 6;
+// required sint32 udata1 = 6;
 inline bool UserGameInfo::has_udata1() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -6110,7 +6228,7 @@ inline void UserGameInfo::set_udata1(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.udata1)
 }
 
-// required int32 udata2 = 7;
+// required sint32 udata2 = 7;
 inline bool UserGameInfo::has_udata2() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -6134,7 +6252,7 @@ inline void UserGameInfo::set_udata2(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.udata2)
 }
 
-// required int32 udata3 = 8;
+// required sint32 udata3 = 8;
 inline bool UserGameInfo::has_udata3() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -6158,7 +6276,7 @@ inline void UserGameInfo::set_udata3(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.udata3)
 }
 
-// required int32 bonues_status = 9;
+// required sint32 bonues_status = 9;
 inline bool UserGameInfo::has_bonues_status() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -6182,7 +6300,7 @@ inline void UserGameInfo::set_bonues_status(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.bonues_status)
 }
 
-// required int32 bonues = 10;
+// required sint32 bonues = 10;
 inline bool UserGameInfo::has_bonues() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
@@ -6206,7 +6324,7 @@ inline void UserGameInfo::set_bonues(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.bonues)
 }
 
-// required int32 days = 11;
+// required sint32 days = 11;
 inline bool UserGameInfo::has_days() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
@@ -6234,7 +6352,7 @@ inline void UserGameInfo::set_days(::google::protobuf::int32 value) {
 
 // GetUgameInfoRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool GetUgameInfoRes::has_status() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6316,7 +6434,7 @@ inline void GetUgameInfoRes::set_allocated_uinfo(::UserGameInfo* uinfo) {
 
 // RecvLoginBonuesRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool RecvLoginBonuesRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6407,7 +6525,7 @@ inline void WorldChipRankInfo::set_allocated_unick(::std::string* unick) {
   // @@protoc_insertion_point(field_set_allocated:WorldChipRankInfo.unick)
 }
 
-// required int32 uface = 2;
+// required sint32 uface = 2;
 inline bool WorldChipRankInfo::has_uface() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6431,7 +6549,7 @@ inline void WorldChipRankInfo::set_uface(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:WorldChipRankInfo.uface)
 }
 
-// required int32 usex = 3;
+// required sint32 usex = 3;
 inline bool WorldChipRankInfo::has_usex() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -6455,7 +6573,7 @@ inline void WorldChipRankInfo::set_usex(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:WorldChipRankInfo.usex)
 }
 
-// required int32 uvip = 4;
+// required sint32 uvip = 4;
 inline bool WorldChipRankInfo::has_uvip() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -6479,7 +6597,7 @@ inline void WorldChipRankInfo::set_uvip(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:WorldChipRankInfo.uvip)
 }
 
-// required int32 uchip = 5;
+// required sint32 uchip = 5;
 inline bool WorldChipRankInfo::has_uchip() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -6507,7 +6625,7 @@ inline void WorldChipRankInfo::set_uchip(::google::protobuf::int32 value) {
 
 // GetWorldRankUchipRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool GetWorldRankUchipRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6565,7 +6683,7 @@ GetWorldRankUchipRes::rank_info() const {
 
 // GetSysMsgReq
 
-// required int32 ver_num = 1;
+// required sint32 ver_num = 1;
 inline bool GetSysMsgReq::has_ver_num() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6593,7 +6711,7 @@ inline void GetSysMsgReq::set_ver_num(::google::protobuf::int32 value) {
 
 // GetSysMsgRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool GetSysMsgRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6617,7 +6735,7 @@ inline void GetSysMsgRes::set_status(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:GetSysMsgRes.status)
 }
 
-// required int32 ver_num = 2;
+// required sint32 ver_num = 2;
 inline bool GetSysMsgRes::has_ver_num() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6714,7 +6832,7 @@ GetSysMsgRes::mutable_sys_msgs() {
 
 // LoginLogicRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool LoginLogicRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6742,7 +6860,7 @@ inline void LoginLogicRes::set_status(::google::protobuf::int32 value) {
 
 // EnterZoneReq
 
-// required int32 zid = 1;
+// required sint32 zid = 1;
 inline bool EnterZoneReq::has_zid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6770,7 +6888,7 @@ inline void EnterZoneReq::set_zid(::google::protobuf::int32 value) {
 
 // EnterZoneRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool EnterZoneRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6798,7 +6916,7 @@ inline void EnterZoneRes::set_status(::google::protobuf::int32 value) {
 
 // EnterMatch
 
-// required int32 zid = 1;
+// required sint32 zid = 1;
 inline bool EnterMatch::has_zid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -6822,7 +6940,7 @@ inline void EnterMatch::set_zid(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:EnterMatch.zid)
 }
 
-// required int32 matchid = 2;
+// required sint32 matchid = 2;
 inline bool EnterMatch::has_matchid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6846,7 +6964,7 @@ inline void EnterMatch::set_matchid(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:EnterMatch.matchid)
 }
 
-// required int32 seatid = 3;
+// required sint32 seatid = 3;
 inline bool EnterMatch::has_seatid() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -6870,7 +6988,7 @@ inline void EnterMatch::set_seatid(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:EnterMatch.seatid)
 }
 
-// required int32 side = 4;
+// required sint32 side = 4;
 inline bool EnterMatch::has_side() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -6961,7 +7079,7 @@ inline void UserArrived::set_allocated_unick(::std::string* unick) {
   // @@protoc_insertion_point(field_set_allocated:UserArrived.unick)
 }
 
-// required int32 uface = 2;
+// required sint32 uface = 2;
 inline bool UserArrived::has_uface() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -6985,7 +7103,7 @@ inline void UserArrived::set_uface(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserArrived.uface)
 }
 
-// required int32 usex = 3;
+// required sint32 usex = 3;
 inline bool UserArrived::has_usex() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -7009,7 +7127,7 @@ inline void UserArrived::set_usex(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserArrived.usex)
 }
 
-// required int32 seatid = 4;
+// required sint32 seatid = 4;
 inline bool UserArrived::has_seatid() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -7033,7 +7151,7 @@ inline void UserArrived::set_seatid(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserArrived.seatid)
 }
 
-// required int32 side = 5;
+// required sint32 side = 5;
 inline bool UserArrived::has_side() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -7057,7 +7175,7 @@ inline void UserArrived::set_side(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserArrived.side)
 }
 
-// required int32 roomid = 6;
+// required sint32 roomid = 6;
 inline bool UserArrived::has_roomid() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -7133,7 +7251,7 @@ inline void UserArrived::set_isoffline(bool value) {
 
 // ExitMatchRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool ExitMatchRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7161,7 +7279,7 @@ inline void ExitMatchRes::set_status(::google::protobuf::int32 value) {
 
 // UserExitMatch
 
-// required int32 seatid = 1;
+// required sint32 seatid = 1;
 inline bool UserExitMatch::has_seatid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7189,7 +7307,7 @@ inline void UserExitMatch::set_seatid(::google::protobuf::int32 value) {
 
 // GameStart
 
-// repeated int32 heroes = 1;
+// repeated sint32 heroes = 1;
 inline int GameStart::heroes_size() const {
   return heroes_.size();
 }
@@ -7353,7 +7471,7 @@ inline void UserRegistReq::set_allocated_upwd_md5(::std::string* upwd_md5) {
 
 // UserRegistRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool UserRegistRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7448,7 +7566,7 @@ inline void CreateRoomReq::set_allocated_room_info(::std::string* room_info) {
 
 // CreateRoomRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool CreateRoomRes::has_status() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -7593,7 +7711,7 @@ inline void CreateRoomRes::set_allocated_user_info(::UserArrived* user_info) {
 
 // JoinRoomReq
 
-// required int32 room_id = 1;
+// required sint32 room_id = 1;
 inline bool JoinRoomReq::has_room_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7621,7 +7739,7 @@ inline void JoinRoomReq::set_room_id(::google::protobuf::int32 value) {
 
 // JoinRoomRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool JoinRoomRes::has_status() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -7742,7 +7860,7 @@ JoinRoomRes::users_info() const {
 
 // ExitRoomRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool ExitRoomRes::has_status() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -7824,7 +7942,7 @@ inline void ExitRoomRes::set_allocated_user_info(::UserArrived* user_info) {
 
 // DessolveRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool DessolveRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7852,7 +7970,7 @@ inline void DessolveRes::set_status(::google::protobuf::int32 value) {
 
 // GetCreateStatusRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool GetCreateStatusRes::has_status() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7880,7 +7998,7 @@ inline void GetCreateStatusRes::set_status(::google::protobuf::int32 value) {
 
 // BackRoomRes
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool BackRoomRes::has_status() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -8059,7 +8177,7 @@ inline void UserOffLine::set_allocated_user_info(::UserArrived* user_info) {
 
 // UserReconnected
 
-// required int32 status = 1;
+// required sint32 status = 1;
 inline bool UserReconnected::has_status() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -8176,9 +8294,39 @@ UserReconnected::users_info() const {
   return users_info_;
 }
 
+// -------------------------------------------------------------------
+
+// HeartBeatRes
+
+// optional sint32 status = 1;
+inline bool HeartBeatRes::has_status() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void HeartBeatRes::set_has_status() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void HeartBeatRes::clear_has_status() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void HeartBeatRes::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::google::protobuf::int32 HeartBeatRes::status() const {
+  // @@protoc_insertion_point(field_get:HeartBeatRes.status)
+  return status_;
+}
+inline void HeartBeatRes::set_status(::google::protobuf::int32 value) {
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:HeartBeatRes.status)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

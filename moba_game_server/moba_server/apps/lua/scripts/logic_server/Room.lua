@@ -106,7 +106,6 @@ function Room:broacast_in_room(stype, ctype, body, not_to_player)
 	for i = 1 , #self._players do
 		if self._players[i] ~= not_to_player then
 			self._players[i]:send_msg(stype, ctype, body)
-			print('hcc>> room: broacast_in_room '.. i)
 		end
 	end
 end
