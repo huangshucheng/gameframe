@@ -1,8 +1,6 @@
 local Function = class("Function")
 GT = GT or {}
 
-local CURRENT_MOUDEL_NAME = ...
-
 function Function.showPopLayer(layerClassName,initArvg, ...)
     local luaFullPath  =  cc.FileUtils:getInstance():fullPathForFilename("game/Mahjong/PopLayer/" .. layerClassName .. ".lua")
     local luacFullPath =  cc.FileUtils:getInstance():fullPathForFilename("game/Mahjong/PopLayer/" .. layerClassName .. ".luac")
@@ -25,6 +23,25 @@ function Function.showPopLayer(layerClassName,initArvg, ...)
     else
         return GT.showPopLayer(layerClassName,initArvg, ...)
     end   
+end
+
+function Function.popLayer(layerClassName)
+    if type(layerClassName) ~= 'string' then return end
+    local runScene = display.getRunningScene()
+    if runScene then 
+        local layer = runScene:getChildByName(layerClassName)
+        if layer then
+            layer:removeSelf()
+        end
+    end
+end
+
+function Function.getLayer(layerClassName)
+    if type(layerClassName) ~= 'string' then return end
+    local runScene = display.getRunningScene()
+    if runScene then 
+        return runScene:getChildByName(layerClassName)
+    end
 end
 
 return Function

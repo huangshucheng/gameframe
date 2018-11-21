@@ -9,6 +9,7 @@ local UserInfo              = require("game.clientdata.UserInfo")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local SystemServiceProxy    = require("game.modules.SystemServiceProxy")
+local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 local Function              = require('game.Base.Function')
 
 --------------拓展
@@ -179,7 +180,6 @@ end
 function LobbyScene:onTouchMessageBtn(send, evnetType)
     GT.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
-    -- local HeartBeat = require('game.Lobby.Base.HeartBeat')
     -- HeartBeat:getInstance():init(self):start()
 end
 
@@ -193,11 +193,13 @@ function LobbyScene:onEnter()
     --获取用户信息
     SystemServiceProxy:getInstance():sendGetUgameInfo()
     LogicServiceProxy:getInstance():sendGetCreateStatus()
+    HeartBeat:getInstance():init(self):start()
     UserRoomInfo.reset()
 end
 
 function LobbyScene:onExit()
     print('LobbyScene:onExit')
+    HeartBeat:getInstance():stop()
 end
 
 return LobbyScene

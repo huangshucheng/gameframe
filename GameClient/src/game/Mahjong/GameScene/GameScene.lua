@@ -9,6 +9,7 @@ local UserInfo          	= require("game.clientdata.UserInfo")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy 	= require("game.modules.LogicServiceProxy")
 local Function 				= require("game.Mahjong.Base.Function")
+local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 
 local KW_ROOM_NUM           = 'KW_ROOM_NUM'
 local KW_BTN_SET            = 'KW_BTN_SET'
@@ -129,11 +130,15 @@ end
 
 function GameScene:onEnter()
 	print('GameScene onEnter')
-    Game.showPopLayer = Function.showPopLayer
+    Game.showPopLayer         = Function.showPopLayer
+    Game.popLayer             = Function.popLayer
+    Game.getLayer             = Function.getLayer
+    HeartBeat:getInstance():init(self):start()
 end
 
 function GameScene:onExit()
     print('GameScene onExit')
+    HeartBeat:getInstance():stop()
 end
 
 return GameScene

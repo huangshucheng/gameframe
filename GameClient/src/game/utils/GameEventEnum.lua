@@ -22,6 +22,7 @@ ServerEvents.ON_SERVER_EVENT_NET_NETLOWER  			= "on_server_event_net_netlower"
 ClientEvents = ClientEvents or {}
 
 ClientEvents.ON_ASYC_USER_INFO 						= 'on_asyc_user_info'
+ClientEvents.ON_NETWORK_OFF 						= 'on_network_off'
 
 -- for use
 --[[

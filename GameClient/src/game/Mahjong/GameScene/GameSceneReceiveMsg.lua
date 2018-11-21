@@ -5,6 +5,9 @@ local Respones          	= require("game.net.Respones")
 local cmd_name_map      	= require("game.net.protocol.cmd_name_map")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local UserInfo              = require("game.clientdata.UserInfo")
+local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
+local HeartBeat             = require('game.Lobby.Base.HeartBeat')
+
 local MAX_PLAYER_NUM        = 4
 
 function GameScene:addServerEventListener()
@@ -16,6 +19,7 @@ function GameScene:addServerEventListener()
 end
 
 function GameScene:addClientEventListener()
+    addEvent(ClientEvents.ON_NETWORK_OFF, self, self.onEventNetWorkOff)
     addEvent("DessolveRes",self, self.onEventDessolve)
     addEvent("ExitRoomRes",self, self.onEventExitRoom)
     addEvent('Relogin',self, self.onEvnetRelogin)
@@ -24,6 +28,7 @@ function GameScene:addClientEventListener()
     addEvent('UserArrived',self, self.onEventUserArrived)
     addEvent('UserOffLine',self, self.onEventUserOffline)
     addEvent('UserReconnected',self, self.onEventUserReconnected)
+    addEvent("LoginLogicRes",self, self.onEventLoginLogic)
 end
 
 function GameScene:onEventData(event)
@@ -139,4 +144,18 @@ end
 
 function GameScene:onEventUserReconnected(event)
     print('hcc>> GameScene:onEventUserReconnected')
+end
+
+function GameScene:onEventNetWorkOff(event)
+    local layer = Game.getLayer('LoadingLayer')
+    if not layer then
+        Game.showPopLayer('LoadingLayer')
+    end
+    -- LogicServiceProxy:getInstance():sendLoginLogicServer() -- login gateway first TODO
+end
+
+function GameScene:onEventLoginLogic(event)
+    Game.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
+    Game.popLayer('LoadingLayer')
+    HeartBeat:getInstance():init(self):start()
 end

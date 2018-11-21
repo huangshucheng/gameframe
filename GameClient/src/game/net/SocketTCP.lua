@@ -82,7 +82,8 @@ function SocketTCP:connect(__host, __port, __retryConnectWhenFailure)
 end
 
 function SocketTCP:send(__data)
-	assert(self.isConnected, self.name .. " is not connected.")
+	if not self.isConnected then return end
+	-- assert(self.isConnected, self.name .. " is not connected.")
     if not __data then return end
 	self.tcp:send(__data)
 end

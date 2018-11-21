@@ -6,7 +6,7 @@ local cmd_name_map          = require("game.net.protocol.cmd_name_map")
 local UserInfo              = require("game.clientdata.UserInfo")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
-
+local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 
 function LobbyScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
@@ -18,6 +18,7 @@ end
 
 function LobbyScene:addClientEventListener()
     addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
+    addEvent(ClientEvents.ON_NETWORK_OFF, self, self.onEventNetWorkOff)
     addEvent("EditProfileRes",self, self.onEventEditProfile)
     addEvent("AccountUpgradeRes",self, self.onEventAccountUpgrade)
     addEvent("Relogin",self, self.onEventReLogin)
@@ -30,7 +31,6 @@ function LobbyScene:addClientEventListener()
     addEvent("JoinRoomRes", self, self.onEventJoinRoom)
     addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
     addEvent("BackRoomRes", self, self.onEventBackRoom)
-    addEvent("HeartBeatRes", self, self.onEventHeartBeat)
 end
 
 function LobbyScene:onEventData(event)
@@ -80,10 +80,12 @@ function LobbyScene:onEventRecvLoginBonues(event)
 end
 
 function LobbyScene:onEventLoginLogic(event)
+    print('hcc>> LobbyScene:onEventLoginLogic login logic success')
     GT.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
+    GT.popLayer('LoadingLayer')
     -- request player create room status
     LogicServiceProxy:getInstance():sendGetCreateStatus()
-    LogicServiceProxy:getInstance():sendHeartBeat()
+    HeartBeat:getInstance():init(self):start()
 end
 
 function LobbyScene:onEventNetConnect(envet)
@@ -91,7 +93,7 @@ function LobbyScene:onEventNetConnect(envet)
 end
 
 function LobbyScene:onEventNetConnectFail(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接失败!"}) 
+        GT.showPopLayer('TipsLayer',{"网络连接失败!"})
 end
 
 function LobbyScene:onEventClose(envet)
@@ -180,10 +182,11 @@ function LobbyScene:onEventBackRoom(event)
     end
 end
 
-function LobbyScene:onEventHeartBeat(event)
-    local data = event._usedata
-    local status = data.status
-    if status == Respones.OK then
-        
+function LobbyScene:onEventNetWorkOff(event)
+    print('hcc>> LobbyScene:onEventNetWorkOff')
+    local layer = GT.getLayer('LoadingLayer')
+    if not layer then
+        GT.showPopLayer('LoadingLayer')
     end
+    LogicServiceProxy:getInstance():sendLoginLogicServer() -- login gateway first TODO
 end
