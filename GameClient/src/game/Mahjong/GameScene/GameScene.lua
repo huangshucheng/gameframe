@@ -133,12 +133,12 @@ function GameScene:onEnter()
     Game.showPopLayer         = Function.showPopLayer
     Game.popLayer             = Function.popLayer
     Game.getLayer             = Function.getLayer
-    HeartBeat:getInstance():init(self):start()
+    -- HeartBeat:getInstance():init(self):start()
 end
 
 function GameScene:onExit()
     print('GameScene onExit')
-    HeartBeat:getInstance():stop()
+    -- HeartBeat:getInstance():stop()
 end
 
 return GameScene

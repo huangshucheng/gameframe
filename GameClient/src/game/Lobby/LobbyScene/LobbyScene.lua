@@ -193,13 +193,13 @@ function LobbyScene:onEnter()
     --获取用户信息
     SystemServiceProxy:getInstance():sendGetUgameInfo()
     LogicServiceProxy:getInstance():sendGetCreateStatus()
-    HeartBeat:getInstance():init(self):start()
+    -- HeartBeat:getInstance():init(self):start()
     UserRoomInfo.reset()
 end
 
 function LobbyScene:onExit()
     print('LobbyScene:onExit')
-    HeartBeat:getInstance():stop()
+    -- HeartBeat:getInstance():stop()
 end
 
 return LobbyScene

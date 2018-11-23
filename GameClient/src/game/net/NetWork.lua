@@ -6,6 +6,8 @@ local BitUtil           = require("game.utils.BitUtil")
 local TcpPacker         = require("game.utils.TcpPacker")
 local ConfigKeyWord     = require("game.net.ConfigKeyWord")
 local ProtoMan          = require("game.utils.ProtoMan")
+local Cmd               = require("game.net.protocol.Cmd")
+local Stype             = require("game.net.Stype")
 
 local socket            = require "socket"
 
@@ -108,7 +110,6 @@ end
 -------- interface start --------
 
 function NetWork:start()
-
    if self._socketTCP then
    		self._socketTCP:connect()
    end

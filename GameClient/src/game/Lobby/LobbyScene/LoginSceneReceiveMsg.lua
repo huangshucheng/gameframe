@@ -40,8 +40,9 @@ function LoginScene:onEventGuestLogin(event)
             UserInfo.setUserId(uinfo.uid)
             UserInfo.setUserIsGuest(true)
             UserInfo.flush()
-            self:enterScene('game.Lobby.LobbyScene.LobbyScene')
+            LogicServiceProxy:getInstance():sendLoginLogicServer()
             GT.showPopLayer('TipsLayer',{"游客登录成功!"})
+            self:enterScene('game.Lobby.LobbyScene.LobbyScene')
         else
             GT.showPopLayer('TipsLayer',{"游客登录失败，您帐号已升级成正式帐号!"})
         end
@@ -59,10 +60,9 @@ function LoginScene:onEventUnameLoginRes(event)
         UserInfo.setUserVip(uinfo.uvip)
         UserInfo.setUserId(uinfo.uid)
         UserInfo.flush()
-        -- login logic server
         LogicServiceProxy:getInstance():sendLoginLogicServer()
-        self:enterScene('game.Lobby.LobbyScene.LobbyScene')
         GT.showPopLayer('TipsLayer',{"登录成功!"})
+        self:enterScene('game.Lobby.LobbyScene.LobbyScene')
     else
         GT.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
     end

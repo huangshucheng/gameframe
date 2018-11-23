@@ -52,7 +52,7 @@ end
 function HeartBeat:scheduleHeartBeatUpdate(dt)
 	self:sendHeartBeat()
 	if self:checkTimeOut() then
-		postEvent(ClientEvents.ON_NETWORK_OFF, nil)
+		-- postEvent(ClientEvents.ON_NETWORK_OFF, nil)
 	end
 end
 

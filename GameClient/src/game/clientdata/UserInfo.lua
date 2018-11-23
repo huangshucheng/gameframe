@@ -9,6 +9,13 @@ local USER_ACCOUNT  = 'USER_ACCOUNT'
 local USER_PWD 		= 'USER_PWD'
 local USER_IS_GUEST = 'USER_IS_GUEST'
 local USER_GUEST_KEY = 'USER_GUEST_KEY'
+local USER_LOGIN_TYPE = 'USER_LOGIN_TYPE'
+
+local logintype = {
+	'uname',
+	'guest',
+	'wechat',
+}
 
 function UserInfo.setUserName(uname)
 	if uname == nil or uname == '' then
@@ -109,8 +116,17 @@ function UserInfo.getUserGuestKey()
 	return cc.UserDefault:getInstance():getStringForKey(USER_GUEST_KEY,'')
 end
 
+function UserInfo.setLoginType(type)
+	cc.UserDefault:getInstance():setStringForKey(USER_LOGIN_TYPE, tostring(type))
+end
+
+function UserInfo.getLoginType()
+	return cc.UserDefault:getInstance():getStringForKey(USER_LOGIN_TYPE,'')
+end
+
 function UserInfo.flush()
 	cc.UserDefault:getInstance():flush()
 end
+
 
 return UserInfo

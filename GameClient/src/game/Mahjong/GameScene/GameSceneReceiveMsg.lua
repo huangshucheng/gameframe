@@ -6,6 +6,7 @@ local cmd_name_map      	= require("game.net.protocol.cmd_name_map")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local UserInfo              = require("game.clientdata.UserInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
+local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 
 local MAX_PLAYER_NUM        = 4
@@ -29,6 +30,9 @@ function GameScene:addClientEventListener()
     addEvent('UserOffLine',self, self.onEventUserOffline)
     addEvent('UserReconnected',self, self.onEventUserReconnected)
     addEvent("LoginLogicRes",self, self.onEventLoginLogic)
+
+    addEvent("GuestLoginRes", self, self.onEventGuestLogin)
+    addEvent("UnameLoginRes", self, self.onEventUnameLogin)
 end
 
 function GameScene:onEventData(event)
@@ -40,6 +44,19 @@ end
 
 function GameScene:onEventNetConnect(event)
     Game.showPopLayer('TipsLayer',{"网络连接成功!"})
+    --重新登录
+    local loginType = UserInfo.getLoginType()
+    print('loginType: '.. loginType)
+    if loginType == 'uname' then
+        local name  = UserInfo.getUserAccount() 
+        local pwd   = UserInfo.getUserPwd()
+        print('hcc>>111 ' .. tostring(name) .. '  pwd:' .. tostring(pwd))
+        AuthServiceProxy:getInstance():sendUnameLogin(name,pwd)
+    elseif loginType == 'guest' then
+        local guestkey = UserInfo.getUserGuestKey()
+        print('hcc>>222 guestKey ' .. tostring(guestKey))
+        AuthServiceProxy:getInstance():sendGuestLogin(guestkey)
+    end
 end
 
 function GameScene:onEventNetConnectFail(event)
@@ -155,7 +172,52 @@ function GameScene:onEventNetWorkOff(event)
 end
 
 function GameScene:onEventLoginLogic(event)
-    Game.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
     Game.popLayer('LoadingLayer')
-    HeartBeat:getInstance():init(self):start()
+    local data = event._usedata
+    if data.status == Respones.OK then
+        Game.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
+        LogicServiceProxy:getInstance():sendBackRoomReq()
+    else
+        Game.showPopLayer('TipsLayer',{"登录逻辑服failed!"})
+        LogicServiceProxy:getInstance():sendLoginLogicServer()  
+    end
+end
+
+function GameScene:onEventGuestLogin(event)
+    local body = event._usedata
+    if body then
+        Game.popLayer('LoadingLayer')
+        if body.status == Respones.OK then
+            local uinfo = body.uinfo
+            UserInfo.setUserName(uinfo.unick)
+            UserInfo.setUserface(uinfo.uface)
+            UserInfo.setUserSex(uinfo.usex)
+            UserInfo.setUserVip(uinfo.uvip)
+            UserInfo.setUserId(uinfo.uid)
+            UserInfo.setUserIsGuest(true)
+            UserInfo.flush()
+            LogicServiceProxy:getInstance():sendLoginLogicServer()
+            Game.showPopLayer('TipsLayer',{"游客登录成功!"})
+        else
+            Game.showPopLayer('TipsLayer',{"游客登录失败，您帐号已升级成正式帐号!"})
+        end
+    end
+end
+
+function GameScene:onEventUnameLogin(event)
+    local body = event._usedata
+    Game.popLayer('LoadingLayer')
+    if body.status == Respones.OK then
+        local uinfo = body.uinfo
+        UserInfo.setUserName(uinfo.unick)
+        UserInfo.setUserface(uinfo.uface)
+        UserInfo.setUserSex(uinfo.usex)
+        UserInfo.setUserVip(uinfo.uvip)
+        UserInfo.setUserId(uinfo.uid)
+        UserInfo.flush()
+        LogicServiceProxy:getInstance():sendLoginLogicServer()
+        Game.showPopLayer('TipsLayer',{"登录成功!"})
+    else
+        Game.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
+    end
 end

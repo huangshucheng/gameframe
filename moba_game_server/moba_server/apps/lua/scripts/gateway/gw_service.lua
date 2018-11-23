@@ -10,17 +10,6 @@ local Stype 				= require("Stype")
 local Cmd 					= require("Cmd")
 local Respones 				= require("Respones")
 
-local function tablesize(table)
-	if type(table) ~= 'table' then
-		return 0
-	end
-	local size = 0
-	for _ , v in pairs(table) do
-		size = size + 1
-	end
-	return size
-end
-
 local function connect_to_server(stype, ip, port)
 	Netbus.tcp_connect(ip, port, function(err, session)
 		do_connecting[stype] = false

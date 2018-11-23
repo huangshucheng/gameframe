@@ -177,6 +177,7 @@ function LoginScene:onEventBtnGuestLogin(sender,eventType)
     end
     print('loginKey: ' .. keystr)
     AuthServiceProxy:getInstance():sendGuestLogin(keystr)
+    UserInfo.setLoginType('guest')
     GT.showPopLayer('LoadingLayer')
 end
 
@@ -192,6 +193,7 @@ function LoginScene:onEventBtnLogin(sender, eventType)
     AuthServiceProxy:getInstance():sendUnameLogin(accountStr,pwdStr)
     UserInfo.setUserAccount(accountStr)
     UserInfo.setUserPwd(pwdStr)
+    UserInfo.setLoginType('uname')
     GT.showPopLayer('LoadingLayer')
 end
 

@@ -310,13 +310,15 @@ function RoomManager:on_back_room(s, req)
 		print('hcc>> on_back_room 1')
 		return
 	end
-
+	--TODO
 	local room = self:get_is_player_uid_in_room(player)
-	if not room then
+	print('hcc>>>>>>>>>>>>111room: ' .. tostring(room))
+	if (room == false) or (room == nil) then
 		NetWork:getInstance():send_status(s, stype, Cmd.eBackRoomRes, uid, Respones.InvalidOpt)
 		print('hcc>> on_back_room 2')
 	end
-
+	print('hcc>>>>>>>>>>>>222room: ' .. tostring(room))
+	dump(room)
 	local ret =  room:enter_player(player) -- TODO error :attempt to index a boolean value (local 'room')
 	if not ret then
 		NetWork:getInstance():send_status(s, stype, Cmd.eBackRoomRes, uid, Respones.InvalidOpt)
