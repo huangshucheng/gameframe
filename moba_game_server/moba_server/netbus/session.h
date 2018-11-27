@@ -6,11 +6,15 @@ public:
 	unsigned int as_client;
 	unsigned int utag;
 	unsigned int uid;
+	int last_send_time;
+	int last_recv_time;
 
-	session() {
-		this->as_client = 0;
-		this->utag = 0;
-		this->uid = 0;
+	session():
+		as_client(0),
+		utag(0),
+		uid(0),
+		last_send_time(0),
+		last_recv_time(0){
 	}
 
 public:

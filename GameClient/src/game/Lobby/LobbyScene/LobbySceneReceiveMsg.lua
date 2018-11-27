@@ -7,7 +7,7 @@ local UserInfo              = require("game.clientdata.UserInfo")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
-local HeartBeat             = require('game.Lobby.Base.HeartBeat')
+-- local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 
 function LobbyScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
@@ -34,6 +34,7 @@ function LobbyScene:addClientEventListener()
     addEvent("JoinRoomRes", self, self.onEventJoinRoom)
     addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
     addEvent("BackRoomRes", self, self.onEventBackRoom)
+    addEvent("HeartBeatRes", self, self.onEventHeartBeat)
 end
 
 function LobbyScene:onEventData(event)
@@ -243,5 +244,13 @@ function LobbyScene:onEventUnameLogin(event)
         GT.showPopLayer('TipsLayer',{"登录成功!"})
     else
         GT.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
+    end
+end
+
+function LobbyScene:onEventHeartBeat(event)
+    local body = event._usedata
+    if body.status == Respones.OK then
+        LogicServiceProxy:getInstance():sendHeartBeat()
+        print('hcc>> client send heart beat....')
     end
 end

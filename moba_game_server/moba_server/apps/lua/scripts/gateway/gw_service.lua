@@ -52,7 +52,7 @@ end
 local function send_to_client(server_session, raw_cmd)
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
 	local client_session = nil
-
+	-- login
 	if is_login_return_cmd(ctype) then
 		client_session = client_sessions_ukey[utag]
 		client_sessions_ukey[utag] = nil
@@ -87,7 +87,7 @@ local function send_to_client(server_session, raw_cmd)
 		Session.send_msg(client_session, login_res)
 		return
 	end
-
+	-- regist
 	if ctype == Cmd.eUserRegistRes then
 		client_session = client_sessions_ukey[utag]
 		client_sessions_ukey[utag] = nil
@@ -110,8 +110,6 @@ local function send_to_client(server_session, raw_cmd)
 			client_sessions_uid[utag] = nil
 		end
 	end
-	-- print("send_to_client client_sessions_ukey size: " .. tablesize(client_sessions_ukey))
-	-- print("send_to_client client_sessions_uid size: " .. tablesize(client_sessions_uid))
 end
 
 local function is_login_request_cmd(ctype)
@@ -150,6 +148,13 @@ local function send_to_server(client_session, raw_cmd)
 		else
 		end
 		client_sessions_ukey[utag] = client_session
+	elseif ctype == Cmd.eHeartBeatReq then
+		local uid = Session.get_uid(client_session)
+		if uid ~= 0 then
+			local time = os.time()
+			Session.set_last_recv_time(client_session,time)
+			local recvtime = Session.get_last_recv_time(client_session)
+		end
 	else
 		local uid = Session.get_uid(client_session)
 		utag = uid
@@ -211,6 +216,32 @@ local function on_gw_session_disconnect(s, stype)
 		print('hcc>> on_gw_session_disconnect 333 uid: ' .. uid)
 	end
 end
+-- todo heart beat
+local function send_heart_beat()
+	for _ , session in pairs(client_sessions_uid) do
+		local uid = Session.get_uid(session)
+		local msg = {
+			Stype.Logic , Cmd.eHeartBeatRes , uid , {status = Respones.OK}
+		}
+		local time = os.time()
+		Session.set_last_send_time(session,time)
+		Session.send_msg(session, msg)
+
+		local time_send = Session.get_last_send_time(session)
+		local time_recv = Session.get_last_recv_time(session)
+		if time_recv == 0 then
+			time_recv = time_send
+		end
+		local sub = time_send - time_recv
+		print('sendTime: '.. time_send .. ' recvTime: '.. time_recv .. '  sub: ' .. sub)
+		if sub >= 6  then
+			print('uid: '.. uid .. ' lost connect -------------')
+			--TODO
+		end
+	end
+end
+
+Scheduler.schedule(send_heart_beat, 1000, -1, 3000)
 
 gw_service_init()
 

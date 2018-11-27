@@ -383,6 +383,58 @@ lua_failed:
 	return 0;
 }
 
+static int lua_set_last_send_time(lua_State* tolua_S){
+	session* s = (session*)tolua_touserdata(tolua_S, 1, NULL);
+	if (s == NULL) {
+		goto lua_failed;
+	}
+
+	int time = lua_tointeger(tolua_S, 2);
+	s->last_send_time = time;
+
+lua_failed:
+	return 0;
+}
+
+static int lua_get_last_send_time(lua_State* tolua_S){
+	session* s = (session*)tolua_touserdata(tolua_S, 1, NULL);
+	if (s == NULL) {
+		goto lua_failed;
+	}
+
+	lua_pushinteger(tolua_S, s->last_send_time);
+	return 1;
+
+lua_failed:
+	return 0;
+}
+
+static int lua_set_last_recv_time(lua_State* tolua_S){
+	session* s = (session*)tolua_touserdata(tolua_S, 1, NULL);
+	if (s == NULL) {
+		goto lua_failed;
+	}
+
+	int time = lua_tointeger(tolua_S, 2);
+	s->last_recv_time= time;
+
+lua_failed:
+	return 0;
+}
+
+static int lua_get_last_recv_time(lua_State* tolua_S){
+	session* s = (session*)tolua_touserdata(tolua_S, 1, NULL);
+	if (s == NULL) {
+		goto lua_failed;
+	}
+
+	lua_pushinteger(tolua_S, s->last_recv_time);
+	return 1;
+
+lua_failed:
+	return 0;
+}
+
 static int
 lua_set_uid(lua_State* tolua_S) {
 	session* s = (session*)tolua_touserdata(tolua_S, 1, NULL);
@@ -442,6 +494,10 @@ register_session_export(lua_State* tolua_S) {
 		tolua_function(tolua_S, "set_uid", lua_set_uid);
 		tolua_function(tolua_S, "get_uid", lua_get_uid);
 		tolua_function(tolua_S, "asclient", lua_as_client);
+		tolua_function(tolua_S, "set_last_send_time", lua_set_last_send_time);
+		tolua_function(tolua_S, "get_last_send_time", lua_get_last_send_time);
+		tolua_function(tolua_S, "set_last_recv_time", lua_set_last_recv_time);
+		tolua_function(tolua_S, "get_last_recv_time", lua_get_last_recv_time);
 		tolua_endmodule(tolua_S);
 	}
 	lua_pop(tolua_S, 1);

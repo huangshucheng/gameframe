@@ -9,7 +9,7 @@ local UserInfo              = require("game.clientdata.UserInfo")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local SystemServiceProxy    = require("game.modules.SystemServiceProxy")
-local HeartBeat             = require('game.Lobby.Base.HeartBeat')
+-- local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 local Function              = require('game.Base.Function')
 
 --------------拓展

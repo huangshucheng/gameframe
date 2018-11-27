@@ -25,7 +25,7 @@ function RoomManager:ctor()
 		[Cmd.eExitRoomReq]  	= self.on_exit_room,
 		[Cmd.eDessolveReq] 		= self.on_dessolve_room,
 		[Cmd.eBackRoomReq] 		= self.on_back_room,
-		[Cmd.eHeartBeatReq] 	= self.on_heart_beat,
+		-- [Cmd.eHeartBeatReq] 	= self.on_heart_beat,
 		[Cmd.eGetCreateStatusReq] = self.on_get_create_status,
 	}
 end

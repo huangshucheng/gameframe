@@ -53,6 +53,9 @@ function PlayerManager:on_login_logic_server(s, req)
 	local uid = req[3]
 	local stype = req[1]
 	print('PlayerManager>> on_login_logic_server>>  uid: '.. tostring(uid))
+	-- Session.set_time_span(s,123)
+	-- local timespan =  Session.get_time_span(s)
+	-- print('hcc>> timespan: ' .. timespan)
 
 	local p = logic_server_players[uid]
 	if p then
