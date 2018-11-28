@@ -34,11 +34,7 @@ function NetWork:ctor()
     self:addEventListenner()
 
     print(__name .. "  ip: " .. self._ip .. "  ,port: " .. tostring(self._port))
-    -- TODO 
-    --[[
-        加密
-        心跳
-    ]]
+    -- TODO 加密
 end
 
 function NetWork:addEventListenner()
@@ -59,7 +55,7 @@ end
 
 -- 接收数据
 function NetWork:onMessage(event)
-	print('\n' .. __name .. " onMessage>> 收到消息------------start")
+	-- print('\n' .. __name .. " onMessage>> 收到消息------------start")
 
    if event.data == nil then return end
     --[[
@@ -87,7 +83,7 @@ function NetWork:onMessage(event)
         local tb = ProtoMan:getInstance():unpack_protobuf_cmd(v)
         postEvent(ServerEvents.ON_SERVER_EVENT_DATA , tb)
     end
-    print(__name .. " onMessage>> 收到消息------------end\n")
+    -- print(__name .. " onMessage>> 收到消息------------end\n")
 end
 
 function NetWork:onClose()

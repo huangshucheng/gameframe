@@ -7,7 +7,6 @@ local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local UserInfo              = require("game.clientdata.UserInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
-local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 
 local MAX_PLAYER_NUM        = 4
 
@@ -20,7 +19,6 @@ function GameScene:addServerEventListener()
 end
 
 function GameScene:addClientEventListener()
-    addEvent(ClientEvents.ON_NETWORK_OFF, self, self.onEventNetWorkOff)
     addEvent("DessolveRes",self, self.onEventDessolve)
     addEvent("ExitRoomRes",self, self.onEventExitRoom)
     addEvent('Relogin',self, self.onEvnetRelogin)
@@ -33,13 +31,18 @@ function GameScene:addClientEventListener()
 
     addEvent("GuestLoginRes", self, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
+    addEvent("HeartBeatRes", self, self.onEventHeartBeat)
 end
 
 function GameScene:onEventData(event)
     local data = event._usedata
     if not data then return end
-    dump(data)
-    postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
+    if tonumber(data.ctype) ~= 47 then -- dump except heartbeat pkt
+        dump(data,'onEventData',5)
+    end 
+    if cmd_name_map[data.ctype] then
+        postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
+    end
 end
 
 function GameScene:onEventNetConnect(event)
@@ -61,14 +64,17 @@ end
 
 function GameScene:onEventNetConnectFail(event)
     Game.showPopLayer('TipsLayer',{"网络连接失败!"}) 
+    GT.showPopLayer('LoadingLayer')
 end
 
 function GameScene:onEventClose(event)
-    Game.showPopLayer('TipsLayer',{"网络连接关闭111!"})
+    -- Game.showPopLayer('TipsLayer',{"网络连接关闭111!"})
+    GT.showPopLayer('LoadingLayer')
 end
 
 function GameScene:onEventClosed(event)
-    Game.showPopLayer('TipsLayer',{"网络连接关闭222!"})
+    -- Game.showPopLayer('TipsLayer',{"网络连接关闭222!"})
+    GT.showPopLayer('LoadingLayer')
 end
 
 function GameScene:onEvnetRelogin(event)
@@ -98,7 +104,7 @@ function GameScene:onEventExitRoom(event)
         else
             UserRoomInfo.removeUserRoomInfoBySeatId(seatid)
         end
-        if unick == tostring(UserInfo.getUserName()) then
+        if unick == tostring(UserInfo.getUserNameEx()) then -- TODO
             self:popScene()
         end
     else
@@ -116,7 +122,7 @@ function GameScene:onEventJoinRoom(event)
         local users_info = data.users_info
         if next(users_info) then
             for i,v in ipairs(users_info) do
-                dump(v)
+                dump(v,'onEventJoinRoom' , 5)
                 UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
             end
         end
@@ -136,7 +142,6 @@ function GameScene:onEventBackRoom(event)
                 UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
             end
         end
-        self:pushScene('game.Mahjong.GameScene.GameScene')
     end
     self:showAllExistUserInfo()
 end
@@ -163,14 +168,6 @@ function GameScene:onEventUserReconnected(event)
     print('hcc>> GameScene:onEventUserReconnected')
 end
 
-function GameScene:onEventNetWorkOff(event)
-    local layer = Game.getLayer('LoadingLayer')
-    if not layer then
-        Game.showPopLayer('LoadingLayer')
-    end
-    -- LogicServiceProxy:getInstance():sendLoginLogicServer() -- login gateway first TODO
-end
-
 function GameScene:onEventLoginLogic(event)
     Game.popLayer('LoadingLayer')
     local data = event._usedata
@@ -185,8 +182,8 @@ end
 
 function GameScene:onEventGuestLogin(event)
     local body = event._usedata
+    Game.popLayer('LoadingLayer')
     if body then
-        Game.popLayer('LoadingLayer')
         if body.status == Respones.OK then
             local uinfo = body.uinfo
             UserInfo.setUserName(uinfo.unick)
@@ -219,5 +216,12 @@ function GameScene:onEventUnameLogin(event)
         Game.showPopLayer('TipsLayer',{"登录成功!"})
     else
         Game.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
+    end
+end
+
+function GameScene:onEventHeartBeat(event)
+    local body = event._usedata
+    if body.status == Respones.OK then
+        LogicServiceProxy:getInstance():sendHeartBeat()
     end
 end

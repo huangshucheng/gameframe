@@ -17,10 +17,21 @@ local logintype = {
 	'wechat',
 }
 
+local __userName = ''
+
+function UserInfo.setUserNameEx(uname)
+	__userName = uname
+end
+
+function UserInfo.getUserNameEx()
+	return __userName
+end
+
 function UserInfo.setUserName(uname)
 	if uname == nil or uname == '' then
 		return
 	end
+	UserInfo.setUserNameEx(uname)
 	cc.UserDefault:getInstance():setStringForKey(USER_NAME, tostring(uname))
 end
 

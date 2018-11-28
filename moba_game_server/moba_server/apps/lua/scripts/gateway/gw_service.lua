@@ -10,6 +10,8 @@ local Stype 				= require("Stype")
 local Cmd 					= require("Cmd")
 local Respones 				= require("Respones")
 
+local DISCONNECT_LIMIT_TIME = 8
+
 local function connect_to_server(stype, ip, port)
 	Netbus.tcp_connect(ip, port, function(err, session)
 		do_connecting[stype] = false
@@ -151,9 +153,7 @@ local function send_to_server(client_session, raw_cmd)
 	elseif ctype == Cmd.eHeartBeatReq then
 		local uid = Session.get_uid(client_session)
 		if uid ~= 0 then
-			local time = os.time()
-			Session.set_last_recv_time(client_session,time)
-			local recvtime = Session.get_last_recv_time(client_session)
+			Session.set_last_recv_time(client_session,os.time())
 		end
 	else
 		local uid = Session.get_uid(client_session)
@@ -188,7 +188,6 @@ local function on_gw_session_disconnect(s, stype)
 		end
 		return
 	end
-
 	-- 连接到网关的客户端断线了
 	-- 把客户端从临时映射表里面删除
 	local utag = Session.get_utag(s)
@@ -216,7 +215,7 @@ local function on_gw_session_disconnect(s, stype)
 		print('hcc>> on_gw_session_disconnect 333 uid: ' .. uid)
 	end
 end
--- todo heart beat
+-- heart beat
 local function send_heart_beat()
 	for _ , session in pairs(client_sessions_uid) do
 		local uid = Session.get_uid(session)
@@ -233,10 +232,10 @@ local function send_heart_beat()
 			time_recv = time_send
 		end
 		local sub = time_send - time_recv
-		print('sendTime: '.. time_send .. ' recvTime: '.. time_recv .. '  sub: ' .. sub)
-		if sub >= 6  then
+		print('uid: '.. uid .. '  ,sendTime: '.. time_send .. ' recvTime: '.. time_recv .. '  sub: ' .. sub)
+		if sub >= DISCONNECT_LIMIT_TIME then
 			print('uid: '.. uid .. ' lost connect -------------')
-			--TODO
+			Session.close(session)
 		end
 	end
 end

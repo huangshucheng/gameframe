@@ -7,7 +7,6 @@ local UserInfo              = require("game.clientdata.UserInfo")
 local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
--- local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 
 function LobbyScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
@@ -19,7 +18,6 @@ end
 
 function LobbyScene:addClientEventListener()
     addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
-    addEvent(ClientEvents.ON_NETWORK_OFF, self, self.onEventNetWorkOff)
     addEvent("GuestLoginRes", self, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
 
@@ -40,8 +38,12 @@ end
 function LobbyScene:onEventData(event)
     local data = event._usedata
     if not data then return end
-    dump(data)
-    postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
+    if tonumber(data.ctype) ~= 47 then -- dump except heartbeat pkt
+        dump(data,'onEventData' , 5)
+    end 
+    if cmd_name_map[data.ctype] then
+        postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
+    end
 end
 
 function LobbyScene:onEventEditProfile(event)
@@ -85,7 +87,6 @@ function LobbyScene:onEventLoginLogic(event)
     if data.status == Respones.OK then
         GT.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
         LogicServiceProxy:getInstance():sendGetCreateStatus()
-        -- HeartBeat:getInstance():init(self):start()
     else
         GT.showPopLayer('TipsLayer',{"登录逻辑服failed!"})
         LogicServiceProxy:getInstance():sendLoginLogicServer()        
@@ -94,31 +95,33 @@ end
 
 function LobbyScene:onEventNetConnect(envet)
     GT.showPopLayer('TipsLayer',{"网络连接成功!"})
+    GT.popLayer('LoadingLayer')
     --重新登录
     local loginType = UserInfo.getLoginType()
     print('loginType: '.. loginType)
     if loginType == 'uname' then
         local name  = UserInfo.getUserAccount() 
         local pwd   = UserInfo.getUserPwd()
-        print('hcc>>111 ' .. tostring(name) .. '  pwd:' .. tostring(pwd))
         AuthServiceProxy:getInstance():sendUnameLogin(name,pwd)
     elseif loginType == 'guest' then
         local guestkey = UserInfo.getUserGuestKey()
-        print('hcc>>222 guestKey ' .. tostring(guestKey))
         AuthServiceProxy:getInstance():sendGuestLogin(guestkey)
     end
 end
 
 function LobbyScene:onEventNetConnectFail(envet)
         GT.showPopLayer('TipsLayer',{"网络连接失败!"})
+        GT.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventClose(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接关闭111!"})
+        -- GT.showPopLayer('TipsLayer',{"网络连接关闭111!"})
+        GT.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventClosed(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接关闭222!"})
+        -- GT.showPopLayer('TipsLayer',{"网络连接关闭222!"})
+        GT.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventAsycUserInfo(event)
@@ -199,19 +202,10 @@ function LobbyScene:onEventBackRoom(event)
     end
 end
 
-function LobbyScene:onEventNetWorkOff(event)
-    print('hcc>> LobbyScene:onEventNetWorkOff')
-    local layer = GT.getLayer('LoadingLayer')
-    if not layer then
-        GT.showPopLayer('LoadingLayer')
-    end
-    LogicServiceProxy:getInstance():sendLoginLogicServer() -- login gateway first TODO
-end
-
 function LobbyScene:onEventGuestLogin(event)
     local body = event._usedata
+    GT.popLayer('LoadingLayer')
     if body then
-        GT.popLayer('LoadingLayer')
         if body.status == Respones.OK then
             local uinfo = body.uinfo
             UserInfo.setUserName(uinfo.unick)
@@ -251,6 +245,5 @@ function LobbyScene:onEventHeartBeat(event)
     local body = event._usedata
     if body.status == Respones.OK then
         LogicServiceProxy:getInstance():sendHeartBeat()
-        print('hcc>> client send heart beat....')
     end
 end
