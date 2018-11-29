@@ -93,6 +93,7 @@ function GameScene:onEventDessolve(event)
 end
 
 function GameScene:onEventExitRoom(event)
+    print('hcc>> onEventExitRoom')
     local data = event._usedata
     if data.status == Respones.OK then
         local user_info = data.user_info
@@ -147,6 +148,7 @@ function GameScene:onEventBackRoom(event)
 end
 
 function GameScene:onEventUserArrived(event)
+    print('hcc>> onEventUserArrived')
     local data = event._usedata
     if next(data) then
         UserRoomInfo.setUserRoomInfoBySeatId(data.seatid, data)

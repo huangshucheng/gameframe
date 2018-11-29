@@ -153,8 +153,9 @@ local function send_to_server(client_session, raw_cmd)
 	elseif ctype == Cmd.eHeartBeatReq then
 		local uid = Session.get_uid(client_session)
 		if uid ~= 0 then
-			Session.set_last_recv_time(client_session,os.time())
+			Session.set_last_recv_time(client_session, os.time())
 		end
+		return
 	else
 		local uid = Session.get_uid(client_session)
 		utag = uid

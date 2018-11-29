@@ -96,6 +96,9 @@ function RoomManager:on_create_room(s, req)
 		NetWork:getInstance():send_status(s, stype, Cmd.eCreateRoomRes, uid, Respones.InvalidOpt)
 		return
 	end
+	
+	player:set_is_host(true)
+	player:set_seat_id(1)
 
 	local room = Room:create()
 	local roomid = self:generate_room_id()
@@ -105,8 +108,6 @@ function RoomManager:on_create_room(s, req)
 	room:enter_player(player)
 	server_rooms[roomid] = room
 
-	player:set_is_host(true)
-	player:set_seat_id(1)
 
 	local user_info = player:get_user_arrived_info()
 

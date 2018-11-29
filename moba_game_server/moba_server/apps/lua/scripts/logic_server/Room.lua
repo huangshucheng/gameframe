@@ -4,6 +4,7 @@ function Room:ctor()
 	self._room_id = 0
 	self._players = {}
 	self._room_info = ''
+	self._max_player = 4
 end
 
 function Room:set_room_id(room_id)
@@ -24,6 +25,14 @@ end
 
 function Room:get_room_players()
 	return self._players
+end
+
+function Room:get_max_player()
+	return self._max_player
+end
+
+function Room:set_max_player(max_player)
+	self._max_player = max_player
 end
 
 function Room:enter_player(player)
@@ -53,10 +62,47 @@ function Room:enter_player(player)
 	table.insert(self._players, player)
 	player:set_room_id(self._room_id)
 	player:set_is_offline(false)
-	if not player:get_is_host() then
-		player:set_seat_id(#self:get_room_players())
+
+	local tmp_seat_id_tb = {}
+	for i = 1 , #self._players do
+		local seatid = self._players[i]:get_seat_id()
+		if seatid ~= -1 then
+			tmp_seat_id_tb[#tmp_seat_id_tb + 1] = seatid
+		end
 	end
-	print("hcc>> room: enter_player  id: " .. player:get_uid() .. '  playerNum: '.. self:get_room_player_num())
+
+	-- print('hcc>> 00000---------------')
+	-- dump(tmp_seat_id_tb)
+
+	local seat_id_table = {}
+	for n = 1 , self._max_player do
+		seat_id_table[#seat_id_table + 1] = n
+	end
+
+	-- print('hcc>> 11111---------------')
+	-- dump(seat_id_table)
+
+	for j = 1 , #tmp_seat_id_tb do
+		local seatid = tmp_seat_id_tb[j]
+		for k = 1 , self._max_player do
+			if seatid == seat_id_table[k] then			
+				table.remove(seat_id_table,k)
+			end
+		end
+	end
+	print('hcc>> 22222---------------')
+	dump(seat_id_table)
+
+	if not player:get_is_host() then
+		local num = #seat_id_table
+		if num >= 1 then
+			local randNum = math.random(1, num)
+			local rand_seat_id = seat_id_table[randNum]
+			print('hcc>> 44444 seatId: ' .. rand_seat_id)
+			player:set_seat_id(rand_seat_id)
+		end
+	end
+	print("hcc>> 55555 room: enter_player  id: " .. player:get_uid() .. '  playerNum: '.. self:get_room_player_num())
 	return true
 end
 

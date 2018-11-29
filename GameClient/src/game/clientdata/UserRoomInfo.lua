@@ -52,7 +52,7 @@ function UserRoomInfo.getRoomId()
 end
 
 function UserRoomInfo.setUserRoomInfoBySeatId(seatId, user_info)
-	if type(seatId) ~= 'number' or (not next(user_info)) then
+	if type(seatId) ~= 'number' then
 		return
 	end
 	room_user_info[seatId] = user_info
@@ -62,11 +62,15 @@ function UserRoomInfo.removeUserRoomInfoBySeatId(seatId)
 	if type(seatId) ~= 'number' then
 		return
 	end
+	local tmpId = nil
 	for k,v in pairs(room_user_info) do
 		if k == seatId then
-			table.remove(room_user_info, k)
+			tmpId = k
 			break
 		end
+	end
+	if tmpId then
+		room_user_info[tmpId] = nil
 	end
 end
 

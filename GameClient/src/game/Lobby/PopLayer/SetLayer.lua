@@ -34,7 +34,7 @@ function SetLayer:onCreate()
     if btn_logout then
         btn_logout:addClickEventListener(handler(self,function(sender, eventType)
             AuthServiceProxy:getInstance():sendLoginOut()
-            GT.showLayer("LoadingLayer")
+            GT.showPopLayer("LoadingLayer")
         end))
     end
 end

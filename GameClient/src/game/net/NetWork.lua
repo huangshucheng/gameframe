@@ -32,8 +32,6 @@ function NetWork:ctor()
     self._socketTCP:setReconnTime(0)
     
     self:addEventListenner()
-
-    print(__name .. "  ip: " .. self._ip .. "  ,port: " .. tostring(self._port))
     -- TODO 加密
 end
 
@@ -55,35 +53,15 @@ end
 
 -- 接收数据
 function NetWork:onMessage(event)
-	-- print('\n' .. __name .. " onMessage>> 收到消息------------start")
-
    if event.data == nil then return end
-    --[[
-    local ba = ByteArray.new(ByteArray.ENDIAN_LITTLE)
-    ba:writeBuf(event.data) --可能有两个包
-    ba:setPos(1)
-    if  ba:getAvailable() <= ba:getLen() then
-        local msg_byte = ByteArray.new(ByteArray.ENDIAN_LITTLE)
-        msg_byte:writeBuf(event.data)
-        msg_byte:setPos(1)
-        local len = msg_byte:readShort()
-        print("可读长度1：" .. msg_byte:getAvailable())
-        local data = msg_byte:readString(len - 2)
-        print("可读长度2：" .. msg_byte:getAvailable())
-        print("包长度：" .. tostring(len))
-        print("数据：" .. data)    --proto buf msg
-        local tb = ProtoMan:getInstance():unpack_protobuf_cmd(data)
-        dump(tb)
-        postEvent(ServerEvents.ON_SERVER_EVENT_DATA, tb)
-    end
-    ]]
     -- 解连包
     local data_tb = self:_onReciveMsg(event.data)
-    for _ , v in pairs(data_tb) do
-        local tb = ProtoMan:getInstance():unpack_protobuf_cmd(v)
-        postEvent(ServerEvents.ON_SERVER_EVENT_DATA , tb)
+    if data_tb then
+        for index = 1 , #data_tb do
+            local tb = ProtoMan:getInstance():unpack_protobuf_cmd(data_tb[index])
+            postEvent(ServerEvents.ON_SERVER_EVENT_DATA , tb)            
+        end
     end
-    -- print(__name .. " onMessage>> 收到消息------------end\n")
 end
 
 function NetWork:onClose()
