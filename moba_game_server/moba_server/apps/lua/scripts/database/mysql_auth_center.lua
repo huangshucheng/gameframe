@@ -63,8 +63,9 @@ local function do_create_account(uname, upwd_md5, ret_handler)
 	local unick = "gst" .. math.random(100000, 999999)
 	local uface = math.random(1, 9)
 	local usex = math.random(0, 1)
-	local sql = "insert into uinfo(`guest_key`, `unick`,`usex`, `uface`,`uname`,`upwd`, `is_guest`)values(\"%s\", \"%s\", %d, %d, \"%s\", \"%s\", %d)"
-	local sql_cmd = string.format(sql,'0', unick, usex, uface, uname, upwd_md5, 0)
+	local brandid = math.random(1000000,9999999)
+	local sql = "insert into uinfo(`guest_key`, `unick`, `brandid` ,`usex`, `uface`,`uname`,`upwd`, `is_guest`)values(\"%s\", \"%s\", %d, %d, %d, \"%s\", \"%s\", %d)"
+	local sql_cmd = string.format(sql,'0', unick, brandid, usex, uface, uname, upwd_md5, 0)
 
 	Mysql.query(mysql_conn, sql_cmd, function (err, ret)
 		if err then 
@@ -163,7 +164,7 @@ local function get_uinfo_by_uname_upwd(uname, upwd, ret_handler)
 		return
 	end
 
-	local sql = "select uid, unick, usex, uface, uvip, status, is_guest from uinfo where binary uname = \"%s\" and upwd = \"%s\" limit 1"
+	local sql = "select uid, brandid, numberid, areaid, unick, usex, uface, uvip, status, is_guest from uinfo where binary uname = \"%s\" and upwd = \"%s\" limit 1"
 	local sql_cmd = string.format(sql, uname, upwd)	
 	
 	Mysql.query(mysql_conn, sql_cmd, function(err, ret)
@@ -186,12 +187,16 @@ local function get_uinfo_by_uname_upwd(uname, upwd, ret_handler)
 		local result = ret[1]
 		local uinfo = {}
 		uinfo.uid = tonumber(result[1])
-		uinfo.unick = result[2]
-		uinfo.usex = tonumber(result[3])
-		uinfo.uface = tonumber(result[4])
-		uinfo.uvip = tonumber(result[5])
-		uinfo.status = tonumber(result[6])
-		uinfo.is_guest = tonumber(result[7])
+		uinfo.brandid = tonumber(result[2])
+		uinfo.numberid = tonumber(result[3])
+		uinfo.areaid = tonumber(result[4])
+		uinfo.unick = result[5]
+		uinfo.usex = tonumber(result[6])
+		uinfo.uface = tonumber(result[7])
+		uinfo.uvip = tonumber(result[8])
+		uinfo.status = tonumber(result[9])
+		uinfo.is_guest = tonumber(result[10])
+		-- print('hcc>> get_uinfo_by_uname_upwd >> brandid: ' .. uinfo.brandid .. ' ,uid: ' .. uinfo.uid .. ' ,unick: ' .. uinfo.unick)
 		if ret_handler then
 			ret_handler(nil, uinfo)
 		end
@@ -206,7 +211,7 @@ local function get_guest_uinfo(g_key, ret_handler)
 		return
 	end
 
-	local sql = "select uid, unick, usex, uface, uvip, status, is_guest from uinfo where binary guest_key = \"%s\" limit 1"
+	local sql = "select uid, brandid, numberid, areaid, unick, usex, uface, uvip, status, is_guest from uinfo where binary guest_key = \"%s\" limit 1"
 	local sql_cmd = string.format(sql, g_key)	
 
 	Mysql.query(mysql_conn, sql_cmd, function(err, ret)
@@ -225,16 +230,20 @@ local function get_guest_uinfo(g_key, ret_handler)
 			return
 		end
 		-- end
-		
+		-- todo
 		local result = ret[1]
 		local uinfo = {}
 		uinfo.uid = tonumber(result[1])
-		uinfo.unick = result[2]
-		uinfo.usex = tonumber(result[3])
-		uinfo.uface = tonumber(result[4])
-		uinfo.uvip = tonumber(result[5])
-		uinfo.status = tonumber(result[6])
-		uinfo.is_guest = tonumber(result[7])
+		uinfo.brandid = tonumber(result[2])
+		uinfo.numberid = tonumber(result[3])
+		uinfo.areaid = tonumber(result[4])
+		uinfo.unick = result[5]
+		uinfo.usex = tonumber(result[6])
+		uinfo.uface = tonumber(result[7])
+		uinfo.uvip = tonumber(result[8])
+		uinfo.status = tonumber(result[9])
+		uinfo.is_guest = tonumber(result[10])
+		-- print('hcc>> get_guest_uinfo>> brandid: ' .. uinfo.brandid .. ' ,uid: ' .. uinfo.uid .. ' ,unick: ' .. uinfo.unick)
 		if ret_handler then
 			ret_handler(nil, uinfo)
 		end
@@ -252,8 +261,9 @@ local function insert_guest_user(g_key, ret_handler)
 	local unick = "gst" .. math.random(100000, 999999)
 	local uface = math.random(1, 9)
 	local usex = math.random(0, 1)
-	local sql = "insert into uinfo(`guest_key`, `unick`, `uface`, `usex`, `is_guest`)values(\"%s\", \"%s\", %d, %d, 1)"
-	local sql_cmd = string.format(sql, g_key, unick, uface, usex)
+	local brandid = math.random(1000000, 9999999)
+	local sql = "insert into uinfo(`guest_key`, `unick`, `brandid`,`uface`, `usex`, `is_guest`)values(\"%s\", \"%s\", %d, %d, %d, 1)"
+	local sql_cmd = string.format(sql, g_key, unick, brandid, uface, usex)
 
 	Mysql.query(mysql_conn, sql_cmd, function (err, ret)
 		if err then 

@@ -2,6 +2,9 @@ Logger.init("logger/auth_server/", "auth", true)
 
 -- 连接到auth center mysql 数据库
 require("database/mysql_auth_center")
+require("functions")
+
+math.newrandomseed()
 
 -- 初始化协议模块
 local proto_type = {

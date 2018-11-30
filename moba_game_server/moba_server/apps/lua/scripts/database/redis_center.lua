@@ -41,7 +41,10 @@ local function set_uinfo_inredis(uid, uinfo)
 	                  " usex " .. uinfo.usex .. 
 	                  " uface " .. uinfo.uface ..
 	                  " uvip " .. uinfo.uvip ..
-	                  " is_guest " .. uinfo.is_guest
+	                  " is_guest " .. uinfo.is_guest ..
+	                  " brandid " .. uinfo.brandid ..
+	                  " numberid " .. uinfo.numberid ..
+	                  " areaid " .. uinfo.areaid
 	
 	Redis.query(redis_conn, redis_cmd, function (err, ret)
 		if err then
@@ -68,6 +71,9 @@ local function get_uinfo_inredis(uid, ret_handler)
 		uinfo.uface = tonumber(ret[6])
 		uinfo.uvip = tonumber(ret[8])
 		uinfo.is_guest = tonumber(ret[10])
+		uinfo.brandid = tonumber(ret[12])
+		uinfo.numberid = tonumber(ret[14])
+		uinfo.areaid = tonumber(ret[16])
 
 		ret_handler(nil, uinfo)		
 	end)

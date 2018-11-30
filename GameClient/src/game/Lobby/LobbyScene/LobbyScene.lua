@@ -99,7 +99,8 @@ function LobbyScene:onCreate()
         self._user_name_text:setString(UserInfo.getUserName())
     end
     if self._user_id_text then
-        self._user_id_text:setString('ID:00000' .. UserInfo.getUserId())
+        -- self._user_id_text:setString('ID:00000' .. UserInfo.getUserId())
+        self._user_id_text:setString('ID:' .. UserInfo.getBrandId())
     end
     if self._img_head then
         self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))

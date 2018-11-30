@@ -32,14 +32,8 @@ function LoginScene:onEventGuestLogin(event)
   	if body then
         GT.popLayer('LoadingLayer')
         if body.status == Respones.OK then
-            local uinfo = body.uinfo
-            UserInfo.setUserName(uinfo.unick)
-            UserInfo.setUserface(uinfo.uface)
-            UserInfo.setUserSex(uinfo.usex)
-            UserInfo.setUserVip(uinfo.uvip)
-            UserInfo.setUserId(uinfo.uid)
+            UserInfo.setUinfo(body.uinfo)
             UserInfo.setUserIsGuest(true)
-            UserInfo.flush()
             LogicServiceProxy:getInstance():sendLoginLogicServer()
             GT.showPopLayer('TipsLayer',{"游客登录成功!"})
             self:enterScene('game.Lobby.LobbyScene.LobbyScene')
@@ -53,13 +47,7 @@ function LoginScene:onEventUnameLoginRes(event)
 	local body = event._usedata
  	GT.popLayer('LoadingLayer')
     if body.status == Respones.OK then
-        local uinfo = body.uinfo
-        UserInfo.setUserName(uinfo.unick)
-        UserInfo.setUserface(uinfo.uface)
-        UserInfo.setUserSex(uinfo.usex)
-        UserInfo.setUserVip(uinfo.uvip)
-        UserInfo.setUserId(uinfo.uid)
-        UserInfo.flush()
+        UserInfo.setUinfo(body.uinfo)
         LogicServiceProxy:getInstance():sendLoginLogicServer()
         GT.showPopLayer('TipsLayer',{"登录成功!"})
         self:enterScene('game.Lobby.LobbyScene.LobbyScene')

@@ -9,7 +9,6 @@ local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 
 function LobbyScene:addServerEventListener()
-    addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
@@ -33,17 +32,6 @@ function LobbyScene:addClientEventListener()
     addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
     addEvent("BackRoomRes", self, self.onEventBackRoom)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
-end
-
-function LobbyScene:onEventData(event)
-    local data = event._usedata
-    if not data then return end
-    if tonumber(data.ctype) ~= 47 then -- dump except heartbeat pkt
-        dump(data,'onEventData' , 5)
-    end 
-    if cmd_name_map[data.ctype] then
-        postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
-    end
 end
 
 function LobbyScene:onEventEditProfile(event)
@@ -207,14 +195,8 @@ function LobbyScene:onEventGuestLogin(event)
     GT.popLayer('LoadingLayer')
     if body then
         if body.status == Respones.OK then
-            local uinfo = body.uinfo
-            UserInfo.setUserName(uinfo.unick)
-            UserInfo.setUserface(uinfo.uface)
-            UserInfo.setUserSex(uinfo.usex)
-            UserInfo.setUserVip(uinfo.uvip)
-            UserInfo.setUserId(uinfo.uid)
+            UserInfo.setUinfo(body.uinfo)
             UserInfo.setUserIsGuest(true)
-            UserInfo.flush()
             LogicServiceProxy:getInstance():sendLoginLogicServer()
             GT.showPopLayer('TipsLayer',{"游客登录成功!"})
         else
@@ -227,13 +209,7 @@ function LobbyScene:onEventUnameLogin(event)
     local body = event._usedata
     GT.popLayer('LoadingLayer')
     if body.status == Respones.OK then
-        local uinfo = body.uinfo
-        UserInfo.setUserName(uinfo.unick)
-        UserInfo.setUserface(uinfo.uface)
-        UserInfo.setUserSex(uinfo.usex)
-        UserInfo.setUserVip(uinfo.uvip)
-        UserInfo.setUserId(uinfo.uid)
-        UserInfo.flush()
+        UserInfo.setUinfo(body.uinfo)
         LogicServiceProxy:getInstance():sendLoginLogicServer()
         GT.showPopLayer('TipsLayer',{"登录成功!"})
     else

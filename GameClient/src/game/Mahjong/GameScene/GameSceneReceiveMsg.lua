@@ -11,7 +11,6 @@ local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 local MAX_PLAYER_NUM        = 4
 
 function GameScene:addServerEventListener()
-    addEvent(ServerEvents.ON_SERVER_EVENT_DATA, self, self.onEventData)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
@@ -32,17 +31,6 @@ function GameScene:addClientEventListener()
     addEvent("GuestLoginRes", self, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
-end
-
-function GameScene:onEventData(event)
-    local data = event._usedata
-    if not data then return end
-    if tonumber(data.ctype) ~= 47 then -- dump except heartbeat pkt
-        dump(data,'onEventData',5)
-    end 
-    if cmd_name_map[data.ctype] then
-        postEvent(cmd_name_map[data.ctype], data.body)  -- post all client event to evety poplayer
-    end
 end
 
 function GameScene:onEventNetConnect(event)
@@ -87,6 +75,7 @@ function GameScene:onEventDessolve(event)
     local data = event._usedata
     if data.status == Respones.OK then  --只有房主才能解散房间
         self:popScene()
+        UserRoomInfo.reset()
     else
         Game.showPopLayer('TipsLayer',{"解散房间失败"})
     end
@@ -98,14 +87,16 @@ function GameScene:onEventExitRoom(event)
     if data.status == Respones.OK then
         local user_info = data.user_info
         local seatid = user_info.seatid
+        local brandid = user_info.brandid
         local unick  = tostring(user_info.unick)
         local ishost = user_info.ishost
+
         if ishost then
             UserRoomInfo.setUserRoomInfoBySeatId(user_info.seatid, user_info)
         else
             UserRoomInfo.removeUserRoomInfoBySeatId(seatid)
         end
-        if unick == tostring(UserInfo.getUserNameEx()) then -- TODO
+        if tonumber(brandid) == tonumber(UserInfo.getBrandId()) then
             self:popScene()
         end
     else
@@ -187,14 +178,8 @@ function GameScene:onEventGuestLogin(event)
     Game.popLayer('LoadingLayer')
     if body then
         if body.status == Respones.OK then
-            local uinfo = body.uinfo
-            UserInfo.setUserName(uinfo.unick)
-            UserInfo.setUserface(uinfo.uface)
-            UserInfo.setUserSex(uinfo.usex)
-            UserInfo.setUserVip(uinfo.uvip)
-            UserInfo.setUserId(uinfo.uid)
+            UserInfo.setUinfo(body.uinfo)
             UserInfo.setUserIsGuest(true)
-            UserInfo.flush()
             LogicServiceProxy:getInstance():sendLoginLogicServer()
             Game.showPopLayer('TipsLayer',{"游客登录成功!"})
         else
@@ -207,13 +192,7 @@ function GameScene:onEventUnameLogin(event)
     local body = event._usedata
     Game.popLayer('LoadingLayer')
     if body.status == Respones.OK then
-        local uinfo = body.uinfo
-        UserInfo.setUserName(uinfo.unick)
-        UserInfo.setUserface(uinfo.uface)
-        UserInfo.setUserSex(uinfo.usex)
-        UserInfo.setUserVip(uinfo.uvip)
-        UserInfo.setUserId(uinfo.uid)
-        UserInfo.flush()
+        UserInfo.setUinfo(body.uinfo)
         LogicServiceProxy:getInstance():sendLoginLogicServer()
         Game.showPopLayer('TipsLayer',{"登录成功!"})
     else

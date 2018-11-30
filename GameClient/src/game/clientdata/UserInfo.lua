@@ -8,8 +8,8 @@ local USER_ID 		= 'USER_ID'
 local USER_ACCOUNT  = 'USER_ACCOUNT'
 local USER_PWD 		= 'USER_PWD'
 local USER_IS_GUEST = 'USER_IS_GUEST'
-local USER_GUEST_KEY = 'USER_GUEST_KEY'
-local USER_LOGIN_TYPE = 'USER_LOGIN_TYPE'
+local USER_GUEST_KEY 	= 'USER_GUEST_KEY'
+local USER_LOGIN_TYPE 	= 'USER_LOGIN_TYPE'
 
 local logintype = {
 	'uname',
@@ -17,21 +17,53 @@ local logintype = {
 	'wechat',
 }
 
-local __userName = ''
+local _brandid 		= 0
+local _numberid 	= 0
+local _areaid 		= 0
 
-function UserInfo.setUserNameEx(uname)
-	__userName = uname
+function UserInfo.setUinfo(uinfo)
+	if not uinfo then
+		return
+	end
+    UserInfo.setUserName(uinfo.unick)
+    UserInfo.setUserface(uinfo.uface)
+    UserInfo.setUserSex(uinfo.usex)
+    UserInfo.setUserVip(uinfo.uvip)
+    UserInfo.setUserId(uinfo.uid)
+    UserInfo.setBrandId(uinfo.brandid)
+    UserInfo.setNumberId(uinfo.numberid)
+    UserInfo.setAreaId(uinfo.areaid)
+    UserInfo.flush()
 end
 
-function UserInfo.getUserNameEx()
-	return __userName
+function UserInfo.setBrandId(id)
+	_brandid = id
+end
+
+function UserInfo.getBrandId()
+	return _brandid
+end
+
+function UserInfo.setNumberId(id)
+	_numberid = id
+end
+
+function UserInfo.getNUmberId()
+	return _numberid
+end
+
+function UserInfo.setAreaId(id)
+	_areaid = id
+end
+
+function UserInfo.getAreaId()
+	return _areaid
 end
 
 function UserInfo.setUserName(uname)
 	if uname == nil or uname == '' then
 		return
 	end
-	UserInfo.setUserNameEx(uname)
 	cc.UserDefault:getInstance():setStringForKey(USER_NAME, tostring(uname))
 end
 
@@ -138,6 +170,5 @@ end
 function UserInfo.flush()
 	cc.UserDefault:getInstance():flush()
 end
-
 
 return UserInfo

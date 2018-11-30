@@ -71,16 +71,10 @@ function Room:enter_player(player)
 		end
 	end
 
-	-- print('hcc>> 00000---------------')
-	-- dump(tmp_seat_id_tb)
-
 	local seat_id_table = {}
 	for n = 1 , self._max_player do
 		seat_id_table[#seat_id_table + 1] = n
 	end
-
-	-- print('hcc>> 11111---------------')
-	-- dump(seat_id_table)
 
 	for j = 1 , #tmp_seat_id_tb do
 		local seatid = tmp_seat_id_tb[j]

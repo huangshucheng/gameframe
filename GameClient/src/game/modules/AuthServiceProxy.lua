@@ -1,4 +1,4 @@
-local AuthServiceProxy = class(AuthServiceProxy)
+local AuthServiceProxy = class('AuthServiceProxy')
 
 local NetWork           = require("game.net.NetWork")
 local Cmd               = require("game.net.protocol.Cmd")

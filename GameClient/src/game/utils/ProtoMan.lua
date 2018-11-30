@@ -1,4 +1,4 @@
-local ProtoMan = class(ProtoMan)
+local ProtoMan = class('ProtoMan')
 
 local ByteArray         = require("game.utils.ByteArray")
 local ConfigKeyWord 	= require("game.net.ConfigKeyWord")
@@ -7,10 +7,10 @@ local cmd_name_map 		= require("game.net.protocol.cmd_name_map")
 local HEADER_SIZE = 8		-- 2 stype, 2 ctype, 4 utag,  body;
 
 function ProtoMan:getInstance()
-    if not self._instance then
-        self._instance = ProtoMan.new()
+    if not ProtoMan._instance then
+        ProtoMan._instance = ProtoMan.new()
     end
-    return self._instance
+    return ProtoMan._instance
 end
 -- regist pb
 function ProtoMan:regist_pb()

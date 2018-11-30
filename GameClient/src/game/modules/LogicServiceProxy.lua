@@ -1,4 +1,4 @@
-local LogicServiceProxy = class(LogicServiceProxy)
+local LogicServiceProxy = class('LogicServiceProxy')
 
 local NetWork           = require("game.net.NetWork")
 local Cmd               = require("game.net.protocol.Cmd")

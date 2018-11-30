@@ -56,6 +56,9 @@ local function login(s, req)
 				usex  = uinfo.usex,
 				uvip  = uinfo.uvip,
 				uid = uinfo.uid, 
+				brandid = uinfo.brandid,
+				numberid = uinfo.numberid,
+				areaid = uinfo.areaid,
 			}
 		}}
 		Session.send_msg(s, msg)

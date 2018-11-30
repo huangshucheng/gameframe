@@ -1,4 +1,4 @@
-local TcpPacker         = class(TcpPacker)
+local TcpPacker         = class('TcpPacker')
 
 local ByteArray         = require("game.utils.ByteArray")
 
@@ -6,10 +6,10 @@ local HEADER_SIZE = 2
 local MAX_PKT_LEN = 65535 - 2
 
 function TcpPacker:getInstance()
-    if not self._instance then
-        self._instance = TcpPacker.new()
+    if not TcpPacker._instance then
+        TcpPacker._instance = TcpPacker.new()
     end
-    return self._instance
+    return TcpPacker._instance
 end
 
 function TcpPacker:tcp_pack(packet)

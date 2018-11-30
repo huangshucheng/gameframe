@@ -66,13 +66,7 @@ local function login(s, req)
 		redis_center.set_uinfo_inredis(uinfo.uid, uinfo)
 		local msg = { Stype.Auth, Cmd.eGuestLoginRes, utag, {
 			status = Respones.OK,
-			uinfo = {
-				unick = uinfo.unick,
-				uface = uinfo.uface,
-				usex  = uinfo.usex,
-				uvip  = uinfo.uvip,
-				uid = uinfo.uid, 
-			}
+			uinfo = uinfo,
 		}}
 		Session.send_msg(s, msg)
 	end)
