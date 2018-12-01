@@ -4,7 +4,7 @@ local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
 local cmd_name_map          = require("game.net.protocol.cmd_name_map")
 local UserInfo              = require("game.clientdata.UserInfo")
-local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
+local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 
@@ -19,7 +19,6 @@ function LobbyScene:addClientEventListener()
     addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
     addEvent("GuestLoginRes", self, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
-
     addEvent("EditProfileRes",self, self.onEventEditProfile)
     addEvent("AccountUpgradeRes",self, self.onEventAccountUpgrade)
     addEvent("Relogin",self, self.onEventReLogin)
@@ -128,8 +127,8 @@ function LobbyScene:onEventCreateRoom(event)
     local status = data.status
     if status == Respones.OK then
         local seatid = data.user_info.seatid
-        UserRoomInfo.setUserRoomInfoBySeatId(seatid, data.user_info)
-        UserRoomInfo.setRoomInfo(data.room_info)
+        RoomData:getInstance():createPlayerByUserInfo(data.user_info)
+        RoomData:getInstance():setRoomInfo(data.room_info)
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         GT.showPopLayer('TipsLayer',{"创建房间失败"})
@@ -140,11 +139,11 @@ function LobbyScene:onEventJoinRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        UserRoomInfo.setRoomInfo(data.room_info)
+        RoomData:getInstance():setRoomInfo(data.room_info)
         local users_info = data.users_info
         if next(users_info) then
-            for i,v in ipairs(users_info) do
-                UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
+            for _,info in ipairs(users_info) do
+                RoomData:getInstance():createPlayerByUserInfo(info)
             end
         end
         self:pushScene('game.Mahjong.GameScene.GameScene')
@@ -177,11 +176,11 @@ function LobbyScene:onEventBackRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        UserRoomInfo.setRoomInfo(data.room_info)
+        RoomData:getInstance():setRoomInfo(data.room_info)
         local users_info = data.users_info
         if next(users_info) then
-            for i,v in ipairs(users_info) do
-                UserRoomInfo.setUserRoomInfoBySeatId(v.seatid, v)
+            for _,info in ipairs(users_info) do
+                RoomData:getInstance():createPlayerByUserInfo(info)
             end
         end
         self:pushScene('game.Mahjong.GameScene.GameScene')
@@ -195,7 +194,7 @@ function LobbyScene:onEventGuestLogin(event)
     GT.popLayer('LoadingLayer')
     if body then
         if body.status == Respones.OK then
-            UserInfo.setUinfo(body.uinfo)
+            UserInfo.setUInfo(body.uinfo)
             UserInfo.setUserIsGuest(true)
             LogicServiceProxy:getInstance():sendLoginLogicServer()
             GT.showPopLayer('TipsLayer',{"游客登录成功!"})
@@ -209,7 +208,7 @@ function LobbyScene:onEventUnameLogin(event)
     local body = event._usedata
     GT.popLayer('LoadingLayer')
     if body.status == Respones.OK then
-        UserInfo.setUinfo(body.uinfo)
+        UserInfo.setUInfo(body.uinfo)
         LogicServiceProxy:getInstance():sendLoginLogicServer()
         GT.showPopLayer('TipsLayer',{"登录成功!"})
     else

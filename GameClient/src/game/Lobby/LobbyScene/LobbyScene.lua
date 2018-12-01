@@ -6,10 +6,9 @@ local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
 local cmd_name_map          = require("game.net.protocol.cmd_name_map")
 local UserInfo              = require("game.clientdata.UserInfo")
-local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
+local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local SystemServiceProxy    = require("game.modules.SystemServiceProxy")
--- local HeartBeat             = require('game.Lobby.Base.HeartBeat')
 local Function              = require('game.Base.Function')
 
 --------------拓展
@@ -142,6 +141,7 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
     str = str .. '  end>>'
     ]]
     LogicServiceProxy:getInstance():sendCreateRoom('房间规则')
+    GT.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onTouchBackRoomBtn(send,eventType)
@@ -157,6 +157,7 @@ function LobbyScene:onTouchBackRoomBtn(send,eventType)
         return
     end
     LogicServiceProxy:getInstance():sendBackRoomReq()
+    GT.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onTouchEventHeadImgBg(send,eventType)
@@ -181,7 +182,6 @@ end
 function LobbyScene:onTouchMessageBtn(send, evnetType)
     GT.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
-    -- HeartBeat:getInstance():init(self):start()
 end
 
 function LobbyScene:onTouchMailBtn(send, evnetType)
@@ -194,13 +194,11 @@ function LobbyScene:onEnter()
     --获取用户信息
     SystemServiceProxy:getInstance():sendGetUgameInfo()
     LogicServiceProxy:getInstance():sendGetCreateStatus()
-    -- HeartBeat:getInstance():init(self):start()
-    UserRoomInfo.reset()
+    RoomData:getInstance():reset()
 end
 
 function LobbyScene:onExit()
     print('LobbyScene:onExit')
-    -- HeartBeat:getInstance():stop()
 end
 
 return LobbyScene

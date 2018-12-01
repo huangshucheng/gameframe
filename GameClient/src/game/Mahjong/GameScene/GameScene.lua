@@ -6,9 +6,10 @@ local Cmd               	= require("game.net.protocol.Cmd")
 local Respones          	= require("game.net.Respones")
 local cmd_name_map      	= require("game.net.protocol.cmd_name_map")
 local UserInfo          	= require("game.clientdata.UserInfo")
-local UserRoomInfo          = require("game.clientdata.UserRoomInfo")
+local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy 	= require("game.modules.LogicServiceProxy")
 local Function 				= require("game.Mahjong.Base.Function")
+local GameFunction          = require("game.Mahjong.Base.GameFunction")
 
 local KW_ROOM_NUM           = 'KW_ROOM_NUM'
 local KW_BTN_SET            = 'KW_BTN_SET'
@@ -21,7 +22,7 @@ local KW_TEXT_SCORE         = 'KW_TEXT_SCORE'
 local KW_IMG_OFFINLE        = 'KW_IMG_OFFINLE'
 local KW_IMG_HEAD           = 'KW_IMG_HEAD'
 
-local MAX_PLAYER_NUM = 4
+local MAX_PLAYER_NUM = RoomData:getInstance():getChars()
 
 --------------拓展
 require('game.Mahjong.GameScene.GameSceneReceiveMsg')
@@ -58,53 +59,57 @@ function GameScene:onCreate()
     self:showAllExistUserInfo()
 end
 
-function GameScene:showUserInfoBySeatId(seatId)
+function GameScene:showUserInfoBySeatId(seatId) --serverSeat
     if seatId > MAX_PLAYER_NUM or seatId < 0 then return end
 
-    local userRoomInfoData = UserRoomInfo.getUserRoomInfoBySeatId(seatId)
-    local isShow = userRoomInfoData ~= nil
+    local player = RoomData:getInstance():getPlayerBySeatId(seatId)
 
-    if self._panel_user_info_table[seatId] then
-        self._panel_user_info_table[seatId]:setVisible(isShow)
+    local localSeat = GameFunction.serverSeatToLocal(seatId)
+    print('hcc>> serverSeat: '.. seatId .. '  ,localseat: ' .. localSeat)
+
+    if self._panel_user_info_table[localSeat] then
+        self._panel_user_info_table[localSeat]:setVisible(player ~= nil)
     end
 
-    if not userRoomInfoData then return end
-
-    local infoPanel = self._panel_user_info_table[seatId]
-    if not infoPanel then return end
-    local textName      = ccui.Helper:seekWidgetByName(infoPanel,KW_TEXT_NAME)
-    local textScore     = ccui.Helper:seekWidgetByName(infoPanel,KW_TEXT_SCORE)
-    local imgOffLine    = ccui.Helper:seekWidgetByName(infoPanel,KW_IMG_OFFINLE)
-    local imgHead       = ccui.Helper:seekWidgetByName(infoPanel,KW_IMG_HEAD)
-    if textName then
-        textName:setString(userRoomInfoData.unick)
-    end
-    if textScore then
-        textScore:setString('1000')    --TODO
-    end
-    if imgOffLine then
-        imgOffLine:setVisible(userRoomInfoData.isoffline)
-    end
-    if imgHead then
-        imgHead:loadTexture(string.format('MahScene/MahRes/rectheader/1%d.png',tonumber(userRoomInfoData.uface)))
+    if player then
+        local infoPanel = self._panel_user_info_table[localSeat]
+        if infoPanel then
+            local textName      = ccui.Helper:seekWidgetByName(infoPanel,KW_TEXT_NAME)
+            local textScore     = ccui.Helper:seekWidgetByName(infoPanel,KW_TEXT_SCORE)
+            local imgOffLine    = ccui.Helper:seekWidgetByName(infoPanel,KW_IMG_OFFINLE)
+            local imgHead       = ccui.Helper:seekWidgetByName(infoPanel,KW_IMG_HEAD)
+            if textName then
+                textName:setString(player:getUNick())
+            end
+            if textScore then
+                textScore:setString('1000')    --TODO
+            end
+            if imgOffLine then
+                imgOffLine:setVisible(player:getIsOffline())
+            end
+            if imgHead then
+                imgHead:loadTexture(string.format('MahScene/MahRes/rectheader/1%d.png',tonumber(player:getUFace())))
+            end
+        end
     end
 end
 
 function GameScene:showAllExistUserInfo()
-    for seatId = 1 , MAX_PLAYER_NUM do
-        self:showUserInfoBySeatId(seatId)
+    for seat = 1 , MAX_PLAYER_NUM do
+        self:showUserInfoBySeatId(seat)
     end
 end
 
 function GameScene:showRoomInfo()
     if self._btn_room_num then
-        local roomid = UserRoomInfo.getRoomId()
+        local roomid = RoomData:getInstance():getRoomId()
+        print('roomid: '.. tostring(roomid))
         if roomid then
             self._btn_room_num:setString('房间号:' .. roomid)
         end
     end
     if self._text_room_rule then
-        local roomRule = UserRoomInfo.getRoomInfo()
+        local roomRule = RoomData:getInstance():getRoomInfo()
         if roomRule then
              self._text_room_rule:setString(roomRule)
          end 

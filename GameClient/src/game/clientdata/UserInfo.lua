@@ -1,3 +1,6 @@
+--[[
+	大厅用户信息
+]]
 local UserInfo = {}
 
 local USER_NAME 	= 'USER_NAME'
@@ -21,7 +24,7 @@ local _brandid 		= 0
 local _numberid 	= 0
 local _areaid 		= 0
 
-function UserInfo.setUinfo(uinfo)
+function UserInfo.setUInfo(uinfo)
 	if not uinfo then
 		return
 	end
