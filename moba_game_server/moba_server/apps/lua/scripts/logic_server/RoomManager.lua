@@ -17,7 +17,6 @@ function RoomManager:getInstance()
 end
 
 function RoomManager:ctor()
-	math.newrandomseed()
 	self._cmd_handler_map =
 	{
 		[Cmd.eCreateRoomReq] 	= self.on_create_room,
@@ -48,7 +47,7 @@ function RoomManager:receive_msg(session, msg)
 	return false
 end
 
-function RoomManager:generate_room_id()
+local function generate_room_id()
 	local function general_rand_id()
 		local room_id = ''
 		for i = 1 , 6 do
@@ -56,12 +55,13 @@ function RoomManager:generate_room_id()
 		end
 		return room_id
 	end
-	
-	local id = tonumber(general_rand_id())
-	if server_rooms[id] then
-		RoomManager.generate_room_id(self) 	--TODO test
+
+	local id = general_rand_id()
+	if not server_rooms[id] then
+		return id
+	else
+		return generate_room_id()
 	end
-	return id
 end
 
 function RoomManager:on_create_room(s, req)
@@ -101,13 +101,12 @@ function RoomManager:on_create_room(s, req)
 	player:set_seat_id(1)
 
 	local room = Room:create()
-	local roomid = self:generate_room_id()
+	local roomid = generate_room_id()
 
 	room:set_room_id(roomid)
 	room:set_room_info(body.room_info)
 	room:enter_player(player)
-	server_rooms[roomid] = room
-
+	server_rooms[tostring(roomid)] = room
 
 	local user_info = player:get_user_arrived_info()
 
@@ -140,16 +139,20 @@ function RoomManager:on_exit_room(s, req)
 	end
 
 	local room_id = player:get_room_id()
+	local body_msg = {
+		status = Respones.OK,
+		user_info = player:get_user_arrived_info(),
+	}
 
 	if room_id == -1 then
-		NetWork:getInstance():send_status(s, stype, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
+		player:send_msg(stype, Cmd.eExitRoomRes, body_msg)
 		print('hcc>> exit_room 2')
 		return
 	end
 
-	local room = server_rooms[room_id]
+	local room = server_rooms[tostring(room_id)]
 	if not room then
-		NetWork:getInstance():send_status(s, stype, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
+		player:send_msg(stype, Cmd.eExitRoomRes, body_msg)
 		print('hcc>> exit_room 3')
 		return
 	end
@@ -159,18 +162,17 @@ function RoomManager:on_exit_room(s, req)
 		player:set_is_offline(true)
 	end
 
-	local tmp_user_info = player:get_user_arrived_info()
+	body_msg = {
+		status = Respones.OK,
+		user_info = player:get_user_arrived_info(),
+	}
+
 	local ret = room:exit_player(player)
 	if not ret then
 		NetWork:getInstance():send_status(s, stype, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
 		print('hcc>> exit_room 4')
 		return
 	end
-	
-	local body_msg = {
-		status = 1,
-		user_info = tmp_user_info,
-	}
 
 	player:send_msg(stype, Cmd.eExitRoomRes, body_msg)	-- send to self player
 	room:broacast_in_room(stype, Cmd.eExitRoomRes, body_msg, player) -- send to other player
@@ -208,7 +210,7 @@ function RoomManager:on_join_room(s, req)
 	local room_id = body.room_id
 	print('hcc>> join_room, room_id: '.. room_id)
 
-	local room = server_rooms[tonumber(room_id)]
+	local room = server_rooms[tostring(room_id)]
 	if not room then
 		NetWork:getInstance():send_status(s, stype, Cmd.eJoinRoomRes, uid, Respones.InvalidOpt)
 		print('hcc>> join_room 4')
@@ -259,7 +261,7 @@ function RoomManager:on_dessolve_room(s, req)
 		return
 	end
 
-	local room = server_rooms[room_id]
+	local room = server_rooms[tostring(room_id)]
 	if not room then
 		NetWork:getInstance():send_status(s, stype, Cmd.eDessolveRes, uid, Respones.InvalidOpt)
 		print('hcc>> dessolve_room 3')
@@ -319,14 +321,15 @@ function RoomManager:on_back_room(s, req)
 	end
 	--TODO
 	local room = self:get_is_player_uid_in_room(player)
-	print('hcc>>>>>>>>>>>>111room: ' .. tostring(room))
+	-- print('hcc>>>>>>>>>>>>111room: ' .. tostring(room))
 	if (room == false) or (room == nil) then
 		NetWork:getInstance():send_status(s, stype, Cmd.eBackRoomRes, uid, Respones.InvalidOpt)
 		print('hcc>> on_back_room 2')
+		return
 	end
-	print('hcc>>>>>>>>>>>>222room: ' .. tostring(room))
+	-- print('hcc>>>>>>>>>>>>222room: ' .. tostring(room))
 	-- dump(room)
-	local ret =  room:enter_player(player) -- TODO error :attempt to index a boolean value (local 'room')
+	local ret =  room:enter_player(player)
 	if not ret then
 		NetWork:getInstance():send_status(s, stype, Cmd.eBackRoomRes, uid, Respones.InvalidOpt)
 		print('hcc>> on_back_room 3')
@@ -364,7 +367,7 @@ function RoomManager:on_player_disconnect(player)
 		return
 	end
 
-	local room = server_rooms[room_id]
+	local room = server_rooms[tostring(room_id)]
 	if not room then
 		print('hcc>> on_player_disconnect 2')
 		return
@@ -391,8 +394,8 @@ function RoomManager:get_is_player_uid_in_room(player)
 end
 
 function RoomManager:delete_room(room_id)
-	if server_rooms[room_id] then
-		server_rooms[room_id] = nil
+	if server_rooms[tostring(room_id)] then
+		server_rooms[tostring(room_id)] = nil
 	end
 end
 
@@ -401,7 +404,7 @@ function RoomManager:get_total_rooms()
 end
 
 function RoomManager:get_room_by_room_id(room_id)
-	return server_rooms[room_id]
+	return server_rooms[tostring(room_id)]
 end
 
 return RoomManager

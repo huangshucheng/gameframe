@@ -96,9 +96,9 @@ message UserCenterInfo {
 	required sint32 usex = 3;
 	required sint32 uvip = 4;
 	required sint32 uid = 5;
-	optional sint32 brandid = 6;
-	optional sint32 numberid = 7;
-	optional sint32 areaid = 8;
+	optional string brandid = 6;
+	optional string numberid = 7;
+	optional string areaid = 8;
 }
 
 message GuestLoginRes {
@@ -206,12 +206,12 @@ message UserArrived {
 	required sint32 usex = 3;
 	required sint32 seatid = 4;
 	required sint32 side = 5;
-	required sint32 roomid = 6;
+	required string roomid = 6;
 	required bool  ishost = 7;
 	required bool  isoffline = 8;
-	optional sint32 brandid = 9;
-	optional sint32 numberid = 10;
-	optional sint32 areaid = 11;
+	optional string brandid = 9;
+	optional string numberid = 10;
+	optional string areaid = 11;
 }
 
 message ExitMatchRes {
@@ -246,7 +246,7 @@ message CreateRoomRes {
 }
 
 message JoinRoomReq {
-	required sint32 room_id = 1;
+	required string room_id = 1;
 }
 
 message JoinRoomRes {

@@ -725,6 +725,51 @@ class UserCenterInfo : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_unick();
   void set_allocated_unick(::std::string* unick);
 
+  // optional string brandid = 6;
+  bool has_brandid() const;
+  void clear_brandid();
+  static const int kBrandidFieldNumber = 6;
+  const ::std::string& brandid() const;
+  void set_brandid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_brandid(::std::string&& value);
+  #endif
+  void set_brandid(const char* value);
+  void set_brandid(const char* value, size_t size);
+  ::std::string* mutable_brandid();
+  ::std::string* release_brandid();
+  void set_allocated_brandid(::std::string* brandid);
+
+  // optional string numberid = 7;
+  bool has_numberid() const;
+  void clear_numberid();
+  static const int kNumberidFieldNumber = 7;
+  const ::std::string& numberid() const;
+  void set_numberid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_numberid(::std::string&& value);
+  #endif
+  void set_numberid(const char* value);
+  void set_numberid(const char* value, size_t size);
+  ::std::string* mutable_numberid();
+  ::std::string* release_numberid();
+  void set_allocated_numberid(::std::string* numberid);
+
+  // optional string areaid = 8;
+  bool has_areaid() const;
+  void clear_areaid();
+  static const int kAreaidFieldNumber = 8;
+  const ::std::string& areaid() const;
+  void set_areaid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_areaid(::std::string&& value);
+  #endif
+  void set_areaid(const char* value);
+  void set_areaid(const char* value, size_t size);
+  ::std::string* mutable_areaid();
+  ::std::string* release_areaid();
+  void set_allocated_areaid(::std::string* areaid);
+
   // required sint32 uface = 2;
   bool has_uface() const;
   void clear_uface();
@@ -753,27 +798,6 @@ class UserCenterInfo : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::int32 uid() const;
   void set_uid(::google::protobuf::int32 value);
 
-  // optional sint32 brandid = 6;
-  bool has_brandid() const;
-  void clear_brandid();
-  static const int kBrandidFieldNumber = 6;
-  ::google::protobuf::int32 brandid() const;
-  void set_brandid(::google::protobuf::int32 value);
-
-  // optional sint32 numberid = 7;
-  bool has_numberid() const;
-  void clear_numberid();
-  static const int kNumberidFieldNumber = 7;
-  ::google::protobuf::int32 numberid() const;
-  void set_numberid(::google::protobuf::int32 value);
-
-  // optional sint32 areaid = 8;
-  bool has_areaid() const;
-  void clear_areaid();
-  static const int kAreaidFieldNumber = 8;
-  ::google::protobuf::int32 areaid() const;
-  void set_areaid(::google::protobuf::int32 value);
-
   // @@protoc_insertion_point(class_scope:UserCenterInfo)
  private:
   void set_has_unick();
@@ -800,13 +824,13 @@ class UserCenterInfo : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr unick_;
+  ::google::protobuf::internal::ArenaStringPtr brandid_;
+  ::google::protobuf::internal::ArenaStringPtr numberid_;
+  ::google::protobuf::internal::ArenaStringPtr areaid_;
   ::google::protobuf::int32 uface_;
   ::google::protobuf::int32 usex_;
   ::google::protobuf::int32 uvip_;
   ::google::protobuf::int32 uid_;
-  ::google::protobuf::int32 brandid_;
-  ::google::protobuf::int32 numberid_;
-  ::google::protobuf::int32 areaid_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserCenterInfoImpl();
 };
@@ -3228,6 +3252,66 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_unick();
   void set_allocated_unick(::std::string* unick);
 
+  // required string roomid = 6;
+  bool has_roomid() const;
+  void clear_roomid();
+  static const int kRoomidFieldNumber = 6;
+  const ::std::string& roomid() const;
+  void set_roomid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_roomid(::std::string&& value);
+  #endif
+  void set_roomid(const char* value);
+  void set_roomid(const char* value, size_t size);
+  ::std::string* mutable_roomid();
+  ::std::string* release_roomid();
+  void set_allocated_roomid(::std::string* roomid);
+
+  // optional string brandid = 9;
+  bool has_brandid() const;
+  void clear_brandid();
+  static const int kBrandidFieldNumber = 9;
+  const ::std::string& brandid() const;
+  void set_brandid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_brandid(::std::string&& value);
+  #endif
+  void set_brandid(const char* value);
+  void set_brandid(const char* value, size_t size);
+  ::std::string* mutable_brandid();
+  ::std::string* release_brandid();
+  void set_allocated_brandid(::std::string* brandid);
+
+  // optional string numberid = 10;
+  bool has_numberid() const;
+  void clear_numberid();
+  static const int kNumberidFieldNumber = 10;
+  const ::std::string& numberid() const;
+  void set_numberid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_numberid(::std::string&& value);
+  #endif
+  void set_numberid(const char* value);
+  void set_numberid(const char* value, size_t size);
+  ::std::string* mutable_numberid();
+  ::std::string* release_numberid();
+  void set_allocated_numberid(::std::string* numberid);
+
+  // optional string areaid = 11;
+  bool has_areaid() const;
+  void clear_areaid();
+  static const int kAreaidFieldNumber = 11;
+  const ::std::string& areaid() const;
+  void set_areaid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_areaid(::std::string&& value);
+  #endif
+  void set_areaid(const char* value);
+  void set_areaid(const char* value, size_t size);
+  ::std::string* mutable_areaid();
+  ::std::string* release_areaid();
+  void set_allocated_areaid(::std::string* areaid);
+
   // required sint32 uface = 2;
   bool has_uface() const;
   void clear_uface();
@@ -3256,13 +3340,6 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::int32 side() const;
   void set_side(::google::protobuf::int32 value);
 
-  // required sint32 roomid = 6;
-  bool has_roomid() const;
-  void clear_roomid();
-  static const int kRoomidFieldNumber = 6;
-  ::google::protobuf::int32 roomid() const;
-  void set_roomid(::google::protobuf::int32 value);
-
   // required bool ishost = 7;
   bool has_ishost() const;
   void clear_ishost();
@@ -3276,27 +3353,6 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   static const int kIsofflineFieldNumber = 8;
   bool isoffline() const;
   void set_isoffline(bool value);
-
-  // optional sint32 brandid = 9;
-  bool has_brandid() const;
-  void clear_brandid();
-  static const int kBrandidFieldNumber = 9;
-  ::google::protobuf::int32 brandid() const;
-  void set_brandid(::google::protobuf::int32 value);
-
-  // optional sint32 numberid = 10;
-  bool has_numberid() const;
-  void clear_numberid();
-  static const int kNumberidFieldNumber = 10;
-  ::google::protobuf::int32 numberid() const;
-  void set_numberid(::google::protobuf::int32 value);
-
-  // optional sint32 areaid = 11;
-  bool has_areaid() const;
-  void clear_areaid();
-  static const int kAreaidFieldNumber = 11;
-  ::google::protobuf::int32 areaid() const;
-  void set_areaid(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:UserArrived)
  private:
@@ -3330,16 +3386,16 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr unick_;
+  ::google::protobuf::internal::ArenaStringPtr roomid_;
+  ::google::protobuf::internal::ArenaStringPtr brandid_;
+  ::google::protobuf::internal::ArenaStringPtr numberid_;
+  ::google::protobuf::internal::ArenaStringPtr areaid_;
   ::google::protobuf::int32 uface_;
   ::google::protobuf::int32 usex_;
   ::google::protobuf::int32 seatid_;
   ::google::protobuf::int32 side_;
-  ::google::protobuf::int32 roomid_;
   bool ishost_;
   bool isoffline_;
-  ::google::protobuf::int32 brandid_;
-  ::google::protobuf::int32 numberid_;
-  ::google::protobuf::int32 areaid_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserArrivedImpl();
 };
@@ -4274,12 +4330,20 @@ class JoinRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // required sint32 room_id = 1;
+  // required string room_id = 1;
   bool has_room_id() const;
   void clear_room_id();
   static const int kRoomIdFieldNumber = 1;
-  ::google::protobuf::int32 room_id() const;
-  void set_room_id(::google::protobuf::int32 value);
+  const ::std::string& room_id() const;
+  void set_room_id(const ::std::string& value);
+  #if LANG_CXX11
+  void set_room_id(::std::string&& value);
+  #endif
+  void set_room_id(const char* value);
+  void set_room_id(const char* value, size_t size);
+  ::std::string* mutable_room_id();
+  ::std::string* release_room_id();
+  void set_allocated_room_id(::std::string* room_id);
 
   // @@protoc_insertion_point(class_scope:JoinRoomReq)
  private:
@@ -4289,7 +4353,7 @@ class JoinRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::int32 room_id_;
+  ::google::protobuf::internal::ArenaStringPtr room_id_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsJoinRoomReqImpl();
 };
@@ -5553,13 +5617,13 @@ inline void UserCenterInfo::set_allocated_unick(::std::string* unick) {
 
 // required sint32 uface = 2;
 inline bool UserCenterInfo::has_uface() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void UserCenterInfo::set_has_uface() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void UserCenterInfo::clear_has_uface() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void UserCenterInfo::clear_uface() {
   uface_ = 0;
@@ -5577,13 +5641,13 @@ inline void UserCenterInfo::set_uface(::google::protobuf::int32 value) {
 
 // required sint32 usex = 3;
 inline bool UserCenterInfo::has_usex() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void UserCenterInfo::set_has_usex() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void UserCenterInfo::clear_has_usex() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void UserCenterInfo::clear_usex() {
   usex_ = 0;
@@ -5601,13 +5665,13 @@ inline void UserCenterInfo::set_usex(::google::protobuf::int32 value) {
 
 // required sint32 uvip = 4;
 inline bool UserCenterInfo::has_uvip() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void UserCenterInfo::set_has_uvip() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void UserCenterInfo::clear_has_uvip() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void UserCenterInfo::clear_uvip() {
   uvip_ = 0;
@@ -5625,13 +5689,13 @@ inline void UserCenterInfo::set_uvip(::google::protobuf::int32 value) {
 
 // required sint32 uid = 5;
 inline bool UserCenterInfo::has_uid() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void UserCenterInfo::set_has_uid() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void UserCenterInfo::clear_has_uid() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void UserCenterInfo::clear_uid() {
   uid_ = 0;
@@ -5647,76 +5711,193 @@ inline void UserCenterInfo::set_uid(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserCenterInfo.uid)
 }
 
-// optional sint32 brandid = 6;
+// optional string brandid = 6;
 inline bool UserCenterInfo::has_brandid() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void UserCenterInfo::set_has_brandid() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void UserCenterInfo::clear_has_brandid() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserCenterInfo::clear_brandid() {
-  brandid_ = 0;
+  brandid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_brandid();
 }
-inline ::google::protobuf::int32 UserCenterInfo::brandid() const {
+inline const ::std::string& UserCenterInfo::brandid() const {
   // @@protoc_insertion_point(field_get:UserCenterInfo.brandid)
-  return brandid_;
+  return brandid_.GetNoArena();
 }
-inline void UserCenterInfo::set_brandid(::google::protobuf::int32 value) {
+inline void UserCenterInfo::set_brandid(const ::std::string& value) {
   set_has_brandid();
-  brandid_ = value;
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserCenterInfo.brandid)
 }
+#if LANG_CXX11
+inline void UserCenterInfo::set_brandid(::std::string&& value) {
+  set_has_brandid();
+  brandid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserCenterInfo.brandid)
+}
+#endif
+inline void UserCenterInfo::set_brandid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_brandid();
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserCenterInfo.brandid)
+}
+inline void UserCenterInfo::set_brandid(const char* value, size_t size) {
+  set_has_brandid();
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserCenterInfo.brandid)
+}
+inline ::std::string* UserCenterInfo::mutable_brandid() {
+  set_has_brandid();
+  // @@protoc_insertion_point(field_mutable:UserCenterInfo.brandid)
+  return brandid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserCenterInfo::release_brandid() {
+  // @@protoc_insertion_point(field_release:UserCenterInfo.brandid)
+  clear_has_brandid();
+  return brandid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserCenterInfo::set_allocated_brandid(::std::string* brandid) {
+  if (brandid != NULL) {
+    set_has_brandid();
+  } else {
+    clear_has_brandid();
+  }
+  brandid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), brandid);
+  // @@protoc_insertion_point(field_set_allocated:UserCenterInfo.brandid)
+}
 
-// optional sint32 numberid = 7;
+// optional string numberid = 7;
 inline bool UserCenterInfo::has_numberid() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void UserCenterInfo::set_has_numberid() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void UserCenterInfo::clear_has_numberid() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void UserCenterInfo::clear_numberid() {
-  numberid_ = 0;
+  numberid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_numberid();
 }
-inline ::google::protobuf::int32 UserCenterInfo::numberid() const {
+inline const ::std::string& UserCenterInfo::numberid() const {
   // @@protoc_insertion_point(field_get:UserCenterInfo.numberid)
-  return numberid_;
+  return numberid_.GetNoArena();
 }
-inline void UserCenterInfo::set_numberid(::google::protobuf::int32 value) {
+inline void UserCenterInfo::set_numberid(const ::std::string& value) {
   set_has_numberid();
-  numberid_ = value;
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserCenterInfo.numberid)
 }
+#if LANG_CXX11
+inline void UserCenterInfo::set_numberid(::std::string&& value) {
+  set_has_numberid();
+  numberid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserCenterInfo.numberid)
+}
+#endif
+inline void UserCenterInfo::set_numberid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_numberid();
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserCenterInfo.numberid)
+}
+inline void UserCenterInfo::set_numberid(const char* value, size_t size) {
+  set_has_numberid();
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserCenterInfo.numberid)
+}
+inline ::std::string* UserCenterInfo::mutable_numberid() {
+  set_has_numberid();
+  // @@protoc_insertion_point(field_mutable:UserCenterInfo.numberid)
+  return numberid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserCenterInfo::release_numberid() {
+  // @@protoc_insertion_point(field_release:UserCenterInfo.numberid)
+  clear_has_numberid();
+  return numberid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserCenterInfo::set_allocated_numberid(::std::string* numberid) {
+  if (numberid != NULL) {
+    set_has_numberid();
+  } else {
+    clear_has_numberid();
+  }
+  numberid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), numberid);
+  // @@protoc_insertion_point(field_set_allocated:UserCenterInfo.numberid)
+}
 
-// optional sint32 areaid = 8;
+// optional string areaid = 8;
 inline bool UserCenterInfo::has_areaid() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void UserCenterInfo::set_has_areaid() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void UserCenterInfo::clear_has_areaid() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void UserCenterInfo::clear_areaid() {
-  areaid_ = 0;
+  areaid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_areaid();
 }
-inline ::google::protobuf::int32 UserCenterInfo::areaid() const {
+inline const ::std::string& UserCenterInfo::areaid() const {
   // @@protoc_insertion_point(field_get:UserCenterInfo.areaid)
-  return areaid_;
+  return areaid_.GetNoArena();
 }
-inline void UserCenterInfo::set_areaid(::google::protobuf::int32 value) {
+inline void UserCenterInfo::set_areaid(const ::std::string& value) {
   set_has_areaid();
-  areaid_ = value;
+  areaid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserCenterInfo.areaid)
+}
+#if LANG_CXX11
+inline void UserCenterInfo::set_areaid(::std::string&& value) {
+  set_has_areaid();
+  areaid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserCenterInfo.areaid)
+}
+#endif
+inline void UserCenterInfo::set_areaid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_areaid();
+  areaid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserCenterInfo.areaid)
+}
+inline void UserCenterInfo::set_areaid(const char* value, size_t size) {
+  set_has_areaid();
+  areaid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserCenterInfo.areaid)
+}
+inline ::std::string* UserCenterInfo::mutable_areaid() {
+  set_has_areaid();
+  // @@protoc_insertion_point(field_mutable:UserCenterInfo.areaid)
+  return areaid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserCenterInfo::release_areaid() {
+  // @@protoc_insertion_point(field_release:UserCenterInfo.areaid)
+  clear_has_areaid();
+  return areaid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserCenterInfo::set_allocated_areaid(::std::string* areaid) {
+  if (areaid != NULL) {
+    set_has_areaid();
+  } else {
+    clear_has_areaid();
+  }
+  areaid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), areaid);
+  // @@protoc_insertion_point(field_set_allocated:UserCenterInfo.areaid)
 }
 
 // -------------------------------------------------------------------
@@ -7213,13 +7394,13 @@ inline void UserArrived::set_allocated_unick(::std::string* unick) {
 
 // required sint32 uface = 2;
 inline bool UserArrived::has_uface() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void UserArrived::set_has_uface() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void UserArrived::clear_has_uface() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void UserArrived::clear_uface() {
   uface_ = 0;
@@ -7237,13 +7418,13 @@ inline void UserArrived::set_uface(::google::protobuf::int32 value) {
 
 // required sint32 usex = 3;
 inline bool UserArrived::has_usex() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void UserArrived::set_has_usex() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000040u;
 }
 inline void UserArrived::clear_has_usex() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void UserArrived::clear_usex() {
   usex_ = 0;
@@ -7261,13 +7442,13 @@ inline void UserArrived::set_usex(::google::protobuf::int32 value) {
 
 // required sint32 seatid = 4;
 inline bool UserArrived::has_seatid() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void UserArrived::set_has_seatid() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void UserArrived::clear_has_seatid() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void UserArrived::clear_seatid() {
   seatid_ = 0;
@@ -7285,13 +7466,13 @@ inline void UserArrived::set_seatid(::google::protobuf::int32 value) {
 
 // required sint32 side = 5;
 inline bool UserArrived::has_side() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void UserArrived::set_has_side() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void UserArrived::clear_has_side() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void UserArrived::clear_side() {
   side_ = 0;
@@ -7307,39 +7488,78 @@ inline void UserArrived::set_side(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserArrived.side)
 }
 
-// required sint32 roomid = 6;
+// required string roomid = 6;
 inline bool UserArrived::has_roomid() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void UserArrived::set_has_roomid() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void UserArrived::clear_has_roomid() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserArrived::clear_roomid() {
-  roomid_ = 0;
+  roomid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_roomid();
 }
-inline ::google::protobuf::int32 UserArrived::roomid() const {
+inline const ::std::string& UserArrived::roomid() const {
   // @@protoc_insertion_point(field_get:UserArrived.roomid)
-  return roomid_;
+  return roomid_.GetNoArena();
 }
-inline void UserArrived::set_roomid(::google::protobuf::int32 value) {
+inline void UserArrived::set_roomid(const ::std::string& value) {
   set_has_roomid();
-  roomid_ = value;
+  roomid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserArrived.roomid)
+}
+#if LANG_CXX11
+inline void UserArrived::set_roomid(::std::string&& value) {
+  set_has_roomid();
+  roomid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserArrived.roomid)
+}
+#endif
+inline void UserArrived::set_roomid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_roomid();
+  roomid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserArrived.roomid)
+}
+inline void UserArrived::set_roomid(const char* value, size_t size) {
+  set_has_roomid();
+  roomid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserArrived.roomid)
+}
+inline ::std::string* UserArrived::mutable_roomid() {
+  set_has_roomid();
+  // @@protoc_insertion_point(field_mutable:UserArrived.roomid)
+  return roomid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserArrived::release_roomid() {
+  // @@protoc_insertion_point(field_release:UserArrived.roomid)
+  clear_has_roomid();
+  return roomid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserArrived::set_allocated_roomid(::std::string* roomid) {
+  if (roomid != NULL) {
+    set_has_roomid();
+  } else {
+    clear_has_roomid();
+  }
+  roomid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), roomid);
+  // @@protoc_insertion_point(field_set_allocated:UserArrived.roomid)
 }
 
 // required bool ishost = 7;
 inline bool UserArrived::has_ishost() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void UserArrived::set_has_ishost() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void UserArrived::clear_has_ishost() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void UserArrived::clear_ishost() {
   ishost_ = false;
@@ -7357,13 +7577,13 @@ inline void UserArrived::set_ishost(bool value) {
 
 // required bool isoffline = 8;
 inline bool UserArrived::has_isoffline() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void UserArrived::set_has_isoffline() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void UserArrived::clear_has_isoffline() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void UserArrived::clear_isoffline() {
   isoffline_ = false;
@@ -7379,76 +7599,193 @@ inline void UserArrived::set_isoffline(bool value) {
   // @@protoc_insertion_point(field_set:UserArrived.isoffline)
 }
 
-// optional sint32 brandid = 9;
+// optional string brandid = 9;
 inline bool UserArrived::has_brandid() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void UserArrived::set_has_brandid() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void UserArrived::clear_has_brandid() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void UserArrived::clear_brandid() {
-  brandid_ = 0;
+  brandid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_brandid();
 }
-inline ::google::protobuf::int32 UserArrived::brandid() const {
+inline const ::std::string& UserArrived::brandid() const {
   // @@protoc_insertion_point(field_get:UserArrived.brandid)
-  return brandid_;
+  return brandid_.GetNoArena();
 }
-inline void UserArrived::set_brandid(::google::protobuf::int32 value) {
+inline void UserArrived::set_brandid(const ::std::string& value) {
   set_has_brandid();
-  brandid_ = value;
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserArrived.brandid)
 }
+#if LANG_CXX11
+inline void UserArrived::set_brandid(::std::string&& value) {
+  set_has_brandid();
+  brandid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserArrived.brandid)
+}
+#endif
+inline void UserArrived::set_brandid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_brandid();
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserArrived.brandid)
+}
+inline void UserArrived::set_brandid(const char* value, size_t size) {
+  set_has_brandid();
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserArrived.brandid)
+}
+inline ::std::string* UserArrived::mutable_brandid() {
+  set_has_brandid();
+  // @@protoc_insertion_point(field_mutable:UserArrived.brandid)
+  return brandid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserArrived::release_brandid() {
+  // @@protoc_insertion_point(field_release:UserArrived.brandid)
+  clear_has_brandid();
+  return brandid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserArrived::set_allocated_brandid(::std::string* brandid) {
+  if (brandid != NULL) {
+    set_has_brandid();
+  } else {
+    clear_has_brandid();
+  }
+  brandid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), brandid);
+  // @@protoc_insertion_point(field_set_allocated:UserArrived.brandid)
+}
 
-// optional sint32 numberid = 10;
+// optional string numberid = 10;
 inline bool UserArrived::has_numberid() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void UserArrived::set_has_numberid() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void UserArrived::clear_has_numberid() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void UserArrived::clear_numberid() {
-  numberid_ = 0;
+  numberid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_numberid();
 }
-inline ::google::protobuf::int32 UserArrived::numberid() const {
+inline const ::std::string& UserArrived::numberid() const {
   // @@protoc_insertion_point(field_get:UserArrived.numberid)
-  return numberid_;
+  return numberid_.GetNoArena();
 }
-inline void UserArrived::set_numberid(::google::protobuf::int32 value) {
+inline void UserArrived::set_numberid(const ::std::string& value) {
   set_has_numberid();
-  numberid_ = value;
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserArrived.numberid)
 }
+#if LANG_CXX11
+inline void UserArrived::set_numberid(::std::string&& value) {
+  set_has_numberid();
+  numberid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserArrived.numberid)
+}
+#endif
+inline void UserArrived::set_numberid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_numberid();
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserArrived.numberid)
+}
+inline void UserArrived::set_numberid(const char* value, size_t size) {
+  set_has_numberid();
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserArrived.numberid)
+}
+inline ::std::string* UserArrived::mutable_numberid() {
+  set_has_numberid();
+  // @@protoc_insertion_point(field_mutable:UserArrived.numberid)
+  return numberid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserArrived::release_numberid() {
+  // @@protoc_insertion_point(field_release:UserArrived.numberid)
+  clear_has_numberid();
+  return numberid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserArrived::set_allocated_numberid(::std::string* numberid) {
+  if (numberid != NULL) {
+    set_has_numberid();
+  } else {
+    clear_has_numberid();
+  }
+  numberid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), numberid);
+  // @@protoc_insertion_point(field_set_allocated:UserArrived.numberid)
+}
 
-// optional sint32 areaid = 11;
+// optional string areaid = 11;
 inline bool UserArrived::has_areaid() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void UserArrived::set_has_areaid() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void UserArrived::clear_has_areaid() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void UserArrived::clear_areaid() {
-  areaid_ = 0;
+  areaid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_areaid();
 }
-inline ::google::protobuf::int32 UserArrived::areaid() const {
+inline const ::std::string& UserArrived::areaid() const {
   // @@protoc_insertion_point(field_get:UserArrived.areaid)
-  return areaid_;
+  return areaid_.GetNoArena();
 }
-inline void UserArrived::set_areaid(::google::protobuf::int32 value) {
+inline void UserArrived::set_areaid(const ::std::string& value) {
   set_has_areaid();
-  areaid_ = value;
+  areaid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserArrived.areaid)
+}
+#if LANG_CXX11
+inline void UserArrived::set_areaid(::std::string&& value) {
+  set_has_areaid();
+  areaid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserArrived.areaid)
+}
+#endif
+inline void UserArrived::set_areaid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_areaid();
+  areaid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserArrived.areaid)
+}
+inline void UserArrived::set_areaid(const char* value, size_t size) {
+  set_has_areaid();
+  areaid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserArrived.areaid)
+}
+inline ::std::string* UserArrived::mutable_areaid() {
+  set_has_areaid();
+  // @@protoc_insertion_point(field_mutable:UserArrived.areaid)
+  return areaid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserArrived::release_areaid() {
+  // @@protoc_insertion_point(field_release:UserArrived.areaid)
+  clear_has_areaid();
+  return areaid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserArrived::set_allocated_areaid(::std::string* areaid) {
+  if (areaid != NULL) {
+    set_has_areaid();
+  } else {
+    clear_has_areaid();
+  }
+  areaid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), areaid);
+  // @@protoc_insertion_point(field_set_allocated:UserArrived.areaid)
 }
 
 // -------------------------------------------------------------------
@@ -7915,7 +8252,7 @@ inline void CreateRoomRes::set_allocated_user_info(::UserArrived* user_info) {
 
 // JoinRoomReq
 
-// required sint32 room_id = 1;
+// required string room_id = 1;
 inline bool JoinRoomReq::has_room_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -7926,17 +8263,56 @@ inline void JoinRoomReq::clear_has_room_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void JoinRoomReq::clear_room_id() {
-  room_id_ = 0;
+  room_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_room_id();
 }
-inline ::google::protobuf::int32 JoinRoomReq::room_id() const {
+inline const ::std::string& JoinRoomReq::room_id() const {
   // @@protoc_insertion_point(field_get:JoinRoomReq.room_id)
-  return room_id_;
+  return room_id_.GetNoArena();
 }
-inline void JoinRoomReq::set_room_id(::google::protobuf::int32 value) {
+inline void JoinRoomReq::set_room_id(const ::std::string& value) {
   set_has_room_id();
-  room_id_ = value;
+  room_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:JoinRoomReq.room_id)
+}
+#if LANG_CXX11
+inline void JoinRoomReq::set_room_id(::std::string&& value) {
+  set_has_room_id();
+  room_id_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:JoinRoomReq.room_id)
+}
+#endif
+inline void JoinRoomReq::set_room_id(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_room_id();
+  room_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:JoinRoomReq.room_id)
+}
+inline void JoinRoomReq::set_room_id(const char* value, size_t size) {
+  set_has_room_id();
+  room_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:JoinRoomReq.room_id)
+}
+inline ::std::string* JoinRoomReq::mutable_room_id() {
+  set_has_room_id();
+  // @@protoc_insertion_point(field_mutable:JoinRoomReq.room_id)
+  return room_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* JoinRoomReq::release_room_id() {
+  // @@protoc_insertion_point(field_release:JoinRoomReq.room_id)
+  clear_has_room_id();
+  return room_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void JoinRoomReq::set_allocated_room_id(::std::string* room_id) {
+  if (room_id != NULL) {
+    set_has_room_id();
+  } else {
+    clear_has_room_id();
+  }
+  room_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_id);
+  // @@protoc_insertion_point(field_set_allocated:JoinRoomReq.room_id)
 }
 
 // -------------------------------------------------------------------

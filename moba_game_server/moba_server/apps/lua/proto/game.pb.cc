@@ -1052,13 +1052,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserCenterInfo, numberid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserCenterInfo, areaid_),
   0,
-  1,
-  2,
-  3,
   4,
   5,
   6,
   7,
+  1,
+  2,
+  3,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GuestLoginRes, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GuestLoginRes, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1254,16 +1254,16 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserArrived, numberid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserArrived, areaid_),
   0,
-  1,
-  2,
-  3,
-  4,
   5,
   6,
   7,
   8,
+  1,
   9,
   10,
+  2,
+  3,
+  4,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitMatchRes, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitMatchRes, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1506,7 +1506,7 @@ void AddDescriptorsImpl() {
       "\022\014\n\004upwd\030\002 \002(\t\"\212\001\n\016UserCenterInfo\022\r\n\005uni"
       "ck\030\001 \002(\t\022\r\n\005uface\030\002 \002(\021\022\014\n\004usex\030\003 \002(\021\022\014\n"
       "\004uvip\030\004 \002(\021\022\013\n\003uid\030\005 \002(\021\022\017\n\007brandid\030\006 \001("
-      "\021\022\020\n\010numberid\030\007 \001(\021\022\016\n\006areaid\030\010 \001(\021\"\?\n\rG"
+      "\t\022\020\n\010numberid\030\007 \001(\t\022\016\n\006areaid\030\010 \001(\t\"\?\n\rG"
       "uestLoginRes\022\016\n\006status\030\001 \002(\021\022\036\n\005uinfo\030\002 "
       "\001(\0132\017.UserCenterInfo\"\?\n\rUnameLoginRes\022\016\n"
       "\006status\030\001 \002(\021\022\036\n\005uinfo\030\002 \001(\0132\017.UserCente"
@@ -1536,9 +1536,9 @@ void AddDescriptorsImpl() {
       "chid\030\002 \002(\021\022\016\n\006seatid\030\003 \002(\021\022\014\n\004side\030\004 \002(\021"
       "\"\275\001\n\013UserArrived\022\r\n\005unick\030\001 \002(\t\022\r\n\005uface"
       "\030\002 \002(\021\022\014\n\004usex\030\003 \002(\021\022\016\n\006seatid\030\004 \002(\021\022\014\n\004"
-      "side\030\005 \002(\021\022\016\n\006roomid\030\006 \002(\021\022\016\n\006ishost\030\007 \002"
-      "(\010\022\021\n\tisoffline\030\010 \002(\010\022\017\n\007brandid\030\t \001(\021\022\020"
-      "\n\010numberid\030\n \001(\021\022\016\n\006areaid\030\013 \001(\021\"\036\n\014Exit"
+      "side\030\005 \002(\021\022\016\n\006roomid\030\006 \002(\t\022\016\n\006ishost\030\007 \002"
+      "(\010\022\021\n\tisoffline\030\010 \002(\010\022\017\n\007brandid\030\t \001(\t\022\020"
+      "\n\010numberid\030\n \001(\t\022\016\n\006areaid\030\013 \001(\t\"\036\n\014Exit"
       "MatchRes\022\016\n\006status\030\001 \002(\021\"\037\n\rUserExitMatc"
       "h\022\016\n\006seatid\030\001 \002(\021\"\033\n\tGameStart\022\016\n\006heroes"
       "\030\001 \003(\021\"0\n\rUserRegistReq\022\r\n\005uname\030\001 \002(\t\022\020"
@@ -1547,7 +1547,7 @@ void AddDescriptorsImpl() {
       "\001 \002(\t\"S\n\rCreateRoomRes\022\016\n\006status\030\001 \002(\021\022\021"
       "\n\troom_info\030\002 \001(\t\022\037\n\tuser_info\030\003 \001(\0132\014.U"
       "serArrived\"\036\n\013JoinRoomReq\022\017\n\007room_id\030\001 \002"
-      "(\021\"R\n\013JoinRoomRes\022\016\n\006status\030\001 \002(\021\022\021\n\troo"
+      "(\t\"R\n\013JoinRoomRes\022\016\n\006status\030\001 \002(\021\022\021\n\troo"
       "m_info\030\002 \001(\t\022 \n\nusers_info\030\003 \003(\0132\014.UserA"
       "rrived\">\n\013ExitRoomRes\022\016\n\006status\030\001 \002(\021\022\037\n"
       "\tuser_info\030\002 \001(\0132\014.UserArrived\"\035\n\013Dessol"
@@ -2331,18 +2331,33 @@ UserCenterInfo::UserCenterInfo(const UserCenterInfo& from)
   if (from.has_unick()) {
     unick_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.unick_);
   }
+  brandid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_brandid()) {
+    brandid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.brandid_);
+  }
+  numberid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_numberid()) {
+    numberid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.numberid_);
+  }
+  areaid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_areaid()) {
+    areaid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.areaid_);
+  }
   ::memcpy(&uface_, &from.uface_,
-    static_cast<size_t>(reinterpret_cast<char*>(&areaid_) -
-    reinterpret_cast<char*>(&uface_)) + sizeof(areaid_));
+    static_cast<size_t>(reinterpret_cast<char*>(&uid_) -
+    reinterpret_cast<char*>(&uface_)) + sizeof(uid_));
   // @@protoc_insertion_point(copy_constructor:UserCenterInfo)
 }
 
 void UserCenterInfo::SharedCtor() {
   _cached_size_ = 0;
   unick_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  brandid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  numberid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  areaid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&uface_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&areaid_) -
-      reinterpret_cast<char*>(&uface_)) + sizeof(areaid_));
+      reinterpret_cast<char*>(&uid_) -
+      reinterpret_cast<char*>(&uface_)) + sizeof(uid_));
 }
 
 UserCenterInfo::~UserCenterInfo() {
@@ -2352,6 +2367,9 @@ UserCenterInfo::~UserCenterInfo() {
 
 void UserCenterInfo::SharedDtor() {
   unick_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  brandid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  numberid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  areaid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void UserCenterInfo::SetCachedSize(int size) const {
@@ -2384,14 +2402,28 @@ void UserCenterInfo::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!unick_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*unick_.UnsafeRawStringPointer())->clear();
+  if (cached_has_bits & 15u) {
+    if (cached_has_bits & 0x00000001u) {
+      GOOGLE_DCHECK(!unick_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*unick_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      GOOGLE_DCHECK(!brandid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*brandid_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000004u) {
+      GOOGLE_DCHECK(!numberid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*numberid_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000008u) {
+      GOOGLE_DCHECK(!areaid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*areaid_.UnsafeRawStringPointer())->clear();
+    }
   }
-  if (cached_has_bits & 254u) {
+  if (cached_has_bits & 240u) {
     ::memset(&uface_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&areaid_) -
-        reinterpret_cast<char*>(&uface_)) + sizeof(areaid_));
+        reinterpret_cast<char*>(&uid_) -
+        reinterpret_cast<char*>(&uface_)) + sizeof(uid_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -2479,42 +2511,48 @@ bool UserCenterInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // optional sint32 brandid = 6;
+      // optional string brandid = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
-          set_has_brandid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &brandid_)));
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_brandid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->brandid().data(), static_cast<int>(this->brandid().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserCenterInfo.brandid");
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional sint32 numberid = 7;
+      // optional string numberid = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
-          set_has_numberid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &numberid_)));
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_numberid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->numberid().data(), static_cast<int>(this->numberid().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserCenterInfo.numberid");
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional sint32 areaid = 8;
+      // optional string areaid = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
-          set_has_areaid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &areaid_)));
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_areaid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->areaid().data(), static_cast<int>(this->areaid().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserCenterInfo.areaid");
         } else {
           goto handle_unusual;
         }
@@ -2559,38 +2597,53 @@ void UserCenterInfo::SerializeWithCachedSizes(
   }
 
   // required sint32 uface = 2;
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->uface(), output);
   }
 
   // required sint32 usex = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(3, this->usex(), output);
   }
 
   // required sint32 uvip = 4;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(4, this->uvip(), output);
   }
 
   // required sint32 uid = 5;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(5, this->uid(), output);
   }
 
-  // optional sint32 brandid = 6;
-  if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(6, this->brandid(), output);
+  // optional string brandid = 6;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->brandid().data(), static_cast<int>(this->brandid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserCenterInfo.brandid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->brandid(), output);
   }
 
-  // optional sint32 numberid = 7;
-  if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(7, this->numberid(), output);
+  // optional string numberid = 7;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->numberid().data(), static_cast<int>(this->numberid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserCenterInfo.numberid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      7, this->numberid(), output);
   }
 
-  // optional sint32 areaid = 8;
-  if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(8, this->areaid(), output);
+  // optional string areaid = 8;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->areaid().data(), static_cast<int>(this->areaid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserCenterInfo.areaid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      8, this->areaid(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2620,38 +2673,56 @@ void UserCenterInfo::SerializeWithCachedSizes(
   }
 
   // required sint32 uface = 2;
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->uface(), target);
   }
 
   // required sint32 usex = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(3, this->usex(), target);
   }
 
   // required sint32 uvip = 4;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(4, this->uvip(), target);
   }
 
   // required sint32 uid = 5;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(5, this->uid(), target);
   }
 
-  // optional sint32 brandid = 6;
-  if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(6, this->brandid(), target);
+  // optional string brandid = 6;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->brandid().data(), static_cast<int>(this->brandid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserCenterInfo.brandid");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->brandid(), target);
   }
 
-  // optional sint32 numberid = 7;
-  if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(7, this->numberid(), target);
+  // optional string numberid = 7;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->numberid().data(), static_cast<int>(this->numberid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserCenterInfo.numberid");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        7, this->numberid(), target);
   }
 
-  // optional sint32 areaid = 8;
-  if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(8, this->areaid(), target);
+  // optional string areaid = 8;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->areaid().data(), static_cast<int>(this->areaid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserCenterInfo.areaid");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        8, this->areaid(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2712,7 +2783,7 @@ size_t UserCenterInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x000000f1) ^ 0x000000f1) == 0) {  // All required fields are present.
     // required string unick = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -2741,25 +2812,25 @@ size_t UserCenterInfo::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_has_bits_[0 / 32] & 224u) {
-    // optional sint32 brandid = 6;
+  if (_has_bits_[0 / 32] & 14u) {
+    // optional string brandid = 6;
     if (has_brandid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->brandid());
     }
 
-    // optional sint32 numberid = 7;
+    // optional string numberid = 7;
     if (has_numberid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->numberid());
     }
 
-    // optional sint32 areaid = 8;
+    // optional string areaid = 8;
     if (has_areaid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->areaid());
     }
 
@@ -2800,25 +2871,28 @@ void UserCenterInfo::MergeFrom(const UserCenterInfo& from) {
       unick_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.unick_);
     }
     if (cached_has_bits & 0x00000002u) {
-      uface_ = from.uface_;
+      set_has_brandid();
+      brandid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.brandid_);
     }
     if (cached_has_bits & 0x00000004u) {
-      usex_ = from.usex_;
+      set_has_numberid();
+      numberid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.numberid_);
     }
     if (cached_has_bits & 0x00000008u) {
-      uvip_ = from.uvip_;
+      set_has_areaid();
+      areaid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.areaid_);
     }
     if (cached_has_bits & 0x00000010u) {
-      uid_ = from.uid_;
+      uface_ = from.uface_;
     }
     if (cached_has_bits & 0x00000020u) {
-      brandid_ = from.brandid_;
+      usex_ = from.usex_;
     }
     if (cached_has_bits & 0x00000040u) {
-      numberid_ = from.numberid_;
+      uvip_ = from.uvip_;
     }
     if (cached_has_bits & 0x00000080u) {
-      areaid_ = from.areaid_;
+      uid_ = from.uid_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -2839,7 +2913,7 @@ void UserCenterInfo::CopyFrom(const UserCenterInfo& from) {
 }
 
 bool UserCenterInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+  if ((_has_bits_[0] & 0x000000f1) != 0x000000f1) return false;
   return true;
 }
 
@@ -2850,13 +2924,13 @@ void UserCenterInfo::Swap(UserCenterInfo* other) {
 void UserCenterInfo::InternalSwap(UserCenterInfo* other) {
   using std::swap;
   unick_.Swap(&other->unick_);
+  brandid_.Swap(&other->brandid_);
+  numberid_.Swap(&other->numberid_);
+  areaid_.Swap(&other->areaid_);
   swap(uface_, other->uface_);
   swap(usex_, other->usex_);
   swap(uvip_, other->uvip_);
   swap(uid_, other->uid_);
-  swap(brandid_, other->brandid_);
-  swap(numberid_, other->numberid_);
-  swap(areaid_, other->areaid_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
@@ -8677,18 +8751,38 @@ UserArrived::UserArrived(const UserArrived& from)
   if (from.has_unick()) {
     unick_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.unick_);
   }
+  roomid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_roomid()) {
+    roomid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.roomid_);
+  }
+  brandid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_brandid()) {
+    brandid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.brandid_);
+  }
+  numberid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_numberid()) {
+    numberid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.numberid_);
+  }
+  areaid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_areaid()) {
+    areaid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.areaid_);
+  }
   ::memcpy(&uface_, &from.uface_,
-    static_cast<size_t>(reinterpret_cast<char*>(&areaid_) -
-    reinterpret_cast<char*>(&uface_)) + sizeof(areaid_));
+    static_cast<size_t>(reinterpret_cast<char*>(&isoffline_) -
+    reinterpret_cast<char*>(&uface_)) + sizeof(isoffline_));
   // @@protoc_insertion_point(copy_constructor:UserArrived)
 }
 
 void UserArrived::SharedCtor() {
   _cached_size_ = 0;
   unick_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  roomid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  brandid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  numberid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  areaid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&uface_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&areaid_) -
-      reinterpret_cast<char*>(&uface_)) + sizeof(areaid_));
+      reinterpret_cast<char*>(&isoffline_) -
+      reinterpret_cast<char*>(&uface_)) + sizeof(isoffline_));
 }
 
 UserArrived::~UserArrived() {
@@ -8698,6 +8792,10 @@ UserArrived::~UserArrived() {
 
 void UserArrived::SharedDtor() {
   unick_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  roomid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  brandid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  numberid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  areaid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void UserArrived::SetCachedSize(int size) const {
@@ -8730,19 +8828,37 @@ void UserArrived::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!unick_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*unick_.UnsafeRawStringPointer())->clear();
+  if (cached_has_bits & 31u) {
+    if (cached_has_bits & 0x00000001u) {
+      GOOGLE_DCHECK(!unick_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*unick_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      GOOGLE_DCHECK(!roomid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*roomid_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000004u) {
+      GOOGLE_DCHECK(!brandid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*brandid_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000008u) {
+      GOOGLE_DCHECK(!numberid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*numberid_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000010u) {
+      GOOGLE_DCHECK(!areaid_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*areaid_.UnsafeRawStringPointer())->clear();
+    }
   }
-  if (cached_has_bits & 254u) {
+  if (cached_has_bits & 224u) {
     ::memset(&uface_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&isoffline_) -
-        reinterpret_cast<char*>(&uface_)) + sizeof(isoffline_));
+        reinterpret_cast<char*>(&seatid_) -
+        reinterpret_cast<char*>(&uface_)) + sizeof(seatid_));
   }
   if (cached_has_bits & 1792u) {
-    ::memset(&brandid_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&areaid_) -
-        reinterpret_cast<char*>(&brandid_)) + sizeof(areaid_));
+    ::memset(&side_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&isoffline_) -
+        reinterpret_cast<char*>(&side_)) + sizeof(isoffline_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -8830,14 +8946,16 @@ bool UserArrived::MergePartialFromCodedStream(
         break;
       }
 
-      // required sint32 roomid = 6;
+      // required string roomid = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
-          set_has_roomid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &roomid_)));
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_roomid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->roomid().data(), static_cast<int>(this->roomid().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserArrived.roomid");
         } else {
           goto handle_unusual;
         }
@@ -8872,42 +8990,48 @@ bool UserArrived::MergePartialFromCodedStream(
         break;
       }
 
-      // optional sint32 brandid = 9;
+      // optional string brandid = 9;
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
-          set_has_brandid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &brandid_)));
+            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_brandid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->brandid().data(), static_cast<int>(this->brandid().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserArrived.brandid");
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional sint32 numberid = 10;
+      // optional string numberid = 10;
       case 10: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(80u /* 80 & 0xFF */)) {
-          set_has_numberid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &numberid_)));
+            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_numberid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->numberid().data(), static_cast<int>(this->numberid().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserArrived.numberid");
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // optional sint32 areaid = 11;
+      // optional string areaid = 11;
       case 11: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(88u /* 88 & 0xFF */)) {
-          set_has_areaid();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &areaid_)));
+            static_cast< ::google::protobuf::uint8>(90u /* 90 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_areaid()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->areaid().data(), static_cast<int>(this->areaid().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserArrived.areaid");
         } else {
           goto handle_unusual;
         }
@@ -8952,53 +9076,73 @@ void UserArrived::SerializeWithCachedSizes(
   }
 
   // required sint32 uface = 2;
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->uface(), output);
   }
 
   // required sint32 usex = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(3, this->usex(), output);
   }
 
   // required sint32 seatid = 4;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(4, this->seatid(), output);
   }
 
   // required sint32 side = 5;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(5, this->side(), output);
   }
 
-  // required sint32 roomid = 6;
-  if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(6, this->roomid(), output);
+  // required string roomid = 6;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->roomid().data(), static_cast<int>(this->roomid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.roomid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->roomid(), output);
   }
 
   // required bool ishost = 7;
-  if (cached_has_bits & 0x00000040u) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->ishost(), output);
   }
 
   // required bool isoffline = 8;
-  if (cached_has_bits & 0x00000080u) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->isoffline(), output);
   }
 
-  // optional sint32 brandid = 9;
-  if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(9, this->brandid(), output);
+  // optional string brandid = 9;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->brandid().data(), static_cast<int>(this->brandid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.brandid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      9, this->brandid(), output);
   }
 
-  // optional sint32 numberid = 10;
-  if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(10, this->numberid(), output);
+  // optional string numberid = 10;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->numberid().data(), static_cast<int>(this->numberid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.numberid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      10, this->numberid(), output);
   }
 
-  // optional sint32 areaid = 11;
-  if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(11, this->areaid(), output);
+  // optional string areaid = 11;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->areaid().data(), static_cast<int>(this->areaid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.areaid");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      11, this->areaid(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -9028,53 +9172,77 @@ void UserArrived::SerializeWithCachedSizes(
   }
 
   // required sint32 uface = 2;
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->uface(), target);
   }
 
   // required sint32 usex = 3;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(3, this->usex(), target);
   }
 
   // required sint32 seatid = 4;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(4, this->seatid(), target);
   }
 
   // required sint32 side = 5;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(5, this->side(), target);
   }
 
-  // required sint32 roomid = 6;
-  if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(6, this->roomid(), target);
+  // required string roomid = 6;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->roomid().data(), static_cast<int>(this->roomid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.roomid");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->roomid(), target);
   }
 
   // required bool ishost = 7;
-  if (cached_has_bits & 0x00000040u) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(7, this->ishost(), target);
   }
 
   // required bool isoffline = 8;
-  if (cached_has_bits & 0x00000080u) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(8, this->isoffline(), target);
   }
 
-  // optional sint32 brandid = 9;
-  if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(9, this->brandid(), target);
+  // optional string brandid = 9;
+  if (cached_has_bits & 0x00000004u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->brandid().data(), static_cast<int>(this->brandid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.brandid");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        9, this->brandid(), target);
   }
 
-  // optional sint32 numberid = 10;
-  if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(10, this->numberid(), target);
+  // optional string numberid = 10;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->numberid().data(), static_cast<int>(this->numberid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.numberid");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        10, this->numberid(), target);
   }
 
-  // optional sint32 areaid = 11;
-  if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(11, this->areaid(), target);
+  // optional string areaid = 11;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->areaid().data(), static_cast<int>(this->areaid().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserArrived.areaid");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        11, this->areaid(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -9094,6 +9262,13 @@ size_t UserArrived::RequiredFieldsByteSizeFallback() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->unick());
+  }
+
+  if (has_roomid()) {
+    // required string roomid = 6;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->roomid());
   }
 
   if (has_uface()) {
@@ -9124,13 +9299,6 @@ size_t UserArrived::RequiredFieldsByteSizeFallback() const {
         this->side());
   }
 
-  if (has_roomid()) {
-    // required sint32 roomid = 6;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->roomid());
-  }
-
   if (has_ishost()) {
     // required bool ishost = 7;
     total_size += 1 + 1;
@@ -9152,11 +9320,16 @@ size_t UserArrived::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x000000ff) ^ 0x000000ff) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x000007e3) ^ 0x000007e3) == 0) {  // All required fields are present.
     // required string unick = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->unick());
+
+    // required string roomid = 6;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->roomid());
 
     // required sint32 uface = 2;
     total_size += 1 +
@@ -9178,11 +9351,6 @@ size_t UserArrived::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->side());
 
-    // required sint32 roomid = 6;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->roomid());
-
     // required bool ishost = 7;
     total_size += 1 + 1;
 
@@ -9192,25 +9360,25 @@ size_t UserArrived::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_has_bits_[8 / 32] & 1792u) {
-    // optional sint32 brandid = 9;
+  if (_has_bits_[0 / 32] & 28u) {
+    // optional string brandid = 9;
     if (has_brandid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->brandid());
     }
 
-    // optional sint32 numberid = 10;
+    // optional string numberid = 10;
     if (has_numberid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->numberid());
     }
 
-    // optional sint32 areaid = 11;
+    // optional string areaid = 11;
     if (has_areaid()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->areaid());
     }
 
@@ -9251,37 +9419,41 @@ void UserArrived::MergeFrom(const UserArrived& from) {
       unick_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.unick_);
     }
     if (cached_has_bits & 0x00000002u) {
-      uface_ = from.uface_;
+      set_has_roomid();
+      roomid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.roomid_);
     }
     if (cached_has_bits & 0x00000004u) {
-      usex_ = from.usex_;
+      set_has_brandid();
+      brandid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.brandid_);
     }
     if (cached_has_bits & 0x00000008u) {
-      seatid_ = from.seatid_;
+      set_has_numberid();
+      numberid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.numberid_);
     }
     if (cached_has_bits & 0x00000010u) {
-      side_ = from.side_;
+      set_has_areaid();
+      areaid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.areaid_);
     }
     if (cached_has_bits & 0x00000020u) {
-      roomid_ = from.roomid_;
+      uface_ = from.uface_;
     }
     if (cached_has_bits & 0x00000040u) {
-      ishost_ = from.ishost_;
+      usex_ = from.usex_;
     }
     if (cached_has_bits & 0x00000080u) {
-      isoffline_ = from.isoffline_;
+      seatid_ = from.seatid_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
   if (cached_has_bits & 1792u) {
     if (cached_has_bits & 0x00000100u) {
-      brandid_ = from.brandid_;
+      side_ = from.side_;
     }
     if (cached_has_bits & 0x00000200u) {
-      numberid_ = from.numberid_;
+      ishost_ = from.ishost_;
     }
     if (cached_has_bits & 0x00000400u) {
-      areaid_ = from.areaid_;
+      isoffline_ = from.isoffline_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -9302,7 +9474,7 @@ void UserArrived::CopyFrom(const UserArrived& from) {
 }
 
 bool UserArrived::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000000ff) != 0x000000ff) return false;
+  if ((_has_bits_[0] & 0x000007e3) != 0x000007e3) return false;
   return true;
 }
 
@@ -9313,16 +9485,16 @@ void UserArrived::Swap(UserArrived* other) {
 void UserArrived::InternalSwap(UserArrived* other) {
   using std::swap;
   unick_.Swap(&other->unick_);
+  roomid_.Swap(&other->roomid_);
+  brandid_.Swap(&other->brandid_);
+  numberid_.Swap(&other->numberid_);
+  areaid_.Swap(&other->areaid_);
   swap(uface_, other->uface_);
   swap(usex_, other->usex_);
   swap(seatid_, other->seatid_);
   swap(side_, other->side_);
-  swap(roomid_, other->roomid_);
   swap(ishost_, other->ishost_);
   swap(isoffline_, other->isoffline_);
-  swap(brandid_, other->brandid_);
-  swap(numberid_, other->numberid_);
-  swap(areaid_, other->areaid_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
@@ -11312,13 +11484,16 @@ JoinRoomReq::JoinRoomReq(const JoinRoomReq& from)
       _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  room_id_ = from.room_id_;
+  room_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_room_id()) {
+    room_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_id_);
+  }
   // @@protoc_insertion_point(copy_constructor:JoinRoomReq)
 }
 
 void JoinRoomReq::SharedCtor() {
   _cached_size_ = 0;
-  room_id_ = 0;
+  room_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 JoinRoomReq::~JoinRoomReq() {
@@ -11327,6 +11502,7 @@ JoinRoomReq::~JoinRoomReq() {
 }
 
 void JoinRoomReq::SharedDtor() {
+  room_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void JoinRoomReq::SetCachedSize(int size) const {
@@ -11358,7 +11534,11 @@ void JoinRoomReq::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  room_id_ = 0;
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    GOOGLE_DCHECK(!room_id_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+    (*room_id_.UnsafeRawStringPointer())->clear();
+  }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
@@ -11373,14 +11553,16 @@ bool JoinRoomReq::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required sint32 room_id = 1;
+      // required string room_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_room_id();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &room_id_)));
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_room_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->room_id().data(), static_cast<int>(this->room_id().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "JoinRoomReq.room_id");
         } else {
           goto handle_unusual;
         }
@@ -11414,9 +11596,14 @@ void JoinRoomReq::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required sint32 room_id = 1;
+  // required string room_id = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->room_id(), output);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->room_id().data(), static_cast<int>(this->room_id().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "JoinRoomReq.room_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->room_id(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -11434,9 +11621,15 @@ void JoinRoomReq::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required sint32 room_id = 1;
+  // required string room_id = 1;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->room_id(), target);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->room_id().data(), static_cast<int>(this->room_id().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "JoinRoomReq.room_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->room_id(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -11456,10 +11649,10 @@ size_t JoinRoomReq::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  // required sint32 room_id = 1;
+  // required string room_id = 1;
   if (has_room_id()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->room_id());
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -11492,7 +11685,8 @@ void JoinRoomReq::MergeFrom(const JoinRoomReq& from) {
   (void) cached_has_bits;
 
   if (from.has_room_id()) {
-    set_room_id(from.room_id());
+    set_has_room_id();
+    room_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_id_);
   }
 }
 
@@ -11521,7 +11715,7 @@ void JoinRoomReq::Swap(JoinRoomReq* other) {
 }
 void JoinRoomReq::InternalSwap(JoinRoomReq* other) {
   using std::swap;
-  swap(room_id_, other->room_id_);
+  room_id_.Swap(&other->room_id_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);

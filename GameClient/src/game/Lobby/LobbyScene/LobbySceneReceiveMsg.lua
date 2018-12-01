@@ -133,6 +133,7 @@ function LobbyScene:onEventCreateRoom(event)
     else
         GT.showPopLayer('TipsLayer',{"创建房间失败"})
     end
+    GT.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventJoinRoom(event)
@@ -150,6 +151,7 @@ function LobbyScene:onEventJoinRoom(event)
     else
         GT.showPopLayer('TipsLayer',{"加入房间失败"})
     end
+    GT.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEvnetGetCreateStatus(event)
@@ -187,6 +189,7 @@ function LobbyScene:onEventBackRoom(event)
     else
         GT.showPopLayer('TipsLayer',{"返回房间失败"})
     end
+    GT.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventGuestLogin(event)

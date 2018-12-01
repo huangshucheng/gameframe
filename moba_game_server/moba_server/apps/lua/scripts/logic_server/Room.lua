@@ -84,15 +84,15 @@ function Room:enter_player(player)
 			end
 		end
 	end
-	print('hcc>> 22222---------------')
-	dump(seat_id_table)
+	-- print('hcc>> 22222---------------')
+	-- dump(seat_id_table)
 
 	if not player:get_is_host() then
 		local num = #seat_id_table
 		if num >= 1 then
 			local randNum = math.random(1, num)
 			local rand_seat_id = seat_id_table[randNum]
-			print('hcc>> 44444 seatId: ' .. rand_seat_id)
+			-- print('hcc>> 44444 seatId: ' .. rand_seat_id)
 			player:set_seat_id(rand_seat_id)
 		end
 	end

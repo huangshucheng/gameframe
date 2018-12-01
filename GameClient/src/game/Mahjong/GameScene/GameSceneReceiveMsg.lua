@@ -25,7 +25,6 @@ function GameScene:addClientEventListener()
     addEvent('BackRoomRes',self, self.onEventBackRoom)
     addEvent('UserArrived',self, self.onEventUserArrived)
     addEvent('UserOffLine',self, self.onEventUserOffline)
-    addEvent('UserReconnected',self, self.onEventUserReconnected)
     addEvent("LoginLogicRes",self, self.onEventLoginLogic)
     addEvent("GuestLoginRes", self, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
@@ -52,12 +51,10 @@ function GameScene:onEventNetConnectFail(event)
 end
 
 function GameScene:onEventClose(event)
-    -- Game.showPopLayer('TipsLayer',{"网络连接关闭111!"})
     GT.showPopLayer('LoadingLayer')
 end
 
 function GameScene:onEventClosed(event)
-    -- Game.showPopLayer('TipsLayer',{"网络连接关闭222!"})
     GT.showPopLayer('LoadingLayer')
 end
 
@@ -118,6 +115,7 @@ function GameScene:onEventBackRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
+        RoomData:getInstance():reset()
         RoomData:getInstance():setRoomInfo(data.room_info)
         local users_info = data.users_info
         if next(users_info) then
@@ -126,6 +124,7 @@ function GameScene:onEventBackRoom(event)
             end
         end
     end
+    self:showRoomInfo()
     self:showAllExistUserInfo()
 end
 
@@ -144,9 +143,6 @@ function GameScene:onEventUserOffline(event)
         RoomData:getInstance():updatePlayerByUserInfo(user_info)
     end
     self:showAllExistUserInfo()
-end
-
-function GameScene:onEventUserReconnected(event)
 end
 
 function GameScene:onEventLoginLogic(event)
