@@ -5,6 +5,7 @@
 local RoomData 	= class('RoomData')
 local Player 	= require('game.clientdata.Player')
 local UserInfo 	= require('game.clientdata.UserInfo')
+local ToolUtils = require('game.utils.ToolUtils')
 
 local MAX_PLAYER_NUM = 4
 
@@ -21,12 +22,9 @@ function RoomData:ctor()
 	self._players 	= {}	-- seatid -> player
 end
 
-function RoomData:setChars(chars)
-	MAX_PLAYER_NUM = chars
-end
-
 function RoomData:getChars()
-	return MAX_PLAYER_NUM
+	local playerNum = ToolUtils.getLuaStrValue(self._room_info,'playerNum')
+	return tonumber(playerNum) or MAX_PLAYER_NUM
 end
 
 function RoomData:setRoomInfo(room_info)

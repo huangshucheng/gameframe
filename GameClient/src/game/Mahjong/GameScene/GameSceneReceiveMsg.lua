@@ -8,8 +8,6 @@ local UserInfo              = require("game.clientdata.UserInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 
-local MAX_PLAYER_NUM        = 4
-
 function GameScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
@@ -33,6 +31,7 @@ end
 
 function GameScene:onEventNetConnect(event)
     Game.showPopLayer('TipsLayer',{"网络连接成功!"})
+    Game.popLayer('LoadingLayer')
     --重新登录
     local loginType = UserInfo.getLoginType()
     if loginType == 'uname' then
@@ -47,15 +46,15 @@ end
 
 function GameScene:onEventNetConnectFail(event)
     Game.showPopLayer('TipsLayer',{"网络连接失败!"}) 
-    GT.showPopLayer('LoadingLayer')
+    Game.showPopLayer('LoadingLayer')
 end
 
 function GameScene:onEventClose(event)
-    GT.showPopLayer('LoadingLayer')
+    Game.showPopLayer('LoadingLayer')
 end
 
 function GameScene:onEventClosed(event)
-    GT.showPopLayer('LoadingLayer')
+    Game.showPopLayer('LoadingLayer')
 end
 
 function GameScene:onEvnetRelogin(event)
@@ -103,7 +102,6 @@ function GameScene:onEventJoinRoom(event)
         local users_info = data.users_info
         if next(users_info) then
             for _,info in ipairs(users_info) do
-                dump(info,'onEventJoinRoom' , 5)
                 RoomData:getInstance():createPlayerByUserInfo(info)
             end
         end

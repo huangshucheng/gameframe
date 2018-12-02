@@ -1,5 +1,5 @@
 local Function = class("Function")
-GT = GT or {}
+Lobby = Lobby or {}
 
 local CURRENT_MOUDEL_NAME = ...
 

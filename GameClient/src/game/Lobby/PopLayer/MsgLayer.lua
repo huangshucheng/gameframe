@@ -56,7 +56,7 @@ function MsgLayer:onEventGetSysMsgRes(event)
     if not data then
         return
     end
-	GT.popLayer('LoadingLayer')
+	Lobby.popLayer('LoadingLayer')
     if data.status == Respones.OK then
         local ver_num = data.ver_num
         local sys_msgs = data.sys_msgs

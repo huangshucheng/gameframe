@@ -2,7 +2,6 @@ local NetWork         = class("NetWork")
 
 local SocketTCP         = require("game.net.SocketTCP")
 local ByteArray         = require("game.utils.ByteArray")
-local BitUtil           = require("game.utils.BitUtil")
 local TcpPacker         = require("game.utils.TcpPacker")
 local ConfigKeyWord     = require("game.net.ConfigKeyWord")
 local ProtoMan          = require("game.utils.ProtoMan")

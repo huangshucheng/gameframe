@@ -1,6 +1,6 @@
 local BaseScene     = require("game.Base.BaseScene")
 local LoginScene    = class("LoginScene", BaseScene)
-GT.LoginScene       = LoginScene
+Lobby.LoginScene       = LoginScene
 
 local Cmd               = require("game.net.protocol.Cmd")
 local Respones          = require("game.net.Respones")
@@ -178,7 +178,7 @@ function LoginScene:onEventBtnGuestLogin(sender,eventType)
     print('loginKey: ' .. keystr)
     AuthServiceProxy:getInstance():sendGuestLogin(keystr)
     UserInfo.setLoginType('guest')
-    GT.showPopLayer('LoadingLayer')
+    Lobby.showPopLayer('LoadingLayer')
 end
 
 function LoginScene:onEventBtnLogin(sender, eventType)
@@ -186,7 +186,7 @@ function LoginScene:onEventBtnLogin(sender, eventType)
     local pwdStr        = self._login_textfield_pwd:getText()
     print('login...' .. ' ' .. accountStr .. '  ' .. pwdStr)
     if accountStr == '' or pwdStr == '' then
-        GT.showPopLayer('TipsLayer',{"帐号或密码错误!"})
+        Lobby.showPopLayer('TipsLayer',{"帐号或密码错误!"})
         return
     end
 
@@ -194,7 +194,7 @@ function LoginScene:onEventBtnLogin(sender, eventType)
     UserInfo.setUserAccount(accountStr)
     UserInfo.setUserPwd(pwdStr)
     UserInfo.setLoginType('uname')
-    GT.showPopLayer('LoadingLayer')
+    Lobby.showPopLayer('LoadingLayer')
 end
 
 function LoginScene:onEventBtnReg(sender, eventType)
@@ -204,22 +204,22 @@ function LoginScene:onEventBtnReg(sender, eventType)
     -- todo: NO space,chinese,daxiaoxie
     print(accountStr , pwdStr , pwdStrConf)
     if accountStr == '' or pwdStr == '' or pwdStrConf == '' then
-        GT.showPopLayer('TipsLayer',{"帐号或密码错误!"})
+        Lobby.showPopLayer('TipsLayer',{"帐号或密码错误!"})
         return
     end
 
     if pwdStr ~= pwdStrConf then
-        GT.showPopLayer('TipsLayer',{"两次密码不一样!"})
+        Lobby.showPopLayer('TipsLayer',{"两次密码不一样!"})
         return
     end
 
     if string.len(accountStr) < 6 or string.len(pwdStr) < 6 or string.len(pwdStrConf) < 6 then
-        GT.showPopLayer('TipsLayer',{"密码需要大于6位!"})
+        Lobby.showPopLayer('TipsLayer',{"密码需要大于6位!"})
         return
     end
 
     AuthServiceProxy:getInstance():sendRegist(accountStr, pwdStr)
-    GT.showPopLayer('LoadingLayer')
+    Lobby.showPopLayer('LoadingLayer')
 end
 
 function LoginScene:onEventBtnGoToLogin(sender,eventType)
@@ -255,7 +255,7 @@ end
 
 function LoginScene:onEnter()
     print('LoginScene:onEnter')
-    GT.showPopLayer         = Function.showPopLayer
+    Lobby.showPopLayer         = Function.showPopLayer
 end
 
 function LoginScene:onExit()

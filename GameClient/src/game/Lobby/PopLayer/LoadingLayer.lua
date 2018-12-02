@@ -12,7 +12,7 @@ function LoadingLayer:init()
     node:setAnchorPoint(cc.p(0,0))      
     node:setPosition(cc.p( 0, 0))
     self:addChild(node)
-    GT.UIFunction.playNodeAnimation(node,cc.p(display.cx,display.cy),"animation/loading_mini/loading_mini.ExportJson","loading_mini","loading",1) 
+    Lobby.UIFunction.playNodeAnimation(node,cc.p(display.cx,display.cy),"animation/loading_mini/loading_mini.ExportJson","loading_mini","loading",1) 
     self._canTouchBackground = false    
 
     local delay = cc.DelayTime:create(5)

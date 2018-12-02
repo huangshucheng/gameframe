@@ -52,16 +52,12 @@ end
 function PlayerManager:on_login_logic_server(s, req)
 	local uid = req[3]
 	local stype = req[1]
-	print('PlayerManager>> on_login_logic_server>>  uid: '.. tostring(uid))
-	-- Session.set_time_span(s,123)
-	-- local timespan =  Session.get_time_span(s)
-	-- print('hcc>> timespan: ' .. timespan)
-
+	print('PlayerManager>> on_login_logic_server >>  uid: '.. tostring(uid))
 	local p = logic_server_players[uid]
 	if p then
 		p:set_session(s)
 		NetWork:getInstance():send_status(s, stype, Cmd.eLoginLogicRes, uid, Respones.OK)
-		print('PlayerManager>> on_login_logic_server 111 user size: '..  online_player_num)
+		print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
 		return
 	end
 
@@ -72,9 +68,8 @@ function PlayerManager:on_login_logic_server(s, req)
 			online_player_num = online_player_num + 1
 		end
 		NetWork:getInstance():send_status(s, stype, Cmd.eLoginLogicRes, uid, status)
-		print('PlayerManager>> on_login_logic_server 333 >> user size: '..  online_player_num)
+		print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
 	end)
-	print('PlayerManager>> on_login_logic_server 222 >> user size: '..  online_player_num)
 end
 
 -- 玩家离开了逻辑服务器

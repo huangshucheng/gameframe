@@ -2,7 +2,7 @@ local GameApp 		= class("GameApp")
 local ProtoMan 		= require("game.utils.ProtoMan")
 local NetWork       = require("game.net.NetWork")
 
-GT = {}
+Lobby = {}
 Game = {}
 
 local Function 		= require('game.Base.Function')
@@ -14,10 +14,10 @@ function GameApp:ctor()
     ProtoMan:getInstance():regist_pb()
     NetWork:getInstance():start()
 
-    GT.showPopLayer 		= Function.showPopLayer
-    GT.popLayer 			= Function.popLayer
-    GT.getLayer 			= Function.getLayer
-    GT.LobbyScene           = nil       
+    Lobby.showPopLayer 		= Function.showPopLayer
+    Lobby.popLayer 			= Function.popLayer
+    Lobby.getLayer 			= Function.getLayer
+    Lobby.LobbyScene           = nil       
 end
 
 function GameApp:showScene(transition, time, more)

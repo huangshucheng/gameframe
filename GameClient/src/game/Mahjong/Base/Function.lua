@@ -1,5 +1,5 @@
 local Function = class("Function")
-GT = GT or {}
+Lobby = Lobby or {}
 
 function Function.showPopLayer(layerClassName,initArvg, ...)
     local luaFullPath  =  cc.FileUtils:getInstance():fullPathForFilename("game/Mahjong/PopLayer/" .. layerClassName .. ".lua")
@@ -21,7 +21,7 @@ function Function.showPopLayer(layerClassName,initArvg, ...)
             end
         end
     else
-        return GT.showPopLayer(layerClassName,initArvg, ...)
+        return Lobby.showPopLayer(layerClassName,initArvg, ...)
     end   
 end
 

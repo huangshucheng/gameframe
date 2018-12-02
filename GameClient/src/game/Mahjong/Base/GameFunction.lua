@@ -11,26 +11,30 @@ function GameFunction.serverSeatToLocal(serverSeat)
     local localSeat  = INVALID_SEAT
     local chairCount = GameFunction.getChairs()
     local selfSeat   = GameFunction.getSelfSeat()
+    local selfLocalSeat = GameFunction.getSelfLocalSeat()
 
     if serverSeat >= 1 and serverSeat <= chairCount then
-        localSeat = ((serverSeat - selfSeat + chairCount) % chairCount) + GameFunction.getSelfLocalSeat()
-        if chairCount == 2 and localSeat == 2 then
-            localSeat = 3
+        localSeat = (chairCount + selfSeat - serverSeat + 1) % chairCount + 1
+        if chairCount == 2 and localSeat == 1 then
+            localSeat = 4
         end
     end
     return localSeat
 end
 
 function GameFunction.localSeatToServer(localSeat)
-	local serverSeat = INVALID_SEAT
-	local chairCount = GameFunction.getChairs()
-	local selfSeat 	 = GameFunction.getSelfSeat()
+    local serverSeat = INVALID_SEAT
+    local chairCount = GameFunction.getChairs()
+    local selfSeat   = GameFunction.getSelfSeat()
+    local selfLocalSeat = GameFunction.getSelfLocalSeat()
 
-	if localSeat >= 1 and localSeat <= chairCount then
-		serverSeat = (chairCount - localSeat + selfSeat) % chairCount + GameFunction.getSelfLocalSeat()
-	end
-	return serverSeat
+    serverSeat = (chairCount + selfSeat - localSeat + 1) % chairCount + 1
+    if chairCount == 2 and serverSeat == 1 then
+        serverSeat = 4
+    end
+    return serverSeat
 end
+
 -- 自己在服务端的seat
 function GameFunction.getSelfSeat()
 	local player = GameFunction.getSelfPlayer()
@@ -41,7 +45,7 @@ function GameFunction.getSelfSeat()
 end
 -- 自己在本地的seat
 function GameFunction.getSelfLocalSeat()
-    return 1
+    return 2
 end
 -- 自己Player对象
 function GameFunction.getSelfPlayer()

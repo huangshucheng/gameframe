@@ -56,7 +56,7 @@ function MyCenterLayer:onCreate()
 	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
 	if btn_upgrade then
 		btn_upgrade:addClickEventListener(handler(self,function()
-		    GT.showPopLayer('UpgradeLayer')
+		    Lobby.showPopLayer('UpgradeLayer')
 		end))
 	end
 
@@ -157,7 +157,7 @@ function MyCenterLayer:onEventLoginOutRes(event)
     if not data then
         return
     end
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 	if data.status == Respones.OK then
 		self:showLayer(false)
 	end
@@ -169,7 +169,7 @@ function MyCenterLayer:onEventEditProFileRes(event)
         return
     end
 
-	GT.popLayer('LoadingLayer')
+	Lobby.popLayer('LoadingLayer')
     
     if data.status == Respones.OK then
     	UserInfo.setUserName(self._login_textfield_name:getText())
@@ -177,7 +177,7 @@ function MyCenterLayer:onEventEditProFileRes(event)
     	UserInfo.setUserface(self._head_img_index)
     	UserInfo.flush()
     	postEvent(ClientEvents.ON_ASYC_USER_INFO)
-    	GT.showPopLayer('TipsLayer',{"修改成功"})
+    	Lobby.showPopLayer('TipsLayer',{"修改成功"})
     end
 end
 
@@ -202,12 +202,12 @@ function MyCenterLayer:onEventBtnModify(sender,eventType)
 		return
 	end
 	AuthServiceProxy:getInstance():sendEditProfile(namestr, self._head_img_index, self._user_sex)
-	GT.showPopLayer('LoadingLayer')
+	Lobby.showPopLayer('LoadingLayer')
 end
 
 function MyCenterLayer:onEventBtnLoginOut(sender, eventType)
 	AuthServiceProxy:getInstance():sendLoginOut()
-	GT.showPopLayer('LoadingLayer')
+	Lobby.showPopLayer('LoadingLayer')
 end
 
 function MyCenterLayer:onEventAsycUserInfo(event)

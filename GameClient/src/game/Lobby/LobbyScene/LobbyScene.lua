@@ -1,6 +1,6 @@
 local BaseScene     = require("game.Base.BaseScene")
 local LobbyScene    = class("LobbyScene", BaseScene)
-GT.LobbyScene       = LobbyScene
+Lobby.LobbyScene       = LobbyScene
 
 local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
@@ -118,7 +118,7 @@ function LobbyScene:onTouchJoinRoomBtn(send,eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
-    GT.showPopLayer('JoinRoomLayer')
+    Lobby.showPopLayer('JoinRoomLayer')
 end
 
 function LobbyScene:onTouchCreateRoomBtn(send,eventType)
@@ -140,8 +140,21 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
     end
     str = str .. '  end>>'
     ]]
-    LogicServiceProxy:getInstance():sendCreateRoom('房间规则')
-    GT.showPopLayer('LoadingLayer')
+    --[[
+        rule:
+        playerNum='4';maxQuanShu='2';
+    ]]
+    local playerNum = 4
+    local playCount = 8
+    local isAAPay = 1
+    local baseScore = 1
+    local gamerule = "playerNum='" .. playerNum .. "';"
+                    .. "playCount='" .. playCount.. "';" 
+                    .. "isAAPay='" .. isAAPay.. "';" 
+                    .. "baseScore='" .. baseScore .. "';"
+    print("gamerule: " .. gamerule)
+    LogicServiceProxy:getInstance():sendCreateRoom(gamerule)
+    Lobby.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onTouchBackRoomBtn(send,eventType)
@@ -157,7 +170,7 @@ function LobbyScene:onTouchBackRoomBtn(send,eventType)
         return
     end
     LogicServiceProxy:getInstance():sendBackRoomReq()
-    GT.showPopLayer('LoadingLayer')
+    Lobby.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onTouchEventHeadImgBg(send,eventType)
@@ -172,25 +185,25 @@ function LobbyScene:onTouchEventHeadImgBg(send,eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
-    GT.showPopLayer('MyCenterLayer')
+    Lobby.showPopLayer('MyCenterLayer')
 end
 
 function LobbyScene:onTouchSettingBtn(send, eventType)
-    GT.showPopLayer('SetLayer')
+    Lobby.showPopLayer('SetLayer')
 end
 
 function LobbyScene:onTouchMessageBtn(send, evnetType)
-    GT.showPopLayer("RankLayer")
+    Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
 end
 
 function LobbyScene:onTouchMailBtn(send, evnetType)
-    GT.showPopLayer("MsgLayer")
+    Lobby.showPopLayer("MsgLayer")
 end
 
 function LobbyScene:onEnter()
     print('LobbyScene:onEnter')
-    GT.showPopLayer         = Function.showPopLayer
+    Lobby.showPopLayer         = Function.showPopLayer
     --获取用户信息
     SystemServiceProxy:getInstance():sendGetUgameInfo()
     LogicServiceProxy:getInstance():sendGetCreateStatus()

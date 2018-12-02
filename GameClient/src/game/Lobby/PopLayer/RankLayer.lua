@@ -60,7 +60,7 @@ function RankLayer:onEventWorldRankUchipRes(event)
     if not data then
         return
     end
-	GT.popLayer('LoadingLayer')
+	Lobby.popLayer('LoadingLayer')
     if data.status == Respones.OK then
         local rank_info = data.rank_info
         for i,v in ipairs(rank_info) do

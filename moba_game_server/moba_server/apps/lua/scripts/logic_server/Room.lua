@@ -1,4 +1,5 @@
 local Room = class("Room")
+local ToolUtils = require("utils.ToolUtils")
 
 function Room:ctor()
 	self._room_id = 0
@@ -17,6 +18,7 @@ end
 
 function Room:set_room_info(room_info)
 	self._room_info = room_info
+	self:parse_game_rule()
 end
 
 function Room:get_room_info()
@@ -35,16 +37,26 @@ function Room:set_max_player(max_player)
 	self._max_player = max_player
 end
 
+function Room:parse_game_rule()
+	local player_num = ToolUtils.getLuaStrValue(self._room_info , 'playerNum')
+	if player_num ~= '' then
+		self._max_player = tonumber(player_num) or 4
+		print('hcc>> max_player: ' .. self._max_player)
+	end
+end
+
 function Room:enter_player(player)
 	if type(player) ~= 'table' then
 		return false
 	end
+
 	-- player already in room
 	if self:is_player_in_room(player) then
 		player:set_is_offline(false)
 		print("hcc>> room: enter_player already in room , id:  " .. player:get_uid())
 		return true
 	end
+
 	-- player reconnect to logic and enter room
 	local uid = player:get_uid()
 	for i = 1 , #self._players do
@@ -57,6 +69,12 @@ function Room:enter_player(player)
 			print('hcc>> enter_player  user re_enter_room id: '.. player:get_uid() .. '  ,playerNum: ' .. self:get_room_player_num())
 			return true
 		end
+	end
+	-- looking player TODO
+
+	-- too many players
+	if #self._players >= self._max_player then
+		return false
 	end
 
 	table.insert(self._players, player)
@@ -79,20 +97,18 @@ function Room:enter_player(player)
 	for j = 1 , #tmp_seat_id_tb do
 		local seatid = tmp_seat_id_tb[j]
 		for k = 1 , self._max_player do
-			if seatid == seat_id_table[k] then			
+			if seatid == seat_id_table[k] then
 				table.remove(seat_id_table,k)
 			end
 		end
 	end
-	-- print('hcc>> 22222---------------')
-	-- dump(seat_id_table)
 
 	if not player:get_is_host() then
 		local num = #seat_id_table
 		if num >= 1 then
 			local randNum = math.random(1, num)
 			local rand_seat_id = seat_id_table[randNum]
-			-- print('hcc>> 44444 seatId: ' .. rand_seat_id)
+			print('hcc>> seatid: ---------------------------' .. rand_seat_id )
 			player:set_seat_id(rand_seat_id)
 		end
 	end

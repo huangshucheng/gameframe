@@ -10,6 +10,7 @@ local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy 	= require("game.modules.LogicServiceProxy")
 local Function 				= require("game.Mahjong.Base.Function")
 local GameFunction          = require("game.Mahjong.Base.GameFunction")
+local ToolUtils             = require("game.utils.ToolUtils")
 
 local KW_ROOM_NUM           = 'KW_ROOM_NUM'
 local KW_BTN_SET            = 'KW_BTN_SET'
@@ -22,7 +23,7 @@ local KW_TEXT_SCORE         = 'KW_TEXT_SCORE'
 local KW_IMG_OFFINLE        = 'KW_IMG_OFFINLE'
 local KW_IMG_HEAD           = 'KW_IMG_HEAD'
 
-local MAX_PLAYER_NUM = RoomData:getInstance():getChars()
+local MAX_PLAYER_NUM = 4
 
 --------------拓展
 require('game.Mahjong.GameScene.GameSceneReceiveMsg')
@@ -48,7 +49,7 @@ function GameScene:onCreate()
     self._btn_room_num = panel_top:getChildByName(KW_ROOM_NUM)
     self._text_room_rule = panel_top:getChildByName(KW_TEXT_RULE)
 
-    for i = 1 , MAX_PLAYER_NUM do
+    for i = 1 , 4 do
         local panel_user = self:getResourceNode():getChildByName(KW_PANEL_USER_INFO .. i)
         if panel_user then
             self._panel_user_info_table[#self._panel_user_info_table + 1] = panel_user
@@ -60,20 +61,14 @@ function GameScene:onCreate()
 end
 
 function GameScene:showUserInfoBySeatId(seatId) --serverSeat
-    if seatId > MAX_PLAYER_NUM or seatId < 0 then return end
-
-    local player = RoomData:getInstance():getPlayerBySeatId(seatId)
-
     local localSeat = GameFunction.serverSeatToLocal(seatId)
+    local player = RoomData:getInstance():getPlayerBySeatId(seatId)
     print('hcc>> serverSeat: '.. seatId .. '  ,localseat: ' .. localSeat)
-
-    if self._panel_user_info_table[localSeat] then
-        self._panel_user_info_table[localSeat]:setVisible(player ~= nil)
-    end
-
     if player then
-        local infoPanel = self._panel_user_info_table[localSeat]
+        local seat =  GameFunction.serverSeatToLocal(player:getSeat())
+        local infoPanel = self._panel_user_info_table[seat]
         if infoPanel then
+            infoPanel:setVisible(true)
             local textName      = ccui.Helper:seekWidgetByName(infoPanel,KW_TEXT_NAME)
             local textScore     = ccui.Helper:seekWidgetByName(infoPanel,KW_TEXT_SCORE)
             local imgOffLine    = ccui.Helper:seekWidgetByName(infoPanel,KW_IMG_OFFINLE)
@@ -91,6 +86,12 @@ function GameScene:showUserInfoBySeatId(seatId) --serverSeat
                 imgHead:loadTexture(string.format('MahScene/MahRes/rectheader/1%d.png',tonumber(player:getUFace())))
             end
         end
+    else
+        local infoPanel = self._panel_user_info_table[localSeat]
+        if infoPanel then
+            infoPanel:setVisible(false)
+        end
+        print('localseat: ' .. localSeat .. " false")
     end
 end
 
@@ -103,7 +104,6 @@ end
 function GameScene:showRoomInfo()
     if self._btn_room_num then
         local roomid = RoomData:getInstance():getRoomId()
-        print('roomid: '.. tostring(roomid))
         if roomid then
             self._btn_room_num:setString('房间号:' .. roomid)
         end
@@ -111,7 +111,21 @@ function GameScene:showRoomInfo()
     if self._text_room_rule then
         local roomRule = RoomData:getInstance():getRoomInfo()
         if roomRule then
-             self._text_room_rule:setString(roomRule)
+            local playerNum = ToolUtils.getLuaStrValue(roomRule,"playerNum")
+            local playCount = ToolUtils.getLuaStrValue(roomRule,"playCount")
+            local isAAPay = ToolUtils.getLuaStrValue(roomRule,"isAAPay")
+            local baseScore = ToolUtils.getLuaStrValue(roomRule,"baseScore")
+            print('hcc>> rule: ' .. playerNum .. "  ," .. playCount .. " ," .. isAAPay .. ' ,' .. baseScore)
+
+            local strRule = ''
+            local payStr = ((tostring(isAAPay) == '1') and "AA支付") or "房主支付"
+
+            strRule = strRule .. "人数:" .. tostring(playerNum) .. ","
+            strRule = strRule .. "局数:" .. tostring(playCount) .. ","
+            strRule = strRule .. "底分:" .. tostring(baseScore) .. ","
+            strRule = strRule .. tostring(payStr)
+
+            self._text_room_rule:setString(strRule)
          end 
     end
 end

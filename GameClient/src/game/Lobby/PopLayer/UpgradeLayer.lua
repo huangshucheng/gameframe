@@ -109,9 +109,9 @@ function UpgradeLayer:onEventAccountUpgradeRes(event)
     	UserInfo.flush()
     	postEvent(ClientEvents.ON_ASYC_USER_INFO)
     	self:showLayer(false)
-        GT.showPopLayer('TipsLayer',{"升级成功"})
+        Lobby.showPopLayer('TipsLayer',{"升级成功"})
     else
-        GT.showPopLayer('TipsLayer',{"升级失败"})
+        Lobby.showPopLayer('TipsLayer',{"升级失败"})
     end
 end
 
@@ -130,7 +130,7 @@ function UpgradeLayer:onEventBtnCommint(sender, evnetType)
 		text_pwd == '' or 
 		text_pwd_conf == '' or 
 	 	text_pwd ~=  text_pwd_conf then
-        GT.showPopLayer('TipsLayer',{"帐号或密码错误!"})
+        Lobby.showPopLayer('TipsLayer',{"帐号或密码错误!"})
 		return
 	end
 

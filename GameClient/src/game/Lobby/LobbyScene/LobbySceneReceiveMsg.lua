@@ -1,4 +1,4 @@
-local LobbyScene = GT.LobbyScene or {}
+local LobbyScene = Lobby.LobbyScene or {}
 
 local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
@@ -34,26 +34,26 @@ function LobbyScene:addClientEventListener()
 end
 
 function LobbyScene:onEventEditProfile(event)
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventAccountUpgrade(event)
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventReLogin(event)
     self:enterScene('game.Lobby.LobbyScene.LoginScene')
-    GT.popLayer('LoadingLayer')
-    GT.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
+    Lobby.popLayer('LoadingLayer')
+    Lobby.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
 end
 
 function LobbyScene:onEventLoginOut(event)
     self:enterScene('game.Lobby.LobbyScene.LoginScene')
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventGetUgameInfo(event)
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
     local body = event._usedata
     if not body then return end
     if body.status == Respones.OK then
@@ -65,24 +65,24 @@ function LobbyScene:onEventGetUgameInfo(event)
 end
 
 function LobbyScene:onEventRecvLoginBonues(event)
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventLoginLogic(event)
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
     local data = event._usedata
     if data.status == Respones.OK then
-        GT.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
+        Lobby.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
         LogicServiceProxy:getInstance():sendGetCreateStatus()
     else
-        GT.showPopLayer('TipsLayer',{"登录逻辑服failed!"})
+        Lobby.showPopLayer('TipsLayer',{"登录逻辑服failed!"})
         LogicServiceProxy:getInstance():sendLoginLogicServer()        
     end
 end
 
 function LobbyScene:onEventNetConnect(envet)
-    GT.showPopLayer('TipsLayer',{"网络连接成功!"})
-    GT.popLayer('LoadingLayer')
+    Lobby.showPopLayer('TipsLayer',{"网络连接成功!"})
+    Lobby.popLayer('LoadingLayer')
     --重新登录
     local loginType = UserInfo.getLoginType()
     print('loginType: '.. loginType)
@@ -97,18 +97,16 @@ function LobbyScene:onEventNetConnect(envet)
 end
 
 function LobbyScene:onEventNetConnectFail(envet)
-        GT.showPopLayer('TipsLayer',{"网络连接失败!"})
-        GT.showPopLayer('LoadingLayer')
+        Lobby.showPopLayer('TipsLayer',{"网络连接失败!"})
+        Lobby.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventClose(envet)
-        -- GT.showPopLayer('TipsLayer',{"网络连接关闭111!"})
-        GT.showPopLayer('LoadingLayer')
+        Lobby.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventClosed(envet)
-        -- GT.showPopLayer('TipsLayer',{"网络连接关闭222!"})
-        GT.showPopLayer('LoadingLayer')
+        Lobby.showPopLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventAsycUserInfo(event)
@@ -131,9 +129,9 @@ function LobbyScene:onEventCreateRoom(event)
         RoomData:getInstance():setRoomInfo(data.room_info)
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
-        GT.showPopLayer('TipsLayer',{"创建房间失败"})
+        Lobby.showPopLayer('TipsLayer',{"创建房间失败"})
     end
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventJoinRoom(event)
@@ -149,9 +147,9 @@ function LobbyScene:onEventJoinRoom(event)
         end
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
-        GT.showPopLayer('TipsLayer',{"加入房间失败"})
+        Lobby.showPopLayer('TipsLayer',{"加入房间失败"})
     end
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEvnetGetCreateStatus(event)
@@ -187,35 +185,35 @@ function LobbyScene:onEventBackRoom(event)
         end
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
-        GT.showPopLayer('TipsLayer',{"返回房间失败"})
+        Lobby.showPopLayer('TipsLayer',{"返回房间失败"})
     end
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventGuestLogin(event)
     local body = event._usedata
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
     if body then
         if body.status == Respones.OK then
             UserInfo.setUInfo(body.uinfo)
             UserInfo.setUserIsGuest(true)
             LogicServiceProxy:getInstance():sendLoginLogicServer()
-            GT.showPopLayer('TipsLayer',{"游客登录成功!"})
+            Lobby.showPopLayer('TipsLayer',{"游客登录成功!"})
         else
-            GT.showPopLayer('TipsLayer',{"游客登录失败，您帐号已升级成正式帐号!"})
+            Lobby.showPopLayer('TipsLayer',{"游客登录失败，您帐号已升级成正式帐号!"})
         end
     end
 end
 
 function LobbyScene:onEventUnameLogin(event)
     local body = event._usedata
-    GT.popLayer('LoadingLayer')
+    Lobby.popLayer('LoadingLayer')
     if body.status == Respones.OK then
         UserInfo.setUInfo(body.uinfo)
         LogicServiceProxy:getInstance():sendLoginLogicServer()
-        GT.showPopLayer('TipsLayer',{"登录成功!"})
+        Lobby.showPopLayer('TipsLayer',{"登录成功!"})
     else
-        GT.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
+        Lobby.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
     end
 end
 

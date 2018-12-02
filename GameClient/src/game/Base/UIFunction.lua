@@ -1,5 +1,5 @@
 local UIFunction = class('UIFunction')
-GT = GT or {}
+Lobby = Lobby or {}
 
 function UIFunction.seekWidgetByName(root,strKeyword)        
     if root == nil then
@@ -37,6 +37,6 @@ function UIFunction.playNodeAnimation(targetPosLayer,pos,aniPath,armatureKeyWord
     end
 end
 
-GT.UIFunction = UIFunction
+Lobby.UIFunction = UIFunction
 
 return UIFunction

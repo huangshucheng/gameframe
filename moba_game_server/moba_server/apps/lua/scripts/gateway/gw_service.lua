@@ -109,7 +109,10 @@ local function send_to_client(server_session, raw_cmd)
 
 		if ctype == Cmd.eLoginOutRes then -- 注销得消息，转发给其他得服务器
 			Session.set_uid(client_session, 0)
+			Session.set_last_recv_time(client_session, 0)
+			Session.set_last_send_time(client_session, 0)
 			client_sessions_uid[utag] = nil
+			print('hcc>> Cmd.eLoginOutRes uid: ' .. utag)
 		end
 	end
 end
@@ -195,14 +198,14 @@ local function on_gw_session_disconnect(s, stype)
 	if client_sessions_ukey[utag] ~= nil and client_sessions_ukey[utag] == s then 
 		client_sessions_ukey[utag] = nil -- 保证utag --> value 删除
  		Session.set_utag(s, 0)
- 		print('hcc>> on_gw_session_disconnect 111 utag: ' .. uid)
+ 		-- print('hcc>> on_gw_session_disconnect 111 utag: ' .. uid)
 	end
 
 	-- 把客户端从uid映射表里移除
 	local uid = Session.get_uid(s)
 	if client_sessions_uid[uid] ~= nil and client_sessions_uid[uid] == s then 
 		client_sessions_uid[uid] = nil
-		print('hcc>> on_gw_session_disconnect 222 uid: ' .. uid)
+		-- print('hcc>> on_gw_session_disconnect 222 uid: ' .. uid)
 	end
 
 	local server_session = server_session_man[stype]
@@ -233,7 +236,7 @@ local function send_heart_beat()
 			time_recv = time_send
 		end
 		local sub = time_send - time_recv
-		print('uid: '.. uid .. '  ,sendTime: '.. time_send .. ' recvTime: '.. time_recv .. '  sub: ' .. sub)
+		-- print('uid: '.. uid .. '  ,sendTime: '.. time_send .. ' recvTime: '.. time_recv .. '  sub: ' .. sub)
 		if sub >= DISCONNECT_LIMIT_TIME then
 			print('uid: '.. uid .. ' lost connect -------------')
 			Session.close(session)

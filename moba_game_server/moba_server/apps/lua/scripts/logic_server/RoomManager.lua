@@ -117,12 +117,9 @@ function RoomManager:on_create_room(s, req)
 	}
 
 	player:send_msg(stype, Cmd.eCreateRoomRes, msg_body)
+
+	print('hcc>> create_room success gameRule: ' .. tostring(room:get_room_info()))
 	print('hcc>> create_room success roomid: ' .. tostring(roomid) .. '  ,roomNum: ' .. self:get_total_rooms())
-	--test
-	-- local body_msg = {
-	-- 	user_info = player:get_user_arrived_info(),
-	-- }
-	-- room:broacast_in_room(stype, Cmd.eUserOffLine, body_msg)
 end
 
 function RoomManager:on_exit_room(s, req)
