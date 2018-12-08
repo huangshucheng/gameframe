@@ -27,6 +27,7 @@ function GameScene:addClientEventListener()
     addEvent("GuestLoginRes", self, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
+    addEvent("UserReconnectedRes", self, self.onEventReconnect)
 end
 
 function GameScene:onEventNetConnect(event)
@@ -121,6 +122,7 @@ function GameScene:onEventBackRoom(event)
                 RoomData:getInstance():createPlayerByUserInfo(info)
             end
         end
+        LogicServiceProxy:getInstance():sendReconnect()
     end
     self:showRoomInfo()
     self:showAllExistUserInfo()
@@ -186,5 +188,13 @@ function GameScene:onEventHeartBeat(event)
     local body = event._usedata
     if body.status == Respones.OK then
         LogicServiceProxy:getInstance():sendHeartBeat()
+    end
+end
+
+function GameScene:onEventReconnect(event)
+    print('hcc>> GameScene:onEventReconnect...........111')        
+    local body = event._usedata
+    if body.status == Respones.OK then
+        print('hcc>> GameScene:onEventReconnect...........222')        
     end
 end

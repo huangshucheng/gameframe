@@ -48,7 +48,6 @@ function PlayerManager:receive_msg(session, msg)
 end
 
 --登录逻辑服务器
--- {stype, ctype, utag, body}
 function PlayerManager:on_login_logic_server(s, req)
 	local uid = req[3]
 	local stype = req[1]

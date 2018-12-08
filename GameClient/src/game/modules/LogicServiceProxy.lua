@@ -56,4 +56,8 @@ function LogicServiceProxy:sendHeartBeat()
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eHeartBeatReq, nil)
 end
 
+function LogicServiceProxy:sendReconnect()
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUserReconnectedReq, nil)
+end
+
 return LogicServiceProxy

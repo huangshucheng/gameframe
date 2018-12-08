@@ -199,11 +199,11 @@ class UserOffLineDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<UserOffLine>
       _instance;
 } _UserOffLine_default_instance_;
-class UserReconnectedDefaultTypeInternal {
+class UserReconnectedResDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<UserReconnected>
+  ::google::protobuf::internal::ExplicitlyConstructed<UserReconnectedRes>
       _instance;
-} _UserReconnected_default_instance_;
+} _UserReconnectedRes_default_instance_;
 class HeartBeatResDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<HeartBeatRes>
@@ -975,7 +975,7 @@ void InitDefaultsUserOffLine() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsUserOffLineImpl);
 }
 
-void InitDefaultsUserReconnectedImpl() {
+void InitDefaultsUserReconnectedResImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 #ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
@@ -983,18 +983,17 @@ void InitDefaultsUserReconnectedImpl() {
 #else
   ::google::protobuf::internal::InitProtobufDefaults();
 #endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_game_2eproto::InitDefaultsUserArrived();
   {
-    void* ptr = &::_UserReconnected_default_instance_;
-    new (ptr) ::UserReconnected();
+    void* ptr = &::_UserReconnectedRes_default_instance_;
+    new (ptr) ::UserReconnectedRes();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::UserReconnected::InitAsDefaultInstance();
+  ::UserReconnectedRes::InitAsDefaultInstance();
 }
 
-void InitDefaultsUserReconnected() {
+void InitDefaultsUserReconnectedRes() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsUserReconnectedImpl);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsUserReconnectedResImpl);
 }
 
 void InitDefaultsHeartBeatResImpl() {
@@ -1378,17 +1377,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserOffLine, user_info_),
   0,
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnected, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnected, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnectedRes, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnectedRes, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnected, status_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnected, room_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnected, users_info_),
-  1,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReconnectedRes, status_),
   0,
-  ~0u,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::HeartBeatRes, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::HeartBeatRes, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1434,8 +1429,8 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 331, 337, sizeof(::GetCreateStatusRes)},
   { 338, 346, sizeof(::BackRoomRes)},
   { 349, 355, sizeof(::UserOffLine)},
-  { 356, 364, sizeof(::UserReconnected)},
-  { 367, 373, sizeof(::HeartBeatRes)},
+  { 356, 362, sizeof(::UserReconnectedRes)},
+  { 363, 369, sizeof(::HeartBeatRes)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1475,7 +1470,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::_GetCreateStatusRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_BackRoomRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_UserOffLine_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_UserReconnected_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_UserReconnectedRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_HeartBeatRes_default_instance_),
 };
 
@@ -1555,40 +1550,39 @@ void AddDescriptorsImpl() {
       "Res\022\016\n\006status\030\001 \002(\021\"R\n\013BackRoomRes\022\016\n\006st"
       "atus\030\001 \002(\021\022\021\n\troom_info\030\002 \001(\t\022 \n\nusers_i"
       "nfo\030\003 \003(\0132\014.UserArrived\".\n\013UserOffLine\022\037"
-      "\n\tuser_info\030\001 \002(\0132\014.UserArrived\"V\n\017UserR"
-      "econnected\022\016\n\006status\030\001 \002(\021\022\021\n\troom_info\030"
-      "\002 \001(\t\022 \n\nusers_info\030\003 \003(\0132\014.UserArrived\""
-      "\036\n\014HeartBeatRes\022\016\n\006status\030\001 \001(\021*<\n\005Stype"
-      "\022\022\n\016INVALIDI_STYPE\020\000\022\010\n\004Auth\020\001\022\n\n\006System"
-      "\020\002\022\t\n\005Logic\020\003*\332\007\n\003Cmd\022\017\n\013INVALID_CMD\020\000\022\022"
-      "\n\016eGuestLoginReq\020\001\022\022\n\016eGuestLoginRes\020\002\022\014"
-      "\n\010eRelogin\020\003\022\021\n\reUserLostConn\020\004\022\023\n\017eEdit"
-      "ProfileReq\020\005\022\023\n\017eEditProfileRes\020\006\022\026\n\022eAc"
-      "countUpgradeReq\020\007\022\026\n\022eAccountUpgradeRes\020"
-      "\010\022\022\n\016eUnameLoginReq\020\t\022\022\n\016eUnameLoginRes\020"
-      "\n\022\020\n\014eLoginOutReq\020\013\022\020\n\014eLoginOutRes\020\014\022\022\n"
-      "\016eUserRegistReq\020\r\022\022\n\016eUserRegistRes\020\016\022\024\n"
-      "\020eGetUgameInfoReq\020\017\022\024\n\020eGetUgameInfoRes\020"
-      "\020\022\027\n\023eRecvLoginBonuesReq\020\021\022\027\n\023eRecvLogin"
-      "BonuesRes\020\022\022\031\n\025eGetWorldRankUchipReq\020\023\022\031"
-      "\n\025eGetWorldRankUchipRes\020\024\022\021\n\reGetSysMsgR"
-      "eq\020\025\022\021\n\reGetSysMsgRes\020\026\022\022\n\016eLoginLogicRe"
-      "q\020\027\022\022\n\016eLoginLogicRes\020\030\022\021\n\reEnterZoneReq"
-      "\020\031\022\021\n\reEnterZoneRes\020\032\022\017\n\013eEnterMatch\020\033\022\020"
-      "\n\014eUserArrived\020\034\022\021\n\reExitMatchReq\020\035\022\021\n\re"
-      "ExitMatchRes\020\036\022\022\n\016eUserExitMatch\020\037\022\022\n\016eC"
-      "reateRoomReq\020 \022\022\n\016eCreateRoomRes\020!\022\020\n\014eJ"
-      "oinRoomReq\020\"\022\020\n\014eJoinRoomRes\020#\022\020\n\014eExitR"
-      "oomReq\020$\022\020\n\014eExitRoomRes\020%\022\020\n\014eDessolveR"
-      "eq\020&\022\020\n\014eDessolveRes\020\'\022\027\n\023eGetCreateStat"
-      "usReq\020(\022\027\n\023eGetCreateStatusRes\020)\022\020\n\014eBac"
-      "kRoomReq\020*\022\020\n\014eBackRoomRes\020+\022\020\n\014eUserOff"
-      "Line\020,\022\024\n\020eUserReconnected\020-\022\021\n\reHeartBe"
-      "atReq\020.\022\021\n\reHeartBeatRes\020/\022\016\n\neGameStart"
-      "\0200"
+      "\n\tuser_info\030\001 \002(\0132\014.UserArrived\"$\n\022UserR"
+      "econnectedRes\022\016\n\006status\030\001 \002(\021\"\036\n\014HeartBe"
+      "atRes\022\016\n\006status\030\001 \001(\021*<\n\005Stype\022\022\n\016INVALI"
+      "DI_STYPE\020\000\022\010\n\004Auth\020\001\022\n\n\006System\020\002\022\t\n\005Logi"
+      "c\020\003*\366\007\n\003Cmd\022\017\n\013INVALID_CMD\020\000\022\022\n\016eGuestLo"
+      "ginReq\020\001\022\022\n\016eGuestLoginRes\020\002\022\014\n\010eRelogin"
+      "\020\003\022\021\n\reUserLostConn\020\004\022\023\n\017eEditProfileReq"
+      "\020\005\022\023\n\017eEditProfileRes\020\006\022\026\n\022eAccountUpgra"
+      "deReq\020\007\022\026\n\022eAccountUpgradeRes\020\010\022\022\n\016eUnam"
+      "eLoginReq\020\t\022\022\n\016eUnameLoginRes\020\n\022\020\n\014eLogi"
+      "nOutReq\020\013\022\020\n\014eLoginOutRes\020\014\022\022\n\016eUserRegi"
+      "stReq\020\r\022\022\n\016eUserRegistRes\020\016\022\024\n\020eGetUgame"
+      "InfoReq\020\017\022\024\n\020eGetUgameInfoRes\020\020\022\027\n\023eRecv"
+      "LoginBonuesReq\020\021\022\027\n\023eRecvLoginBonuesRes\020"
+      "\022\022\031\n\025eGetWorldRankUchipReq\020\023\022\031\n\025eGetWorl"
+      "dRankUchipRes\020\024\022\021\n\reGetSysMsgReq\020\025\022\021\n\reG"
+      "etSysMsgRes\020\026\022\022\n\016eLoginLogicReq\020\027\022\022\n\016eLo"
+      "ginLogicRes\020\030\022\021\n\reEnterZoneReq\020\031\022\021\n\reEnt"
+      "erZoneRes\020\032\022\017\n\013eEnterMatch\020\033\022\020\n\014eUserArr"
+      "ived\020\034\022\021\n\reExitMatchReq\020\035\022\021\n\reExitMatchR"
+      "es\020\036\022\022\n\016eUserExitMatch\020\037\022\022\n\016eCreateRoomR"
+      "eq\020 \022\022\n\016eCreateRoomRes\020!\022\020\n\014eJoinRoomReq"
+      "\020\"\022\020\n\014eJoinRoomRes\020#\022\020\n\014eExitRoomReq\020$\022\020"
+      "\n\014eExitRoomRes\020%\022\020\n\014eDessolveReq\020&\022\020\n\014eD"
+      "essolveRes\020\'\022\027\n\023eGetCreateStatusReq\020(\022\027\n"
+      "\023eGetCreateStatusRes\020)\022\020\n\014eBackRoomReq\020*"
+      "\022\020\n\014eBackRoomRes\020+\022\020\n\014eUserOffLine\020,\022\021\n\r"
+      "eHeartBeatReq\020-\022\021\n\reHeartBeatRes\020.\022\016\n\neG"
+      "ameStart\020/\022\027\n\023eUserReconnectedReq\0200\022\027\n\023e"
+      "UserReconnectedRes\0201"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 3362);
+      descriptor, 3340);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game.proto", &protobuf_RegisterTypes);
 }
@@ -1675,6 +1669,7 @@ bool Cmd_IsValid(int value) {
     case 46:
     case 47:
     case 48:
+    case 49:
       return true;
     default:
       return false;
@@ -13477,97 +13472,82 @@ void UserOffLine::InternalSwap(UserOffLine* other) {
 
 // ===================================================================
 
-void UserReconnected::InitAsDefaultInstance() {
+void UserReconnectedRes::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int UserReconnected::kStatusFieldNumber;
-const int UserReconnected::kRoomInfoFieldNumber;
-const int UserReconnected::kUsersInfoFieldNumber;
+const int UserReconnectedRes::kStatusFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-UserReconnected::UserReconnected()
+UserReconnectedRes::UserReconnectedRes()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_game_2eproto::InitDefaultsUserReconnected();
+    ::protobuf_game_2eproto::InitDefaultsUserReconnectedRes();
   }
   SharedCtor();
-  // @@protoc_insertion_point(constructor:UserReconnected)
+  // @@protoc_insertion_point(constructor:UserReconnectedRes)
 }
-UserReconnected::UserReconnected(const UserReconnected& from)
+UserReconnectedRes::UserReconnectedRes(const UserReconnectedRes& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
-      _cached_size_(0),
-      users_info_(from.users_info_) {
+      _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  room_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_room_info()) {
-    room_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_info_);
-  }
   status_ = from.status_;
-  // @@protoc_insertion_point(copy_constructor:UserReconnected)
+  // @@protoc_insertion_point(copy_constructor:UserReconnectedRes)
 }
 
-void UserReconnected::SharedCtor() {
+void UserReconnectedRes::SharedCtor() {
   _cached_size_ = 0;
-  room_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   status_ = 0;
 }
 
-UserReconnected::~UserReconnected() {
-  // @@protoc_insertion_point(destructor:UserReconnected)
+UserReconnectedRes::~UserReconnectedRes() {
+  // @@protoc_insertion_point(destructor:UserReconnectedRes)
   SharedDtor();
 }
 
-void UserReconnected::SharedDtor() {
-  room_info_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void UserReconnectedRes::SharedDtor() {
 }
 
-void UserReconnected::SetCachedSize(int size) const {
+void UserReconnectedRes::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* UserReconnected::descriptor() {
+const ::google::protobuf::Descriptor* UserReconnectedRes::descriptor() {
   ::protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const UserReconnected& UserReconnected::default_instance() {
-  ::protobuf_game_2eproto::InitDefaultsUserReconnected();
+const UserReconnectedRes& UserReconnectedRes::default_instance() {
+  ::protobuf_game_2eproto::InitDefaultsUserReconnectedRes();
   return *internal_default_instance();
 }
 
-UserReconnected* UserReconnected::New(::google::protobuf::Arena* arena) const {
-  UserReconnected* n = new UserReconnected;
+UserReconnectedRes* UserReconnectedRes::New(::google::protobuf::Arena* arena) const {
+  UserReconnectedRes* n = new UserReconnectedRes;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void UserReconnected::Clear() {
-// @@protoc_insertion_point(message_clear_start:UserReconnected)
+void UserReconnectedRes::Clear() {
+// @@protoc_insertion_point(message_clear_start:UserReconnectedRes)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  users_info_.Clear();
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(!room_info_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*room_info_.UnsafeRawStringPointer())->clear();
-  }
   status_ = 0;
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
 
-bool UserReconnected::MergePartialFromCodedStream(
+bool UserReconnectedRes::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:UserReconnected)
+  // @@protoc_insertion_point(parse_start:UserReconnectedRes)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -13587,33 +13567,6 @@ bool UserReconnected::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string room_info = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_room_info()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->room_info().data(), static_cast<int>(this->room_info().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "UserReconnected.room_info");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .UserArrived users_info = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_users_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -13626,92 +13579,56 @@ bool UserReconnected::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:UserReconnected)
+  // @@protoc_insertion_point(parse_success:UserReconnectedRes)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:UserReconnected)
+  // @@protoc_insertion_point(parse_failure:UserReconnectedRes)
   return false;
 #undef DO_
 }
 
-void UserReconnected::SerializeWithCachedSizes(
+void UserReconnectedRes::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:UserReconnected)
+  // @@protoc_insertion_point(serialize_start:UserReconnectedRes)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required sint32 status = 1;
-  if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->status(), output);
-  }
-
-  // optional string room_info = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->room_info().data(), static_cast<int>(this->room_info().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "UserReconnected.room_info");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->room_info(), output);
-  }
-
-  // repeated .UserArrived users_info = 3;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->users_info_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, this->users_info(static_cast<int>(i)), output);
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->status(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:UserReconnected)
+  // @@protoc_insertion_point(serialize_end:UserReconnectedRes)
 }
 
-::google::protobuf::uint8* UserReconnected::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* UserReconnectedRes::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:UserReconnected)
+  // @@protoc_insertion_point(serialize_to_array_start:UserReconnectedRes)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required sint32 status = 1;
-  if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->status(), target);
-  }
-
-  // optional string room_info = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->room_info().data(), static_cast<int>(this->room_info().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "UserReconnected.room_info");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->room_info(), target);
-  }
-
-  // repeated .UserArrived users_info = 3;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->users_info_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        3, this->users_info(static_cast<int>(i)), deterministic, target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->status(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:UserReconnected)
+  // @@protoc_insertion_point(serialize_to_array_end:UserReconnectedRes)
   return target;
 }
 
-size_t UserReconnected::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:UserReconnected)
+size_t UserReconnectedRes::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:UserReconnectedRes)
   size_t total_size = 0;
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -13725,24 +13642,6 @@ size_t UserReconnected::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->status());
   }
-  // repeated .UserArrived users_info = 3;
-  {
-    unsigned int count = static_cast<unsigned int>(this->users_info_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->users_info(static_cast<int>(i)));
-    }
-  }
-
-  // optional string room_info = 2;
-  if (has_room_info()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->room_info());
-  }
-
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -13750,77 +13649,65 @@ size_t UserReconnected::ByteSizeLong() const {
   return total_size;
 }
 
-void UserReconnected::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:UserReconnected)
+void UserReconnectedRes::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:UserReconnectedRes)
   GOOGLE_DCHECK_NE(&from, this);
-  const UserReconnected* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const UserReconnected>(
+  const UserReconnectedRes* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const UserReconnectedRes>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:UserReconnected)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:UserReconnectedRes)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:UserReconnected)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:UserReconnectedRes)
     MergeFrom(*source);
   }
 }
 
-void UserReconnected::MergeFrom(const UserReconnected& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:UserReconnected)
+void UserReconnectedRes::MergeFrom(const UserReconnectedRes& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:UserReconnectedRes)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  users_info_.MergeFrom(from.users_info_);
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      set_has_room_info();
-      room_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.room_info_);
-    }
-    if (cached_has_bits & 0x00000002u) {
-      status_ = from.status_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (from.has_status()) {
+    set_status(from.status());
   }
 }
 
-void UserReconnected::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:UserReconnected)
+void UserReconnectedRes::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:UserReconnectedRes)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void UserReconnected::CopyFrom(const UserReconnected& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:UserReconnected)
+void UserReconnectedRes::CopyFrom(const UserReconnectedRes& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:UserReconnectedRes)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool UserReconnected::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->users_info())) return false;
+bool UserReconnectedRes::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   return true;
 }
 
-void UserReconnected::Swap(UserReconnected* other) {
+void UserReconnectedRes::Swap(UserReconnectedRes* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void UserReconnected::InternalSwap(UserReconnected* other) {
+void UserReconnectedRes::InternalSwap(UserReconnectedRes* other) {
   using std::swap;
-  users_info_.InternalSwap(&other->users_info_);
-  room_info_.Swap(&other->room_info_);
   swap(status_, other->status_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata UserReconnected::GetMetadata() const {
+::google::protobuf::Metadata UserReconnectedRes::GetMetadata() const {
   protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages];
 }

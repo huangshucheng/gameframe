@@ -63,11 +63,12 @@ local Cmd = {
 	eBackRoomRes = 43,
 
 	eUserOffLine = 44,
-	eUserReconnected = 45,
-	eHeartBeatReq = 46,
-	eHeartBeatRes = 47,
+	eHeartBeatReq = 45,
+	eHeartBeatRes = 46,
 	--
-	eGameStart 	 = 48,
+	eGameStart 	 = 47,
+	eUserReconnectedReq = 48,
+	eUserReconnectedRes = 49,
 }
 
 return Cmd

@@ -3,10 +3,12 @@ local Stype 		= require("Stype")
 local Cmd 			= require("Cmd")
 local PlayerManager = require("logic_server/PlayerManager")
 local RoomManager   = require("logic_server/RoomManager")
+local GameManager 	= require("logic_server/GameManager")
 
 local function on_logic_recv_cmd(session, msg)
-	if PlayerManager:getInstance():receive_msg(session, msg) then return end
-	if RoomManager:getInstance():receive_msg(session, msg) 	 then return end
+	PlayerManager:getInstance():receive_msg(session, msg)
+	RoomManager:getInstance():receive_msg(session, msg)
+	GameManager:getInstance():receive_msg(session, msg)
 end
 
 local function on_gateway_disconnect(session, stype) 

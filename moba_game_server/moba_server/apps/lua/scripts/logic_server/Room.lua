@@ -33,10 +33,6 @@ function Room:get_max_player()
 	return self._max_player
 end
 
-function Room:set_max_player(max_player)
-	self._max_player = max_player
-end
-
 function Room:parse_game_rule()
 	local player_num = ToolUtils.getLuaStrValue(self._room_info , 'playerNum')
 	if player_num ~= '' then

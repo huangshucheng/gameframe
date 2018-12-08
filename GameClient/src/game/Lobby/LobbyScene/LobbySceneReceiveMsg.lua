@@ -184,6 +184,7 @@ function LobbyScene:onEventBackRoom(event)
             end
         end
         self:pushScene('game.Mahjong.GameScene.GameScene')
+        LogicServiceProxy:getInstance():sendReconnect()
     else
         Lobby.showPopLayer('TipsLayer',{"返回房间失败"})
     end

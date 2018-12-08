@@ -73,12 +73,13 @@ enum Cmd {
 	eBackRoomRes = 43;
 	
 	eUserOffLine = 44;
-	eUserReconnected = 45;
 
-	eHeartBeatReq = 46;
-	eHeartBeatRes = 47;
+	eHeartBeatReq = 45;
+	eHeartBeatRes = 46;
 	
-	eGameStart = 48;
+	eGameStart = 47;
+	eUserReconnectedReq = 48;
+	eUserReconnectedRes = 49;
 }
 
 message GuestLoginReq {
@@ -278,10 +279,8 @@ message UserOffLine {
 	required UserArrived user_info = 1;
 }
 
-message UserReconnected {	
+message UserReconnectedRes {	
 	required sint32 status = 1;
-	optional string room_info = 2;
-	repeated UserArrived users_info = 3;
 }
 
 message HeartBeatRes {
