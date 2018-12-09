@@ -77,9 +77,12 @@ enum Cmd {
 	eHeartBeatReq = 45;
 	eHeartBeatRes = 46;
 	
-	eGameStart = 47;
-	eUserReconnectedReq = 48;
-	eUserReconnectedRes = 49;
+	eUserReconnectedReq = 47;
+	eUserReconnectedRes = 48;
+
+	eUserReadyReq = 49;
+	eUserReadyRes = 50;
+	eGameStart = 51;
 }
 
 message GuestLoginReq {
@@ -287,4 +290,13 @@ message HeartBeatRes {
 	optional sint32 status = 1;
 }
 
+message UserReadyReq {
+	required sint32 ready_state = 1;
+}
 
+message UserReadyRes {
+	required sint32 status 	= 1;
+	optional string brandid = 2;
+	optional string numberid = 3;
+	optional sint32 user_state = 4;
+}

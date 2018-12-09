@@ -24,6 +24,8 @@ GameClient/obj/
 GameClient/GameClient-src-config
 GameClient/GameClient-src-luaproj
 GameClient/GameClient-src.luaproj.user
+GameClient/Gameclient_src.config
+GameClient/Gameclient_src.luaproj
 Debug.win32/
 
 

@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[38];
+  static const ::google::protobuf::internal::ParseTable schema[40];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -119,6 +119,10 @@ void InitDefaultsUserReconnectedResImpl();
 void InitDefaultsUserReconnectedRes();
 void InitDefaultsHeartBeatResImpl();
 void InitDefaultsHeartBeatRes();
+void InitDefaultsUserReadyReqImpl();
+void InitDefaultsUserReadyReq();
+void InitDefaultsUserReadyResImpl();
+void InitDefaultsUserReadyRes();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -158,6 +162,8 @@ inline void InitDefaults() {
   InitDefaultsUserOffLine();
   InitDefaultsUserReconnectedRes();
   InitDefaultsHeartBeatRes();
+  InitDefaultsUserReadyReq();
+  InitDefaultsUserReadyRes();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -262,6 +268,12 @@ extern UserGameInfoDefaultTypeInternal _UserGameInfo_default_instance_;
 class UserOffLine;
 class UserOffLineDefaultTypeInternal;
 extern UserOffLineDefaultTypeInternal _UserOffLine_default_instance_;
+class UserReadyReq;
+class UserReadyReqDefaultTypeInternal;
+extern UserReadyReqDefaultTypeInternal _UserReadyReq_default_instance_;
+class UserReadyRes;
+class UserReadyResDefaultTypeInternal;
+extern UserReadyResDefaultTypeInternal _UserReadyRes_default_instance_;
 class UserReconnectedRes;
 class UserReconnectedResDefaultTypeInternal;
 extern UserReconnectedResDefaultTypeInternal _UserReconnectedRes_default_instance_;
@@ -344,13 +356,15 @@ enum Cmd {
   eUserOffLine = 44,
   eHeartBeatReq = 45,
   eHeartBeatRes = 46,
-  eGameStart = 47,
-  eUserReconnectedReq = 48,
-  eUserReconnectedRes = 49
+  eUserReconnectedReq = 47,
+  eUserReconnectedRes = 48,
+  eUserReadyReq = 49,
+  eUserReadyRes = 50,
+  eGameStart = 51
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
-const Cmd Cmd_MAX = eUserReconnectedRes;
+const Cmd Cmd_MAX = eGameStart;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();
@@ -5314,6 +5328,272 @@ class HeartBeatRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsHeartBeatResImpl();
 };
+// -------------------------------------------------------------------
+
+class UserReadyReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserReadyReq) */ {
+ public:
+  UserReadyReq();
+  virtual ~UserReadyReq();
+
+  UserReadyReq(const UserReadyReq& from);
+
+  inline UserReadyReq& operator=(const UserReadyReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UserReadyReq(UserReadyReq&& from) noexcept
+    : UserReadyReq() {
+    *this = ::std::move(from);
+  }
+
+  inline UserReadyReq& operator=(UserReadyReq&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserReadyReq& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UserReadyReq* internal_default_instance() {
+    return reinterpret_cast<const UserReadyReq*>(
+               &_UserReadyReq_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    38;
+
+  void Swap(UserReadyReq* other);
+  friend void swap(UserReadyReq& a, UserReadyReq& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UserReadyReq* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserReadyReq* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserReadyReq& from);
+  void MergeFrom(const UserReadyReq& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserReadyReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required sint32 ready_state = 1;
+  bool has_ready_state() const;
+  void clear_ready_state();
+  static const int kReadyStateFieldNumber = 1;
+  ::google::protobuf::int32 ready_state() const;
+  void set_ready_state(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:UserReadyReq)
+ private:
+  void set_has_ready_state();
+  void clear_has_ready_state();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::int32 ready_state_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUserReadyReqImpl();
+};
+// -------------------------------------------------------------------
+
+class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserReadyRes) */ {
+ public:
+  UserReadyRes();
+  virtual ~UserReadyRes();
+
+  UserReadyRes(const UserReadyRes& from);
+
+  inline UserReadyRes& operator=(const UserReadyRes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UserReadyRes(UserReadyRes&& from) noexcept
+    : UserReadyRes() {
+    *this = ::std::move(from);
+  }
+
+  inline UserReadyRes& operator=(UserReadyRes&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserReadyRes& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UserReadyRes* internal_default_instance() {
+    return reinterpret_cast<const UserReadyRes*>(
+               &_UserReadyRes_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    39;
+
+  void Swap(UserReadyRes* other);
+  friend void swap(UserReadyRes& a, UserReadyRes& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UserReadyRes* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserReadyRes* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserReadyRes& from);
+  void MergeFrom(const UserReadyRes& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserReadyRes* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string brandid = 2;
+  bool has_brandid() const;
+  void clear_brandid();
+  static const int kBrandidFieldNumber = 2;
+  const ::std::string& brandid() const;
+  void set_brandid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_brandid(::std::string&& value);
+  #endif
+  void set_brandid(const char* value);
+  void set_brandid(const char* value, size_t size);
+  ::std::string* mutable_brandid();
+  ::std::string* release_brandid();
+  void set_allocated_brandid(::std::string* brandid);
+
+  // optional string numberid = 3;
+  bool has_numberid() const;
+  void clear_numberid();
+  static const int kNumberidFieldNumber = 3;
+  const ::std::string& numberid() const;
+  void set_numberid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_numberid(::std::string&& value);
+  #endif
+  void set_numberid(const char* value);
+  void set_numberid(const char* value, size_t size);
+  ::std::string* mutable_numberid();
+  ::std::string* release_numberid();
+  void set_allocated_numberid(::std::string* numberid);
+
+  // required sint32 status = 1;
+  bool has_status() const;
+  void clear_status();
+  static const int kStatusFieldNumber = 1;
+  ::google::protobuf::int32 status() const;
+  void set_status(::google::protobuf::int32 value);
+
+  // optional sint32 user_state = 4;
+  bool has_user_state() const;
+  void clear_user_state();
+  static const int kUserStateFieldNumber = 4;
+  ::google::protobuf::int32 user_state() const;
+  void set_user_state(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:UserReadyRes)
+ private:
+  void set_has_status();
+  void clear_has_status();
+  void set_has_brandid();
+  void clear_has_brandid();
+  void set_has_numberid();
+  void clear_has_numberid();
+  void set_has_user_state();
+  void clear_has_user_state();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr brandid_;
+  ::google::protobuf::internal::ArenaStringPtr numberid_;
+  ::google::protobuf::int32 status_;
+  ::google::protobuf::int32 user_state_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUserReadyResImpl();
+};
 // ===================================================================
 
 
@@ -8779,9 +9059,219 @@ inline void HeartBeatRes::set_status(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:HeartBeatRes.status)
 }
 
+// -------------------------------------------------------------------
+
+// UserReadyReq
+
+// required sint32 ready_state = 1;
+inline bool UserReadyReq::has_ready_state() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserReadyReq::set_has_ready_state() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserReadyReq::clear_has_ready_state() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserReadyReq::clear_ready_state() {
+  ready_state_ = 0;
+  clear_has_ready_state();
+}
+inline ::google::protobuf::int32 UserReadyReq::ready_state() const {
+  // @@protoc_insertion_point(field_get:UserReadyReq.ready_state)
+  return ready_state_;
+}
+inline void UserReadyReq::set_ready_state(::google::protobuf::int32 value) {
+  set_has_ready_state();
+  ready_state_ = value;
+  // @@protoc_insertion_point(field_set:UserReadyReq.ready_state)
+}
+
+// -------------------------------------------------------------------
+
+// UserReadyRes
+
+// required sint32 status = 1;
+inline bool UserReadyRes::has_status() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void UserReadyRes::set_has_status() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void UserReadyRes::clear_has_status() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void UserReadyRes::clear_status() {
+  status_ = 0;
+  clear_has_status();
+}
+inline ::google::protobuf::int32 UserReadyRes::status() const {
+  // @@protoc_insertion_point(field_get:UserReadyRes.status)
+  return status_;
+}
+inline void UserReadyRes::set_status(::google::protobuf::int32 value) {
+  set_has_status();
+  status_ = value;
+  // @@protoc_insertion_point(field_set:UserReadyRes.status)
+}
+
+// optional string brandid = 2;
+inline bool UserReadyRes::has_brandid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserReadyRes::set_has_brandid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserReadyRes::clear_has_brandid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserReadyRes::clear_brandid() {
+  brandid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_brandid();
+}
+inline const ::std::string& UserReadyRes::brandid() const {
+  // @@protoc_insertion_point(field_get:UserReadyRes.brandid)
+  return brandid_.GetNoArena();
+}
+inline void UserReadyRes::set_brandid(const ::std::string& value) {
+  set_has_brandid();
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserReadyRes.brandid)
+}
+#if LANG_CXX11
+inline void UserReadyRes::set_brandid(::std::string&& value) {
+  set_has_brandid();
+  brandid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserReadyRes.brandid)
+}
+#endif
+inline void UserReadyRes::set_brandid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_brandid();
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserReadyRes.brandid)
+}
+inline void UserReadyRes::set_brandid(const char* value, size_t size) {
+  set_has_brandid();
+  brandid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserReadyRes.brandid)
+}
+inline ::std::string* UserReadyRes::mutable_brandid() {
+  set_has_brandid();
+  // @@protoc_insertion_point(field_mutable:UserReadyRes.brandid)
+  return brandid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserReadyRes::release_brandid() {
+  // @@protoc_insertion_point(field_release:UserReadyRes.brandid)
+  clear_has_brandid();
+  return brandid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserReadyRes::set_allocated_brandid(::std::string* brandid) {
+  if (brandid != NULL) {
+    set_has_brandid();
+  } else {
+    clear_has_brandid();
+  }
+  brandid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), brandid);
+  // @@protoc_insertion_point(field_set_allocated:UserReadyRes.brandid)
+}
+
+// optional string numberid = 3;
+inline bool UserReadyRes::has_numberid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UserReadyRes::set_has_numberid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UserReadyRes::clear_has_numberid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UserReadyRes::clear_numberid() {
+  numberid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_numberid();
+}
+inline const ::std::string& UserReadyRes::numberid() const {
+  // @@protoc_insertion_point(field_get:UserReadyRes.numberid)
+  return numberid_.GetNoArena();
+}
+inline void UserReadyRes::set_numberid(const ::std::string& value) {
+  set_has_numberid();
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserReadyRes.numberid)
+}
+#if LANG_CXX11
+inline void UserReadyRes::set_numberid(::std::string&& value) {
+  set_has_numberid();
+  numberid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserReadyRes.numberid)
+}
+#endif
+inline void UserReadyRes::set_numberid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_numberid();
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserReadyRes.numberid)
+}
+inline void UserReadyRes::set_numberid(const char* value, size_t size) {
+  set_has_numberid();
+  numberid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserReadyRes.numberid)
+}
+inline ::std::string* UserReadyRes::mutable_numberid() {
+  set_has_numberid();
+  // @@protoc_insertion_point(field_mutable:UserReadyRes.numberid)
+  return numberid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserReadyRes::release_numberid() {
+  // @@protoc_insertion_point(field_release:UserReadyRes.numberid)
+  clear_has_numberid();
+  return numberid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserReadyRes::set_allocated_numberid(::std::string* numberid) {
+  if (numberid != NULL) {
+    set_has_numberid();
+  } else {
+    clear_has_numberid();
+  }
+  numberid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), numberid);
+  // @@protoc_insertion_point(field_set_allocated:UserReadyRes.numberid)
+}
+
+// optional sint32 user_state = 4;
+inline bool UserReadyRes::has_user_state() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void UserReadyRes::set_has_user_state() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void UserReadyRes::clear_has_user_state() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void UserReadyRes::clear_user_state() {
+  user_state_ = 0;
+  clear_has_user_state();
+}
+inline ::google::protobuf::int32 UserReadyRes::user_state() const {
+  // @@protoc_insertion_point(field_get:UserReadyRes.user_state)
+  return user_state_;
+}
+inline void UserReadyRes::set_user_state(::google::protobuf::int32 value) {
+  set_has_user_state();
+  user_state_ = value;
+  // @@protoc_insertion_point(field_set:UserReadyRes.user_state)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

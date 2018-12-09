@@ -8,8 +8,18 @@ local NetWork 		= require("logic_server/NetWork")
 
 local Player = class("Player")
 
-function Player:ctor()
+Player.STATE = {
+    psNull			= 0,        -- 空
+    psWait 			= 1,        -- 等待(按下开始按钮前)
+    psReady 		= 2,        -- 准备(按下开始按钮后)
+    psPlaying 		= 3,      	-- 游戏(正在进行游戏)
+    psEscape 		= 4,       	-- 逃跑(游戏被中断)
+    psExitEarly 	= 5,    	-- 提前退出
+    psSeeing 		= 6,		-- 旁观
+} 
 
+function Player:ctor()
+	
 end
 
 function Player:init(uid, s, ret_handler)
@@ -25,6 +35,7 @@ function Player:init(uid, s, ret_handler)
 	self._is_offline 	= false    -- 是否掉线
 	self._ugame_info 	= nil 	   -- 玩家游戏信息（金币，经验）
 	self._uinfo 		= nil 	   -- 玩家帐号信息（名称，头像）
+	self._state 		= Player.STATE.psNull
 
 	-- 数据库理面读取玩家的基本信息;
 	mysql_game.get_ugame_info(uid, function (err, ugame_info)
@@ -84,6 +95,7 @@ function Player:reset()
 	self._is_robot 		= false
 	self._is_host 		= false
 	self._is_offline 	= false
+	self._state   		= Player.STATE.psNull
 end
 
 function Player:exit_room_and_reset()
@@ -91,6 +103,7 @@ function Player:exit_room_and_reset()
 	self._matchid = -1
 	self._seatid  = -1
 	self._is_host = false
+	self._state   = Player.STATE.psNull
 end
 
 function Player:set_room_id(room_id)
@@ -129,6 +142,22 @@ function Player:set_is_offline(is_offline)
 	self._is_offline = is_offline
 end
 
+function Player:set_state(state)
+	self._state = state
+end
+
+function Player:get_state()
+	return self._state
+end
+
+function Player:get_brand_id()
+	return self._uinfo.brandid
+end
+
+function Player:get_number_id()
+	return self._uinfo.numberid
+end
+
 function Player:set_session(s)
 	self._session = s
 end
@@ -156,6 +185,7 @@ function Player:copy_room_info(player)
 	self._is_robot = player._is_robot
 	self._is_host  = player._is_host
 	self._is_offline = player._is_offline
+	self._state 	= player._state
 end
 
 function Player:get_uid()

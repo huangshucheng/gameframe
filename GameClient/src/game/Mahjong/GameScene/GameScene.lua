@@ -142,7 +142,9 @@ function GameScene:onTouchSettingBtn(sender, eventType)
     if eventType ~= ccui.TouchEventType.ended then
         return
     end
-    Game.showPopLayer('SetLayer')
+    --Game.showPopLayer('SetLayer')
+    --test
+    LogicServiceProxy:getInstance():sendUserReady()
 end
 
 function GameScene:onEnter()

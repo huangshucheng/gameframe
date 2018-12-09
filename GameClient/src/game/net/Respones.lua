@@ -29,7 +29,12 @@ local Respones = {
 	PlayerNotEnterRoomEver 	= -115,
 
 	-- get create status
-	PlayerNotCreateRoomOrNotEnterRoom = -116
+	PlayerNotCreateRoomOrNotEnterRoom = -116,
+
+	-- user ready
+	PlayerIsNotReady 		= -117,
+	PlayerIsAlreadyReady 	= -118,
+	PlayerIsAlreadyStartGame = -119,
 
 }
 

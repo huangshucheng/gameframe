@@ -28,6 +28,9 @@ function GameScene:addClientEventListener()
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
     addEvent("UserReconnectedRes", self, self.onEventReconnect)
+
+
+    addEvent("UserReadyRes", self, self.onEventUserReady)
 end
 
 function GameScene:onEventNetConnect(event)
@@ -196,5 +199,13 @@ function GameScene:onEventReconnect(event)
     local body = event._usedata
     if body.status == Respones.OK then
         print('hcc>> GameScene:onEventReconnect...........222')        
+    end
+end
+
+function GameScene:onEventUserReady(event)
+    print('hcc>> GameScene:onEventUserReady...........111')
+    local body = event._usedata
+    if body.status == Respones.OK then
+       print('hcc>> GameScene:onEventUserReady...........222') 
     end
 end

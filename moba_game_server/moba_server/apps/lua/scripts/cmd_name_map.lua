@@ -48,9 +48,11 @@ local cmd_name_map = {
 	[45] = "HeartBeatReq",
 	[46] = "HeartBeatRes",
 	--
-	[47] = "GameStart",
-	[48] = "UserReconnectedReq",
-	[49] = "UserReconnectedRes",
+	[47] = "UserReconnectedReq",
+	[48] = "UserReconnectedRes",
+	[49] = "UserReadyReq",
+	[50] = "UserReadyRes",
+	[51] = "GameStart",
 }
 
 return cmd_name_map

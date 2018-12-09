@@ -60,4 +60,18 @@ function LogicServiceProxy:sendReconnect()
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUserReconnectedReq, nil)
 end
 
+function LogicServiceProxy:sendUserReady()
+	local msg = {
+		ready_state = 1,
+	}
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUserReadyReq, msg)
+end
+
+function LogicServiceProxy:sendUserCancelReady()
+	local msg = {
+		ready_state = 2,
+	}
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUserReadyReq, msg)
+end
+
 return LogicServiceProxy
