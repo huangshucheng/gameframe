@@ -35,7 +35,7 @@ function Player:init(uid, s, ret_handler)
 	self._is_offline 	= false    -- 是否掉线
 	self._ugame_info 	= nil 	   -- 玩家游戏信息（金币，经验）
 	self._uinfo 		= nil 	   -- 玩家帐号信息（名称，头像）
-	self._state 		= Player.STATE.psNull
+	self._state 		= 0
 
 	-- 数据库理面读取玩家的基本信息;
 	mysql_game.get_ugame_info(uid, function (err, ugame_info)
@@ -95,7 +95,7 @@ function Player:reset()
 	self._is_robot 		= false
 	self._is_host 		= false
 	self._is_offline 	= false
-	self._state   		= Player.STATE.psNull
+	self._state   		= 0
 end
 
 function Player:exit_room_and_reset()
@@ -103,7 +103,7 @@ function Player:exit_room_and_reset()
 	self._matchid = -1
 	self._seatid  = -1
 	self._is_host = false
-	self._state   = Player.STATE.psNull
+	self._state   = 0
 end
 
 function Player:set_room_id(room_id)

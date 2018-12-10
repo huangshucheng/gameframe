@@ -1,5 +1,15 @@
 local Player = class('Player')
 
+Player.STATE = {
+    psNull			= 0,        -- 空
+    psWait 			= 1,        -- 等待(按下开始按钮前)
+    psReady 		= 2,        -- 准备(按下开始按钮后)
+    psPlaying 		= 3,      	-- 游戏(正在进行游戏)
+    psEscape 		= 4,       	-- 逃跑(游戏被中断)
+    psExitEarly 	= 5,    	-- 提前退出
+    psSeeing 		= 6,		-- 旁观
+} 
+
 function Player:ctor()
 	self:reset()
 end
@@ -16,6 +26,7 @@ function Player:reset()
 	self._uface 	= 1
 	self._unick 	= ''
 	self._usex 		= 0 
+	self._state 	= 0
 end
 
 function Player:setUInfo(uinfo)
@@ -75,6 +86,14 @@ end
 
 function Player:getUSex()
 	return self._usex
+end
+
+function Player:getState()
+	return self._state
+end
+
+function Player:setState(state)
+	self._state = state
 end
 
 return Player

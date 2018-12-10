@@ -1304,6 +1304,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserArrived, brandid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserArrived, numberid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserArrived, areaid_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserArrived, user_state_),
   0,
   5,
   6,
@@ -1315,6 +1316,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   2,
   3,
   4,
+  11,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitMatchRes, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitMatchRes, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1456,13 +1458,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReadyRes, status_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReadyRes, seatid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReadyRes, brandid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReadyRes, numberid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserReadyRes, user_state_),
   2,
+  3,
   0,
   1,
-  3,
+  4,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 6, sizeof(::GuestLoginReq)},
@@ -1486,25 +1490,25 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 188, 194, sizeof(::EnterZoneReq)},
   { 195, 201, sizeof(::EnterZoneRes)},
   { 202, 211, sizeof(::EnterMatch)},
-  { 215, 231, sizeof(::UserArrived)},
-  { 242, 248, sizeof(::ExitMatchRes)},
-  { 249, 255, sizeof(::UserExitMatch)},
-  { 256, 262, sizeof(::GameStart)},
-  { 263, 270, sizeof(::UserRegistReq)},
-  { 272, 278, sizeof(::UserRegistRes)},
-  { 279, 285, sizeof(::CreateRoomReq)},
-  { 286, 294, sizeof(::CreateRoomRes)},
-  { 297, 303, sizeof(::JoinRoomReq)},
-  { 304, 312, sizeof(::JoinRoomRes)},
-  { 315, 322, sizeof(::ExitRoomRes)},
-  { 324, 330, sizeof(::DessolveRes)},
-  { 331, 337, sizeof(::GetCreateStatusRes)},
-  { 338, 346, sizeof(::BackRoomRes)},
-  { 349, 355, sizeof(::UserOffLine)},
-  { 356, 362, sizeof(::UserReconnectedRes)},
-  { 363, 369, sizeof(::HeartBeatRes)},
-  { 370, 376, sizeof(::UserReadyReq)},
-  { 377, 386, sizeof(::UserReadyRes)},
+  { 215, 232, sizeof(::UserArrived)},
+  { 244, 250, sizeof(::ExitMatchRes)},
+  { 251, 257, sizeof(::UserExitMatch)},
+  { 258, 264, sizeof(::GameStart)},
+  { 265, 272, sizeof(::UserRegistReq)},
+  { 274, 280, sizeof(::UserRegistRes)},
+  { 281, 287, sizeof(::CreateRoomReq)},
+  { 288, 296, sizeof(::CreateRoomRes)},
+  { 299, 305, sizeof(::JoinRoomReq)},
+  { 306, 314, sizeof(::JoinRoomRes)},
+  { 317, 324, sizeof(::ExitRoomRes)},
+  { 326, 332, sizeof(::DessolveRes)},
+  { 333, 339, sizeof(::GetCreateStatusRes)},
+  { 340, 348, sizeof(::BackRoomRes)},
+  { 351, 357, sizeof(::UserOffLine)},
+  { 358, 364, sizeof(::UserReconnectedRes)},
+  { 365, 371, sizeof(::HeartBeatRes)},
+  { 372, 378, sizeof(::UserReadyReq)},
+  { 379, 389, sizeof(::UserReadyRes)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1605,64 +1609,65 @@ void AddDescriptorsImpl() {
       "q\022\013\n\003zid\030\001 \002(\021\"\036\n\014EnterZoneRes\022\016\n\006status"
       "\030\001 \002(\021\"H\n\nEnterMatch\022\013\n\003zid\030\001 \002(\021\022\017\n\007mat"
       "chid\030\002 \002(\021\022\016\n\006seatid\030\003 \002(\021\022\014\n\004side\030\004 \002(\021"
-      "\"\275\001\n\013UserArrived\022\r\n\005unick\030\001 \002(\t\022\r\n\005uface"
+      "\"\321\001\n\013UserArrived\022\r\n\005unick\030\001 \002(\t\022\r\n\005uface"
       "\030\002 \002(\021\022\014\n\004usex\030\003 \002(\021\022\016\n\006seatid\030\004 \002(\021\022\014\n\004"
       "side\030\005 \002(\021\022\016\n\006roomid\030\006 \002(\t\022\016\n\006ishost\030\007 \002"
       "(\010\022\021\n\tisoffline\030\010 \002(\010\022\017\n\007brandid\030\t \001(\t\022\020"
-      "\n\010numberid\030\n \001(\t\022\016\n\006areaid\030\013 \001(\t\"\036\n\014Exit"
-      "MatchRes\022\016\n\006status\030\001 \002(\021\"\037\n\rUserExitMatc"
-      "h\022\016\n\006seatid\030\001 \002(\021\"\033\n\tGameStart\022\016\n\006heroes"
-      "\030\001 \003(\021\"0\n\rUserRegistReq\022\r\n\005uname\030\001 \002(\t\022\020"
-      "\n\010upwd_md5\030\002 \002(\t\"\037\n\rUserRegistRes\022\016\n\006sta"
-      "tus\030\001 \002(\021\"\"\n\rCreateRoomReq\022\021\n\troom_info\030"
-      "\001 \002(\t\"S\n\rCreateRoomRes\022\016\n\006status\030\001 \002(\021\022\021"
-      "\n\troom_info\030\002 \001(\t\022\037\n\tuser_info\030\003 \001(\0132\014.U"
-      "serArrived\"\036\n\013JoinRoomReq\022\017\n\007room_id\030\001 \002"
-      "(\t\"R\n\013JoinRoomRes\022\016\n\006status\030\001 \002(\021\022\021\n\troo"
-      "m_info\030\002 \001(\t\022 \n\nusers_info\030\003 \003(\0132\014.UserA"
-      "rrived\">\n\013ExitRoomRes\022\016\n\006status\030\001 \002(\021\022\037\n"
-      "\tuser_info\030\002 \001(\0132\014.UserArrived\"\035\n\013Dessol"
-      "veRes\022\016\n\006status\030\001 \002(\021\"$\n\022GetCreateStatus"
-      "Res\022\016\n\006status\030\001 \002(\021\"R\n\013BackRoomRes\022\016\n\006st"
-      "atus\030\001 \002(\021\022\021\n\troom_info\030\002 \001(\t\022 \n\nusers_i"
-      "nfo\030\003 \003(\0132\014.UserArrived\".\n\013UserOffLine\022\037"
-      "\n\tuser_info\030\001 \002(\0132\014.UserArrived\"$\n\022UserR"
-      "econnectedRes\022\016\n\006status\030\001 \002(\021\"\036\n\014HeartBe"
-      "atRes\022\016\n\006status\030\001 \001(\021\"#\n\014UserReadyReq\022\023\n"
-      "\013ready_state\030\001 \002(\021\"U\n\014UserReadyRes\022\016\n\006st"
-      "atus\030\001 \002(\021\022\017\n\007brandid\030\002 \001(\t\022\020\n\010numberid\030"
-      "\003 \001(\t\022\022\n\nuser_state\030\004 \001(\021*<\n\005Stype\022\022\n\016IN"
-      "VALIDI_STYPE\020\000\022\010\n\004Auth\020\001\022\n\n\006System\020\002\022\t\n\005"
-      "Logic\020\003*\234\010\n\003Cmd\022\017\n\013INVALID_CMD\020\000\022\022\n\016eGue"
-      "stLoginReq\020\001\022\022\n\016eGuestLoginRes\020\002\022\014\n\010eRel"
-      "ogin\020\003\022\021\n\reUserLostConn\020\004\022\023\n\017eEditProfil"
-      "eReq\020\005\022\023\n\017eEditProfileRes\020\006\022\026\n\022eAccountU"
-      "pgradeReq\020\007\022\026\n\022eAccountUpgradeRes\020\010\022\022\n\016e"
-      "UnameLoginReq\020\t\022\022\n\016eUnameLoginRes\020\n\022\020\n\014e"
-      "LoginOutReq\020\013\022\020\n\014eLoginOutRes\020\014\022\022\n\016eUser"
-      "RegistReq\020\r\022\022\n\016eUserRegistRes\020\016\022\024\n\020eGetU"
-      "gameInfoReq\020\017\022\024\n\020eGetUgameInfoRes\020\020\022\027\n\023e"
-      "RecvLoginBonuesReq\020\021\022\027\n\023eRecvLoginBonues"
-      "Res\020\022\022\031\n\025eGetWorldRankUchipReq\020\023\022\031\n\025eGet"
-      "WorldRankUchipRes\020\024\022\021\n\reGetSysMsgReq\020\025\022\021"
-      "\n\reGetSysMsgRes\020\026\022\022\n\016eLoginLogicReq\020\027\022\022\n"
-      "\016eLoginLogicRes\020\030\022\021\n\reEnterZoneReq\020\031\022\021\n\r"
-      "eEnterZoneRes\020\032\022\017\n\013eEnterMatch\020\033\022\020\n\014eUse"
-      "rArrived\020\034\022\021\n\reExitMatchReq\020\035\022\021\n\reExitMa"
-      "tchRes\020\036\022\022\n\016eUserExitMatch\020\037\022\022\n\016eCreateR"
-      "oomReq\020 \022\022\n\016eCreateRoomRes\020!\022\020\n\014eJoinRoo"
-      "mReq\020\"\022\020\n\014eJoinRoomRes\020#\022\020\n\014eExitRoomReq"
-      "\020$\022\020\n\014eExitRoomRes\020%\022\020\n\014eDessolveReq\020&\022\020"
-      "\n\014eDessolveRes\020\'\022\027\n\023eGetCreateStatusReq\020"
-      "(\022\027\n\023eGetCreateStatusRes\020)\022\020\n\014eBackRoomR"
-      "eq\020*\022\020\n\014eBackRoomRes\020+\022\020\n\014eUserOffLine\020,"
-      "\022\021\n\reHeartBeatReq\020-\022\021\n\reHeartBeatRes\020.\022\027"
-      "\n\023eUserReconnectedReq\020/\022\027\n\023eUserReconnec"
-      "tedRes\0200\022\021\n\reUserReadyReq\0201\022\021\n\reUserRead"
-      "yRes\0202\022\016\n\neGameStart\0203"
+      "\n\010numberid\030\n \001(\t\022\016\n\006areaid\030\013 \001(\t\022\022\n\nuser"
+      "_state\030\014 \001(\021\"\036\n\014ExitMatchRes\022\016\n\006status\030\001"
+      " \002(\021\"\037\n\rUserExitMatch\022\016\n\006seatid\030\001 \002(\021\"\033\n"
+      "\tGameStart\022\016\n\006heroes\030\001 \003(\021\"0\n\rUserRegist"
+      "Req\022\r\n\005uname\030\001 \002(\t\022\020\n\010upwd_md5\030\002 \002(\t\"\037\n\r"
+      "UserRegistRes\022\016\n\006status\030\001 \002(\021\"\"\n\rCreateR"
+      "oomReq\022\021\n\troom_info\030\001 \002(\t\"S\n\rCreateRoomR"
+      "es\022\016\n\006status\030\001 \002(\021\022\021\n\troom_info\030\002 \001(\t\022\037\n"
+      "\tuser_info\030\003 \001(\0132\014.UserArrived\"\036\n\013JoinRo"
+      "omReq\022\017\n\007room_id\030\001 \002(\t\"R\n\013JoinRoomRes\022\016\n"
+      "\006status\030\001 \002(\021\022\021\n\troom_info\030\002 \001(\t\022 \n\nuser"
+      "s_info\030\003 \003(\0132\014.UserArrived\">\n\013ExitRoomRe"
+      "s\022\016\n\006status\030\001 \002(\021\022\037\n\tuser_info\030\002 \001(\0132\014.U"
+      "serArrived\"\035\n\013DessolveRes\022\016\n\006status\030\001 \002("
+      "\021\"$\n\022GetCreateStatusRes\022\016\n\006status\030\001 \002(\021\""
+      "R\n\013BackRoomRes\022\016\n\006status\030\001 \002(\021\022\021\n\troom_i"
+      "nfo\030\002 \001(\t\022 \n\nusers_info\030\003 \003(\0132\014.UserArri"
+      "ved\".\n\013UserOffLine\022\037\n\tuser_info\030\001 \002(\0132\014."
+      "UserArrived\"$\n\022UserReconnectedRes\022\016\n\006sta"
+      "tus\030\001 \002(\021\"\036\n\014HeartBeatRes\022\016\n\006status\030\001 \001("
+      "\021\"#\n\014UserReadyReq\022\023\n\013ready_state\030\001 \002(\021\"e"
+      "\n\014UserReadyRes\022\016\n\006status\030\001 \002(\021\022\016\n\006seatid"
+      "\030\002 \002(\021\022\017\n\007brandid\030\003 \001(\t\022\020\n\010numberid\030\004 \001("
+      "\t\022\022\n\nuser_state\030\005 \001(\021*<\n\005Stype\022\022\n\016INVALI"
+      "DI_STYPE\020\000\022\010\n\004Auth\020\001\022\n\n\006System\020\002\022\t\n\005Logi"
+      "c\020\003*\234\010\n\003Cmd\022\017\n\013INVALID_CMD\020\000\022\022\n\016eGuestLo"
+      "ginReq\020\001\022\022\n\016eGuestLoginRes\020\002\022\014\n\010eRelogin"
+      "\020\003\022\021\n\reUserLostConn\020\004\022\023\n\017eEditProfileReq"
+      "\020\005\022\023\n\017eEditProfileRes\020\006\022\026\n\022eAccountUpgra"
+      "deReq\020\007\022\026\n\022eAccountUpgradeRes\020\010\022\022\n\016eUnam"
+      "eLoginReq\020\t\022\022\n\016eUnameLoginRes\020\n\022\020\n\014eLogi"
+      "nOutReq\020\013\022\020\n\014eLoginOutRes\020\014\022\022\n\016eUserRegi"
+      "stReq\020\r\022\022\n\016eUserRegistRes\020\016\022\024\n\020eGetUgame"
+      "InfoReq\020\017\022\024\n\020eGetUgameInfoRes\020\020\022\027\n\023eRecv"
+      "LoginBonuesReq\020\021\022\027\n\023eRecvLoginBonuesRes\020"
+      "\022\022\031\n\025eGetWorldRankUchipReq\020\023\022\031\n\025eGetWorl"
+      "dRankUchipRes\020\024\022\021\n\reGetSysMsgReq\020\025\022\021\n\reG"
+      "etSysMsgRes\020\026\022\022\n\016eLoginLogicReq\020\027\022\022\n\016eLo"
+      "ginLogicRes\020\030\022\021\n\reEnterZoneReq\020\031\022\021\n\reEnt"
+      "erZoneRes\020\032\022\017\n\013eEnterMatch\020\033\022\020\n\014eUserArr"
+      "ived\020\034\022\021\n\reExitMatchReq\020\035\022\021\n\reExitMatchR"
+      "es\020\036\022\022\n\016eUserExitMatch\020\037\022\022\n\016eCreateRoomR"
+      "eq\020 \022\022\n\016eCreateRoomRes\020!\022\020\n\014eJoinRoomReq"
+      "\020\"\022\020\n\014eJoinRoomRes\020#\022\020\n\014eExitRoomReq\020$\022\020"
+      "\n\014eExitRoomRes\020%\022\020\n\014eDessolveReq\020&\022\020\n\014eD"
+      "essolveRes\020\'\022\027\n\023eGetCreateStatusReq\020(\022\027\n"
+      "\023eGetCreateStatusRes\020)\022\020\n\014eBackRoomReq\020*"
+      "\022\020\n\014eBackRoomRes\020+\022\020\n\014eUserOffLine\020,\022\021\n\r"
+      "eHeartBeatReq\020-\022\021\n\reHeartBeatRes\020.\022\027\n\023eU"
+      "serReconnectedReq\020/\022\027\n\023eUserReconnectedR"
+      "es\0200\022\021\n\reUserReadyReq\0201\022\021\n\reUserReadyRes"
+      "\0202\022\016\n\neGameStart\0203"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 3502);
+      descriptor, 3538);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game.proto", &protobuf_RegisterTypes);
 }
@@ -8808,6 +8813,7 @@ const int UserArrived::kIsofflineFieldNumber;
 const int UserArrived::kBrandidFieldNumber;
 const int UserArrived::kNumberidFieldNumber;
 const int UserArrived::kAreaidFieldNumber;
+const int UserArrived::kUserStateFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 UserArrived::UserArrived()
@@ -8845,8 +8851,8 @@ UserArrived::UserArrived(const UserArrived& from)
     areaid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.areaid_);
   }
   ::memcpy(&uface_, &from.uface_,
-    static_cast<size_t>(reinterpret_cast<char*>(&isoffline_) -
-    reinterpret_cast<char*>(&uface_)) + sizeof(isoffline_));
+    static_cast<size_t>(reinterpret_cast<char*>(&user_state_) -
+    reinterpret_cast<char*>(&uface_)) + sizeof(user_state_));
   // @@protoc_insertion_point(copy_constructor:UserArrived)
 }
 
@@ -8858,8 +8864,8 @@ void UserArrived::SharedCtor() {
   numberid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   areaid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&uface_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&isoffline_) -
-      reinterpret_cast<char*>(&uface_)) + sizeof(isoffline_));
+      reinterpret_cast<char*>(&user_state_) -
+      reinterpret_cast<char*>(&uface_)) + sizeof(user_state_));
 }
 
 UserArrived::~UserArrived() {
@@ -8932,10 +8938,10 @@ void UserArrived::Clear() {
         reinterpret_cast<char*>(&seatid_) -
         reinterpret_cast<char*>(&uface_)) + sizeof(seatid_));
   }
-  if (cached_has_bits & 1792u) {
+  if (cached_has_bits & 3840u) {
     ::memset(&side_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&isoffline_) -
-        reinterpret_cast<char*>(&side_)) + sizeof(isoffline_));
+        reinterpret_cast<char*>(&user_state_) -
+        reinterpret_cast<char*>(&side_)) + sizeof(user_state_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -9115,6 +9121,20 @@ bool UserArrived::MergePartialFromCodedStream(
         break;
       }
 
+      // optional sint32 user_state = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(96u /* 96 & 0xFF */)) {
+          set_has_user_state();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                 input, &user_state_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -9222,6 +9242,11 @@ void UserArrived::SerializeWithCachedSizes(
       11, this->areaid(), output);
   }
 
+  // optional sint32 user_state = 12;
+  if (cached_has_bits & 0x00000800u) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(12, this->user_state(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -9320,6 +9345,11 @@ void UserArrived::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         11, this->areaid(), target);
+  }
+
+  // optional sint32 user_state = 12;
+  if (cached_has_bits & 0x00000800u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(12, this->user_state(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -9460,6 +9490,13 @@ size_t UserArrived::ByteSizeLong() const {
     }
 
   }
+  // optional sint32 user_state = 12;
+  if (has_user_state()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->user_state());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -9522,7 +9559,7 @@ void UserArrived::MergeFrom(const UserArrived& from) {
     }
     _has_bits_[0] |= cached_has_bits;
   }
-  if (cached_has_bits & 1792u) {
+  if (cached_has_bits & 3840u) {
     if (cached_has_bits & 0x00000100u) {
       side_ = from.side_;
     }
@@ -9531,6 +9568,9 @@ void UserArrived::MergeFrom(const UserArrived& from) {
     }
     if (cached_has_bits & 0x00000400u) {
       isoffline_ = from.isoffline_;
+    }
+    if (cached_has_bits & 0x00000800u) {
+      user_state_ = from.user_state_;
     }
     _has_bits_[0] |= cached_has_bits;
   }
@@ -9572,6 +9612,7 @@ void UserArrived::InternalSwap(UserArrived* other) {
   swap(side_, other->side_);
   swap(ishost_, other->ishost_);
   swap(isoffline_, other->isoffline_);
+  swap(user_state_, other->user_state_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
@@ -14287,6 +14328,7 @@ void UserReadyRes::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int UserReadyRes::kStatusFieldNumber;
+const int UserReadyRes::kSeatidFieldNumber;
 const int UserReadyRes::kBrandidFieldNumber;
 const int UserReadyRes::kNumberidFieldNumber;
 const int UserReadyRes::kUserStateFieldNumber;
@@ -14379,7 +14421,7 @@ void UserReadyRes::Clear() {
       (*numberid_.UnsafeRawStringPointer())->clear();
     }
   }
-  if (cached_has_bits & 12u) {
+  if (cached_has_bits & 28u) {
     ::memset(&status_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&user_state_) -
         reinterpret_cast<char*>(&status_)) + sizeof(user_state_));
@@ -14412,10 +14454,24 @@ bool UserReadyRes::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string brandid = 2;
+      // required sint32 seatid = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_seatid();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                 input, &seatid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional string brandid = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_brandid()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -14428,10 +14484,10 @@ bool UserReadyRes::MergePartialFromCodedStream(
         break;
       }
 
-      // optional string numberid = 3;
-      case 3: {
+      // optional string numberid = 4;
+      case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_numberid()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -14444,10 +14500,10 @@ bool UserReadyRes::MergePartialFromCodedStream(
         break;
       }
 
-      // optional sint32 user_state = 4;
-      case 4: {
+      // optional sint32 user_state = 5;
+      case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
           set_has_user_state();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
@@ -14490,29 +14546,34 @@ void UserReadyRes::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->status(), output);
   }
 
-  // optional string brandid = 2;
+  // required sint32 seatid = 2;
+  if (cached_has_bits & 0x00000008u) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->seatid(), output);
+  }
+
+  // optional string brandid = 3;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->brandid().data(), static_cast<int>(this->brandid().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "UserReadyRes.brandid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->brandid(), output);
+      3, this->brandid(), output);
   }
 
-  // optional string numberid = 3;
+  // optional string numberid = 4;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->numberid().data(), static_cast<int>(this->numberid().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "UserReadyRes.numberid");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->numberid(), output);
+      4, this->numberid(), output);
   }
 
-  // optional sint32 user_state = 4;
-  if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(4, this->user_state(), output);
+  // optional sint32 user_state = 5;
+  if (cached_has_bits & 0x00000010u) {
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(5, this->user_state(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -14535,7 +14596,12 @@ void UserReadyRes::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->status(), target);
   }
 
-  // optional string brandid = 2;
+  // required sint32 seatid = 2;
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->seatid(), target);
+  }
+
+  // optional string brandid = 3;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->brandid().data(), static_cast<int>(this->brandid().length()),
@@ -14543,10 +14609,10 @@ void UserReadyRes::SerializeWithCachedSizes(
       "UserReadyRes.brandid");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->brandid(), target);
+        3, this->brandid(), target);
   }
 
-  // optional string numberid = 3;
+  // optional string numberid = 4;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->numberid().data(), static_cast<int>(this->numberid().length()),
@@ -14554,12 +14620,12 @@ void UserReadyRes::SerializeWithCachedSizes(
       "UserReadyRes.numberid");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->numberid(), target);
+        4, this->numberid(), target);
   }
 
-  // optional sint32 user_state = 4;
-  if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(4, this->user_state(), target);
+  // optional sint32 user_state = 5;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(5, this->user_state(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -14570,6 +14636,26 @@ void UserReadyRes::SerializeWithCachedSizes(
   return target;
 }
 
+size_t UserReadyRes::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:UserReadyRes)
+  size_t total_size = 0;
+
+  if (has_status()) {
+    // required sint32 status = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->status());
+  }
+
+  if (has_seatid()) {
+    // required sint32 seatid = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->seatid());
+  }
+
+  return total_size;
+}
 size_t UserReadyRes::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:UserReadyRes)
   size_t total_size = 0;
@@ -14579,21 +14665,29 @@ size_t UserReadyRes::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  // required sint32 status = 1;
-  if (has_status()) {
+  if (((_has_bits_[0] & 0x0000000c) ^ 0x0000000c) == 0) {  // All required fields are present.
+    // required sint32 status = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->status());
+
+    // required sint32 seatid = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->seatid());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
   }
   if (_has_bits_[0 / 32] & 3u) {
-    // optional string brandid = 2;
+    // optional string brandid = 3;
     if (has_brandid()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->brandid());
     }
 
-    // optional string numberid = 3;
+    // optional string numberid = 4;
     if (has_numberid()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -14601,7 +14695,7 @@ size_t UserReadyRes::ByteSizeLong() const {
     }
 
   }
-  // optional sint32 user_state = 4;
+  // optional sint32 user_state = 5;
   if (has_user_state()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::SInt32Size(
@@ -14638,7 +14732,7 @@ void UserReadyRes::MergeFrom(const UserReadyRes& from) {
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 15u) {
+  if (cached_has_bits & 31u) {
     if (cached_has_bits & 0x00000001u) {
       set_has_brandid();
       brandid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.brandid_);
@@ -14651,6 +14745,9 @@ void UserReadyRes::MergeFrom(const UserReadyRes& from) {
       status_ = from.status_;
     }
     if (cached_has_bits & 0x00000008u) {
+      seatid_ = from.seatid_;
+    }
+    if (cached_has_bits & 0x00000010u) {
       user_state_ = from.user_state_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -14672,7 +14769,7 @@ void UserReadyRes::CopyFrom(const UserReadyRes& from) {
 }
 
 bool UserReadyRes::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000004) != 0x00000004) return false;
+  if ((_has_bits_[0] & 0x0000000c) != 0x0000000c) return false;
   return true;
 }
 
@@ -14685,6 +14782,7 @@ void UserReadyRes::InternalSwap(UserReadyRes* other) {
   brandid_.Swap(&other->brandid_);
   numberid_.Swap(&other->numberid_);
   swap(status_, other->status_);
+  swap(seatid_, other->seatid_);
   swap(user_state_, other->user_state_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);

@@ -216,6 +216,7 @@ message UserArrived {
 	optional string brandid = 9;
 	optional string numberid = 10;
 	optional string areaid = 11;
+	optional sint32 user_state = 12;
 }
 
 message ExitMatchRes {
@@ -296,7 +297,8 @@ message UserReadyReq {
 
 message UserReadyRes {
 	required sint32 status 	= 1;
-	optional string brandid = 2;
-	optional string numberid = 3;
-	optional sint32 user_state = 4;
+	required sint32 seatid  = 2;
+	optional string brandid = 3;
+	optional string numberid = 4;
+	optional sint32 user_state = 5;
 }

@@ -3369,6 +3369,13 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   bool isoffline() const;
   void set_isoffline(bool value);
 
+  // optional sint32 user_state = 12;
+  bool has_user_state() const;
+  void clear_user_state();
+  static const int kUserStateFieldNumber = 12;
+  ::google::protobuf::int32 user_state() const;
+  void set_user_state(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:UserArrived)
  private:
   void set_has_unick();
@@ -3393,6 +3400,8 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void clear_has_numberid();
   void set_has_areaid();
   void clear_has_areaid();
+  void set_has_user_state();
+  void clear_has_user_state();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -3411,6 +3420,7 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::int32 side_;
   bool ishost_;
   bool isoffline_;
+  ::google::protobuf::int32 user_state_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserArrivedImpl();
 };
@@ -5529,10 +5539,10 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // optional string brandid = 2;
+  // optional string brandid = 3;
   bool has_brandid() const;
   void clear_brandid();
-  static const int kBrandidFieldNumber = 2;
+  static const int kBrandidFieldNumber = 3;
   const ::std::string& brandid() const;
   void set_brandid(const ::std::string& value);
   #if LANG_CXX11
@@ -5544,10 +5554,10 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_brandid();
   void set_allocated_brandid(::std::string* brandid);
 
-  // optional string numberid = 3;
+  // optional string numberid = 4;
   bool has_numberid() const;
   void clear_numberid();
-  static const int kNumberidFieldNumber = 3;
+  static const int kNumberidFieldNumber = 4;
   const ::std::string& numberid() const;
   void set_numberid(const ::std::string& value);
   #if LANG_CXX11
@@ -5566,10 +5576,17 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 status() const;
   void set_status(::google::protobuf::int32 value);
 
-  // optional sint32 user_state = 4;
+  // required sint32 seatid = 2;
+  bool has_seatid() const;
+  void clear_seatid();
+  static const int kSeatidFieldNumber = 2;
+  ::google::protobuf::int32 seatid() const;
+  void set_seatid(::google::protobuf::int32 value);
+
+  // optional sint32 user_state = 5;
   bool has_user_state() const;
   void clear_user_state();
-  static const int kUserStateFieldNumber = 4;
+  static const int kUserStateFieldNumber = 5;
   ::google::protobuf::int32 user_state() const;
   void set_user_state(::google::protobuf::int32 value);
 
@@ -5577,6 +5594,8 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
  private:
   void set_has_status();
   void clear_has_status();
+  void set_has_seatid();
+  void clear_has_seatid();
   void set_has_brandid();
   void clear_has_brandid();
   void set_has_numberid();
@@ -5584,12 +5603,16 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   void set_has_user_state();
   void clear_has_user_state();
 
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr brandid_;
   ::google::protobuf::internal::ArenaStringPtr numberid_;
   ::google::protobuf::int32 status_;
+  ::google::protobuf::int32 seatid_;
   ::google::protobuf::int32 user_state_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserReadyResImpl();
@@ -8038,6 +8061,30 @@ inline void UserArrived::set_allocated_areaid(::std::string* areaid) {
   // @@protoc_insertion_point(field_set_allocated:UserArrived.areaid)
 }
 
+// optional sint32 user_state = 12;
+inline bool UserArrived::has_user_state() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void UserArrived::set_has_user_state() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void UserArrived::clear_has_user_state() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void UserArrived::clear_user_state() {
+  user_state_ = 0;
+  clear_has_user_state();
+}
+inline ::google::protobuf::int32 UserArrived::user_state() const {
+  // @@protoc_insertion_point(field_get:UserArrived.user_state)
+  return user_state_;
+}
+inline void UserArrived::set_user_state(::google::protobuf::int32 value) {
+  set_has_user_state();
+  user_state_ = value;
+  // @@protoc_insertion_point(field_set:UserArrived.user_state)
+}
+
 // -------------------------------------------------------------------
 
 // ExitMatchRes
@@ -9115,7 +9162,31 @@ inline void UserReadyRes::set_status(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserReadyRes.status)
 }
 
-// optional string brandid = 2;
+// required sint32 seatid = 2;
+inline bool UserReadyRes::has_seatid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void UserReadyRes::set_has_seatid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void UserReadyRes::clear_has_seatid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void UserReadyRes::clear_seatid() {
+  seatid_ = 0;
+  clear_has_seatid();
+}
+inline ::google::protobuf::int32 UserReadyRes::seatid() const {
+  // @@protoc_insertion_point(field_get:UserReadyRes.seatid)
+  return seatid_;
+}
+inline void UserReadyRes::set_seatid(::google::protobuf::int32 value) {
+  set_has_seatid();
+  seatid_ = value;
+  // @@protoc_insertion_point(field_set:UserReadyRes.seatid)
+}
+
+// optional string brandid = 3;
 inline bool UserReadyRes::has_brandid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -9178,7 +9249,7 @@ inline void UserReadyRes::set_allocated_brandid(::std::string* brandid) {
   // @@protoc_insertion_point(field_set_allocated:UserReadyRes.brandid)
 }
 
-// optional string numberid = 3;
+// optional string numberid = 4;
 inline bool UserReadyRes::has_numberid() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -9241,15 +9312,15 @@ inline void UserReadyRes::set_allocated_numberid(::std::string* numberid) {
   // @@protoc_insertion_point(field_set_allocated:UserReadyRes.numberid)
 }
 
-// optional sint32 user_state = 4;
+// optional sint32 user_state = 5;
 inline bool UserReadyRes::has_user_state() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void UserReadyRes::set_has_user_state() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void UserReadyRes::clear_has_user_state() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void UserReadyRes::clear_user_state() {
   user_state_ = 0;

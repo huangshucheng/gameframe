@@ -80,6 +80,7 @@ function GameManager:on_user_ready(session, req)
 	local ready_state = body.ready_state
 	local msg_body ={
 		status = Respones.OK,
+		seatid = player:get_seat_id(),
 		brandid = player:get_brand_id(),
 		numberid = player:get_number_id(),
 		user_state = player:get_state(),

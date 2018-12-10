@@ -1,8 +1,6 @@
 local GameScene = Game.GameScene or {}
 
-local Cmd               	= require("game.net.protocol.Cmd")
 local Respones          	= require("game.net.Respones")
-local cmd_name_map      	= require("game.net.protocol.cmd_name_map")
 local RoomData              = require("game.clientdata.RoomData")
 local UserInfo              = require("game.clientdata.UserInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
@@ -28,7 +26,6 @@ function GameScene:addClientEventListener()
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
     addEvent("UserReconnectedRes", self, self.onEventReconnect)
-
 
     addEvent("UserReadyRes", self, self.onEventUserReady)
 end
@@ -111,6 +108,7 @@ function GameScene:onEventJoinRoom(event)
         end
     end
     self:showAllExistUserInfo()
+    self:onEventJoinRoom()
 end
 
 function GameScene:onEventBackRoom(event)
@@ -129,6 +127,7 @@ function GameScene:onEventBackRoom(event)
     end
     self:showRoomInfo()
     self:showAllExistUserInfo()
+    self:showReadyBtn()
 end
 
 function GameScene:onEventUserArrived(event)
@@ -195,10 +194,8 @@ function GameScene:onEventHeartBeat(event)
 end
 
 function GameScene:onEventReconnect(event)
-    print('hcc>> GameScene:onEventReconnect...........111')        
     local body = event._usedata
     if body.status == Respones.OK then
-        print('hcc>> GameScene:onEventReconnect...........222')        
     end
 end
 
@@ -206,6 +203,16 @@ function GameScene:onEventUserReady(event)
     print('hcc>> GameScene:onEventUserReady...........111')
     local body = event._usedata
     if body.status == Respones.OK then
-       print('hcc>> GameScene:onEventUserReady...........222') 
+       --TODO
+       local brandid = body.brandid
+       local seatid = body.seatid
+       local user_state = body.user_state
+       local player = RoomData:getInstance():getPlayerBySeatId(seatid)
+       if player then
+           if player:getBrandId() == brandid then
+                player:setState(user_state)
+                self:showReadyBtn()
+           end
+       end
     end
 end
