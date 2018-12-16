@@ -74,9 +74,19 @@ function GameManager:on_user_ready(session, req)
 		NetWork:getInstance():send_status(session, stype, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
-
 	if not body then return end
 	dump(body,"on_user_ready")
+
+	local room_id = player:get_room_id()
+	if room_id == -1 then
+		NetWork:getInstance():send_status(session, stype, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotInRoom)
+	end
+
+	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
+	if not room then 
+		NetWork:getInstance():send_status(session, stype, Cmd.eUserReadyRes, uid, Respones.RoomIsNotExist)
+	end
+
 	local ready_state = body.ready_state
 	local msg_body ={
 		status = Respones.OK,
@@ -104,6 +114,7 @@ function GameManager:on_user_ready(session, req)
 
 	msg_body.user_state = player:get_state()
 	player:send_msg(stype, Cmd.eUserReadyRes, msg_body)
+	room:broacast_in_room(stype, Cmd.eUserReadyRes, msg_body, player)
 end
 
 return GameManager

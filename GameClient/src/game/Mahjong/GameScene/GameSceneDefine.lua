@@ -13,5 +13,6 @@ GameSceneDefine.KW_IMG_HEAD           = 'KW_IMG_HEAD'
 
 GameSceneDefine.KW_PANEL_BOTTON_BTN   = 'KW_PANEL_BOTTON_BTN'
 GameSceneDefine.KW_BTN_READY 		  = 'KW_BTN_READY'
+GameSceneDefine.KW_IMG_READY 		  = 'KW_IMG_READY'
 
 return GameSceneDefine

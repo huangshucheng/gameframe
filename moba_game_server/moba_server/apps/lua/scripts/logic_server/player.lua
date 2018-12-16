@@ -77,7 +77,8 @@ function Player:get_user_arrived_info()
 		side 	= self._side,
 		roomid  = self._room_id,
 		ishost  = self._is_host,
-		isoffline = self._is_offline
+		isoffline = self._is_offline,
+		user_state = self._state,
 	}
 	return body
 end

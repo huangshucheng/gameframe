@@ -42,6 +42,7 @@ function Player:setUInfo(uinfo)
 	self._uface 	= uinfo.uface
 	self._unick 	= uinfo.unick
 	self._usex 		= uinfo.usex
+	self._state 	= uinfo.user_state
 end
 
 function Player:getSeat()
@@ -94,6 +95,14 @@ end
 
 function Player:setState(state)
 	self._state = state
+end
+
+function Player:getLocalSeat()
+	return require('game.Mahjong.Base.GameFunction').serverSeatToLocal(self._seatid)
+end
+
+function Player:getServerSeat()
+	return self._seatid
 end
 
 return Player

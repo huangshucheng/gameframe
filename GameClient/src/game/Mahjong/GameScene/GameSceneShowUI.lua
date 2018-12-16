@@ -13,7 +13,7 @@ function GameScene:showUserInfoBySeatId(seatId) --serverSeat
     local player = RoomData:getInstance():getPlayerBySeatId(seatId)
     print('hcc>> serverSeat: '.. seatId .. '  ,localseat: ' .. localSeat)
     if player then
-        local seat =  GameFunction.serverSeatToLocal(player:getSeat())
+        local seat =  GameFunction.serverSeatToLocal(player:getServerSeat())
         local infoPanel = self._panel_user_info_table[seat]
         if infoPanel then
             infoPanel:setVisible(true)
@@ -90,11 +90,34 @@ function GameScene:showReadyBtn()
 			local ready_btn = panel_btn:getChildByName(GameSceneDefine.KW_BTN_READY)
 			if ready_btn  then
 			 	ready_btn:setVisible(isShow)
-			 end 
+			 end
 		end
 	end
 
 	local state = selfPlayer:getState()
 	local show = (state < Player.STATE.psReady) and true or false
-	showFunc(show)	
+	showFunc(show)
+end
+
+function GameScene:showReadyImag()
+    local showFunc = function(localSeat, isShow)
+        local infoPanel = self._panel_user_info_table[localSeat]
+        if infoPanel then
+            local ready_img = infoPanel:getChildByName(GameSceneDefine.KW_IMG_READY)
+            if ready_img  then
+                ready_img:setVisible(isShow)
+             end
+        end
+    end
+
+    for sSeat = 1 , MAX_PLAYER_NUM do
+        local localSeat = GameFunction.serverSeatToLocal(sSeat)
+        local player = RoomData:getInstance():getPlayerBySeatId(sSeat)
+        if player then
+            local isShow = player:getState() == Player.STATE.psReady
+            showFunc(player:getLocalSeat(), isShow)
+        else
+            showFunc(localSeat, false)
+        end
+    end
 end

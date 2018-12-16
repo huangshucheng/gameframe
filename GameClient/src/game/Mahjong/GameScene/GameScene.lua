@@ -26,6 +26,7 @@ function GameScene:onCreate()
     self:showRoomInfo()
     self:showAllExistUserInfo()
     self:showReadyBtn()
+    self:showReadyImag()
 end
 
 function GameScene:initUI()

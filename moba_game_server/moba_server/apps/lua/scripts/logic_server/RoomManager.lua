@@ -64,7 +64,7 @@ local function generate_room_id()
 	end
 end
 
-function RoomManager:on_create_room(s, req)
+function RoomManager:on_create_room(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -73,23 +73,23 @@ function RoomManager:on_create_room(s, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(s, stype, Cmd.eCreateRoomRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eCreateRoomRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 
 	if not body then
-		NetWork:getInstance():send_status(s, stype, Cmd.eCreateRoomRes, uid, Respones.RoomInfoIsNill)
+		NetWork:getInstance():send_status(session, stype, Cmd.eCreateRoomRes, uid, Respones.RoomInfoIsNill)
 		return
 	end
 
 	if self:get_is_player_uid_in_room(player) then
-		NetWork:getInstance():send_status(s, stype, Cmd.eCreateRoomRes, uid, Respones.PlayerIsAlreadyInRoom)
+		NetWork:getInstance():send_status(session, stype, Cmd.eCreateRoomRes, uid, Respones.PlayerIsAlreadyInRoom)
 		return
 	end
 
 	local player_room_id = player:get_room_id()
 	if player_room_id ~= -1 then -- this player already create one room
-		NetWork:getInstance():send_status(s, stype, Cmd.eCreateRoomRes, uid, Respones.PlayerIsAlreadyCreateOneRoom)
+		NetWork:getInstance():send_status(session, stype, Cmd.eCreateRoomRes, uid, Respones.PlayerIsAlreadyCreateOneRoom)
 		return
 	end
 	
@@ -118,7 +118,7 @@ function RoomManager:on_create_room(s, req)
 	print('hcc>> create_room success roomid: ' .. tostring(roomid) .. '  ,roomNum: ' .. self:get_total_rooms())
 end
 
-function RoomManager:on_exit_room(s, req)
+function RoomManager:on_exit_room(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -126,7 +126,7 @@ function RoomManager:on_exit_room(s, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(s, stype, Cmd.eExitRoomRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eExitRoomRes, uid, Respones.PlayerIsNotExist)
 		print('hcc>> exit_room 1')
 		return
 	end
@@ -160,7 +160,7 @@ function RoomManager:on_exit_room(s, req)
 
 	local ret = room:exit_player(player)
 	if not ret then
-		NetWork:getInstance():send_status(s, stype, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
+		NetWork:getInstance():send_status(session, stype, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
 		return
 	end
 
@@ -170,7 +170,7 @@ function RoomManager:on_exit_room(s, req)
 	print("hcc>> exit_room success roomNum: " .. self:get_total_rooms())
 end
 
-function RoomManager:on_join_room(s, req)
+function RoomManager:on_join_room(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -179,18 +179,18 @@ function RoomManager:on_join_room(s, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(s, stype, Cmd.eJoinRoomRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eJoinRoomRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 	--if create one room or in room ,can not join other room ,only can back room
 	local room = self:get_is_player_uid_in_room(player)
 	if room then
-		NetWork:getInstance():send_status(s, stype, Cmd.eJoinRoomRes, uid, Respones.PlayerIsAlreadyCreateOneRoom)
+		NetWork:getInstance():send_status(session, stype, Cmd.eJoinRoomRes, uid, Respones.PlayerIsAlreadyCreateOneRoom)
 		return
 	end
 
 	if not body then 
-		NetWork:getInstance():send_status(s, stype, Cmd.eJoinRoomRes, uid, Respones.RoomIdIsNill)
+		NetWork:getInstance():send_status(session, stype, Cmd.eJoinRoomRes, uid, Respones.RoomIdIsNill)
 		return
 	end
 
@@ -199,13 +199,13 @@ function RoomManager:on_join_room(s, req)
 
 	local room = server_rooms[tostring(room_id)]
 	if not room then
-		NetWork:getInstance():send_status(s, stype, Cmd.eJoinRoomRes, uid, Respones.RoomIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eJoinRoomRes, uid, Respones.RoomIsNotExist)
 		return
 	end
 
 	local ret =  room:enter_player(player)
 	if not ret then
-		NetWork:getInstance():send_status(s, stype, Cmd.eJoinRoomRes, uid, Respones.InvalidOpt)
+		NetWork:getInstance():send_status(session, stype, Cmd.eJoinRoomRes, uid, Respones.InvalidOpt)
 		return
 	end
 
@@ -226,7 +226,7 @@ function RoomManager:on_join_room(s, req)
 	print('hcc>> join_room usccess roomNum: ' .. self:get_total_rooms())
 end
 
-function RoomManager:on_dessolve_room(s, req)
+function RoomManager:on_dessolve_room(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -234,25 +234,25 @@ function RoomManager:on_dessolve_room(s, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(s, stype, Cmd.eDessolveRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eDessolveRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 
 	local room_id = player:get_room_id()
 	if room_id == -1 then
-		NetWork:getInstance():send_status(s, stype, Cmd.eDessolveRes, uid, Respones.PlayerIsNotInRoom)
+		NetWork:getInstance():send_status(session, stype, Cmd.eDessolveRes, uid, Respones.PlayerIsNotInRoom)
 		return
 	end
 
 	local room = server_rooms[tostring(room_id)]
 	if not room then
-		NetWork:getInstance():send_status(s, stype, Cmd.eDessolveRes, uid, Respones.RoomIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eDessolveRes, uid, Respones.RoomIsNotExist)
 		return
 	end
 
 	local ishost = player:get_is_host()
 	if not ishost then
-		NetWork:getInstance():send_status(s, stype, Cmd.eDessolveRes, uid, Respones.DessolvePlayerIsNotHost)
+		NetWork:getInstance():send_status(session, stype, Cmd.eDessolveRes, uid, Respones.DessolvePlayerIsNotHost)
 		return
 	end
 
@@ -265,7 +265,7 @@ function RoomManager:on_dessolve_room(s, req)
 	print('hcc>> dessolve_room success roomNum: '.. self:get_total_rooms())
 end
 
-function RoomManager:on_get_create_status(s, req)
+function RoomManager:on_get_create_status(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -273,7 +273,7 @@ function RoomManager:on_get_create_status(s, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(s, stype, Cmd.eGetCreateStatusRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eGetCreateStatusRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 
@@ -285,7 +285,7 @@ function RoomManager:on_get_create_status(s, req)
 	end
 end
 
-function RoomManager:on_back_room(s, req)
+function RoomManager:on_back_room(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
@@ -293,19 +293,19 @@ function RoomManager:on_back_room(s, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(s, stype, Cmd.eBackRoomRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, stype, Cmd.eBackRoomRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 	
 	local room = self:get_is_player_uid_in_room(player)
 	if not room then
-		NetWork:getInstance():send_status(s, stype, Cmd.eBackRoomRes, uid, Respones.PlayerNotEnterRoomEver)
+		NetWork:getInstance():send_status(session, stype, Cmd.eBackRoomRes, uid, Respones.PlayerNotEnterRoomEver)
 		return
 	end
 	
 	local ret =  room:enter_player(player)
 	if not ret then
-		NetWork:getInstance():send_status(s, stype, Cmd.eBackRoomRes, uid, Respones.InvalidOpt)
+		NetWork:getInstance():send_status(session, stype, Cmd.eBackRoomRes, uid, Respones.InvalidOpt)
 		return
 	end
 

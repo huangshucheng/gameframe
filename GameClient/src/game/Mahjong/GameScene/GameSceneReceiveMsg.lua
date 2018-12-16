@@ -26,7 +26,6 @@ function GameScene:addClientEventListener()
     addEvent("UnameLoginRes", self, self.onEventUnameLogin)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
     addEvent("UserReconnectedRes", self, self.onEventReconnect)
-
     addEvent("UserReadyRes", self, self.onEventUserReady)
 end
 
@@ -128,6 +127,7 @@ function GameScene:onEventBackRoom(event)
     self:showRoomInfo()
     self:showAllExistUserInfo()
     self:showReadyBtn()
+    self:showReadyImag()
 end
 
 function GameScene:onEventUserArrived(event)
@@ -136,6 +136,7 @@ function GameScene:onEventUserArrived(event)
         RoomData:getInstance():createPlayerByUserInfo(data)
     end
     self:showAllExistUserInfo()
+    self:showReadyImag()
 end
 
 function GameScene:onEventUserOffline(event)
@@ -203,7 +204,6 @@ function GameScene:onEventUserReady(event)
     print('hcc>> GameScene:onEventUserReady...........111')
     local body = event._usedata
     if body.status == Respones.OK then
-       --TODO
        local brandid = body.brandid
        local seatid = body.seatid
        local user_state = body.user_state
@@ -212,6 +212,7 @@ function GameScene:onEventUserReady(event)
            if player:getBrandId() == brandid then
                 player:setState(user_state)
                 self:showReadyBtn()
+                self:showReadyImag()
            end
        end
     end

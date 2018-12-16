@@ -439,7 +439,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="KW_PANEL_BOTTON_BTN" ActionTag="-1266699634" Tag="35" IconVisible="False" TopMargin="476.0000" BottomMargin="144.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="KW_PANEL_BOTTON_BTN" ActionTag="-1266699634" Tag="35" IconVisible="False" TopMargin="476.0000" BottomMargin="144.0000" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="1280.0000" Y="100.0000" />
             <Children>
               <AbstractNodeData Name="KW_BTN_READY" ActionTag="97207935" VisibleForFrame="False" Tag="36" IconVisible="False" LeftMargin="529.0000" RightMargin="529.0000" TopMargin="-0.5000" BottomMargin="-0.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="192" Scale9Height="79" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
