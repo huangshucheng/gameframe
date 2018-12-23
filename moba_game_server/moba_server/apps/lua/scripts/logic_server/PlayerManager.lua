@@ -48,31 +48,31 @@ function PlayerManager:receive_msg(session, msg)
 end
 
 --登录逻辑服务器
-function PlayerManager:on_login_logic_server(s, req)
+function PlayerManager:on_login_logic_server(session, req)
 	local uid = req[3]
 	local stype = req[1]
 	print('PlayerManager>> on_login_logic_server >>  uid: '.. tostring(uid))
 	local p = logic_server_players[uid]
 	if p then
-		p:set_session(s)
-		NetWork:getInstance():send_status(s, stype, Cmd.eLoginLogicRes, uid, Respones.OK)
+		p:set_session(session)
+		NetWork:getInstance():send_status(session, Cmd.eLoginLogicRes, uid, Respones.OK)
 		print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
 		return
 	end
 
 	p = Player:create()
-	p:init(uid, s, function(status)
+	p:init(uid, session, function(status)
 		if status == Respones.OK then
 			logic_server_players[uid] = p
 			online_player_num = online_player_num + 1
 		end
-		NetWork:getInstance():send_status(s, stype, Cmd.eLoginLogicRes, uid, status)
+		NetWork:getInstance():send_status(session, Cmd.eLoginLogicRes, uid, status)
 		print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
 	end)
 end
 
 -- 玩家离开了逻辑服务器
-function PlayerManager:on_player_disconnect(s, req)
+function PlayerManager:on_player_disconnect(session, req)
 	local uid = req[3]
 	local p = logic_server_players[uid]
 	if not p then
@@ -91,12 +91,12 @@ function PlayerManager:on_player_disconnect(s, req)
 	print('PlayerManager>> on_player_disconnect >> user size: '..  online_player_num)
 end
 
-function PlayerManager:on_gateway_connect(s)
+function PlayerManager:on_gateway_connect(session)
 	logic_server_players 	= {}
 	online_player_num 		= 0
 end
 
-function PlayerManager:on_gateway_disconnect(s)
+function PlayerManager:on_gateway_disconnect(session)
 	logic_server_players 	= {}
 	online_player_num 		= 0
 end

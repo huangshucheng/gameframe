@@ -163,12 +163,12 @@ function Player:set_session(s)
 	self._session = s
 end
 
-function Player:send_msg(stype, ctype, body)
+function Player:send_msg(ctype, body)
 	if not self._session or self._is_robot then 
 		return
 	end
 
-	local msg = {stype, ctype, self._uid, body}
+	local msg = {Stype.Logic, ctype, self._uid, body}
 	NetWork:getInstance():send_msg(self._session, msg)
 end
 

@@ -1,11 +1,27 @@
 local Room = class("Room")
-local ToolUtils = require("utils.ToolUtils")
+
+logic_server_global_table.Room = Room
+
+local ToolUtils = require("utils/ToolUtils")
+
+-- 拓展
+require("logic_server/RoomDefine")
+require("logic_server/RoomBaseLogic")
+require("logic_server/RoomStepInit")
+require("logic_server/RoomStep")
+require("logic_server/RoomSubStep")
+--
 
 function Room:ctor()
-	self._room_id = 0
-	self._players = {}
-	self._room_info = ''
-	self._max_player = 4
+	print('Room:ctor')
+	self._room_id 		= 0
+	self._players 		= {}
+	self._room_info 	= ''
+	self._max_player 	= 4
+	self._is_start_game = false
+	if self.init_step_func then
+		self:init_step_func()
+	end
 end
 
 function Room:set_room_id(room_id)
@@ -18,7 +34,9 @@ end
 
 function Room:set_room_info(room_info)
 	self._room_info = room_info
-	self:parse_game_rule()
+	if self.parse_game_rule then
+		self:parse_game_rule()
+	end
 end
 
 function Room:get_room_info()
@@ -150,14 +168,14 @@ function Room:kick_all_players_in_room()
 	self._players = {}
 end
 
-function Room:broacast_in_room(stype, ctype, body, not_to_player)
-	if stype == nil or ctype == nil then
+function Room:broacast_in_room(ctype, body, not_to_player)
+	if ctype == nil then
 		return
 	end
 
 	for i = 1 , #self._players do
 		if self._players[i] ~= not_to_player then
-			self._players[i]:send_msg(stype, ctype, body)
+			self._players[i]:send_msg(ctype, body)
 		end
 	end
 end
@@ -187,6 +205,30 @@ end
 
 function Room:get_room_player_num()
 	return #self._players
+end
+
+function Room:get_is_start_game()
+	return self._is_start_game
+end
+
+function Room:set_is_start_game(is_start)
+	self._is_start_game = is_start
+end
+
+function Room:get_player_count_by_state(state)
+	local count = 0
+	for i = 1 , #self._players do
+		if self._players[i]:get_state() == state then
+			count = count + 1
+		end
+	end
+	return count
+end
+
+function Room:set_all_player_state(state)
+	for i = 1 , #self._players do
+		self._players[i]:set_state(state)
+	end
 end
 
 return Room

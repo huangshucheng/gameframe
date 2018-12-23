@@ -36,6 +36,8 @@ local Respones = {
 	PlayerIsAlreadyReady 	= -118,
 	PlayerIsAlreadyStartGame = -119,
 
+	GameIsStart 			= -120,
+
 }
 
 return Respones

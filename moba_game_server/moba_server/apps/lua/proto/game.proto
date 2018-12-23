@@ -227,10 +227,6 @@ message UserExitMatch {
 	required sint32 seatid = 1;	
 }
 
-message GameStart {
-	repeated sint32 heroes = 1; 
-}
-
 message UserRegistReq {
 	required string uname = 1;
 	required string upwd_md5 = 2;	
@@ -301,4 +297,8 @@ message UserReadyRes {
 	optional string brandid = 3;
 	optional string numberid = 4;
 	optional sint32 user_state = 5;
+}
+
+message GameStart {
+	repeated sint32 users_state = 1;
 }

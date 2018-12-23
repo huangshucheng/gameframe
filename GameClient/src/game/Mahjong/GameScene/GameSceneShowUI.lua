@@ -44,37 +44,42 @@ function GameScene:showUserInfoBySeatId(seatId) --serverSeat
 end
 
 function GameScene:showAllExistUserInfo()
-    for seat = 1 , MAX_PLAYER_NUM do
-        self:showUserInfoBySeatId(seat)
+    for serverSeat = 1 , MAX_PLAYER_NUM do
+        self:showUserInfoBySeatId(serverSeat)
     end
 end
 
 function GameScene:showRoomInfo()
-    if self._btn_room_num then
-        local roomid = RoomData:getInstance():getRoomId()
-        if roomid then
-            self._btn_room_num:setString('房间号:' .. roomid)
+    local panel_top = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_TOP)
+    if panel_top then
+        local btn_room_num = panel_top:getChildByName(GameSceneDefine.KW_ROOM_NUM)
+        local text_room_rule = panel_top:getChildByName(GameSceneDefine.KW_TEXT_RULE)
+        if btn_room_num then
+            local roomid = RoomData:getInstance():getRoomId()
+            if roomid then
+                btn_room_num:setString('房间号:' .. roomid)
+            end
         end
-    end
-    if self._text_room_rule then
-        local roomRule = RoomData:getInstance():getRoomInfo()
-        if roomRule then
-            local playerNum = ToolUtils.getLuaStrValue(roomRule,"playerNum")
-            local playCount = ToolUtils.getLuaStrValue(roomRule,"playCount")
-            local isAAPay = ToolUtils.getLuaStrValue(roomRule,"isAAPay")
-            local baseScore = ToolUtils.getLuaStrValue(roomRule,"baseScore")
-            print('hcc>> rule: ' .. playerNum .. "  ," .. playCount .. " ," .. isAAPay .. ' ,' .. baseScore)
 
-            local strRule = ''
-            local payStr = ((tostring(isAAPay) == '1') and "AA支付") or "房主支付"
+        if text_room_rule then
+            local roomRule = RoomData:getInstance():getRoomInfo()
+            if roomRule then
+                local playerNum = ToolUtils.getLuaStrValue(roomRule,"playerNum")
+                local playCount = ToolUtils.getLuaStrValue(roomRule,"playCount")
+                local isAAPay = ToolUtils.getLuaStrValue(roomRule,"isAAPay")
+                local baseScore = ToolUtils.getLuaStrValue(roomRule,"baseScore")
+                print('hcc>> rule: ' .. playerNum .. "  ," .. playCount .. " ," .. isAAPay .. ' ,' .. baseScore)
 
-            strRule = strRule .. "人数:" .. tostring(playerNum) .. ","
-            strRule = strRule .. "局数:" .. tostring(playCount) .. ","
-            strRule = strRule .. "底分:" .. tostring(baseScore) .. ","
-            strRule = strRule .. tostring(payStr)
+                local strRule = ''
+                local payStr = ((tostring(isAAPay) == '1') and "AA支付") or "房主支付"
 
-            self._text_room_rule:setString(strRule)
-         end 
+                strRule = strRule .. "人数:" .. tostring(playerNum) .. ","
+                strRule = strRule .. "局数:" .. tostring(playCount) .. ","
+                strRule = strRule .. "底分:" .. tostring(baseScore) .. ","
+                strRule = strRule .. tostring(payStr)
+                text_room_rule:setString(strRule)
+             end 
+        end
     end
 end
 

@@ -7,6 +7,7 @@ local UserInfo              = require("game.clientdata.UserInfo")
 local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
+local LobbySceneDefine      = require('game.Lobby.LobbyScene.LobbySceneDefine')
 
 function LobbyScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
@@ -57,9 +58,16 @@ function LobbyScene:onEventGetUgameInfo(event)
     local body = event._usedata
     if not body then return end
     if body.status == Respones.OK then
-        if self._coin_text and self._diamond_text then
-            self._coin_text:setString(tostring(body.uinfo.uchip))
-            self._diamond_text:setString(tostring(body.uinfo.uchip2))
+        local img_top_bg = self:getResourceNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
+        if img_top_bg then
+            local coin_text         = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_COIN)
+            local diamond_text      = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_DIAMOND)
+            if coin_text then
+                coin_text:setString(tostring(body.uinfo.uchip))
+            end
+            if diamond_text then
+                diamond_text:setString(tostring(body.uinfo.uchip2))
+            end
         end
     end
 end
@@ -111,12 +119,16 @@ end
 
 function LobbyScene:onEventAsycUserInfo(event)
     local uname = UserInfo.getUserName()
-    if uname and uname ~= '' then
-        self._user_name_text:setString(tostring(uname))
-    end
-
-    if self._img_head then
-        self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
+    local img_top_bg = self:getResourceNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
+    if img_top_bg then
+        local user_name_text = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_USER_NAME)
+        local img_head = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.IMG_HEAD)
+        if uname and uname ~= '' and user_name_text then
+            user_name_text:setString(tostring(uname))    
+        end 
+        if img_head then
+            img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
+        end
     end
 end
 
@@ -155,19 +167,27 @@ end
 function LobbyScene:onEvnetGetCreateStatus(event)
     local data = event._usedata
     local status = data.status
+    local img_back_room = nil
+    local img_create_room = nil
+
+    local panel_center = self:getResourceNode():getChildByName(LobbySceneDefine.PANEL_CENTER)
+    if panel_center then
+        img_back_room         = panel_center:getChildByName(LobbySceneDefine.IMG_BACK_ROOM)
+        img_create_room       = panel_center:getChildByName(LobbySceneDefine.IMG_CREATE_ROOM)
+    end
     if status == Respones.OK then
-        if self._img_back_room then
-            self._img_back_room:setVisible(true)
+        if img_back_room then
+            img_back_room:setVisible(true)
         end
-        if self._img_create_room then
-            self._img_create_room:setVisible(false)
+        if img_create_room then
+            img_create_room:setVisible(false)
         end
     else
-        if self._img_back_room then
-            self._img_back_room:setVisible(false)
+        if img_back_room then
+            img_back_room:setVisible(false)
         end
-        if self._img_create_room then
-            self._img_create_room:setVisible(true)
+        if img_create_room then
+            img_create_room:setVisible(true)
         end
     end
 end

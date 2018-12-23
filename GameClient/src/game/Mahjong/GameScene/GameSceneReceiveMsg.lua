@@ -27,6 +27,7 @@ function GameScene:addClientEventListener()
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
     addEvent("UserReconnectedRes", self, self.onEventReconnect)
     addEvent("UserReadyRes", self, self.onEventUserReady)
+    addEvent("GameStart", self, self.onEventGameStart)
 end
 
 function GameScene:onEventNetConnect(event)
@@ -76,14 +77,14 @@ function GameScene:onEventExitRoom(event)
     local data = event._usedata
     if data.status == Respones.OK then
         local user_info = data.user_info
-        local seatid = user_info.seatid
+        local serverSeat = user_info.seatid
         local brandid = user_info.brandid
         local ishost = user_info.ishost
 
         if ishost then
             RoomData:getInstance():updatePlayerByUserInfo(user_info)
         else
-            RoomData:getInstance():removePlayerBySeatId(seatid)
+            RoomData:getInstance():removePlayerBySeatId(serverSeat)
         end
         if tonumber(brandid) == tonumber(UserInfo.getBrandId()) then
             self:popScene()
@@ -201,13 +202,12 @@ function GameScene:onEventReconnect(event)
 end
 
 function GameScene:onEventUserReady(event)
-    print('hcc>> GameScene:onEventUserReady...........111')
     local body = event._usedata
     if body.status == Respones.OK then
        local brandid = body.brandid
-       local seatid = body.seatid
+       local serverSeat = body.seatid
        local user_state = body.user_state
-       local player = RoomData:getInstance():getPlayerBySeatId(seatid)
+       local player = RoomData:getInstance():getPlayerBySeatId(serverSeat)
        if player then
            if player:getBrandId() == brandid then
                 player:setState(user_state)
@@ -216,4 +216,17 @@ function GameScene:onEventUserReady(event)
            end
        end
     end
+end
+
+function GameScene:onEventGameStart(event)
+    local body = event._usedata    
+    if next(body.users_state) then
+        for serverSeat,state in pairs(body.users_state) do
+            local player = RoomData:getInstance():getPlayerBySeatId(serverSeat)
+            if player then
+                player:setState(state)
+            end
+        end
+    end
+    self:showReadyImag()
 end

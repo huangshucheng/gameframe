@@ -1,0 +1,1 @@
+local Room = logic_server_global_table.Room or {}

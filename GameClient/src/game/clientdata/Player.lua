@@ -98,7 +98,10 @@ function Player:setState(state)
 end
 
 function Player:getLocalSeat()
-	return require('game.Mahjong.Base.GameFunction').serverSeatToLocal(self._seatid)
+	local GameFunction = require('game.Mahjong.Base.GameFunction')
+	if GameFunction then
+		return GameFunction.serverSeatToLocal(self._seatid)
+	end
 end
 
 function Player:getServerSeat()

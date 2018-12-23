@@ -16,6 +16,10 @@ function GameManager:getInstance()
 	return GameManager._instance
 end
 
+function GameManager:on_timer()
+	-- print('GameManager>> on_timer  ')
+end
+
 function GameManager:ctor()
 	self._cmd_handler_map =
 	{
@@ -51,7 +55,7 @@ function GameManager:on_reconnect(session, req)
 	print('hcc>> GameManager:on_reconnect uid: ' .. uid)
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(session, stype, Cmd.eUserReconnectedRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, Cmd.eUserReconnectedRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 
@@ -59,7 +63,7 @@ function GameManager:on_reconnect(session, req)
 		status 	= Respones.OK,
 	}
 
-	player:send_msg(stype, Cmd.eUserReconnectedRes, msg_body)
+	player:send_msg(Cmd.eUserReconnectedRes, msg_body)
 end
 
 function GameManager:on_user_ready(session, req)
@@ -71,7 +75,7 @@ function GameManager:on_user_ready(session, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(session, stype, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotExist)
+		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 	if not body then return end
@@ -79,12 +83,12 @@ function GameManager:on_user_ready(session, req)
 
 	local room_id = player:get_room_id()
 	if room_id == -1 then
-		NetWork:getInstance():send_status(session, stype, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotInRoom)
+		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotInRoom)
 	end
 
 	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
 	if not room then 
-		NetWork:getInstance():send_status(session, stype, Cmd.eUserReadyRes, uid, Respones.RoomIsNotExist)
+		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.RoomIsNotExist)
 	end
 
 	local ready_state = body.ready_state
@@ -108,13 +112,14 @@ function GameManager:on_user_ready(session, req)
 		elseif player:get_state() > Player.STATE.psReady then
 			msg_body.status = Respones.PlayerIsAlreadyStartGame
 		else
-			msg_body.status = Respones.PlayerIsNotReady				
+			msg_body.status = Respones.PlayerIsNotReady	
 		end
 	end
 
 	msg_body.user_state = player:get_state()
-	player:send_msg(stype, Cmd.eUserReadyRes, msg_body)
-	room:broacast_in_room(stype, Cmd.eUserReadyRes, msg_body, player)
+	player:send_msg(Cmd.eUserReadyRes, msg_body)
+	room:broacast_in_room(Cmd.eUserReadyRes, msg_body, player)
+	room:check_game_start()
 end
 
 return GameManager

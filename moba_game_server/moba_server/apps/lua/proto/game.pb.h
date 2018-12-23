@@ -91,8 +91,6 @@ void InitDefaultsExitMatchResImpl();
 void InitDefaultsExitMatchRes();
 void InitDefaultsUserExitMatchImpl();
 void InitDefaultsUserExitMatch();
-void InitDefaultsGameStartImpl();
-void InitDefaultsGameStart();
 void InitDefaultsUserRegistReqImpl();
 void InitDefaultsUserRegistReq();
 void InitDefaultsUserRegistResImpl();
@@ -123,6 +121,8 @@ void InitDefaultsUserReadyReqImpl();
 void InitDefaultsUserReadyReq();
 void InitDefaultsUserReadyResImpl();
 void InitDefaultsUserReadyRes();
+void InitDefaultsGameStartImpl();
+void InitDefaultsGameStart();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -148,7 +148,6 @@ inline void InitDefaults() {
   InitDefaultsUserArrived();
   InitDefaultsExitMatchRes();
   InitDefaultsUserExitMatch();
-  InitDefaultsGameStart();
   InitDefaultsUserRegistReq();
   InitDefaultsUserRegistRes();
   InitDefaultsCreateRoomReq();
@@ -164,6 +163,7 @@ inline void InitDefaults() {
   InitDefaultsHeartBeatRes();
   InitDefaultsUserReadyReq();
   InitDefaultsUserReadyRes();
+  InitDefaultsGameStart();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -3646,119 +3646,6 @@ class UserExitMatch : public ::google::protobuf::Message /* @@protoc_insertion_p
 };
 // -------------------------------------------------------------------
 
-class GameStart : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:GameStart) */ {
- public:
-  GameStart();
-  virtual ~GameStart();
-
-  GameStart(const GameStart& from);
-
-  inline GameStart& operator=(const GameStart& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  GameStart(GameStart&& from) noexcept
-    : GameStart() {
-    *this = ::std::move(from);
-  }
-
-  inline GameStart& operator=(GameStart&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const GameStart& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const GameStart* internal_default_instance() {
-    return reinterpret_cast<const GameStart*>(
-               &_GameStart_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    24;
-
-  void Swap(GameStart* other);
-  friend void swap(GameStart& a, GameStart& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline GameStart* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  GameStart* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const GameStart& from);
-  void MergeFrom(const GameStart& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(GameStart* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated sint32 heroes = 1;
-  int heroes_size() const;
-  void clear_heroes();
-  static const int kHeroesFieldNumber = 1;
-  ::google::protobuf::int32 heroes(int index) const;
-  void set_heroes(int index, ::google::protobuf::int32 value);
-  void add_heroes(::google::protobuf::int32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      heroes() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_heroes();
-
-  // @@protoc_insertion_point(class_scope:GameStart)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > heroes_;
-  friend struct ::protobuf_game_2eproto::TableStruct;
-  friend void ::protobuf_game_2eproto::InitDefaultsGameStartImpl();
-};
-// -------------------------------------------------------------------
-
 class UserRegistReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserRegistReq) */ {
  public:
   UserRegistReq();
@@ -3801,7 +3688,7 @@ class UserRegistReq : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_UserRegistReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    25;
+    24;
 
   void Swap(UserRegistReq* other);
   friend void swap(UserRegistReq& a, UserRegistReq& b) {
@@ -3940,7 +3827,7 @@ class UserRegistRes : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_UserRegistRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    26;
+    25;
 
   void Swap(UserRegistRes* other);
   friend void swap(UserRegistRes& a, UserRegistRes& b) {
@@ -4050,7 +3937,7 @@ class CreateRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_CreateRoomReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    27;
+    26;
 
   void Swap(CreateRoomReq* other);
   friend void swap(CreateRoomReq& a, CreateRoomReq& b) {
@@ -4168,7 +4055,7 @@ class CreateRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_CreateRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    28;
+    27;
 
   void Swap(CreateRoomRes* other);
   friend void swap(CreateRoomRes& a, CreateRoomRes& b) {
@@ -4308,7 +4195,7 @@ class JoinRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_JoinRoomReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    29;
+    28;
 
   void Swap(JoinRoomReq* other);
   friend void swap(JoinRoomReq& a, JoinRoomReq& b) {
@@ -4426,7 +4313,7 @@ class JoinRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_JoinRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    30;
+    29;
 
   void Swap(JoinRoomRes* other);
   friend void swap(JoinRoomRes& a, JoinRoomRes& b) {
@@ -4567,7 +4454,7 @@ class ExitRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_ExitRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    31;
+    30;
 
   void Swap(ExitRoomRes* other);
   friend void swap(ExitRoomRes& a, ExitRoomRes& b) {
@@ -4689,7 +4576,7 @@ class DessolveRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_DessolveRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    32;
+    31;
 
   void Swap(DessolveRes* other);
   friend void swap(DessolveRes& a, DessolveRes& b) {
@@ -4799,7 +4686,7 @@ class GetCreateStatusRes : public ::google::protobuf::Message /* @@protoc_insert
                &_GetCreateStatusRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    33;
+    32;
 
   void Swap(GetCreateStatusRes* other);
   friend void swap(GetCreateStatusRes& a, GetCreateStatusRes& b) {
@@ -4909,7 +4796,7 @@ class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_BackRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    34;
+    33;
 
   void Swap(BackRoomRes* other);
   friend void swap(BackRoomRes& a, BackRoomRes& b) {
@@ -5050,7 +4937,7 @@ class UserOffLine : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_UserOffLine_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    35;
+    34;
 
   void Swap(UserOffLine* other);
   friend void swap(UserOffLine& a, UserOffLine& b) {
@@ -5162,7 +5049,7 @@ class UserReconnectedRes : public ::google::protobuf::Message /* @@protoc_insert
                &_UserReconnectedRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    36;
+    35;
 
   void Swap(UserReconnectedRes* other);
   friend void swap(UserReconnectedRes& a, UserReconnectedRes& b) {
@@ -5272,7 +5159,7 @@ class HeartBeatRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_HeartBeatRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    37;
+    36;
 
   void Swap(HeartBeatRes* other);
   friend void swap(HeartBeatRes& a, HeartBeatRes& b) {
@@ -5382,7 +5269,7 @@ class UserReadyReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_UserReadyReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    38;
+    37;
 
   void Swap(UserReadyReq* other);
   friend void swap(UserReadyReq& a, UserReadyReq& b) {
@@ -5492,7 +5379,7 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_UserReadyRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    39;
+    38;
 
   void Swap(UserReadyRes* other);
   friend void swap(UserReadyRes& a, UserReadyRes& b) {
@@ -5616,6 +5503,119 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 user_state_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserReadyResImpl();
+};
+// -------------------------------------------------------------------
+
+class GameStart : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:GameStart) */ {
+ public:
+  GameStart();
+  virtual ~GameStart();
+
+  GameStart(const GameStart& from);
+
+  inline GameStart& operator=(const GameStart& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  GameStart(GameStart&& from) noexcept
+    : GameStart() {
+    *this = ::std::move(from);
+  }
+
+  inline GameStart& operator=(GameStart&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GameStart& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GameStart* internal_default_instance() {
+    return reinterpret_cast<const GameStart*>(
+               &_GameStart_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    39;
+
+  void Swap(GameStart* other);
+  friend void swap(GameStart& a, GameStart& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GameStart* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  GameStart* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const GameStart& from);
+  void MergeFrom(const GameStart& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(GameStart* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated sint32 users_state = 1;
+  int users_state_size() const;
+  void clear_users_state();
+  static const int kUsersStateFieldNumber = 1;
+  ::google::protobuf::int32 users_state(int index) const;
+  void set_users_state(int index, ::google::protobuf::int32 value);
+  void add_users_state(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      users_state() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_users_state();
+
+  // @@protoc_insertion_point(class_scope:GameStart)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > users_state_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsGameStartImpl();
 };
 // ===================================================================
 
@@ -8143,40 +8143,6 @@ inline void UserExitMatch::set_seatid(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// GameStart
-
-// repeated sint32 heroes = 1;
-inline int GameStart::heroes_size() const {
-  return heroes_.size();
-}
-inline void GameStart::clear_heroes() {
-  heroes_.Clear();
-}
-inline ::google::protobuf::int32 GameStart::heroes(int index) const {
-  // @@protoc_insertion_point(field_get:GameStart.heroes)
-  return heroes_.Get(index);
-}
-inline void GameStart::set_heroes(int index, ::google::protobuf::int32 value) {
-  heroes_.Set(index, value);
-  // @@protoc_insertion_point(field_set:GameStart.heroes)
-}
-inline void GameStart::add_heroes(::google::protobuf::int32 value) {
-  heroes_.Add(value);
-  // @@protoc_insertion_point(field_add:GameStart.heroes)
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-GameStart::heroes() const {
-  // @@protoc_insertion_point(field_list:GameStart.heroes)
-  return heroes_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-GameStart::mutable_heroes() {
-  // @@protoc_insertion_point(field_mutable_list:GameStart.heroes)
-  return &heroes_;
-}
-
-// -------------------------------------------------------------------
-
 // UserRegistReq
 
 // required string uname = 1;
@@ -9334,6 +9300,40 @@ inline void UserReadyRes::set_user_state(::google::protobuf::int32 value) {
   set_has_user_state();
   user_state_ = value;
   // @@protoc_insertion_point(field_set:UserReadyRes.user_state)
+}
+
+// -------------------------------------------------------------------
+
+// GameStart
+
+// repeated sint32 users_state = 1;
+inline int GameStart::users_state_size() const {
+  return users_state_.size();
+}
+inline void GameStart::clear_users_state() {
+  users_state_.Clear();
+}
+inline ::google::protobuf::int32 GameStart::users_state(int index) const {
+  // @@protoc_insertion_point(field_get:GameStart.users_state)
+  return users_state_.Get(index);
+}
+inline void GameStart::set_users_state(int index, ::google::protobuf::int32 value) {
+  users_state_.Set(index, value);
+  // @@protoc_insertion_point(field_set:GameStart.users_state)
+}
+inline void GameStart::add_users_state(::google::protobuf::int32 value) {
+  users_state_.Add(value);
+  // @@protoc_insertion_point(field_add:GameStart.users_state)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+GameStart::users_state() const {
+  // @@protoc_insertion_point(field_list:GameStart.users_state)
+  return users_state_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+GameStart::mutable_users_state() {
+  // @@protoc_insertion_point(field_mutable_list:GameStart.users_state)
+  return &users_state_;
 }
 
 #ifdef __GNUC__

@@ -19,6 +19,12 @@ local function on_gateway_connect(session, stype)
 	PlayerManager:getInstance():on_gateway_connect(session)
 end
 
+local function logic_timer()
+	GameManager:getInstance():on_timer()
+end
+
+Scheduler.schedule(logic_timer, 1000, -1, 1000)
+
 local logic_service = {
 	on_session_recv_cmd 		= on_logic_recv_cmd,
 	on_session_disconnect 		= on_gateway_disconnect,
