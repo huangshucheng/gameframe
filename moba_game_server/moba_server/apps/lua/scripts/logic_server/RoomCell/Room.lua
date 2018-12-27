@@ -1,16 +1,6 @@
 local Room = class("Room")
 
-logic_server_global_table.Room = Room
-
 local ToolUtils = require("utils/ToolUtils")
-
--- 拓展
-require("logic_server/RoomDefine")
-require("logic_server/RoomBaseLogic")
-require("logic_server/RoomStepInit")
-require("logic_server/RoomStep")
-require("logic_server/RoomSubStep")
---
 
 function Room:ctor()
 	print('Room:ctor')
@@ -19,9 +9,63 @@ function Room:ctor()
 	self._room_info 	= ''
 	self._max_player 	= 4
 	self._is_start_game = false
+	
 	if self.init_step_func then
 		self:init_step_func()
 	end
+	--[[
+	local allfunc = Room.getAllFunction(self) 
+	dump(allfunc,'Room:ctor>>>>>>')
+	local objectemetatable = getmetatable(self)
+	dump(objectemetatable , 'objectemetatable')
+	]]
+	self:setMetaTable()
+end
+
+function Room.getAllFunction(class,meathon)
+    meathon = meathon or {}
+    if class.super ~= nil then
+        meathon = Room.getAllFunction(class.super,meathon)
+    end
+
+    local metatable = getmetatable(class)
+    if metatable == nil then
+        metatable = class
+    end
+    for i,v in pairs(metatable) do
+        meathon[i] = v
+    end
+    return meathon
+end
+-- TODO hcc
+function Room:setMetaTable()
+    local scriptPath = {}
+    local path = 'logic_server.RoomCell'
+    table.insert(scriptPath, path .. ".RoomStepInit")
+    table.insert(scriptPath, path .. ".RoomBaseLogic")
+    table.insert(scriptPath, path .. ".RoomStartStep")
+    table.insert(scriptPath, path .. ".RoomStopStep")
+    table.insert(scriptPath, path .. ".RoomStartSubStep")
+    table.insert(scriptPath, path .. ".RoomStopSubStep")
+
+    local tmpmetatable = {}
+    for i,v in ipairs(scriptPath) do
+        local script = require(v)
+        local object = script.new()
+        local objectemetatable = getmetatable(object)
+        -- dump(objectemetatable,'Room:setMetaTable>>00000')
+        for scripti,scriptv in pairs(objectemetatable.__index) do
+            tmpmetatable[scripti] = scriptv
+        end
+    end
+    -- dump(tmpmetatable,'Room:setMetaTable>>11111')
+    local metatable = Room.getAllFunction(self)
+    for i,v in pairs(metatable.__index) do
+        tmpmetatable[i] = v
+    end
+	-- dump(tmpmetatable,'Room:setMetaTable>>22222') 
+    setmetatable(self, {__index = tmpmetatable}) 
+	-- dump(tmpmetatable,'Room:setMetaTable>>33333')
 end
 
 function Room:set_room_id(room_id)

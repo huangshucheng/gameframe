@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>E439935D-B2A2-46AE-856D-2AA408428F33</ProjectGuid>
+    <!--$guid1$-->
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="scripts\" />
+    <Folder Include="scripts\auth_server\" />
+    <Folder Include="scripts\database\" />
+    <Folder Include="scripts\gateway\" />
+    <Folder Include="scripts\logic_server\" />
+    <Folder Include="scripts\logic_server\MahRule\" />
+    <Folder Include="scripts\logic_server\PlayerCell\" />
+    <Folder Include="scripts\logic_server\RoomCell\" />
+    <Folder Include="scripts\system_server\" />
+    <Folder Include="scripts\talkroom\" />
+    <Folder Include="scripts\utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="scripts\auth_server\account_upgrade.lua" />
+    <Compile Include="scripts\auth_server\auth_service.lua" />
+    <Compile Include="scripts\auth_server\edit_profile.lua" />
+    <Compile Include="scripts\auth_server\guest.lua" />
+    <Compile Include="scripts\auth_server\login_out.lua" />
+    <Compile Include="scripts\auth_server\main.lua" />
+    <Compile Include="scripts\auth_server\uname_login.lua" />
+    <Compile Include="scripts\auth_server\user_regist.lua" />
+    <Compile Include="scripts\Cmd.lua" />
+    <Compile Include="scripts\cmd_name_map.lua" />
+    <Compile Include="scripts\database\mysql_auth_center.lua" />
+    <Compile Include="scripts\database\mysql_game.lua" />
+    <Compile Include="scripts\database\redis_center.lua" />
+    <Compile Include="scripts\database\redis_game.lua" />
+    <Compile Include="scripts\database\redis_rank.lua" />
+    <Compile Include="scripts\functions.lua" />
+    <Compile Include="scripts\game_config.lua" />
+    <Compile Include="scripts\gateway\gw_service.lua" />
+    <Compile Include="scripts\gateway\main.lua" />
+    <Compile Include="scripts\logic_server\GameManager.lua" />
+    <Compile Include="scripts\logic_server\logic_service.lua" />
+    <Compile Include="scripts\logic_server\MahRule\Mah.lua" />
+    <Compile Include="scripts\logic_server\MahRule\MahData.lua" />
+    <Compile Include="scripts\logic_server\MahRule\MahFan.lua" />
+    <Compile Include="scripts\logic_server\MahRule\MahFunc.lua" />
+    <Compile Include="scripts\logic_server\MahRule\MahRule.lua" />
+    <Compile Include="scripts\logic_server\main.lua" />
+    <Compile Include="scripts\logic_server\NetWork.lua" />
+    <Compile Include="scripts\logic_server\PlayerCell\Player.lua" />
+    <Compile Include="scripts\logic_server\PlayerManager.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\Room.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomBaseLogic.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomDefine.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomStartStep.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomStartSubStep.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomStepInit.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomStopStep.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomStopSubStep.lua" />
+    <Compile Include="scripts\logic_server\RoomCell\RoomType.lua" />
+    <Compile Include="scripts\logic_server\RoomManager.lua" />
+    <Compile Include="scripts\logic_server\State.lua" />
+    <Compile Include="scripts\moba_game_config.lua" />
+    <Compile Include="scripts\Respones.lua" />
+    <Compile Include="scripts\Stype.lua" />
+    <Compile Include="scripts\system_server\game_rank.lua" />
+    <Compile Include="scripts\system_server\login_bonues.lua" />
+    <Compile Include="scripts\system_server\main.lua" />
+    <Compile Include="scripts\system_server\system_service.lua" />
+    <Compile Include="scripts\system_server\sys_msg.lua" />
+    <Compile Include="scripts\system_server\ugame.lua" />
+    <Compile Include="scripts\talkroom\cmd_name_map.lua" />
+    <Compile Include="scripts\talkroom\echo_server.lua" />
+    <Compile Include="scripts\talkroom\main.lua" />
+    <Compile Include="scripts\talkroom\trm_server.lua" />
+    <Compile Include="scripts\utils\StringUtils.lua" />
+    <Compile Include="scripts\utils\ToolUtils.lua" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

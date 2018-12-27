@@ -107,6 +107,7 @@ logger::log(const char* file_name,
 	format_time();
 	static char msg_meta_info[1024] = { 0 };
 	static char msg_content[1024 * 10] = { 0 };
+	static char msg_log_level[256] = { 0 };
 	static char new_line = '\n';
 
 	va_list args;
@@ -115,13 +116,14 @@ logger::log(const char* file_name,
 	va_end(args);
 
 	sprintf(msg_meta_info, "%s:%u  ", file_name, line_num);
-	uv_buf_t buf[6]; // time level content fileandline newline
+	sprintf(msg_log_level, "[%s]", g_log_level[level]);
+
+	uv_buf_t buf[5]; // time level content fileandline newline
 	buf[0] = uv_buf_init(g_format_time, strlen(g_format_time));
-	buf[1] = uv_buf_init(g_log_level[level], strlen(g_log_level[level]));
+	buf[1] = uv_buf_init(msg_log_level, strlen(msg_log_level));
 	buf[2] = uv_buf_init(msg_meta_info, strlen(msg_meta_info));
-	buf[3] = uv_buf_init(&new_line, 1);
-	buf[4] = uv_buf_init(msg_content, strlen(msg_content));
-	buf[5] = uv_buf_init(&new_line, 1);
+	buf[3] = uv_buf_init(msg_content, strlen(msg_content));
+	buf[4] = uv_buf_init(&new_line, 1);
 
 	uv_fs_t writeReq;
 	int result = uv_fs_write(NULL, &writeReq, g_file_handle.result, buf, sizeof(buf) / sizeof(buf[0]), -1, NULL);
@@ -132,7 +134,8 @@ logger::log(const char* file_name,
 	uv_fs_req_cleanup(&writeReq);
 
 	if (g_std_out) {
-		printf("%s:%u\n[%s] %s\n", file_name, line_num, g_log_level[level], msg_content);
+		//printf("%s:%u\n[%s] %s\n", file_name, line_num, g_log_level[level], msg_content);
+		printf("[%s]%s:%u  %s\n", g_log_level[level], file_name, line_num, msg_content);
 	}
 }
 

@@ -1,6 +1,6 @@
 local MahRule = class('MahRule')
 
-function MahRule:crot()
+function MahRule:ctor()
 
 end
 

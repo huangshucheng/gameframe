@@ -4,7 +4,7 @@ local Cmd 		= require("Cmd")
 
 local PlayerManager 	= require("logic_server/PlayerManager")
 local RoomManager 		= require("logic_server/RoomManager")
-local Player 			= require("logic_server/Player")
+local Player 			= require("logic_server/PlayerCell/Player")
 local NetWork 			= require("logic_server/NetWork")
 
 local GameManager 	= class("GameManager")

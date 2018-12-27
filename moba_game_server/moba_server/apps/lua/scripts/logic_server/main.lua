@@ -4,9 +4,6 @@ require("database/mysql_game")
 require("functions")
 math.newrandomseed()
 
---全局表，用来传递数据
-logic_server_global_table = {}
-
 local proto_type = { PROTO_JSON = 0, PROTO_BUF = 1,}
 
 ProtoMan.init(proto_type.PROTO_BUF)

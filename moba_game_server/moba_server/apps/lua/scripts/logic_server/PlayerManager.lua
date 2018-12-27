@@ -5,7 +5,7 @@ local mysql_game 	= require("database/mysql_game")
 local redis_game 	= require("database/redis_game")
 local mysql_center 	= require("database/mysql_auth_center")
 local redis_center 	= require("database/redis_center")
-local Player 		= require("logic_server/Player")
+local Player 		= require("logic_server/PlayerCell/Player")
 local NetWork 		= require("logic_server/NetWork")
 
 local PlayerManager = class('PlayerManager')

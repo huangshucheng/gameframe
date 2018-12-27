@@ -1,6 +1,5 @@
-local Room = logic_server_global_table.Room or {}
-
-local Player 			= require("logic_server/Player")
+local Room = class('Room')
+local Player 			= require("logic_server/PlayerCell/Player")
 local Cmd 				= require("Cmd")
 
 function Room:check_game_start()
@@ -29,3 +28,5 @@ function Room:check_game_start()
 		print('hcc>>testGameStart not start game, ready count: '.. tostring(ready_player_count))
 	end
 end
+
+return Room

@@ -1,9 +1,9 @@
 local Respones 	= require("Respones")
 local Stype 	= require("Stype")
 local Cmd 		= require("Cmd")
-local Room 				= require("logic_server/Room")
+local Room 				= require("logic_server/RoomCell/Room")
 local PlayerManager 	= require("logic_server/PlayerManager")
-local Player 			= require("logic_server/Player")
+local Player 			= require("logic_server/PlayerCell/Player")
 local NetWork 			= require("logic_server/NetWork")
 
 local RoomManager 		= class("RoomManager")
@@ -98,6 +98,8 @@ function RoomManager:on_create_room(session, req)
 	player:set_seat_id(1)
 
 	local room = Room:create()
+	-- room:setMetaTable()
+	
 	local roomid = generate_room_id()
 
 	room:set_room_id(roomid)
