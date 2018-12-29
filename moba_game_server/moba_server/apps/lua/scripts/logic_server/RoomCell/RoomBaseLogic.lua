@@ -1,6 +1,7 @@
 local Room = class('Room')
 local Player 			= require("logic_server/PlayerCell/Player")
 local Cmd 				= require("Cmd")
+local RoomDefine 		= require("logic_server/RoomCell/RoomDefine")
 
 function Room:check_game_start()
 	if self:get_is_start_game() == true then
@@ -23,7 +24,7 @@ function Room:check_game_start()
 		}
 		self:broacast_in_room(Cmd.eGameStart, msg, nil)
 		print('hcc>>testGameStart start game, ready count: '.. tostring(ready_player_count))
-		self:start_game_step(Room.GameStep.GAME_STEP_START_GAME)
+		self:start_game_step(RoomDefine.GameStep.GAME_STEP_START_GAME)
 	else
 		print('hcc>>testGameStart not start game, ready count: '.. tostring(ready_player_count))
 	end

@@ -60,7 +60,7 @@ function PlayerManager:on_login_logic_server(session, req)
 		return
 	end
 
-	p = Player:create()
+	p = Player.new()
 	p:init(uid, session, function(status)
 		if status == Respones.OK then
 			logic_server_players[uid] = p

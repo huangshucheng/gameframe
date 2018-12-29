@@ -97,9 +97,7 @@ function RoomManager:on_create_room(session, req)
 	player:set_is_host(true)
 	player:set_seat_id(1)
 
-	local room = Room:create()
-	-- room:setMetaTable()
-	
+	local room = Room.new()
 	local roomid = generate_room_id()
 
 	room:set_room_id(roomid)

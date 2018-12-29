@@ -10,16 +10,20 @@ function Room:ctor()
 	self._max_player 	= 4
 	self._is_start_game = false
 	
+	self:setMetaTable()
+	self:initFunction()
+end
+
+function Room:initFunction()
+
+	if self.init_first_data then
+		self:init_first_data()
+	end
+
 	if self.init_step_func then
 		self:init_step_func()
 	end
-	--[[
-	local allfunc = Room.getAllFunction(self) 
-	dump(allfunc,'Room:ctor>>>>>>')
-	local objectemetatable = getmetatable(self)
-	dump(objectemetatable , 'objectemetatable')
-	]]
-	self:setMetaTable()
+
 end
 
 function Room.getAllFunction(class,meathon)
@@ -37,10 +41,11 @@ function Room.getAllFunction(class,meathon)
     end
     return meathon
 end
--- TODO hcc
+
 function Room:setMetaTable()
     local scriptPath = {}
     local path = 'logic_server.RoomCell'
+    table.insert(scriptPath, path .. ".RoomData")
     table.insert(scriptPath, path .. ".RoomStepInit")
     table.insert(scriptPath, path .. ".RoomBaseLogic")
     table.insert(scriptPath, path .. ".RoomStartStep")
@@ -53,19 +58,16 @@ function Room:setMetaTable()
         local script = require(v)
         local object = script.new()
         local objectemetatable = getmetatable(object)
-        -- dump(objectemetatable,'Room:setMetaTable>>00000')
-        for scripti,scriptv in pairs(objectemetatable.__index) do
+        for scripti,scriptv in pairs(objectemetatable) do
             tmpmetatable[scripti] = scriptv
         end
     end
-    -- dump(tmpmetatable,'Room:setMetaTable>>11111')
     local metatable = Room.getAllFunction(self)
-    for i,v in pairs(metatable.__index) do
+    for i,v in pairs(metatable) do
         tmpmetatable[i] = v
     end
-	-- dump(tmpmetatable,'Room:setMetaTable>>22222') 
     setmetatable(self, {__index = tmpmetatable}) 
-	-- dump(tmpmetatable,'Room:setMetaTable>>33333')
+	dump(tmpmetatable,'Room:setMetaTable>>33333')
 end
 
 function Room:set_room_id(room_id)

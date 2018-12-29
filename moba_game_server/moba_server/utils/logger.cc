@@ -115,7 +115,7 @@ logger::log(const char* file_name,
 	vsnprintf(msg_content, sizeof(msg_content), msg, args);
 	va_end(args);
 
-	sprintf(msg_meta_info, "%s:%u  ", file_name, line_num);
+	sprintf(msg_meta_info, "%s:[%u]  ", file_name, line_num);
 	sprintf(msg_log_level, "[%s]", g_log_level[level]);
 
 	uv_buf_t buf[5]; // time level content fileandline newline
@@ -135,7 +135,7 @@ logger::log(const char* file_name,
 
 	if (g_std_out) {
 		//printf("%s:%u\n[%s] %s\n", file_name, line_num, g_log_level[level], msg_content);
-		printf("[%s]%s:%u  %s\n", g_log_level[level], file_name, line_num, msg_content);
+		printf("[%s]%s:[%u]  %s\n", g_log_level[level], file_name, line_num, msg_content);
 	}
 }
 

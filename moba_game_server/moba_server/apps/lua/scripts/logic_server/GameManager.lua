@@ -21,6 +21,7 @@ function GameManager:on_timer()
 end
 
 function GameManager:ctor()
+	print('GameManager:ctor')
 	self._cmd_handler_map =
 	{
 		[Cmd.eUserReconnectedReq] 	= self.on_reconnect,
