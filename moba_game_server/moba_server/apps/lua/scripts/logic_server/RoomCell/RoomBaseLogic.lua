@@ -24,7 +24,7 @@ function Room:check_game_start()
 		}
 		self:broacast_in_room(Cmd.eGameStart, msg, nil)
 		print('hcc>>testGameStart start game, ready count: '.. tostring(ready_player_count))
-		self:start_game_step(RoomDefine.GameStep.GAME_STEP_START_GAME)
+		self:goto_game_step(RoomDefine.GameStep.GAME_STEP_START_GAME)
 	else
 		print('hcc>>testGameStart not start game, ready count: '.. tostring(ready_player_count))
 	end

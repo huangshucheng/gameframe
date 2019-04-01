@@ -5,13 +5,12 @@ Lobby.LoginScene       = LoginScene
 local Cmd               = require("game.net.protocol.Cmd")
 local Respones          = require("game.net.Respones")
 local UserInfo          = require("game.clientdata.UserInfo")
-local AuthServiceProxy  = require("game.modules.AuthServiceProxy")
-local LogicServiceProxy = require("game.modules.LogicServiceProxy")
 
 local Function          = require('game.Base.Function')
 
 --------------拓展
 require('game.Lobby.LobbyScene.LoginSceneReceiveMsg')
+require('game.Lobby.LobbyScene.LoginSceneTouchEvent')
 
 ---------------end
 
@@ -35,14 +34,47 @@ function LoginScene:ctor()
 end
 
 function LoginScene:onCreate()
+    self:addUITouchEvent()
+    self:initUI()
+end
 
+function LoginScene:addUITouchEvent()
     local btn_guest_login = self:getResourceNode():getChildByName(BTN_GUEST_LOGIN)
-    local btn_lobby_register = self:getResourceNode():getChildByName(BTN_LOBBY_REGISTER)
-
     if btn_guest_login then
         btn_guest_login:addClickEventListener(handler(self,self.onEventBtnGuestLogin))
     end
 
+    local img_panel_login_bg = self:getResourceNode():getChildByName(IMG_LOGIN_BG)
+
+    if img_panel_login_bg then
+        local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
+        local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
+       
+        if panel_login then
+            local btn_login = ccui.Helper:seekWidgetByName(panel_login, BTN_LOGIN)
+            if btn_login then
+                btn_login:addClickEventListener(handler(self,self.onEventBtnLogin))     
+            end
+            local btn_goto_reg = ccui.Helper:seekWidgetByName(panel_login, BTN_GOTO_REGISTER)
+            if btn_goto_reg then
+               btn_goto_reg:addClickEventListener(handler(self,self.onEventBtnGoToLogin))  
+            end
+        end
+
+        if panel_register then
+            local btn_reg_close = ccui.Helper:seekWidgetByName(panel_register, BTN_REG_CLOSE)
+            if btn_reg_close then
+               btn_reg_close:addClickEventListener(handler(self,self.onEventBtnRegClose))
+            end
+            local btn_reg = ccui.Helper:seekWidgetByName(panel_register, BTN_REGISTER)
+            if btn_reg then
+                btn_reg:addClickEventListener(handler(self,self.onEventBtnReg))
+            end
+        end
+    end
+end
+
+function LoginScene:initUI()
     local img_panel_login_bg = self:getResourceNode():getChildByName(IMG_LOGIN_BG)
 
     if not img_panel_login_bg then
@@ -51,28 +83,7 @@ function LoginScene:onCreate()
 
     local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
     local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
-
-    if (not panel_login) or (not panel_register) then
-        return
-    end
-
-    local btn_login = ccui.Helper:seekWidgetByName(panel_login, BTN_LOGIN)
-    if btn_login then
-        btn_login:addClickEventListener(handler(self,self.onEventBtnLogin))     
-    end
-    local btn_goto_reg = ccui.Helper:seekWidgetByName(panel_login, BTN_GOTO_REGISTER)
-    if btn_goto_reg then
-       btn_goto_reg:addClickEventListener(handler(self,self.onEventBtnGoToLogin))  
-    end
-
-    local btn_reg_close = ccui.Helper:seekWidgetByName(panel_register, BTN_REG_CLOSE)
-    if btn_reg_close then
-       btn_reg_close:addClickEventListener(handler(self,self.onEventBtnRegClose))
-    end
-    local btn_reg = ccui.Helper:seekWidgetByName(panel_register, BTN_REGISTER)
-    if btn_reg then
-        btn_reg:addClickEventListener(handler(self,self.onEventBtnReg))
-    end
+    
     -- editbox
     local login_textfield_account   = ccui.Helper:seekWidgetByName(panel_login, TEXTFIELD_ACCOUNT)
     local login_textfield_pwd       = ccui.Helper:seekWidgetByName(panel_login, TEXTFIELD_PWD)
@@ -165,91 +176,6 @@ function LoginScene:onCreate()
 
     if self._login_textfield_pwd then
         self._login_textfield_pwd:setText(UserInfo.getUserPwd())
-    end
-end
-
-function LoginScene:onEventBtnGuestLogin(sender,eventType)
-    local keystr = UserInfo.getUserGuestKey()
-    if keystr == '' or keystr == nil then
-        keystr = math.random(100000, 999999) .. '8JvrDstUNDuTNnnCKFEw' .. math.random(100000, 999999)
-        UserInfo.setUserGuestKey(keystr)
-        UserInfo.flush()
-    end
-    print('loginKey: ' .. keystr)
-    AuthServiceProxy:getInstance():sendGuestLogin(keystr)
-    UserInfo.setLoginType('guest')
-    Lobby.showPopLayer('LoadingLayer')
-end
-
-function LoginScene:onEventBtnLogin(sender, eventType)
-    local accountStr    = self._login_textfield_account:getText()
-    local pwdStr        = self._login_textfield_pwd:getText()
-    print('login...' .. ' ' .. accountStr .. '  ' .. pwdStr)
-    if accountStr == '' or pwdStr == '' then
-        Lobby.showPopLayer('TipsLayer',{"帐号或密码错误!"})
-        return
-    end
-
-    AuthServiceProxy:getInstance():sendUnameLogin(accountStr,pwdStr)
-    UserInfo.setUserAccount(accountStr)
-    UserInfo.setUserPwd(pwdStr)
-    UserInfo.setLoginType('uname')
-    Lobby.showPopLayer('LoadingLayer')
-end
-
-function LoginScene:onEventBtnReg(sender, eventType)
-    local accountStr    = self._reg_textfield_account:getText()
-    local pwdStr        = self._reg_textfield_pwd:getText()
-    local pwdStrConf    = self._reg_textfield_pwd_conf:getText()
-    -- todo: NO space,chinese,daxiaoxie
-    print(accountStr , pwdStr , pwdStrConf)
-    if accountStr == '' or pwdStr == '' or pwdStrConf == '' then
-        Lobby.showPopLayer('TipsLayer',{"帐号或密码错误!"})
-        return
-    end
-
-    if pwdStr ~= pwdStrConf then
-        Lobby.showPopLayer('TipsLayer',{"两次密码不一样!"})
-        return
-    end
-
-    if string.len(accountStr) < 6 or string.len(pwdStr) < 6 or string.len(pwdStrConf) < 6 then
-        Lobby.showPopLayer('TipsLayer',{"密码需要大于6位!"})
-        return
-    end
-
-    AuthServiceProxy:getInstance():sendRegist(accountStr, pwdStr)
-    Lobby.showPopLayer('LoadingLayer')
-end
-
-function LoginScene:onEventBtnGoToLogin(sender,eventType)
-    local img_panel_login_bg = self:getResourceNode():getChildByName(IMG_LOGIN_BG)
-    if img_panel_login_bg then
-        local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
-        if panel_login then
-            panel_login:setVisible(false)
-        end
-
-        local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
-        if panel_register then
-            panel_register:setVisible(true)
-        end
-    end
-    
-end
-
-function LoginScene:onEventBtnRegClose(sender, eventType)
-    local img_panel_login_bg = self:getResourceNode():getChildByName(IMG_LOGIN_BG)
-    if img_panel_login_bg then
-        local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
-        if panel_login then
-            panel_login:setVisible(true)
-        end
-
-        local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
-        if panel_register then
-            panel_register:setVisible(false)
-        end
     end
 end
 

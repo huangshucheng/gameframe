@@ -3,7 +3,6 @@ local Room = class("Room")
 local ToolUtils = require("utils/ToolUtils")
 
 function Room:ctor()
-	print('Room:ctor')
 	self._room_id 		= 0
 	self._players 		= {}
 	self._room_info 	= ''
@@ -46,12 +45,9 @@ function Room:setMetaTable()
     local scriptPath = {}
     local path = 'logic_server.RoomCell'
     table.insert(scriptPath, path .. ".RoomData")
-    table.insert(scriptPath, path .. ".RoomStepInit")
     table.insert(scriptPath, path .. ".RoomBaseLogic")
-    table.insert(scriptPath, path .. ".RoomStartStep")
-    table.insert(scriptPath, path .. ".RoomStopStep")
-    table.insert(scriptPath, path .. ".RoomStartSubStep")
-    table.insert(scriptPath, path .. ".RoomStopSubStep")
+    table.insert(scriptPath, path .. ".RoomStepInit")
+    table.insert(scriptPath, path .. ".GameStep")
 
     local tmpmetatable = {}
     for i,v in ipairs(scriptPath) do
@@ -109,14 +105,12 @@ function Room:enter_player(player)
 	if type(player) ~= 'table' then
 		return false
 	end
-
 	-- player already in room
 	if self:is_player_in_room(player) then
 		player:set_is_offline(false)
 		print("hcc>> room: enter_player already in room , id:  " .. player:get_uid())
 		return true
 	end
-
 	-- player reconnect to logic and enter room
 	local uid = player:get_uid()
 	for i = 1 , #self._players do
@@ -168,11 +162,11 @@ function Room:enter_player(player)
 		if num >= 1 then
 			local randNum = math.random(1, num)
 			local rand_seat_id = seat_id_table[randNum]
-			print('hcc>> seatid: ---------------------------' .. rand_seat_id )
+			-- print('hcc>> seatid: ---------------------------' .. rand_seat_id )
 			player:set_seat_id(rand_seat_id)
 		end
 	end
-	print("hcc>> 55555 room: enter_player  id: " .. player:get_uid() .. '  playerNum: '.. self:get_room_player_num())
+	-- print("hcc>> 55555 room: enter_player  id: " .. player:get_uid() .. '  playerNum: '.. self:get_room_player_num())
 	return true
 end
 
@@ -212,18 +206,6 @@ function Room:kick_all_players_in_room()
 	end
 
 	self._players = {}
-end
-
-function Room:broacast_in_room(ctype, body, not_to_player)
-	if ctype == nil then
-		return
-	end
-
-	for i = 1 , #self._players do
-		if self._players[i] ~= not_to_player then
-			self._players[i]:send_msg(ctype, body)
-		end
-	end
 end
 
 function Room:is_player_in_room(player)
@@ -275,6 +257,25 @@ function Room:set_all_player_state(state)
 	for i = 1 , #self._players do
 		self._players[i]:set_state(state)
 	end
+end
+-- 发送消息给房间所有人
+function Room:broacast_in_room(ctype, body, not_to_player)
+	if ctype == nil then
+		return
+	end
+
+	for i = 1 , #self._players do
+		if self._players[i] ~= not_to_player then
+			self._players[i]:send_msg(ctype, body)
+		end
+	end
+end
+--发送消息给单个人
+function Room:send_msg_to_player(ctype, body, player)
+	if ctype == nil or next(body) == nil or player == nil then
+		return
+	end
+	player:send_msg(ctype, body)
 end
 
 return Room

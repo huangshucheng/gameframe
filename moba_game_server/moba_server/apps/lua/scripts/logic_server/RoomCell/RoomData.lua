@@ -1,6 +1,6 @@
 local RoomData = class('RoomData')
 
--- Room logic data
+-- 房间逻辑数据
 
 function RoomData:ctor()
 
