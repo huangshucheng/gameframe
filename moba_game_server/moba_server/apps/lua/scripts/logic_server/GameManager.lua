@@ -84,11 +84,13 @@ function GameManager:on_user_ready(session, req)
 	local room_id = player:get_room_id()
 	if room_id == -1 then
 		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotInRoom)
+		return
 	end
 
 	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
 	if not room then 
 		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.RoomIsNotExist)
+		return
 	end
 
 	local ready_state = body.ready_state
