@@ -63,7 +63,7 @@ function Room:setMetaTable()
         tmpmetatable[i] = v
     end
     setmetatable(self, {__index = tmpmetatable}) 
-	dump(tmpmetatable,'Room:setMetaTable>>33333')
+	--dump(tmpmetatable,'Room:setMetaTable>>33333')
 end
 
 function Room:set_room_id(room_id)
