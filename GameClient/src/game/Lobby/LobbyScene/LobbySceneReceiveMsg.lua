@@ -32,6 +32,7 @@ function LobbyScene:addClientEventListener()
     addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
     addEvent("BackRoomRes", self, self.onEventBackRoom)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
+    addEvent("UdpTest", self, self.onEventUdpTest)
 end
 
 function LobbyScene:onEventEditProfile(event)
@@ -243,4 +244,9 @@ function LobbyScene:onEventHeartBeat(event)
     if body.status == Respones.OK then
         LogicServiceProxy:getInstance():sendHeartBeat()
     end
+end
+
+function LobbyScene:onEventUdpTest(event)
+    local body = event._usedata
+    print('hcc>>onEventUdpTest: ' .. body.content)
 end

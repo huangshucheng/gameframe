@@ -83,6 +83,7 @@ enum Cmd {
 	eUserReadyReq = 49;
 	eUserReadyRes = 50;
 	eGameStart = 51;
+	eUdpTest = 52;
 }
 
 message GuestLoginReq {
@@ -301,4 +302,8 @@ message UserReadyRes {
 
 message GameStart {
 	repeated sint32 users_state = 1;
+}
+
+message UdpTest {
+	required string content = 1;
 }

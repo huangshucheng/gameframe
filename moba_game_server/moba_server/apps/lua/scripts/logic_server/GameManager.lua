@@ -25,6 +25,7 @@ function GameManager:ctor()
 	{
 		[Cmd.eUserReconnectedReq] 	= self.on_reconnect,
 		[Cmd.eUserReadyReq] 		= self.on_user_ready,
+		[Cmd.eUdpTest]				= self.on_udp_test,
 	}
 end
 
@@ -122,6 +123,21 @@ function GameManager:on_user_ready(session, req)
 	player:send_msg(Cmd.eUserReadyRes, msg_body)
 	room:broacast_in_room(Cmd.eUserReadyRes, msg_body, player)
 	room:check_game_start()
+end
+
+function GameManager:on_udp_test(session, req)
+	local stype = req[1]
+	local ctype = req[2]
+	local uid 	= req[3]
+	local body 	= req[4]
+	print('hcc>>on_udp_test>> content: ' .. tostring(body.content))
+	local msg = {
+		stype,
+		ctype,
+		uid,
+		{content = body.content}
+	}
+	NetWork:getInstance():send_msg(session,msg)
 end
 
 return GameManager

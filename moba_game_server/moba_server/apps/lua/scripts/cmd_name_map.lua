@@ -53,6 +53,7 @@ local cmd_name_map = {
 	[49] = "UserReadyReq",
 	[50] = "UserReadyRes",
 	[51] = "GameStart",
+	[52] = "UdpTest",
 }
 
 return cmd_name_map

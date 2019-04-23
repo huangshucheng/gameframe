@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[40];
+  static const ::google::protobuf::internal::ParseTable schema[41];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -123,6 +123,8 @@ void InitDefaultsUserReadyResImpl();
 void InitDefaultsUserReadyRes();
 void InitDefaultsGameStartImpl();
 void InitDefaultsGameStart();
+void InitDefaultsUdpTestImpl();
+void InitDefaultsUdpTest();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -164,6 +166,7 @@ inline void InitDefaults() {
   InitDefaultsUserReadyReq();
   InitDefaultsUserReadyRes();
   InitDefaultsGameStart();
+  InitDefaultsUdpTest();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -247,6 +250,9 @@ extern LoginOutResDefaultTypeInternal _LoginOutRes_default_instance_;
 class RecvLoginBonuesRes;
 class RecvLoginBonuesResDefaultTypeInternal;
 extern RecvLoginBonuesResDefaultTypeInternal _RecvLoginBonuesRes_default_instance_;
+class UdpTest;
+class UdpTestDefaultTypeInternal;
+extern UdpTestDefaultTypeInternal _UdpTest_default_instance_;
 class UnameLoginReq;
 class UnameLoginReqDefaultTypeInternal;
 extern UnameLoginReqDefaultTypeInternal _UnameLoginReq_default_instance_;
@@ -360,11 +366,12 @@ enum Cmd {
   eUserReconnectedRes = 48,
   eUserReadyReq = 49,
   eUserReadyRes = 50,
-  eGameStart = 51
+  eGameStart = 51,
+  eUdpTest = 52
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
-const Cmd Cmd_MAX = eGameStart;
+const Cmd Cmd_MAX = eUdpTest;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();
@@ -5617,6 +5624,124 @@ class GameStart : public ::google::protobuf::Message /* @@protoc_insertion_point
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsGameStartImpl();
 };
+// -------------------------------------------------------------------
+
+class UdpTest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UdpTest) */ {
+ public:
+  UdpTest();
+  virtual ~UdpTest();
+
+  UdpTest(const UdpTest& from);
+
+  inline UdpTest& operator=(const UdpTest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UdpTest(UdpTest&& from) noexcept
+    : UdpTest() {
+    *this = ::std::move(from);
+  }
+
+  inline UdpTest& operator=(UdpTest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UdpTest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UdpTest* internal_default_instance() {
+    return reinterpret_cast<const UdpTest*>(
+               &_UdpTest_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    40;
+
+  void Swap(UdpTest* other);
+  friend void swap(UdpTest& a, UdpTest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UdpTest* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UdpTest* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UdpTest& from);
+  void MergeFrom(const UdpTest& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UdpTest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string content = 1;
+  bool has_content() const;
+  void clear_content();
+  static const int kContentFieldNumber = 1;
+  const ::std::string& content() const;
+  void set_content(const ::std::string& value);
+  #if LANG_CXX11
+  void set_content(::std::string&& value);
+  #endif
+  void set_content(const char* value);
+  void set_content(const char* value, size_t size);
+  ::std::string* mutable_content();
+  ::std::string* release_content();
+  void set_allocated_content(::std::string* content);
+
+  // @@protoc_insertion_point(class_scope:UdpTest)
+ private:
+  void set_has_content();
+  void clear_has_content();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr content_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUdpTestImpl();
+};
 // ===================================================================
 
 
@@ -9336,9 +9461,78 @@ GameStart::mutable_users_state() {
   return &users_state_;
 }
 
+// -------------------------------------------------------------------
+
+// UdpTest
+
+// required string content = 1;
+inline bool UdpTest::has_content() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UdpTest::set_has_content() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UdpTest::clear_has_content() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UdpTest::clear_content() {
+  content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_content();
+}
+inline const ::std::string& UdpTest::content() const {
+  // @@protoc_insertion_point(field_get:UdpTest.content)
+  return content_.GetNoArena();
+}
+inline void UdpTest::set_content(const ::std::string& value) {
+  set_has_content();
+  content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UdpTest.content)
+}
+#if LANG_CXX11
+inline void UdpTest::set_content(::std::string&& value) {
+  set_has_content();
+  content_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UdpTest.content)
+}
+#endif
+inline void UdpTest::set_content(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_content();
+  content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UdpTest.content)
+}
+inline void UdpTest::set_content(const char* value, size_t size) {
+  set_has_content();
+  content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UdpTest.content)
+}
+inline ::std::string* UdpTest::mutable_content() {
+  set_has_content();
+  // @@protoc_insertion_point(field_mutable:UdpTest.content)
+  return content_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UdpTest::release_content() {
+  // @@protoc_insertion_point(field_release:UdpTest.content)
+  clear_has_content();
+  return content_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UdpTest::set_allocated_content(::std::string* content) {
+  if (content != NULL) {
+    set_has_content();
+  } else {
+    clear_has_content();
+  }
+  content_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), content);
+  // @@protoc_insertion_point(field_set_allocated:UdpTest.content)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

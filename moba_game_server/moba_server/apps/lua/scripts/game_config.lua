@@ -67,6 +67,11 @@ local game_config = {
 		port 		= 6379,
 		db_index 	= 3,
 	},
+
+	logic_udp = {
+		host  		= "127.0.0.1",
+		port 		= 8003,
+	},
 }
 
 return game_config

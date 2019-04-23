@@ -88,9 +88,20 @@ function LobbyScene:onTouchSettingBtn(send, eventType)
     Lobby.showPopLayer('SetLayer')
 end
 
+local SocketUDP = require('game.net.SocketUDP')
+local udp       = SocketUDP.new()
 function LobbyScene:onTouchMessageBtn(send, evnetType)
-    Lobby.showPopLayer("RankLayer")
+    -- Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
+    --test 
+    -- LogicServiceProxy:getInstance():sendUdpTest()
+    local msg = {
+        content = "hccloveyou"
+    }
+    local Cmd                   = require("game.net.protocol.Cmd")
+    if udp then
+        udp:sendMsg(3,Cmd.eUdpTest,msg)
+    end
 end
 
 function LobbyScene:onTouchMailBtn(send, evnetType)

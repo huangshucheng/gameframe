@@ -73,6 +73,7 @@ local Cmd = {
 	eUserReadyRes 				= 50,
 
 	eGameStart 	                = 51,
+	eUdpTest 					= 52,
 }
 
 return Cmd
