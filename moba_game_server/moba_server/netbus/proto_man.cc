@@ -61,7 +61,12 @@ proto_man::create_message(const char* type_name) {
 
 void
 proto_man::release_message(google::protobuf::Message* m) {
-	delete m;
+	if (m)
+	{
+		m->Clear();
+		delete m;
+		m = nullptr;
+	}
 }
 
 bool 
@@ -139,7 +144,7 @@ proto_man::cmd_msg_free(struct cmd_msg* msg) {
 		}
 		else {
 			google::protobuf::Message* p_m = (google::protobuf::Message*) msg->body;
-			delete p_m;
+			release_message(p_m);
 			msg->body = NULL;
 		}
 	}

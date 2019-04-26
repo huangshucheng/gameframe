@@ -11,7 +11,6 @@ using namespace std;
 #include "logger.h"
 #include "uv.h"
 
-
 static string g_log_path;
 static string g_prefix;
 static uv_fs_t g_file_handle;
@@ -21,6 +20,7 @@ static char g_format_time[64] = { 0 };
 static char* g_log_level[] = { "DEBUG ", "WARNING ", "ERROR "};
 static bool g_std_out = false;
 static bool is_init = false;
+static uv_fs_t g_write_req;
 
 static void 
 open_file(tm* time_struct) {
@@ -28,9 +28,9 @@ open_file(tm* time_struct) {
 	char fileName[128] = { 0 };
 
 	if (g_file_handle.result != 0) {
-		uv_fs_close(uv_default_loop(), &g_file_handle, g_file_handle.result, NULL);
-		uv_fs_req_cleanup(&g_file_handle);
+		uv_fs_close(NULL, &g_file_handle, g_file_handle.result, NULL);
 		g_file_handle.result = 0;
+		uv_fs_req_cleanup(&g_file_handle);
 	}
 
 	sprintf(fileName, "%s%s.%4d%02d%02d.log", g_log_path.c_str(), g_prefix.c_str(), time_struct->tm_year + 1900, time_struct->tm_mon + 1, time_struct->tm_mday);
@@ -38,6 +38,7 @@ open_file(tm* time_struct) {
 	if (result < 0) {
 		fprintf(stderr, "open file failed! name=%s, reason=%s", fileName, uv_strerror(result));
 	}
+	uv_fs_req_cleanup(&g_file_handle);
 }
 
 static void 
@@ -55,7 +56,6 @@ prepare_file() {
 			open_file(time_struct);
 		}
 	}
-
 }
 
 static void 
@@ -93,10 +93,10 @@ logger::init(const char* path, const char* prefix, bool std_output) {
 	int result;
 
 	while (find != std::string::npos) {
-		result = uv_fs_mkdir(uv_default_loop(), &req, tmp_path.substr(0, find).c_str(), 0755, NULL);
+		result = uv_fs_mkdir(NULL, &req, tmp_path.substr(0, find).c_str(), 0755, NULL);
 		find = tmp_path.find("/", find + 1);
+		uv_fs_req_cleanup(&req);
 	}
-	uv_fs_req_cleanup(&req);
 }
 
 void 
@@ -124,17 +124,15 @@ logger::log(const char* file_name,
 	buf[2] = uv_buf_init(msg_meta_info, strlen(msg_meta_info));
 	buf[3] = uv_buf_init(msg_content, strlen(msg_content));
 	buf[4] = uv_buf_init(&new_line, 1);
-
-	uv_fs_t writeReq;
-	int result = uv_fs_write(NULL, &writeReq, g_file_handle.result, buf, sizeof(buf) / sizeof(buf[0]), -1, NULL);
+	
+	uv_fs_req_cleanup(&g_write_req);
+	unsigned int nbufs = sizeof(buf) / sizeof(buf[0]);
+	int result = uv_fs_write(NULL, &g_write_req, g_file_handle.result, buf, nbufs, -1, NULL);
 	if (result < 0) {
 		fprintf(stderr, "log failed %s%s%s%s", g_format_time, g_log_level[level], msg_meta_info, msg_content);
 	}
-
-	uv_fs_req_cleanup(&writeReq);
-
+	uv_fs_req_cleanup(&g_write_req);
 	if (g_std_out) {
-		//printf("%s:%u\n[%s] %s\n", file_name, line_num, g_log_level[level], msg_content);
 		printf("[%s]%s:[%u]  %s\n", g_log_level[level], file_name, line_num, msg_content);
 	}
 }

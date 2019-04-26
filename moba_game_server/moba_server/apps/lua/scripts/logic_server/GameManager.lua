@@ -17,7 +17,8 @@ function GameManager:getInstance()
 end
 
 function GameManager:on_timer()
-	-- print('GameManager>> on_timer  ')
+	--local  c1 = collectgarbage("count")
+	--print('GameManager>> on_timer  memory: ' .. tostring(c1))
 end
 
 function GameManager:ctor()
@@ -130,7 +131,8 @@ function GameManager:on_udp_test(session, req)
 	local ctype = req[2]
 	local uid 	= req[3]
 	local body 	= req[4]
-	print('hcc>>on_udp_test>> content: ' .. tostring(body.content))
+	local len = string.len(body.content)
+	-- print('hcc>>on_udp_test>> uid: ' .. uid .. ' ,content len: ' .. tostring(body.content))
 	local msg = {
 		stype,
 		ctype,

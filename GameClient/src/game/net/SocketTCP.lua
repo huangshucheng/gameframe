@@ -9,14 +9,14 @@ local STATUS_ALREADY_CONNECTED      = "already connected"
 local STATUS_ALREADY_IN_PROGRESS    = "Operation already in progress"
 local STATUS_TIMEOUT                = "timeout"
 
-local Scheduler     = require("game.utils.scheduler")
-local socket        = require "socket"
-
 SocketTCP.EVENT_DATA                = "SOCKET_TCP_DATA"
 SocketTCP.EVENT_CLOSE               = "SOCKET_TCP_CLOSE"
 SocketTCP.EVENT_CLOSED              = "SOCKET_TCP_CLOSED"
 SocketTCP.EVENT_CONNECTED           = "SOCKET_TCP_CONNECTED"
 SocketTCP.EVENT_CONNECT_FAILURE     = "SOCKET_TCP_CONNECT_FAILURE"
+
+local Scheduler     = require("game.utils.scheduler")
+local socket        = require "socket"
 
 SocketTCP._VERSION 	= socket._VERSION
 SocketTCP._DEBUG 	= socket._DEBUG

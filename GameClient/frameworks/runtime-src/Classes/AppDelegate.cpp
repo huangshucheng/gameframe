@@ -45,10 +45,12 @@ static int register_all_packages()
 bool AppDelegate::applicationDidFinishLaunching()
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	/*
 	AllocConsole();
 	freopen("CONIN$", "r", stdin);
 	freopen("CONOUT$", "w", stdout);
 	freopen("CONOUT$", "w", stderr);
+	*/
 #endif
     // set default FPS
     Director::getInstance()->setAnimationInterval(1.0 / 60.0f);

@@ -291,27 +291,26 @@ push_proto_message_tolua(const Message* message) {
 // protobuf: message key, value --> lua table
 // json: json string ´«¸ølua
 // {1: stype, 2: ctype, 3: utag, 4: body_table_or_str}
+//TODO ÄÚ´æÐ¹Â©
 bool
 lua_service::on_session_recv_cmd(session* s, struct cmd_msg* msg) {
-	tolua_pushuserdata(lua_wrapper::lua_state(), (void*)s);
 	int index = 1;
-
+	tolua_pushuserdata(lua_wrapper::lua_state(), (void*)s);
 	lua_newtable(lua_wrapper::lua_state());
 	lua_pushinteger(lua_wrapper::lua_state(), msg->stype);
-	lua_rawseti(lua_wrapper::lua_state(), -2, index);          /* table[index] = value, L: table */
+	lua_rawseti(lua_wrapper::lua_state(), -2, index);         
 	++index;
 
 	lua_pushinteger(lua_wrapper::lua_state(), msg->ctype);
-	lua_rawseti(lua_wrapper::lua_state(), -2, index);          /* table[index] = value, L: table */
+	lua_rawseti(lua_wrapper::lua_state(), -2, index);         
 	++index;
 
 	lua_pushinteger(lua_wrapper::lua_state(), msg->utag);
-	lua_rawseti(lua_wrapper::lua_state(), -2, index);          /* table[index] = value, L: table */
+	lua_rawseti(lua_wrapper::lua_state(), -2, index);         
 	++index;
-
 	if (!msg->body) {
 		lua_pushnil(lua_wrapper::lua_state());
-		lua_rawseti(lua_wrapper::lua_state(), -2, index);          /* table[index] = value, L: table */
+		lua_rawseti(lua_wrapper::lua_state(), -2, index);     
 		++index;
 	}
 	else {
@@ -321,7 +320,7 @@ lua_service::on_session_recv_cmd(session* s, struct cmd_msg* msg) {
 		else { // protobuf
 			push_proto_message_tolua((Message*)msg->body);
 		}
-		lua_rawseti(lua_wrapper::lua_state(), -2, index);          /* table[index] = value, L: table */
+		lua_rawseti(lua_wrapper::lua_state(), -2, index);          
 		++index;
 	}
 

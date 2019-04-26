@@ -25,7 +25,6 @@ struct connect_cb {
 extern "C" {
 	static void
 	on_recv_client_cmd(session* s, unsigned char* body, int len) {
-		
 		struct raw_cmd raw;
 		if (proto_man::decode_raw_cmd(body, len, &raw)) {
 			if (!service_man::on_recv_raw_cmd((session*)s, &raw)) {

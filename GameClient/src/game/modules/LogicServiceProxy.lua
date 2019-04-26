@@ -75,10 +75,7 @@ function LogicServiceProxy:sendUserCancelReady()
 end
 
 --test
-function LogicServiceProxy:sendUdpTest()
-	local msg = {
-		content = "hello udp"
-	}
+function LogicServiceProxy:sendUdpTest(msg)
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUdpTest, msg)
 end
 

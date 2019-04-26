@@ -1,4 +1,4 @@
-local NetWork         = class("NetWork")
+local NetWork           = class("NetWork")
 
 local SocketTCP         = require("game.net.SocketTCP")
 local ByteArray         = require("game.utils.ByteArray")
@@ -7,12 +7,9 @@ local ConfigKeyWord     = require("game.net.ConfigKeyWord")
 local ProtoMan          = require("game.utils.ProtoMan")
 local Cmd               = require("game.net.protocol.Cmd")
 local cmd_name_map      = require("game.net.protocol.cmd_name_map")
-local Stype             = require("game.net.Stype")
-
 local socket            = require "socket"
 
 local HEADER_SIZE       = 2
-
 local __name            = 'NetWork>> '
 local __buf             = ByteArray.new(ByteArray.ENDIAN_LITTLE)
 
@@ -61,7 +58,7 @@ function NetWork:onMessage(event)
             if cmd_name_map[tb.ctype] then
                 postEvent(cmd_name_map[tb.ctype],tb.body)
                 if tb.ctype ~= Cmd.eHeartBeatRes then
-                    dump(tb,'[协议:' .. tostring(cmd_name_map[tb.ctype]) .. ']',5)
+                    dump(tb,'[tcp协议:' .. tostring(cmd_name_map[tb.ctype]) .. ']',5)
                 end
             end
         end

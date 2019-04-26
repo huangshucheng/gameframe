@@ -38,13 +38,11 @@ service_man::on_recv_raw_cmd(session* s, struct raw_cmd* raw) {
 	if (g_service_set[raw->stype]->using_raw_cmd) {
 		return g_service_set[raw->stype]->on_session_recv_raw_cmd(s, raw);
 	}
-
 	struct cmd_msg* msg = NULL;
 	if (proto_man::decode_cmd_msg(raw->raw_data, raw->raw_len, &msg)) {
 		ret = g_service_set[raw->stype]->on_session_recv_cmd(s, msg);
 		proto_man::cmd_msg_free(msg);
 	}
-
 	return ret;
 }
 
