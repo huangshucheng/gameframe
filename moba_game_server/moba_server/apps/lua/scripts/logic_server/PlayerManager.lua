@@ -51,12 +51,14 @@ end
 function PlayerManager:on_login_logic_server(session, req)
 	local uid = req[3]
 	local stype = req[1]
-	print('PlayerManager>> on_login_logic_server >>  uid: '.. tostring(uid))
+	local body = req[4]
 	local p = logic_server_players[uid]
 	if p then
 		p:set_session(session)
+		p:set_udp_addr(body.udp_ip, body.udp_port)
+		print('PlayerManager>>111 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
 		NetWork:getInstance():send_status(session, Cmd.eLoginLogicRes, uid, Respones.OK)
-		print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
+		-- print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
 		return
 	end
 
@@ -67,18 +69,19 @@ function PlayerManager:on_login_logic_server(session, req)
 			online_player_num = online_player_num + 1
 		end
 		NetWork:getInstance():send_status(session, Cmd.eLoginLogicRes, uid, status)
-		print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
+		-- print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
+		print('PlayerManager>>222 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
 	end)
+	p:set_udp_addr(body.udp_ip, body.udp_port)
 end
 
 -- 玩家离开了逻辑服务器
 function PlayerManager:on_player_disconnect(session, req)
 	local uid = req[3]
 	local p = logic_server_players[uid]
-	if not p then
-		return 
-	end
 	if p then
+		p:set_session(nil)
+		p:set_udp_addr(nil, 0)
 		local RoomManager = require("logic_server/RoomManager")
 		RoomManager:getInstance():on_player_disconnect(p)
 		print("PlayerManager>> on_player_disconnect>> Player uid " .. uid .. " disconnect!")

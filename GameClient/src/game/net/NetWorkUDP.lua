@@ -22,6 +22,10 @@ function NetWorkUDP:ctor()
     -- TODO 加密
 end
 
+function NetWorkUDP:start()
+    print('hcc>>NetWorkUDP:start')
+end
+
 function NetWorkUDP:addEventListenner()
     if self._socketUDP then
         self._socketUDP:addEventListener(SocketUDP.EVENT_DATA, handler(self,self.onMessage))

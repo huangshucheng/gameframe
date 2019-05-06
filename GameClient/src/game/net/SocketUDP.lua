@@ -34,6 +34,10 @@ function SocketUDP:ctor()
 		self.udp:setpeername(self.host, self.port)	--绑定远程端口
 		self.tickScheduler = Scheduler.scheduleUpdateGlobal(handler(self, self._tick))
 		print('hcc>>tick ' .. tostring(self.tickScheduler))
+        --local host , port = self.udp:getpeername()
+        local ip, port = self.udp:getsockname()
+        print('hcc>> udp ip: ' .. tostring(ip) .. ' ,port: ' .. tostring(port))
+        ConfigKeyWord.set_local_udp_addr(ip,port)
 	end
 end
 

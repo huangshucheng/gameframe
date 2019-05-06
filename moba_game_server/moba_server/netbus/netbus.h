@@ -5,6 +5,7 @@ class session;
 
 class netbus {
 public:
+	netbus();
 	static netbus* instance();
 
 public:
@@ -16,6 +17,11 @@ public:
 	void tcp_connect(const char* server_ip, int port, 
 	                 void(*on_connected)(int err, session* s, void* udata), 
 					 void* udata);
+
+	void udp_send_to(char* ip, int port, unsigned char* body, int len);
+
+private:
+	void* udp_handler;
 };
 
 #endif

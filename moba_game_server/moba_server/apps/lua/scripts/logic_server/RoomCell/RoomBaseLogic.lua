@@ -8,7 +8,8 @@ function Room:check_game_start()
 		return
 	end
 	local ready_player_count = self:get_player_count_by_state(Player.STATE.psReady)
-	if ready_player_count == self:get_max_player() then
+	-- if ready_player_count == self:get_max_player() then
+	if ready_player_count >= 1 then --test
 		-- start game
 		self:set_is_start_game(true)
 		self:set_all_player_state(Player.STATE.psPlaying)

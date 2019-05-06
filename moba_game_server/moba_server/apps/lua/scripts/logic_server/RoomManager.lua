@@ -336,15 +336,13 @@ function RoomManager:on_back_room(session, req)
 	print('hcc>> on_back_room usccess roomNum: ' .. self:get_total_rooms())
 end
 
--- TODO
 function RoomManager:on_player_disconnect(player)
-	print('hcc>> on_player_disconnect')
+	print('hcc>> on_player_disconnect ' .. type(player))
 	if type(player) ~= 'table' then
 		return
 	end
 
 	local room_id = player:get_room_id()
-
 	if room_id == -1 then
 		return
 	end
@@ -361,7 +359,7 @@ function RoomManager:on_player_disconnect(player)
 	room:broacast_in_room(Cmd.eUserOffLine, body_msg)
 	print("hcc>> on_player_disconnect roomNum: " .. self:get_total_rooms())
 end
-
+--玩家是否卡在房间里面，没有正常退出
 function RoomManager:get_is_player_uid_in_room(player)
 	if type(player) ~= 'table' then
 		return false
@@ -375,7 +373,9 @@ function RoomManager:get_is_player_uid_in_room(player)
 end
 
 function RoomManager:delete_room(room_id)
-	if server_rooms[tostring(room_id)] then
+	local room = server_rooms[tostring(room_id)]
+	if room then
+		room:reset()
 		server_rooms[tostring(room_id)] = nil
 	end
 end

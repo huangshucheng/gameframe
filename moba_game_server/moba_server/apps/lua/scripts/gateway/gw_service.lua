@@ -53,6 +53,7 @@ end
 
 local function send_to_client(server_session, raw_cmd)
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
+	print('hcc>>send_to_client>> ctype: ' .. ctype)
 	local client_session = nil
 	-- login
 	if is_login_return_cmd(ctype) then
@@ -102,6 +103,14 @@ local function send_to_client(server_session, raw_cmd)
 		return
 	end
 
+	if ctype == Cmd.eLogicFrame then
+		print('hcc>>eLogicFrame')
+	end
+
+	if ctype == Cmd.eUdpTest then
+		print('hcc>>eUdpTest')
+	end
+
 	client_session = client_sessions_uid[utag]
 	if client_session then 
 		RawCmd.set_utag(raw_cmd, 0)
@@ -112,7 +121,7 @@ local function send_to_client(server_session, raw_cmd)
 			Session.set_last_recv_time(client_session, 0)
 			Session.set_last_send_time(client_session, 0)
 			client_sessions_uid[utag] = nil
-			print('hcc>> Cmd.eLoginOutRes uid: ' .. utag)
+			-- print('hcc>> Cmd.eLoginOutRes uid: ' .. utag)
 		end
 	end
 end
@@ -153,6 +162,19 @@ local function send_to_server(client_session, raw_cmd)
 		else
 		end
 		client_sessions_ukey[utag] = client_session
+	elseif ctype == Cmd.eLoginLogicReq then
+		local uid = Session.get_uid(client_session)
+		utag = uid
+		if utag == 0 then
+			return
+		end
+		local tcp_ip, tcp_port = Session.get_address(client_session)
+		local body = RawCmd.read_body(raw_cmd)
+		body.udp_ip = tcp_ip
+		print('hcc>> gw_service>> udp_ip: ' .. tostring(tcp_ip) .. '  ,udp_port: ' .. tostring(body.udp_port))
+		local login_logic_cmd = {stype, ctype, utag, body}
+		Session.send_msg(server_session, login_logic_cmd)
+		return
 	elseif ctype == Cmd.eHeartBeatReq then
 		local uid = Session.get_uid(client_session)
 		if uid ~= 0 then

@@ -28,6 +28,7 @@ GameClient/Gameclient_src.config
 GameClient/Gameclient_src.luaproj
 Debug.win32/
 
+GameClient2/
 
 moba_game_server/moba_server/build/proj.win32/Debug/
 moba_game_server/moba_server/build/proj.win32/maba_gameserver.vcxproj.user

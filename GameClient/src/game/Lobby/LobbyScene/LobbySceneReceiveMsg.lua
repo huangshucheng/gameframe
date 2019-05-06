@@ -8,6 +8,7 @@ local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 local LobbySceneDefine      = require('game.Lobby.LobbyScene.LobbySceneDefine')
+local NetWorkUDP            = require("game.net.NetWorkUDP")
 
 function LobbyScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
@@ -83,6 +84,7 @@ function LobbyScene:onEventLoginLogic(event)
     if data.status == Respones.OK then
         Lobby.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
         LogicServiceProxy:getInstance():sendGetCreateStatus()
+        NetWorkUDP:getInstance():start()
     else
         Lobby.showPopLayer('TipsLayer',{"登录逻辑服failed!"})
         LogicServiceProxy:getInstance():sendLoginLogicServer()        

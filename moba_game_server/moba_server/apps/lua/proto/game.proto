@@ -84,6 +84,7 @@ enum Cmd {
 	eUserReadyRes = 50;
 	eGameStart = 51;
 	eUdpTest = 52;
+	eLogicFrame = 53;
 }
 
 message GuestLoginReq {
@@ -306,4 +307,13 @@ message GameStart {
 
 message UdpTest {
 	required string content = 1;
+}
+
+message LoginLogicReq {
+	required string udp_ip = 1;
+	required int32 udp_port = 2;
+}
+
+message LogicFrame {
+	required int32 frameid = 1;
 }

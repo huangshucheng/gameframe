@@ -3,6 +3,7 @@ local LogicServiceProxy = class('LogicServiceProxy')
 local NetWork           = require("game.net.NetWork")
 local Cmd               = require("game.net.protocol.Cmd")
 local Stype             = require("game.net.Stype")
+local ConfigKeyWord     = require("game.net.ConfigKeyWord")
 
 function LogicServiceProxy:getInstance()
 	if not LogicServiceProxy._instance then
@@ -16,7 +17,12 @@ function LogicServiceProxy:ctor()
 end
 
 function LogicServiceProxy:sendLoginLogicServer()
- 	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eLoginLogicReq,nil)
+    local ip , port = ConfigKeyWord.get_local_udp_addr()
+    local msg = {
+        udp_ip = ip,
+        udp_port = port,
+    }
+ 	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eLoginLogicReq,msg)
 end
 
 function LogicServiceProxy:sendCreateRoom(room_info)

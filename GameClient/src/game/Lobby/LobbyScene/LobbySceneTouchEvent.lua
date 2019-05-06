@@ -94,21 +94,21 @@ function LobbyScene:onTouchMessageBtn(send, evnetType)
     -- Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
     --test 
-    
+    --[[
     local str = ''
     for i = 1 , 1000 do
         str = str .. i
     end 
     -- local msg = {content = "hcc udp test!!!!!!!!!!!!!!!!!!!!"}
     local msg = {content = str}
-    local Cmd = require("game.net.protocol.Cmd")
+    --local Cmd = require("game.net.protocol.Cmd")
+    
     if self.tickScheduler == nil then
         self.tickScheduler = Scheduler.scheduleUpdateGlobal(handler(self, function()
-            SocketUDP:getInstance():sendMsg(3,Cmd.eUdpTest,msg)        
             -- LogicServiceProxy:getInstance():sendUdpTest(msg)        
         end))
     end
-    -- LogicServiceProxy:getInstance():sendUdpTest(msg)  
+    ]]
 end
 
 function LobbyScene:onTouchMailBtn(send, evnetType)

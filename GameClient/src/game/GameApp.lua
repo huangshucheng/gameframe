@@ -1,6 +1,7 @@
 local GameApp 		= class("GameApp")
 local ProtoMan 		= require("game.utils.ProtoMan")
 local NetWork       = require("game.net.NetWork")
+local NetWorkUDP    = require("game.net.NetWorkUDP")
 
 Lobby = {}
 Game = {}
@@ -13,6 +14,7 @@ function GameApp:ctor()
 
     ProtoMan:getInstance():regist_pb()
     NetWork:getInstance():start()
+    NetWorkUDP:getInstance():start()
 
     Lobby.showPopLayer 		= Function.showPopLayer
     Lobby.popLayer 			= Function.popLayer

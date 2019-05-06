@@ -132,14 +132,21 @@ function GameManager:on_udp_test(session, req)
 	local uid 	= req[3]
 	local body 	= req[4]
 	local len = string.len(body.content)
-	-- print('hcc>>on_udp_test>> uid: ' .. uid .. ' ,content len: ' .. tostring(body.content))
+	print('hcc>>on_udp_test>> uid: ' .. uid .. ' ,content len: ' .. tostring(body.content))
 	local msg = {
 		stype,
 		ctype,
 		uid,
 		{content = body.content}
 	}
-	NetWork:getInstance():send_msg(session,msg)
+	-- NetWork:getInstance():send_msg(session,msg)
+	--[[
+	local player = PlayerManager:getInstance():get_player_by_uid(uid)
+	print('hcc>> on_udp_test>> player : ' .. tostring(player))
+	if player then
+		player:udp_send_cmd(stype,ctype,{content = body.content})
+	end
+	]]
 end
 
 return GameManager

@@ -37,6 +37,10 @@ function Player:init(uid, s, ret_handler)
 	self._uinfo 		= nil 	   -- 玩家帐号信息（名称，头像）
 	self._state 		= 0
 
+	self._client_ip 		= nil 			-- 玩家对应客户端的 udp的ip地址
+	self._client_udp_port 	= 0 			-- 玩家对应的客户端udp 的port
+	self._sync_frameid 		= 0 			-- 玩家同步到那一帧
+
 	-- 数据库理面读取玩家的基本信息;
 	mysql_game.get_ugame_info(uid, function (err, ugame_info)
 		if err then
@@ -191,6 +195,32 @@ end
 
 function Player:get_uid()
 	return self._uid
+end
+
+function Player:set_udp_addr(ip, port)
+	self._client_ip = ip
+	self._client_udp_port = port
+end
+
+function Player:get_sync_frameid()
+	return self._sync_frameid
+end
+
+function Player:set_sync_frameid(frameid)
+	self._sync_frameid = frameid	
+end
+
+function Player:udp_send_cmd(stype, ctype, body) 
+	if not self._session or self._is_robot then --玩家已经断线或是机器人
+		return
+	end
+
+	if not self._client_ip or self._client_udp_port == 0 then 
+		return
+	end
+	local msg = {stype, ctype, 0, body}
+	Session.udp_send_msg(self._client_ip, self._client_udp_port, msg)
+	print('hcc>>udp_send_cmd, ip: ' .. self._client_ip .. ' ,port: ' .. self._client_udp_port)
 end
 
 return Player

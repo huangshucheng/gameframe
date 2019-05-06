@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[41];
+  static const ::google::protobuf::internal::ParseTable schema[43];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -125,6 +125,10 @@ void InitDefaultsGameStartImpl();
 void InitDefaultsGameStart();
 void InitDefaultsUdpTestImpl();
 void InitDefaultsUdpTest();
+void InitDefaultsLoginLogicReqImpl();
+void InitDefaultsLoginLogicReq();
+void InitDefaultsLogicFrameImpl();
+void InitDefaultsLogicFrame();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -167,6 +171,8 @@ inline void InitDefaults() {
   InitDefaultsUserReadyRes();
   InitDefaultsGameStart();
   InitDefaultsUdpTest();
+  InitDefaultsLoginLogicReq();
+  InitDefaultsLogicFrame();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -241,6 +247,12 @@ extern JoinRoomReqDefaultTypeInternal _JoinRoomReq_default_instance_;
 class JoinRoomRes;
 class JoinRoomResDefaultTypeInternal;
 extern JoinRoomResDefaultTypeInternal _JoinRoomRes_default_instance_;
+class LogicFrame;
+class LogicFrameDefaultTypeInternal;
+extern LogicFrameDefaultTypeInternal _LogicFrame_default_instance_;
+class LoginLogicReq;
+class LoginLogicReqDefaultTypeInternal;
+extern LoginLogicReqDefaultTypeInternal _LoginLogicReq_default_instance_;
 class LoginLogicRes;
 class LoginLogicResDefaultTypeInternal;
 extern LoginLogicResDefaultTypeInternal _LoginLogicRes_default_instance_;
@@ -367,11 +379,12 @@ enum Cmd {
   eUserReadyReq = 49,
   eUserReadyRes = 50,
   eGameStart = 51,
-  eUdpTest = 52
+  eUdpTest = 52,
+  eLogicFrame = 53
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
-const Cmd Cmd_MAX = eUdpTest;
+const Cmd Cmd_MAX = eLogicFrame;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();
@@ -5742,6 +5755,247 @@ class UdpTest : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUdpTestImpl();
 };
+// -------------------------------------------------------------------
+
+class LoginLogicReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:LoginLogicReq) */ {
+ public:
+  LoginLogicReq();
+  virtual ~LoginLogicReq();
+
+  LoginLogicReq(const LoginLogicReq& from);
+
+  inline LoginLogicReq& operator=(const LoginLogicReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  LoginLogicReq(LoginLogicReq&& from) noexcept
+    : LoginLogicReq() {
+    *this = ::std::move(from);
+  }
+
+  inline LoginLogicReq& operator=(LoginLogicReq&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LoginLogicReq& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const LoginLogicReq* internal_default_instance() {
+    return reinterpret_cast<const LoginLogicReq*>(
+               &_LoginLogicReq_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    41;
+
+  void Swap(LoginLogicReq* other);
+  friend void swap(LoginLogicReq& a, LoginLogicReq& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline LoginLogicReq* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  LoginLogicReq* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const LoginLogicReq& from);
+  void MergeFrom(const LoginLogicReq& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(LoginLogicReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string udp_ip = 1;
+  bool has_udp_ip() const;
+  void clear_udp_ip();
+  static const int kUdpIpFieldNumber = 1;
+  const ::std::string& udp_ip() const;
+  void set_udp_ip(const ::std::string& value);
+  #if LANG_CXX11
+  void set_udp_ip(::std::string&& value);
+  #endif
+  void set_udp_ip(const char* value);
+  void set_udp_ip(const char* value, size_t size);
+  ::std::string* mutable_udp_ip();
+  ::std::string* release_udp_ip();
+  void set_allocated_udp_ip(::std::string* udp_ip);
+
+  // required int32 udp_port = 2;
+  bool has_udp_port() const;
+  void clear_udp_port();
+  static const int kUdpPortFieldNumber = 2;
+  ::google::protobuf::int32 udp_port() const;
+  void set_udp_port(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:LoginLogicReq)
+ private:
+  void set_has_udp_ip();
+  void clear_has_udp_ip();
+  void set_has_udp_port();
+  void clear_has_udp_port();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr udp_ip_;
+  ::google::protobuf::int32 udp_port_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsLoginLogicReqImpl();
+};
+// -------------------------------------------------------------------
+
+class LogicFrame : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:LogicFrame) */ {
+ public:
+  LogicFrame();
+  virtual ~LogicFrame();
+
+  LogicFrame(const LogicFrame& from);
+
+  inline LogicFrame& operator=(const LogicFrame& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  LogicFrame(LogicFrame&& from) noexcept
+    : LogicFrame() {
+    *this = ::std::move(from);
+  }
+
+  inline LogicFrame& operator=(LogicFrame&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LogicFrame& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const LogicFrame* internal_default_instance() {
+    return reinterpret_cast<const LogicFrame*>(
+               &_LogicFrame_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    42;
+
+  void Swap(LogicFrame* other);
+  friend void swap(LogicFrame& a, LogicFrame& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline LogicFrame* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  LogicFrame* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const LogicFrame& from);
+  void MergeFrom(const LogicFrame& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(LogicFrame* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 frameid = 1;
+  bool has_frameid() const;
+  void clear_frameid();
+  static const int kFrameidFieldNumber = 1;
+  ::google::protobuf::int32 frameid() const;
+  void set_frameid(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:LogicFrame)
+ private:
+  void set_has_frameid();
+  void clear_has_frameid();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::int32 frameid_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsLogicFrameImpl();
+};
 // ===================================================================
 
 
@@ -9528,9 +9782,132 @@ inline void UdpTest::set_allocated_content(::std::string* content) {
   // @@protoc_insertion_point(field_set_allocated:UdpTest.content)
 }
 
+// -------------------------------------------------------------------
+
+// LoginLogicReq
+
+// required string udp_ip = 1;
+inline bool LoginLogicReq::has_udp_ip() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LoginLogicReq::set_has_udp_ip() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LoginLogicReq::clear_has_udp_ip() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LoginLogicReq::clear_udp_ip() {
+  udp_ip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_udp_ip();
+}
+inline const ::std::string& LoginLogicReq::udp_ip() const {
+  // @@protoc_insertion_point(field_get:LoginLogicReq.udp_ip)
+  return udp_ip_.GetNoArena();
+}
+inline void LoginLogicReq::set_udp_ip(const ::std::string& value) {
+  set_has_udp_ip();
+  udp_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:LoginLogicReq.udp_ip)
+}
+#if LANG_CXX11
+inline void LoginLogicReq::set_udp_ip(::std::string&& value) {
+  set_has_udp_ip();
+  udp_ip_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:LoginLogicReq.udp_ip)
+}
+#endif
+inline void LoginLogicReq::set_udp_ip(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_udp_ip();
+  udp_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:LoginLogicReq.udp_ip)
+}
+inline void LoginLogicReq::set_udp_ip(const char* value, size_t size) {
+  set_has_udp_ip();
+  udp_ip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:LoginLogicReq.udp_ip)
+}
+inline ::std::string* LoginLogicReq::mutable_udp_ip() {
+  set_has_udp_ip();
+  // @@protoc_insertion_point(field_mutable:LoginLogicReq.udp_ip)
+  return udp_ip_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* LoginLogicReq::release_udp_ip() {
+  // @@protoc_insertion_point(field_release:LoginLogicReq.udp_ip)
+  clear_has_udp_ip();
+  return udp_ip_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void LoginLogicReq::set_allocated_udp_ip(::std::string* udp_ip) {
+  if (udp_ip != NULL) {
+    set_has_udp_ip();
+  } else {
+    clear_has_udp_ip();
+  }
+  udp_ip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), udp_ip);
+  // @@protoc_insertion_point(field_set_allocated:LoginLogicReq.udp_ip)
+}
+
+// required int32 udp_port = 2;
+inline bool LoginLogicReq::has_udp_port() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void LoginLogicReq::set_has_udp_port() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void LoginLogicReq::clear_has_udp_port() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void LoginLogicReq::clear_udp_port() {
+  udp_port_ = 0;
+  clear_has_udp_port();
+}
+inline ::google::protobuf::int32 LoginLogicReq::udp_port() const {
+  // @@protoc_insertion_point(field_get:LoginLogicReq.udp_port)
+  return udp_port_;
+}
+inline void LoginLogicReq::set_udp_port(::google::protobuf::int32 value) {
+  set_has_udp_port();
+  udp_port_ = value;
+  // @@protoc_insertion_point(field_set:LoginLogicReq.udp_port)
+}
+
+// -------------------------------------------------------------------
+
+// LogicFrame
+
+// required int32 frameid = 1;
+inline bool LogicFrame::has_frameid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LogicFrame::set_has_frameid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LogicFrame::clear_has_frameid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LogicFrame::clear_frameid() {
+  frameid_ = 0;
+  clear_has_frameid();
+}
+inline ::google::protobuf::int32 LogicFrame::frameid() const {
+  // @@protoc_insertion_point(field_get:LogicFrame.frameid)
+  return frameid_;
+}
+inline void LogicFrame::set_frameid(::google::protobuf::int32 value) {
+  set_has_frameid();
+  frameid_ = value;
+  // @@protoc_insertion_point(field_set:LogicFrame.frameid)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

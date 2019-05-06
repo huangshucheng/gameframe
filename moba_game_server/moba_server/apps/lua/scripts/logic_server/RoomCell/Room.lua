@@ -1,6 +1,7 @@
 local Room = class("Room")
 
 local ToolUtils = require("utils/ToolUtils")
+local RoomDefine 		= require("logic_server/RoomCell/RoomDefine")
 
 function Room:ctor()
 	self._room_id 		= 0
@@ -207,7 +208,7 @@ function Room:kick_all_players_in_room()
 
 	self._players = {}
 end
-
+--玩家是否在房间里面，正常退出和进入
 function Room:is_player_in_room(player)
 	if type(player) ~= 'table' then
 		return false
@@ -218,7 +219,7 @@ function Room:is_player_in_room(player)
 		end
 	end
 end
-
+--玩家是否卡在房间里面，没有正常退出
 function Room:is_player_uid_in_room(player)
 	if type(player) ~= 'table' then
 		return false
@@ -276,6 +277,10 @@ function Room:send_msg_to_player(ctype, body, player)
 		return
 	end
 	player:send_msg(ctype, body)
+end
+
+function Room:reset()
+	self:goto_game_step(RoomDefine.GameStep.GAME_STEP_END_GAME)
 end
 
 return Room
