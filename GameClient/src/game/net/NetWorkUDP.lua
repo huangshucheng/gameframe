@@ -39,7 +39,7 @@ function NetWorkUDP:onMessage(event)
     if data_tb then
         if cmd_name_map[data_tb.ctype] then
             postEvent(cmd_name_map[data_tb.ctype],data_tb.body)
-            dump(data_tb,'[udp协议:' .. tostring(cmd_name_map[data_tb.ctype]) .. ']',5)
+            --dump(data_tb,'[udp协议:' .. tostring(cmd_name_map[data_tb.ctype]) .. ']',5)
         end
     end
 end

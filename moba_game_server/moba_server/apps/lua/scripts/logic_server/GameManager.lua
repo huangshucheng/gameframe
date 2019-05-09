@@ -27,6 +27,7 @@ function GameManager:ctor()
 		[Cmd.eUserReconnectedReq] 	= self.on_reconnect,
 		[Cmd.eUserReadyReq] 		= self.on_user_ready,
 		[Cmd.eUdpTest]				= self.on_udp_test,
+		[Cmd.eNextFrameOpts] 		= self.on_next_frame_event,
 	}
 end
 
@@ -140,13 +141,21 @@ function GameManager:on_udp_test(session, req)
 		{content = body.content}
 	}
 	-- NetWork:getInstance():send_msg(session,msg)
-	--[[
-	local player = PlayerManager:getInstance():get_player_by_uid(uid)
-	print('hcc>> on_udp_test>> player : ' .. tostring(player))
-	if player then
-		player:udp_send_cmd(stype,ctype,{content = body.content})
+end
+
+function GameManager:on_next_frame_event(session, req)
+	local stype = req[1]
+	local ctype = req[2]
+	local uid 	= req[3]  -- 用udp , uid == 0，不经过gateway
+	local body 	= req[4]
+	print('on_next_frame_event: styep:' .. stype .. ' ,ctype:' .. ctype .. ' ,uid:' .. uid)
+	dump(body,"on_next_frame_event")
+	if not body then return end
+	local room_id = body.roomid
+	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
+	if room then
+		room:on_next_frame_event(body)
 	end
-	]]
 end
 
 return GameManager

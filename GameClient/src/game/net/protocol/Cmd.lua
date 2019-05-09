@@ -75,6 +75,7 @@ local Cmd = {
 	eGameStart 	                = 51,
 	eUdpTest 					= 52,
 	eLogicFrame 				= 53,
+	eNextFrameOpts 				= 54,
 }
 
 return Cmd

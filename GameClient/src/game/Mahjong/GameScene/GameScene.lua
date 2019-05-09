@@ -16,6 +16,9 @@ GameScene.RESOURCE_FILENAME = 'MahScene/MahScene.csb'
 function GameScene:ctor()
     self._panel_user_info_table = {}
 	GameScene.super.ctor(self)
+
+    self._sync_frameid = 0
+    self._last_frame_opt = nil
 end
 
 function GameScene:onCreate()

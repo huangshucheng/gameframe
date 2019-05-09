@@ -5,6 +5,7 @@ local RoomData              = require("game.clientdata.RoomData")
 local UserInfo              = require("game.clientdata.UserInfo")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
+local GameFunction          = require("game.Mahjong.Base.GameFunction")
 
 function GameScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
@@ -28,6 +29,7 @@ function GameScene:addClientEventListener()
     addEvent("UserReconnectedRes", self, self.onEventReconnect)
     addEvent("UserReadyRes", self, self.onEventUserReady)
     addEvent("GameStart", self, self.onEventGameStart)
+    addEvent("LogicFrame", self, self.onEventServerLogicFrame)
 end
 
 function GameScene:onEventNetConnect(event)
@@ -229,4 +231,74 @@ function GameScene:onEventGameStart(event)
         end
     end
     self:showReadyImag()
+end
+
+function GameScene:onEventServerLogicFrame(event)
+    local body = event._usedata
+    -- dump(body,"onEventServerLogicFrame")
+    local frameid = body.frameid
+    local unsync_frames = body.unsync_frames
+    print("onEventServerLogicFrame: frameid: " .. tostring(frameid) .. ' ,unsync_frames size: ' .. #unsync_frames)
+    if frameid < self._sync_frameid then
+        return
+    end
+
+    --同步自己客户端上一帧逻辑操作, 
+    --调整我们的位置; 调成完以后, 客户端同步到的是 sync_frameid
+    -- 位置,同步到正确的逻辑位置
+    if self._last_frame_opt then
+        self:on_sync_last_logic_frame(self.last_frame_opt)
+    end
+    -- 从sync_frameid + 1 开始 ----> frame.frameid - 1; 
+    -- 同步丢失的帧, 所有客户端数据--》同步到 frame.frameid - 1;
+    -- 跳到你收到的最新的一个帧之前
+    for i =1 , #unsync_frames do
+        if self._sync_frameid < unsync_frames[i].frameid then
+            if unsync_frames[i].frameid >= frameid then
+                break
+            end
+            --同步客户端
+            -- self:on_handler_frame_event(unsync_frames[i])
+            -- self:upgrade_exp_by_time()
+        end
+    end
+
+    -- 获取 最后一个操作  frameid 操作,根据这个操作，来处理，来播放动画;
+    self._sync_frameid = frameid
+    if #unsync_frames > 0 then
+        self._last_frame_opt = unsync_frames[#unsync_frames - 1]
+        --同步客户端
+        -- self:on_handler_frame_event(self._last_frame_opt)
+        -- self:upgrade_exp_by_time()
+    else
+        self._last_frame_opt = nil
+    end
+
+    -- 采集下一个帧的事件，发送给服务器;
+    self:capture_player_opts()
+end
+
+function GameScene:on_sync_last_logic_frame(last_frame_opt)
+
+end
+
+function GameScene:capture_player_opts()
+ --test
+    local room_id = RoomData:getInstance():getRoomId()
+    local seat_id = GameFunction.getSelfSeat()
+    local opts_table = {}
+    local opts_1 = {
+        seatid = seat_id,
+        opt_type = 0,
+        x = 999,
+        y = 999,
+    }
+    table.insert(opts_table,opts_1)
+    local msg = {
+        frameid = self._sync_frameid + 1,
+        roomid = room_id,
+        seatid = seat_id,
+        opts = opts_table,
+    }
+    LogicServiceProxy:getInstance():sendNextFrame(msg)
 end

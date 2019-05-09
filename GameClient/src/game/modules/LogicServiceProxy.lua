@@ -1,6 +1,7 @@
 local LogicServiceProxy = class('LogicServiceProxy')
 
 local NetWork           = require("game.net.NetWork")
+local NetWorkUDP 		= require("game.net.NetWorkUDP")
 local Cmd               = require("game.net.protocol.Cmd")
 local Stype             = require("game.net.Stype")
 local ConfigKeyWord     = require("game.net.ConfigKeyWord")
@@ -83,6 +84,10 @@ end
 --test
 function LogicServiceProxy:sendUdpTest(msg)
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUdpTest, msg)
+end
+
+function LogicServiceProxy:sendNextFrame(msg)
+	NetWorkUDP:getInstance():sendMsg(Stype.Logic, Cmd.eNextFrameOpts, msg)
 end
 
 return LogicServiceProxy

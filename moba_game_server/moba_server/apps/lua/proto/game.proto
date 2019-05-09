@@ -85,6 +85,7 @@ enum Cmd {
 	eGameStart = 51;
 	eUdpTest = 52;
 	eLogicFrame = 53;
+	eNextFrameOpts = 54;
 }
 
 message GuestLoginReq {
@@ -311,9 +312,29 @@ message UdpTest {
 
 message LoginLogicReq {
 	required string udp_ip = 1;
-	required int32 udp_port = 2;
+	required sint32 udp_port = 2;
+}
+
+message OptionEvent {
+	required sint32 seatid = 1;
+	required sint32 opt_type = 2;
+	optional sint32 x = 3;
+	optional sint32 y = 4;  	
+}
+
+message FrameOpts {
+	required sint32 frameid = 1;
+	repeated OptionEvent opts = 2;
 }
 
 message LogicFrame {
-	required int32 frameid = 1;
+	required sint32 frameid = 1;
+	repeated FrameOpts unsync_frames = 2;
+}
+
+message NextFrameOpts {
+	required sint32 frameid = 1;
+	required string roomid = 2;
+	required sint32 seatid = 3;
+	repeated OptionEvent opts = 4;
 }

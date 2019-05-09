@@ -279,6 +279,15 @@ function Room:send_msg_to_player(ctype, body, player)
 	player:send_msg(ctype, body)
 end
 
+function Room:get_player_by_seat_id(seat_id)
+	for i = 1 , #self._players do
+		local player = self._players[i]
+		if player:get_seat_id() == seat_id then
+			return player
+		end
+	end
+end
+
 function Room:reset()
 	self:goto_game_step(RoomDefine.GameStep.GAME_STEP_END_GAME)
 end
