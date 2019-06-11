@@ -5,8 +5,13 @@ local GameSceneDefine       = require("game.Mahjong.GameScene.GameSceneDefine")
 local ToolUtils             = require("game.utils.ToolUtils")
 local GameFunction 			= require("game.Mahjong.Base.GameFunction")
 local Player 				= require("game.clientdata.Player")
+local JoyStick              = require("game.Mahjong.UI.JoyStick")
+local Hero                  = require("game.Mahjong.UI.Hero")
 
 local MAX_PLAYER_NUM = 4
+local HERO_MOVE_SPEED = 200
+local LOGIC_FRAME_TIME = 66
+local FLOAT_SCALE = 100000000
 
 function GameScene:showUserInfoBySeatId(seatId) --serverSeat
     local localSeat = GameFunction.serverSeatToLocal(seatId)
@@ -125,4 +130,105 @@ function GameScene:showReadyImag()
             showFunc(localSeat, false)
         end
     end
+end
+
+function GameScene:showJoystick()
+    if self._joystick == nil then
+        local touch_layer = self:getTouchLayer()
+        if touch_layer then
+            self._joystick =  JoyStick:create()
+            touch_layer:addChild(self._joystick)
+        end
+    end
+end
+
+function GameScene:showHeroPos(dt)
+    if true then return end
+    local hero = self:getHero()
+    if hero then
+        local joystick = self:getJoyStick()
+        if joystick then
+            local dir = joystick:getDir()
+            local state = hero:getState()
+            if dir.x == 0 and dir.y == 0 then
+                if state == hero.STATE.move then
+                    hero:setState(hero.STATE.idle)
+                end
+                return
+            end
+
+            if state == hero.STATE.idle then
+                hero:setState(hero.STATE.move)
+            end
+            local vx = dir.x * HERO_MOVE_SPEED
+            local vy = dir.y * HERO_MOVE_SPEED
+            local sx = vx * dt + hero:getPositionX()
+            local sy = vy * dt + hero:getPositionY()
+            hero:setPosition(cc.p(sx,sy))
+            local r = math.atan2(dir.y,dir.x)
+            local degree = r * 180 / math.pi
+            degree = 360 - degree + 90
+            hero:setRotation(degree)
+        end
+    end
+end   
+
+function GameScene:do_joystick_event(opt)
+    local dt = LOGIC_FRAME_TIME / 1000
+    local seatid = opt.seatid
+    local x = opt.x
+    local y = opt.y
+    local seatid = opt.seatid
+    -- print('hcc>>dt: ' .. dt , x , y) --0.066
+    -- if true then return end
+    ------------
+    local hero = self:getHero(seatid)
+    if hero then
+        local dir = cc.p(x / FLOAT_SCALE , y / FLOAT_SCALE)
+        local state = hero:getState()
+        if dir.x == 0 and dir.y == 0 then
+            if state == hero.STATE.move then
+                hero:setState(hero.STATE.idle)
+            end
+            return
+        end
+
+        if state == hero.STATE.idle then
+            hero:setState(hero.STATE.move)
+        end
+        local vx = dir.x * HERO_MOVE_SPEED
+        local vy = dir.y * HERO_MOVE_SPEED
+        local sx = vx * dt + hero:getPositionX()
+        local sy = vy * dt + hero:getPositionY()
+        hero:setPosition(cc.p(sx,sy))
+        local r = math.atan2(dir.y,dir.x)
+        local degree = r * 180 / math.pi
+        degree = 360 - degree + 90
+        hero:setRotation(degree)
+    end
+    ------------
+end
+
+function GameScene:sync_last_joystic_event(opt)
+    self:do_joystick_event(opt)
+end 
+
+function GameScene:on_handler_frame_event(unsync_frames)
+    -- print('hcc<<tiem event: ' .. os.time())
+    -- dump(unsync_frames,'hcc>>on_handler_frame_event',5)
+    local frameid = unsync_frames.frameid
+    local opts = unsync_frames.opts
+    if next(opts) then
+        for index = 1 , #opts do
+            local _opt = opts[index]
+            local opt_type = _opt.opt_type
+            if opt_type == 0 then
+                self:sync_last_joystic_event(_opt)
+            end
+        end
+    end
+end
+
+function GameScene:on_sync_last_logic_frame(last_frame_opt)
+    -- dump(last_frame_opt,'hcc>>on_sync_last_logic_frame',5)
 end

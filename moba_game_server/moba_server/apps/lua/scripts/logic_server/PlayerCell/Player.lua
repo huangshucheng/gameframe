@@ -109,6 +109,7 @@ function Player:exit_room_and_reset()
 	self._seatid  = -1
 	self._is_host = false
 	self._state   = 0
+	self._sync_frameid 	= 0
 end
 
 function Player:set_room_id(room_id)
@@ -191,6 +192,7 @@ function Player:copy_room_info(player)
 	self._is_host  = player._is_host
 	self._is_offline = player._is_offline
 	self._state 	= player._state
+	self._sync_frameid = player._sync_frameid
 end
 
 function Player:get_uid()
@@ -220,7 +222,7 @@ function Player:udp_send_cmd(stype, ctype, body)
 	end
 	local msg = {stype, ctype, 0, body}
 	Session.udp_send_msg(self._client_ip, self._client_udp_port, msg)
-	print('hcc>>udp_send_cmd, ip: ' .. self._client_ip .. ' ,port: ' .. self._client_udp_port)
+	-- print('hcc>>udp_send_cmd, ip: ' .. self._client_ip .. ' ,port: ' .. self._client_udp_port)
 end
 
 return Player

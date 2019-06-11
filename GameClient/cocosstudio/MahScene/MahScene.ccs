@@ -15,6 +15,10 @@
               <Image Name="mj_img_virtualBg.jpg" />
               <Image Name="mj_img_virtualBg.png" />
             </Folder>
+            <Folder Name="joystic">
+              <Image Name="joystic_bg.png" />
+              <Image Name="joystic_center.png" />
+            </Folder>
             <Folder Name="rectheader">
               <Image Name="11.png" />
               <Image Name="12.png" />
@@ -25,6 +29,17 @@
               <Image Name="17.png" />
               <Image Name="18.png" />
               <Image Name="19.png" />
+            </Folder>
+            <Folder Name="roundheader">
+              <Image Name="round_11.png" />
+              <Image Name="round_12.png" />
+              <Image Name="round_13.png" />
+              <Image Name="round_14.png" />
+              <Image Name="round_15.png" />
+              <Image Name="round_16.png" />
+              <Image Name="round_17.png" />
+              <Image Name="round_18.png" />
+              <Image Name="round_19.png" />
             </Folder>
             <Image Name="anniu.png" />
             <Image Name="dialog_btn_cancel_normal.png" />
@@ -56,6 +71,8 @@
           <Folder Name="PopLayer">
             <Project Name="SetLayer.csd" Type="Layer" />
           </Folder>
+          <Project Name="Hero.csd" Type="Node" />
+          <Project Name="JoyStick.csd" Type="Node" />
           <Project Name="MahScene.csd" Type="Scene" />
         </Folder>
       </RootFolder>

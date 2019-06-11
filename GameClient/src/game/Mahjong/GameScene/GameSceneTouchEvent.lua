@@ -17,27 +17,6 @@ function GameScene:onTouchSettingBtn(sender, eventType)
         return
     end
     Game.showPopLayer('SetLayer')
-    --test
-    --[[
-    local room_id = RoomData:getInstance():getRoomId()
-    local seat_id = GameFunction.getSelfSeat()
-    local opts_table = {}
-    local opts_1 = {
-        seatid = seat_id,
-        opt_type = 0,
-        x = 999,
-        y = 999,
-    }
-    table.insert(opts_table,opts_1)
-    table.insert(opts_table,opts_1)
-    local msg = {
-        frameid = 0,
-        roomid = room_id,
-        seatid = seat_id,
-        opts = opts_table,
-    }
-    LogicServiceProxy:getInstance():sendNextFrame(msg)
-    ]]
 end
 
 function GameScene:onTouchReadyBtn(sender, eventType)

@@ -84,6 +84,7 @@ lua_log_debug(lua_State *luastate) {
 			t += "thread";
 		else
 		{
+			//TODO crash
 			const char * str = lua_tostring(luastate, i);
 			if (str)
 				t += lua_tostring(luastate, i);

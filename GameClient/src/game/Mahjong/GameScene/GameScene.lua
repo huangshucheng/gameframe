@@ -1,14 +1,16 @@
 local BaseScene     = require("game.Base.BaseScene")
 local GameScene     = class("GameScene", BaseScene)
-Game.GameScene        = GameScene
+Game.GameScene      = GameScene
 
 local Function 				= require("game.Mahjong.Base.Function")
 local GameSceneDefine       = require("game.Mahjong.GameScene.GameSceneDefine")
+local Scheduler             = require("game.utils.scheduler")
 
 --------------拓展
 require('game.Mahjong.GameScene.GameSceneReceiveMsg')
 require('game.Mahjong.GameScene.GameSceneTouchEvent')
 require('game.Mahjong.GameScene.GameSceneShowUI')
+require('game.Mahjong.GameScene.GameSceneUI')
 ---------------end
 
 GameScene.RESOURCE_FILENAME = 'MahScene/MahScene.csb'
@@ -19,6 +21,9 @@ function GameScene:ctor()
 
     self._sync_frameid = 0
     self._last_frame_opt = nil
+
+    self._joystick = nil
+    self._hero_list = {}
 end
 
 function GameScene:onCreate()
@@ -28,6 +33,8 @@ function GameScene:onCreate()
     self:showAllExistUserInfo()
     self:showReadyBtn()
     self:showReadyImag()
+    -- self:showJoystick()
+    -- self.tickScheduler = Scheduler.scheduleUpdateGlobal(handler(self, self.update))
 end
 
 function GameScene:initUI()
@@ -64,6 +71,14 @@ end
 
 function GameScene:onExit()
     print('GameScene onExit')
+    if self.tickScheduler then
+        Scheduler.unscheduleGlobal(self.tickScheduler)
+        self.tickScheduler = nil
+    end 
+end
+
+function GameScene:update(dt)
+    self:showHeroPos(dt)
 end
 
 return GameScene

@@ -133,7 +133,7 @@ function GameManager:on_udp_test(session, req)
 	local uid 	= req[3]
 	local body 	= req[4]
 	local len = string.len(body.content)
-	print('hcc>>on_udp_test>> uid: ' .. uid .. ' ,content len: ' .. tostring(body.content))
+	-- print('hcc>>on_udp_test>> uid: ' .. uid .. ' ,content len: ' .. tostring(body.content))
 	local msg = {
 		stype,
 		ctype,
@@ -148,8 +148,8 @@ function GameManager:on_next_frame_event(session, req)
 	local ctype = req[2]
 	local uid 	= req[3]  -- 用udp , uid == 0，不经过gateway
 	local body 	= req[4]
-	print('on_next_frame_event: styep:' .. stype .. ' ,ctype:' .. ctype .. ' ,uid:' .. uid)
-	dump(body,"on_next_frame_event")
+	-- print('on_next_frame_event: styep:' .. stype .. ' ,ctype:' .. ctype .. ' ,uid:' .. uid)
+	-- dump(body,"on_next_frame_event")
 	if not body then return end
 	local room_id = body.roomid
 	local room = RoomManager:getInstance():get_room_by_room_id(room_id)

@@ -3,6 +3,7 @@ local NetWorkUDP        = class("NetWorkUDP")
 local SocketUDP         = require("game.net.SocketUDP")
 local ConfigKeyWord     = require("game.net.ConfigKeyWord")
 local ProtoMan          = require("game.utils.ProtoMan")
+local Cmd               = require("game.net.protocol.Cmd")
 local cmd_name_map      = require("game.net.protocol.cmd_name_map")
 local socket            = require "socket"
 
@@ -39,7 +40,9 @@ function NetWorkUDP:onMessage(event)
     if data_tb then
         if cmd_name_map[data_tb.ctype] then
             postEvent(cmd_name_map[data_tb.ctype],data_tb.body)
-            --dump(data_tb,'[udp协议:' .. tostring(cmd_name_map[data_tb.ctype]) .. ']',5)
+            if data_tb.ctype ~= Cmd.eLogicFrame then
+                dump(data_tb,'[udp协议:' .. tostring(cmd_name_map[data_tb.ctype]) .. ']',5)
+            end
         end
     end
 end

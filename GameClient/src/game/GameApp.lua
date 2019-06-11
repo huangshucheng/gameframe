@@ -24,9 +24,12 @@ end
 
 function GameApp:showScene(transition, time, more)
     local scene = display.newScene()
-    local gameLayer = require("game.Lobby.LobbyScene.LoginScene"):create()
-    scene:addChild(gameLayer)
-    display.runScene(scene, transition, time, more)
+    local loginScene = require("game.Lobby.LobbyScene.LoginScene")
+    if loginScene then
+        local gameLayer = loginScene:create()
+        scene:addChild(gameLayer)
+        display.runScene(scene, transition, time, more)
+    end
 end
 
 return GameApp

@@ -18,7 +18,7 @@ function LogicServiceProxy:ctor()
 end
 
 function LogicServiceProxy:sendLoginLogicServer()
-    local ip , port = ConfigKeyWord.get_local_udp_addr()
+	local ip , port = ConfigKeyWord.get_udp_addr()
     local msg = {
         udp_ip = ip,
         udp_port = port,

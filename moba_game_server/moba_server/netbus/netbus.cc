@@ -201,14 +201,15 @@ extern "C" {
 					  const uv_buf_t* buf,
 					  const struct sockaddr* addr, 
 					  unsigned flags) {
-
-			udp_session udp_s;
-			udp_s.udp_handler = handle;
-			udp_s.addr = addr;
-			uv_ip4_name((struct sockaddr_in*)addr, udp_s.c_address, 32);
-			udp_s.c_port = ntohs(((struct sockaddr_in*)addr)->sin_port);
-
-			on_recv_client_cmd((session*)&udp_s, (unsigned char*)buf->base, nread);
+			if (addr)
+			{
+				udp_session udp_s;
+				udp_s.udp_handler = handle;
+				udp_s.addr = addr;
+				uv_ip4_name((struct sockaddr_in*)addr, udp_s.c_address, 32);
+				udp_s.c_port = ntohs(((struct sockaddr_in*)addr)->sin_port);
+				on_recv_client_cmd((session*)&udp_s, (unsigned char*)buf->base, nread);
+			}
 		}
 
 	static void 

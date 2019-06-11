@@ -1,21 +1,14 @@
 local Room = class("Room")
 
-local ToolUtils = require("utils/ToolUtils")
+local ToolUtils 		= require("utils/ToolUtils")
 local RoomDefine 		= require("logic_server/RoomCell/RoomDefine")
 
 function Room:ctor()
-	self._room_id 		= 0
-	self._players 		= {}
-	self._room_info 	= ''
-	self._max_player 	= 4
-	self._is_start_game = false
-	
 	self:setMetaTable()
 	self:initFunction()
 end
 
 function Room:initFunction()
-
 	if self.init_first_data then
 		self:init_first_data()
 	end
@@ -23,7 +16,6 @@ function Room:initFunction()
 	if self.init_step_func then
 		self:init_step_func()
 	end
-
 end
 
 function Room.getAllFunction(class,meathon)
@@ -64,7 +56,6 @@ function Room:setMetaTable()
         tmpmetatable[i] = v
     end
     setmetatable(self, {__index = tmpmetatable}) 
-	--dump(tmpmetatable,'Room:setMetaTable>>33333')
 end
 
 function Room:set_room_id(room_id)

@@ -7,6 +7,8 @@ local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 local GameFunction          = require("game.Mahjong.Base.GameFunction")
 
+local FLOAT_SCALE = 100000000
+
 function GameScene:addServerEventListener()
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
     addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
@@ -235,10 +237,13 @@ end
 
 function GameScene:onEventServerLogicFrame(event)
     local body = event._usedata
-    -- dump(body,"onEventServerLogicFrame")
+    if not body then return end
+    -- dump(body,"onEventServerLogicFrame",5)
     local frameid = body.frameid
+    if not frameid then return end
+
     local unsync_frames = body.unsync_frames
-    print("onEventServerLogicFrame: frameid: " .. tostring(frameid) .. ' ,unsync_frames size: ' .. #unsync_frames)
+    -- print("recvSer>>fid: " .. tostring(frameid) .. ' ,syncfid: ' .. self._sync_frameid .. ' ,unsync_size: ' .. tostring(#unsync_frames))
     if frameid < self._sync_frameid then
         return
     end
@@ -253,46 +258,45 @@ function GameScene:onEventServerLogicFrame(event)
     -- 同步丢失的帧, 所有客户端数据--》同步到 frame.frameid - 1;
     -- 跳到你收到的最新的一个帧之前
     for i =1 , #unsync_frames do
+        if unsync_frames[i].frameid >= frameid then
+            -- print('hcc<<111')
+            break
+        end
         if self._sync_frameid < unsync_frames[i].frameid then
-            if unsync_frames[i].frameid >= frameid then
-                break
-            end
+            -- dump(unsync_frames[i],'hcc<<222')
             --同步客户端
-            -- self:on_handler_frame_event(unsync_frames[i])
-            -- self:upgrade_exp_by_time()
+             self:on_handler_frame_event(unsync_frames[i])
         end
     end
-
     -- 获取 最后一个操作  frameid 操作,根据这个操作，来处理，来播放动画;
     self._sync_frameid = frameid
     if #unsync_frames > 0 then
-        self._last_frame_opt = unsync_frames[#unsync_frames - 1]
+        self._last_frame_opt = unsync_frames[#unsync_frames]
         --同步客户端
-        -- self:on_handler_frame_event(self._last_frame_opt)
-        -- self:upgrade_exp_by_time()
+         self:on_handler_frame_event(self._last_frame_opt)
+         -- dump(unsync_frames,'hcc<<333',5)
     else
         self._last_frame_opt = nil
     end
-
     -- 采集下一个帧的事件，发送给服务器;
     self:capture_player_opts()
 end
 
-function GameScene:on_sync_last_logic_frame(last_frame_opt)
-
-end
-
 function GameScene:capture_player_opts()
- --test
     local room_id = RoomData:getInstance():getRoomId()
     local seat_id = GameFunction.getSelfSeat()
+    local dir = self:getJoyStick():getDir()
+    local pix = FLOAT_SCALE
+    -- print('hcc>>pos: x : ' .. dir.x .. ' ,y : ' .. dir.y)
+    -- print('hcc>>pos: x: ' .. dir.x * pix .. ' ,y: ' .. dir.y* pix)
     local opts_table = {}
     local opts_1 = {
         seatid = seat_id,
         opt_type = 0,
-        x = 999,
-        y = 999,
+        x = dir.x * pix,
+        y = dir.y * pix,
     }
+    
     table.insert(opts_table,opts_1)
     local msg = {
         frameid = self._sync_frameid + 1,

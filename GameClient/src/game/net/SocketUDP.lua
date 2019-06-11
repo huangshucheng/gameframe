@@ -31,13 +31,13 @@ function SocketUDP:ctor()
 	
 	if self.udp then
 		self.udp:settimeout(0)
+		local _, local_udp_port = ConfigKeyWord.get_udp_addr()
+        local ret = self.udp:setsockname('*',local_udp_port) --绑定本地端口，接收数据
 		self.udp:setpeername(self.host, self.port)	--绑定远程端口
 		self.tickScheduler = Scheduler.scheduleUpdateGlobal(handler(self, self._tick))
-		print('hcc>>tick ' .. tostring(self.tickScheduler))
-        --local host , port = self.udp:getpeername()
         local ip, port = self.udp:getsockname()
-        print('hcc>> udp ip: ' .. tostring(ip) .. ' ,port: ' .. tostring(port))
-        ConfigKeyWord.set_local_udp_addr(ip,port)
+        print('hcc>> udp,local  ip ,port: ' , tostring(ip) , tostring(port))
+        print('hcc>> udp,remote ip, port: ' , self.udp:getpeername())
 	end
 end
 
