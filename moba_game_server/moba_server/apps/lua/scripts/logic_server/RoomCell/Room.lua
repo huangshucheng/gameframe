@@ -162,7 +162,7 @@ function Room:enter_player(player)
 	return true
 end
 
-function Room:exit_player(player)
+function Room:exit_player(player,is_force_exit)
 	if type(player) ~= 'table' then
 		return false
 	end
@@ -176,7 +176,7 @@ function Room:exit_player(player)
 	end
 
 	if index then
-		if player:get_is_host() then 	-- room host can back to lobby and can enter next time
+		if player:get_is_host() or is_force_exit or self:get_is_start_game() then 	-- room host can back to lobby and can enter next time
 			player:set_is_offline(true)
 		else
 			table.remove(self._players,index)

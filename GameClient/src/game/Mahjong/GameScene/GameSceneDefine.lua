@@ -16,6 +16,7 @@ GameSceneDefine.KW_BTN_READY 		  = 'KW_BTN_READY'
 GameSceneDefine.KW_IMG_READY 		  = 'KW_IMG_READY'
 GameSceneDefine.KW_TOUCH_LAYER 		  = 'KW_TOUCH_LAYER'
 GameSceneDefine.KW_HERO 			  = 'KW_HERO'
+GameSceneDefine.KW_IMG_MASTER 		  = 'KW_IMG_MASTER'
 
 
 return GameSceneDefine

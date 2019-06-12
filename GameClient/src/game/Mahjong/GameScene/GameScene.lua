@@ -33,6 +33,7 @@ function GameScene:onCreate()
     self:showAllExistUserInfo()
     self:showReadyBtn()
     self:showReadyImag()
+    self:showHostImag()
     -- self:showJoystick()
     -- self.tickScheduler = Scheduler.scheduleUpdateGlobal(handler(self, self.update))
 end
@@ -71,10 +72,10 @@ end
 
 function GameScene:onExit()
     print('GameScene onExit')
-    if self.tickScheduler then
-        Scheduler.unscheduleGlobal(self.tickScheduler)
-        self.tickScheduler = nil
-    end 
+--    if self.tickScheduler then
+--        Scheduler.unscheduleGlobal(self.tickScheduler)
+--        self.tickScheduler = nil
+--    end 
 end
 
 function GameScene:update(dt)

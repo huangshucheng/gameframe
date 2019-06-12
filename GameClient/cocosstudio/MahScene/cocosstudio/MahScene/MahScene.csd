@@ -158,6 +158,16 @@
                 <PreSize X="1.2100" Y="0.6200" />
                 <FileData Type="Normal" Path="MahScene/MahRes/zhunbei.png" Plist="" />
               </AbstractNodeData>
+              <AbstractNodeData Name="KW_IMG_MASTER" ActionTag="-39237376" VisibleForFrame="False" Tag="58" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="2.5000" RightMargin="2.5000" TopMargin="-9.0000" BottomMargin="71.0000" LeftEage="38" RightEage="38" TopEage="12" BottomEage="12" Scale9OriginX="38" Scale9OriginY="12" Scale9Width="19" Scale9Height="14" ctype="ImageViewObjectData">
+                <Size X="95.0000" Y="38.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="50.0000" Y="90.0000" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.9000" />
+                <PreSize X="0.9500" Y="0.3800" />
+                <FileData Type="Normal" Path="MahScene/MahRes/private_room_master.png" Plist="" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="0.5000" />
             <Position X="27.3920" Y="360.0000" />
@@ -251,6 +261,16 @@
                 <PrePosition X="0.5000" Y="1.2000" />
                 <PreSize X="1.2100" Y="0.6200" />
                 <FileData Type="Normal" Path="MahScene/MahRes/zhunbei.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="KW_IMG_MASTER" ActionTag="-413872272" VisibleForFrame="False" Tag="59" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="2.5000" RightMargin="2.5000" TopMargin="-9.0000" BottomMargin="71.0000" LeftEage="38" RightEage="38" TopEage="12" BottomEage="12" Scale9OriginX="38" Scale9OriginY="12" Scale9Width="19" Scale9Height="14" ctype="ImageViewObjectData">
+                <Size X="95.0000" Y="38.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="50.0000" Y="90.0000" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.9000" />
+                <PreSize X="0.9500" Y="0.3800" />
+                <FileData Type="Normal" Path="MahScene/MahRes/private_room_master.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" />
@@ -346,6 +366,16 @@
                 <PreSize X="1.2100" Y="0.6200" />
                 <FileData Type="Normal" Path="MahScene/MahRes/zhunbei.png" Plist="" />
               </AbstractNodeData>
+              <AbstractNodeData Name="KW_IMG_MASTER" ActionTag="1929045602" VisibleForFrame="False" Tag="60" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="2.5000" RightMargin="2.5000" TopMargin="-9.0000" BottomMargin="71.0000" LeftEage="38" RightEage="38" TopEage="12" BottomEage="12" Scale9OriginX="38" Scale9OriginY="12" Scale9Width="19" Scale9Height="14" ctype="ImageViewObjectData">
+                <Size X="95.0000" Y="38.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="50.0000" Y="90.0000" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.9000" />
+                <PreSize X="0.9500" Y="0.3800" />
+                <FileData Type="Normal" Path="MahScene/MahRes/private_room_master.png" Plist="" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="1246.8480" Y="360.0000" />
@@ -439,6 +469,16 @@
                 <PrePosition X="0.5000" Y="-0.2000" />
                 <PreSize X="1.2100" Y="0.6200" />
                 <FileData Type="Normal" Path="MahScene/MahRes/zhunbei.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="KW_IMG_MASTER" ActionTag="-187414698" VisibleForFrame="False" Tag="61" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="2.5000" RightMargin="2.5000" TopMargin="-9.0000" BottomMargin="71.0000" LeftEage="38" RightEage="38" TopEage="12" BottomEage="12" Scale9OriginX="38" Scale9OriginY="12" Scale9Width="19" Scale9Height="14" ctype="ImageViewObjectData">
+                <Size X="95.0000" Y="38.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="50.0000" Y="90.0000" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.9000" />
+                <PreSize X="0.9500" Y="0.3800" />
+                <FileData Type="Normal" Path="MahScene/MahRes/private_room_master.png" Plist="" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />

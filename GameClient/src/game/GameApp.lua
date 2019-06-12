@@ -14,7 +14,7 @@ function GameApp:ctor()
 
     ProtoMan:getInstance():regist_pb()
     NetWork:getInstance():start()
-    NetWorkUDP:getInstance():start()
+    -- NetWorkUDP:getInstance():start()  --UDP test
 
     Lobby.showPopLayer 		= Function.showPopLayer
     Lobby.popLayer 			= Function.popLayer

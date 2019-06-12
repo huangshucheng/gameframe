@@ -84,19 +84,20 @@ function GameScene:onEventExitRoom(event)
         local serverSeat = user_info.seatid
         local brandid = user_info.brandid
         local ishost = user_info.ishost
+        local isoffline = user_info.isoffline
 
-        if ishost then
+        if ishost or isoffline then
             RoomData:getInstance():updatePlayerByUserInfo(user_info)
         else
             RoomData:getInstance():removePlayerBySeatId(serverSeat)
         end
+        self:showAllExistUserInfo()
         if tonumber(brandid) == tonumber(UserInfo.getBrandId()) then
             self:popScene()
         end
     else
         Game.showPopLayer('TipsLayer',{"退出房间失败!"})
     end
-    self:showAllExistUserInfo()
 end
 
 function GameScene:onEventJoinRoom(event)
@@ -113,6 +114,7 @@ function GameScene:onEventJoinRoom(event)
     end
     self:showAllExistUserInfo()
     self:onEventJoinRoom()
+    self:showHostImag()
 end
 
 function GameScene:onEventBackRoom(event)
@@ -133,6 +135,7 @@ function GameScene:onEventBackRoom(event)
     self:showAllExistUserInfo()
     self:showReadyBtn()
     self:showReadyImag()
+    self:showHostImag()
 end
 
 function GameScene:onEventUserArrived(event)
@@ -142,6 +145,8 @@ function GameScene:onEventUserArrived(event)
     end
     self:showAllExistUserInfo()
     self:showReadyImag()
+    self:showHostImag()
+    print('hcc>>onEventUserArrived')
 end
 
 function GameScene:onEventUserOffline(event)
@@ -296,7 +301,7 @@ function GameScene:capture_player_opts()
         x = dir.x * pix,
         y = dir.y * pix,
     }
-    
+
     table.insert(opts_table,opts_1)
     local msg = {
         frameid = self._sync_frameid + 1,

@@ -132,6 +132,27 @@ function GameScene:showReadyImag()
     end
 end
 
+function GameScene:showHostImag()
+    local showFunc = function(localSeat, isShow)
+        local infoPanel = self._panel_user_info_table[localSeat]
+        if infoPanel then
+            local host_img = infoPanel:getChildByName(GameSceneDefine.KW_IMG_MASTER)
+            if host_img  then
+                host_img:setVisible(isShow)
+             end
+        end
+    end
+    for sSeat = 1 , MAX_PLAYER_NUM do
+        local localSeat = GameFunction.serverSeatToLocal(sSeat)
+        local player = RoomData:getInstance():getPlayerBySeatId(sSeat)
+        if player then
+            showFunc(player:getLocalSeat(), player:getIsHost())
+        else
+            showFunc(localSeat, false)
+        end
+    end
+end
+
 function GameScene:showJoystick()
     if self._joystick == nil then
         local touch_layer = self:getTouchLayer()

@@ -39,8 +39,15 @@ function LogicServiceProxy:sendDessolveRoom()
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eDessolveReq, nil)
 end
 
-function LogicServiceProxy:sendExitRoom()
-	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eExitRoomReq, nil)
+function LogicServiceProxy:sendExitRoom(is_force)
+	if is_force == nil then
+		is_force = false
+	end
+	local msg = {
+		is_force_exit = is_force
+	}
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eExitRoomReq, msg)
+	dump(msg,'hcc>>sendExitRoom')
 end
 
 function LogicServiceProxy:sendJoinRoom(roomid)

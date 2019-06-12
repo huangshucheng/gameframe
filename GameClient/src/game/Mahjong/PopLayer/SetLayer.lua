@@ -40,7 +40,7 @@ function SetLayer:onCreate()
     local btn_exit = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_EXIT)
     if btn_exit then
         btn_exit:addClickEventListener(handler(self,function(sender, eventType)
-            LogicServiceProxy:getInstance():sendExitRoom()
+            LogicServiceProxy:getInstance():sendExitRoom(true)
         end))
     end
     --[[
@@ -51,7 +51,7 @@ function SetLayer:onCreate()
     local btn_back = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_BACK)
     if btn_back then
         btn_back:addClickEventListener(handler(self,function(sender, eventType)
-            LogicServiceProxy:getInstance():sendExitRoom()
+            LogicServiceProxy:getInstance():sendExitRoom(true)
         end))
     end
     --[[

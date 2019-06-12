@@ -259,6 +259,10 @@ message JoinRoomRes {
 	repeated UserArrived users_info = 3;
 }
 
+message ExitRoomReq {
+	required bool is_force_exit = 1;
+}
+
 message ExitRoomRes {
 	required sint32 status = 1;
 	optional UserArrived user_info = 2;

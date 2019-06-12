@@ -169,6 +169,11 @@ class JoinRoomResDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<JoinRoomRes>
       _instance;
 } _JoinRoomRes_default_instance_;
+class ExitRoomReqDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<ExitRoomReq>
+      _instance;
+} _ExitRoomReq_default_instance_;
 class ExitRoomResDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<ExitRoomRes>
@@ -886,6 +891,27 @@ void InitDefaultsJoinRoomRes() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsJoinRoomResImpl);
 }
 
+void InitDefaultsExitRoomReqImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  {
+    void* ptr = &::_ExitRoomReq_default_instance_;
+    new (ptr) ::ExitRoomReq();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::ExitRoomReq::InitAsDefaultInstance();
+}
+
+void InitDefaultsExitRoomReq() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsExitRoomReqImpl);
+}
+
 void InitDefaultsExitRoomResImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1228,7 +1254,7 @@ void InitDefaultsNextFrameOpts() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsNextFrameOptsImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[46];
+::google::protobuf::Metadata file_level_metadata[47];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[2];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -1542,6 +1568,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   1,
   0,
   ~0u,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitRoomReq, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitRoomReq, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitRoomReq, is_force_exit_),
+  0,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitRoomRes, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ExitRoomRes, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1718,22 +1751,23 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 281, 289, sizeof(::CreateRoomRes)},
   { 292, 298, sizeof(::JoinRoomReq)},
   { 299, 307, sizeof(::JoinRoomRes)},
-  { 310, 317, sizeof(::ExitRoomRes)},
-  { 319, 325, sizeof(::DessolveRes)},
-  { 326, 332, sizeof(::GetCreateStatusRes)},
-  { 333, 341, sizeof(::BackRoomRes)},
-  { 344, 350, sizeof(::UserOffLine)},
-  { 351, 357, sizeof(::UserReconnectedRes)},
-  { 358, 364, sizeof(::HeartBeatRes)},
-  { 365, 371, sizeof(::UserReadyReq)},
-  { 372, 382, sizeof(::UserReadyRes)},
-  { 387, 393, sizeof(::GameStart)},
-  { 394, 400, sizeof(::UdpTest)},
-  { 401, 408, sizeof(::LoginLogicReq)},
-  { 410, 419, sizeof(::OptionEvent)},
-  { 423, 430, sizeof(::FrameOpts)},
-  { 432, 439, sizeof(::LogicFrame)},
-  { 441, 450, sizeof(::NextFrameOpts)},
+  { 310, 316, sizeof(::ExitRoomReq)},
+  { 317, 324, sizeof(::ExitRoomRes)},
+  { 326, 332, sizeof(::DessolveRes)},
+  { 333, 339, sizeof(::GetCreateStatusRes)},
+  { 340, 348, sizeof(::BackRoomRes)},
+  { 351, 357, sizeof(::UserOffLine)},
+  { 358, 364, sizeof(::UserReconnectedRes)},
+  { 365, 371, sizeof(::HeartBeatRes)},
+  { 372, 378, sizeof(::UserReadyReq)},
+  { 379, 389, sizeof(::UserReadyRes)},
+  { 394, 400, sizeof(::GameStart)},
+  { 401, 407, sizeof(::UdpTest)},
+  { 408, 415, sizeof(::LoginLogicReq)},
+  { 417, 426, sizeof(::OptionEvent)},
+  { 430, 437, sizeof(::FrameOpts)},
+  { 439, 446, sizeof(::LogicFrame)},
+  { 448, 457, sizeof(::NextFrameOpts)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -1767,6 +1801,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::_CreateRoomRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_JoinRoomReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_JoinRoomRes_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_ExitRoomReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_ExitRoomRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_DessolveRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_GetCreateStatusRes_default_instance_),
@@ -1801,7 +1836,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 46);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 47);
 }
 
 void AddDescriptorsImpl() {
@@ -1854,62 +1889,62 @@ void AddDescriptorsImpl() {
       "fo\030\002 \001(\t\022\037\n\tuser_info\030\003 \001(\0132\014.UserArrive"
       "d\"\036\n\013JoinRoomReq\022\017\n\007room_id\030\001 \002(\t\"R\n\013Joi"
       "nRoomRes\022\016\n\006status\030\001 \002(\021\022\021\n\troom_info\030\002 "
-      "\001(\t\022 \n\nusers_info\030\003 \003(\0132\014.UserArrived\">\n"
-      "\013ExitRoomRes\022\016\n\006status\030\001 \002(\021\022\037\n\tuser_inf"
-      "o\030\002 \001(\0132\014.UserArrived\"\035\n\013DessolveRes\022\016\n\006"
-      "status\030\001 \002(\021\"$\n\022GetCreateStatusRes\022\016\n\006st"
-      "atus\030\001 \002(\021\"R\n\013BackRoomRes\022\016\n\006status\030\001 \002("
-      "\021\022\021\n\troom_info\030\002 \001(\t\022 \n\nusers_info\030\003 \003(\013"
-      "2\014.UserArrived\".\n\013UserOffLine\022\037\n\tuser_in"
-      "fo\030\001 \002(\0132\014.UserArrived\"$\n\022UserReconnecte"
-      "dRes\022\016\n\006status\030\001 \002(\021\"\036\n\014HeartBeatRes\022\016\n\006"
-      "status\030\001 \001(\021\"#\n\014UserReadyReq\022\023\n\013ready_st"
-      "ate\030\001 \002(\021\"e\n\014UserReadyRes\022\016\n\006status\030\001 \002("
-      "\021\022\016\n\006seatid\030\002 \002(\021\022\017\n\007brandid\030\003 \001(\t\022\020\n\010nu"
-      "mberid\030\004 \001(\t\022\022\n\nuser_state\030\005 \001(\021\" \n\tGame"
-      "Start\022\023\n\013users_state\030\001 \003(\021\"\032\n\007UdpTest\022\017\n"
-      "\007content\030\001 \002(\t\"1\n\rLoginLogicReq\022\016\n\006udp_i"
-      "p\030\001 \002(\t\022\020\n\010udp_port\030\002 \002(\021\"E\n\013OptionEvent"
-      "\022\016\n\006seatid\030\001 \002(\021\022\020\n\010opt_type\030\002 \002(\021\022\t\n\001x\030"
-      "\003 \001(\021\022\t\n\001y\030\004 \001(\021\"8\n\tFrameOpts\022\017\n\007frameid"
-      "\030\001 \002(\021\022\032\n\004opts\030\002 \003(\0132\014.OptionEvent\"@\n\nLo"
-      "gicFrame\022\017\n\007frameid\030\001 \002(\021\022!\n\runsync_fram"
-      "es\030\002 \003(\0132\n.FrameOpts\"\\\n\rNextFrameOpts\022\017\n"
-      "\007frameid\030\001 \002(\021\022\016\n\006roomid\030\002 \002(\t\022\016\n\006seatid"
-      "\030\003 \002(\021\022\032\n\004opts\030\004 \003(\0132\014.OptionEvent*<\n\005St"
-      "ype\022\022\n\016INVALIDI_STYPE\020\000\022\010\n\004Auth\020\001\022\n\n\006Sys"
-      "tem\020\002\022\t\n\005Logic\020\003*\317\010\n\003Cmd\022\017\n\013INVALID_CMD\020"
-      "\000\022\022\n\016eGuestLoginReq\020\001\022\022\n\016eGuestLoginRes\020"
-      "\002\022\014\n\010eRelogin\020\003\022\021\n\reUserLostConn\020\004\022\023\n\017eE"
-      "ditProfileReq\020\005\022\023\n\017eEditProfileRes\020\006\022\026\n\022"
-      "eAccountUpgradeReq\020\007\022\026\n\022eAccountUpgradeR"
-      "es\020\010\022\022\n\016eUnameLoginReq\020\t\022\022\n\016eUnameLoginR"
-      "es\020\n\022\020\n\014eLoginOutReq\020\013\022\020\n\014eLoginOutRes\020\014"
-      "\022\022\n\016eUserRegistReq\020\r\022\022\n\016eUserRegistRes\020\016"
-      "\022\024\n\020eGetUgameInfoReq\020\017\022\024\n\020eGetUgameInfoR"
-      "es\020\020\022\027\n\023eRecvLoginBonuesReq\020\021\022\027\n\023eRecvLo"
-      "ginBonuesRes\020\022\022\031\n\025eGetWorldRankUchipReq\020"
-      "\023\022\031\n\025eGetWorldRankUchipRes\020\024\022\021\n\reGetSysM"
-      "sgReq\020\025\022\021\n\reGetSysMsgRes\020\026\022\022\n\016eLoginLogi"
-      "cReq\020\027\022\022\n\016eLoginLogicRes\020\030\022\021\n\reEnterZone"
-      "Req\020\031\022\021\n\reEnterZoneRes\020\032\022\017\n\013eEnterMatch\020"
-      "\033\022\020\n\014eUserArrived\020\034\022\021\n\reExitMatchReq\020\035\022\021"
-      "\n\reExitMatchRes\020\036\022\022\n\016eUserExitMatch\020\037\022\022\n"
-      "\016eCreateRoomReq\020 \022\022\n\016eCreateRoomRes\020!\022\020\n"
-      "\014eJoinRoomReq\020\"\022\020\n\014eJoinRoomRes\020#\022\020\n\014eEx"
-      "itRoomReq\020$\022\020\n\014eExitRoomRes\020%\022\020\n\014eDessol"
-      "veReq\020&\022\020\n\014eDessolveRes\020\'\022\027\n\023eGetCreateS"
-      "tatusReq\020(\022\027\n\023eGetCreateStatusRes\020)\022\020\n\014e"
-      "BackRoomReq\020*\022\020\n\014eBackRoomRes\020+\022\020\n\014eUser"
-      "OffLine\020,\022\021\n\reHeartBeatReq\020-\022\021\n\reHeartBe"
-      "atRes\020.\022\027\n\023eUserReconnectedReq\020/\022\027\n\023eUse"
-      "rReconnectedRes\0200\022\021\n\reUserReadyReq\0201\022\021\n\r"
-      "eUserReadyRes\0202\022\016\n\neGameStart\0203\022\014\n\010eUdpT"
-      "est\0204\022\017\n\013eLogicFrame\0205\022\022\n\016eNextFrameOpts"
-      "\0206"
+      "\001(\t\022 \n\nusers_info\030\003 \003(\0132\014.UserArrived\"$\n"
+      "\013ExitRoomReq\022\025\n\ris_force_exit\030\001 \002(\010\">\n\013E"
+      "xitRoomRes\022\016\n\006status\030\001 \002(\021\022\037\n\tuser_info\030"
+      "\002 \001(\0132\014.UserArrived\"\035\n\013DessolveRes\022\016\n\006st"
+      "atus\030\001 \002(\021\"$\n\022GetCreateStatusRes\022\016\n\006stat"
+      "us\030\001 \002(\021\"R\n\013BackRoomRes\022\016\n\006status\030\001 \002(\021\022"
+      "\021\n\troom_info\030\002 \001(\t\022 \n\nusers_info\030\003 \003(\0132\014"
+      ".UserArrived\".\n\013UserOffLine\022\037\n\tuser_info"
+      "\030\001 \002(\0132\014.UserArrived\"$\n\022UserReconnectedR"
+      "es\022\016\n\006status\030\001 \002(\021\"\036\n\014HeartBeatRes\022\016\n\006st"
+      "atus\030\001 \001(\021\"#\n\014UserReadyReq\022\023\n\013ready_stat"
+      "e\030\001 \002(\021\"e\n\014UserReadyRes\022\016\n\006status\030\001 \002(\021\022"
+      "\016\n\006seatid\030\002 \002(\021\022\017\n\007brandid\030\003 \001(\t\022\020\n\010numb"
+      "erid\030\004 \001(\t\022\022\n\nuser_state\030\005 \001(\021\" \n\tGameSt"
+      "art\022\023\n\013users_state\030\001 \003(\021\"\032\n\007UdpTest\022\017\n\007c"
+      "ontent\030\001 \002(\t\"1\n\rLoginLogicReq\022\016\n\006udp_ip\030"
+      "\001 \002(\t\022\020\n\010udp_port\030\002 \002(\021\"E\n\013OptionEvent\022\016"
+      "\n\006seatid\030\001 \002(\021\022\020\n\010opt_type\030\002 \002(\021\022\t\n\001x\030\003 "
+      "\001(\021\022\t\n\001y\030\004 \001(\021\"8\n\tFrameOpts\022\017\n\007frameid\030\001"
+      " \002(\021\022\032\n\004opts\030\002 \003(\0132\014.OptionEvent\"@\n\nLogi"
+      "cFrame\022\017\n\007frameid\030\001 \002(\021\022!\n\runsync_frames"
+      "\030\002 \003(\0132\n.FrameOpts\"\\\n\rNextFrameOpts\022\017\n\007f"
+      "rameid\030\001 \002(\021\022\016\n\006roomid\030\002 \002(\t\022\016\n\006seatid\030\003"
+      " \002(\021\022\032\n\004opts\030\004 \003(\0132\014.OptionEvent*<\n\005Styp"
+      "e\022\022\n\016INVALIDI_STYPE\020\000\022\010\n\004Auth\020\001\022\n\n\006Syste"
+      "m\020\002\022\t\n\005Logic\020\003*\317\010\n\003Cmd\022\017\n\013INVALID_CMD\020\000\022"
+      "\022\n\016eGuestLoginReq\020\001\022\022\n\016eGuestLoginRes\020\002\022"
+      "\014\n\010eRelogin\020\003\022\021\n\reUserLostConn\020\004\022\023\n\017eEdi"
+      "tProfileReq\020\005\022\023\n\017eEditProfileRes\020\006\022\026\n\022eA"
+      "ccountUpgradeReq\020\007\022\026\n\022eAccountUpgradeRes"
+      "\020\010\022\022\n\016eUnameLoginReq\020\t\022\022\n\016eUnameLoginRes"
+      "\020\n\022\020\n\014eLoginOutReq\020\013\022\020\n\014eLoginOutRes\020\014\022\022"
+      "\n\016eUserRegistReq\020\r\022\022\n\016eUserRegistRes\020\016\022\024"
+      "\n\020eGetUgameInfoReq\020\017\022\024\n\020eGetUgameInfoRes"
+      "\020\020\022\027\n\023eRecvLoginBonuesReq\020\021\022\027\n\023eRecvLogi"
+      "nBonuesRes\020\022\022\031\n\025eGetWorldRankUchipReq\020\023\022"
+      "\031\n\025eGetWorldRankUchipRes\020\024\022\021\n\reGetSysMsg"
+      "Req\020\025\022\021\n\reGetSysMsgRes\020\026\022\022\n\016eLoginLogicR"
+      "eq\020\027\022\022\n\016eLoginLogicRes\020\030\022\021\n\reEnterZoneRe"
+      "q\020\031\022\021\n\reEnterZoneRes\020\032\022\017\n\013eEnterMatch\020\033\022"
+      "\020\n\014eUserArrived\020\034\022\021\n\reExitMatchReq\020\035\022\021\n\r"
+      "eExitMatchRes\020\036\022\022\n\016eUserExitMatch\020\037\022\022\n\016e"
+      "CreateRoomReq\020 \022\022\n\016eCreateRoomRes\020!\022\020\n\014e"
+      "JoinRoomReq\020\"\022\020\n\014eJoinRoomRes\020#\022\020\n\014eExit"
+      "RoomReq\020$\022\020\n\014eExitRoomRes\020%\022\020\n\014eDessolve"
+      "Req\020&\022\020\n\014eDessolveRes\020\'\022\027\n\023eGetCreateSta"
+      "tusReq\020(\022\027\n\023eGetCreateStatusRes\020)\022\020\n\014eBa"
+      "ckRoomReq\020*\022\020\n\014eBackRoomRes\020+\022\020\n\014eUserOf"
+      "fLine\020,\022\021\n\reHeartBeatReq\020-\022\021\n\reHeartBeat"
+      "Res\020.\022\027\n\023eUserReconnectedReq\020/\022\027\n\023eUserR"
+      "econnectedRes\0200\022\021\n\reUserReadyReq\0201\022\021\n\reU"
+      "serReadyRes\0202\022\016\n\neGameStart\0203\022\014\n\010eUdpTes"
+      "t\0204\022\017\n\013eLogicFrame\0205\022\022\n\016eNextFrameOpts\0206"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 3962);
+      descriptor, 4000);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game.proto", &protobuf_RegisterTypes);
 }
@@ -12191,6 +12226,247 @@ void JoinRoomRes::InternalSwap(JoinRoomRes* other) {
 }
 
 ::google::protobuf::Metadata JoinRoomRes::GetMetadata() const {
+  protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void ExitRoomReq::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ExitRoomReq::kIsForceExitFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ExitRoomReq::ExitRoomReq()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_game_2eproto::InitDefaultsExitRoomReq();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:ExitRoomReq)
+}
+ExitRoomReq::ExitRoomReq(const ExitRoomReq& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  is_force_exit_ = from.is_force_exit_;
+  // @@protoc_insertion_point(copy_constructor:ExitRoomReq)
+}
+
+void ExitRoomReq::SharedCtor() {
+  _cached_size_ = 0;
+  is_force_exit_ = false;
+}
+
+ExitRoomReq::~ExitRoomReq() {
+  // @@protoc_insertion_point(destructor:ExitRoomReq)
+  SharedDtor();
+}
+
+void ExitRoomReq::SharedDtor() {
+}
+
+void ExitRoomReq::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ExitRoomReq::descriptor() {
+  ::protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ExitRoomReq& ExitRoomReq::default_instance() {
+  ::protobuf_game_2eproto::InitDefaultsExitRoomReq();
+  return *internal_default_instance();
+}
+
+ExitRoomReq* ExitRoomReq::New(::google::protobuf::Arena* arena) const {
+  ExitRoomReq* n = new ExitRoomReq;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void ExitRoomReq::Clear() {
+// @@protoc_insertion_point(message_clear_start:ExitRoomReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  is_force_exit_ = false;
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool ExitRoomReq::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:ExitRoomReq)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool is_force_exit = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          set_has_is_force_exit();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &is_force_exit_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:ExitRoomReq)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:ExitRoomReq)
+  return false;
+#undef DO_
+}
+
+void ExitRoomReq::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:ExitRoomReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required bool is_force_exit = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->is_force_exit(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:ExitRoomReq)
+}
+
+::google::protobuf::uint8* ExitRoomReq::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:ExitRoomReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // required bool is_force_exit = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->is_force_exit(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ExitRoomReq)
+  return target;
+}
+
+size_t ExitRoomReq::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ExitRoomReq)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  // required bool is_force_exit = 1;
+  if (has_is_force_exit()) {
+    total_size += 1 + 1;
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ExitRoomReq::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:ExitRoomReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ExitRoomReq* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ExitRoomReq>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ExitRoomReq)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:ExitRoomReq)
+    MergeFrom(*source);
+  }
+}
+
+void ExitRoomReq::MergeFrom(const ExitRoomReq& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ExitRoomReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_is_force_exit()) {
+    set_is_force_exit(from.is_force_exit());
+  }
+}
+
+void ExitRoomReq::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:ExitRoomReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ExitRoomReq::CopyFrom(const ExitRoomReq& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ExitRoomReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ExitRoomReq::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  return true;
+}
+
+void ExitRoomReq::Swap(ExitRoomReq* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ExitRoomReq::InternalSwap(ExitRoomReq* other) {
+  using std::swap;
+  swap(is_force_exit_, other->is_force_exit_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata ExitRoomReq::GetMetadata() const {
   protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages];
 }

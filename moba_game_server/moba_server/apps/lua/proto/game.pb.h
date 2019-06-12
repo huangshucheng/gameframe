@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[46];
+  static const ::google::protobuf::internal::ParseTable schema[47];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -103,6 +103,8 @@ void InitDefaultsJoinRoomReqImpl();
 void InitDefaultsJoinRoomReq();
 void InitDefaultsJoinRoomResImpl();
 void InitDefaultsJoinRoomRes();
+void InitDefaultsExitRoomReqImpl();
+void InitDefaultsExitRoomReq();
 void InitDefaultsExitRoomResImpl();
 void InitDefaultsExitRoomRes();
 void InitDefaultsDessolveResImpl();
@@ -166,6 +168,7 @@ inline void InitDefaults() {
   InitDefaultsCreateRoomRes();
   InitDefaultsJoinRoomReq();
   InitDefaultsJoinRoomRes();
+  InitDefaultsExitRoomReq();
   InitDefaultsExitRoomRes();
   InitDefaultsDessolveRes();
   InitDefaultsGetCreateStatusRes();
@@ -220,6 +223,9 @@ extern EnterZoneResDefaultTypeInternal _EnterZoneRes_default_instance_;
 class ExitMatchRes;
 class ExitMatchResDefaultTypeInternal;
 extern ExitMatchResDefaultTypeInternal _ExitMatchRes_default_instance_;
+class ExitRoomReq;
+class ExitRoomReqDefaultTypeInternal;
+extern ExitRoomReqDefaultTypeInternal _ExitRoomReq_default_instance_;
 class ExitRoomRes;
 class ExitRoomResDefaultTypeInternal;
 extern ExitRoomResDefaultTypeInternal _ExitRoomRes_default_instance_;
@@ -4451,6 +4457,116 @@ class JoinRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
+class ExitRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ExitRoomReq) */ {
+ public:
+  ExitRoomReq();
+  virtual ~ExitRoomReq();
+
+  ExitRoomReq(const ExitRoomReq& from);
+
+  inline ExitRoomReq& operator=(const ExitRoomReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ExitRoomReq(ExitRoomReq&& from) noexcept
+    : ExitRoomReq() {
+    *this = ::std::move(from);
+  }
+
+  inline ExitRoomReq& operator=(ExitRoomReq&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ExitRoomReq& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ExitRoomReq* internal_default_instance() {
+    return reinterpret_cast<const ExitRoomReq*>(
+               &_ExitRoomReq_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    30;
+
+  void Swap(ExitRoomReq* other);
+  friend void swap(ExitRoomReq& a, ExitRoomReq& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ExitRoomReq* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ExitRoomReq* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ExitRoomReq& from);
+  void MergeFrom(const ExitRoomReq& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ExitRoomReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required bool is_force_exit = 1;
+  bool has_is_force_exit() const;
+  void clear_is_force_exit();
+  static const int kIsForceExitFieldNumber = 1;
+  bool is_force_exit() const;
+  void set_is_force_exit(bool value);
+
+  // @@protoc_insertion_point(class_scope:ExitRoomReq)
+ private:
+  void set_has_is_force_exit();
+  void clear_has_is_force_exit();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  bool is_force_exit_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsExitRoomReqImpl();
+};
+// -------------------------------------------------------------------
+
 class ExitRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ExitRoomRes) */ {
  public:
   ExitRoomRes();
@@ -4493,7 +4609,7 @@ class ExitRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_ExitRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    30;
+    31;
 
   void Swap(ExitRoomRes* other);
   friend void swap(ExitRoomRes& a, ExitRoomRes& b) {
@@ -4615,7 +4731,7 @@ class DessolveRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_DessolveRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    31;
+    32;
 
   void Swap(DessolveRes* other);
   friend void swap(DessolveRes& a, DessolveRes& b) {
@@ -4725,7 +4841,7 @@ class GetCreateStatusRes : public ::google::protobuf::Message /* @@protoc_insert
                &_GetCreateStatusRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    32;
+    33;
 
   void Swap(GetCreateStatusRes* other);
   friend void swap(GetCreateStatusRes& a, GetCreateStatusRes& b) {
@@ -4835,7 +4951,7 @@ class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_BackRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    33;
+    34;
 
   void Swap(BackRoomRes* other);
   friend void swap(BackRoomRes& a, BackRoomRes& b) {
@@ -4976,7 +5092,7 @@ class UserOffLine : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_UserOffLine_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    34;
+    35;
 
   void Swap(UserOffLine* other);
   friend void swap(UserOffLine& a, UserOffLine& b) {
@@ -5088,7 +5204,7 @@ class UserReconnectedRes : public ::google::protobuf::Message /* @@protoc_insert
                &_UserReconnectedRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    35;
+    36;
 
   void Swap(UserReconnectedRes* other);
   friend void swap(UserReconnectedRes& a, UserReconnectedRes& b) {
@@ -5198,7 +5314,7 @@ class HeartBeatRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_HeartBeatRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    36;
+    37;
 
   void Swap(HeartBeatRes* other);
   friend void swap(HeartBeatRes& a, HeartBeatRes& b) {
@@ -5308,7 +5424,7 @@ class UserReadyReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_UserReadyReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    37;
+    38;
 
   void Swap(UserReadyReq* other);
   friend void swap(UserReadyReq& a, UserReadyReq& b) {
@@ -5418,7 +5534,7 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_UserReadyRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    38;
+    39;
 
   void Swap(UserReadyRes* other);
   friend void swap(UserReadyRes& a, UserReadyRes& b) {
@@ -5587,7 +5703,7 @@ class GameStart : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_GameStart_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    39;
+    40;
 
   void Swap(GameStart* other);
   friend void swap(GameStart& a, GameStart& b) {
@@ -5700,7 +5816,7 @@ class UdpTest : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_UdpTest_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    40;
+    41;
 
   void Swap(UdpTest* other);
   friend void swap(UdpTest& a, UdpTest& b) {
@@ -5818,7 +5934,7 @@ class LoginLogicReq : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_LoginLogicReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    41;
+    42;
 
   void Swap(LoginLogicReq* other);
   friend void swap(LoginLogicReq& a, LoginLogicReq& b) {
@@ -5949,7 +6065,7 @@ class OptionEvent : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_OptionEvent_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    42;
+    43;
 
   void Swap(OptionEvent* other);
   friend void swap(OptionEvent& a, OptionEvent& b) {
@@ -6092,7 +6208,7 @@ class FrameOpts : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_FrameOpts_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    43;
+    44;
 
   void Swap(FrameOpts* other);
   friend void swap(FrameOpts& a, FrameOpts& b) {
@@ -6215,7 +6331,7 @@ class LogicFrame : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_LogicFrame_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    44;
+    45;
 
   void Swap(LogicFrame* other);
   friend void swap(LogicFrame& a, LogicFrame& b) {
@@ -6338,7 +6454,7 @@ class NextFrameOpts : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_NextFrameOpts_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    45;
+    46;
 
   void Swap(NextFrameOpts* other);
   friend void swap(NextFrameOpts& a, NextFrameOpts& b) {
@@ -9532,6 +9648,34 @@ JoinRoomRes::users_info() const {
 
 // -------------------------------------------------------------------
 
+// ExitRoomReq
+
+// required bool is_force_exit = 1;
+inline bool ExitRoomReq::has_is_force_exit() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ExitRoomReq::set_has_is_force_exit() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ExitRoomReq::clear_has_is_force_exit() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ExitRoomReq::clear_is_force_exit() {
+  is_force_exit_ = false;
+  clear_has_is_force_exit();
+}
+inline bool ExitRoomReq::is_force_exit() const {
+  // @@protoc_insertion_point(field_get:ExitRoomReq.is_force_exit)
+  return is_force_exit_;
+}
+inline void ExitRoomReq::set_is_force_exit(bool value) {
+  set_has_is_force_exit();
+  is_force_exit_ = value;
+  // @@protoc_insertion_point(field_set:ExitRoomReq.is_force_exit)
+}
+
+// -------------------------------------------------------------------
+
 // ExitRoomRes
 
 // required sint32 status = 1;
@@ -10689,6 +10833,8 @@ NextFrameOpts::opts() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

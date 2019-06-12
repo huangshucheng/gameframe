@@ -55,6 +55,7 @@
             <Image Name="head_yellow.png" />
             <Image Name="kuang.png" />
             <Image Name="offline_flag.png" />
+            <Image Name="private_room_master.png" />
             <Image Name="setting_btn_exit_normal.png" />
             <Image Name="setting_btn_exit_pressed.png" />
             <Image Name="shezhi.png" />

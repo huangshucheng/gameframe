@@ -1,6 +1,8 @@
 local LobbyScene = Lobby.LobbyScene or {}
 
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
+local SocketUDP             = require('game.net.NetWorkUDP')
+local Scheduler             = require("game.utils.scheduler")
 
 function LobbyScene:onTouchJoinRoomBtn(send,eventType)
     if eventType == ccui.TouchEventType.began then
@@ -88,8 +90,6 @@ function LobbyScene:onTouchSettingBtn(send, eventType)
     Lobby.showPopLayer('SetLayer')
 end
 
-local SocketUDP = require('game.net.NetWorkUDP')
-local Scheduler     = require("game.utils.scheduler")
 function LobbyScene:onTouchMessageBtn(send, evnetType)
     -- Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO

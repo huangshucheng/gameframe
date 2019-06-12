@@ -84,7 +84,7 @@ function LobbyScene:onEventLoginLogic(event)
     if data.status == Respones.OK then
         Lobby.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
         LogicServiceProxy:getInstance():sendGetCreateStatus()
-        NetWorkUDP:getInstance():start()
+        -- NetWorkUDP:getInstance():start() --UDP test
     else
         Lobby.showPopLayer('TipsLayer',{"登录逻辑服failed!"})
         LogicServiceProxy:getInstance():sendLoginLogicServer()        

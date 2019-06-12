@@ -124,6 +124,8 @@ function RoomManager:on_exit_room(session, req)
 	local stype = req[1]
 	local ctype = req[2]
 	local uid 	= req[3]
+	local body = req[4]
+	dump(body,'hcc>>on_exit_room')
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
@@ -149,10 +151,18 @@ function RoomManager:on_exit_room(session, req)
 		return
 	end
 
+	if not body then
+		NetWork:getInstance():send_status(session, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
+		return
+	end
+
+	local is_force_exit = body.is_force_exit
+	print('hcc>>on_exit_room: is_force_exit: ' .. tostring(is_force_exit))
 	local state = tonumber(player:get_state())
 	if state == Player.STATE.psPlaying or room:get_is_start_game() then
-		NetWork:getInstance():send_status(session, Cmd.eExitRoomRes, uid, Respones.GameIsStart)
-		return
+		-- NetWork:getInstance():send_status(session, Cmd.eExitRoomRes, uid, Respones.GameIsStart)
+		-- return
+		player:set_is_offline(true)
 	end
 
 	local ishost = player:get_is_host()
@@ -170,7 +180,6 @@ function RoomManager:on_exit_room(session, req)
 		NetWork:getInstance():send_status(session, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
 		return
 	end
-
 	player:send_msg(Cmd.eExitRoomRes, body_msg)	-- send to self player
 	room:broacast_in_room(Cmd.eExitRoomRes, body_msg, player) -- send to other player
 
