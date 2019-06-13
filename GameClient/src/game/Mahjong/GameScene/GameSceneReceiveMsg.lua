@@ -17,12 +17,19 @@ function GameScene:addServerEventListener()
 end
 
 function GameScene:addClientEventListener()
+    addEvent("CheckLinkGameRes",self, self.onEventCheckLinkGame)
+    addEvent("RoomInfoRes",self, self.onEventRoomInfo)
+    addEvent("RoomIdRes",self, self.onEventRoomId)
+    addEvent("PlayCountRes",self, self.onEventPlayCount)
+
     addEvent("DessolveRes",self, self.onEventDessolve)
     addEvent("ExitRoomRes",self, self.onEventExitRoom)
-    addEvent('Relogin',self, self.onEvnetRelogin)
     addEvent('JoinRoomRes',self, self.onEventJoinRoom)
     addEvent('BackRoomRes',self, self.onEventBackRoom)
     addEvent('UserArrived',self, self.onEventUserArrived)
+    addEvent("GameStart", self, self.onEventGameStart)
+    
+    addEvent('Relogin',self, self.onEvnetRelogin)
     addEvent('UserOffLine',self, self.onEventUserOffline)
     addEvent("LoginLogicRes",self, self.onEventLoginLogic)
     addEvent("GuestLoginRes", self, self.onEventGuestLogin)
@@ -30,7 +37,6 @@ function GameScene:addClientEventListener()
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
     addEvent("UserReconnectedRes", self, self.onEventReconnect)
     addEvent("UserReadyRes", self, self.onEventUserReady)
-    addEvent("GameStart", self, self.onEventGameStart)
     addEvent("LogicFrame", self, self.onEventServerLogicFrame)
 end
 
@@ -64,7 +70,35 @@ end
 
 function GameScene:onEvnetRelogin(event)
     self:enterScene('game.Lobby.LobbyScene.LoginScene')
-    Game.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
+    -- Game.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
+end
+-----------------------------------------------------
+
+function GameScene:onEventCheckLinkGame(event)
+    local data = event._usedata
+    if data.status == Respones.OK then
+        print('link game logic success')
+    else
+        print('link game logic failed')
+    end
+end
+
+function GameScene:onEventRoomInfo(event)
+    local data = event._usedata
+    local room_info = data.room_info
+    print('room_info: ' .. tostring(room_info))
+end
+
+function GameScene:onEventRoomId(event)
+    local data = event._usedata
+    local room_id = data.room_id
+    print('room_id: ' .. tostring(room_id))
+end
+
+function GameScene:onEventPlayCount(event)
+    local data = event._usedata
+    local play_count = data.play_count
+    print('play_count: ' .. tostring(play_count))
 end
 
 function GameScene:onEventDessolve(event)

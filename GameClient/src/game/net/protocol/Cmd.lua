@@ -76,6 +76,12 @@ local Cmd = {
 	eUdpTest 					= 52,
 	eLogicFrame 				= 53,
 	eNextFrameOpts 				= 54,
+
+	eCheckLinkGameReq 			= 55,
+	eCheckLinkGameRes 			= 56,
+	eRoomInfoRes 				= 57,
+	eRoomIdRes 					= 58,
+	ePlayCountRes 				= 59,
 }
 
 return Cmd

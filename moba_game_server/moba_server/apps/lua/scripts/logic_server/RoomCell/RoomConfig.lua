@@ -1,7 +1,7 @@
-local RoomConfig = class('RoomConfig')
+local Room = class('Room')
 
 -- 房间配置
 
-RoomConfig.canSpecf = true 	--做牌
+Room.canSpecf = true 	--做牌
 
-return RoomConfig
+return Room

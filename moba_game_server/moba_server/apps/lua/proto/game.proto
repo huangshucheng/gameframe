@@ -86,6 +86,13 @@ enum Cmd {
 	eUdpTest = 52;
 	eLogicFrame = 53;
 	eNextFrameOpts = 54;
+	
+	eCheckLinkGameReq = 55;
+	eCheckLinkGameRes = 56;
+
+	eRoomInfoRes = 57;
+	eRoomIdRes = 58;
+	ePlayCountRes = 59;
 }
 
 message GuestLoginReq {
@@ -341,4 +348,20 @@ message NextFrameOpts {
 	required string roomid = 2;
 	required sint32 seatid = 3;
 	repeated OptionEvent opts = 4;
+}
+
+message CheckLinkGameRes {
+	required sint32 status = 1;
+}
+
+message RoomInfoRes {
+	required string room_info = 1;
+}
+
+message RoomIdRes {
+	required string room_id = 1;
+}
+
+message PlayCountRes {
+	required string play_count = 1;
 }

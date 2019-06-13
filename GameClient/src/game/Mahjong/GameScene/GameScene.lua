@@ -4,6 +4,7 @@ Game.GameScene      = GameScene
 
 local Function 				= require("game.Mahjong.Base.Function")
 local GameSceneDefine       = require("game.Mahjong.GameScene.GameSceneDefine")
+local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local Scheduler             = require("game.utils.scheduler")
 
 --------------拓展
@@ -27,6 +28,8 @@ function GameScene:ctor()
 end
 
 function GameScene:onCreate()
+    print('GameScene>>onCreate')
+    LogicServiceProxy:getInstance():sendCheckLinkGameReq()
     self:initUI()
     self:addUITouchEvent()
     self:showRoomInfo()

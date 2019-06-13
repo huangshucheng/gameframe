@@ -24,6 +24,7 @@ end
 function GameManager:ctor()
 	self._cmd_handler_map =
 	{
+		[Cmd.eCheckLinkGameReq] 	= self.on_check_link_game,
 		[Cmd.eUserReconnectedReq] 	= self.on_reconnect,
 		[Cmd.eUserReadyReq] 		= self.on_user_ready,
 		[Cmd.eUdpTest]				= self.on_udp_test,
@@ -48,6 +49,37 @@ function GameManager:receive_msg(session, msg)
 	end
 	
 	return false
+end
+-- check enter room , then  send room info,user info
+function GameManager:on_check_link_game(session, req)
+	if not req then return end
+	local stype = req[1]
+	local ctype = req[2]
+	local uid 	= req[3]
+	print('hcc>> GameManager:on_check_link_game uid: ' .. uid)
+	local player = PlayerManager:getInstance():get_player_by_uid(uid)
+	if not player then
+		NetWork:getInstance():send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.PlayerIsNotExist)
+		return
+	end
+
+	local msg_body = {
+		status 	= Respones.OK,
+	}
+	player:send_msg(Cmd.eCheckLinkGameRes, msg_body)
+
+	local room_id = player:get_room_id()
+	print('hcc>> on_check_link_game, room_id: '.. room_id)
+	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
+	if not room then
+		NetWork:getInstance():send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.RoomIsNotExist)
+	 	return
+	end
+
+	player:send_msg(Cmd.eUserArrived, player:get_user_arrived_info())
+	player:send_msg(Cmd.eRoomInfoRes, {room_info = room:get_room_info()})
+	player:send_msg(Cmd.eRoomIdRes,{room_id = room:get_room_id()})
+	player:send_msg(Cmd.ePlayCountRes,{play_count = room:get_play_count()})
 end
 
 function GameManager:on_reconnect(session, req)

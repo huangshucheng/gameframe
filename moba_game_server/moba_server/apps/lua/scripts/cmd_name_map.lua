@@ -56,6 +56,11 @@ local cmd_name_map = {
 	[52] = "UdpTest",
 	[53] = "LogicFrame",
 	[54] = "NextFrameOpts",
+	[55] = "CheckLinkGameReq",
+	[56] = "CheckLinkGameRes",
+	[57] = "RoomInfoRes",
+	[58] = "RoomIdRes",
+	[59] = "PlayCountRes",
 }
 
 return cmd_name_map

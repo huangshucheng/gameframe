@@ -97,4 +97,8 @@ function LogicServiceProxy:sendNextFrame(msg)
 	NetWorkUDP:getInstance():sendMsg(Stype.Logic, Cmd.eNextFrameOpts, msg)
 end
 
+function LogicServiceProxy:sendCheckLinkGameReq()
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eCheckLinkGameReq)
+end
+
 return LogicServiceProxy

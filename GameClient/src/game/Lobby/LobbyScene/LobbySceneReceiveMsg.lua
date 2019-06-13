@@ -28,10 +28,12 @@ function LobbyScene:addClientEventListener()
     addEvent("GetUgameInfoRes",self, self.onEventGetUgameInfo)
     addEvent("RecvLoginBonuesRes",self, self.onEventRecvLoginBonues)
     addEvent("LoginLogicRes",self, self.onEventLoginLogic)
+    
     addEvent("CreateRoomRes", self, self.onEventCreateRoom)
     addEvent("JoinRoomRes", self, self.onEventJoinRoom)
-    addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
     addEvent("BackRoomRes", self, self.onEventBackRoom)
+
+    addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
     addEvent("UdpTest", self, self.onEventUdpTest)
 end
@@ -167,6 +169,25 @@ function LobbyScene:onEventJoinRoom(event)
     Lobby.popLayer('LoadingLayer')
 end
 
+function LobbyScene:onEventBackRoom(event)
+    local data = event._usedata
+    local status = data.status
+    if status == Respones.OK then
+        RoomData:getInstance():setRoomInfo(data.room_info)
+        local users_info = data.users_info
+        if next(users_info) then
+            for _,info in ipairs(users_info) do
+                RoomData:getInstance():createPlayerByUserInfo(info)
+            end
+        end
+        self:pushScene('game.Mahjong.GameScene.GameScene')
+        LogicServiceProxy:getInstance():sendReconnect()
+    else
+        Lobby.showPopLayer('TipsLayer',{"返回房间失败"})
+    end
+    Lobby.popLayer('LoadingLayer')
+end
+
 function LobbyScene:onEvnetGetCreateStatus(event)
     local data = event._usedata
     local status = data.status
@@ -193,25 +214,6 @@ function LobbyScene:onEvnetGetCreateStatus(event)
             img_create_room:setVisible(true)
         end
     end
-end
-
-function LobbyScene:onEventBackRoom(event)
-    local data = event._usedata
-    local status = data.status
-    if status == Respones.OK then
-        RoomData:getInstance():setRoomInfo(data.room_info)
-        local users_info = data.users_info
-        if next(users_info) then
-            for _,info in ipairs(users_info) do
-                RoomData:getInstance():createPlayerByUserInfo(info)
-            end
-        end
-        self:pushScene('game.Mahjong.GameScene.GameScene')
-        LogicServiceProxy:getInstance():sendReconnect()
-    else
-        Lobby.showPopLayer('TipsLayer',{"返回房间失败"})
-    end
-    Lobby.popLayer('LoadingLayer')
 end
 
 function LobbyScene:onEventGuestLogin(event)
