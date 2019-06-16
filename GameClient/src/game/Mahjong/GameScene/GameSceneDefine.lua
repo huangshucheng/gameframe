@@ -17,6 +17,8 @@ GameSceneDefine.KW_IMG_READY 		  = 'KW_IMG_READY'
 GameSceneDefine.KW_TOUCH_LAYER 		  = 'KW_TOUCH_LAYER'
 GameSceneDefine.KW_HERO 			  = 'KW_HERO'
 GameSceneDefine.KW_IMG_MASTER 		  = 'KW_IMG_MASTER'
+GameSceneDefine.KW_PANEL_LEFT_TOP 		  = "KW_PANEL_LEFT_TOP"
+GameSceneDefine.KW_TEXT_PLAY_COUNT 		  = "KW_TEXT_PLAY_COUNT"
 
 
 return GameSceneDefine

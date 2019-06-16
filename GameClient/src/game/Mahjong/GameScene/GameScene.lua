@@ -17,14 +17,7 @@ require('game.Mahjong.GameScene.GameSceneUI')
 GameScene.RESOURCE_FILENAME = 'MahScene/MahScene.csb'
 
 function GameScene:ctor()
-    self._panel_user_info_table = {}
 	GameScene.super.ctor(self)
-
-    self._sync_frameid = 0
-    self._last_frame_opt = nil
-
-    self._joystick = nil
-    self._hero_list = {}
 end
 
 function GameScene:onCreate()
@@ -32,23 +25,18 @@ function GameScene:onCreate()
     LogicServiceProxy:getInstance():sendCheckLinkGameReq()
     self:initUI()
     self:addUITouchEvent()
-    self:showRoomInfo()
-    self:showAllExistUserInfo()
-    self:showReadyBtn()
-    self:showReadyImag()
-    self:showHostImag()
-    -- self:showJoystick()
-    -- self.tickScheduler = Scheduler.scheduleUpdateGlobal(handler(self, self.update))
 end
 
 function GameScene:initUI()
-    for i = 1 , 4 do
-        local panel_user = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. i)
+    local panel_user = nil
+    local index = 0
+    repeat
+        index = index + 1
+        panel_user = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. index)
         if panel_user then
-            self._panel_user_info_table[#self._panel_user_info_table + 1] = panel_user
             panel_user:setVisible(false)
         end
-    end
+    until panel_user == nil
 end
 
 function GameScene:addUITouchEvent()
@@ -75,10 +63,6 @@ end
 
 function GameScene:onExit()
     print('GameScene onExit')
---    if self.tickScheduler then
---        Scheduler.unscheduleGlobal(self.tickScheduler)
---        self.tickScheduler = nil
---    end 
 end
 
 function GameScene:update(dt)

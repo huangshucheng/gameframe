@@ -8,8 +8,8 @@ function Room:check_game_start()
 		return
 	end
 	local ready_player_count = self:get_player_count_by_state(Player.STATE.psReady)
-	-- if ready_player_count == self:get_max_player() then
-	if ready_player_count >= 4 then
+	-- if ready_player_count >= 4 then
+	if ready_player_count == self:get_max_player() then
 		-- start game
 		self:set_is_start_game(true)
 		self:set_all_player_state(Player.STATE.psPlaying)
@@ -20,10 +20,7 @@ function Room:check_game_start()
 			local seatId = tonumber(players[i]:get_seat_id())
 			states[seatId] = players[i]:get_state()
 		end
-		local msg = {
-			users_state = states
-		}
-		self:broacast_in_room(Cmd.eGameStart, msg, nil)
+		self:broacast_in_room(Cmd.eGameStart,{users_state = states})
 		print('hcc>>testGameStart start game, ready count: '.. tostring(ready_player_count))
 		self:goto_game_step(RoomDefine.GameStep.GAME_STEP_START_GAME)
 	else

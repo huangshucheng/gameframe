@@ -141,9 +141,6 @@ function LobbyScene:onEventCreateRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        local seatid = data.user_info.seatid
-        RoomData:getInstance():createPlayerByUserInfo(data.user_info)
-        RoomData:getInstance():setRoomInfo(data.room_info)
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         Lobby.showPopLayer('TipsLayer',{"创建房间失败"})
@@ -155,13 +152,6 @@ function LobbyScene:onEventJoinRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        RoomData:getInstance():setRoomInfo(data.room_info)
-        local users_info = data.users_info
-        if next(users_info) then
-            for _,info in ipairs(users_info) do
-                RoomData:getInstance():createPlayerByUserInfo(info)
-            end
-        end
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         Lobby.showPopLayer('TipsLayer',{"加入房间失败"})
@@ -173,15 +163,7 @@ function LobbyScene:onEventBackRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        RoomData:getInstance():setRoomInfo(data.room_info)
-        local users_info = data.users_info
-        if next(users_info) then
-            for _,info in ipairs(users_info) do
-                RoomData:getInstance():createPlayerByUserInfo(info)
-            end
-        end
         self:pushScene('game.Mahjong.GameScene.GameScene')
-        LogicServiceProxy:getInstance():sendReconnect()
     else
         Lobby.showPopLayer('TipsLayer',{"返回房间失败"})
     end

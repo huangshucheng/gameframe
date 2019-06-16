@@ -1,6 +1,5 @@
 local Room = class("Room")
 
-local ToolUtils 		= require("utils/ToolUtils")
 local RoomDefine 		= require("logic_server/RoomCell/RoomDefine")
 
 function Room:ctor()
@@ -56,14 +55,6 @@ function Room:setMetaTable()
         tmpmetatable[i] = v
     end
     setmetatable(self, {__index = tmpmetatable}) 
-end
-
-function Room:parse_game_rule()
-	local player_num = ToolUtils.getLuaStrValue(self._room_info , 'playerNum')
-	if player_num ~= '' then
-		self._max_player = tonumber(player_num) or 4
-		print('hcc>> max_player: ' .. self._max_player)
-	end
 end
 
 function Room:enter_player(player)
@@ -135,7 +126,7 @@ function Room:enter_player(player)
 	return true
 end
 
-function Room:exit_player(player,is_force_exit)
+function Room:exit_player(player)
 	if type(player) ~= 'table' then
 		return false
 	end
@@ -149,7 +140,7 @@ function Room:exit_player(player,is_force_exit)
 	end
 
 	if index then
-		if player:get_is_host() or is_force_exit or self:get_is_start_game() then 	-- room host can back to lobby and can enter next time
+		if player:get_is_host() or self:get_is_start_game() then 	-- room host can back to lobby and can enter next time
 			player:set_is_offline(true)
 		else
 			table.remove(self._players,index)

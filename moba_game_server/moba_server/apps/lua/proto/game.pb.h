@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[51];
+  static const ::google::protobuf::internal::ParseTable schema[52];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -145,6 +145,8 @@ void InitDefaultsRoomIdResImpl();
 void InitDefaultsRoomIdRes();
 void InitDefaultsPlayCountResImpl();
 void InitDefaultsPlayCountRes();
+void InitDefaultsUserArrivedInfosImpl();
+void InitDefaultsUserArrivedInfos();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -197,6 +199,7 @@ inline void InitDefaults() {
   InitDefaultsRoomInfoRes();
   InitDefaultsRoomIdRes();
   InitDefaultsPlayCountRes();
+  InitDefaultsUserArrivedInfos();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -322,6 +325,9 @@ extern UnameLoginResDefaultTypeInternal _UnameLoginRes_default_instance_;
 class UserArrived;
 class UserArrivedDefaultTypeInternal;
 extern UserArrivedDefaultTypeInternal _UserArrived_default_instance_;
+class UserArrivedInfos;
+class UserArrivedInfosDefaultTypeInternal;
+extern UserArrivedInfosDefaultTypeInternal _UserArrivedInfos_default_instance_;
 class UserCenterInfo;
 class UserCenterInfoDefaultTypeInternal;
 extern UserCenterInfoDefaultTypeInternal _UserCenterInfo_default_instance_;
@@ -434,11 +440,12 @@ enum Cmd {
   eCheckLinkGameRes = 56,
   eRoomInfoRes = 57,
   eRoomIdRes = 58,
-  ePlayCountRes = 59
+  ePlayCountRes = 59,
+  eUserArrivedInfos = 60
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
-const Cmd Cmd_MAX = ePlayCountRes;
+const Cmd Cmd_MAX = eUserArrivedInfos;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();
@@ -4434,33 +4441,6 @@ class JoinRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // repeated .UserArrived users_info = 3;
-  int users_info_size() const;
-  void clear_users_info();
-  static const int kUsersInfoFieldNumber = 3;
-  const ::UserArrived& users_info(int index) const;
-  ::UserArrived* mutable_users_info(int index);
-  ::UserArrived* add_users_info();
-  ::google::protobuf::RepeatedPtrField< ::UserArrived >*
-      mutable_users_info();
-  const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
-      users_info() const;
-
-  // optional string room_info = 2;
-  bool has_room_info() const;
-  void clear_room_info();
-  static const int kRoomInfoFieldNumber = 2;
-  const ::std::string& room_info() const;
-  void set_room_info(const ::std::string& value);
-  #if LANG_CXX11
-  void set_room_info(::std::string&& value);
-  #endif
-  void set_room_info(const char* value);
-  void set_room_info(const char* value, size_t size);
-  ::std::string* mutable_room_info();
-  ::std::string* release_room_info();
-  void set_allocated_room_info(::std::string* room_info);
-
   // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
@@ -4472,14 +4452,10 @@ class JoinRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
  private:
   void set_has_status();
   void clear_has_status();
-  void set_has_room_info();
-  void clear_has_room_info();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::UserArrived > users_info_;
-  ::google::protobuf::internal::ArenaStringPtr room_info_;
   ::google::protobuf::int32 status_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsJoinRoomResImpl();
@@ -5027,33 +5003,6 @@ class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // repeated .UserArrived users_info = 3;
-  int users_info_size() const;
-  void clear_users_info();
-  static const int kUsersInfoFieldNumber = 3;
-  const ::UserArrived& users_info(int index) const;
-  ::UserArrived* mutable_users_info(int index);
-  ::UserArrived* add_users_info();
-  ::google::protobuf::RepeatedPtrField< ::UserArrived >*
-      mutable_users_info();
-  const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
-      users_info() const;
-
-  // optional string room_info = 2;
-  bool has_room_info() const;
-  void clear_room_info();
-  static const int kRoomInfoFieldNumber = 2;
-  const ::std::string& room_info() const;
-  void set_room_info(const ::std::string& value);
-  #if LANG_CXX11
-  void set_room_info(::std::string&& value);
-  #endif
-  void set_room_info(const char* value);
-  void set_room_info(const char* value, size_t size);
-  ::std::string* mutable_room_info();
-  ::std::string* release_room_info();
-  void set_allocated_room_info(::std::string* room_info);
-
   // required sint32 status = 1;
   bool has_status() const;
   void clear_status();
@@ -5065,14 +5014,10 @@ class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
  private:
   void set_has_status();
   void clear_has_status();
-  void set_has_room_info();
-  void clear_has_room_info();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::UserArrived > users_info_;
-  ::google::protobuf::internal::ArenaStringPtr room_info_;
   ::google::protobuf::int32 status_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsBackRoomResImpl();
@@ -7045,17 +6990,151 @@ class PlayCountRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_play_count();
   void set_allocated_play_count(::std::string* play_count);
 
+  // required string total_play_count = 2;
+  bool has_total_play_count() const;
+  void clear_total_play_count();
+  static const int kTotalPlayCountFieldNumber = 2;
+  const ::std::string& total_play_count() const;
+  void set_total_play_count(const ::std::string& value);
+  #if LANG_CXX11
+  void set_total_play_count(::std::string&& value);
+  #endif
+  void set_total_play_count(const char* value);
+  void set_total_play_count(const char* value, size_t size);
+  ::std::string* mutable_total_play_count();
+  ::std::string* release_total_play_count();
+  void set_allocated_total_play_count(::std::string* total_play_count);
+
   // @@protoc_insertion_point(class_scope:PlayCountRes)
  private:
   void set_has_play_count();
   void clear_has_play_count();
+  void set_has_total_play_count();
+  void clear_has_total_play_count();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr play_count_;
+  ::google::protobuf::internal::ArenaStringPtr total_play_count_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsPlayCountResImpl();
+};
+// -------------------------------------------------------------------
+
+class UserArrivedInfos : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserArrivedInfos) */ {
+ public:
+  UserArrivedInfos();
+  virtual ~UserArrivedInfos();
+
+  UserArrivedInfos(const UserArrivedInfos& from);
+
+  inline UserArrivedInfos& operator=(const UserArrivedInfos& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  UserArrivedInfos(UserArrivedInfos&& from) noexcept
+    : UserArrivedInfos() {
+    *this = ::std::move(from);
+  }
+
+  inline UserArrivedInfos& operator=(UserArrivedInfos&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserArrivedInfos& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UserArrivedInfos* internal_default_instance() {
+    return reinterpret_cast<const UserArrivedInfos*>(
+               &_UserArrivedInfos_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    51;
+
+  void Swap(UserArrivedInfos* other);
+  friend void swap(UserArrivedInfos& a, UserArrivedInfos& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UserArrivedInfos* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserArrivedInfos* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserArrivedInfos& from);
+  void MergeFrom(const UserArrivedInfos& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserArrivedInfos* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .UserArrived user_info = 1;
+  int user_info_size() const;
+  void clear_user_info();
+  static const int kUserInfoFieldNumber = 1;
+  const ::UserArrived& user_info(int index) const;
+  ::UserArrived* mutable_user_info(int index);
+  ::UserArrived* add_user_info();
+  ::google::protobuf::RepeatedPtrField< ::UserArrived >*
+      mutable_user_info();
+  const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
+      user_info() const;
+
+  // @@protoc_insertion_point(class_scope:UserArrivedInfos)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::UserArrived > user_info_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsUserArrivedInfosImpl();
 };
 // ===================================================================
 
@@ -10024,13 +10103,13 @@ inline void JoinRoomReq::set_allocated_room_id(::std::string* room_id) {
 
 // required sint32 status = 1;
 inline bool JoinRoomRes::has_status() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void JoinRoomRes::set_has_status() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void JoinRoomRes::clear_has_status() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void JoinRoomRes::clear_status() {
   status_ = 0;
@@ -10044,99 +10123,6 @@ inline void JoinRoomRes::set_status(::google::protobuf::int32 value) {
   set_has_status();
   status_ = value;
   // @@protoc_insertion_point(field_set:JoinRoomRes.status)
-}
-
-// optional string room_info = 2;
-inline bool JoinRoomRes::has_room_info() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void JoinRoomRes::set_has_room_info() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void JoinRoomRes::clear_has_room_info() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void JoinRoomRes::clear_room_info() {
-  room_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_room_info();
-}
-inline const ::std::string& JoinRoomRes::room_info() const {
-  // @@protoc_insertion_point(field_get:JoinRoomRes.room_info)
-  return room_info_.GetNoArena();
-}
-inline void JoinRoomRes::set_room_info(const ::std::string& value) {
-  set_has_room_info();
-  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:JoinRoomRes.room_info)
-}
-#if LANG_CXX11
-inline void JoinRoomRes::set_room_info(::std::string&& value) {
-  set_has_room_info();
-  room_info_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:JoinRoomRes.room_info)
-}
-#endif
-inline void JoinRoomRes::set_room_info(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_room_info();
-  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:JoinRoomRes.room_info)
-}
-inline void JoinRoomRes::set_room_info(const char* value, size_t size) {
-  set_has_room_info();
-  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:JoinRoomRes.room_info)
-}
-inline ::std::string* JoinRoomRes::mutable_room_info() {
-  set_has_room_info();
-  // @@protoc_insertion_point(field_mutable:JoinRoomRes.room_info)
-  return room_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* JoinRoomRes::release_room_info() {
-  // @@protoc_insertion_point(field_release:JoinRoomRes.room_info)
-  clear_has_room_info();
-  return room_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void JoinRoomRes::set_allocated_room_info(::std::string* room_info) {
-  if (room_info != NULL) {
-    set_has_room_info();
-  } else {
-    clear_has_room_info();
-  }
-  room_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_info);
-  // @@protoc_insertion_point(field_set_allocated:JoinRoomRes.room_info)
-}
-
-// repeated .UserArrived users_info = 3;
-inline int JoinRoomRes::users_info_size() const {
-  return users_info_.size();
-}
-inline void JoinRoomRes::clear_users_info() {
-  users_info_.Clear();
-}
-inline const ::UserArrived& JoinRoomRes::users_info(int index) const {
-  // @@protoc_insertion_point(field_get:JoinRoomRes.users_info)
-  return users_info_.Get(index);
-}
-inline ::UserArrived* JoinRoomRes::mutable_users_info(int index) {
-  // @@protoc_insertion_point(field_mutable:JoinRoomRes.users_info)
-  return users_info_.Mutable(index);
-}
-inline ::UserArrived* JoinRoomRes::add_users_info() {
-  // @@protoc_insertion_point(field_add:JoinRoomRes.users_info)
-  return users_info_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::UserArrived >*
-JoinRoomRes::mutable_users_info() {
-  // @@protoc_insertion_point(field_mutable_list:JoinRoomRes.users_info)
-  return &users_info_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
-JoinRoomRes::users_info() const {
-  // @@protoc_insertion_point(field_list:JoinRoomRes.users_info)
-  return users_info_;
 }
 
 // -------------------------------------------------------------------
@@ -10311,13 +10297,13 @@ inline void GetCreateStatusRes::set_status(::google::protobuf::int32 value) {
 
 // required sint32 status = 1;
 inline bool BackRoomRes::has_status() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void BackRoomRes::set_has_status() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void BackRoomRes::clear_has_status() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void BackRoomRes::clear_status() {
   status_ = 0;
@@ -10331,99 +10317,6 @@ inline void BackRoomRes::set_status(::google::protobuf::int32 value) {
   set_has_status();
   status_ = value;
   // @@protoc_insertion_point(field_set:BackRoomRes.status)
-}
-
-// optional string room_info = 2;
-inline bool BackRoomRes::has_room_info() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void BackRoomRes::set_has_room_info() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void BackRoomRes::clear_has_room_info() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void BackRoomRes::clear_room_info() {
-  room_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_room_info();
-}
-inline const ::std::string& BackRoomRes::room_info() const {
-  // @@protoc_insertion_point(field_get:BackRoomRes.room_info)
-  return room_info_.GetNoArena();
-}
-inline void BackRoomRes::set_room_info(const ::std::string& value) {
-  set_has_room_info();
-  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:BackRoomRes.room_info)
-}
-#if LANG_CXX11
-inline void BackRoomRes::set_room_info(::std::string&& value) {
-  set_has_room_info();
-  room_info_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:BackRoomRes.room_info)
-}
-#endif
-inline void BackRoomRes::set_room_info(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_room_info();
-  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:BackRoomRes.room_info)
-}
-inline void BackRoomRes::set_room_info(const char* value, size_t size) {
-  set_has_room_info();
-  room_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:BackRoomRes.room_info)
-}
-inline ::std::string* BackRoomRes::mutable_room_info() {
-  set_has_room_info();
-  // @@protoc_insertion_point(field_mutable:BackRoomRes.room_info)
-  return room_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* BackRoomRes::release_room_info() {
-  // @@protoc_insertion_point(field_release:BackRoomRes.room_info)
-  clear_has_room_info();
-  return room_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void BackRoomRes::set_allocated_room_info(::std::string* room_info) {
-  if (room_info != NULL) {
-    set_has_room_info();
-  } else {
-    clear_has_room_info();
-  }
-  room_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), room_info);
-  // @@protoc_insertion_point(field_set_allocated:BackRoomRes.room_info)
-}
-
-// repeated .UserArrived users_info = 3;
-inline int BackRoomRes::users_info_size() const {
-  return users_info_.size();
-}
-inline void BackRoomRes::clear_users_info() {
-  users_info_.Clear();
-}
-inline const ::UserArrived& BackRoomRes::users_info(int index) const {
-  // @@protoc_insertion_point(field_get:BackRoomRes.users_info)
-  return users_info_.Get(index);
-}
-inline ::UserArrived* BackRoomRes::mutable_users_info(int index) {
-  // @@protoc_insertion_point(field_mutable:BackRoomRes.users_info)
-  return users_info_.Mutable(index);
-}
-inline ::UserArrived* BackRoomRes::add_users_info() {
-  // @@protoc_insertion_point(field_add:BackRoomRes.users_info)
-  return users_info_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::UserArrived >*
-BackRoomRes::mutable_users_info() {
-  // @@protoc_insertion_point(field_mutable_list:BackRoomRes.users_info)
-  return &users_info_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
-BackRoomRes::users_info() const {
-  // @@protoc_insertion_point(field_list:BackRoomRes.users_info)
-  return users_info_;
 }
 
 // -------------------------------------------------------------------
@@ -11552,9 +11445,108 @@ inline void PlayCountRes::set_allocated_play_count(::std::string* play_count) {
   // @@protoc_insertion_point(field_set_allocated:PlayCountRes.play_count)
 }
 
+// required string total_play_count = 2;
+inline bool PlayCountRes::has_total_play_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PlayCountRes::set_has_total_play_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PlayCountRes::clear_has_total_play_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PlayCountRes::clear_total_play_count() {
+  total_play_count_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_total_play_count();
+}
+inline const ::std::string& PlayCountRes::total_play_count() const {
+  // @@protoc_insertion_point(field_get:PlayCountRes.total_play_count)
+  return total_play_count_.GetNoArena();
+}
+inline void PlayCountRes::set_total_play_count(const ::std::string& value) {
+  set_has_total_play_count();
+  total_play_count_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:PlayCountRes.total_play_count)
+}
+#if LANG_CXX11
+inline void PlayCountRes::set_total_play_count(::std::string&& value) {
+  set_has_total_play_count();
+  total_play_count_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:PlayCountRes.total_play_count)
+}
+#endif
+inline void PlayCountRes::set_total_play_count(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_total_play_count();
+  total_play_count_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:PlayCountRes.total_play_count)
+}
+inline void PlayCountRes::set_total_play_count(const char* value, size_t size) {
+  set_has_total_play_count();
+  total_play_count_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:PlayCountRes.total_play_count)
+}
+inline ::std::string* PlayCountRes::mutable_total_play_count() {
+  set_has_total_play_count();
+  // @@protoc_insertion_point(field_mutable:PlayCountRes.total_play_count)
+  return total_play_count_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PlayCountRes::release_total_play_count() {
+  // @@protoc_insertion_point(field_release:PlayCountRes.total_play_count)
+  clear_has_total_play_count();
+  return total_play_count_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PlayCountRes::set_allocated_total_play_count(::std::string* total_play_count) {
+  if (total_play_count != NULL) {
+    set_has_total_play_count();
+  } else {
+    clear_has_total_play_count();
+  }
+  total_play_count_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), total_play_count);
+  // @@protoc_insertion_point(field_set_allocated:PlayCountRes.total_play_count)
+}
+
+// -------------------------------------------------------------------
+
+// UserArrivedInfos
+
+// repeated .UserArrived user_info = 1;
+inline int UserArrivedInfos::user_info_size() const {
+  return user_info_.size();
+}
+inline void UserArrivedInfos::clear_user_info() {
+  user_info_.Clear();
+}
+inline const ::UserArrived& UserArrivedInfos::user_info(int index) const {
+  // @@protoc_insertion_point(field_get:UserArrivedInfos.user_info)
+  return user_info_.Get(index);
+}
+inline ::UserArrived* UserArrivedInfos::mutable_user_info(int index) {
+  // @@protoc_insertion_point(field_mutable:UserArrivedInfos.user_info)
+  return user_info_.Mutable(index);
+}
+inline ::UserArrived* UserArrivedInfos::add_user_info() {
+  // @@protoc_insertion_point(field_add:UserArrivedInfos.user_info)
+  return user_info_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::UserArrived >*
+UserArrivedInfos::mutable_user_info() {
+  // @@protoc_insertion_point(field_mutable_list:UserArrivedInfos.user_info)
+  return &user_info_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::UserArrived >&
+UserArrivedInfos::user_info() const {
+  // @@protoc_insertion_point(field_list:UserArrivedInfos.user_info)
+  return user_info_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -7,8 +7,6 @@ local Player 	= require('game.clientdata.Player')
 local UserInfo 	= require('game.clientdata.UserInfo')
 local ToolUtils = require('game.utils.ToolUtils')
 
-local MAX_PLAYER_NUM = 4
-
 function RoomData:getInstance()
 	if RoomData._instance == nil then
 		RoomData._instance = RoomData.new()
@@ -19,12 +17,14 @@ end
 function RoomData:ctor()
 	self._room_info = ''
 	self._room_id 	= ''
+	self._play_count = 0
+	self._total_play_count = 0
 	self._players 	= {}	-- seatid -> player
 end
 
 function RoomData:getChars()
 	local playerNum = ToolUtils.getLuaStrValue(self._room_info,'playerNum')
-	return tonumber(playerNum) or MAX_PLAYER_NUM
+	return tonumber(playerNum) or 4
 end
 
 function RoomData:setRoomInfo(room_info)
@@ -36,15 +36,11 @@ function RoomData:getRoomInfo()
 end
 
 function RoomData:getRoomId()
-	if self._room_id == '' then
-		for _ , player in pairs(self._players) do 
-			if player then
-				self._room_id = player:getRoomId()
-				break
-			end
-		end
-	end
 	return self._room_id
+end
+
+function RoomData:setRoomId(room_id)
+	self._room_id = room_id
 end
 
 function RoomData:getSelfPlayer()
@@ -95,6 +91,22 @@ function RoomData:reset()
 	self._players = {}
 	self._room_info = ''
 	self._room_id 	= ''
+end
+
+function RoomData:setPlayCount(play_count)
+	self._play_count = play_count
+end
+
+function RoomData:getPlayCount()
+	return self._play_count
+end
+
+function RoomData:setTotalPlayCount(total_play_count)
+	self._total_play_count = total_play_count
+end
+
+function RoomData:getTotalPlayCount()
+	return self._total_play_count
 end
 
 return RoomData

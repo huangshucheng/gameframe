@@ -174,7 +174,7 @@ function Player:send_msg(ctype, body)
 	end
 
 	local msg = {Stype.Logic, ctype, self._uid, body}
-	NetWork:getInstance():send_msg(self._session, msg)
+	NetWork.send_msg(self._session, msg)
 end
 
 function Player:copy_room_info(player)

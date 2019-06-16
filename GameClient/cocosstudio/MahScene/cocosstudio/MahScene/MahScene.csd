@@ -66,6 +66,32 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
+          <AbstractNodeData Name="KW_PANEL_LEFT_TOP" ActionTag="-1263329281" Tag="62" IconVisible="False" RightMargin="1180.0000" BottomMargin="520.0000" ClipAble="False" BackColorAlpha="47" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+            <Size X="100.0000" Y="200.0000" />
+            <Children>
+              <AbstractNodeData Name=" KW_TEXT_PLAY_COUNT" ActionTag="1332545715" Tag="64" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="43.5075" RightMargin="-63.5075" TopMargin="57.7769" BottomMargin="112.2231" FontSize="30" LabelText="局数:0/6" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="120.0000" Y="30.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="103.5075" Y="127.2231" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="254" G="225" B="133" />
+                <PrePosition X="1.0351" Y="0.6361" />
+                <PreSize X="1.2000" Y="0.1500" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleY="1.0000" />
+            <Position Y="720.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition Y="1.0000" />
+            <PreSize X="0.0781" Y="0.2778" />
+            <SingleColor A="255" R="0" G="0" B="0" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
           <AbstractNodeData Name="KW_BTN_SET" ActionTag="693826071" Tag="6" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="1160.7880" RightMargin="48.2120" TopMargin="37.0640" BottomMargin="614.9360" TouchEnable="True" LeftEage="23" RightEage="23" TopEage="22" BottomEage="22" Scale9OriginX="23" Scale9OriginY="22" Scale9Width="25" Scale9Height="24" ctype="ImageViewObjectData">
             <Size X="71.0000" Y="68.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

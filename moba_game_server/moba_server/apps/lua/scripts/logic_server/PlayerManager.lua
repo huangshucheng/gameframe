@@ -56,8 +56,8 @@ function PlayerManager:on_login_logic_server(session, req)
 	if p then
 		p:set_session(session)
 		p:set_udp_addr(body.udp_ip, body.udp_port)
-		print('PlayerManager>>111 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
-		NetWork:getInstance():send_status(session, Cmd.eLoginLogicRes, uid, Respones.OK)
+		-- print('PlayerManager>>111 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
+		NetWork.send_status(session, Cmd.eLoginLogicRes, uid, Respones.OK)
 		-- print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
 		return
 	end
@@ -68,9 +68,9 @@ function PlayerManager:on_login_logic_server(session, req)
 			logic_server_players[uid] = p
 			online_player_num = online_player_num + 1
 		end
-		NetWork:getInstance():send_status(session, Cmd.eLoginLogicRes, uid, status)
+		NetWork.send_status(session, Cmd.eLoginLogicRes, uid, status)
 		-- print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
-		print('PlayerManager>>222 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
+		-- print('PlayerManager>>222 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
 	end)
 	p:set_udp_addr(body.udp_ip, body.udp_port)
 end

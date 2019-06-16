@@ -59,27 +59,28 @@ function GameManager:on_check_link_game(session, req)
 	print('hcc>> GameManager:on_check_link_game uid: ' .. uid)
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.PlayerIsNotExist)
+		NetWork.send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 
-	local msg_body = {
-		status 	= Respones.OK,
-	}
-	player:send_msg(Cmd.eCheckLinkGameRes, msg_body)
-
+	player:send_msg(Cmd.eCheckLinkGameRes, {status = Respones.OK})
 	local room_id = player:get_room_id()
 	print('hcc>> on_check_link_game, room_id: '.. room_id)
 	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
 	if not room then
-		NetWork:getInstance():send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.RoomIsNotExist)
+		NetWork.send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.RoomIsNotExist)
 	 	return
 	end
-
-	player:send_msg(Cmd.eUserArrived, player:get_user_arrived_info())
+	-- send other player info and selfinfo to selfplayer
+	local users_info = {}
+	local players = room:get_room_players()
+	for i = 1 , #players do
+		users_info[#users_info + 1] = players[i]:get_user_arrived_info()
+	end
 	player:send_msg(Cmd.eRoomInfoRes, {room_info = room:get_room_info()})
 	player:send_msg(Cmd.eRoomIdRes,{room_id = room:get_room_id()})
-	player:send_msg(Cmd.ePlayCountRes,{play_count = room:get_play_count()})
+	player:send_msg(Cmd.ePlayCountRes,{play_count = room:get_play_count(),total_play_count = room:get_total_play_count()})
+	player:send_msg(Cmd.eUserArrivedInfos,{user_info = users_info})
 end
 
 function GameManager:on_reconnect(session, req)
@@ -90,7 +91,7 @@ function GameManager:on_reconnect(session, req)
 	print('hcc>> GameManager:on_reconnect uid: ' .. uid)
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(session, Cmd.eUserReconnectedRes, uid, Respones.PlayerIsNotExist)
+		NetWork.send_status(session, Cmd.eUserReconnectedRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 
@@ -110,7 +111,7 @@ function GameManager:on_user_ready(session, req)
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
-		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotExist)
+		NetWork.send_status(session, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 	if not body then return end
@@ -118,13 +119,13 @@ function GameManager:on_user_ready(session, req)
 
 	local room_id = player:get_room_id()
 	if room_id == -1 then
-		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotInRoom)
+		NetWork.send_status(session, Cmd.eUserReadyRes, uid, Respones.PlayerIsNotInRoom)
 		return
 	end
 
 	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
 	if not room then 
-		NetWork:getInstance():send_status(session, Cmd.eUserReadyRes, uid, Respones.RoomIsNotExist)
+		NetWork.send_status(session, Cmd.eUserReadyRes, uid, Respones.RoomIsNotExist)
 		return
 	end
 
@@ -172,22 +173,7 @@ function GameManager:on_udp_test(session, req)
 		uid,
 		{content = body.content}
 	}
-	-- NetWork:getInstance():send_msg(session,msg)
-end
-
-function GameManager:on_next_frame_event(session, req)
-	local stype = req[1]
-	local ctype = req[2]
-	local uid 	= req[3]  -- 用udp , uid == 0，不经过gateway
-	local body 	= req[4]
-	-- print('on_next_frame_event: styep:' .. stype .. ' ,ctype:' .. ctype .. ' ,uid:' .. uid)
-	-- dump(body,"on_next_frame_event")
-	if not body then return end
-	local room_id = body.roomid
-	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
-	if room then
-		room:on_next_frame_event(body)
-	end
+	-- NetWork.send_msg(session,msg)
 end
 
 return GameManager

@@ -93,6 +93,7 @@ enum Cmd {
 	eRoomInfoRes = 57;
 	eRoomIdRes = 58;
 	ePlayCountRes = 59;
+	eUserArrivedInfos = 60;
 }
 
 message GuestLoginReq {
@@ -262,8 +263,6 @@ message JoinRoomReq {
 
 message JoinRoomRes {
 	required sint32 status = 1;
-	optional string room_info = 2;
-	repeated UserArrived users_info = 3;
 }
 
 message ExitRoomReq {
@@ -285,8 +284,6 @@ message GetCreateStatusRes {
 
 message BackRoomRes {
 	required sint32 status = 1;
-	optional string room_info = 2;
-	repeated UserArrived users_info = 3;
 }
 
 message UserOffLine {
@@ -364,4 +361,9 @@ message RoomIdRes {
 
 message PlayCountRes {
 	required string play_count = 1;
+	required string total_play_count = 2;
+}
+
+message UserArrivedInfos {
+	repeated UserArrived user_info = 1;
 }
