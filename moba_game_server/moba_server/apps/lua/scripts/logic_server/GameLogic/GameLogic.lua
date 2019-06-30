@@ -30,6 +30,7 @@ function GameLogic:setMetaTable()
     table.insert(scriptPath, path .. "/GameStep")
     table.insert(scriptPath, path .. "/GameSendMsg")
     table.insert(scriptPath, path .. "/GameData")
+    table.insert(scriptPath, path .. "/GameDefine")
 
     local tmpmetatable = {}
     for i,v in ipairs(scriptPath) do
@@ -48,9 +49,8 @@ function GameLogic:setMetaTable()
 end
 
 function GameLogic:init()
-	if self.init_data then
-		self:init_data()
-	end
+	self:init_data()
+	self:init_step_func()
 end
 
 return GameLogic

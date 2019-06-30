@@ -22,4 +22,8 @@ function GameLogic:get_max_player()
 	return self._room:get_max_player()
 end
 
+function GameLogic:reset()
+	
+end
+
 return GameLogic

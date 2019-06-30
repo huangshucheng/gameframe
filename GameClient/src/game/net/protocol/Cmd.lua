@@ -85,6 +85,8 @@ local Cmd = {
 	eUserArrivedInfos	    	= 60,
 	eUserState 					= 61,
 	eAllUserState 				= 62,
+	eGameResult 				= 63,
+	eGameTotalResult 			= 64,
 }
 
 return Cmd

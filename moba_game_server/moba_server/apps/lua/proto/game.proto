@@ -96,6 +96,8 @@ enum Cmd {
 	eUserArrivedInfos = 60;
 	eUserState = 61;
 	eAllUserState = 62;
+	eGameResult = 63;
+	eGameTotalResult = 64;
 }
 
 message GuestLoginReq {
@@ -254,9 +256,7 @@ message CreateRoomReq {
 }
 
 message CreateRoomRes {
-	required sint32 status 			= 1;
-	optional string room_info 		= 2;
-	optional UserArrived user_info  = 3;
+	required sint32 status = 1;
 }
 
 message JoinRoomReq {
@@ -377,4 +377,12 @@ message UserState {
 
 message AllUserState {
 	repeated UserState users_state = 1;	
+}
+
+message GameResult {
+	repeated string score = 1;
+}
+
+message GameTotalResult {
+	repeated string score = 1;	
 }

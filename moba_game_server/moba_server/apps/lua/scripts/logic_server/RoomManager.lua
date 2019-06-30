@@ -105,17 +105,8 @@ function RoomManager:on_create_room(session, req)
 	room:set_room_info(body.room_info)
 	room:enter_player(player)
 	server_rooms[tostring(roomid)] = room
-
-	local user_info = player:get_user_arrived_info()
-
-	local msg_body = {
-		status 		= Respones.OK,
-		room_info 	= body.room_info,
-		user_info 	= user_info,
-	}
-
-	player:send_msg(Cmd.eCreateRoomRes, msg_body)
-
+	
+	player:send_msg(Cmd.eCreateRoomRes, {status = Respones.OK})
 	print('create_room success ,brandid: ' .. player:get_brand_id() .. ' ,roomid: ' .. roomid .. ' ,totalroomNum: ' .. self:get_total_rooms() ..' ,rule: ' .. tostring(room:get_room_info()))
 end
 

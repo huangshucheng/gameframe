@@ -27,6 +27,8 @@ function GameScene:addClientEventListener()
     addEvent('JoinRoomRes',self, self.onEventJoinRoom)
     addEvent('BackRoomRes',self, self.onEventBackRoom)
     addEvent("GameStart", self, self.onEventGameStart)
+    addEvent("GameResult", self, self.onEventGameResult)
+    addEvent("GameTotalResult", self, self.onEventGameTotalResult)
     addEvent("AllUserState", self, self.onEventUserState)
     
     addEvent('Relogin',self, self.onEvnetRelogin)
@@ -72,7 +74,7 @@ function GameScene:onEvnetRelogin(event)
     -- Game.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
 end
 -----------------------------------------------------
-
+--
 function GameScene:onEventCheckLinkGame(event)
     local data = event._usedata
     if data.status == Respones.OK then
@@ -267,4 +269,12 @@ function GameScene:onEventUserState(event)
         end
     end
     self:showReadyImag()
+end
+
+function GameScene:onEventGameResult(event)
+
+end
+
+function GameScene:onEventGameTotalResult(event)
+
 end

@@ -189,8 +189,13 @@ function Room:check_game_start()
 	end
 end
 
+function Room:on_logic_end_game()
+	self:set_all_player_state(Player.STATE.psWait)
+	self:send_user_state()
+end
+
 function Room:reset()
-	
+
 end
 
 return Room

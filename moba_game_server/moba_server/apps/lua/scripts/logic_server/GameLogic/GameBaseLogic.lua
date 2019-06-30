@@ -7,6 +7,8 @@ end
 
 function GameLogic:on_game_start()
 	print('GameLogic>>:on_game_start')
+	-- init data
+	self:goto_game_step(self.GameStep.GAME_STEP_START_GAME)
 end
 
 function GameLogic:brodcast_in_room(ctype, body, not_to_player)
