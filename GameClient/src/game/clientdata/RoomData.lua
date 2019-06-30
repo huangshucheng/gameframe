@@ -84,6 +84,7 @@ function RoomData:removePlayerBySeatId(seat_id)
 end
 
 function RoomData:getPlayerBySeatId(seat_id)
+	seat_id = tonumber(seat_id)
 	return self._players[seat_id]
 end
 

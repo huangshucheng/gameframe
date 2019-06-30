@@ -2,31 +2,23 @@ local Room = class('Room')
 local ToolUtils 		= require("utils/ToolUtils")
 
 -- 房间逻辑数据
-
-function Room:ctor()
-
-end
-
-function Room:init_first_data()
+function Room:init_data()
 	self._room_id 		= 0
 	self._players 		= {}
 	self._room_info 	= ''
 	self._max_player 	= 4
 	self._is_start_game = false
+	self._game_logic 	= nil
 
-	self._play_count = 0
+	self._play_count 	= 0
 	self._total_play_count = 0
-end
-
-function Room:init_every_data()
-	
 end
 
 function Room:parse_game_rule()
 	local player_num = ToolUtils.getLuaStrValue(self._room_info , 'playerNum')
 	if player_num ~= '' then
 		self._max_player = tonumber(player_num) or 4
-		print('hcc>> max_player: ' .. self._max_player)
+		print('max_player: ' .. self._max_player)
 	end
 	local total_play_count = ToolUtils.getLuaStrValue(self._room_info, 'playCount')
 	if total_play_count ~= '' then
@@ -45,8 +37,12 @@ end
 
 function Room:set_room_info(room_info)
 	self._room_info = room_info
-	if self.parse_game_rule then
-		self:parse_game_rule()
+	self:parse_game_rule()
+
+	if self._game_logic then
+		if self._game_logic.on_parse_game_rule then
+			self._game_logic:on_parse_game_rule(room_info)
+		end
 	end
 end
 
@@ -88,6 +84,10 @@ end
 
 function Room:get_total_play_count()
 	return self._total_play_count
+end
+
+function Room:get_game_logic()
+	return self._game_logic
 end
 
 return Room

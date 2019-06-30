@@ -5,7 +5,7 @@ local mysql_game 	= require("database/mysql_game")
 local redis_game 	= require("database/redis_game")
 local mysql_center 	= require("database/mysql_auth_center")
 local redis_center 	= require("database/redis_center")
-local Player 		= require("logic_server/PlayerCell/Player")
+local Player 		= require("logic_server/PlayerCell.Player")
 local NetWork 		= require("logic_server/NetWork")
 
 local PlayerManager = class('PlayerManager')
@@ -56,9 +56,8 @@ function PlayerManager:on_login_logic_server(session, req)
 	if p then
 		p:set_session(session)
 		p:set_udp_addr(body.udp_ip, body.udp_port)
-		-- print('PlayerManager>>111 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
 		NetWork.send_status(session, Cmd.eLoginLogicRes, uid, Respones.OK)
-		-- print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
+		print('on_login_logic_server exits,>> uid: ' .. uid .. ' ,brandid: ' .. p:get_brand_id() .. ' ,user size: '..  online_player_num)
 		return
 	end
 
@@ -69,8 +68,7 @@ function PlayerManager:on_login_logic_server(session, req)
 			online_player_num = online_player_num + 1
 		end
 		NetWork.send_status(session, Cmd.eLoginLogicRes, uid, status)
-		-- print('PlayerManager>> on_login_logic_server >> user size: '..  online_player_num)
-		-- print('PlayerManager>>222 on_login_logic_server >>  uid: '.. tostring(uid) .. ' ,ip: ' .. tostring(body.udp_ip) .. ' ,udp_port: ' .. body.udp_port .. ' , userSize: ' .. online_player_num)
+		print('on_login_logic_server >> uid: ' .. uid .. ' ,brandid: ' .. p:get_brand_id() .. ' ,user size: '..  online_player_num)
 	end)
 	p:set_udp_addr(body.udp_ip, body.udp_port)
 end
@@ -84,14 +82,13 @@ function PlayerManager:on_player_disconnect(session, req)
 		p:set_udp_addr(nil, 0)
 		local RoomManager = require("logic_server/RoomManager")
 		RoomManager:getInstance():on_player_disconnect(p)
-		print("PlayerManager>> on_player_disconnect>> Player uid " .. uid .. " disconnect!")
+		print("on_player_disconnect>> Player uid " .. uid .. " ,brandid: " .. p:get_brand_id() .. " disconnect!" .. ' ,usersize: ' .. online_player_num)
 		logic_server_players[uid] = nil
 		online_player_num = online_player_num - 1
 		if online_player_num <= 0 then
 			online_player_num = 0
 		end
 	end
-	print('PlayerManager>> on_player_disconnect >> user size: '..  online_player_num)
 end
 
 function PlayerManager:on_gateway_connect(session)

@@ -17,7 +17,7 @@
 start gamelogic
 玩家准备 OK
 检测游戏开始 OK
-开始游戏
+开始游戏 OK
 做牌功能
 发牌
 投色子

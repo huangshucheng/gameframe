@@ -1,14 +1,15 @@
-local Room = class("Room")
+local GameLogic 			= class('GameLogic')
 
-function Room:ctor()
+function GameLogic:ctor()
+	print('hcc>>GameLogic:ctor')
 	self:setMetaTable()
 	self:init()
 end
 
-function Room.getAllFunction(class,meathon)
+function GameLogic.getAllFunction(class,meathon)
     meathon = meathon or {}
     if class.super ~= nil then
-        meathon = Room.getAllFunction(class.super,meathon)
+        meathon = GameLogic.getAllFunction(class.super,meathon)
     end
 
     local metatable = getmetatable(class)
@@ -21,12 +22,14 @@ function Room.getAllFunction(class,meathon)
     return meathon
 end
 
-function Room:setMetaTable()
+function GameLogic:setMetaTable()
     local scriptPath = {}
-    local path = 'logic_server/RoomCell'
-    table.insert(scriptPath, path .. "/RoomData")
-    table.insert(scriptPath, path .. "/RoomBaseLogic")
-    table.insert(scriptPath, path .. "/RoomSendMsg")
+    local path = 'logic_server/GameLogic'
+    table.insert(scriptPath, path .. "/GameBaseLogic")
+    table.insert(scriptPath, path .. "/GameStepInit")
+    table.insert(scriptPath, path .. "/GameStep")
+    table.insert(scriptPath, path .. "/GameSendMsg")
+    table.insert(scriptPath, path .. "/GameData")
 
     local tmpmetatable = {}
     for i,v in ipairs(scriptPath) do
@@ -37,27 +40,17 @@ function Room:setMetaTable()
             tmpmetatable[scripti] = scriptv
         end
     end
-    local metatable = Room.getAllFunction(self)
+    local metatable = GameLogic.getAllFunction(self)
     for i,v in pairs(metatable) do
         tmpmetatable[i] = v
     end
     setmetatable(self, {__index = tmpmetatable}) 
 end
 
-function Room:init()
+function GameLogic:init()
 	if self.init_data then
 		self:init_data()
 	end
-	-- set room instance
-	local GameLogic = require('logic_server/GameLogic/GameLogic')
-	if GameLogic then
-		self._game_logic = GameLogic.new()
-		if self._game_logic then
-			if self._game_logic.set_room then
-				self._game_logic:set_room(self)
-			end
-		end
-	end
 end
 
-return Room
+return GameLogic

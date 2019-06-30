@@ -94,7 +94,7 @@ function Player:getState()
 end
 
 function Player:setState(state)
-	self._state = state
+	self._state = tonumber(state)
 end
 
 function Player:getLocalSeat()

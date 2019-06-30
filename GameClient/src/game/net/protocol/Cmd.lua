@@ -83,6 +83,8 @@ local Cmd = {
 	eRoomIdRes 					= 58,
 	ePlayCountRes 				= 59,
 	eUserArrivedInfos	    	= 60,
+	eUserState 					= 61,
+	eAllUserState 				= 62,
 }
 
 return Cmd

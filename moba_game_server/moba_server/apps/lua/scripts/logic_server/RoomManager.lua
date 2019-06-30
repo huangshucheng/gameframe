@@ -73,6 +73,7 @@ function RoomManager:on_create_room(session, req)
 	local body 	= req[4]
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
+	print('on_create_room player: ' .. tostring(player))
 	if not player then
 		NetWork.send_status(session, Cmd.eCreateRoomRes, uid, Respones.PlayerIsNotExist)
 		return
@@ -115,8 +116,7 @@ function RoomManager:on_create_room(session, req)
 
 	player:send_msg(Cmd.eCreateRoomRes, msg_body)
 
-	print('hcc>> create_room success gameRule: ' .. tostring(room:get_room_info()))
-	print('hcc>> create_room success roomid: ' .. tostring(roomid) .. '  ,roomNum: ' .. self:get_total_rooms())
+	print('create_room success ,brandid: ' .. player:get_brand_id() .. ' ,roomid: ' .. roomid .. ' ,totalroomNum: ' .. self:get_total_rooms() ..' ,rule: ' .. tostring(room:get_room_info()))
 end
 
 function RoomManager:on_exit_room(session, req)
@@ -177,8 +177,8 @@ function RoomManager:on_exit_room(session, req)
 		return
 	end
 	player:send_msg(Cmd.eExitRoomRes, body_msg)	-- send to self player
-	room:broacast_in_room(Cmd.eExitRoomRes, body_msg, player) -- send to other player
-	print("hcc>> exit_room success roomNum: " .. self:get_total_rooms())
+	room:brodcast_in_room(Cmd.eExitRoomRes, body_msg, player) -- send to other player
+	print("exit_room success brandid: " .. player:get_brand_id() .. ' ,totalroomNum: ' .. self:get_total_rooms())
 end
 
 function RoomManager:on_join_room(session, req)
@@ -222,8 +222,8 @@ function RoomManager:on_join_room(session, req)
 
 	local users_info = {}
 	table.insert(users_info,player:get_user_arrived_info())
-	room:broacast_in_room(Cmd.eUserArrivedInfos, {user_info = users_info}, player)
-	print('hcc>> join_room usccess roomNum: ' .. self:get_total_rooms())
+	room:brodcast_in_room(Cmd.eUserArrivedInfos, {user_info = users_info}, player)
+	print('join_room usccess brandid: ' .. player:get_brand_id() .. ' ,totalroomnum: ' .. self:get_total_rooms())
 end
 
 function RoomManager:on_dessolve_room(session, req)
@@ -259,13 +259,13 @@ function RoomManager:on_dessolve_room(session, req)
 	local msg = {
 		status = Respones.OK
 	}
-	room:broacast_in_room(Cmd.eDessolveRes, msg)
+	room:brodcast_in_room(Cmd.eDessolveRes, msg)
 	room:kick_all_players_in_room()
 	if room:get_is_start_game() then
 		room:set_is_start_game(false)
 	end
 	self:delete_room(room_id)
-	print('hcc>> dessolve_room success roomNum: '.. self:get_total_rooms())
+	print('dessolve_room success brandid: ' .. player:get_brand_id() .. ' ,totalroomnum: ' .. self:get_total_rooms())
 end
 
 function RoomManager:on_get_create_status(session, req)
@@ -315,13 +315,12 @@ function RoomManager:on_back_room(session, req)
 
 	local users_info = {}
 	table.insert(users_info,player:get_user_arrived_info())
-	room:broacast_in_room(Cmd.eUserArrivedInfos, {user_info = users_info}, player)
+	room:brodcast_in_room(Cmd.eUserArrivedInfos, {user_info = users_info}, player)
 
-	print('hcc>> on_back_room usccess roomNum: ' .. self:get_total_rooms())
+	print('on_back_room usccess brandid: ' .. player:get_brand_id() .. ' ,totalroomnum: ' .. self:get_total_rooms())
 end
 
 function RoomManager:on_player_disconnect(player)
-	print('hcc>> on_player_disconnect ' .. type(player))
 	if type(player) ~= 'table' then
 		return
 	end
@@ -340,8 +339,8 @@ function RoomManager:on_player_disconnect(player)
 	local body_msg = {
 		user_info = player:get_user_arrived_info(),
 	}
-	room:broacast_in_room(Cmd.eUserOffLine, body_msg)
-	print("hcc>> on_player_disconnect roomNum: " .. self:get_total_rooms())
+	room:brodcast_in_room(Cmd.eUserOffLine, body_msg)
+	print("on_player_disconnect brandid: " .. player:get_brand_id())
 end
 --玩家是否卡在房间里面，没有正常退出
 function RoomManager:get_is_player_uid_in_room(player)

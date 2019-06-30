@@ -152,6 +152,7 @@ function LobbyScene:onEventJoinRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
+        Lobby.popLayer('JoinRoomLayer')     
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         Lobby.showPopLayer('TipsLayer',{"加入房间失败"})
@@ -166,6 +167,7 @@ function LobbyScene:onEventBackRoom(event)
         self:pushScene('game.Mahjong.GameScene.GameScene')
     else
         Lobby.showPopLayer('TipsLayer',{"返回房间失败"})
+        LogicServiceProxy:getInstance():sendGetCreateStatus()
     end
     Lobby.popLayer('LoadingLayer')
 end

@@ -62,6 +62,8 @@ local cmd_name_map = {
 	[58] = "RoomIdRes",
 	[59] = "PlayCountRes",
 	[60] = "UserArrivedInfos",
+	[61] = "UserState",
+	[62] = "AllUserState",
 }
 
 return cmd_name_map

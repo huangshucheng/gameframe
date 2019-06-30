@@ -15,6 +15,7 @@ function GameScene:addServerEventListener()
 end
 
 function GameScene:addClientEventListener()
+    
     addEvent("CheckLinkGameRes",self, self.onEventCheckLinkGame)
     addEvent("RoomInfoRes",self, self.onEventRoomInfo)
     addEvent("RoomIdRes",self, self.onEventRoomId)
@@ -26,6 +27,7 @@ function GameScene:addClientEventListener()
     addEvent('JoinRoomRes',self, self.onEventJoinRoom)
     addEvent('BackRoomRes',self, self.onEventBackRoom)
     addEvent("GameStart", self, self.onEventGameStart)
+    addEvent("AllUserState", self, self.onEventUserState)
     
     addEvent('Relogin',self, self.onEvnetRelogin)
     addEvent('UserOffLine',self, self.onEventUserOffline)
@@ -35,7 +37,6 @@ function GameScene:addClientEventListener()
     addEvent("HeartBeatRes", self, self.onEventHeartBeat)
     addEvent("UserReconnectedRes", self, self.onEventReconnect)
     addEvent("UserReadyRes", self, self.onEventUserReady)
-    addEvent("LogicFrame", self, self.onEventServerLogicFrame)
 end
 
 function GameScene:onEventNetConnect(event)
@@ -159,8 +160,8 @@ function GameScene:onEventUserArrivedInfos(event)
     local data = event._usedata
     dump(data,'hcc>>onEventUserArrivedInfos')
     if next(data.user_info) then
-        for _,v in ipairs(data.user_info) do
-            RoomData:getInstance():createPlayerByUserInfo(v)
+        for _,info in ipairs(data.user_info) do
+            RoomData:getInstance():createPlayerByUserInfo(info)
         end
     end
     self:showAllExistUserInfo()
@@ -185,7 +186,6 @@ function GameScene:onEventLoginLogic(event)
     local data = event._usedata
     if data.status == Respones.OK then
         Game.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
-        LogicServiceProxy:getInstance():sendCheckLinkGameReq()
         LogicServiceProxy:getInstance():sendReconnect()
         print('hcc>>GameScene:onEventLoginLogic')
     else
@@ -252,12 +252,17 @@ function GameScene:onEventUserReady(event)
 end
 
 function GameScene:onEventGameStart(event)
-    local body = event._usedata    
+    local body = event._usedata
+    print('onEventGameStart status: ' .. tostring(body.status))
+end
+
+function GameScene:onEventUserState(event)
+    local body = event._usedata
     if next(body.users_state) then
-        for serverSeat,state in pairs(body.users_state) do
-            local player = RoomData:getInstance():getPlayerBySeatId(serverSeat)
+        for index,state in pairs(body.users_state) do
+            local player = RoomData:getInstance():getPlayerBySeatId(state.seatid)
             if player then
-                player:setState(state)
+                player:setState(state.user_state)
             end
         end
     end

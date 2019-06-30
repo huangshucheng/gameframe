@@ -1,6 +1,6 @@
 local ConfigKeyWord = {}
 
-ConfigKeyWord.ip 				= '192.168.1.105' -- 服务端内网ip
+ConfigKeyWord.ip 				= '192.168.2.130' -- 服务端内网ip
 -- ConfigKeyWord.ip 				= '127.0.0.1'
 ConfigKeyWord.port 				= 6080  --服务端 端口
 ConfigKeyWord.udp_port 			= 8003  --服务端udp端口

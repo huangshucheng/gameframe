@@ -27,8 +27,6 @@ function GameManager:ctor()
 		[Cmd.eCheckLinkGameReq] 	= self.on_check_link_game,
 		[Cmd.eUserReconnectedReq] 	= self.on_reconnect,
 		[Cmd.eUserReadyReq] 		= self.on_user_ready,
-		[Cmd.eUdpTest]				= self.on_udp_test,
-		[Cmd.eNextFrameOpts] 		= self.on_next_frame_event,
 	}
 end
 
@@ -50,22 +48,21 @@ function GameManager:receive_msg(session, msg)
 	
 	return false
 end
--- check enter room , then  send room info,user info
+-- check enter room , then  send room info,user info ,only someone self
 function GameManager:on_check_link_game(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
 	local uid 	= req[3]
-	print('hcc>> GameManager:on_check_link_game uid: ' .. uid)
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
 		NetWork.send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
-
 	player:send_msg(Cmd.eCheckLinkGameRes, {status = Respones.OK})
 	local room_id = player:get_room_id()
-	print('hcc>> on_check_link_game, room_id: '.. room_id)
+	-- print('hcc>> on_check_link_game, room_id: '.. room_id)
+	print('on_check_link_game uid: ' .. uid .. ' ,brandid: ' .. player:get_brand_id() .. ' ,room_id: ' .. room_id)
 	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
 	if not room then
 		NetWork.send_status(session, Cmd.eCheckLinkGameRes, uid, Respones.RoomIsNotExist)
@@ -82,24 +79,37 @@ function GameManager:on_check_link_game(session, req)
 	player:send_msg(Cmd.ePlayCountRes,{play_count = room:get_play_count(),total_play_count = room:get_total_play_count()})
 	player:send_msg(Cmd.eUserArrivedInfos,{user_info = users_info})
 end
-
+-- user reconnect ,send room info ,user info game data
 function GameManager:on_reconnect(session, req)
 	if not req then return end
 	local stype = req[1]
 	local ctype = req[2]
 	local uid 	= req[3]
-	print('hcc>> GameManager:on_reconnect uid: ' .. uid)
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
 		NetWork.send_status(session, Cmd.eUserReconnectedRes, uid, Respones.PlayerIsNotExist)
 		return
 	end
 
-	local msg_body = {
-		status 	= Respones.OK,
-	}
+	local room = RoomManager:getInstance():get_is_player_uid_in_room(player)
+	if not room then
+		NetWork.send_status(session, Cmd.eUserReconnectedRes, uid, Respones.PlayerNotEnterRoomEver)
+		return
+	end
+	
+	local ret =  room:enter_player(player)
+	if not ret then
+		NetWork.send_status(session, Cmd.eUserReconnectedRes, uid, Respones.InvalidOpt)
+		return
+	end
+	print('on_reconnect uid: ' .. uid .. ' ,brandid: ' .. player:get_brand_id())
+	player:send_msg(Cmd.eUserReconnectedRes, {status = Respones.OK})
 
-	player:send_msg(Cmd.eUserReconnectedRes, msg_body)
+	player:send_msg(Cmd.eRoomInfoRes, {room_info = room:get_room_info()})
+	player:send_msg(Cmd.eRoomIdRes,{room_id = room:get_room_id()})
+	player:send_msg(Cmd.ePlayCountRes,{play_count = room:get_play_count(),total_play_count = room:get_total_play_count()})
+	room:send_user_state()
+	room:send_user_arrived_infos()
 end
 
 function GameManager:on_user_ready(session, req)
@@ -115,7 +125,6 @@ function GameManager:on_user_ready(session, req)
 		return
 	end
 	if not body then return end
-	dump(body,"on_user_ready")
 
 	local room_id = player:get_room_id()
 	if room_id == -1 then
@@ -138,6 +147,8 @@ function GameManager:on_user_ready(session, req)
 		user_state = player:get_state(),
 	}
 
+	print('on_user_ready uid: ' .. uid .. ' ,brandid: ' .. player:get_brand_id() .. ' ,ready_state: ' .. ready_state)
+
 	if ready_state == 1 then -- user send ready
 		if player:get_state() >= Player.STATE.psReady then
 			msg_body.status = Respones.PlayerIsAlreadyReady
@@ -155,25 +166,9 @@ function GameManager:on_user_ready(session, req)
 	end
 
 	msg_body.user_state = player:get_state()
-	player:send_msg(Cmd.eUserReadyRes, msg_body)
-	room:broacast_in_room(Cmd.eUserReadyRes, msg_body, player)
+	-- player:send_msg(Cmd.eUserReadyRes, msg_body)
+	room:brodcast_in_room(Cmd.eUserReadyRes, msg_body)
 	room:check_game_start()
-end
-
-function GameManager:on_udp_test(session, req)
-	local stype = req[1]
-	local ctype = req[2]
-	local uid 	= req[3]
-	local body 	= req[4]
-	local len = string.len(body.content)
-	-- print('hcc>>on_udp_test>> uid: ' .. uid .. ' ,content len: ' .. tostring(body.content))
-	local msg = {
-		stype,
-		ctype,
-		uid,
-		{content = body.content}
-	}
-	-- NetWork.send_msg(session,msg)
 end
 
 return GameManager

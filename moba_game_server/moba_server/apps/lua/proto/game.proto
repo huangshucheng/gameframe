@@ -94,6 +94,8 @@ enum Cmd {
 	eRoomIdRes = 58;
 	ePlayCountRes = 59;
 	eUserArrivedInfos = 60;
+	eUserState = 61;
+	eAllUserState = 62;
 }
 
 message GuestLoginReq {
@@ -311,7 +313,7 @@ message UserReadyRes {
 }
 
 message GameStart {
-	repeated sint32 users_state = 1;
+	required sint32 status = 1;
 }
 
 message UdpTest {
@@ -366,4 +368,13 @@ message PlayCountRes {
 
 message UserArrivedInfos {
 	repeated UserArrived user_info = 1;
+}
+
+message UserState {
+	required string seatid = 1;
+	required string user_state = 2;
+}
+
+message AllUserState {
+	repeated UserState users_state = 1;	
 }
