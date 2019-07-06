@@ -1,4 +1,4 @@
-local LoginScene = Lobby.LoginScene or {}
+local LoginScene = class('LoginScene')
 
 local UserInfo          = require("game.clientdata.UserInfo")
 
@@ -63,7 +63,7 @@ function LoginScene:onEventBtnReg(sender, eventType)
 end
 
 function LoginScene:onEventBtnGoToLogin(sender,eventType)
-    local img_panel_login_bg = self:getResourceNode():getChildByName(IMG_LOGIN_BG)
+    local img_panel_login_bg = self._rootNode:getChildByName(IMG_LOGIN_BG)
     if img_panel_login_bg then
         local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
         if panel_login then
@@ -79,7 +79,7 @@ function LoginScene:onEventBtnGoToLogin(sender,eventType)
 end
 
 function LoginScene:onEventBtnRegClose(sender, eventType)
-    local img_panel_login_bg = self:getResourceNode():getChildByName(IMG_LOGIN_BG)
+    local img_panel_login_bg = self._rootNode:getChildByName(IMG_LOGIN_BG)
     if img_panel_login_bg then
         local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
         if panel_login then
@@ -92,3 +92,5 @@ function LoginScene:onEventBtnRegClose(sender, eventType)
         end
     end
 end
+
+return LoginScene

@@ -147,9 +147,9 @@ function MyCenterLayer:onCreate()
 end
 
 function MyCenterLayer:addClientEventListener()
-	addEvent('LoginOutRes', self, self.onEventLoginOutRes)
-	addEvent('EditProfileRes', self, self.onEventEditProFileRes)
-	addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
+	addEvent('LoginOutRes', self, self, self.onEventLoginOutRes)
+	addEvent('EditProfileRes', self, self, self.onEventEditProFileRes)
+	addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self, self.onEventAsycUserInfo)
 end
 
 function MyCenterLayer:onEventLoginOutRes(event)

@@ -1,57 +1,84 @@
-local BaseScene     = require("game.Base.BaseScene")
-local GameScene     = class("GameScene", BaseScene)
-Game.GameScene      = GameScene
+local GameScene     = class("GameScene")
 
 local Function 				= require("game.Mahjong.Base.Function")
 local GameSceneDefine       = require("game.Mahjong.GameScene.GameSceneDefine")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
-local Scheduler             = require("game.utils.scheduler")
-
---------------拓展
-require('game.Mahjong.GameScene.GameSceneReceiveMsg')
-require('game.Mahjong.GameScene.GameSceneTouchEvent')
-require('game.Mahjong.GameScene.GameSceneShowUI')
-require('game.Mahjong.GameScene.GameSceneUI')
----------------end
 
 GameScene.RESOURCE_FILENAME = 'MahScene/MahScene.csb'
 
 function GameScene:ctor()
-	GameScene.super.ctor(self)
+    self._gameScene     = nil
+    self._rootNode      = nil
 end
 
-function GameScene:onCreate()
-    print('GameScene>>onCreate')
-    LogicServiceProxy:getInstance():sendCheckLinkGameReq()
+function GameScene.getAllFunction(class,meathon)
+    meathon = meathon or {}
+
+    if class.super ~= nil then
+        meathon = GameScene.getAllFunction(class.super,meathon)
+    end
+
+    local gameScenemetatable = getmetatable(class)
+    if gameScenemetatable == nil then
+        gameScenemetatable = class
+    end
+    for i,v in pairs(gameScenemetatable) do
+        meathon[i] = v
+    end
+    return meathon
+end
+
+function GameScene:setMetaTable()
+    local scriptPath = {}
+    table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneReceiveMsg")
+    table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneReceiveNetMsg")
+    table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneTouchEvent")
+    table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneShowUI")
+    table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneInit")
+    table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneUI")
+    local tmpmetatable = {}
+    for i,v in ipairs(scriptPath) do
+        local script = require(v)
+        local object = script.new()
+        local objectemetatable = getmetatable(object)
+        for scripti,scriptv in pairs(objectemetatable) do
+            tmpmetatable[scripti] = scriptv
+        end
+    end
+    local metatable = GameScene.getAllFunction(self)
+    for i,v in pairs(metatable) do
+        tmpmetatable[i] = v
+    end
+    setmetatable(self, {__index = tmpmetatable}) 
+    dump(tmpmetatable,'hcc>>tmpmetatable')
+end
+
+function GameScene:pushScene()
+    self:setMetaTable()
+    self._gameScene = display.newScene("GameScene")
+    self._gameScene:enableNodeEvents()
+
+    self._rootNode = cc.CSLoader:createNode(GameScene.RESOURCE_FILENAME)
+    assert(self._rootNode, string.format("GameScene:pushScene() - load resouce node from file \"%s\" failed", GameScene.RESOURCE_FILENAME))
+    self._rootNode:setContentSize(display.size)
+    ccui.Helper:doLayout(self._rootNode)
+    self._gameScene:addChild(self._rootNode)
+
+    cc.Director:getInstance():pushScene(self._gameScene)
+    self._gameScene.onEnter = handler(self,self.onEnter)
+    self._gameScene.onExit = handler(self,self.onExit)
+    self:init()
+end
+
+function GameScene:init()
     self:initUI()
     self:addUITouchEvent()
+    self:initNetEventListener()
+    self:initClientEventListener()
 end
 
-function GameScene:initUI()
-    local panel_user = nil
-    local index = 0
-    repeat
-        index = index + 1
-        panel_user = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. index)
-        if panel_user then
-            panel_user:setVisible(false)
-        end
-    until panel_user == nil
-end
-
-function GameScene:addUITouchEvent()
-    local btn_setting = self:getResourceNode():getChildByName(GameSceneDefine.KW_BTN_SET)
-    if btn_setting then
-        btn_setting:addTouchEventListener(handler(self,self.onTouchSettingBtn))
-    end
-
-    local panel_btn = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_BOTTON_BTN)
-    if panel_btn then
-        local ready_btn = panel_btn:getChildByName(GameSceneDefine.KW_BTN_READY)
-        if ready_btn  then
-            ready_btn:addClickEventListener(handler(self, self.onTouchReadyBtn))
-         end
-    end
+function GameScene:popScene()
+    cc.Director:getInstance():popScene()
 end
 
 function GameScene:onEnter()
@@ -59,6 +86,7 @@ function GameScene:onEnter()
     Game.showPopLayer         = Function.showPopLayer
     Game.popLayer             = Function.popLayer
     Game.getLayer             = Function.getLayer
+    LogicServiceProxy:getInstance():sendCheckLinkGameReq()
 end
 
 function GameScene:onExit()
@@ -66,7 +94,7 @@ function GameScene:onExit()
 end
 
 function GameScene:update(dt)
-    self:showHeroPos(dt)
+
 end
 
 return GameScene

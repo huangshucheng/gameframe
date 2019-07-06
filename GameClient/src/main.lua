@@ -9,6 +9,7 @@ cc.FileUtils:getInstance():addSearchPath("res/")
 
 require "config"
 require "cocos.init"
+require "game.framework.init"
 require "game.utils.GameEventEnum"
 require "game.utils.protobuf.protobuf"
 

@@ -1,4 +1,4 @@
-local GameScene = Game.GameScene or {}
+local GameScene = class("GameScene")
 
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local RoomData              = require("game.clientdata.RoomData")
@@ -23,3 +23,5 @@ function GameScene:onTouchReadyBtn(sender, eventType)
 	LogicServiceProxy:getInstance():sendUserReady()
     print('hcc>> click ready....')
 end
+
+return GameScene

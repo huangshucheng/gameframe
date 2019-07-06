@@ -52,7 +52,7 @@ function RankLayer:onCreate()
 end
 
 function RankLayer:addClientEventListener()
-	addEvent('GetWorldRankUchipRes', self, self.onEventWorldRankUchipRes)
+	addEvent('GetWorldRankUchipRes', self, self, self.onEventWorldRankUchipRes)
 end
 
 function RankLayer:onEventWorldRankUchipRes(event)

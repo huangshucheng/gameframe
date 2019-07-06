@@ -94,7 +94,7 @@ function UpgradeLayer:onCreate()
 end
 
 function UpgradeLayer:addClientEventListener()
-	addEvent('AccountUpgradeRes', self, self.onEventAccountUpgradeRes)
+	addEvent('AccountUpgradeRes', self, self, self.onEventAccountUpgradeRes)
 end
 
 function UpgradeLayer:onEventAccountUpgradeRes(event)

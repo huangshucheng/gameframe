@@ -1,4 +1,5 @@
-local LobbyScene = Lobby.LobbyScene or {}
+local CURRENT_MODULE_NAME = ...
+local LobbyScene = class("LobbyScene")
 
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local SocketUDP             = require('game.net.NetWorkUDP')
@@ -114,3 +115,5 @@ end
 function LobbyScene:onTouchMailBtn(send, evnetType)
     Lobby.showPopLayer("MsgLayer")
 end
+
+return LobbyScene

@@ -48,7 +48,7 @@ function MsgLayer:onCreate()
 end
 
 function MsgLayer:addClientEventListener()
-	addEvent('GetSysMsgRes', self, self.onEventGetSysMsgRes)
+	addEvent('GetSysMsgRes', self,self,self.onEventGetSysMsgRes)
 end
 
 function MsgLayer:onEventGetSysMsgRes(event)

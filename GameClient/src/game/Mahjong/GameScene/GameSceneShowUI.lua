@@ -1,4 +1,4 @@
-local GameScene = Game.GameScene or {}
+local GameScene = class("GameScene")
 
 local RoomData              = require("game.clientdata.RoomData")
 local GameSceneDefine       = require("game.Mahjong.GameScene.GameSceneDefine")
@@ -14,7 +14,7 @@ function GameScene:showUserInfoBySeatId(seatId) --serverSeat
     print('hcc>> serverSeat: '.. seatId .. '  ,localseat: ' .. localSeat)
     if player then
         local seat =  GameFunction.serverSeatToLocal(player:getServerSeat())
-        local infoPanel = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. seat)
+        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. seat)
         if infoPanel then
             infoPanel:setVisible(true)
             local textName      = ccui.Helper:seekWidgetByName(infoPanel,GameSceneDefine.KW_TEXT_NAME)
@@ -35,7 +35,7 @@ function GameScene:showUserInfoBySeatId(seatId) --serverSeat
             end
         end
     else
-        local infoPanel = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
+        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
         if infoPanel then
             infoPanel:setVisible(false)
         end
@@ -51,7 +51,7 @@ function GameScene:showAllExistUserInfo()
 end
 
 function GameScene:showRoomInfo()
-    local panel_top = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_TOP)
+    local panel_top = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_TOP)
     if panel_top then
         local text_room_rule = panel_top:getChildByName(GameSceneDefine.KW_TEXT_RULE)
 
@@ -78,7 +78,7 @@ function GameScene:showRoomInfo()
 end
 
 function GameScene:showRoomId()
-    local panel_top = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_TOP)
+    local panel_top = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_TOP)
     if panel_top then
         local btn_room_num = panel_top:getChildByName(GameSceneDefine.KW_ROOM_NUM)
         if btn_room_num then
@@ -97,7 +97,7 @@ function GameScene:showReadyBtn()
 	end
 	
 	local showFunc = function(isShow)
-		local panel_btn = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_BOTTON_BTN)
+		local panel_btn = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_BOTTON_BTN)
 		if panel_btn then
 			local ready_btn = panel_btn:getChildByName(GameSceneDefine.KW_BTN_READY)
 			if ready_btn  then
@@ -113,7 +113,7 @@ end
 
 function GameScene:showReadyImag()
     local showFunc = function(localSeat, isShow)
-        local infoPanel = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
+        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
         if infoPanel then
             local ready_img = infoPanel:getChildByName(GameSceneDefine.KW_IMG_READY)
             if ready_img  then
@@ -136,7 +136,7 @@ end
 
 function GameScene:showHostImag()
     local showFunc = function(localSeat, isShow)
-        local infoPanel = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
+        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
         if infoPanel then
             local host_img = infoPanel:getChildByName(GameSceneDefine.KW_IMG_MASTER)
             if host_img  then
@@ -157,7 +157,7 @@ function GameScene:showHostImag()
 end
 
 function GameScene:showPlayCount()
-    local leftTopPanel = self:getResourceNode():getChildByName(GameSceneDefine.KW_PANEL_LEFT_TOP)
+    local leftTopPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_LEFT_TOP)
     if leftTopPanel then
         local text = ccui.Helper:seekWidgetByName(leftTopPanel,GameSceneDefine.KW_TEXT_PLAY_COUNT)        
         if text then
@@ -167,3 +167,5 @@ function GameScene:showPlayCount()
         end
     end
 end
+
+return GameScene

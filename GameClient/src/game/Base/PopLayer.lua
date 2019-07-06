@@ -1,4 +1,6 @@
-local PopLayer = class("PopLayer",cc.Layer)
+local PopLayer = class("PopLayer",function()
+    return display.newLayer()
+end)
 
 function PopLayer:ctor()
     self:enableNodeEvents()
@@ -81,15 +83,6 @@ end
 
 function PopLayer:getCsbNode()
     return self._csbResourceNode
-end
-
-function PopLayer:enterScene(scenePath)
-    local gameLayer = require(scenePath):create()
-    if gameLayer then
-        local scene = display.newScene()
-        scene:addChild(gameLayer)
-        display.runScene(scene)
-    end
 end
 
 return PopLayer

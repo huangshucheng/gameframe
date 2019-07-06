@@ -1,9 +1,11 @@
-local LobbyScene = Lobby.LobbyScene or {}
+local CURRENT_MODULE_NAME = ...
+local LobbyScene = class("LobbyScene")
+
 local UserInfo              = require("game.clientdata.UserInfo")
 local LobbySceneDefine      = require('game.Lobby.LobbyScene.LobbySceneDefine')
 
 function LobbyScene:showUserInfo()
-    local img_top_bg = self:getResourceNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
+    local img_top_bg = self:getRootNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
     if img_top_bg then
         local user_name_text 	= ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_USER_NAME)
         local user_id_text 		= ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_USER_ID)
@@ -19,3 +21,5 @@ function LobbyScene:showUserInfo()
         end
     end
 end
+
+return LobbyScene

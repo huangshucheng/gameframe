@@ -19,17 +19,11 @@ function GameApp:ctor()
     Lobby.showPopLayer 		= Function.showPopLayer
     Lobby.popLayer 			= Function.popLayer
     Lobby.getLayer 			= Function.getLayer
-    Lobby.LobbyScene           = nil       
 end
 
 function GameApp:showScene(transition, time, more)
-    local scene = display.newScene()
-    local loginScene = require("game.Lobby.LobbyScene.LoginScene")
-    if loginScene then
-        local gameLayer = loginScene:create()
-        scene:addChild(gameLayer)
-        display.runScene(scene, transition, time, more)
-    end
+    local loginScene = require("game.Lobby.LobbyScene.LoginScene"):create()
+    loginScene:run()
 end
 
 return GameApp

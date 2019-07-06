@@ -40,7 +40,7 @@ function SetLayer:onCreate()
 end
 
 function SetLayer:addClientEventListener()
-	addEvent('LoginOutRes', self, self.onEventLoginOutRes)
+	addEvent('LoginOutRes', self, self, self.onEventLoginOutRes)
 end
 
 function SetLayer:onEventLoginOutRes(event)

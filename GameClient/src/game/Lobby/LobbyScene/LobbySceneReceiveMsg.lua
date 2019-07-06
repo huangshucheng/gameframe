@@ -1,41 +1,32 @@
-local LobbyScene = Lobby.LobbyScene or {}
+local LobbyScene = class("LobbyScene")
 
 local Cmd                   = require("game.net.protocol.Cmd")
 local Respones              = require("game.net.Respones")
 local cmd_name_map          = require("game.net.protocol.cmd_name_map")
-local UserInfo              = require("game.clientdata.UserInfo")
 local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
-local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 local LobbySceneDefine      = require('game.Lobby.LobbyScene.LobbySceneDefine')
 local NetWorkUDP            = require("game.net.NetWorkUDP")
+local UserInfo              = require("game.clientdata.UserInfo")
 
-function LobbyScene:addServerEventListener()
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED, self, self.onEventClosed)
-end
-
-function LobbyScene:addClientEventListener()
-    addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self.onEventAsycUserInfo)
-    addEvent("GuestLoginRes", self, self.onEventGuestLogin)
-    addEvent("UnameLoginRes", self, self.onEventUnameLogin)
-    addEvent("EditProfileRes",self, self.onEventEditProfile)
-    addEvent("AccountUpgradeRes",self, self.onEventAccountUpgrade)
-    addEvent("Relogin",self, self.onEventReLogin)
-    addEvent("LoginOutRes",self, self.onEventLoginOut)
-    addEvent("GetUgameInfoRes",self, self.onEventGetUgameInfo)
-    addEvent("RecvLoginBonuesRes",self, self.onEventRecvLoginBonues)
-    addEvent("LoginLogicRes",self, self.onEventLoginLogic)
-    
-    addEvent("CreateRoomRes", self, self.onEventCreateRoom)
-    addEvent("JoinRoomRes", self, self.onEventJoinRoom)
-    addEvent("BackRoomRes", self, self.onEventBackRoom)
-
-    addEvent("GetCreateStatusRes", self, self.onEvnetGetCreateStatus)
-    addEvent("HeartBeatRes", self, self.onEventHeartBeat)
-    addEvent("UdpTest", self, self.onEventUdpTest)
+function LobbyScene:initClientEventListener()
+    addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self._lobbyScene, self.onEventAsycUserInfo)
+    addEvent("GuestLoginRes", self, self._lobbyScene, self.onEventGuestLogin)
+    addEvent("UnameLoginRes", self, self._lobbyScene, self.onEventUnameLogin)
+    addEvent("EditProfileRes", self, self._lobbyScene, self.onEventEditProfile)
+    addEvent("AccountUpgradeRes", self, self._lobbyScene, self.onEventAccountUpgrade)
+    addEvent("Relogin", self, self._lobbyScene, self.onEventReLogin)
+    addEvent("LoginOutRes", self, self._lobbyScene, self.onEventLoginOut)
+    addEvent("GetUgameInfoRes", self, self._lobbyScene, self.onEventGetUgameInfo)
+    addEvent("GetUgameInfoRes", self, self._lobbyScene, handler(self, self.onEventGetUgameInfo))
+    addEvent("RecvLoginBonuesRes", self, self._lobbyScene, self.onEventRecvLoginBonues)
+    addEvent("LoginLogicRes", self, self._lobbyScene, self.onEventLoginLogic)
+    addEvent("CreateRoomRes", self, self._lobbyScene, self.onEventCreateRoom)
+    addEvent("JoinRoomRes", self, self._lobbyScene, self.onEventJoinRoom)
+    addEvent("BackRoomRes", self, self._lobbyScene, self.onEventBackRoom)
+    addEvent("GetCreateStatusRes", self, self._lobbyScene, self.onEvnetGetCreateStatus)
+    addEvent("HeartBeatRes", self, self._lobbyScene, self.onEventHeartBeat)
+    addEvent("UdpTest", self, self._lobbyScene, self.onEventUdpTest)
 end
 
 function LobbyScene:onEventEditProfile(event)
@@ -47,13 +38,15 @@ function LobbyScene:onEventAccountUpgrade(event)
 end
 
 function LobbyScene:onEventReLogin(event)
-    self:enterScene('game.Lobby.LobbyScene.LoginScene')
+    local loginScene = require("game.Lobby.LobbyScene.LoginScene"):create()
+    loginScene:run()
     Lobby.popLayer('LoadingLayer')
     Lobby.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
 end
 
 function LobbyScene:onEventLoginOut(event)
-    self:enterScene('game.Lobby.LobbyScene.LoginScene')
+    local loginScene = require("game.Lobby.LobbyScene.LoginScene"):create()
+    loginScene:run()
     Lobby.popLayer('LoadingLayer')
 end
 
@@ -62,7 +55,7 @@ function LobbyScene:onEventGetUgameInfo(event)
     local body = event._usedata
     if not body then return end
     if body.status == Respones.OK then
-        local img_top_bg = self:getResourceNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
+        local img_top_bg = self:getRootNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
         if img_top_bg then
             local coin_text         = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_COIN)
             local diamond_text      = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_DIAMOND)
@@ -93,38 +86,9 @@ function LobbyScene:onEventLoginLogic(event)
     end
 end
 
-function LobbyScene:onEventNetConnect(envet)
-    Lobby.showPopLayer('TipsLayer',{"网络连接成功!"})
-    Lobby.popLayer('LoadingLayer')
-    --重新登录
-    local loginType = UserInfo.getLoginType()
-    print('loginType: '.. loginType)
-    if loginType == 'uname' then
-        local name  = UserInfo.getUserAccount() 
-        local pwd   = UserInfo.getUserPwd()
-        AuthServiceProxy:getInstance():sendUnameLogin(name,pwd)
-    elseif loginType == 'guest' then
-        local guestkey = UserInfo.getUserGuestKey()
-        AuthServiceProxy:getInstance():sendGuestLogin(guestkey)
-    end
-end
-
-function LobbyScene:onEventNetConnectFail(envet)
-        Lobby.showPopLayer('TipsLayer',{"网络连接失败!"})
-        Lobby.showPopLayer('LoadingLayer')
-end
-
-function LobbyScene:onEventClose(envet)
-        Lobby.showPopLayer('LoadingLayer')
-end
-
-function LobbyScene:onEventClosed(envet)
-        Lobby.showPopLayer('LoadingLayer')
-end
-
 function LobbyScene:onEventAsycUserInfo(event)
     local uname = UserInfo.getUserName()
-    local img_top_bg = self:getResourceNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
+    local img_top_bg = self:getRootNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
     if img_top_bg then
         local user_name_text = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_USER_NAME)
         local img_head = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.IMG_HEAD)
@@ -141,7 +105,8 @@ function LobbyScene:onEventCreateRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        self:pushScene('game.Mahjong.GameScene.GameScene')
+        local gameScene = require("game.Mahjong.GameScene.GameScene"):create()
+        gameScene:pushScene()
     else
         Lobby.showPopLayer('TipsLayer',{"创建房间失败"})
     end
@@ -153,7 +118,8 @@ function LobbyScene:onEventJoinRoom(event)
     local status = data.status
     if status == Respones.OK then
         Lobby.popLayer('JoinRoomLayer')     
-        self:pushScene('game.Mahjong.GameScene.GameScene')
+        local gameScene = require("game.Mahjong.GameScene.GameScene"):create()
+        gameScene:pushScene()
     else
         Lobby.showPopLayer('TipsLayer',{"加入房间失败"})
     end
@@ -164,7 +130,8 @@ function LobbyScene:onEventBackRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        self:pushScene('game.Mahjong.GameScene.GameScene')
+        local gameScene = require("game.Mahjong.GameScene.GameScene"):create()
+        gameScene:pushScene()
     else
         Lobby.showPopLayer('TipsLayer',{"返回房间失败"})
         LogicServiceProxy:getInstance():sendGetCreateStatus()
@@ -178,7 +145,7 @@ function LobbyScene:onEvnetGetCreateStatus(event)
     local img_back_room = nil
     local img_create_room = nil
 
-    local panel_center = self:getResourceNode():getChildByName(LobbySceneDefine.PANEL_CENTER)
+    local panel_center = self:getRootNode():getChildByName(LobbySceneDefine.PANEL_CENTER)
     if panel_center then
         img_back_room         = panel_center:getChildByName(LobbySceneDefine.IMG_BACK_ROOM)
         img_create_room       = panel_center:getChildByName(LobbySceneDefine.IMG_CREATE_ROOM)
@@ -238,3 +205,5 @@ function LobbyScene:onEventUdpTest(event)
     local body = event._usedata
     print('hcc>>onEventUdpTest: ' .. body.content)
 end
+
+return LobbyScene

@@ -1,6 +1,11 @@
-function addEvent(eventname,target,callBack)
+--function addEvent(eventname,target,callBack)
+--   local listener = cc.EventListenerCustom:create(eventname,handler(target, callBack))
+--    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, target)
+--end
+
+function addEvent(eventname,target,nodeTarget,callBack)
    local listener = cc.EventListenerCustom:create(eventname,handler(target, callBack))
-    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, target)
+    cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener,nodeTarget)
 end
 
 function postEvent(eventname,data)

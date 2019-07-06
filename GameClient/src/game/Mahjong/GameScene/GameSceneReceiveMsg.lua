@@ -1,4 +1,4 @@
-local GameScene = Game.GameScene or {}
+local GameScene = class("GameScene")
 
 local Respones          	= require("game.net.Respones")
 local RoomData              = require("game.clientdata.RoomData")
@@ -7,70 +7,35 @@ local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local AuthServiceProxy      = require("game.modules.AuthServiceProxy")
 local GameFunction          = require("game.Mahjong.Base.GameFunction")
 
-function GameScene:addServerEventListener()
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT, self, self.onEventNetConnect)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CONNECT_FAIL, self, self.onEventNetConnectFail)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSE, self, self.onEventClose)
-    addEvent(ServerEvents.ON_SERVER_EVENT_NET_CLOSED, self, self.onEventClosed)
-end
+function GameScene:initClientEventListener()
+    addEvent("CheckLinkGameRes",self, self._gameScene, self.onEventCheckLinkGame)
+    addEvent("RoomInfoRes",self, self._gameScene, self.onEventRoomInfo)
+    addEvent("RoomIdRes",self, self._gameScene, self.onEventRoomId)
+    addEvent("PlayCountRes",self, self._gameScene, self.onEventPlayCount)
 
-function GameScene:addClientEventListener()
+    addEvent("DessolveRes",self, self._gameScene, self.onEventDessolve)
+    addEvent('UserArrivedInfos',self, self._gameScene, self.onEventUserArrivedInfos)
+    addEvent("ExitRoomRes",self, self._gameScene, self.onEventExitRoom)
+    addEvent('JoinRoomRes',self, self._gameScene, self.onEventJoinRoom)
+    addEvent('BackRoomRes',self, self._gameScene, self.onEventBackRoom)
+    addEvent("GameStart", self, self._gameScene, self.onEventGameStart)
+    addEvent("GameResult", self, self._gameScene, self.onEventGameResult)
+    addEvent("GameTotalResult", self, self._gameScene, self.onEventGameTotalResult)
+    addEvent("AllUserState", self, self._gameScene, self.onEventUserState)
     
-    addEvent("CheckLinkGameRes",self, self.onEventCheckLinkGame)
-    addEvent("RoomInfoRes",self, self.onEventRoomInfo)
-    addEvent("RoomIdRes",self, self.onEventRoomId)
-    addEvent("PlayCountRes",self, self.onEventPlayCount)
-
-    addEvent("DessolveRes",self, self.onEventDessolve)
-    addEvent('UserArrivedInfos',self, self.onEventUserArrivedInfos)
-    addEvent("ExitRoomRes",self, self.onEventExitRoom)
-    addEvent('JoinRoomRes',self, self.onEventJoinRoom)
-    addEvent('BackRoomRes',self, self.onEventBackRoom)
-    addEvent("GameStart", self, self.onEventGameStart)
-    addEvent("GameResult", self, self.onEventGameResult)
-    addEvent("GameTotalResult", self, self.onEventGameTotalResult)
-    addEvent("AllUserState", self, self.onEventUserState)
-    
-    addEvent('Relogin',self, self.onEvnetRelogin)
-    addEvent('UserOffLine',self, self.onEventUserOffline)
-    addEvent("LoginLogicRes",self, self.onEventLoginLogic)
-    addEvent("GuestLoginRes", self, self.onEventGuestLogin)
-    addEvent("UnameLoginRes", self, self.onEventUnameLogin)
-    addEvent("HeartBeatRes", self, self.onEventHeartBeat)
-    addEvent("UserReconnectedRes", self, self.onEventReconnect)
-    addEvent("UserReadyRes", self, self.onEventUserReady)
-end
-
-function GameScene:onEventNetConnect(event)
-    Game.showPopLayer('TipsLayer',{"网络连接成功!"})
-    Game.popLayer('LoadingLayer')
-    --重新登录
-    local loginType = UserInfo.getLoginType()
-    if loginType == 'uname' then
-        local name  = UserInfo.getUserAccount() 
-        local pwd   = UserInfo.getUserPwd()
-        AuthServiceProxy:getInstance():sendUnameLogin(name,pwd)
-    elseif loginType == 'guest' then
-        local guestkey = UserInfo.getUserGuestKey()
-        AuthServiceProxy:getInstance():sendGuestLogin(guestkey)
-    end
-end
-
-function GameScene:onEventNetConnectFail(event)
-    Game.showPopLayer('TipsLayer',{"网络连接失败!"}) 
-    Game.showPopLayer('LoadingLayer')
-end
-
-function GameScene:onEventClose(event)
-    Game.showPopLayer('LoadingLayer')
-end
-
-function GameScene:onEventClosed(event)
-    Game.showPopLayer('LoadingLayer')
+    addEvent('Relogin',self, self._gameScene, self.onEvnetRelogin)
+    addEvent('UserOffLine',self, self._gameScene, self.onEventUserOffline)
+    addEvent("LoginLogicRes",self, self._gameScene, self.onEventLoginLogic)
+    addEvent("GuestLoginRes", self, self._gameScene, self.onEventGuestLogin)
+    addEvent("UnameLoginRes", self, self._gameScene, self.onEventUnameLogin)
+    addEvent("HeartBeatRes", self, self._gameScene, self.onEventHeartBeat)
+    addEvent("UserReconnectedRes", self, self._gameScene, self.onEventReconnect)
+    addEvent("UserReadyRes", self, self._gameScene, self.onEventUserReady)
 end
 
 function GameScene:onEvnetRelogin(event)
-    self:enterScene('game.Lobby.LobbyScene.LoginScene')
+    local loginScene = require("game.Lobby.LobbyScene.LoginScene"):create()
+    loginScene:run()
     -- Game.showPopLayer('TipsLayer',{'帐号在其他地方登录!'})
 end
 -----------------------------------------------------
@@ -278,3 +243,5 @@ end
 function GameScene:onEventGameTotalResult(event)
 
 end
+
+return GameScene
