@@ -85,4 +85,22 @@ function PopLayer:getCsbNode()
     return self._csbResourceNode
 end
 
+function PopLayer:isShowTouchEffect(send, eventType)
+    if not send or not eventType then
+        return false
+    end
+    if eventType == ccui.TouchEventType.began then
+        send:setScale(0.9)
+        send:setColor(cc.c3b(160,160,160))
+    elseif eventType == ccui.TouchEventType.ended or
+        eventType == ccui.TouchEventType.canceled then
+        send:setScale(1)
+        send:setColor(cc.c3b(255,255,255))
+    end
+    if eventType ~= ccui.TouchEventType.ended then
+        return false
+    end 
+    return true
+end
+
 return PopLayer

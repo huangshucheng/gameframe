@@ -1,7 +1,6 @@
 local GameLogic 			= class('GameLogic')
 
 function GameLogic:ctor()
-	print('hcc>>GameLogic:ctor')
 	self:setMetaTable()
 	self:init()
 end
@@ -25,7 +24,7 @@ end
 function GameLogic:setMetaTable()
     local scriptPath = {}
     local path = 'logic_server/GameLogic'
-    table.insert(scriptPath, path .. "/GameBaseLogic")
+    table.insert(scriptPath, path .. "/GameLogicBase")
     table.insert(scriptPath, path .. "/GameStepInit")
     table.insert(scriptPath, path .. "/GameStep")
     table.insert(scriptPath, path .. "/GameSendMsg")

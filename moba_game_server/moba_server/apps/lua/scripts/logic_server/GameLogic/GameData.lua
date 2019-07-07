@@ -19,7 +19,15 @@ function GameLogic:get_players()
 end
 
 function GameLogic:get_max_player()
-	return self._room:get_max_player()
+	return tonumber(self._room:get_max_player())
+end
+
+function GameLogic:get_play_count()
+	return tonumber(self._room:get_play_count())
+end
+
+function GameLogic:get_total_play_count()
+	return tonumber(self._room:get_total_play_count())
 end
 
 function GameLogic:reset()

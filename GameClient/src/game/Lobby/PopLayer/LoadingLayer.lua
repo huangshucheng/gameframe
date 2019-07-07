@@ -17,7 +17,7 @@ function LoadingLayer:init()
 
     local delay = cc.DelayTime:create(5)
     local callfuck = cc.CallFunc:create(function()
-    	-- self:showLayer(false)
+    	self:showLayer(false)
 	end)
 	self:runAction(cc.Sequence:create(delay,callfuck))
 end

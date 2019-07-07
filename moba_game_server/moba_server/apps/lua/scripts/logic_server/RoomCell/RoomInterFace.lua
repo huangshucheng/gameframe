@@ -1,6 +1,6 @@
 local Room = class('Room')
-local Player 			= require("logic_server/PlayerCell/Player")
 
+--玩家进入房间
 function Room:enter_player(player)
 	if type(player) ~= 'table' then
 		return false
@@ -69,7 +69,7 @@ function Room:enter_player(player)
 	-- print("hcc>> 55555 room: enter_player  id: " .. player:get_uid() .. '  playerNum: '.. self:get_room_player_num())
 	return true
 end
-
+--玩家退出房间
 function Room:exit_player(player)
 	if type(player) ~= 'table' then
 		return false
@@ -95,7 +95,7 @@ function Room:exit_player(player)
 	end
 	return false
 end
-
+--踢出所有玩家
 function Room:kick_all_players_in_room()
 	if #self._players <= 0 then
 		return
@@ -130,7 +130,7 @@ function Room:is_player_uid_in_room(player)
 	end
 	return false
 end
-
+--获得某状态下所有玩家数量
 function Room:get_player_count_by_state(state)
 	local count = 0
 	for i = 1 , #self._players do
@@ -140,7 +140,7 @@ function Room:get_player_count_by_state(state)
 	end
 	return count
 end
-
+--设置所有玩家状态
 function Room:set_all_player_state(state)
 	for i = 1 , #self._players do
 		self._players[i]:set_state(state)
@@ -158,7 +158,7 @@ function Room:brodcast_in_room(ctype, body, not_to_player)
 		end
 	end
 end
-
+--根据座位号id获取玩家对象
 function Room:get_player_by_seat_id(seat_id)
 	for i = 1 , #self._players do
 		local player = self._players[i]
@@ -168,34 +168,13 @@ function Room:get_player_by_seat_id(seat_id)
 	end
 end
 
-function Room:check_game_start()
-	if self:get_is_start_game() == true then
-		return
-	end
-	local ready_player_count = self:get_player_count_by_state(Player.STATE.psReady)
-	-- if ready_player_count >= 4 then
-	if ready_player_count == self:get_max_player() then
-		-- start game
-		self:set_is_start_game(true)
-		self:set_all_player_state(Player.STATE.psPlaying)
-		self:send_game_start()
-		self:send_user_state()
-		print('testGameStart start game, ready count: '.. tostring(ready_player_count))
-		if self._game_logic.on_game_start then
-			self._game_logic:on_game_start()
-		end
-	else
-		print('testGameStart not start game, ready count: '.. tostring(ready_player_count))
-	end
+function Room:deleteRoom()
+	local RoomManager = require("logic_server/RoomManager")
+	RoomManager:getInstance():delete_room(self:get_room_id())
 end
 
-function Room:on_logic_end_game()
-	self:set_all_player_state(Player.STATE.psWait)
-	self:send_user_state()
-end
-
+--重置
 function Room:reset()
-
 end
 
 return Room

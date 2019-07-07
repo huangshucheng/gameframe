@@ -55,17 +55,8 @@ function LobbyScene:onEventGetUgameInfo(event)
     local body = event._usedata
     if not body then return end
     if body.status == Respones.OK then
-        local img_top_bg = self:getRootNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
-        if img_top_bg then
-            local coin_text         = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_COIN)
-            local diamond_text      = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_DIAMOND)
-            if coin_text then
-                coin_text:setString(tostring(body.uinfo.uchip))
-            end
-            if diamond_text then
-                diamond_text:setString(tostring(body.uinfo.uchip2))
-            end
-        end
+        Lobby.UIFunction.setString(self:getRootNode(),LobbySceneDefine.TEXT_COIN,body.uinfo.uchip)
+        Lobby.UIFunction.setString(self:getRootNode(),LobbySceneDefine.TEXT_DIAMOND,body.uinfo.uchip2)
     end
 end
 
@@ -88,17 +79,8 @@ end
 
 function LobbyScene:onEventAsycUserInfo(event)
     local uname = UserInfo.getUserName()
-    local img_top_bg = self:getRootNode():getChildByName(LobbySceneDefine.IMG_TOP_BG)
-    if img_top_bg then
-        local user_name_text = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.TEXT_USER_NAME)
-        local img_head = ccui.Helper:seekWidgetByName(img_top_bg, LobbySceneDefine.IMG_HEAD)
-        if uname and uname ~= '' and user_name_text then
-            user_name_text:setString(tostring(uname))    
-        end 
-        if img_head then
-            img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
-        end
-    end
+    Lobby.UIFunction.setString(self:getRootNode(),LobbySceneDefine.TEXT_USER_NAME,uname)
+    Lobby.UIFunction.loadTexture(self:getRootNode(),LobbySceneDefine.IMG_HEAD,string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
 end
 
 function LobbyScene:onEventCreateRoom(event)
@@ -142,28 +124,12 @@ end
 function LobbyScene:onEvnetGetCreateStatus(event)
     local data = event._usedata
     local status = data.status
-    local img_back_room = nil
-    local img_create_room = nil
-
-    local panel_center = self:getRootNode():getChildByName(LobbySceneDefine.PANEL_CENTER)
-    if panel_center then
-        img_back_room         = panel_center:getChildByName(LobbySceneDefine.IMG_BACK_ROOM)
-        img_create_room       = panel_center:getChildByName(LobbySceneDefine.IMG_CREATE_ROOM)
-    end
     if status == Respones.OK then
-        if img_back_room then
-            img_back_room:setVisible(true)
-        end
-        if img_create_room then
-            img_create_room:setVisible(false)
-        end
+        Lobby.UIFunction.setVisible(self:getRootNode(),LobbySceneDefine.IMG_BACK_ROOM,true)
+        Lobby.UIFunction.setVisible(self:getRootNode(),LobbySceneDefine.IMG_CREATE_ROOM,false)
     else
-        if img_back_room then
-            img_back_room:setVisible(false)
-        end
-        if img_create_room then
-            img_create_room:setVisible(true)
-        end
+        Lobby.UIFunction.setVisible(self:getRootNode(),LobbySceneDefine.IMG_BACK_ROOM,false)
+        Lobby.UIFunction.setVisible(self:getRootNode(),LobbySceneDefine.IMG_CREATE_ROOM,true)
     end
 end
 

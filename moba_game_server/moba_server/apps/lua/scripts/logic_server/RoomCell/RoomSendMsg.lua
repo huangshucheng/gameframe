@@ -27,4 +27,12 @@ function Room:send_user_arrived_infos()
 	self:brodcast_in_room(Cmd.eUserArrivedInfos,{user_info = users_info})
 end
 
+function Room:send_play_count()
+	local msg = {
+		play_count = self:get_play_count(),
+		total_play_count = self:get_total_play_count()
+	}
+	self:brodcast_in_room(Cmd.ePlayCountRes,msg)
+end
+
 return Room

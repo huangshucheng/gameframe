@@ -1,4 +1,4 @@
-local LoginScene = class('LoginScene')
+local LoginScene 		= class('LoginScene')
 local UserInfo          = require("game.clientdata.UserInfo")
 
 local BTN_GUEST_LOGIN               = 'BTN_GUEST_LOGIN'
@@ -14,45 +14,16 @@ local TEXTFIELD_ACCOUNT             = 'TEXTFIELD_ACCOUNT'
 local TEXTFIELD_PWD                 = 'TEXTFIELD_PWD'
 local TEXTFIELD_PWD_CONF            = 'TEXTFIELD_PWD_CONF'
 
-
 function LoginScene:addUITouchEvent()
-    local btn_guest_login = self._rootNode:getChildByName(BTN_GUEST_LOGIN)
-    if btn_guest_login then
-        btn_guest_login:addClickEventListener(handler(self,self.onEventBtnGuestLogin))
-    end
-
-    local img_panel_login_bg = self._rootNode:getChildByName(IMG_LOGIN_BG)
-
-    if img_panel_login_bg then
-        local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
-        local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
-       
-        if panel_login then
-            local btn_login = ccui.Helper:seekWidgetByName(panel_login, BTN_LOGIN)
-            if btn_login then
-                btn_login:addClickEventListener(handler(self,self.onEventBtnLogin))     
-            end
-            local btn_goto_reg = ccui.Helper:seekWidgetByName(panel_login, BTN_GOTO_REGISTER)
-            if btn_goto_reg then
-               btn_goto_reg:addClickEventListener(handler(self,self.onEventBtnGoToLogin))  
-            end
-        end
-
-        if panel_register then
-            local btn_reg_close = ccui.Helper:seekWidgetByName(panel_register, BTN_REG_CLOSE)
-            if btn_reg_close then
-               btn_reg_close:addClickEventListener(handler(self,self.onEventBtnRegClose))
-            end
-            local btn_reg = ccui.Helper:seekWidgetByName(panel_register, BTN_REGISTER)
-            if btn_reg then
-                btn_reg:addClickEventListener(handler(self,self.onEventBtnReg))
-            end
-        end
-    end
+    Lobby.UIFunction.addTouchEventListener(self:getRootNode(),BTN_GUEST_LOGIN,handler(self, self.onEventBtnGuestLogin))
+    Lobby.UIFunction.addTouchEventListener(self:getRootNode(),BTN_LOGIN,handler(self, self.onEventBtnLogin))
+    Lobby.UIFunction.addTouchEventListener(self:getRootNode(),BTN_GOTO_REGISTER,handler(self, self.onEventBtnGoToLogin))
+    Lobby.UIFunction.addTouchEventListener(self:getRootNode(),BTN_REG_CLOSE,handler(self, self.onEventBtnRegClose))
+    Lobby.UIFunction.addTouchEventListener(self:getRootNode(),BTN_REGISTER,handler(self, self.onEventBtnReg))
 end
 
 function LoginScene:initUI()
-    local img_panel_login_bg = self._rootNode:getChildByName(IMG_LOGIN_BG)
+    local img_panel_login_bg = self:getRootNode():getChildByName(IMG_LOGIN_BG)
 
     if not img_panel_login_bg then
         return
@@ -62,11 +33,11 @@ function LoginScene:initUI()
     local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
     
     -- editbox
-    local login_textfield_account   = ccui.Helper:seekWidgetByName(panel_login, TEXTFIELD_ACCOUNT)
-    local login_textfield_pwd       = ccui.Helper:seekWidgetByName(panel_login, TEXTFIELD_PWD)
-    local reg_textfield_account     = ccui.Helper:seekWidgetByName(panel_register, TEXTFIELD_ACCOUNT)
-    local reg_textfield_pwd         = ccui.Helper:seekWidgetByName(panel_register, TEXTFIELD_PWD)
-    local reg_textfield_pwd_conf    = ccui.Helper:seekWidgetByName(panel_register, TEXTFIELD_PWD_CONF)
+    local login_textfield_account   = Lobby.UIFunction.seekWidgetByName(panel_login, TEXTFIELD_ACCOUNT)
+    local login_textfield_pwd       = Lobby.UIFunction.seekWidgetByName(panel_login, TEXTFIELD_PWD)
+    local reg_textfield_account     = Lobby.UIFunction.seekWidgetByName(panel_register, TEXTFIELD_ACCOUNT)
+    local reg_textfield_pwd         = Lobby.UIFunction.seekWidgetByName(panel_register, TEXTFIELD_PWD)
+    local reg_textfield_pwd_conf    = Lobby.UIFunction.seekWidgetByName(panel_register, TEXTFIELD_PWD_CONF)
 
     local textfieldSize             = cc.size(300,51)
     local textfieldImg              = 'Lobby/LobbyRes/home_scene/user_info/120.png'

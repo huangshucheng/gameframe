@@ -2203,7 +2203,7 @@ void AddDescriptorsImpl() {
       "dRes\022\016\n\006status\030\001 \002(\021\"\036\n\014HeartBeatRes\022\016\n\006"
       "status\030\001 \001(\021\"#\n\014UserReadyReq\022\023\n\013ready_st"
       "ate\030\001 \002(\021\"e\n\014UserReadyRes\022\016\n\006status\030\001 \002("
-      "\021\022\016\n\006seatid\030\002 \002(\021\022\017\n\007brandid\030\003 \001(\t\022\020\n\010nu"
+      "\021\022\016\n\006seatid\030\002 \001(\021\022\017\n\007brandid\030\003 \001(\t\022\020\n\010nu"
       "mberid\030\004 \001(\t\022\022\n\nuser_state\030\005 \001(\021\"\033\n\tGame"
       "Start\022\016\n\006status\030\001 \002(\021\"\032\n\007UdpTest\022\017\n\007cont"
       "ent\030\001 \002(\t\"1\n\rLoginLogicReq\022\016\n\006udp_ip\030\001 \002"
@@ -14718,7 +14718,7 @@ bool UserReadyRes::MergePartialFromCodedStream(
         break;
       }
 
-      // required sint32 seatid = 2;
+      // optional sint32 seatid = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
@@ -14810,7 +14810,7 @@ void UserReadyRes::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->status(), output);
   }
 
-  // required sint32 seatid = 2;
+  // optional sint32 seatid = 2;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->seatid(), output);
   }
@@ -14860,7 +14860,7 @@ void UserReadyRes::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->status(), target);
   }
 
-  // required sint32 seatid = 2;
+  // optional sint32 seatid = 2;
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->seatid(), target);
   }
@@ -14900,26 +14900,6 @@ void UserReadyRes::SerializeWithCachedSizes(
   return target;
 }
 
-size_t UserReadyRes::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:UserReadyRes)
-  size_t total_size = 0;
-
-  if (has_status()) {
-    // required sint32 status = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->status());
-  }
-
-  if (has_seatid()) {
-    // required sint32 seatid = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->seatid());
-  }
-
-  return total_size;
-}
 size_t UserReadyRes::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:UserReadyRes)
   size_t total_size = 0;
@@ -14929,19 +14909,11 @@ size_t UserReadyRes::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x0000000c) ^ 0x0000000c) == 0) {  // All required fields are present.
-    // required sint32 status = 1;
+  // required sint32 status = 1;
+  if (has_status()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->status());
-
-    // required sint32 seatid = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->seatid());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
   if (_has_bits_[0 / 32] & 3u) {
     // optional string brandid = 3;
@@ -14959,13 +14931,22 @@ size_t UserReadyRes::ByteSizeLong() const {
     }
 
   }
-  // optional sint32 user_state = 5;
-  if (has_user_state()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->user_state());
-  }
+  if (_has_bits_[0 / 32] & 24u) {
+    // optional sint32 seatid = 2;
+    if (has_seatid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+          this->seatid());
+    }
 
+    // optional sint32 user_state = 5;
+    if (has_user_state()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::SInt32Size(
+          this->user_state());
+    }
+
+  }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -15033,7 +15014,7 @@ void UserReadyRes::CopyFrom(const UserReadyRes& from) {
 }
 
 bool UserReadyRes::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000c) != 0x0000000c) return false;
+  if ((_has_bits_[0] & 0x00000004) != 0x00000004) return false;
   return true;
 }
 

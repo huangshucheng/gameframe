@@ -306,7 +306,7 @@ message UserReadyReq {
 
 message UserReadyRes {
 	required sint32 status 	= 1;
-	required sint32 seatid  = 2;
+	optional sint32 seatid  = 2;
 	optional string brandid = 3;
 	optional string numberid = 4;
 	optional sint32 user_state = 5;

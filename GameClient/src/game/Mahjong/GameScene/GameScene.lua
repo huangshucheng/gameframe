@@ -31,6 +31,7 @@ end
 function GameScene:setMetaTable()
     local scriptPath = {}
     table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneReceiveMsg")
+    table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneReceiveGameLogicMsg")
     table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneReceiveNetMsg")
     table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneTouchEvent")
     table.insert(scriptPath,"game.Mahjong.GameScene.GameSceneShowUI")
@@ -50,7 +51,7 @@ function GameScene:setMetaTable()
         tmpmetatable[i] = v
     end
     setmetatable(self, {__index = tmpmetatable}) 
-    dump(tmpmetatable,'hcc>>tmpmetatable')
+    -- dump(tmpmetatable,'hcc>>tmpmetatable')
 end
 
 function GameScene:pushScene()
@@ -75,6 +76,7 @@ function GameScene:init()
     self:addUITouchEvent()
     self:initNetEventListener()
     self:initClientEventListener()
+    self:initLogicEventListener()
 end
 
 function GameScene:popScene()

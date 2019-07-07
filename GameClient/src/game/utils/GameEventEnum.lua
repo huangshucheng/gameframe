@@ -4,6 +4,7 @@
 --end
 
 function addEvent(eventname,target,nodeTarget,callBack)
+	
    local listener = cc.EventListenerCustom:create(eventname,handler(target, callBack))
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener,nodeTarget)
 end
@@ -32,6 +33,6 @@ ClientEvents.ON_NETWORK_OFF 						= 'on_network_off'
 -- for use
 --[[
     postEvent(GameEvents.E_GAME_INIT,leftChariId)
-	addEvent(GameEvents.E_GAME_INIT, self, self.onGameReset)
+	addEvent(GameEvents.E_GAME_INIT, self, ,self._sceneNode self.onGameReset)
 ]]
 

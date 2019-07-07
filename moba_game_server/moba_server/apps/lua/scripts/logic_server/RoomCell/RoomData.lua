@@ -22,7 +22,7 @@ function Room:parse_game_rule()
 	end
 	local total_play_count = ToolUtils.getLuaStrValue(self._room_info, 'playCount')
 	if total_play_count ~= '' then
-		self._total_play_count = total_play_count
+		self._total_play_count = tonumber(total_play_count)
 		print('total_play_count: ' .. tostring(self._total_play_count))
 	end
 end
@@ -75,7 +75,7 @@ function Room:get_play_count()
 end
 
 function Room:set_play_count(count)
-	self._play_count = count
+	self._play_count = tonumber(count)
 end
 
 function Room:set_total_play_count(total_play_count)

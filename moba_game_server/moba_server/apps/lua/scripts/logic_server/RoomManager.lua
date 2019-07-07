@@ -351,6 +351,7 @@ function RoomManager:delete_room(room_id)
 	if room then
 		room:reset()
 		server_rooms[tostring(room_id)] = nil
+		print('delete_room success,totalroomnum: ' .. self:get_total_rooms())
 	end
 end
 

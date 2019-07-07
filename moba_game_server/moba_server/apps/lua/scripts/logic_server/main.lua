@@ -21,8 +21,8 @@ local Stype 		= require("Stype")
 
 Netbus.tcp_listen(servers[Stype.Logic].port)
 print("[Logic Server]>>>>> tcp Start at ".. servers[Stype.Logic].port)
-Netbus.udp_listen(game_config.logic_udp.port)
-print("[Logic Server]>>>>> udp Start at ".. game_config.logic_udp.port)
+-- Netbus.udp_listen(game_config.logic_udp.port)
+-- print("[Logic Server]>>>>> udp Start at ".. game_config.logic_udp.port)
 
 local logic_service = require("logic_server/logic_service")
 local ret = Service.register(Stype.Logic, logic_service)

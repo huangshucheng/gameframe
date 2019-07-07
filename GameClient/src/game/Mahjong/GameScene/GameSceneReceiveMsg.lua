@@ -18,9 +18,6 @@ function GameScene:initClientEventListener()
     addEvent("ExitRoomRes",self, self._gameScene, self.onEventExitRoom)
     addEvent('JoinRoomRes',self, self._gameScene, self.onEventJoinRoom)
     addEvent('BackRoomRes',self, self._gameScene, self.onEventBackRoom)
-    addEvent("GameStart", self, self._gameScene, self.onEventGameStart)
-    addEvent("GameResult", self, self._gameScene, self.onEventGameResult)
-    addEvent("GameTotalResult", self, self._gameScene, self.onEventGameTotalResult)
     addEvent("AllUserState", self, self._gameScene, self.onEventUserState)
     
     addEvent('Relogin',self, self._gameScene, self.onEvnetRelogin)
@@ -101,7 +98,7 @@ function GameScene:onEventExitRoom(event)
         end
         self:showAllExistUserInfo()
         if tonumber(brandid) == tonumber(UserInfo.getBrandId()) then
-            self:popScene()
+            -- self:popScene()
         end
     else
         Game.showPopLayer('TipsLayer',{"退出房间失败!"})
@@ -218,11 +215,6 @@ function GameScene:onEventUserReady(event)
     end
 end
 
-function GameScene:onEventGameStart(event)
-    local body = event._usedata
-    print('onEventGameStart status: ' .. tostring(body.status))
-end
-
 function GameScene:onEventUserState(event)
     local body = event._usedata
     if next(body.users_state) then
@@ -234,14 +226,7 @@ function GameScene:onEventUserState(event)
         end
     end
     self:showReadyImag()
-end
-
-function GameScene:onEventGameResult(event)
-
-end
-
-function GameScene:onEventGameTotalResult(event)
-
+    self:showReadyBtn()
 end
 
 return GameScene

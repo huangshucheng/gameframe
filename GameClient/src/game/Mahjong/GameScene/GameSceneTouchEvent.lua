@@ -4,22 +4,15 @@ local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local RoomData              = require("game.clientdata.RoomData")
 local GameFunction          = require("game.Mahjong.Base.GameFunction")
 
-function GameScene:onTouchSettingBtn(sender, eventType)
-    if eventType == ccui.TouchEventType.began then
-        sender:setScale(0.9)
-        sender:setColor(cc.c3b(160,160,160))
-    elseif eventType == ccui.TouchEventType.ended or
-        eventType == ccui.TouchEventType.canceled then
-        sender:setScale(1)
-        sender:setColor(cc.c3b(255,255,255))
-    end
-    if eventType ~= ccui.TouchEventType.ended then
-        return
-    end
+function GameScene:onTouchSettingBtn(send, eventType)
+   if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
     Game.showPopLayer('SetLayer')
+    -- Game.showPopLayer('WinLostLayer')
+    -- Game.showPopLayer('TotalWinLostLayer')
 end
 
-function GameScene:onTouchReadyBtn(sender, eventType)
+function GameScene:onTouchReadyBtn(send, eventType)
+    if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
 	LogicServiceProxy:getInstance():sendUserReady()
     print('hcc>> click ready....')
 end

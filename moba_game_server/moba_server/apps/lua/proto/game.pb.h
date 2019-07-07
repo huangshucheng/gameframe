@@ -5590,7 +5590,7 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 status() const;
   void set_status(::google::protobuf::int32 value);
 
-  // required sint32 seatid = 2;
+  // optional sint32 seatid = 2;
   bool has_seatid() const;
   void clear_seatid();
   static const int kSeatidFieldNumber = 2;
@@ -5616,9 +5616,6 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
   void clear_has_numberid();
   void set_has_user_state();
   void clear_has_user_state();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
@@ -10865,7 +10862,7 @@ inline void UserReadyRes::set_status(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserReadyRes.status)
 }
 
-// required sint32 seatid = 2;
+// optional sint32 seatid = 2;
 inline bool UserReadyRes::has_seatid() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }

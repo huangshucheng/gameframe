@@ -5,88 +5,64 @@ local GameSceneDefine       = require("game.Mahjong.GameScene.GameSceneDefine")
 local ToolUtils             = require("game.utils.ToolUtils")
 local GameFunction 			= require("game.Mahjong.Base.GameFunction")
 local Player 				= require("game.clientdata.Player")
-local JoyStick              = require("game.Mahjong.UI.JoyStick")
-local Hero                  = require("game.Mahjong.UI.Hero")
+
+local MAX_PLAYER_COUNT = 4
 
 function GameScene:showUserInfoBySeatId(seatId) --serverSeat
     local localSeat = GameFunction.serverSeatToLocal(seatId)
     local player = RoomData:getInstance():getPlayerBySeatId(seatId)
-    print('hcc>> serverSeat: '.. seatId .. '  ,localseat: ' .. localSeat)
+    -- print('hcc>> serverSeat: '.. seatId .. '  ,localseat: ' .. localSeat)
     if player then
         local seat =  GameFunction.serverSeatToLocal(player:getServerSeat())
-        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. seat)
+        local infoPanel = Lobby.UIFunction.seekWidgetByName(self:getRootNode(),GameSceneDefine.KW_PANEL_USER_INFO .. seat)
         if infoPanel then
             infoPanel:setVisible(true)
-            local textName      = ccui.Helper:seekWidgetByName(infoPanel,GameSceneDefine.KW_TEXT_NAME)
-            local textScore     = ccui.Helper:seekWidgetByName(infoPanel,GameSceneDefine.KW_TEXT_SCORE)
-            local imgOffLine    = ccui.Helper:seekWidgetByName(infoPanel,GameSceneDefine.KW_IMG_OFFINLE)
-            local imgHead       = ccui.Helper:seekWidgetByName(infoPanel,GameSceneDefine.KW_IMG_HEAD)
-            if textName then
-                textName:setString(player:getUNick())
-            end
-            if textScore then
-                textScore:setString('1000')    --TODO
-            end
-            if imgOffLine then
-                imgOffLine:setVisible(player:getIsOffline())
-            end
-            if imgHead then
-                imgHead:loadTexture(string.format('MahScene/MahRes/rectheader/1%d.png',tonumber(player:getUFace())))
-            end
+            Lobby.UIFunction.setString(infoPanel,GameSceneDefine.KW_TEXT_NAME,player:getUNick())
+            Lobby.UIFunction.setString(infoPanel,GameSceneDefine.KW_TEXT_SCORE,'1000')
+            Lobby.UIFunction.setVisible(infoPanel,GameSceneDefine.KW_IMG_OFFINLE,player:getIsOffline())
+            Lobby.UIFunction.loadTexture(infoPanel,GameSceneDefine.KW_IMG_HEAD,string.format('MahScene/MahRes/rectheader/1%d.png',tonumber(player:getUFace())))
         end
     else
-        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
-        if infoPanel then
-            infoPanel:setVisible(false)
-        end
-        print('localseat: ' .. localSeat .. " false")
+        Lobby.UIFunction.setVisible(self:getRootNode(),GameSceneDefine.KW_PANEL_USER_INFO .. localSeat,false)
+        -- print('localseat: ' .. localSeat .. " false")
     end
 end
 
 function GameScene:showAllExistUserInfo()
-    local total_play_count = RoomData:getInstance():getTotalPlayCount()
-    for serverSeat = 1 , total_play_count do
+    local playerCount = RoomData:getInstance():getChars()
+    print('playerCount: ' .. playerCount)
+    for serverSeat = 1 , MAX_PLAYER_COUNT do
         self:showUserInfoBySeatId(serverSeat)
     end
 end
 
 function GameScene:showRoomInfo()
-    local panel_top = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_TOP)
+    local panel_top = Lobby.UIFunction.seekWidgetByName(self:getRootNode(),GameSceneDefine.KW_PANEL_TOP)
     if panel_top then
-        local text_room_rule = panel_top:getChildByName(GameSceneDefine.KW_TEXT_RULE)
+        local roomRule = RoomData:getInstance():getRoomInfo()
+        if roomRule then
+            local playerNum = ToolUtils.getLuaStrValue(roomRule,"playerNum")
+            local playCount = ToolUtils.getLuaStrValue(roomRule,"playCount")
+            local isAAPay = ToolUtils.getLuaStrValue(roomRule,"isAAPay")
+            local baseScore = ToolUtils.getLuaStrValue(roomRule,"baseScore")
+            print('hcc>> rule: ' .. playerNum .. "  ," .. playCount .. " ," .. isAAPay .. ' ,' .. baseScore)
 
-        if text_room_rule then
-            local roomRule = RoomData:getInstance():getRoomInfo()
-            if roomRule then
-                local playerNum = ToolUtils.getLuaStrValue(roomRule,"playerNum")
-                local playCount = ToolUtils.getLuaStrValue(roomRule,"playCount")
-                local isAAPay = ToolUtils.getLuaStrValue(roomRule,"isAAPay")
-                local baseScore = ToolUtils.getLuaStrValue(roomRule,"baseScore")
-                print('hcc>> rule: ' .. playerNum .. "  ," .. playCount .. " ," .. isAAPay .. ' ,' .. baseScore)
+            local strRule = ''
+            local payStr = ((tostring(isAAPay) == '1') and "AA支付") or "房主支付"
 
-                local strRule = ''
-                local payStr = ((tostring(isAAPay) == '1') and "AA支付") or "房主支付"
-
-                strRule = strRule .. "人数:" .. tostring(playerNum) .. ","
-                strRule = strRule .. "局数:" .. tostring(playCount) .. ","
-                strRule = strRule .. "底分:" .. tostring(baseScore) .. ","
-                strRule = strRule .. tostring(payStr)
-                text_room_rule:setString(strRule)
-             end 
-        end
+            strRule = strRule .. "人数:" .. tostring(playerNum) .. ","
+            strRule = strRule .. "局数:" .. tostring(playCount) .. ","
+            strRule = strRule .. "底分:" .. tostring(baseScore) .. ","
+            strRule = strRule .. tostring(payStr)
+            Lobby.UIFunction.setString(panel_top,GameSceneDefine.KW_TEXT_RULE,strRule)
+         end 
     end
 end
 
 function GameScene:showRoomId()
-    local panel_top = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_TOP)
+    local panel_top =  Lobby.UIFunction.seekWidgetByName(self:getRootNode(),GameSceneDefine.KW_PANEL_TOP)
     if panel_top then
-        local btn_room_num = panel_top:getChildByName(GameSceneDefine.KW_ROOM_NUM)
-        if btn_room_num then
-            local roomid = RoomData:getInstance():getRoomId()
-            if roomid then
-                btn_room_num:setString('房间号:' .. roomid)
-            end
-        end
+        Lobby.UIFunction.setString(panel_top,GameSceneDefine.KW_ROOM_NUM,RoomData:getInstance():getRoomId())
     end
 end
 
@@ -97,13 +73,7 @@ function GameScene:showReadyBtn()
 	end
 	
 	local showFunc = function(isShow)
-		local panel_btn = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_BOTTON_BTN)
-		if panel_btn then
-			local ready_btn = panel_btn:getChildByName(GameSceneDefine.KW_BTN_READY)
-			if ready_btn  then
-			 	ready_btn:setVisible(isShow)
-			 end
-		end
+         Lobby.UIFunction.setVisible(self:getRootNode(),GameSceneDefine.KW_BTN_READY,isShow)
 	end
 
 	local state = selfPlayer:getState()
@@ -113,16 +83,12 @@ end
 
 function GameScene:showReadyImag()
     local showFunc = function(localSeat, isShow)
-        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
+        local infoPanel = Lobby.UIFunction.seekWidgetByName(self:getRootNode(),GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
         if infoPanel then
-            local ready_img = infoPanel:getChildByName(GameSceneDefine.KW_IMG_READY)
-            if ready_img  then
-                ready_img:setVisible(isShow)
-             end
+             Lobby.UIFunction.setVisible(infoPanel,GameSceneDefine.KW_IMG_READY,isShow)
         end
     end
-    local total_play_count = RoomData:getInstance():getTotalPlayCount()
-    for sSeat = 1 , total_play_count do
+    for sSeat = 1 , MAX_PLAYER_COUNT do
         local localSeat = GameFunction.serverSeatToLocal(sSeat)
         local player = RoomData:getInstance():getPlayerBySeatId(sSeat)
         if player then
@@ -136,16 +102,12 @@ end
 
 function GameScene:showHostImag()
     local showFunc = function(localSeat, isShow)
-        local infoPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
+        local infoPanel = Lobby.UIFunction.seekWidgetByName(self:getRootNode(),GameSceneDefine.KW_PANEL_USER_INFO .. localSeat)
         if infoPanel then
-            local host_img = infoPanel:getChildByName(GameSceneDefine.KW_IMG_MASTER)
-            if host_img  then
-                host_img:setVisible(isShow)
-             end
+            Lobby.UIFunction.setVisible(infoPanel,GameSceneDefine.KW_IMG_MASTER,isShow)
         end
     end
-    local total_play_count = RoomData:getInstance():getTotalPlayCount()
-    for sSeat = 1 , total_play_count do
+    for sSeat = 1 , MAX_PLAYER_COUNT do
         local localSeat = GameFunction.serverSeatToLocal(sSeat)
         local player = RoomData:getInstance():getPlayerBySeatId(sSeat)
         if player then
@@ -157,14 +119,11 @@ function GameScene:showHostImag()
 end
 
 function GameScene:showPlayCount()
-    local leftTopPanel = self._rootNode:getChildByName(GameSceneDefine.KW_PANEL_LEFT_TOP)
+    local leftTopPanel = Lobby.UIFunction.seekWidgetByName(self:getRootNode(),GameSceneDefine.KW_PANEL_LEFT_TOP)
     if leftTopPanel then
-        local text = ccui.Helper:seekWidgetByName(leftTopPanel,GameSceneDefine.KW_TEXT_PLAY_COUNT)        
-        if text then
-            local count = RoomData:getInstance():getPlayCount()
-            local total = RoomData:getInstance():getTotalPlayCount()
-            text:setString('局数:' .. tostring(count) .. '/' .. tostring(total))
-        end
+        local count = RoomData:getInstance():getPlayCount()
+        local total = RoomData:getInstance():getTotalPlayCount()
+        Lobby.UIFunction.setString(leftTopPanel,GameSceneDefine.KW_TEXT_PLAY_COUNT,'局数:' .. tostring(count) .. '/' .. tostring(total))
     end
 end
 

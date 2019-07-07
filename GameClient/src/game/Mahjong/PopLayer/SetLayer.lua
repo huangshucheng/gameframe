@@ -23,48 +23,25 @@ function SetLayer:init()
 end
 
 function SetLayer:onCreate()
-	local img_bg = self:getCsbNode():getChildByName(KW_IMG_BG)
-	if not img_bg then return end
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),KW_BTN_CLOSE,handler(self, self.onClickEventClose))
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),KW_BTN_EXIT,handler(self, self.onClickEventExit))
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),KW_BTN_DESSOLVE,handler(self, self.onClickEventDessolve))
+end
 
-	local btn_close = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_CLOSE)
-	if btn_close then
-		btn_close:addClickEventListener(handler(self,function()
-			self:showLayer(false)
-		end))
-	end
-	--[[
-	   退出房间:
-	   非房主>> 直接退出到大厅
-	   房主>> 信息还在房间，相当于在房间断线,可以返回房间 （目前房主不能返回大厅）
-	]]
-    local btn_exit = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_EXIT)
-    if btn_exit then
-        btn_exit:addClickEventListener(handler(self,function(sender, eventType)
-            LogicServiceProxy:getInstance():sendExitRoom(true)
-        end))
-    end
-    --[[
-     返回大厅
-	  非房主：直接退出到大厅
-	  房主：信息还在房间，相当于在房间断线,可以返回房间 （目前房主不能返回大厅）
-    ]]
-    local btn_back = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_BACK)
-    if btn_back then
-        btn_back:addClickEventListener(handler(self,function(sender, eventType)
-            LogicServiceProxy:getInstance():sendExitRoom(true)
-        end))
-    end
-    --[[
-       解散房间:
-		非房主：不能解散房间，只能退出房间
-		房主：可以解散房间
-    ]]
-    local btn_dsv = ccui.Helper:seekWidgetByName(img_bg,KW_BTN_DESSOLVE)
-    if btn_dsv then
-        btn_dsv:addClickEventListener(handler(self,function(sender, eventType)
-            LogicServiceProxy:getInstance():sendDessolveRoom()
-        end))
-    end
+function SetLayer:onClickEventClose(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    self:showLayer(false)
+end
+
+function SetLayer:onClickEventExit(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    LogicServiceProxy:getInstance():sendExitRoom(true)
+    cc.Director:getInstance():popScene()
+end
+
+function SetLayer:onClickEventDessolve(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    LogicServiceProxy:getInstance():sendDessolveRoom()
 end
 
 return SetLayer

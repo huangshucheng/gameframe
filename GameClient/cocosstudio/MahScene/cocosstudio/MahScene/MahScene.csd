@@ -69,10 +69,10 @@
           <AbstractNodeData Name="KW_PANEL_LEFT_TOP" ActionTag="-1263329281" Tag="62" IconVisible="False" RightMargin="1180.0000" BottomMargin="520.0000" ClipAble="False" BackColorAlpha="47" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="100.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name=" KW_TEXT_PLAY_COUNT" ActionTag="1332545715" Tag="64" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="43.5075" RightMargin="-63.5075" TopMargin="57.7769" BottomMargin="112.2231" FontSize="30" LabelText="局数:0/6" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="KW_TEXT_PLAY_COUNT" ActionTag="1332545715" Tag="64" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="43.5100" RightMargin="-63.5100" TopMargin="57.7800" BottomMargin="112.2200" FontSize="30" LabelText="局数:-/-" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="120.0000" Y="30.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="103.5075" Y="127.2231" />
+                <Position X="103.5100" Y="127.2200" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="254" G="225" B="133" />
                 <PrePosition X="1.0351" Y="0.6361" />

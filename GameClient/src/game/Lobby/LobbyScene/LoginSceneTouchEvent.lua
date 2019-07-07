@@ -8,7 +8,8 @@ local IMG_LOGIN_BG                  = 'IMG_LOGIN_BG'
 local PANEL_LOGIN                   = 'PANEL_LOGIN'
 local PANEL_REGISTER                = 'PANEL_REGISTER'
 
-function LoginScene:onEventBtnGuestLogin(sender,eventType)
+function LoginScene:onEventBtnGuestLogin(send,eventType)
+    if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
     local keystr = UserInfo.getUserGuestKey()
     if keystr == '' or keystr == nil then
         keystr = math.random(100000, 999999) .. '8JvrDstUNDuTNnnCKFEw' .. math.random(100000, 999999)
@@ -21,7 +22,8 @@ function LoginScene:onEventBtnGuestLogin(sender,eventType)
     Lobby.showPopLayer('LoadingLayer')
 end
 
-function LoginScene:onEventBtnLogin(sender, eventType)
+function LoginScene:onEventBtnLogin(send, eventType)
+    if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
     local accountStr    = self._login_textfield_account:getText()
     local pwdStr        = self._login_textfield_pwd:getText()
     print('login...' .. ' ' .. accountStr .. '  ' .. pwdStr)
@@ -37,7 +39,8 @@ function LoginScene:onEventBtnLogin(sender, eventType)
     Lobby.showPopLayer('LoadingLayer')
 end
 
-function LoginScene:onEventBtnReg(sender, eventType)
+function LoginScene:onEventBtnReg(send, eventType)
+    if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
     local accountStr    = self._reg_textfield_account:getText()
     local pwdStr        = self._reg_textfield_pwd:getText()
     local pwdStrConf    = self._reg_textfield_pwd_conf:getText()
@@ -62,35 +65,16 @@ function LoginScene:onEventBtnReg(sender, eventType)
     Lobby.showPopLayer('LoadingLayer')
 end
 
-function LoginScene:onEventBtnGoToLogin(sender,eventType)
-    local img_panel_login_bg = self._rootNode:getChildByName(IMG_LOGIN_BG)
-    if img_panel_login_bg then
-        local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
-        if panel_login then
-            panel_login:setVisible(false)
-        end
-
-        local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
-        if panel_register then
-            panel_register:setVisible(true)
-        end
-    end
-    
+function LoginScene:onEventBtnGoToLogin(send,eventType)
+    if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
+    Lobby.UIFunction.setVisible(self:getRootNode(),PANEL_LOGIN,false)
+    Lobby.UIFunction.setVisible(self:getRootNode(),PANEL_REGISTER,true)
 end
 
-function LoginScene:onEventBtnRegClose(sender, eventType)
-    local img_panel_login_bg = self._rootNode:getChildByName(IMG_LOGIN_BG)
-    if img_panel_login_bg then
-        local panel_login = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_LOGIN)
-        if panel_login then
-            panel_login:setVisible(true)
-        end
-
-        local panel_register = ccui.Helper:seekWidgetByName(img_panel_login_bg, PANEL_REGISTER)
-        if panel_register then
-            panel_register:setVisible(false)
-        end
-    end
+function LoginScene:onEventBtnRegClose(send, eventType)
+    if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
+    Lobby.UIFunction.setVisible(self:getRootNode(),PANEL_LOGIN,true)
+    Lobby.UIFunction.setVisible(self:getRootNode(),PANEL_REGISTER,false)
 end
 
 return LoginScene

@@ -15,7 +15,14 @@ end
 function GameLogic:step_end_game()
 	print('hcc>>step_end_game...')
 	self:send_game_result()
-	self:get_room():on_logic_end_game()
+
+	self:get_room():on_logic_game_result()
+	print('step_end_game>> playcount: ' .. self:get_play_count() .. ' ,total_play_count: ' .. self:get_total_play_count())
+	if self:get_play_count() == self:get_total_play_count() then
+		print('hcc>>step_end_game>> total result')
+		self:send_game_total_result()
+		self:get_room():on_logic_game_total_result()
+	end
 end
 
 return GameLogic

@@ -28,8 +28,10 @@ end
 function LoginScene:setMetaTable()
     local scriptPath = {}
     table.insert(scriptPath,"game.Lobby.LobbyScene.LoginSceneReceiveMsg")
+    table.insert(scriptPath,"game.Lobby.LobbyScene.LoginSceneReceiveNetMsg")
     table.insert(scriptPath,"game.Lobby.LobbyScene.LoginSceneInit")
     table.insert(scriptPath,"game.Lobby.LobbyScene.LoginSceneTouchEvent")
+    table.insert(scriptPath,"game.Lobby.LobbyScene.LoginSceneUI")
     local tmpmetatable = {}
     for i,v in ipairs(scriptPath) do
         local script = require(v)
