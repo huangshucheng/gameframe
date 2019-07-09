@@ -23,7 +23,6 @@ end
 
 function RankLayer:init()
 	self._canTouchBackground = true
-	self._list_view = nil
 
 	RankLayer.super.init(self)
 
@@ -31,24 +30,19 @@ function RankLayer:init()
 end
 
 function RankLayer:onCreate()
-	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
-	if not img_bg then return end
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_CLOSE,handler(self, self.onClickEventClose))
 
-	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
-	if btn_close then
-		btn_close:addClickEventListener(handler(self,function()
-			self:showLayer(false)
-		end))
+	local list_view = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),KW_RANK_LIST)
+	local rank_item = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),RANK_ITEM)
+	if list_view and rank_item then
+		list_view:removeAllChildren()
+		list_view:setItemModel(rank_item)
 	end
+end
 
-	self._list_view = ccui.Helper:seekWidgetByName(img_bg,KW_RANK_LIST)
-	local rank_item = ccui.Helper:seekWidgetByName(img_bg,RANK_ITEM)
-	if not rank_item then return end
-
-	if self._list_view then
-		self._list_view:removeAllChildren()
-		self._list_view:setItemModel(rank_item)
-	end
+function RankLayer:onClickEventClose(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    self:showLayer(false)
 end
 
 function RankLayer:addClientEventListener()
@@ -60,28 +54,22 @@ function RankLayer:onEventWorldRankUchipRes(event)
     if not data then
         return
     end
+    local list_view = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),KW_RANK_LIST)
 	Lobby.popLayer('LoadingLayer')
     if data.status == Respones.OK then
         local rank_info = data.rank_info
         for i,v in ipairs(rank_info) do
-   			if self._list_view then
-   			    self._list_view:pushBackDefaultItem()
-              	local products = self._list_view:getItems()
+   			if list_view then
+   			    list_view:pushBackDefaultItem()
+              	local products = list_view:getItems()
                 local uinfoItem = products[#products]
                 uinfoItem:setVisible(true)
                 uinfoItem:setSwallowTouches(false)        --单个子item node
-                local text_rank     = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_RANK)
-                local text_uchip    = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_UCHIP)
-                local img_head  = ccui.Helper:seekWidgetByName(uinfoItem,IMG_HEAD)
-                local text_name = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_NAME)
-                local text_uvip = ccui.Helper:seekWidgetByName(uinfoItem,KW_TEXT_UVIP)
-                if text_rank then text_rank:setString(tostring(i)) end
-                if text_uchip then text_uchip:setString(tostring(v.uchip)) end
-                if text_name then text_name:setString(tostring(v.unick)) end
-                if text_uvip then text_uvip:setString(tostring('VIP'.. v.uvip)) end
-                if img_head and v.uface >= 1 and v.uface <= 9 then
-                 	img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%d.png',v.uface))
-                end
+                Lobby.UIFunction.setString(uinfoItem,KW_TEXT_RANK,i)
+                Lobby.UIFunction.setString(uinfoItem,KW_TEXT_UCHIP,v.uchip)
+                Lobby.UIFunction.setString(uinfoItem,KW_TEXT_NAME,v.unick)
+                Lobby.UIFunction.setString(uinfoItem,KW_TEXT_UVIP, 'VIP ' .. v.uvip)
+                Lobby.UIFunction.loadTexture(uinfoItem,IMG_HEAD,string.format('Lobby/LobbyRes/rectheader/1%d.png',v.uface))
 			end     	
         end
     end

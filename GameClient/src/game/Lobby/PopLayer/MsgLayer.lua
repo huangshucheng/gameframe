@@ -19,32 +19,23 @@ end
 
 function MsgLayer:init()
 	self._canTouchBackground = true
-	self._list_view = nil
-
 	MsgLayer.super.init(self)
-	
     SystemServiceProxy:getInstance():sendGetSystemMsg()
 end
 
 function MsgLayer:onCreate()
-	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
-	if not img_bg then return end
-
-	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
-	if btn_close then
-		btn_close:addClickEventListener(handler(self,function()
-			self:showLayer(false)
-		end))
+	local list_view = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),KW_MSG_LIST)
+	local msg_item = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),MSG_ITEM)
+	if list_view and msg_item then
+		list_view:removeAllChildren()
+		list_view:setItemModel(msg_item)
 	end
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_CLOSE,handler(self, self.onClickEventClose))
+end
 
-	self._list_view = ccui.Helper:seekWidgetByName(img_bg,KW_MSG_LIST)
-	local msg_item = ccui.Helper:seekWidgetByName(img_bg,MSG_ITEM)
-	if not msg_item then return end
-
-	if self._list_view then
-		self._list_view:removeAllChildren()
-		self._list_view:setItemModel(msg_item)
-	end
+function MsgLayer:onClickEventClose(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    self:showLayer(false)
 end
 
 function MsgLayer:addClientEventListener()
@@ -56,22 +47,21 @@ function MsgLayer:onEventGetSysMsgRes(event)
     if not data then
         return
     end
+    local list_view = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),KW_MSG_LIST)
 	Lobby.popLayer('LoadingLayer')
     if data.status == Respones.OK then
         local ver_num = data.ver_num
         local sys_msgs = data.sys_msgs
         print('ver_num  '.. ver_num)
         for i,v in ipairs(sys_msgs) do
-            if self._list_view then
-                self._list_view:pushBackDefaultItem()
-                local products = self._list_view:getItems()
+            if list_view then
+                list_view:pushBackDefaultItem()
+                local products = list_view:getItems()
                 local infoItem = products[#products]
                 infoItem:setVisible(true)
                 infoItem:setSwallowTouches(false)
-                local text_id   = ccui.Helper:seekWidgetByName(infoItem,KW_TEXT_ID)
-                local text_msg  = ccui.Helper:seekWidgetByName(infoItem,KW_TEXT_MSG)
-                if text_id then text_id:setString(tostring(i)) end
-                if text_msg then text_msg:setString(tostring(v)) end
+                Lobby.UIFunction.setString(infoItem,KW_TEXT_ID,i)
+                Lobby.UIFunction.setString(infoItem,KW_TEXT_MSG,v)
             end  
         end
     end

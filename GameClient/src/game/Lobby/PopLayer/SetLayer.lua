@@ -20,23 +20,19 @@ function SetLayer:init()
 end
 
 function SetLayer:onCreate()
-	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
-	if not img_bg then return end
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_CLOSE,handler(self, self.onClickEventClose))
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_LOGOUT,handler(self, self.onClickEventLoginOut))
+end
 
-	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
-	if btn_close then
-		btn_close:addClickEventListener(handler(self,function()
-			self:showLayer(false)
-		end))
-	end
+function SetLayer:onClickEventClose(send, eventType)
+	if not self:isShowTouchEffect(send, eventType) then return end
+	self:showLayer(false)
+end
 
-    local btn_logout = ccui.Helper:seekWidgetByName(img_bg,BTN_LOGOUT)
-    if btn_logout then
-        btn_logout:addClickEventListener(handler(self,function(sender, eventType)
-            AuthServiceProxy:getInstance():sendLoginOut()
-            Lobby.showPopLayer("LoadingLayer")
-        end))
-    end
+function SetLayer:onClickEventLoginOut(send, eventType)
+	if not self:isShowTouchEffect(send, eventType) then return end
+    AuthServiceProxy:getInstance():sendLoginOut()
+    Lobby.showPopLayer("LoadingLayer")
 end
 
 function SetLayer:addClientEventListener()

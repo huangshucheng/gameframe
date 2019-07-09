@@ -54,7 +54,7 @@ end
 
 function LobbyScene:onTouchMessageBtn(send, eventType)
     if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
-    -- Lobby.showPopLayer("RankLayer")
+    Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
     --test 
     --[[

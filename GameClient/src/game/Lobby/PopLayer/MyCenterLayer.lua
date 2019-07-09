@@ -25,7 +25,6 @@ function MyCenterLayer:ctor()
 	self._login_textfield_name = nil
 	self._checkbox_boy = nil
 	self._checkbox_girl = nil
-	self._img_head = nil
 	self._user_sex = 1
 	self._head_img_index = 1
 	MyCenterLayer.super.ctor(self)
@@ -38,42 +37,7 @@ function MyCenterLayer:init()
 end
 
 function MyCenterLayer:onCreate()
-	
-	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
-	if not img_bg then return end
-
-	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
-	if btn_close then
-		btn_close:addClickEventListener(handler(self,function()
-			self:showLayer(false)
-		end))
-	end
-	local btn_modify = ccui.Helper:seekWidgetByName(img_bg,BTN_MODIFY)
-	if btn_modify then
-		btn_modify:addClickEventListener(handler(self,self.onEventBtnModify))
-	end
-
-	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
-	if btn_upgrade then
-		btn_upgrade:addClickEventListener(handler(self,function()
-		    Lobby.showPopLayer('UpgradeLayer')
-		end))
-	end
-
-	local panel_head_bg = ccui.Helper:seekWidgetByName(img_bg,PANEL_HEAD_BG)
-	if panel_head_bg then
-		panel_head_bg:addClickEventListener(handler(self,function(sender, eventType)
-			self._head_img_index = self._head_img_index + 1
-			if self._head_img_index > 9 then
-				self._head_img_index = 1
-			end
-		    if self._img_head then
-    			self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%d.png',self._head_img_index))
-    		end
-		end))
-	end
-
-	local login_textfield_name 		= ccui.Helper:seekWidgetByName(img_bg,TEXTFIELD_NAME)
+	local login_textfield_name 		= Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),TEXTFIELD_NAME)
     local textfieldSize             = cc.size(300,51)
     local textfieldImg              = 'Lobby/LobbyRes/home_scene/user_info/120.png'
     if login_textfield_name then
@@ -88,11 +52,12 @@ function MyCenterLayer:onCreate()
         self._login_textfield_name:setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
         self._login_textfield_name:setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
         textfdParent:getParent():addChild(self._login_textfield_name)
+        self._login_textfield_name:setName("login_textfield_name")
         textfdParent:removeSelf()
     end
 
-    self._checkbox_boy = ccui.Helper:seekWidgetByName(img_bg,CHECK_BOY)
-    self._checkbox_girl = ccui.Helper:seekWidgetByName(img_bg,CHECK_GIRL)
+    self._checkbox_boy = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),CHECK_BOY)
+    self._checkbox_girl = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),CHECK_GIRL)
 
     if (not self._checkbox_boy) or (not self._checkbox_girl)  then
     	return
@@ -109,9 +74,6 @@ function MyCenterLayer:onCreate()
     end
 
 	self._checkbox_boy:addEventListener(handler(self,function(sender,eventType)
-		-- if eventType == ccui.CheckBoxEventType.selected then
-		-- elseif eventType == ccui.CheckBoxEventType.unselected then
-		-- end
 		setSex(true)
 	end))
 
@@ -119,31 +81,47 @@ function MyCenterLayer:onCreate()
 		setSex(false)
 	end))
 
-	local btn_logout = ccui.Helper:seekWidgetByName(img_bg,BTN_LOGOUT)
-	if btn_logout then
-		btn_logout:addClickEventListener(handler(self,self.onEventBtnLoginOut))
-	end
     -- load data
     if self._login_textfield_name then
     	self._login_textfield_name:setText(UserInfo.getUserName())
     end
-    self._img_head = ccui.Helper:seekWidgetByName(img_bg,IMG_HEAD)
-    if self._img_head then
-    	self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
-    end
-
 	local sex = UserInfo.getUserSex()
 	if tonumber(sex) == 1 then
 		setSex(true)
 	else
 		setSex(false)
 	end
-
-	if btn_upgrade then
-		btn_upgrade:setVisible(UserInfo.getUserIsGuest())
-	end
-
+	
 	self._head_img_index = tonumber(UserInfo.getUserface())
+
+	Lobby.UIFunction.setVisible(self:getCsbNode(),BTN_UPGRADE,UserInfo.getUserIsGuest())
+    Lobby.UIFunction.loadTexture(self:getCsbNode(),IMG_HEAD,string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
+	
+	Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_CLOSE,handler(self, self.onClickEventClose))
+	Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_MODIFY,handler(self, self.onEventBtnModify))
+	Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_UPGRADE,handler(self, self.onEventBtnUpgrade))
+	Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_LOGOUT,handler(self, self.onEventBtnLoginOut))
+	Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),PANEL_HEAD_BG,handler(self, self.onEventBtnHeadBg))
+end
+
+function MyCenterLayer:onEventBtnUpgrade(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    Lobby.showPopLayer('UpgradeLayer')
+end
+
+function MyCenterLayer:onClickEventClose(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    self:showLayer(false)
+end
+
+function MyCenterLayer:onEventBtnHeadBg(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+	self._head_img_index = self._head_img_index + 1
+	if self._head_img_index > 9 then
+		self._head_img_index = 1
+	end
+	local str = string.format('Lobby/LobbyRes/rectheader/1%d.png',self._head_img_index)
+	Lobby.UIFunction.loadTexture(self:getCsbNode(),IMG_HEAD,str)
 end
 
 function MyCenterLayer:addClientEventListener()
@@ -181,7 +159,8 @@ function MyCenterLayer:onEventEditProFileRes(event)
     end
 end
 
-function MyCenterLayer:onEventBtnModify(sender,eventType)
+function MyCenterLayer:onEventBtnModify(send,eventType)
+	if not self:isShowTouchEffect(send, eventType) then return end
 	local namestr = ''
 
 	if self._login_textfield_name then
@@ -205,7 +184,8 @@ function MyCenterLayer:onEventBtnModify(sender,eventType)
 	Lobby.showPopLayer('LoadingLayer')
 end
 
-function MyCenterLayer:onEventBtnLoginOut(sender, eventType)
+function MyCenterLayer:onEventBtnLoginOut(send, eventType)
+	if not self:isShowTouchEffect(send, eventType) then return end
 	AuthServiceProxy:getInstance():sendLoginOut()
 	Lobby.showPopLayer('LoadingLayer')
 end
@@ -213,18 +193,13 @@ end
 function MyCenterLayer:onEventAsycUserInfo(event)
     local uname = UserInfo.getUserName()
     if uname and uname ~= '' then
-        self._login_textfield_name:setText(tostring(uname))
+    	if self._login_textfield_name then
+        	self._login_textfield_name:setText(tostring(uname))
+    	end
     end
-
-    local isguest = UserInfo.getUserIsGuest()
-
-	local img_bg = self:getCsbNode():getChildByName(IMG_BG)
-	local btn_upgrade = ccui.Helper:seekWidgetByName(img_bg,BTN_UPGRADE)
-	btn_upgrade:setVisible(isguest) 
-
-    if self._img_head then
-        self._img_head:loadTexture(string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface()))
-    end
+    local str = string.format('Lobby/LobbyRes/rectheader/1%s.png',UserInfo.getUserface())
+    Lobby.UIFunction.loadTexture(self:getCsbNode(),IMG_HEAD,str)
+	Lobby.UIFunction.setVisible(self:getCsbNode(),BTN_UPGRADE,UserInfo.getUserIsGuest())
 end
 
 return MyCenterLayer

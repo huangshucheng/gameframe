@@ -8,7 +8,6 @@ TipsLayer._csbResourcePath = 'Lobby/PopLayer/TipsLayer.csb'
 
 function TipsLayer:ctor()
 	TipsLayer.super.ctor(self)
-	self._tips_text = nil
 end
 
 function TipsLayer:init(str)
@@ -17,18 +16,15 @@ function TipsLayer:init(str)
 
     self:getBgLayer():setVisible(false)
     
-    self._tips_text = self:getCsbNode():getChildByName(KW_TEXT_TIPS)
-    
-    if self._tips_text  then
-    	self._tips_text:setString(tostring(str))
-	    local delay = cc.DelayTime:create(1)
-	    local fadeout = cc.FadeOut:create(0.2)
-	    local cfk = cc.CallFunc:create(function()
-	    	self:showLayer(false)
-    	end)
-	    local seq = cc.Sequence:create(delay,fadeout,cfk)
-	    self:runAction(seq) 
-    end
+    local seq = cc.Sequence:create(
+    	cc.DelayTime:create(1),
+    	cc.FadeOut:create(0.2),
+    	cc.CallFunc:create(function()
+    		self:showLayer(false)
+		end))
+    self:runAction(seq) 
+
+    Lobby.UIFunction.setString(self:getCsbNode(),KW_TEXT_TIPS,tostring(str))
 end
 
 return TipsLayer

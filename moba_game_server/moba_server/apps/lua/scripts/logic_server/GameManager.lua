@@ -136,6 +136,14 @@ function GameManager:on_user_ready(session, req)
 		return
 	end
 	local ready_state = body.ready_state
+
+
+	if player:get_state() == ready_state then
+		print('on_user_ready same state: ' .. ready_state)
+		return
+	end
+	print('on_user_ready uid: ' .. uid .. ' ,brandid: ' .. player:get_brand_id() .. ' ,ready_state: ' .. ready_state)
+
 	local msg_body ={
 		status = Respones.OK,
 		seatid = player:get_seat_id(),
@@ -143,9 +151,6 @@ function GameManager:on_user_ready(session, req)
 		numberid = player:get_number_id(),
 		user_state = player:get_state(),
 	}
-
-	print('on_user_ready uid: ' .. uid .. ' ,brandid: ' .. player:get_brand_id() .. ' ,ready_state: ' .. ready_state)
-
 	if ready_state == 1 then -- user send ready
 		if player:get_state() >= Player.STATE.psReady then
 			msg_body.status = Respones.PlayerIsAlreadyReady

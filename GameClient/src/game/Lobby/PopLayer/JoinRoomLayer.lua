@@ -27,23 +27,8 @@ function JoinRoomLayer:init()
 end
 
 function JoinRoomLayer:onCreate()
-	local img_bg = self:getCsbNode():getChildByName(KW_IMG_BG)
-	if not img_bg then return end
-
-	local btn_close = ccui.Helper:seekWidgetByName(img_bg, KW_BTN_CLOSE)
-	if btn_close then
-		btn_close:addClickEventListener(handler(self,function()
-			self:showLayer(false)
-		end))
-	end
-
-	local btn_clear = ccui.Helper:seekWidgetByName(img_bg, KW_BTN_CLEAR)
-	if btn_clear then
-		btn_clear:addClickEventListener(handler(self,self.onBtnEventClear))
-	end
-
 	for i = 1 , 6 do
-		local text = ccui.Helper:seekWidgetByName(img_bg, KW_TEXT_NUM .. i)
+		local text = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(), KW_TEXT_NUM .. i)
 		if text then
 			text:setString('')
 			self._numberList[i] = text
@@ -51,29 +36,38 @@ function JoinRoomLayer:onCreate()
 	end
 
 	for j = 0 , 9 do
-		local btn = ccui.Helper:seekWidgetByName(img_bg, KW_BTN .. j)
+		local btn = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(), KW_BTN .. j)
 		if btn then
 			self._numberBtnList[j] = btn
-			btn:addClickEventListener(handler(self,self.onBtnEventNumber))
 			btn.tmpNum = j
 		end
+		Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),KW_BTN .. j,handler(self, self.onBtnEventNumber))
 	end
+
+	Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),KW_BTN_CLOSE,handler(self, self.onClickEventClose))
+	Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),KW_BTN_CLEAR,handler(self, self.onBtnEventClear))
+end
+
+function JoinRoomLayer:onClickEventClose(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    self:showLayer(false)
 end
 
 function JoinRoomLayer:addClientEventListener()
 
 end
 
-function JoinRoomLayer:onBtnEventClear(sender, eventType)
-	print('hcc clear')
+function JoinRoomLayer:onBtnEventClear(send, eventType)
+	if not self:isShowTouchEffect(send, eventType) then return end
 	for i = 1 , 6 do
-		self._numberList[i]:setString('')
+		Lobby.UIFunction.setString(self:getCsbNode(),KW_TEXT_NUM .. i , '')
 	end
 	self._text_index = 1
 end
 
-function JoinRoomLayer:onBtnEventNumber(sender, eventType)
-	local tmpNum = sender.tmpNum
+function JoinRoomLayer:onBtnEventNumber(send, eventType)
+	if not self:isShowTouchEffect(send, eventType) then return end
+	local tmpNum = send.tmpNum
 	print("hcc btn num: " .. tostring(tmpNum))
 	if not tmpNum then 
 		return

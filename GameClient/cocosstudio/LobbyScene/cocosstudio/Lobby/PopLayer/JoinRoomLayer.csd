@@ -12,7 +12,7 @@
               <AbstractNodeData Name="KW_PANEL_NUM" ActionTag="-1958332212" Tag="49" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="50.5000" RightMargin="50.5000" TopMargin="115.8779" BottomMargin="470.1221" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="700.0000" Y="100.0000" />
                 <Children>
-                  <AbstractNodeData Name="KW_PANEL_1" ActionTag="1825903047" Tag="51" IconVisible="False" LeftMargin="53.6357" RightMargin="566.3643" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+                  <AbstractNodeData Name="KW_PANEL_1" ActionTag="1825903047" Tag="51" IconVisible="False" LeftMargin="53.6357" RightMargin="566.3643" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="80.0000" Y="100.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="93.6357" Y="48.3647" />
@@ -64,7 +64,7 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="KW_PANEL_5" ActionTag="-586281915" Tag="56" IconVisible="False" LeftMargin="468.1142" RightMargin="151.8859" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                  <AbstractNodeData Name="KW_PANEL_5" ActionTag="-586281915" Tag="56" IconVisible="False" LeftMargin="468.1142" RightMargin="151.8858" TopMargin="1.6353" BottomMargin="-1.6353" TouchEnable="True" ClipAble="False" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="80.0000" Y="100.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="508.1142" Y="48.3647" />
@@ -178,14 +178,14 @@
                 <PreSize X="0.6442" Y="0.1152" />
                 <FileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/joinroom_input_bg.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_CLOSE" ActionTag="-500233661" Tag="150" IconVisible="False" LeftMargin="742.0966" RightMargin="-21.0966" TopMargin="58.5214" BottomMargin="547.4786" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="50" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="80.0000" Y="80.0000" />
+              <AbstractNodeData Name="KW_BTN_CLOSE" ActionTag="-500233661" Tag="150" IconVisible="False" LeftMargin="722.0966" RightMargin="-41.0966" TopMargin="38.5214" BottomMargin="527.4786" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="50" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="120.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="782.0966" Y="587.4786" />
-                <Scale ScaleX="1.5000" ScaleY="1.5000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.9764" Y="0.8564" />
-                <PreSize X="0.0999" Y="0.1166" />
+                <PreSize X="0.1498" Y="0.1749" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/guanbi_on.png" Plist="" />
                 <PressedFileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/guanbi_on.png" Plist="" />
@@ -203,7 +203,7 @@
                 <PreSize X="0.3620" Y="0.0773" />
                 <FileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/joinroom_title_bg.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_0" ActionTag="-1421348616" Tag="151" IconVisible="False" LeftMargin="85.8346" RightMargin="521.1653" TopMargin="537.5577" BottomMargin="49.4423" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="164" Scale9Height="77" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="KW_BTN_0" ActionTag="-1421348616" Tag="151" IconVisible="False" LeftMargin="85.8346" RightMargin="521.1654" TopMargin="537.5577" BottomMargin="49.4423" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="164" Scale9Height="77" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="194.0000" Y="99.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="182.8346" Y="98.9423" />

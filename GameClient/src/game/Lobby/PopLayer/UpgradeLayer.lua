@@ -33,22 +33,12 @@ function UpgradeLayer:init()
 end
 
 function UpgradeLayer:onCreate()
-    local img_bg = self:getCsbNode():getChildByName(IMG_BG)
-	local btn_close = ccui.Helper:seekWidgetByName(img_bg,BTN_CLOSE)
-	if btn_close then
-		btn_close:addClickEventListener(handler(self,function()
-			self:showLayer(false)
-		end))
-	end
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_CLOSE,handler(self, self.onClickEventClose))
+    Lobby.UIFunction.addTouchEventListener(self:getCsbNode(),BTN_COMMIT,handler(self, self.onEventBtnCommint))
 
-	local btn_commit = ccui.Helper:seekWidgetByName(img_bg,BTN_COMMIT) 
-	if btn_commit then
-		btn_commit:addClickEventListener(handler(self,self.onEventBtnCommint))
-	end
-
- 	local textfield_account = ccui.Helper:seekWidgetByName(img_bg,TEXTFIELD_ACCOUNT)
- 	local textfield_pwd = ccui.Helper:seekWidgetByName(img_bg,TEXTFIELD_PWD)
- 	local textfield_pwd_conf = ccui.Helper:seekWidgetByName(img_bg,TEXTFIELD_PWD_CONF)
+ 	local textfield_account = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),TEXTFIELD_ACCOUNT)
+ 	local textfield_pwd = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),TEXTFIELD_PWD)
+ 	local textfield_pwd_conf = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),TEXTFIELD_PWD_CONF)
 
  	local textfieldSize             = cc.size(300,51)
     local textfieldImg              = 'Lobby/LobbyRes/home_scene/user_info/120.png'
@@ -115,7 +105,13 @@ function UpgradeLayer:onEventAccountUpgradeRes(event)
     end
 end
 
-function UpgradeLayer:onEventBtnCommint(sender, evnetType)
+function UpgradeLayer:onClickEventClose(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
+    self:showLayer(false)
+end
+
+function UpgradeLayer:onEventBtnCommint(send, eventType)
+    if not self:isShowTouchEffect(send, eventType) then return end
 	if (not self._textfield_account) or 
 		(not self._textfield_pwd) or 
 		(not self._textfield_pwd_conf)  then

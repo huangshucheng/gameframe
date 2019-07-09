@@ -20,14 +20,14 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="BTN_CLOSE" ActionTag="360554092" Tag="77" IconVisible="False" LeftMargin="543.8647" RightMargin="11.1353" TopMargin="17.2692" BottomMargin="338.7308" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="15" Scale9Height="22" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="45.0000" Y="44.0000" />
+              <AbstractNodeData Name="BTN_CLOSE" ActionTag="360554092" Tag="77" IconVisible="False" LeftMargin="534.5862" RightMargin="5.4138" TopMargin="11.8207" BottomMargin="328.1793" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="15" Scale9Height="22" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="60.0000" Y="60.0000" />
                 <AnchorPoint ScaleX="0.6666" ScaleY="0.3899" />
-                <Position X="573.8635" Y="355.8847" />
-                <Scale ScaleX="1.2000" ScaleY="1.2000" />
+                <Position X="574.5822" Y="351.5733" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.9564" Y="0.8897" />
-                <PreSize X="0.0750" Y="0.1100" />
+                <PrePosition X="0.9576" Y="0.8789" />
+                <PreSize X="0.1000" Y="0.1500" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/048.png" Plist="" />
                 <PressedFileData Type="Normal" Path="Lobby/LobbyRes/home_scene/user_info/048.png" Plist="" />

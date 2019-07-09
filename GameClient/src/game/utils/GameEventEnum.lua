@@ -4,7 +4,6 @@
 --end
 
 function addEvent(eventname,target,nodeTarget,callBack)
-	
    local listener = cc.EventListenerCustom:create(eventname,handler(target, callBack))
     cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener,nodeTarget)
 end
