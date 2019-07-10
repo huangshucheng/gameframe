@@ -7,10 +7,13 @@ local RoomData              = require("game.clientdata.RoomData")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local LobbySceneDefine      = require('game.Lobby.LobbyScene.LobbySceneDefine')
 local NetWorkUDP            = require("game.net.NetWorkUDP")
+local NetWork               = require("game.net.NetWork")
 local UserInfo              = require("game.clientdata.UserInfo")
+local HeartBeat             = require("game.Lobby.Base.HeartBeat")
 
 function LobbyScene:initClientEventListener()
     addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self._lobbyScene, self.onEventAsycUserInfo)
+    addEvent(ClientEvents.ON_NETWORK_OFF, self, self._lobbyScene, self.onEventNetWorkOff)
     addEvent("GuestLoginRes", self, self._lobbyScene, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self._lobbyScene, self.onEventUnameLogin)
     addEvent("EditProfileRes", self, self._lobbyScene, self.onEventEditProfile)
@@ -163,8 +166,15 @@ end
 function LobbyScene:onEventHeartBeat(event)
     local body = event._usedata
     if body.status == Respones.OK then
-        LogicServiceProxy:getInstance():sendHeartBeat()
+        print('heartbeat>>>>>>>>>')
+        -- LogicServiceProxy:getInstance():sendHeartBeat()
+        HeartBeat:getInstance():onHeartBeat()
     end
+end
+
+function LobbyScene:onEventNetWorkOff(event)
+    NetWork:getInstance():start()
+    -- NetWork:getInstance():reConnect()
 end
 
 function LobbyScene:onEventUdpTest(event)

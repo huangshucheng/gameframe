@@ -137,11 +137,11 @@ function GameManager:on_user_ready(session, req)
 	end
 	local ready_state = body.ready_state
 
-
-	if player:get_state() == ready_state then
-		print('on_user_ready same state: ' .. ready_state)
-		return
-	end
+	--TODO 判断服务玩家状态，一样就返回
+	-- if player:get_state() == ready_state then
+	-- 	print('on_user_ready same state: ' .. ready_state)
+	-- 	return
+	-- end
 	print('on_user_ready uid: ' .. uid .. ' ,brandid: ' .. player:get_brand_id() .. ' ,ready_state: ' .. ready_state)
 
 	local msg_body ={
