@@ -77,6 +77,7 @@ function GameScene:init()
     self:initNetEventListener()
     self:initClientEventListener()
     self:initLogicEventListener()
+    print('GameScene>> initNetEventListener')
 end
 
 function GameScene:popScene()

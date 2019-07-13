@@ -127,25 +127,27 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="TEXT_USER_NAME" ActionTag="2082616274" Tag="21" IconVisible="False" LeftMargin="159.0392" RightMargin="42.9608" TopMargin="16.2519" BottomMargin="45.7481" FontSize="28" LabelText="hccfuck" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="98.0000" Y="28.0000" />
+                  <AbstractNodeData Name="TEXT_USER_NAME" ActionTag="2082616274" Tag="21" IconVisible="False" LeftMargin="159.0392" RightMargin="44.9608" TopMargin="13.7519" BottomMargin="43.2481" FontSize="28" LabelText="hccfuck" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="96.0000" Y="33.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="159.0392" Y="59.7481" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5301" Y="0.6639" />
-                    <PreSize X="0.3267" Y="0.3111" />
+                    <PreSize X="0.3200" Y="0.3667" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="TEXT_USER_ID" ActionTag="503128040" Tag="22" IconVisible="False" LeftMargin="155.0162" RightMargin="27.9838" TopMargin="63.9834" BottomMargin="1.0166" FontSize="25" LabelText="ID:326520" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="117.0000" Y="25.0000" />
+                  <AbstractNodeData Name="TEXT_USER_ID" ActionTag="503128040" Tag="22" IconVisible="False" LeftMargin="155.0162" RightMargin="27.9838" TopMargin="61.9834" BottomMargin="-0.9834" FontSize="25" LabelText="ID:326520" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="117.0000" Y="29.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="155.0162" Y="13.5166" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5167" Y="0.1502" />
-                    <PreSize X="0.3900" Y="0.2778" />
+                    <PreSize X="0.3900" Y="0.3222" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -174,14 +176,15 @@
                     <PreSize X="0.1859" Y="0.8571" />
                     <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/coin.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="TEXT_COIN" ActionTag="1437019821" Tag="37" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="95.4000" RightMargin="55.6000" TopMargin="12.5000" BottomMargin="12.5000" FontSize="24" LabelText="9999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="48.0000" Y="24.0000" />
+                  <AbstractNodeData Name="TEXT_COIN" ActionTag="1437019821" Tag="37" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="90.4000" RightMargin="50.6000" TopMargin="10.5000" BottomMargin="10.5000" FontSize="24" LabelText="9999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="58.0000" Y="28.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="119.4000" Y="24.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.6000" Y="0.5000" />
-                    <PreSize X="0.2412" Y="0.4898" />
+                    <PreSize X="0.2915" Y="0.5714" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -207,14 +210,15 @@
                     <PreSize X="0.2111" Y="0.8163" />
                     <FileData Type="Normal" Path="Lobby/LobbyRes/home_scene/demaon.png" Plist="" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="TEXT_DIAMOND" ActionTag="1331751265" Tag="38" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="95.4000" RightMargin="55.6000" TopMargin="12.5000" BottomMargin="12.5000" FontSize="24" LabelText="9999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="48.0000" Y="24.0000" />
+                  <AbstractNodeData Name="TEXT_DIAMOND" ActionTag="1331751265" Tag="38" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="90.4000" RightMargin="50.6000" TopMargin="10.5000" BottomMargin="10.5000" FontSize="24" LabelText="9999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="58.0000" Y="28.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="119.4000" Y="24.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.6000" Y="0.5000" />
-                    <PreSize X="0.2412" Y="0.4898" />
+                    <PreSize X="0.2915" Y="0.5714" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -242,14 +246,15 @@
               <AbstractNodeData Name="IMG_JOIN_ROOM" ActionTag="2070188978" Tag="41" IconVisible="False" LeftMargin="105.3936" RightMargin="494.6064" TopMargin="74.7811" BottomMargin="75.2189" TouchEnable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
                 <Size X="300.0000" Y="350.0000" />
                 <Children>
-                  <AbstractNodeData Name="TEXT_JOIN_ROOM" ActionTag="-479596716" Tag="44" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="70.0000" RightMargin="70.0000" TopMargin="155.0000" BottomMargin="155.0000" FontSize="40" LabelText="加入房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="160.0000" Y="40.0000" />
+                  <AbstractNodeData Name="TEXT_JOIN_ROOM" ActionTag="-479596716" Tag="44" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="69.5000" RightMargin="69.5000" TopMargin="151.5000" BottomMargin="151.5000" FontSize="40" LabelText="加入房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="161.0000" Y="47.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="150.0000" Y="175.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.5000" />
-                    <PreSize X="0.5333" Y="0.1143" />
+                    <PreSize X="0.5367" Y="0.1343" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="81" G="81" B="81" />
                   </AbstractNodeData>
@@ -265,14 +270,15 @@
               <AbstractNodeData Name="IMG_CREATE_ROOM" ActionTag="-638889419" Tag="42" IconVisible="False" LeftMargin="503.3323" RightMargin="96.6677" TopMargin="74.7811" BottomMargin="75.2189" TouchEnable="True" LeftEage="60" RightEage="60" TopEage="60" BottomEage="60" Scale9OriginX="60" Scale9OriginY="60" Scale9Width="28" Scale9Height="35" ctype="ImageViewObjectData">
                 <Size X="300.0000" Y="350.0000" />
                 <Children>
-                  <AbstractNodeData Name="TEXT_CREATE_ROOM" ActionTag="898619876" Tag="45" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="70.0000" RightMargin="70.0000" TopMargin="155.0000" BottomMargin="155.0000" FontSize="40" LabelText="创建房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="160.0000" Y="40.0000" />
+                  <AbstractNodeData Name="TEXT_CREATE_ROOM" ActionTag="898619876" Tag="45" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="69.5000" RightMargin="69.5000" TopMargin="151.5000" BottomMargin="151.5000" FontSize="40" LabelText="创建房间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="161.0000" Y="47.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="150.0000" Y="175.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.5000" Y="0.5000" />
-                    <PreSize X="0.5333" Y="0.1143" />
+                    <PreSize X="0.5367" Y="0.1343" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>

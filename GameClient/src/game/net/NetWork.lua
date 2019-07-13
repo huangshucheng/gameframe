@@ -27,7 +27,6 @@ function NetWork:ctor()
 
     self._socketTCP     = SocketTCP.new(self._ip,self._port,true)
     self._socketTCP:setReconnTime(0)
-    
     self:addEventListenner()
     -- TODO 加密
 end
@@ -91,10 +90,8 @@ function NetWork:start()
 end
 
 function NetWork:reConnect()
-    self._socketTCP = SocketTCP.new(self._ip,self._port,false)
-
     if self._socketTCP then
-    	self._socketTCP:connect()
+        self._socketTCP:reConnect()
     end
 end
 
@@ -104,15 +101,21 @@ function NetWork:stop()
 	end
 end
 
-function NetWork:isConnected()
-    if self._socketTCP then
-        return self._socketTCP.isConnected
-    end
-end
-
 function NetWork:disconnect()
     if self._socketTCP then
     	self._socketTCP:disconnect()
+    end
+end
+
+function NetWork:setIsConnected(flag)
+    if self._socketTCP then
+        self._socketTCP:setIsConnected(flag)
+    end
+end
+
+function NetWork:getIsConnected()
+    if self._socketTCP then
+        return self._socketTCP:getIsConnected()
     end
 end
 

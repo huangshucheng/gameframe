@@ -4,4 +4,10 @@ local Stype = {
 	Logic 	= 3,
 }
 
+Stype.name = {
+	[1] = 'Auth',	
+	[2] = 'System',	
+	[3] = 'Logic',
+}
+
 return Stype

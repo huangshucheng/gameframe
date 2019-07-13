@@ -9,11 +9,9 @@ local LobbySceneDefine      = require('game.Lobby.LobbyScene.LobbySceneDefine')
 local NetWorkUDP            = require("game.net.NetWorkUDP")
 local NetWork               = require("game.net.NetWork")
 local UserInfo              = require("game.clientdata.UserInfo")
-local HeartBeat             = require("game.Lobby.Base.HeartBeat")
 
 function LobbyScene:initClientEventListener()
     addEvent(ClientEvents.ON_ASYC_USER_INFO, self, self._lobbyScene, self.onEventAsycUserInfo)
-    addEvent(ClientEvents.ON_NETWORK_OFF, self, self._lobbyScene, self.onEventNetWorkOff)
     addEvent("GuestLoginRes", self, self._lobbyScene, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self._lobbyScene, self.onEventUnameLogin)
     addEvent("EditProfileRes", self, self._lobbyScene, self.onEventEditProfile)
@@ -28,7 +26,6 @@ function LobbyScene:initClientEventListener()
     addEvent("JoinRoomRes", self, self._lobbyScene, self.onEventJoinRoom)
     addEvent("BackRoomRes", self, self._lobbyScene, self.onEventBackRoom)
     addEvent("GetCreateStatusRes", self, self._lobbyScene, self.onEvnetGetCreateStatus)
-    addEvent("HeartBeatRes", self, self._lobbyScene, self.onEventHeartBeat)
     addEvent("UdpTest", self, self._lobbyScene, self.onEventUdpTest)
 end
 
@@ -163,23 +160,8 @@ function LobbyScene:onEventUnameLogin(event)
     end
 end
 
-function LobbyScene:onEventHeartBeat(event)
-    local body = event._usedata
-    if body.status == Respones.OK then
-        print('heartbeat>>>>>>>>>')
-        -- LogicServiceProxy:getInstance():sendHeartBeat()
-        HeartBeat:getInstance():onHeartBeat()
-    end
-end
-
-function LobbyScene:onEventNetWorkOff(event)
-    NetWork:getInstance():start()
-    -- NetWork:getInstance():reConnect()
-end
-
 function LobbyScene:onEventUdpTest(event)
     local body = event._usedata
-    print('hcc>>onEventUdpTest: ' .. body.content)
 end
 
 return LobbyScene

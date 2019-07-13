@@ -90,69 +90,75 @@
                     <EndColor A="255" R="255" G="255" B="255" />
                     <ColorVector ScaleY="1.0000" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="KW_TEXT_NUM_1" ActionTag="-1926619005" Tag="164" IconVisible="False" LeftMargin="67.7986" RightMargin="582.2014" TopMargin="0.5379" BottomMargin="-0.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="50.0000" Y="100.0000" />
+                  <AbstractNodeData Name="KW_TEXT_NUM_1" ActionTag="-1926619005" Tag="164" IconVisible="False" LeftMargin="64.2986" RightMargin="578.7014" TopMargin="-8.4621" BottomMargin="-9.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="57.0000" Y="118.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="92.7986" Y="49.4621" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="165" B="0" />
                     <PrePosition X="0.1326" Y="0.4946" />
-                    <PreSize X="0.0714" Y="1.0000" />
+                    <PreSize X="0.0814" Y="1.1800" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="KW_TEXT_NUM_2" ActionTag="1212151276" Tag="165" IconVisible="False" LeftMargin="171.6565" RightMargin="478.3435" TopMargin="0.5379" BottomMargin="-0.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="50.0000" Y="100.0000" />
+                  <AbstractNodeData Name="KW_TEXT_NUM_2" ActionTag="1212151276" Tag="165" IconVisible="False" LeftMargin="168.1565" RightMargin="474.8435" TopMargin="-8.4621" BottomMargin="-9.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="57.0000" Y="118.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="196.6565" Y="49.4621" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="165" B="0" />
                     <PrePosition X="0.2809" Y="0.4946" />
-                    <PreSize X="0.0714" Y="1.0000" />
+                    <PreSize X="0.0814" Y="1.1800" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="KW_TEXT_NUM_3" ActionTag="831287427" Tag="166" IconVisible="False" LeftMargin="275.5143" RightMargin="374.4857" TopMargin="0.5379" BottomMargin="-0.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="50.0000" Y="100.0000" />
+                  <AbstractNodeData Name="KW_TEXT_NUM_3" ActionTag="831287427" Tag="166" IconVisible="False" LeftMargin="272.0143" RightMargin="370.9857" TopMargin="-8.4621" BottomMargin="-9.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="57.0000" Y="118.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="300.5143" Y="49.4621" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="165" B="0" />
                     <PrePosition X="0.4293" Y="0.4946" />
-                    <PreSize X="0.0714" Y="1.0000" />
+                    <PreSize X="0.0814" Y="1.1800" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="KW_TEXT_NUM_4" ActionTag="1434250954" Tag="167" IconVisible="False" LeftMargin="379.3722" RightMargin="270.6278" TopMargin="0.5379" BottomMargin="-0.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="50.0000" Y="100.0000" />
+                  <AbstractNodeData Name="KW_TEXT_NUM_4" ActionTag="1434250954" Tag="167" IconVisible="False" LeftMargin="375.8722" RightMargin="267.1278" TopMargin="-8.4621" BottomMargin="-9.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="57.0000" Y="118.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="404.3722" Y="49.4621" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="165" B="0" />
                     <PrePosition X="0.5777" Y="0.4946" />
-                    <PreSize X="0.0714" Y="1.0000" />
+                    <PreSize X="0.0814" Y="1.1800" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="KW_TEXT_NUM_5" ActionTag="-1716739855" Tag="168" IconVisible="False" LeftMargin="483.2300" RightMargin="166.7700" TopMargin="0.5379" BottomMargin="-0.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="50.0000" Y="100.0000" />
+                  <AbstractNodeData Name="KW_TEXT_NUM_5" ActionTag="-1716739855" Tag="168" IconVisible="False" LeftMargin="479.7300" RightMargin="163.2700" TopMargin="-8.4621" BottomMargin="-9.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="57.0000" Y="118.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="508.2300" Y="49.4621" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="165" B="0" />
                     <PrePosition X="0.7260" Y="0.4946" />
-                    <PreSize X="0.0714" Y="1.0000" />
+                    <PreSize X="0.0814" Y="1.1800" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="KW_TEXT_NUM_6" ActionTag="18427154" Tag="50" IconVisible="False" LeftMargin="587.0879" RightMargin="62.9121" TopMargin="0.5379" BottomMargin="-0.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="50.0000" Y="100.0000" />
+                  <AbstractNodeData Name="KW_TEXT_NUM_6" ActionTag="18427154" Tag="50" IconVisible="False" LeftMargin="583.5879" RightMargin="59.4121" TopMargin="-8.4621" BottomMargin="-9.5379" FontSize="100" LabelText="9" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="57.0000" Y="118.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="612.0879" Y="49.4621" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="165" B="0" />
                     <PrePosition X="0.8744" Y="0.4946" />
-                    <PreSize X="0.0714" Y="1.0000" />
+                    <PreSize X="0.0814" Y="1.1800" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -353,18 +359,35 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="KW_BTN_CLEAR" ActionTag="-1878501189" Tag="163" IconVisible="False" LeftMargin="310.9352" RightMargin="86.0648" TopMargin="537.2326" BottomMargin="49.7674" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="374" Scale9Height="77" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="404.0000" Y="99.0000" />
+              <AbstractNodeData Name="KW_BTN_CLEAR" ActionTag="-1878501189" Tag="163" IconVisible="False" LeftMargin="307.9057" RightMargin="313.0943" TopMargin="539.9560" BottomMargin="61.0440" TouchEnable="True" FontSize="50" ButtonText="重输" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="180.0000" Y="85.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="512.9352" Y="99.2674" />
+                <Position X="397.9057" Y="103.5440" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6404" Y="0.1447" />
-                <PreSize X="0.5044" Y="0.1443" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/btn_clear_pressed.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/btn_clear_pressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Lobby/LobbyRes/joinRoom/btn_clear_normal.png" Plist="" />
+                <PrePosition X="0.4968" Y="0.1509" />
+                <PreSize X="0.2247" Y="0.1239" />
+                <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
+                <TextColor A="255" R="255" G="0" B="0" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="KW_BTN_DELETE" ActionTag="1999348423" Tag="84" IconVisible="False" LeftMargin="534.4368" RightMargin="86.5632" TopMargin="539.9560" BottomMargin="61.0440" TouchEnable="True" FontSize="50" ButtonText="删除" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="180.0000" Y="85.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="624.4368" Y="103.5440" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.7796" Y="0.1509" />
+                <PreSize X="0.2247" Y="0.1239" />
+                <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
+                <TextColor A="255" R="255" G="0" B="0" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+                <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

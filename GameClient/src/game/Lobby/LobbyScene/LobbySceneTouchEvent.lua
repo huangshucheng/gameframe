@@ -54,7 +54,7 @@ end
 
 function LobbyScene:onTouchMessageBtn(send, eventType)
     if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
-    Lobby.showPopLayer("RankLayer")
+    -- Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
     --test 
     --[[
@@ -72,7 +72,9 @@ function LobbyScene:onTouchMessageBtn(send, eventType)
         end))
     end
     ]]
-    LogicServiceProxy:getInstance():sendLoginLogicServer()
+    -- LogicServiceProxy:getInstance():sendLoginLogicServer()
+    local NetWork       = require("game.net.NetWork")
+    NetWork:getInstance():reConnect()
 end
 
 function LobbyScene:onTouchMailBtn(send, eventType)

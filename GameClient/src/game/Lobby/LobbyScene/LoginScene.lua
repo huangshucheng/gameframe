@@ -46,7 +46,7 @@ function LoginScene:setMetaTable()
         tmpmetatable[i] = v
     end
     setmetatable(self, {__index = tmpmetatable}) 
-    dump(tmpmetatable,'hcc>>LoginScene>>tmpmetatable')
+    -- dump(tmpmetatable,'hcc>>LoginScene>>tmpmetatable')
 end
 
 function LoginScene:run()

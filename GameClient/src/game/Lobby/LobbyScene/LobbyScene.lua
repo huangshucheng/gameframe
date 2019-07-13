@@ -47,7 +47,7 @@ function LobbyScene:setMetaTable()
         tmpmetatable[i] = v
     end
     setmetatable(self, {__index = tmpmetatable}) 
-    dump(tmpmetatable,'hcc>>LobbyScene>>tmpmetatable')
+    -- dump(tmpmetatable,'hcc>>LobbyScene>>tmpmetatable')
 end
 
 function LobbyScene:ctor()
@@ -90,6 +90,7 @@ end
 
 function LobbyScene:onExit()
     print('LobbyScene:onExit')
+    -- removeEvent('HeartBeatRes')
 end
 
 return LobbyScene

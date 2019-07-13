@@ -14,6 +14,10 @@ function postEvent(eventname,data)
     cc.Director:getInstance():getEventDispatcher():dispatchEvent(event)
 end
 
+function removeEvent(eventName)
+	cc.Director:getInstance():getEventDispatcher():removeCustomEventListeners(eventName)
+end
+
 ServerEvents = ServerEvents or {}
 
 ServerEvents.ON_SERVER_EVENT_DATA		    		= "on_server_event_data"

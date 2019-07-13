@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="TipLayer" Type="Layer" ID="01ffe3ee-bbdb-4494-bcf9-9b1fec0c0150" Version="3.10.0.0" />
+  <PropertyGroup Name="TipsLayer" Type="Layer" ID="01ffe3ee-bbdb-4494-bcf9-9b1fec0c0150" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -16,14 +16,15 @@
             <PreSize X="0.3125" Y="0.0833" />
             <FileData Type="Normal" Path="Lobby/LobbyRes/tips/tips_2.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="KW_TEXT_TIPS" ActionTag="853670969" Tag="103" IconVisible="False" LeftMargin="591.6660" RightMargin="560.3340" TopMargin="629.8018" BottomMargin="57.1983" FontSize="32" LabelText="提示啊！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="128.0000" Y="33.0000" />
+          <AbstractNodeData Name="KW_TEXT_TIPS" ActionTag="853670969" Tag="103" IconVisible="False" LeftMargin="600.6660" RightMargin="569.3340" TopMargin="627.3017" BottomMargin="54.6983" FontSize="32" LabelText="提示啊！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="110.0000" Y="38.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="655.6660" Y="73.6983" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5122" Y="0.1024" />
-            <PreSize X="0.1000" Y="0.0458" />
+            <PreSize X="0.0859" Y="0.0528" />
+            <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

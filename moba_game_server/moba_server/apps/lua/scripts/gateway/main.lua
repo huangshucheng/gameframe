@@ -1,5 +1,6 @@
 --初始化日志模块
 Logger.init("logger/gateway/", "gateway", true)
+require("functions")
 
 -- 初始化协议模块
 local proto_type = {

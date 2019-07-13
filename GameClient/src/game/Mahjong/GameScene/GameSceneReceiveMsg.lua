@@ -25,7 +25,6 @@ function GameScene:initClientEventListener()
     addEvent("LoginLogicRes",self, self._gameScene, self.onEventLoginLogic)
     addEvent("GuestLoginRes", self, self._gameScene, self.onEventGuestLogin)
     addEvent("UnameLoginRes", self, self._gameScene, self.onEventUnameLogin)
-    addEvent("HeartBeatRes", self, self._gameScene, self.onEventHeartBeat)
     addEvent("UserReconnectedRes", self, self._gameScene, self.onEventReconnect)
     addEvent("UserReadyRes", self, self._gameScene, self.onEventUserReady)
 end
@@ -182,13 +181,6 @@ function GameScene:onEventUnameLogin(event)
         Game.showPopLayer('TipsLayer',{"登录成功!"})
     else
         Game.showPopLayer('TipsLayer',{"登录失败,帐号或密码错误!"})
-    end
-end
-
-function GameScene:onEventHeartBeat(event)
-    local body = event._usedata
-    if body.status == Respones.OK then
-        LogicServiceProxy:getInstance():sendHeartBeat()
     end
 end
 

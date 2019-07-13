@@ -12,14 +12,15 @@
               <AbstractNodeData Name="IMG_TITLE_BG" ActionTag="-432134933" Tag="75" IconVisible="False" LeftMargin="155.6226" RightMargin="160.3774" TopMargin="-46.0818" BottomMargin="508.0818" TouchEnable="True" LeftEage="199" RightEage="199" TopEage="38" BottomEage="38" Scale9OriginX="199" Scale9OriginY="38" Scale9Width="208" Scale9Height="42" ctype="ImageViewObjectData">
                 <Size X="606.0000" Y="118.0000" />
                 <Children>
-                  <AbstractNodeData Name="TEXT_TITLE" ActionTag="859535861" Tag="76" IconVisible="False" LeftMargin="265.2469" RightMargin="270.7531" TopMargin="44.2925" BottomMargin="38.7075" FontSize="35" LabelText="公告" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="70.0000" Y="35.0000" />
+                  <AbstractNodeData Name="TEXT_TITLE" ActionTag="859535861" Tag="76" IconVisible="False" LeftMargin="264.2469" RightMargin="269.7531" TopMargin="41.2925" BottomMargin="35.7075" FontSize="35" LabelText="公告" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="72.0000" Y="41.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="300.2469" Y="56.2075" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4955" Y="0.4763" />
-                    <PreSize X="0.1155" Y="0.2966" />
+                    <PreSize X="0.1188" Y="0.3475" />
+                    <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -38,25 +39,27 @@
                   <AbstractNodeData Name="MSG_ITEM" ActionTag="409231736" Tag="83" IconVisible="False" BottomMargin="330.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                     <Size X="900.0000" Y="100.0000" />
                     <Children>
-                      <AbstractNodeData Name="KW_TEXT_ID" ActionTag="-235650992" Tag="85" IconVisible="False" LeftMargin="43.7023" RightMargin="830.2977" TopMargin="27.5446" BottomMargin="20.4554" FontSize="52" LabelText="1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="26.0000" Y="52.0000" />
+                      <AbstractNodeData Name="KW_TEXT_ID" ActionTag="-235650992" Tag="85" IconVisible="False" LeftMargin="47.2023" RightMargin="833.7977" TopMargin="23.0446" BottomMargin="15.9554" FontSize="52" LabelText="1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="19.0000" Y="61.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="56.7023" Y="46.4554" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.0630" Y="0.4646" />
-                        <PreSize X="0.0289" Y="0.5200" />
+                        <PreSize X="0.0211" Y="0.6100" />
+                        <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="KW_TEXT_MSG" ActionTag="1032553744" Tag="86" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="370.0000" RightMargin="370.0000" TopMargin="37.5445" BottomMargin="29.4555" FontSize="32" LabelText="正在加载.." ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="160.0000" Y="33.0000" />
+                      <AbstractNodeData Name="KW_TEXT_MSG" ActionTag="1032553744" Tag="86" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="376.5000" RightMargin="376.5000" TopMargin="35.0445" BottomMargin="26.9555" FontSize="32" LabelText="正在加载.." ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="147.0000" Y="38.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="450.0000" Y="45.9555" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.5000" Y="0.4596" />
-                        <PreSize X="0.1778" Y="0.3300" />
+                        <PreSize X="0.1633" Y="0.3800" />
+                        <FontResource Type="Normal" Path="Lobby/LobbyRes/fnt/jiancuyuan.TTF" Plist="" />
                         <OutlineColor A="255" R="255" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>

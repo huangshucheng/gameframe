@@ -5,6 +5,9 @@
       <RootFolder Name=".">
         <Folder Name="Lobby">
           <Folder Name="LobbyRes">
+            <Folder Name="fnt">
+              <TTF Name="jiancuyuan.TTF" />
+            </Folder>
             <Folder Name="game_scene">
               <Image Name="PVPload001.png" />
             </Folder>
@@ -107,17 +110,6 @@
               <Image Name="login_bg.png" />
             </Folder>
             <Folder Name="rectheader">
-              <Image Name="11.png" />
-              <Image Name="12.png" />
-              <Image Name="13.png" />
-              <Image Name="14.png" />
-              <Image Name="15.png" />
-              <Image Name="16.png" />
-              <Image Name="17.png" />
-              <Image Name="18.png" />
-              <Image Name="19.png" />
-            </Folder>
-            <Folder Name="roundheader">
               <Image Name="11.png" />
               <Image Name="12.png" />
               <Image Name="13.png" />

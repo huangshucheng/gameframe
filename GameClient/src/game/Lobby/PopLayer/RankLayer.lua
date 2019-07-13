@@ -54,6 +54,8 @@ function RankLayer:onEventWorldRankUchipRes(event)
     if not data then
         return
     end
+    -- myprint('hcc>>onEventWorldRankUchipRes')
+    -- myprint(data)
     local list_view = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),KW_RANK_LIST)
 	Lobby.popLayer('LoadingLayer')
     if data.status == Respones.OK then

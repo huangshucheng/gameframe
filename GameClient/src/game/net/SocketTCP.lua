@@ -81,6 +81,13 @@ function SocketTCP:connect(__host, __port, __retryConnectWhenFailure)
 	end
 end
 
+function SocketTCP:reConnect()
+	print('hcc>>reConnect , self.isConnected : ' .. tostring(self.isConnected))
+	if self.isConnected then return end
+    self:close()
+    self:_reconnect(true)
+end
+
 function SocketTCP:send(__data)
 	if not self.isConnected then return end
 	-- assert(self.isConnected, self.name .. " is not connected.")
@@ -104,6 +111,14 @@ function SocketTCP.getTime()
 	return socket.gettime()
 end
 
+function SocketTCP:getIsConnected()
+	return self.isConnected
+end
+
+function SocketTCP:setIsConnected(flag)
+	self.isConnected = flag
+end
+
 -------------------- private --------------------
 
 function SocketTCP:_checkConnect()
@@ -119,28 +134,38 @@ function SocketTCP:_connectTimeTick(dt)
 	self.waitConnect = self.waitConnect or 0
 	self.waitConnect = self.waitConnect + dt
 	if self.waitConnect >= SOCKET_CONNECT_FAIL_TIMEOUT then
+        print('SOCKET_CONNECT_FAIL_TIMEOUT .....')
 		self.waitConnect = nil
 		self:close()
 		self:_connectFailure()
+    else
+        -- print('SOCKET_CONNECT_FAIL_TIMEOUT ..... not')
 	end
 	self:_checkConnect()
 end
 
 function SocketTCP:_tick(dt)
 	local __body, __status, __partial = self.tcp:receive("*a")	-- read the package body
+	-- print('_tick>>>> ' , tostring(__body) , tostring(__status) , tostring(__partial))
     if __status == STATUS_CLOSED or __status == STATUS_NOT_CONNECTED then
     	self:close()
     	if self.isConnected then
     		self:_onDisconnect()
+            print('hcc>>111' .. 'self.isConnected == true')
     	else
     		self:_connectFailure()
+            print('hcc>>222' .. 'self.isConnected == false')
     	end
    		return
 	end
-    if 	(__body and string.len(__body) == 0) or
-		(__partial and string.len(__partial) == 0)
-	then return end
-	if __body and __partial then __body = __body .. __partial end
+
+    if 	(__body and string.len(__body) == 0) or(__partial and string.len(__partial) == 0) then 
+        return 
+    end
+
+	if __body and __partial then 
+        __body = __body .. __partial 
+    end
 	self:dispatchEvent({name = SocketTCP.EVENT_DATA , data = (__partial or __body) , partial = __partial , body = __body})
 end
 
@@ -157,11 +182,12 @@ end
 
 function SocketTCP:_onDisconnect()
 	self.isConnected = false
-	self:_reconnect();
+	self:_reconnect()
 	self:dispatchEvent({name = SocketTCP.EVENT_CLOSED})
 end
 
 function SocketTCP:_onConnected()
+	print('hcc>>_onConnected success ')
 	self.isConnected = true
 	if self.connectTimeTickScheduler then Scheduler.unscheduleGlobal(self.connectTimeTickScheduler) end	
 	self.tickScheduler = Scheduler.scheduleUpdateGlobal(handler(self, self._tick))
@@ -169,7 +195,7 @@ function SocketTCP:_onConnected()
 end
 
 function SocketTCP:_connectFailure(status)
-	self:_reconnect();
+	self:_reconnect()
 	self:dispatchEvent({name = SocketTCP.EVENT_CONNECT_FAILURE})
 end
 
@@ -177,7 +203,7 @@ function SocketTCP:_reconnect(__immediately)
 	if not self.isRetryConnect then return end
 	if __immediately then self:connect() return end
 	
-	if self.reconnectScheduler then 
+	if self.reconnectScheduler then
 		Scheduler.unscheduleGlobal(self.reconnectScheduler) 
 	end
 
