@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[56];
+  static const ::google::protobuf::internal::ParseTable schema[59];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -155,6 +155,12 @@ void InitDefaultsGameResultImpl();
 void InitDefaultsGameResult();
 void InitDefaultsGameTotalResultImpl();
 void InitDefaultsGameTotalResult();
+void InitDefaultsClickTouZiNumReqImpl();
+void InitDefaultsClickTouZiNumReq();
+void InitDefaultsTouZiNumResImpl();
+void InitDefaultsTouZiNumRes();
+void InitDefaultsClickTouZiBombResImpl();
+void InitDefaultsClickTouZiBombRes();
 inline void InitDefaults() {
   InitDefaultsGuestLoginReq();
   InitDefaultsUnameLoginReq();
@@ -212,6 +218,9 @@ inline void InitDefaults() {
   InitDefaultsAllUserState();
   InitDefaultsGameResult();
   InitDefaultsGameTotalResult();
+  InitDefaultsClickTouZiNumReq();
+  InitDefaultsTouZiNumRes();
+  InitDefaultsClickTouZiBombRes();
 }
 }  // namespace protobuf_game_2eproto
 class AccountUpgradeReq;
@@ -229,6 +238,12 @@ extern BackRoomResDefaultTypeInternal _BackRoomRes_default_instance_;
 class CheckLinkGameRes;
 class CheckLinkGameResDefaultTypeInternal;
 extern CheckLinkGameResDefaultTypeInternal _CheckLinkGameRes_default_instance_;
+class ClickTouZiBombRes;
+class ClickTouZiBombResDefaultTypeInternal;
+extern ClickTouZiBombResDefaultTypeInternal _ClickTouZiBombRes_default_instance_;
+class ClickTouZiNumReq;
+class ClickTouZiNumReqDefaultTypeInternal;
+extern ClickTouZiNumReqDefaultTypeInternal _ClickTouZiNumReq_default_instance_;
 class CreateRoomReq;
 class CreateRoomReqDefaultTypeInternal;
 extern CreateRoomReqDefaultTypeInternal _CreateRoomReq_default_instance_;
@@ -334,6 +349,9 @@ extern RoomIdResDefaultTypeInternal _RoomIdRes_default_instance_;
 class RoomInfoRes;
 class RoomInfoResDefaultTypeInternal;
 extern RoomInfoResDefaultTypeInternal _RoomInfoRes_default_instance_;
+class TouZiNumRes;
+class TouZiNumResDefaultTypeInternal;
+extern TouZiNumResDefaultTypeInternal _TouZiNumRes_default_instance_;
 class UdpTest;
 class UdpTestDefaultTypeInternal;
 extern UdpTestDefaultTypeInternal _UdpTest_default_instance_;
@@ -469,11 +487,14 @@ enum Cmd {
   eUserState = 61,
   eAllUserState = 62,
   eGameResult = 63,
-  eGameTotalResult = 64
+  eGameTotalResult = 64,
+  eClickTouZiNumReq = 65,
+  eTouZiNumRes = 66,
+  eClickTouZiBombRes = 67
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALID_CMD;
-const Cmd Cmd_MAX = eGameTotalResult;
+const Cmd Cmd_MAX = eClickTouZiBombRes;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();
@@ -7219,21 +7240,6 @@ class UserState : public ::google::protobuf::Message /* @@protoc_insertion_point
 
   // accessors -------------------------------------------------------
 
-  // required string seatid = 1;
-  bool has_seatid() const;
-  void clear_seatid();
-  static const int kSeatidFieldNumber = 1;
-  const ::std::string& seatid() const;
-  void set_seatid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_seatid(::std::string&& value);
-  #endif
-  void set_seatid(const char* value);
-  void set_seatid(const char* value, size_t size);
-  ::std::string* mutable_seatid();
-  ::std::string* release_seatid();
-  void set_allocated_seatid(::std::string* seatid);
-
   // required string user_state = 2;
   bool has_user_state() const;
   void clear_user_state();
@@ -7249,6 +7255,13 @@ class UserState : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::std::string* release_user_state();
   void set_allocated_user_state(::std::string* user_state);
 
+  // required sint32 seatid = 1;
+  bool has_seatid() const;
+  void clear_seatid();
+  static const int kSeatidFieldNumber = 1;
+  ::google::protobuf::int32 seatid() const;
+  void set_seatid(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:UserState)
  private:
   void set_has_seatid();
@@ -7262,8 +7275,8 @@ class UserState : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr seatid_;
   ::google::protobuf::internal::ArenaStringPtr user_state_;
+  ::google::protobuf::int32 seatid_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserStateImpl();
 };
@@ -7625,6 +7638,365 @@ class GameTotalResult : public ::google::protobuf::Message /* @@protoc_insertion
   ::google::protobuf::RepeatedPtrField< ::std::string> score_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsGameTotalResultImpl();
+};
+// -------------------------------------------------------------------
+
+class ClickTouZiNumReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ClickTouZiNumReq) */ {
+ public:
+  ClickTouZiNumReq();
+  virtual ~ClickTouZiNumReq();
+
+  ClickTouZiNumReq(const ClickTouZiNumReq& from);
+
+  inline ClickTouZiNumReq& operator=(const ClickTouZiNumReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ClickTouZiNumReq(ClickTouZiNumReq&& from) noexcept
+    : ClickTouZiNumReq() {
+    *this = ::std::move(from);
+  }
+
+  inline ClickTouZiNumReq& operator=(ClickTouZiNumReq&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ClickTouZiNumReq& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ClickTouZiNumReq* internal_default_instance() {
+    return reinterpret_cast<const ClickTouZiNumReq*>(
+               &_ClickTouZiNumReq_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    56;
+
+  void Swap(ClickTouZiNumReq* other);
+  friend void swap(ClickTouZiNumReq& a, ClickTouZiNumReq& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ClickTouZiNumReq* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ClickTouZiNumReq* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ClickTouZiNumReq& from);
+  void MergeFrom(const ClickTouZiNumReq& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ClickTouZiNumReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required sint32 seatid = 1;
+  bool has_seatid() const;
+  void clear_seatid();
+  static const int kSeatidFieldNumber = 1;
+  ::google::protobuf::int32 seatid() const;
+  void set_seatid(::google::protobuf::int32 value);
+
+  // required sint32 touzi_num = 2;
+  bool has_touzi_num() const;
+  void clear_touzi_num();
+  static const int kTouziNumFieldNumber = 2;
+  ::google::protobuf::int32 touzi_num() const;
+  void set_touzi_num(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:ClickTouZiNumReq)
+ private:
+  void set_has_seatid();
+  void clear_has_seatid();
+  void set_has_touzi_num();
+  void clear_has_touzi_num();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::int32 seatid_;
+  ::google::protobuf::int32 touzi_num_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsClickTouZiNumReqImpl();
+};
+// -------------------------------------------------------------------
+
+class TouZiNumRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:TouZiNumRes) */ {
+ public:
+  TouZiNumRes();
+  virtual ~TouZiNumRes();
+
+  TouZiNumRes(const TouZiNumRes& from);
+
+  inline TouZiNumRes& operator=(const TouZiNumRes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  TouZiNumRes(TouZiNumRes&& from) noexcept
+    : TouZiNumRes() {
+    *this = ::std::move(from);
+  }
+
+  inline TouZiNumRes& operator=(TouZiNumRes&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TouZiNumRes& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const TouZiNumRes* internal_default_instance() {
+    return reinterpret_cast<const TouZiNumRes*>(
+               &_TouZiNumRes_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    57;
+
+  void Swap(TouZiNumRes* other);
+  friend void swap(TouZiNumRes& a, TouZiNumRes& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TouZiNumRes* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  TouZiNumRes* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const TouZiNumRes& from);
+  void MergeFrom(const TouZiNumRes& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(TouZiNumRes* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated sint32 touzi_nums = 1;
+  int touzi_nums_size() const;
+  void clear_touzi_nums();
+  static const int kTouziNumsFieldNumber = 1;
+  ::google::protobuf::int32 touzi_nums(int index) const;
+  void set_touzi_nums(int index, ::google::protobuf::int32 value);
+  void add_touzi_nums(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      touzi_nums() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_touzi_nums();
+
+  // repeated sint32 bomb_nums = 2;
+  int bomb_nums_size() const;
+  void clear_bomb_nums();
+  static const int kBombNumsFieldNumber = 2;
+  ::google::protobuf::int32 bomb_nums(int index) const;
+  void set_bomb_nums(int index, ::google::protobuf::int32 value);
+  void add_bomb_nums(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      bomb_nums() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_bomb_nums();
+
+  // @@protoc_insertion_point(class_scope:TouZiNumRes)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > touzi_nums_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > bomb_nums_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsTouZiNumResImpl();
+};
+// -------------------------------------------------------------------
+
+class ClickTouZiBombRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ClickTouZiBombRes) */ {
+ public:
+  ClickTouZiBombRes();
+  virtual ~ClickTouZiBombRes();
+
+  ClickTouZiBombRes(const ClickTouZiBombRes& from);
+
+  inline ClickTouZiBombRes& operator=(const ClickTouZiBombRes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ClickTouZiBombRes(ClickTouZiBombRes&& from) noexcept
+    : ClickTouZiBombRes() {
+    *this = ::std::move(from);
+  }
+
+  inline ClickTouZiBombRes& operator=(ClickTouZiBombRes&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ClickTouZiBombRes& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ClickTouZiBombRes* internal_default_instance() {
+    return reinterpret_cast<const ClickTouZiBombRes*>(
+               &_ClickTouZiBombRes_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    58;
+
+  void Swap(ClickTouZiBombRes* other);
+  friend void swap(ClickTouZiBombRes& a, ClickTouZiBombRes& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ClickTouZiBombRes* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ClickTouZiBombRes* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ClickTouZiBombRes& from);
+  void MergeFrom(const ClickTouZiBombRes& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ClickTouZiBombRes* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required sint32 seatid = 1;
+  bool has_seatid() const;
+  void clear_seatid();
+  static const int kSeatidFieldNumber = 1;
+  ::google::protobuf::int32 seatid() const;
+  void set_seatid(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:ClickTouZiBombRes)
+ private:
+  void set_has_seatid();
+  void clear_has_seatid();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  ::google::protobuf::int32 seatid_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsClickTouZiBombResImpl();
 };
 // ===================================================================
 
@@ -11913,78 +12285,39 @@ UserArrivedInfos::user_info() const {
 
 // UserState
 
-// required string seatid = 1;
+// required sint32 seatid = 1;
 inline bool UserState::has_seatid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void UserState::set_has_seatid() {
-  _has_bits_[0] |= 0x00000001u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void UserState::clear_has_seatid() {
-  _has_bits_[0] &= ~0x00000001u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserState::clear_seatid() {
-  seatid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  seatid_ = 0;
   clear_has_seatid();
 }
-inline const ::std::string& UserState::seatid() const {
+inline ::google::protobuf::int32 UserState::seatid() const {
   // @@protoc_insertion_point(field_get:UserState.seatid)
-  return seatid_.GetNoArena();
+  return seatid_;
 }
-inline void UserState::set_seatid(const ::std::string& value) {
+inline void UserState::set_seatid(::google::protobuf::int32 value) {
   set_has_seatid();
-  seatid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  seatid_ = value;
   // @@protoc_insertion_point(field_set:UserState.seatid)
-}
-#if LANG_CXX11
-inline void UserState::set_seatid(::std::string&& value) {
-  set_has_seatid();
-  seatid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:UserState.seatid)
-}
-#endif
-inline void UserState::set_seatid(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_seatid();
-  seatid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:UserState.seatid)
-}
-inline void UserState::set_seatid(const char* value, size_t size) {
-  set_has_seatid();
-  seatid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:UserState.seatid)
-}
-inline ::std::string* UserState::mutable_seatid() {
-  set_has_seatid();
-  // @@protoc_insertion_point(field_mutable:UserState.seatid)
-  return seatid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* UserState::release_seatid() {
-  // @@protoc_insertion_point(field_release:UserState.seatid)
-  clear_has_seatid();
-  return seatid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void UserState::set_allocated_seatid(::std::string* seatid) {
-  if (seatid != NULL) {
-    set_has_seatid();
-  } else {
-    clear_has_seatid();
-  }
-  seatid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), seatid);
-  // @@protoc_insertion_point(field_set_allocated:UserState.seatid)
 }
 
 // required string user_state = 2;
 inline bool UserState::has_user_state() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void UserState::set_has_user_state() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void UserState::clear_has_user_state() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void UserState::clear_user_state() {
   user_state_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -12219,9 +12552,159 @@ GameTotalResult::mutable_score() {
   return &score_;
 }
 
+// -------------------------------------------------------------------
+
+// ClickTouZiNumReq
+
+// required sint32 seatid = 1;
+inline bool ClickTouZiNumReq::has_seatid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ClickTouZiNumReq::set_has_seatid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ClickTouZiNumReq::clear_has_seatid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ClickTouZiNumReq::clear_seatid() {
+  seatid_ = 0;
+  clear_has_seatid();
+}
+inline ::google::protobuf::int32 ClickTouZiNumReq::seatid() const {
+  // @@protoc_insertion_point(field_get:ClickTouZiNumReq.seatid)
+  return seatid_;
+}
+inline void ClickTouZiNumReq::set_seatid(::google::protobuf::int32 value) {
+  set_has_seatid();
+  seatid_ = value;
+  // @@protoc_insertion_point(field_set:ClickTouZiNumReq.seatid)
+}
+
+// required sint32 touzi_num = 2;
+inline bool ClickTouZiNumReq::has_touzi_num() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ClickTouZiNumReq::set_has_touzi_num() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ClickTouZiNumReq::clear_has_touzi_num() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ClickTouZiNumReq::clear_touzi_num() {
+  touzi_num_ = 0;
+  clear_has_touzi_num();
+}
+inline ::google::protobuf::int32 ClickTouZiNumReq::touzi_num() const {
+  // @@protoc_insertion_point(field_get:ClickTouZiNumReq.touzi_num)
+  return touzi_num_;
+}
+inline void ClickTouZiNumReq::set_touzi_num(::google::protobuf::int32 value) {
+  set_has_touzi_num();
+  touzi_num_ = value;
+  // @@protoc_insertion_point(field_set:ClickTouZiNumReq.touzi_num)
+}
+
+// -------------------------------------------------------------------
+
+// TouZiNumRes
+
+// repeated sint32 touzi_nums = 1;
+inline int TouZiNumRes::touzi_nums_size() const {
+  return touzi_nums_.size();
+}
+inline void TouZiNumRes::clear_touzi_nums() {
+  touzi_nums_.Clear();
+}
+inline ::google::protobuf::int32 TouZiNumRes::touzi_nums(int index) const {
+  // @@protoc_insertion_point(field_get:TouZiNumRes.touzi_nums)
+  return touzi_nums_.Get(index);
+}
+inline void TouZiNumRes::set_touzi_nums(int index, ::google::protobuf::int32 value) {
+  touzi_nums_.Set(index, value);
+  // @@protoc_insertion_point(field_set:TouZiNumRes.touzi_nums)
+}
+inline void TouZiNumRes::add_touzi_nums(::google::protobuf::int32 value) {
+  touzi_nums_.Add(value);
+  // @@protoc_insertion_point(field_add:TouZiNumRes.touzi_nums)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+TouZiNumRes::touzi_nums() const {
+  // @@protoc_insertion_point(field_list:TouZiNumRes.touzi_nums)
+  return touzi_nums_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+TouZiNumRes::mutable_touzi_nums() {
+  // @@protoc_insertion_point(field_mutable_list:TouZiNumRes.touzi_nums)
+  return &touzi_nums_;
+}
+
+// repeated sint32 bomb_nums = 2;
+inline int TouZiNumRes::bomb_nums_size() const {
+  return bomb_nums_.size();
+}
+inline void TouZiNumRes::clear_bomb_nums() {
+  bomb_nums_.Clear();
+}
+inline ::google::protobuf::int32 TouZiNumRes::bomb_nums(int index) const {
+  // @@protoc_insertion_point(field_get:TouZiNumRes.bomb_nums)
+  return bomb_nums_.Get(index);
+}
+inline void TouZiNumRes::set_bomb_nums(int index, ::google::protobuf::int32 value) {
+  bomb_nums_.Set(index, value);
+  // @@protoc_insertion_point(field_set:TouZiNumRes.bomb_nums)
+}
+inline void TouZiNumRes::add_bomb_nums(::google::protobuf::int32 value) {
+  bomb_nums_.Add(value);
+  // @@protoc_insertion_point(field_add:TouZiNumRes.bomb_nums)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+TouZiNumRes::bomb_nums() const {
+  // @@protoc_insertion_point(field_list:TouZiNumRes.bomb_nums)
+  return bomb_nums_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+TouZiNumRes::mutable_bomb_nums() {
+  // @@protoc_insertion_point(field_mutable_list:TouZiNumRes.bomb_nums)
+  return &bomb_nums_;
+}
+
+// -------------------------------------------------------------------
+
+// ClickTouZiBombRes
+
+// required sint32 seatid = 1;
+inline bool ClickTouZiBombRes::has_seatid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ClickTouZiBombRes::set_has_seatid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ClickTouZiBombRes::clear_has_seatid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ClickTouZiBombRes::clear_seatid() {
+  seatid_ = 0;
+  clear_has_seatid();
+}
+inline ::google::protobuf::int32 ClickTouZiBombRes::seatid() const {
+  // @@protoc_insertion_point(field_get:ClickTouZiBombRes.seatid)
+  return seatid_;
+}
+inline void ClickTouZiBombRes::set_seatid(::google::protobuf::int32 value) {
+  set_has_seatid();
+  seatid_ = value;
+  // @@protoc_insertion_point(field_set:ClickTouZiBombRes.seatid)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -3,13 +3,14 @@ local GameLogic 			= class('GameLogic')
 function GameLogic:step_start_game()
 	print('hcc>>step_start_game...')
 	--send data
-	-- local data_array = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
-	-- local num = math.random(1,#data_array)
+	--test
+	-- local function go_end()
+	-- 	self:goto_game_step(self.GameStep.GAME_STEP_END_GAME)
+	-- end
+	-- Scheduler.schedule(go_end, 3000, 1, 0)
 
-	local function go_end()
-		self:goto_game_step(self.GameStep.GAME_STEP_END_GAME)
-	end
-	Scheduler.schedule(go_end, 3000, 1, 0)
+	------------touzi game
+	self:send_touzi_num()
 end
 
 function GameLogic:step_end_game()
@@ -23,6 +24,7 @@ function GameLogic:step_end_game()
 		self:send_game_total_result()
 		self:get_room():on_logic_game_total_result()
 	end
+	self:reset_game_data()
 end
 
 return GameLogic

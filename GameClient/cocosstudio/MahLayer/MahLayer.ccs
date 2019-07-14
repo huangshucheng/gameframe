@@ -6,6 +6,15 @@
         <Folder Name="MahLayer">
           <Image Name="HelloWorld.png" />
           <Project Name="MahLayer.csd" Type="Scene" />
+          <Folder Name="Games">
+            <Project Name="GameTouZi.csd" Type="Layer" />
+          </Folder>
+          <Folder Name="GameRes">
+            <Folder Name="fnt">
+              <TTF Name="jiancuyuan.TTF" />
+            </Folder>
+          </Folder>
+          <Folder Name="PopLayer" />
         </Folder>
       </RootFolder>
     </Group>

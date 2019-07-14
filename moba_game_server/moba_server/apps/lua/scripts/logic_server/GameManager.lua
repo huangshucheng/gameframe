@@ -27,6 +27,8 @@ function GameManager:ctor()
 		[Cmd.eCheckLinkGameReq] 	= self.on_check_link_game,
 		[Cmd.eUserReconnectedReq] 	= self.on_reconnect,
 		[Cmd.eUserReadyReq] 		= self.on_user_ready,
+		--游戏逻辑
+		[Cmd.eClickTouZiNumReq] 	= self.on_user_click_touzi_num,
 	}
 end
 
@@ -170,6 +172,31 @@ function GameManager:on_user_ready(session, req)
 	msg_body.user_state = player:get_state()
 	room:brodcast_in_room(Cmd.eUserReadyRes, msg_body)
 	room:check_game_start()
+end
+
+function GameManager:on_user_click_touzi_num(session, req)
+	if not req then return end
+	local stype = req[1]
+	local ctype = req[2]
+	local uid 	= req[3]
+	local body 	= req[4]
+
+	local player = PlayerManager:getInstance():get_player_by_uid(uid)
+	if not player then
+		return
+	end
+	local room_id = player:get_room_id()
+	if room_id == -1 then
+		return
+	end
+	local room = RoomManager:getInstance():get_room_by_room_id(room_id)
+	if not room then 
+		return
+	end
+	if not body then 
+		return
+	end
+	room:on_game_logic_cmd(ctype,body)
 end
 
 return GameManager

@@ -28,6 +28,7 @@ function GameLogic:setMetaTable()
     table.insert(scriptPath, path .. "/GameStepInit")
     table.insert(scriptPath, path .. "/GameStep")
     table.insert(scriptPath, path .. "/GameSendMsg")
+    table.insert(scriptPath, path .. "/GameRecvMsg")
     table.insert(scriptPath, path .. "/GameData")
     table.insert(scriptPath, path .. "/GameDefine")
 

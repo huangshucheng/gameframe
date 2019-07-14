@@ -53,7 +53,7 @@ end
 
 function RoomData:createPlayerByUserInfo(user_info)
 	if not next(user_info) then return end
-	local seatid = user_info.seatid
+	local seatid = tonumber(user_info.seatid)
 	if seatid then
 		local player = Player:create()
 		player:setUInfo(user_info)
@@ -63,7 +63,7 @@ end
 
 function RoomData:updatePlayerByUserInfo(user_info)
 	if not next(user_info) then return end
-	local seatid = user_info.seatid
+	local seatid = tonumber(user_info.seatid)
 	if seatid then
 		local player = self._players[seatid]
 		if player then
@@ -84,8 +84,7 @@ function RoomData:removePlayerBySeatId(seat_id)
 end
 
 function RoomData:getPlayerBySeatId(seat_id)
-	seat_id = tonumber(seat_id)
-	return self._players[seat_id]
+	return self._players[tonumber(seat_id)]
 end
 
 function RoomData:reset()

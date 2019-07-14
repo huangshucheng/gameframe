@@ -31,7 +31,7 @@ function GameScene:onEventNetConnect(event)
 end
 
 function GameScene:onEventNetConnectFail(event)
-    Game.showPopLayer('TipsLayer',{"网络连接失败!"}) 
+    Game.showPopLayer('TipsLayer',{"网络连接失败!"})
     Game.showPopLayer('LoadingLayer')
 end
 
@@ -46,7 +46,7 @@ end
 function GameScene:onEventHeartBeat(event)
     local body = event._usedata
     if body.status == Respones.OK then
-        print('GameScene>> onEventHeartBeat')
+        -- print('GameScene>> onEventHeartBeat')
         HeartBeat:getInstance():onHeartBeat()
     end
 end

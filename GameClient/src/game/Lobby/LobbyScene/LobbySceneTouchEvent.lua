@@ -23,7 +23,7 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
         rule:
         playerNum='4';maxQuanShu='2';
     ]]
-    local playerNum = 4
+    local playerNum = 2
     local playCount = 3
     local isAAPay = 1
     local baseScore = 1
@@ -54,7 +54,7 @@ end
 
 function LobbyScene:onTouchMessageBtn(send, eventType)
     if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
-    -- Lobby.showPopLayer("RankLayer")
+    Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
     --test 
     --[[
@@ -73,8 +73,8 @@ function LobbyScene:onTouchMessageBtn(send, eventType)
     end
     ]]
     -- LogicServiceProxy:getInstance():sendLoginLogicServer()
-    local NetWork       = require("game.net.NetWork")
-    NetWork:getInstance():reConnect()
+    -- local NetWork       = require("game.net.NetWork")
+    -- NetWork:getInstance():reConnect()
 end
 
 function LobbyScene:onTouchMailBtn(send, eventType)

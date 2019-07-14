@@ -25,13 +25,13 @@ function HeartBeat:scheduleHeartBeatUpdate()
 	self.__heartBeatCount = self.__heartBeatCount + 1
 	if self:isTimeOut() then
 		if NetWork:getInstance():getIsConnected() then
-			print('scheduleHeartBeatUpdate>> true')
+			-- print('scheduleHeartBeatUpdate>> true')
 			NetWork:getInstance():setIsConnected(false)
 		end
 		postEvent(ClientEvents.ON_NETWORK_OFF)
 		print('scheduleHeartBeatUpdate>> timeOut............')	
 	end
-	print('scheduleHeartBeatUpdate>> count: ' .. self.__heartBeatCount)
+	-- print('scheduleHeartBeatUpdate>> count: ' .. self.__heartBeatCount)
 end
 
 function HeartBeat:isTimeOut()
@@ -45,7 +45,7 @@ end
 function HeartBeat:onHeartBeat()
 	self.__heartBeatCount = 0
 	LogicServiceProxy:getInstance():sendHeartBeat()
-	print('onEventHeartBeat>> count: ' .. self.__heartBeatCount)
+	-- print('onEventHeartBeat>> count: ' .. self.__heartBeatCount)
 end
 
 function HeartBeat:resetHeartBeatCount()

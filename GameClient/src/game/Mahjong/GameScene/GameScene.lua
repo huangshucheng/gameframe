@@ -69,6 +69,11 @@ function GameScene:pushScene()
     self._gameScene.onEnter = handler(self,self.onEnter)
     self._gameScene.onExit = handler(self,self.onExit)
     self:init()
+
+    --test
+    self:initGameUITouzi()
+    self:initGameUITouZiTouchEvent()
+    self:showGameTouZi(false)
 end
 
 function GameScene:init()

@@ -108,6 +108,7 @@ function GameScene:onEventJoinRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
+        
     end
 end
 

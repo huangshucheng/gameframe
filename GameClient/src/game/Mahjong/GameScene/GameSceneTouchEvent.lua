@@ -17,4 +17,13 @@ function GameScene:onTouchReadyBtn(send, eventType)
     print('hcc>> click ready....')
 end
 
+function GameScene:onTouchTouZi(send, eventType)
+	if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
+	local index = send.index
+	print('hcc>>onTouchTouZi ' .. tostring(index))
+	local selfSeat = GameFunction.getSelfSeat()
+	print('slefseat: ' .. selfSeat)
+	LogicServiceProxy:getInstance():sendTouZiNum(selfSeat, index)
+end
+
 return GameScene

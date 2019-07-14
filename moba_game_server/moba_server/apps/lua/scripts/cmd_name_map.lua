@@ -66,6 +66,9 @@ local cmd_name_map = {
 	[62] = "AllUserState",
 	[63] = "GameResult",
 	[64] = "GameTotalResult",
+	[65] = "ClickTouZiNumReq",
+	[66] = "TouZiNumRes",
+	[67] = "ClickTouZiBombRes",
 }
 
 return cmd_name_map

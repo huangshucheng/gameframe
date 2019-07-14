@@ -87,6 +87,9 @@ local Cmd = {
 	eAllUserState 				= 62,
 	eGameResult 				= 63,
 	eGameTotalResult 			= 64,
+	eClickTouZiNumReq 			= 65,
+	eTouZiNumRes 				= 66,
+	eClickTouZiBombRes 			= 67,
 }
 
 return Cmd

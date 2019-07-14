@@ -98,6 +98,10 @@ enum Cmd {
 	eAllUserState = 62;
 	eGameResult = 63;
 	eGameTotalResult = 64;
+
+	eClickTouZiNumReq = 65;
+	eTouZiNumRes = 66;
+	eClickTouZiBombRes = 67;
 }
 
 message GuestLoginReq {
@@ -371,7 +375,7 @@ message UserArrivedInfos {
 }
 
 message UserState {
-	required string seatid = 1;
+	required sint32 seatid = 1;
 	required string user_state = 2;
 }
 
@@ -385,4 +389,18 @@ message GameResult {
 
 message GameTotalResult {
 	repeated string score = 1;	
+}
+
+message ClickTouZiNumReq {
+	required sint32 seatid = 1;
+	required sint32 touzi_num = 2;	
+}
+
+message TouZiNumRes {
+	repeated sint32 touzi_nums = 1;
+	repeated sint32 bomb_nums = 2;
+}
+
+message ClickTouZiBombRes {
+	required sint32 seatid = 1;
 }

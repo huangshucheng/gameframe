@@ -101,4 +101,8 @@ function LogicServiceProxy:sendCheckLinkGameReq()
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eCheckLinkGameReq)
 end
 
+function LogicServiceProxy:sendTouZiNum(seatid, num)
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eClickTouZiNumReq,{seatid = seatid,touzi_num = num})
+end
+
 return LogicServiceProxy

@@ -28,18 +28,5 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="MahScene/MahScene.csd" />
-          <FilePathData Path="MahScene/PopLayer/SetLayer.csd" />
-          <FilePathData Path="MahScene/Hero.csd" />
-          <FilePathData Path="MahScene/JoyStick.csd" />
-          <FilePathData Path="MahScene/PopLayer/WinLostLayer.csd" />
-          <FilePathData Path="MahScene/PopLayer/TotalWinLostLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="MahScene/MahScene.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

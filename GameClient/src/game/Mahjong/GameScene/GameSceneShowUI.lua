@@ -127,4 +127,18 @@ function GameScene:showPlayCount()
     end
 end
 
+function GameScene:showGameTouZi(render)
+    Lobby.UIFunction.setVisible(self:getRootNode(),GameSceneDefine.KW_CSB_GAME_TOUZI_NAME,render)
+end
+
+function GameScene:refreshTouziNum(touzi_nums,bomb_nums)
+    for index = 1 , #touzi_nums do
+        local btnBomb = Lobby.UIFunction.seekWidgetByName(self:getGameTouziNode(),'KW_BOMB_' .. index)
+        Lobby.UIFunction.setVisible(self:getGameTouziNode(),'KW_BOMB_' .. index,touzi_nums[index] ~= 0)
+    end
+    for index = 1 , #bomb_nums do
+       Lobby.UIFunction.setString(self:getGameTouziNode(),'KW_BOMB_' .. bomb_nums[index],'bomb' .. index) 
+    end
+end
+
 return GameScene
