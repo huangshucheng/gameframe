@@ -25,5 +25,22 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="Lobby/LobbyScene.csd" />
+          <FilePathData Path="Lobby/PopLayer/MyCenterLayer.csd" />
+          <FilePathData Path="Lobby/MainScene.csd" />
+          <FilePathData Path="Lobby/LoginScene.csd" />
+          <FilePathData Path="Lobby/PopLayer/UpgradeLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/TipsLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/RankLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/MsgLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/SetLayer.csd" />
+          <FilePathData Path="Lobby/PopLayer/JoinRoomLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="Lobby/PopLayer/JoinRoomLayer.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

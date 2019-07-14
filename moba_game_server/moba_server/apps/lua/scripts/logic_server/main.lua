@@ -32,4 +32,7 @@ else
   print("register [Logic service]: failed!!!")
 end
 
+-------test
+-- require('logic_server/mjlib/base/test_mjlib')
+-- require('logic_server/mjlib/base/gen_auto_table')
 
