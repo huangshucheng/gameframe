@@ -25,10 +25,11 @@ function Room:setMetaTable()
     local scriptPath = {}
     local path = 'logic_server/RoomCell'
     table.insert(scriptPath, path .. "/RoomData")
-    table.insert(scriptPath, path .. "/RoomLogicBase")
     table.insert(scriptPath, path .. "/RoomLogic")
     table.insert(scriptPath, path .. "/RoomSendMsg")
     table.insert(scriptPath, path .. "/RoomInterFace")
+    table.insert(scriptPath, path .. "/RoomRecvMsgBase")
+    table.insert(scriptPath, path .. "/RoomRecvMsg")
 
     local tmpmetatable = {}
     for i,v in ipairs(scriptPath) do

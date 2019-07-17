@@ -2,14 +2,7 @@ local GameLogic 			= class('GameLogic')
 local Cmd                   = require('Cmd')
 local cmd_name_map          = require('cmd_name_map')
 
-function GameLogic:on_game_logic_cmd(ctype,body)
-    dump(body,'on_game_logic_cmd ctype>> ' .. tostring(cmd_name_map[ctype]))
-    if ctype == Cmd.eClickTouZiNumReq then
-    	self:on_msg_click_touzi(body)
-    end
-end
-
-function GameLogic:on_msg_click_touzi(body)
+function GameLogic:on_msg_click_touzi(body,player)
 	local seatid = tonumber(body.seatid)
 	local touzi_num = tonumber(body.touzi_num)
 
@@ -22,6 +15,7 @@ function GameLogic:on_msg_click_touzi(body)
 		end
 		return false
  	end
+
  	if is_bomb_func(touzi_num) then
  		self:send_click_bomb_seatid(seatid)
  		self:goto_game_step(self.GameStep.GAME_STEP_END_GAME)

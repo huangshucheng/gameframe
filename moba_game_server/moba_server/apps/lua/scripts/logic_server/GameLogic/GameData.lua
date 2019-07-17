@@ -15,6 +15,10 @@ function GameLogic:init_data()
 	self._bomb_nums = {1,2}
 end
 
+-----------------------------------------------------------
+--room data
+-----------------------------------------------------------
+
 function GameLogic:set_room(room)
 	self._room = room
 end
@@ -23,7 +27,7 @@ function GameLogic:get_room()
 	return self._room
 end
 
-function GameLogic:get_players()
+function GameLogic:get_room_players()
 	return self._room:get_room_players()
 end
 
@@ -39,6 +43,17 @@ function GameLogic:get_total_play_count()
 	return tonumber(self._room:get_total_play_count())
 end
 
+function GameLogic:get_room_info()
+	return self._room:get_room_info()
+end
+
+function GameLogic:get_room_id()
+	return self._room:get_room_id()
+end
+
+-----------------------------------------------------------
+--logic data
+-----------------------------------------------------------
 function GameLogic:reset_game_data()
 	self:reset_touzi_nums()
 end

@@ -5,6 +5,7 @@ local Room 				= require("logic_server/RoomCell/Room")
 local PlayerManager 	= require("logic_server/PlayerManager")
 local Player 			= require("logic_server/PlayerCell/Player")
 local NetWork 			= require("logic_server/NetWork")
+local cmd_name_map 		= require("cmd_name_map")
 
 local RoomManager 		= class("RoomManager")
 
@@ -34,10 +35,20 @@ function RoomManager:receive_msg(session, msg)
 		return false
 	end
 
+	local stype = msg[1]
 	local ctype = msg[2]
+	local uid 	= msg[3]
+	local body 	= msg[4]
 
 	if not ctype then
 	 	return false
+	end
+
+	--先有palyer 再有room
+	local player = PlayerManager:getInstance():get_player_by_uid(uid)
+	if not player then
+		print('RoomManager>> ctype:' .. tostring(cmd_name_map[ctype]) ..  ' ,uid: ' .. tostring(uid) .. ' player is nil ')
+		return false
 	end
 
 	if self._cmd_handler_map[ctype] then
@@ -73,7 +84,7 @@ function RoomManager:on_create_room(session, req)
 	local body 	= req[4]
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
-	print('on_create_room player: ' .. tostring(player))
+	-- print('on_create_room player, numid: ' .. tostring(player:get_brand_id()))
 	if not player then
 		NetWork.send_status(session, Cmd.eCreateRoomRes, uid, Respones.PlayerIsNotExist)
 		return
@@ -258,7 +269,7 @@ function RoomManager:on_dessolve_room(session, req)
 	self:delete_room(room_id)
 	print('dessolve_room success brandid: ' .. player:get_brand_id() .. ' ,totalroomnum: ' .. self:get_total_rooms())
 end
-
+--判断是否卡在房间里面
 function RoomManager:on_get_create_status(session, req)
 	if not req then return end
 	local stype = req[1]

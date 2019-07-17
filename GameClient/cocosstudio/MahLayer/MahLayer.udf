@@ -1,5 +1,14 @@
 <UserData Version="3.10.0.0">
   <Properties>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="MahLayer/Games/GameTouZi.csd" />
+          <FilePathData Path="MahLayer/MahLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="MahLayer/Games/GameTouZi.csd" />
+      </Value>
+    </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />

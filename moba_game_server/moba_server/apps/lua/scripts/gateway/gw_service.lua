@@ -11,7 +11,7 @@ local Cmd 					= require("Cmd")
 local cmd_name_map 			= require("cmd_name_map")
 local Respones 				= require("Respones")
 
-local DISCONNECT_LIMIT_TIME = 8
+local DISCONNECT_LIMIT_TIME = 10
 
 local function connect_to_server(stype, ip, port)
 	Netbus.tcp_connect(ip, port, function(err, session)
@@ -55,29 +55,29 @@ end
 -- 服务器发给客户端
 local function send_to_client(server_session, raw_cmd)
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
-	print('send_to_client>> ctype: ' .. tostring(cmd_name_map[ctype]))
+	print('send_to_client>> uid: ' .. utag .. ' ,ctype: ' .. tostring(cmd_name_map[ctype]))
 	local client_session = nil
 	-- login
 	if is_login_return_cmd(ctype) then
-		print('send_to_client>> is_login_return_cmd 111')
+		-- print('send_to_client>> is_login_return_cmd 111')
 		client_session = client_sessions_ukey[utag]
 		client_sessions_ukey[utag] = nil
 
 		if client_session == nil then 
-			print('send_to_client>> is_login_return_cmd 222 nil')
+			-- print('send_to_client>> is_login_return_cmd 222 nil')
 			return
 		end
 
 		local body = RawCmd.read_body(raw_cmd)
 		if body == nil then
-			print('send_to_client>> is_login_return_cmd 333 nil')
+			-- print('send_to_client>> is_login_return_cmd 333 nil')
 			return
 		end
 
 		if body.status ~= Respones.OK then 
 			RawCmd.set_utag(raw_cmd, 0)
 			Session.send_raw_cmd(client_session, raw_cmd)
-			print('send_to_client>> is_login_return_cmd 444')
+			-- print('send_to_client>> is_login_return_cmd 444')
 			return
 		end 
 
@@ -87,7 +87,7 @@ local function send_to_client(server_session, raw_cmd)
 			local relogin_cmd = {Stype.Auth, Cmd.eRelogin, 0, nil}
 			Session.send_msg(client_sessions_uid[uid], relogin_cmd)
 			Session.close(client_sessions_uid[uid])
-			print('send_to_client>> is_login_return_cmd 555')
+			-- print('send_to_client>> is_login_return_cmd 555')
 		end
 		client_sessions_uid[uid] = client_session
 		Session.set_uid(client_session, uid)
@@ -95,7 +95,7 @@ local function send_to_client(server_session, raw_cmd)
 		body.uinfo.uid = 0;
 		local login_res = {stype, ctype, 0, body}
 		Session.send_msg(client_session, login_res)
-		print('send_to_client>> is_login_return_cmd 666 success')
+		-- print('send_to_client>> is_login_return_cmd 666 success')
 		return
 	end
 	-- regist
@@ -112,7 +112,7 @@ local function send_to_client(server_session, raw_cmd)
 	end
 
 	client_session = client_sessions_uid[utag]
-	print('send_to_client>> is_login_return_cmd 777 session: ' .. tostring(client_session))
+	-- print('send_to_client>> is_login_return_cmd 777 session: ' .. tostring(client_session))
 	if client_session then 
 		RawCmd.set_utag(raw_cmd, 0)
 		Session.send_raw_cmd(client_session, raw_cmd)
@@ -139,7 +139,9 @@ end
 -- 客户端发给服务器
 local function send_to_server(client_session, raw_cmd)
 	local stype, ctype, utag = RawCmd.read_header(raw_cmd)
-	print('send_to_server>> ctype: ' .. tostring(cmd_name_map[ctype]))
+	if ctype ~= Cmd.eHeartBeatReq then
+		print('send_to_server>> ctype: ' .. tostring(cmd_name_map[ctype]))
+	end
 	local server_session = server_session_man[stype]
 	if server_session == nil then --可以回一个命令给客户端，系统错误
 		return
@@ -153,7 +155,7 @@ local function send_to_server(client_session, raw_cmd)
 			Session.set_utag(client_session, utag)
 		end
 		client_sessions_ukey[utag] = client_session
-		print('send_to_server>> is login request')
+		-- print('send_to_server>> is login request')
 	elseif ctype == Cmd.eUserRegistReq then
 		utag = Session.get_utag(client_session)
 		if utag == 0 then 
@@ -172,7 +174,7 @@ local function send_to_server(client_session, raw_cmd)
 		local tcp_ip, tcp_port = Session.get_address(client_session)
 		local body = RawCmd.read_body(raw_cmd)
 		body.udp_ip = tcp_ip
-		print('hcc>> gw_service>> udp_ip: ' .. tostring(tcp_ip) .. '  ,udp_port: ' .. tostring(body.udp_port))
+		-- print('hcc>> gw_service>> udp_ip: ' .. tostring(tcp_ip) .. '  ,udp_port: ' .. tostring(body.udp_port))
 		local login_logic_cmd = {stype, ctype, utag, body}
 		Session.send_msg(server_session, login_logic_cmd)
 		return
@@ -239,12 +241,12 @@ local function on_gw_session_disconnect(s, stype)
 	if uid ~= 0 then 
 		local user_lost = {stype, Cmd.eUserLostConn, uid, nil}
 		Session.send_msg(server_session, user_lost)
-		print('hcc>> on_gw_session_disconnect 333 uid: ' .. uid)
+		-- print('hcc>> on_gw_session_disconnect 333 uid: ' .. uid)
 	end
 end
 -- heart beat
 local function send_heart_beat()
-	print('sessionSize: ' .. table.nums(client_sessions_uid))
+	-- print('sessionSize: ' .. table.nums(client_sessions_uid))
 	for _ , session in pairs(client_sessions_uid) do
 		local uid = Session.get_uid(session)
 		local msg = {
