@@ -1,5 +1,22 @@
 local Room = class('Room')
 local Player 			= require("logic_server/PlayerCell/Player")
+local ToolUtils 		= require("utils/ToolUtils")
+
+function Room:parse_game_rule()
+	local player_num = ToolUtils.getLuaStrValue(self:get_room_info() , 'playerNum')
+	if player_num ~= '' then
+		self._max_player = tonumber(player_num) or 4
+		print('max_player: ' .. self._max_player)
+	end
+	local total_play_count = ToolUtils.getLuaStrValue(self:get_room_info(), 'playCount')
+	if total_play_count ~= '' then
+		self._total_play_count = tonumber(total_play_count)
+		print('total_play_count: ' .. tostring(self._total_play_count))
+	end
+	if self._game_logic.parse_game_rule then
+		self._game_logic:parse_game_rule()
+	end
+end
 
 function Room:check_game_start()
 	local ready_player_count = self:get_player_count_by_state(Player.STATE.psReady)

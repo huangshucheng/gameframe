@@ -1,8 +1,7 @@
 local GameLogic 			= class('GameLogic')
 
-function GameLogic:on_parse_game_rule(game_rule)
-	-- print("GameLogic>>on_parse_game_rule: " .. game_rule)
-	-- print("GameLogic>>room rule_info: " .. self:get_room():get_room_info())
+function GameLogic:parse_game_rule()
+	print('GameLogic>>:parse_game_rule')
 end
 
 function GameLogic:on_game_start()

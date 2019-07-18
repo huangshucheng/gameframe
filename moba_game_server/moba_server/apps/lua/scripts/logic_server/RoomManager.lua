@@ -114,6 +114,7 @@ function RoomManager:on_create_room(session, req)
 
 	room:set_room_id(roomid)
 	room:set_room_info(body.room_info)
+	room:parse_game_rule()
 	room:enter_player(player)
 	server_rooms[tostring(roomid)] = room
 	

@@ -1,4 +1,5 @@
 local Room = class("Room")
+local GameLogic = require('logic_server/GameLogic/GameLogic')
 
 function Room:ctor()
 	self:setMetaTable()
@@ -28,7 +29,6 @@ function Room:setMetaTable()
     table.insert(scriptPath, path .. "/RoomLogic")
     table.insert(scriptPath, path .. "/RoomSendMsg")
     table.insert(scriptPath, path .. "/RoomInterFace")
-    table.insert(scriptPath, path .. "/RoomRecvMsgBase")
     table.insert(scriptPath, path .. "/RoomRecvMsg")
 
     local tmpmetatable = {}
@@ -51,15 +51,10 @@ function Room:init()
 	if self.init_data then
 		self:init_data()
 	end
-	-- set room instance
-	local GameLogic = require('logic_server/GameLogic/GameLogic')
-	if GameLogic then
-		self._game_logic = GameLogic.new()
-		if self._game_logic then
-			if self._game_logic.set_room then
-				self._game_logic:set_room(self)
-			end
-		end
+	-- set game instance
+	self._game_logic = GameLogic.new()
+	if self._game_logic.set_room then
+		self._game_logic:set_room(self)
 	end
 end
 

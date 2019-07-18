@@ -48,8 +48,8 @@ function GameManager:receive_msg(session, msg)
 	 	return false
 	end
 
-	if room.on_game_logic_cmd then
-		room:on_game_logic_cmd(ctype,body,player)
+	if room.on_game_msg_cmd then
+		room:on_game_msg_cmd(ctype,body,player)
 	end
 	return true
 end
