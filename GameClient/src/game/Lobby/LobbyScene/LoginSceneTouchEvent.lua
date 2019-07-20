@@ -1,7 +1,6 @@
 local LoginScene = class('LoginScene')
 
 local UserInfo          = require("game.clientdata.UserInfo")
-
 local AuthServiceProxy  = require("game.modules.AuthServiceProxy")
 
 local IMG_LOGIN_BG                  = 'IMG_LOGIN_BG'

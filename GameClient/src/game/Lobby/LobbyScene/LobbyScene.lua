@@ -85,6 +85,7 @@ function LobbyScene:onEnter()
     --获取用户信息
     SystemServiceProxy:getInstance():sendGetUgameInfo()
     LogicServiceProxy:getInstance():sendGetCreateStatus()
+    LogicServiceProxy:getInstance():sendLoginLogicServer()
     RoomData:getInstance():reset()
 end
 

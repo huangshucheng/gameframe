@@ -50,12 +50,11 @@ function RoomManager:receive_msg(session, msg)
 		print('RoomManager>> ctype:' .. tostring(cmd_name_map[ctype]) ..  ' ,uid: ' .. tostring(uid) .. ' player is nil ')
 		return false
 	end
-
+	--阻拦房间消息，如果房间存在，消息发到房间内，如果房间不在，则走创建房间或其他逻辑
 	if self._cmd_handler_map[ctype] then
 		self._cmd_handler_map[ctype](self, session, msg)
 		return true
 	end
-	
 	return false
 end
 
@@ -114,7 +113,7 @@ function RoomManager:on_create_room(session, req)
 
 	room:set_room_id(roomid)
 	room:set_room_info(body.room_info)
-	room:parse_game_rule()
+	room:on_parse_game_rule()
 	room:enter_player(player)
 	server_rooms[tostring(roomid)] = room
 	

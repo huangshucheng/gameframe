@@ -24,7 +24,7 @@ function GameLogic:step_end_game()
 		self:send_game_total_result()
 		self:get_room():on_logic_game_total_result()
 	end
-	self:reset_game_data()
+	self:get_logic_data():reset_logic_data()
 end
 
 return GameLogic

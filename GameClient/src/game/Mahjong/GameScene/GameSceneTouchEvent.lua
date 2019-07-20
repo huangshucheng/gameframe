@@ -9,6 +9,7 @@ function GameScene:onTouchSettingBtn(send, eventType)
     Game.showPopLayer('SetLayer')
     -- Game.showPopLayer('WinLostLayer')
     -- Game.showPopLayer('TotalWinLostLayer')
+    print('onEventGameResult>> player count: ' .. RoomData:getInstance():getRoomPlayerCount())
 end
 
 function GameScene:onTouchReadyBtn(send, eventType)

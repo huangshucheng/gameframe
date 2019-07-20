@@ -1,18 +1,13 @@
 local GameLogic 			= class('GameLogic')
+local GameDataLogic 		= require('logic_server/GameLogic/GameDataLogic')
+
+---房间，游戏，配置相关数据
 
 function GameLogic:init_data()
 	self._room 				= nil
 	self._game_step_id 		= nil
 	self._game_step_handler_map = nil
-
-	----logic data
-	self._touzi_nums = 	{
-		1,2,3,4,5,6,7,8,
-		9,10,11,12,13,14,15,16,
-		17,18,19,20,21,22,23,24,
-		25,26,27,28,29,30,31,32
-	}
-	self._bomb_nums = {1,2}
+	self._game_logic_data 		= GameDataLogic.new()
 end
 
 -----------------------------------------------------------
@@ -51,37 +46,20 @@ function GameLogic:get_room_id()
 	return self._room:get_room_id()
 end
 
+function GameLogic:get_is_start_game()
+	return self._room:get_is_start_game()
+end
+
 -----------------------------------------------------------
---logic data
+-- logic data
 -----------------------------------------------------------
-function GameLogic:reset_game_data()
-	self:reset_touzi_nums()
-end
------ logic data
-function GameLogic:get_touzi_nums()
-	return self._touzi_nums
+
+function GameLogic:get_logic_data()
+	return self._game_logic_data
 end
 
-function GameLogic:set_touzi_nums(nums)
-	self._touzi_nums = nums
-end
-
-function GameLogic:get_bomb_nums()
-	return self._bomb_nums
-end
-
-function GameLogic:set_bomb_nums(nums)
-	self._bomb_nums = nums
-end
-
-function GameLogic:reset_touzi_nums()
-	self._touzi_nums = 	{
-		1,2,3,4,5,6,7,8,
-		9,10,11,12,13,14,15,16,
-		17,18,19,20,21,22,23,24,
-		25,26,27,28,29,30,31,32
-	}
-	self._bomb_nums = {1,2}
+function GameLogic:get_game_step_id()
+	return self._game_step_id
 end
 
 return GameLogic

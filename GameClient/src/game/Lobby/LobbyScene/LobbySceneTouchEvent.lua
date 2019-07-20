@@ -24,7 +24,7 @@ function LobbyScene:onTouchCreateRoomBtn(send,eventType)
         playerNum='4';maxQuanShu='2';
     ]]
     local playerNum = 2
-    local playCount = 3
+    local playCount = 10
     local isAAPay = 1
     local baseScore = 1
     local gamerule = "playerNum='" .. playerNum .. "';"

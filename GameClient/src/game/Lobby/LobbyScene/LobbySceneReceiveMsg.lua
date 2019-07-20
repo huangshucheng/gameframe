@@ -73,7 +73,7 @@ function LobbyScene:onEventLoginLogic(event)
         -- NetWorkUDP:getInstance():start() --UDP test
     else
         Lobby.showPopLayer('TipsLayer',{"登录逻辑服failed!"})
-        LogicServiceProxy:getInstance():sendLoginLogicServer()        
+        LogicServiceProxy:getInstance():sendLoginLogicServer()  
     end
 end
 

@@ -2,7 +2,7 @@ local Room = class('Room')
 local Player 			= require("logic_server/PlayerCell/Player")
 local ToolUtils 		= require("utils/ToolUtils")
 
-function Room:parse_game_rule()
+function Room:on_parse_game_rule()
 	local player_num = ToolUtils.getLuaStrValue(self:get_room_info() , 'playerNum')
 	if player_num ~= '' then
 		self._max_player = tonumber(player_num) or 4
@@ -16,6 +16,17 @@ function Room:parse_game_rule()
 	if self._game_logic.parse_game_rule then
 		self._game_logic:parse_game_rule()
 	end
+end
+
+function Room:on_logic_game_result()
+	self:set_all_player_state(Player.STATE.psWait)
+	self:send_user_state()
+end
+
+function Room:on_logic_game_total_result()
+	self:set_is_start_game(false)
+	self:kick_all_players_in_room()
+	self:deleteRoom()
 end
 
 function Room:check_game_start()
@@ -42,17 +53,6 @@ function Room:check_game_start()
 	else
 		print('testGameStart not start game, ready count: '.. tostring(ready_player_count))
 	end
-end
-
-function Room:on_logic_game_result()
-	self:set_all_player_state(Player.STATE.psWait)
-	self:send_user_state()
-end
-
-function Room:on_logic_game_total_result()
-	self:set_is_start_game(false)
-	self:kick_all_players_in_room()
-	self:deleteRoom()
 end
 
 return Room

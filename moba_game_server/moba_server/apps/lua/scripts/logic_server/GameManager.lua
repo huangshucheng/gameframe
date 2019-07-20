@@ -5,8 +5,6 @@ local cmd_name_map 	= require("cmd_name_map")
 
 local PlayerManager 	= require("logic_server/PlayerManager")
 local RoomManager 		= require("logic_server/RoomManager")
-local Player 			= require("logic_server/PlayerCell/Player")
-local NetWork 			= require("logic_server/NetWork")
 
 local GameManager 	= class("GameManager")
 
@@ -15,11 +13,6 @@ function GameManager:getInstance()
 		GameManager._instance = GameManager.new()
 	end
 	return GameManager._instance
-end
-
-function GameManager:on_timer()
-	--local  c1 = collectgarbage("count")
-	--print('GameManager>> on_timer  memory: ' .. tostring(c1))
 end
 
 function GameManager:receive_msg(session, msg)

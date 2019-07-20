@@ -74,7 +74,6 @@ end
 function GameScene:onEventDessolve(event)
     local data = event._usedata
     if data.status == Respones.OK then  --只有房主才能解散房间
-        RoomData:getInstance():reset()
         self:popScene()
     else
         Game.showPopLayer('TipsLayer',{"解散房间失败"})
@@ -97,18 +96,17 @@ function GameScene:onEventExitRoom(event)
         end
         self:showAllExistUserInfo()
         if tonumber(brandid) == tonumber(UserInfo.getBrandId()) then
-            -- self:popScene()
         end
     else
         Game.showPopLayer('TipsLayer',{"退出房间失败!"})
     end
+    print('onEventExitRoom>> player count: ' .. RoomData:getInstance():getRoomPlayerCount())
 end
 
 function GameScene:onEventJoinRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        
     end
 end
 
@@ -116,8 +114,9 @@ function GameScene:onEventBackRoom(event)
     local data = event._usedata
     local status = data.status
     if status == Respones.OK then
-        RoomData:getInstance():reset()
+        LogicServiceProxy:getInstance():sendReconnect()
     end
+    print('onEventBackRoom>> player count: ' .. RoomData:getInstance():getRoomPlayerCount())
 end
 
 function GameScene:onEventUserArrivedInfos(event)
@@ -133,7 +132,11 @@ function GameScene:onEventUserArrivedInfos(event)
     self:showHostImag()
     self:showReadyBtn()
     self:showRoomInfo()
-    print('hcc>>onEventUserArrivedInfos')
+    for i = 1 , 4 do
+        local player = RoomData:getInstance():getPlayerBySeatId(i)
+        print('onEventUserArrivedInfos>> player id ' .. i .. ' ,is>> ' .. tostring(player))
+    end
+    print('onEventUserArrivedInfos>> player count: ' .. RoomData:getInstance():getRoomPlayerCount())
 end
 
 function GameScene:onEventUserOffline(event)
@@ -143,6 +146,7 @@ function GameScene:onEventUserOffline(event)
         RoomData:getInstance():updatePlayerByUserInfo(user_info)
     end
     self:showAllExistUserInfo()
+    print('onEventUserOffline>> player count: ' .. RoomData:getInstance():getRoomPlayerCount())
 end
 
 function GameScene:onEventLoginLogic(event)
@@ -150,7 +154,7 @@ function GameScene:onEventLoginLogic(event)
     local data = event._usedata
     if data.status == Respones.OK then
         Game.showPopLayer('TipsLayer',{"登录逻辑服成功!"})
-        LogicServiceProxy:getInstance():sendReconnect()
+        LogicServiceProxy:getInstance():sendBackRoomReq()
         print('hcc>>GameScene:onEventLoginLogic')
     else
         Game.showPopLayer('TipsLayer',{"登录逻辑服failed!"})

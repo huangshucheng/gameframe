@@ -33,7 +33,9 @@ function GameLogic:send_game_total_result()
 end
 
 function GameLogic:send_touzi_num()
-	local msg = {touzi_nums = self:get_touzi_nums() , bomb_nums = self:get_bomb_nums()}
+	local tmp_touzi_nums = self:get_logic_data():get_touzi_nums()
+	local tmp_bomb_nums =  self:get_logic_data():get_bomb_nums()
+	local msg = {touzi_nums = tmp_touzi_nums , bomb_nums = tmp_bomb_nums}
 	self:brodcast_in_room(Cmd.eTouZiNumRes, msg)
 end
 

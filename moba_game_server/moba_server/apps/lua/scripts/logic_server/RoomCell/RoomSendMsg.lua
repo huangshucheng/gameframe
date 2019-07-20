@@ -1,6 +1,5 @@
-local Room = class('Room')
-
-local Cmd 				= require("Cmd")
+local Room 	= class('Room')
+local Cmd 	= require("Cmd")
 
 function Room:send_game_start()
 	self:brodcast_in_room(Cmd.eGameStart,{status = 1})

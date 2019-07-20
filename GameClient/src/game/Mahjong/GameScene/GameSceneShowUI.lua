@@ -135,9 +135,11 @@ function GameScene:refreshTouziNum(touzi_nums,bomb_nums)
     for index = 1 , #touzi_nums do
         local btnBomb = Lobby.UIFunction.seekWidgetByName(self:getGameTouziNode(),'KW_BOMB_' .. index)
         Lobby.UIFunction.setVisible(self:getGameTouziNode(),'KW_BOMB_' .. index,touzi_nums[index] ~= 0)
+        Lobby.UIFunction.setColor(self:getGameTouziNode(),'KW_BOMB_' .. index,cc.c3b(255,255,255)) 
     end
     for index = 1 , #bomb_nums do
-       Lobby.UIFunction.setString(self:getGameTouziNode(),'KW_BOMB_' .. bomb_nums[index],'bomb' .. index) 
+       -- Lobby.UIFunction.setString(self:getGameTouziNode(),'KW_BOMB_' .. bomb_nums[index],'bomb' .. index) 
+       Lobby.UIFunction.setColor(self:getGameTouziNode(),'KW_BOMB_' .. bomb_nums[index],cc.c3b(255,0,0)) 
     end
 end
 

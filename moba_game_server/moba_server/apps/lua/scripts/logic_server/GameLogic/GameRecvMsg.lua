@@ -6,7 +6,7 @@ local Respones 				= require("Respones")
 
 --命令类型，数据，发送过来的玩家
 function GameLogic:on_game_msg_cmd(ctype,body,player)
-    dump(body,'on_game_msg_cmd ctype>> ' .. tostring(cmd_name_map[ctype]))
+   -- dump(body,'on_game_msg_cmd ctype>> ' .. tostring(cmd_name_map[ctype]))
 -------------------------------------------------------
 -- base msg
 -------------------------------------------------------
@@ -27,8 +27,7 @@ end
 function GameLogic:on_msg_check_link_game(body,player)
 	if not player then return end
 	local room_id = player:get_room_id()
-	print('hcc>> on_msg_check_link_game, room_id: '.. room_id)
-	print('on_msg_check_link_game ,brandid: ' .. player:get_brand_id() .. ' ,room_id: ' .. room_id)
+	-- print('on_msg_check_link_game ,brandid: ' .. player:get_brand_id() .. ' ,room_id: ' .. room_id)
 	-- send other player info and selfinfo to selfplayer
 	local users_info = {}
 	local players = self:get_room_players()
@@ -40,6 +39,10 @@ function GameLogic:on_msg_check_link_game(body,player)
 	player:send_msg(Cmd.eRoomIdRes,{room_id = self:get_room_id()})
 	player:send_msg(Cmd.ePlayCountRes,{play_count = self:get_play_count(),total_play_count = self:get_total_play_count()})
 	player:send_msg(Cmd.eUserArrivedInfos,{user_info = users_info})
+	--------------------------------
+	---具体重连逻辑
+	--------------------------------
+	self:on_user_reconnect(player)
 end
 
 -- user reconnect ,send room info ,user info game data
@@ -56,6 +59,10 @@ function GameLogic:on_msg_reconnect(body,player)
 	player:send_msg(Cmd.ePlayCountRes,{play_count = self:get_play_count(),total_play_count = self:get_total_play_count()})
 	self:send_user_state()
 	self:send_user_arrived_infos()
+	--------------------------------
+	---具体重连逻辑
+	--------------------------------
+	self:on_user_reconnect(player)
 end
 
 function GameLogic:on_msg_user_ready(body,player)
@@ -66,11 +73,6 @@ function GameLogic:on_msg_user_ready(body,player)
 	end
 	local ready_state = body.ready_state
 
-	--TODO 判断服务玩家状态，一样就返回，不然玩家可以一直点击准备
-	-- if player:get_state() == ready_state then
-	-- 	print('on_user_ready same state: ' .. ready_state)
-	-- 	return
-	-- end
 	print('on_user_ready, brandid: ' .. player:get_brand_id() .. ' ,ready_state: ' .. ready_state)
 
 	local msg_body ={
@@ -83,6 +85,8 @@ function GameLogic:on_msg_user_ready(body,player)
 	if ready_state == 1 then -- user send ready
 		if player:get_state() >= Player.STATE.psReady then
 			msg_body.status = Respones.PlayerIsAlreadyReady
+			print('use already ready')
+			return
 		else
 			player:set_state(Player.STATE.psReady)
 		end

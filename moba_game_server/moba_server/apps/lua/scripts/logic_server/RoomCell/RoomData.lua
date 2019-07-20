@@ -6,7 +6,7 @@ function Room:init_data()
 	self._players 		= {}
 	self._room_info 	= ''
 	self._max_player 	= 4
-	self._is_start_game = false
+	self._is_start_game = false 	--一整盘游戏是否开始,大结算才会重置
 	self._game_logic 	= nil
 
 	self._play_count 	= 0

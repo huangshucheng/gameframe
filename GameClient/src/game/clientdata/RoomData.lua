@@ -109,4 +109,12 @@ function RoomData:getTotalPlayCount()
 	return self._total_play_count
 end
 
+function RoomData:getRoomPlayerCount()
+	local num = 0
+	for _,v in pairs(self._players) do
+		num = num + 1
+	end
+	return num
+end
+
 return RoomData
