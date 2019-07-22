@@ -19,7 +19,10 @@ end
 local game_config = require("game_config")
 -- 开启网关端口监听
 Netbus.tcp_listen(game_config.gateway_tcp_port)
-print("[gateway Server]>>>>> Start at ".. game_config.gateway_tcp_port)
+Netbus.ws_listen(game_config.gateway_ws_port)
+
+print("[gateway Server]>>>>> tcp_socket Start at ".. game_config.gateway_tcp_port)
+print("[gateway Server]>>>>> ws_socket Start at ".. game_config.gateway_ws_port)
 
 local servers = game_config.servers
 local gw_service = require("gateway/gw_service")
