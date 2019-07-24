@@ -25,6 +25,10 @@ extern "C" {
 struct timer_repeat {
 	int handler;
 	int repeat_count;
+	timer_repeat(){
+		handler = 0;
+		repeat_count = 0;
+	}
 };
 
 static void

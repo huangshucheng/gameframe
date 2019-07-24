@@ -21,6 +21,10 @@ using namespace std;
 struct connect_cb {
 	void(*on_connected)(int err, session* s, void* udata);
 	void* udata;
+	connect_cb(){
+		on_connected	= nullptr;
+		udata			= nullptr;
+	}
 };
 
 extern "C" {
@@ -128,6 +132,10 @@ extern "C" {
 	struct udp_recv_buf {
 		char* recv_buf;
 		size_t max_recv_len;
+		udp_recv_buf(){
+			recv_buf = nullptr;
+			max_recv_len = 0;
+		}
 	};
 
 	static void

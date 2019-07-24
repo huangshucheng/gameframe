@@ -7,7 +7,8 @@ local proto_type = {
     PROTO_JSON = 0,
     PROTO_BUF = 1,
 }
-ProtoMan.init(proto_type.PROTO_BUF)
+
+ProtoMan.init(proto_type.PROTO_BUF) --test websocket debug
 -- 如果是protobuf协议，还要注册一下映射表
 if ProtoMan.proto_type() == proto_type.PROTO_BUF then 
   local cmd_name_map = require("cmd_name_map")

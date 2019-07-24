@@ -155,8 +155,9 @@ local function send_to_server(client_session, raw_cmd)
 			Session.set_utag(client_session, utag)
 		end
 		client_sessions_ukey[utag] = client_session
-		-- print('send_to_server>> is login request')
-	elseif ctype == Cmd.eUserRegistReq then
+		print('send_to_server>> is login request')
+		-- Session.send_raw_cmd(client_session, raw_cmd) --test websocket debug
+  	elseif ctype == Cmd.eUserRegistReq then
 		utag = Session.get_utag(client_session)
 		if utag == 0 then 
 			utag = g_ukey

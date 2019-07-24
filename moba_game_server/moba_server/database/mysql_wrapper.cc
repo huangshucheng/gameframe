@@ -33,6 +33,17 @@ struct connect_req {
 	void* context;
 
 	void* udata;
+	connect_req(){
+		ip = nullptr;
+		port = 0;
+		db_name = nullptr;
+		uname = nullptr;
+		upwd = nullptr;
+		open_cb = nullptr;
+		err = nullptr;
+		context = nullptr;
+		udata = nullptr;
+	}
 };
 
 struct mysql_context {
@@ -40,6 +51,10 @@ struct mysql_context {
 	uv_mutex_t lock; 
 
 	int is_closed;
+	mysql_context(){
+		pConn = nullptr;
+		is_closed = 0;
+	}
 };
 
 static char* 

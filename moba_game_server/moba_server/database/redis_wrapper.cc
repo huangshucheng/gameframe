@@ -41,6 +41,13 @@ struct connect_req {
 	char* err;
 	void* context;
 	void* udata;
+	connect_req(){
+		ip = nullptr;
+		open_cb = nullptr;
+		err = nullptr;
+		context = nullptr;
+		udata = nullptr;
+	}
 };
 
 struct redis_context {
@@ -48,6 +55,10 @@ struct redis_context {
 	uv_mutex_t lock; 
 
 	int is_closed;
+	redis_context(){
+		pConn = nullptr;
+		is_closed = false;
+	}
 };
 
 static void
@@ -146,6 +157,14 @@ struct query_req {
 	char* err;
 	redisReply* result;
 	void* udata;
+	query_req(){
+		context = nullptr;
+		cmd = nullptr;
+		query_cb = nullptr;
+		err = nullptr;
+		result = nullptr;
+		udata = nullptr;
+	}
 };
 
 static void

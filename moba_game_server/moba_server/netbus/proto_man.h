@@ -16,15 +16,27 @@ struct cmd_msg{
 	int ctype; 
 	unsigned int utag;
 	void* body; // JSON str ªÚ’ﬂ «message;
+	cmd_msg(){
+		stype	= 0;
+		ctype	= 0;
+		utag	= 0;
+		body	= nullptr;
+	}
 };
 
 struct raw_cmd {
 	int stype;
 	int ctype;
 	unsigned int utag;
-
 	unsigned char* raw_data;
 	int raw_len;
+	raw_cmd(){
+		stype		= 0;
+		ctype		= 0;
+		utag		= 0;
+		raw_data	= nullptr;
+		raw_len		= 0;
+	}
 };
 
 class proto_man {
