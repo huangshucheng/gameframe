@@ -1,14 +1,14 @@
 syntax = "proto2"; 
-//注意字段不能使用下划线
+
 enum Stype {
-	InvalidStype = 0;
+	INVALIDI_STYPE = 0;
 	Auth = 1;
 	System = 2;
 	Logic = 3;
 }
 
 enum Cmd {
-	INVALIDCMD = 0;
+	INVALID_CMD = 0;
 	
 	eGuestLoginReq = 1;
 	eGuestLoginRes = 2;
@@ -105,7 +105,7 @@ enum Cmd {
 }
 
 message GuestLoginReq {
-	required string guestKey = 1;
+	required string guest_key = 1;
 }
 
 message UnameLoginReq {
@@ -129,14 +129,6 @@ message GuestLoginRes {
 	optional UserCenterInfo uinfo = 2; 
 }
 
-message Relogin {
-	
-}
-
-message UserLostConn {
-	
-}
-
 message UnameLoginRes {
 	required sint32 status = 1;
 	optional UserCenterInfo uinfo = 2; 
@@ -154,15 +146,11 @@ message EditProfileRes {
 
 message AccountUpgradeReq {
 	required string uname = 1;
-	required string upwdMd5 = 2;
+	required string upwd_md5 = 2;
 }
 
 message AccountUpgradeRes {
 	required sint32 status = 1;
-}
-
-message LoginOutReq {
-	
 }
 
 message LoginOutRes {
@@ -179,22 +167,14 @@ message UserGameInfo {
 	required sint32 udata2 = 7;
 	required sint32 udata3 = 8;
 
-	required sint32 bonuesStatus = 9;
+	required sint32 bonues_status = 9;
 	required sint32 bonues = 10;
 	required sint32 days = 11;
-}
-
-message GetUgameInfoReq {
-	
 }
 
 message GetUgameInfoRes {
 	required sint32 status = 1;
 	optional UserGameInfo uinfo = 2; 
-}
-
-message RecvLoginBonuesReq {
-	
 }
 
 message RecvLoginBonuesRes {
@@ -211,17 +191,17 @@ message WorldChipRankInfo {
 
 message GetWorldRankUchipRes {
 	required sint32 status = 1; 
-	repeated WorldChipRankInfo rankInfo = 2;
+	repeated WorldChipRankInfo rank_info = 2;
 }
 
 message GetSysMsgReq {
-	required sint32 versionNum = 1;
+	required sint32 ver_num = 1;
 }
 
 message GetSysMsgRes {
 	required sint32 status = 1;
-	required sint32 versionNum = 2;
-	repeated string systemMsgs = 3;
+	required sint32 ver_num = 2;
+	repeated string sys_msgs = 3;
 }
 
 message LoginLogicRes {
@@ -255,11 +235,7 @@ message UserArrived {
 	optional string brandid = 9;
 	optional string numberid = 10;
 	optional string areaid = 11;
-	optional sint32 userState = 12;
-}
-
-message ExitMatchReq {
-	
+	optional sint32 user_state = 12;
 }
 
 message ExitMatchRes {
@@ -272,7 +248,7 @@ message UserExitMatch {
 
 message UserRegistReq {
 	required string uname = 1;
-	required string upwdMd5 = 2;	
+	required string upwd_md5 = 2;	
 }
 
 message UserRegistRes {
@@ -280,7 +256,7 @@ message UserRegistRes {
 }
 
 message CreateRoomReq {
-	required string roomInfo = 1;
+	required string room_info = 1;
 }
 
 message CreateRoomRes {
@@ -288,7 +264,7 @@ message CreateRoomRes {
 }
 
 message JoinRoomReq {
-	required string roomid = 1;
+	required string room_id = 1;
 }
 
 message JoinRoomRes {
@@ -296,32 +272,20 @@ message JoinRoomRes {
 }
 
 message ExitRoomReq {
-	
+	required bool is_force_exit = 1;
 }
 
 message ExitRoomRes {
 	required sint32 status = 1;
-	optional UserArrived userInfo = 2;
-}
-
-message DessolveReq {
-	
+	optional UserArrived user_info = 2;
 }
 
 message DessolveRes {
 	required sint32 status = 1;
 }
 
-message GetCreateStatusReq {
-	
-}
-
 message GetCreateStatusRes {
 	required sint32 status = 1;
-}
-
-message BackRoomReq {
-	
 }
 
 message BackRoomRes {
@@ -329,19 +293,11 @@ message BackRoomRes {
 }
 
 message UserOffLine {
-	required UserArrived userInfo = 1;
-}
-
-message UserReconnectedReq {
-	
+	required UserArrived user_info = 1;
 }
 
 message UserReconnectedRes {	
 	required sint32 status = 1;
-}
-
-message HeartBeatReq {
-
 }
 
 message HeartBeatRes {
@@ -349,7 +305,7 @@ message HeartBeatRes {
 }
 
 message UserReadyReq {
-	required sint32 readyState = 1;
+	required sint32 ready_state = 1;
 }
 
 message UserReadyRes {
@@ -357,7 +313,7 @@ message UserReadyRes {
 	optional sint32 seatid  = 2;
 	optional string brandid = 3;
 	optional string numberid = 4;
-	optional sint32 userState = 5;
+	optional sint32 user_state = 5;
 }
 
 message GameStart {
@@ -369,13 +325,13 @@ message UdpTest {
 }
 
 message LoginLogicReq {
-	required string udpIp = 1;
-	required sint32 udpPort = 2;
+	required string udp_ip = 1;
+	required sint32 udp_port = 2;
 }
 
 message OptionEvent {
 	required sint32 seatid = 1;
-	required sint32 optType = 2;
+	required sint32 opt_type = 2;
 	optional sint32 x = 3;
 	optional sint32 y = 4;  	
 }
@@ -387,7 +343,7 @@ message FrameOpts {
 
 message LogicFrame {
 	required sint32 frameid = 1;
-	repeated FrameOpts unsyncFrames = 2;
+	repeated FrameOpts unsync_frames = 2;
 }
 
 message NextFrameOpts {
@@ -397,38 +353,34 @@ message NextFrameOpts {
 	repeated OptionEvent opts = 4;
 }
 
-message CheckLinkGameReq {
-	
-}
-
 message CheckLinkGameRes {
 	required sint32 status = 1;
 }
 
 message RoomInfoRes {
-	required string roomInfo = 1;
+	required string room_info = 1;
 }
 
 message RoomIdRes {
-	required string roomId = 1;
+	required string room_id = 1;
 }
 
 message PlayCountRes {
-	required string playCount = 1;
-	required string totalPlayCount = 2;
+	required string play_count = 1;
+	required string total_play_count = 2;
 }
 
 message UserArrivedInfos {
-	repeated UserArrived userInfo = 1;
+	repeated UserArrived user_info = 1;
 }
 
 message UserState {
 	required sint32 seatid = 1;
-	required string userState = 2;
+	required string user_state = 2;
 }
 
 message AllUserState {
-	repeated UserState userState = 1;	
+	repeated UserState users_state = 1;	
 }
 
 message GameResult {
@@ -441,12 +393,12 @@ message GameTotalResult {
 
 message ClickTouZiNumReq {
 	required sint32 seatid = 1;
-	required sint32 touziNum = 2;	
+	required sint32 touzi_num = 2;	
 }
 
 message TouZiNumRes {
-	repeated sint32 touziNums = 1;
-	repeated sint32 bombNums = 2;
+	repeated sint32 touzi_nums = 1;
+	repeated sint32 bomb_nums = 2;
 }
 
 message ClickTouZiBombRes {

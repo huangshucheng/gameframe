@@ -180,6 +180,7 @@ local function send_to_server(client_session, raw_cmd)
 		Session.send_msg(server_session, login_logic_cmd)
 		return
 	elseif ctype == Cmd.eHeartBeatReq then
+		print("Cmd.eHeartBeatReq")
 		local uid = Session.get_uid(client_session)
 		if uid ~= 0 then
 			Session.set_last_recv_time(client_session, os.time())
@@ -247,7 +248,7 @@ local function on_gw_session_disconnect(s, stype)
 end
 -- heart beat
 local function send_heart_beat()
-	-- print('sessionSize: ' .. table.nums(client_sessions_uid))
+	print('sessionSize: ' .. table.nums(client_sessions_uid))
 	for _ , session in pairs(client_sessions_uid) do
 		local uid = Session.get_uid(session)
 		local msg = {
@@ -263,7 +264,7 @@ local function send_heart_beat()
 			time_recv = time_send
 		end
 		local sub = time_send - time_recv
-		-- print('uid: '.. uid .. '  ,sendTime: '.. time_send .. ' recvTime: '.. time_recv .. '  sub: ' .. sub)
+		print('uid: '.. uid .. '  ,sendTime: '.. time_send .. ' recvTime: '.. time_recv .. '  sub: ' .. sub)
 		if sub >= DISCONNECT_LIMIT_TIME then
 			print('uid: '.. uid .. ' lost connect -------------')
 			Session.close(session)
