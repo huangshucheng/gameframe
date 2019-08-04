@@ -3,8 +3,8 @@ local Respones 	= require("Respones")
 local Stype 	= require("Stype")
 local Cmd 		= require("Cmd")
 
-local function _do_create_account(s, utag, uname, upwd_md5)
-	mysql_center.do_create_account(uname, upwd_md5, function (err, ret)
+local function _do_create_account(s, utag, uname, upwdmd5)
+	mysql_center.do_create_account(uname, upwdmd5, function (err, ret)
 		if err then
 			local msg = {Stype.Auth, Cmd.eUserRegistRes, utag, {
 				status = Respones.SystemErr,
@@ -24,15 +24,16 @@ end
 
 local function regist(s, req)
 	local utag = req[3]
-	local user_regist_req = req[4]		--{uname='' , upwd_md5 = ''}
-	-- print("hcc >> regist: uname: " .. user_regist_req.uname .. ' upwd_md5: ' .. user_regist_req.upwd_md5)
+	local user_regist_req = req[4]		--{uname='' , upwdmd5 = ''}
+	-- print("hcc >> regist: uname: " .. user_regist_req.uname .. ' upwdmd5: ' .. user_regist_req.upwdmd5)
+	dump(user_regist_req,"user_regist_req")
 	local uname 	= user_regist_req.uname
-	local upwd_md5 	= user_regist_req.upwd_md5
+	local upwdmd5 	= user_regist_req.upwdmd5
 
 	-- 检查参数
 	-- if string.len(uname_login_req.uname) <= 0 or string.len(uname_login_req.upwd) ~= 32 then 	-- TODO md5 check 
 	local nameLen = string.len(uname)
-	local upwd_md5Len = string.len(upwd_md5)
+	local upwd_md5Len = string.len(upwdmd5)
 	if nameLen < 6 or nameLen > 32 or upwd_md5Len < 6 or upwd_md5Len > 32 then 	-- TODO md5 check 
 	   	local msg = {Stype.Auth, Cmd.eUserRegistRes, utag, {
 			status = Respones.InvalidParams,
@@ -59,7 +60,7 @@ local function regist(s, req)
 			Session.send_msg(s, msg)
 			return 
 		end
-		 _do_create_account(s, utag, uname, upwd_md5)
+		 _do_create_account(s, utag, uname, upwdmd5)
 	end)
 end
 

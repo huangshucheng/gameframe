@@ -5,15 +5,16 @@ local Stype 	= require("Stype")
 local Cmd 		= require("Cmd")
 
 local function login(s, req)
-	local g_key = req[4].guest_key
 	local utag = req[3];
-	print('authserver>> guest login, utag: ' .. tostring(utag))
+	local g_key = req[4].guestkey
+	dump(req,"guestLogin")
+	print('authserver>> guest login, utag: ' .. tostring(utag) .. " ,g_key: " .. g_key)
 	-- 判断gkey的合法性，是否为字符串，并且长度为32
 	if type(g_key) ~= "string" or string.len(g_key) ~= 32 then 
 		local msg = {Stype.Auth, Cmd.eGuestLoginRes, utag, {
 			status = Respones.InvalidParams,
 		}}
-
+		print('guest login 111')
 		Session.send_msg(s, msg)
 		return
 	end
@@ -25,6 +26,7 @@ local function login(s, req)
 			}}
 
 			Session.send_msg(s, msg)
+			print('guest login 222')
 			return
 		end
 
@@ -34,7 +36,7 @@ local function login(s, req)
 					local msg = {Stype.Auth, Cmd.eGuestLoginRes, utag, {
 						status = Respones.SystemErr,
 					}}
-
+					print('guest login 333')
 					Session.send_msg(s, msg)
 					return
 				end
@@ -49,7 +51,7 @@ local function login(s, req)
 			local msg = {Stype.Auth, Cmd.eGuestLoginRes, utag, {
 				status = Respones.UserIsFreeze,
 			}}
-
+			print('guest login 444')
 			Session.send_msg(s, msg)
 			return
 		end
@@ -58,7 +60,7 @@ local function login(s, req)
 			local msg = {Stype.Auth, Cmd.eGuestLoginRes, utag, {
 				status = Respones.UserIsNotGuest,
 			}}
-
+			print('guest login 555')
 			Session.send_msg(s, msg)
 			return
 		end
@@ -68,6 +70,7 @@ local function login(s, req)
 			status = Respones.OK,
 			uinfo = uinfo,
 		}}
+		print('guest login 666')
 		Session.send_msg(s, msg)
 	end)
 end

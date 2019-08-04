@@ -4,8 +4,8 @@ local Respones 	= require("Respones")
 local Stype 	= require("Stype")
 local Cmd 		= require("Cmd")
 
-local function _do_account_upgrade(s, req, uid, uname, upwd_md5)
-	mysql_center.do_guest_account_upgrade(uid, uname, upwd_md5, function (err, ret)
+local function _do_account_upgrade(s, req, uid, uname, upwdmd5)
+	mysql_center.do_guest_account_upgrade(uid, uname, upwdmd5, function (err, ret)
 		if err then
 			local msg = {Stype.Auth, Cmd.eAccountUpgradeRes, uid, {
 				status = Respones.SystemErr,
@@ -23,7 +23,7 @@ local function _do_account_upgrade(s, req, uid, uname, upwd_md5)
 	end)
 end
 
-local function _check_is_guest(s, req, uid, uname, upwd_md5)
+local function _check_is_guest(s, req, uid, uname, upwdmd5)
 	mysql_center.get_uinfo_by_uid(uid, function (err, uinfo)
 		if err then
 			local msg = {Stype.Auth, Cmd.eAccountUpgradeRes, uid, {
@@ -43,7 +43,7 @@ local function _check_is_guest(s, req, uid, uname, upwd_md5)
 			return
 		end
 
-		_do_account_upgrade(s, req, uid, uname, upwd_md5)
+		_do_account_upgrade(s, req, uid, uname, upwdmd5)
 	end)
 end
 
@@ -51,8 +51,8 @@ local function do_upgrade(s, req)
 	local uid = req[3]
 	local account_upgrade_req = req[4]
 	local uname 	= account_upgrade_req.uname
-	local upwd_md5	= account_upgrade_req.upwd_md5
-	-- if string.len(uname) <= 0 or string.len(upwd_md5) ~= 32 then  --TODO md5 check
+	local upwdmd5	= account_upgrade_req.upwdmd5
+	-- if string.len(uname) <= 0 or string.len(upwdmd5) ~= 32 then  --TODO md5 check
 	if string.len(uname) <= 0 then
 		local msg = {Stype.Auth, Cmd.eAccountUpgradeRes, uid, {
 			status = Respones.InvalidParams,
@@ -77,7 +77,7 @@ local function do_upgrade(s, req)
 			Session.send_msg(s, msg)
 			return 
 		end
-		_check_is_guest(s, req, uid, uname, upwd_md5)
+		_check_is_guest(s, req, uid, uname, upwdmd5)
 	end)
 end
 

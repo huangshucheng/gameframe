@@ -1,6 +1,7 @@
 local Stype = require("Stype")
 local Cmd 	= require("Cmd")
 local guest = require("auth_server/guest")
+require("functions")
 
 local edit_profile 		= require("auth_server/edit_profile")
 local account_upgrade 	= require("auth_server/account_upgrade");

@@ -51,11 +51,9 @@ end
 function PlayerManager:on_login_logic_server(session, req)
 	local uid = req[3]
 	local stype = req[1]
-	local body = req[4]
 	local p = logic_server_players[uid]
 	if p then
 		p:set_session(session)
-		p:set_udp_addr(body.udp_ip, body.udp_port)
 		NetWork.send_status(session, Cmd.eLoginLogicRes, uid, Respones.OK)
 		print('on_login_logic_server exits,>> uid: ' .. uid .. ' ,brandid: ' .. p:get_brand_id() .. ' ,user size: '..  online_player_num)
 		return
@@ -70,7 +68,6 @@ function PlayerManager:on_login_logic_server(session, req)
 		NetWork.send_status(session, Cmd.eLoginLogicRes, uid, status)
 		print('on_login_logic_server >> uid: ' .. uid .. ' ,brandid: ' .. p:get_brand_id() .. ' ,user size: '..  online_player_num)
 	end)
-	p:set_udp_addr(body.udp_ip, body.udp_port)
 end
 
 -- 玩家离开了逻辑服务器

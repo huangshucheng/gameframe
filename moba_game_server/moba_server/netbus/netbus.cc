@@ -357,8 +357,11 @@ netbus::ws_listen(int port) {
 	uv_tcp_init(uv_default_loop(), listen);
 
 	struct sockaddr_in addr;
+	//struct sockaddr_in6 addr_in6;
 	uv_ip4_addr("0.0.0.0", port, &addr);
+	//uv_ip6_addr("0.0.0.0", port, &addr_in6);
 
+	//int ret = uv_tcp_bind(listen, (const struct sockaddr*) &addr_in6, 0);
 	int ret = uv_tcp_bind(listen, (const struct sockaddr*) &addr, 0);
 	if (ret != 0) {
 		free(listen);
