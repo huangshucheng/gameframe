@@ -73,8 +73,7 @@ local function get_ugame_info(s, req)
 					udata1  = ugame_info.udata1,
 					udata2  = ugame_info.udata2,
 					udata3 = ugame_info.udata3,
-
-					bonues_status = bonues_info.status,
+					bonuesstatus = bonues_info.status,
 					bonues = bonues_info.bonues,
 					days = bonues_info.days,
 				}

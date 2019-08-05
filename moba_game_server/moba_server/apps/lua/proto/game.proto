@@ -178,7 +178,6 @@ message UserGameInfo {
 	required sint32 udata1 = 6;
 	required sint32 udata2 = 7;
 	required sint32 udata3 = 8;
-
 	required sint32 bonuesstatus = 9;
 	required sint32 bonues = 10;
 	required sint32 days = 11;
