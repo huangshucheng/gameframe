@@ -174,14 +174,14 @@ message LoginOutRes {
 }
 
 message UserGameInfo {
-	required string uchip = 1;
-	required string uexp = 2;
+	required sint32 uchip = 1;
+	required sint32 uexp = 2;
 	required sint32 uvip = 3;
 	required sint32 uchip2 = 4;
 	required sint32 uchip3 = 5;
 	required sint32 udata1 = 6;
-	required bool udata2 = 7;
-	required bool udata3 = 8;
+	required sint32 udata2 = 7;
+	required sint32 udata3 = 8;
 }
 
 message GetUgameInfoReq {

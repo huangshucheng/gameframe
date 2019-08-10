@@ -2690,10 +2690,10 @@ void AddDescriptorsImpl() {
       "\002(\t\022\017\n\007upwdMd5\030\002 \002(\t\"#\n\021AccountUpgradeRe"
       "s\022\016\n\006status\030\001 \002(\021\"\r\n\013LoginOutReq\"\035\n\013Logi"
       "nOutRes\022\016\n\006status\030\001 \002(\021\"\211\001\n\014UserGameInfo"
-      "\022\r\n\005uchip\030\001 \002(\t\022\014\n\004uexp\030\002 \002(\t\022\014\n\004uvip\030\003 "
+      "\022\r\n\005uchip\030\001 \002(\021\022\014\n\004uexp\030\002 \002(\021\022\014\n\004uvip\030\003 "
       "\002(\021\022\016\n\006uchip2\030\004 \002(\021\022\016\n\006uchip3\030\005 \002(\021\022\016\n\006u"
-      "data1\030\006 \002(\021\022\016\n\006udata2\030\007 \002(\010\022\016\n\006udata3\030\010 "
-      "\002(\010\"\021\n\017GetUgameInfoReq\"\?\n\017GetUgameInfoRe"
+      "data1\030\006 \002(\021\022\016\n\006udata2\030\007 \002(\021\022\016\n\006udata3\030\010 "
+      "\002(\021\"\021\n\017GetUgameInfoReq\"\?\n\017GetUgameInfoRe"
       "s\022\016\n\006status\030\001 \002(\021\022\034\n\005uinfo\030\002 \001(\0132\r.UserG"
       "ameInfo\"\024\n\022RecvLoginBonuesReq\"$\n\022RecvLog"
       "inBonuesRes\022\016\n\006status\030\001 \002(\021\"\\\n\021WorldChip"
@@ -6851,27 +6851,17 @@ UserGameInfo::UserGameInfo(const UserGameInfo& from)
       _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  uchip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_uchip()) {
-    uchip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uchip_);
-  }
-  uexp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_uexp()) {
-    uexp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uexp_);
-  }
-  ::memcpy(&uvip_, &from.uvip_,
+  ::memcpy(&uchip_, &from.uchip_,
     static_cast<size_t>(reinterpret_cast<char*>(&udata3_) -
-    reinterpret_cast<char*>(&uvip_)) + sizeof(udata3_));
+    reinterpret_cast<char*>(&uchip_)) + sizeof(udata3_));
   // @@protoc_insertion_point(copy_constructor:UserGameInfo)
 }
 
 void UserGameInfo::SharedCtor() {
   _cached_size_ = 0;
-  uchip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  uexp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&uvip_, 0, static_cast<size_t>(
+  ::memset(&uchip_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&udata3_) -
-      reinterpret_cast<char*>(&uvip_)) + sizeof(udata3_));
+      reinterpret_cast<char*>(&uchip_)) + sizeof(udata3_));
 }
 
 UserGameInfo::~UserGameInfo() {
@@ -6880,8 +6870,6 @@ UserGameInfo::~UserGameInfo() {
 }
 
 void UserGameInfo::SharedDtor() {
-  uchip_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  uexp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void UserGameInfo::SetCachedSize(int size) const {
@@ -6914,20 +6902,10 @@ void UserGameInfo::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 3u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!uchip_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*uchip_.UnsafeRawStringPointer())->clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!uexp_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*uexp_.UnsafeRawStringPointer())->clear();
-    }
-  }
-  if (cached_has_bits & 252u) {
-    ::memset(&uvip_, 0, static_cast<size_t>(
+  if (cached_has_bits & 255u) {
+    ::memset(&uchip_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&udata3_) -
-        reinterpret_cast<char*>(&uvip_)) + sizeof(udata3_));
+        reinterpret_cast<char*>(&uchip_)) + sizeof(udata3_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -6943,32 +6921,28 @@ bool UserGameInfo::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string uchip = 1;
+      // required sint32 uchip = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_uchip()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->uchip().data(), static_cast<int>(this->uchip().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "UserGameInfo.uchip");
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          set_has_uchip();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                 input, &uchip_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required string uexp = 2;
+      // required sint32 uexp = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_uexp()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->uexp().data(), static_cast<int>(this->uexp().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "UserGameInfo.uexp");
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          set_has_uexp();
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                 input, &uexp_)));
         } else {
           goto handle_unusual;
         }
@@ -7031,13 +7005,13 @@ bool UserGameInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // required bool udata2 = 7;
+      // required sint32 udata2 = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
           set_has_udata2();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
                  input, &udata2_)));
         } else {
           goto handle_unusual;
@@ -7045,13 +7019,13 @@ bool UserGameInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // required bool udata3 = 8;
+      // required sint32 udata3 = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
           set_has_udata3();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
                  input, &udata3_)));
         } else {
           goto handle_unusual;
@@ -7086,24 +7060,14 @@ void UserGameInfo::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string uchip = 1;
+  // required sint32 uchip = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uchip().data(), static_cast<int>(this->uchip().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "UserGameInfo.uchip");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->uchip(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->uchip(), output);
   }
 
-  // required string uexp = 2;
+  // required sint32 uexp = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uexp().data(), static_cast<int>(this->uexp().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "UserGameInfo.uexp");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->uexp(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->uexp(), output);
   }
 
   // required sint32 uvip = 3;
@@ -7126,14 +7090,14 @@ void UserGameInfo::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(6, this->udata1(), output);
   }
 
-  // required bool udata2 = 7;
+  // required sint32 udata2 = 7;
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->udata2(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(7, this->udata2(), output);
   }
 
-  // required bool udata3 = 8;
+  // required sint32 udata3 = 8;
   if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->udata3(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteSInt32(8, this->udata3(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7151,26 +7115,14 @@ void UserGameInfo::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required string uchip = 1;
+  // required sint32 uchip = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uchip().data(), static_cast<int>(this->uchip().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "UserGameInfo.uchip");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->uchip(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->uchip(), target);
   }
 
-  // required string uexp = 2;
+  // required sint32 uexp = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->uexp().data(), static_cast<int>(this->uexp().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "UserGameInfo.uexp");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->uexp(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->uexp(), target);
   }
 
   // required sint32 uvip = 3;
@@ -7193,14 +7145,14 @@ void UserGameInfo::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(6, this->udata1(), target);
   }
 
-  // required bool udata2 = 7;
+  // required sint32 udata2 = 7;
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(7, this->udata2(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(7, this->udata2(), target);
   }
 
-  // required bool udata3 = 8;
+  // required sint32 udata3 = 8;
   if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(8, this->udata3(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(8, this->udata3(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7216,16 +7168,16 @@ size_t UserGameInfo::RequiredFieldsByteSizeFallback() const {
   size_t total_size = 0;
 
   if (has_uchip()) {
-    // required string uchip = 1;
+    // required sint32 uchip = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->uchip());
   }
 
   if (has_uexp()) {
-    // required string uexp = 2;
+    // required sint32 uexp = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->uexp());
   }
 
@@ -7258,13 +7210,17 @@ size_t UserGameInfo::RequiredFieldsByteSizeFallback() const {
   }
 
   if (has_udata2()) {
-    // required bool udata2 = 7;
-    total_size += 1 + 1;
+    // required sint32 udata2 = 7;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->udata2());
   }
 
   if (has_udata3()) {
-    // required bool udata3 = 8;
-    total_size += 1 + 1;
+    // required sint32 udata3 = 8;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->udata3());
   }
 
   return total_size;
@@ -7279,14 +7235,14 @@ size_t UserGameInfo::ByteSizeLong() const {
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x000000ff) ^ 0x000000ff) == 0) {  // All required fields are present.
-    // required string uchip = 1;
+    // required sint32 uchip = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->uchip());
 
-    // required string uexp = 2;
+    // required sint32 uexp = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->uexp());
 
     // required sint32 uvip = 3;
@@ -7309,11 +7265,15 @@ size_t UserGameInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->udata1());
 
-    // required bool udata2 = 7;
-    total_size += 1 + 1;
+    // required sint32 udata2 = 7;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->udata2());
 
-    // required bool udata3 = 8;
-    total_size += 1 + 1;
+    // required sint32 udata3 = 8;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+        this->udata3());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -7350,12 +7310,10 @@ void UserGameInfo::MergeFrom(const UserGameInfo& from) {
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 255u) {
     if (cached_has_bits & 0x00000001u) {
-      set_has_uchip();
-      uchip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uchip_);
+      uchip_ = from.uchip_;
     }
     if (cached_has_bits & 0x00000002u) {
-      set_has_uexp();
-      uexp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uexp_);
+      uexp_ = from.uexp_;
     }
     if (cached_has_bits & 0x00000004u) {
       uvip_ = from.uvip_;
@@ -7404,8 +7362,8 @@ void UserGameInfo::Swap(UserGameInfo* other) {
 }
 void UserGameInfo::InternalSwap(UserGameInfo* other) {
   using std::swap;
-  uchip_.Swap(&other->uchip_);
-  uexp_.Swap(&other->uexp_);
+  swap(uchip_, other->uchip_);
+  swap(uexp_, other->uexp_);
   swap(uvip_, other->uvip_);
   swap(uchip2_, other->uchip2_);
   swap(uchip3_, other->uchip3_);

@@ -2303,35 +2303,19 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required string uchip = 1;
+  // required sint32 uchip = 1;
   bool has_uchip() const;
   void clear_uchip();
   static const int kUchipFieldNumber = 1;
-  const ::std::string& uchip() const;
-  void set_uchip(const ::std::string& value);
-  #if LANG_CXX11
-  void set_uchip(::std::string&& value);
-  #endif
-  void set_uchip(const char* value);
-  void set_uchip(const char* value, size_t size);
-  ::std::string* mutable_uchip();
-  ::std::string* release_uchip();
-  void set_allocated_uchip(::std::string* uchip);
+  ::google::protobuf::int32 uchip() const;
+  void set_uchip(::google::protobuf::int32 value);
 
-  // required string uexp = 2;
+  // required sint32 uexp = 2;
   bool has_uexp() const;
   void clear_uexp();
   static const int kUexpFieldNumber = 2;
-  const ::std::string& uexp() const;
-  void set_uexp(const ::std::string& value);
-  #if LANG_CXX11
-  void set_uexp(::std::string&& value);
-  #endif
-  void set_uexp(const char* value);
-  void set_uexp(const char* value, size_t size);
-  ::std::string* mutable_uexp();
-  ::std::string* release_uexp();
-  void set_allocated_uexp(::std::string* uexp);
+  ::google::protobuf::int32 uexp() const;
+  void set_uexp(::google::protobuf::int32 value);
 
   // required sint32 uvip = 3;
   bool has_uvip() const;
@@ -2361,19 +2345,19 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 udata1() const;
   void set_udata1(::google::protobuf::int32 value);
 
-  // required bool udata2 = 7;
+  // required sint32 udata2 = 7;
   bool has_udata2() const;
   void clear_udata2();
   static const int kUdata2FieldNumber = 7;
-  bool udata2() const;
-  void set_udata2(bool value);
+  ::google::protobuf::int32 udata2() const;
+  void set_udata2(::google::protobuf::int32 value);
 
-  // required bool udata3 = 8;
+  // required sint32 udata3 = 8;
   bool has_udata3() const;
   void clear_udata3();
   static const int kUdata3FieldNumber = 8;
-  bool udata3() const;
-  void set_udata3(bool value);
+  ::google::protobuf::int32 udata3() const;
+  void set_udata3(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:UserGameInfo)
  private:
@@ -2400,14 +2384,14 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr uchip_;
-  ::google::protobuf::internal::ArenaStringPtr uexp_;
+  ::google::protobuf::int32 uchip_;
+  ::google::protobuf::int32 uexp_;
   ::google::protobuf::int32 uvip_;
   ::google::protobuf::int32 uchip2_;
   ::google::protobuf::int32 uchip3_;
   ::google::protobuf::int32 udata1_;
-  bool udata2_;
-  bool udata3_;
+  ::google::protobuf::int32 udata2_;
+  ::google::protobuf::int32 udata3_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserGameInfoImpl();
 };
@@ -10387,7 +10371,7 @@ inline void LoginOutRes::set_status(::google::protobuf::int32 value) {
 
 // UserGameInfo
 
-// required string uchip = 1;
+// required sint32 uchip = 1;
 inline bool UserGameInfo::has_uchip() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -10398,59 +10382,20 @@ inline void UserGameInfo::clear_has_uchip() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void UserGameInfo::clear_uchip() {
-  uchip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  uchip_ = 0;
   clear_has_uchip();
 }
-inline const ::std::string& UserGameInfo::uchip() const {
+inline ::google::protobuf::int32 UserGameInfo::uchip() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.uchip)
-  return uchip_.GetNoArena();
+  return uchip_;
 }
-inline void UserGameInfo::set_uchip(const ::std::string& value) {
+inline void UserGameInfo::set_uchip(::google::protobuf::int32 value) {
   set_has_uchip();
-  uchip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  uchip_ = value;
   // @@protoc_insertion_point(field_set:UserGameInfo.uchip)
 }
-#if LANG_CXX11
-inline void UserGameInfo::set_uchip(::std::string&& value) {
-  set_has_uchip();
-  uchip_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:UserGameInfo.uchip)
-}
-#endif
-inline void UserGameInfo::set_uchip(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_uchip();
-  uchip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:UserGameInfo.uchip)
-}
-inline void UserGameInfo::set_uchip(const char* value, size_t size) {
-  set_has_uchip();
-  uchip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:UserGameInfo.uchip)
-}
-inline ::std::string* UserGameInfo::mutable_uchip() {
-  set_has_uchip();
-  // @@protoc_insertion_point(field_mutable:UserGameInfo.uchip)
-  return uchip_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* UserGameInfo::release_uchip() {
-  // @@protoc_insertion_point(field_release:UserGameInfo.uchip)
-  clear_has_uchip();
-  return uchip_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void UserGameInfo::set_allocated_uchip(::std::string* uchip) {
-  if (uchip != NULL) {
-    set_has_uchip();
-  } else {
-    clear_has_uchip();
-  }
-  uchip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uchip);
-  // @@protoc_insertion_point(field_set_allocated:UserGameInfo.uchip)
-}
 
-// required string uexp = 2;
+// required sint32 uexp = 2;
 inline bool UserGameInfo::has_uexp() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -10461,56 +10406,17 @@ inline void UserGameInfo::clear_has_uexp() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserGameInfo::clear_uexp() {
-  uexp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  uexp_ = 0;
   clear_has_uexp();
 }
-inline const ::std::string& UserGameInfo::uexp() const {
+inline ::google::protobuf::int32 UserGameInfo::uexp() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.uexp)
-  return uexp_.GetNoArena();
+  return uexp_;
 }
-inline void UserGameInfo::set_uexp(const ::std::string& value) {
+inline void UserGameInfo::set_uexp(::google::protobuf::int32 value) {
   set_has_uexp();
-  uexp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  uexp_ = value;
   // @@protoc_insertion_point(field_set:UserGameInfo.uexp)
-}
-#if LANG_CXX11
-inline void UserGameInfo::set_uexp(::std::string&& value) {
-  set_has_uexp();
-  uexp_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:UserGameInfo.uexp)
-}
-#endif
-inline void UserGameInfo::set_uexp(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  set_has_uexp();
-  uexp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:UserGameInfo.uexp)
-}
-inline void UserGameInfo::set_uexp(const char* value, size_t size) {
-  set_has_uexp();
-  uexp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:UserGameInfo.uexp)
-}
-inline ::std::string* UserGameInfo::mutable_uexp() {
-  set_has_uexp();
-  // @@protoc_insertion_point(field_mutable:UserGameInfo.uexp)
-  return uexp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* UserGameInfo::release_uexp() {
-  // @@protoc_insertion_point(field_release:UserGameInfo.uexp)
-  clear_has_uexp();
-  return uexp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void UserGameInfo::set_allocated_uexp(::std::string* uexp) {
-  if (uexp != NULL) {
-    set_has_uexp();
-  } else {
-    clear_has_uexp();
-  }
-  uexp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uexp);
-  // @@protoc_insertion_point(field_set_allocated:UserGameInfo.uexp)
 }
 
 // required sint32 uvip = 3;
@@ -10609,7 +10515,7 @@ inline void UserGameInfo::set_udata1(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.udata1)
 }
 
-// required bool udata2 = 7;
+// required sint32 udata2 = 7;
 inline bool UserGameInfo::has_udata2() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -10620,20 +10526,20 @@ inline void UserGameInfo::clear_has_udata2() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void UserGameInfo::clear_udata2() {
-  udata2_ = false;
+  udata2_ = 0;
   clear_has_udata2();
 }
-inline bool UserGameInfo::udata2() const {
+inline ::google::protobuf::int32 UserGameInfo::udata2() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.udata2)
   return udata2_;
 }
-inline void UserGameInfo::set_udata2(bool value) {
+inline void UserGameInfo::set_udata2(::google::protobuf::int32 value) {
   set_has_udata2();
   udata2_ = value;
   // @@protoc_insertion_point(field_set:UserGameInfo.udata2)
 }
 
-// required bool udata3 = 8;
+// required sint32 udata3 = 8;
 inline bool UserGameInfo::has_udata3() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -10644,14 +10550,14 @@ inline void UserGameInfo::clear_has_udata3() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void UserGameInfo::clear_udata3() {
-  udata3_ = false;
+  udata3_ = 0;
   clear_has_udata3();
 }
-inline bool UserGameInfo::udata3() const {
+inline ::google::protobuf::int32 UserGameInfo::udata3() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.udata3)
   return udata3_;
 }
-inline void UserGameInfo::set_udata3(bool value) {
+inline void UserGameInfo::set_udata3(::google::protobuf::int32 value) {
   set_has_udata3();
   udata3_ = value;
   // @@protoc_insertion_point(field_set:UserGameInfo.udata3)
