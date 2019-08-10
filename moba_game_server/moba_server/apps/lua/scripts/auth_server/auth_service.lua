@@ -16,6 +16,7 @@ auth_service_handlers[Cmd.eAccountUpgradeReq] 	= account_upgrade.do_upgrade
 auth_service_handlers[Cmd.eUnameLoginReq] 		= uname_login.login
 auth_service_handlers[Cmd.eLoginOutReq] 		= login_out.do_login_out
 auth_service_handlers[Cmd.eUserRegistReq] 		= user_regist.regist
+auth_service_handlers[Cmd.eUserGameInfo] 		= uname_login.testProto
 
 local function on_auth_recv_cmd(s, msg)
 	if auth_service_handlers[msg[2]] then 

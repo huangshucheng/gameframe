@@ -90,6 +90,7 @@ local Cmd = {
 	eClickTouZiNumReq 			= 65,
 	eTouZiNumRes 				= 66,
 	eClickTouZiBombRes 			= 67,
+	eUserGameInfo 				= 68,
 }
 
 return Cmd

@@ -8,6 +8,7 @@ local Cmd 		= require("Cmd")
 local function login(s, req)
 	local utag = req[3]
 	local uname_login_req = req[4]
+	dump(uname_login_req, "hcc>>uname_login_req")
 	-- 检查参数
 	-- if string.len(uname_login_req.uname) <= 0 or string.len(uname_login_req.upwd) ~= 32 then 	-- TODO md5 check 
 	if string.len(uname_login_req.uname) <= 0 then 	-- TODO md5 check 
@@ -65,9 +66,33 @@ local function login(s, req)
 		print('authserver>> username login, id: ' .. tostring(msg[4].uinfo.uid))
 	end)
 end
+--test 
+local testProto = function(s,req)
+	local utag = req[3]	or 0
+	local body = req[4]
+	dump(body, "hcc>>testProto")
+	-- 返回给客户端
+	local msg = { Stype.Auth, Cmd.eUserGameInfo, utag, body}
+	-- local msg = { Stype.Auth, Cmd.eUnameLoginRes, utag, {
+	-- 		status = Respones.OK,
+	-- 		uinfo = {
+	-- 			unick = "hcc",
+	-- 			uface = 1,
+	-- 			usex  = 2,
+	-- 			uvip  = 3,
+	-- 			uid = 4, 
+	-- 			brandid = "111111",
+	-- 			numberid = "222222",
+	-- 			areaid = "7109",
+	-- 		}
+	-- 	}}
+	-- dump(msg,"hcc>>testProto>>ugame_info utag: " .. tostring(utag))
+	Session.send_msg(s, msg)
+end
 
 local uname_login = {
 	login = login,
+	testProto = testProto,
 }
 
 return uname_login

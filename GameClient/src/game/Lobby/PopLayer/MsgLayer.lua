@@ -50,10 +50,10 @@ function MsgLayer:onEventGetSysMsgRes(event)
     local list_view = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),KW_MSG_LIST)
 	Lobby.popLayer('LoadingLayer')
     if data.status == Respones.OK then
-        local ver_num = data.ver_num
-        local sys_msgs = data.sys_msgs
-        print('ver_num  '.. ver_num)
-        for i,v in ipairs(sys_msgs) do
+        local versionnum = data.versionnum
+        local systemmsgs = data.systemmsgs
+        print('ver_num  '.. versionnum)
+        for i,v in ipairs(systemmsgs) do
             if list_view then
                 list_view:pushBackDefaultItem()
                 local products = list_view:getItems()

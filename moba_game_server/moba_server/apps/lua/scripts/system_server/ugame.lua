@@ -73,11 +73,12 @@ local function get_ugame_info(s, req)
 					udata1  = ugame_info.udata1,
 					udata2  = ugame_info.udata2,
 					udata3 = ugame_info.udata3,
-					bonuesstatus = bonues_info.status,
-					bonues = bonues_info.bonues,
-					days = bonues_info.days,
+					-- bonuesstatus = bonues_info.status,
+					-- bonues = bonues_info.bonues,
+					-- days = bonues_info.days,
 				}
 			}}
+			dump(msg,"hcc>>msg>>ugame_info")
 			Session.send_msg(s, msg)
 		end)
 	end)

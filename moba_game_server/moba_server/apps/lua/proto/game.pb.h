@@ -37,7 +37,7 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[71];
+  static const ::google::protobuf::internal::ParseTable schema[72];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -81,6 +81,8 @@ void InitDefaultsRecvLoginBonuesResImpl();
 void InitDefaultsRecvLoginBonuesRes();
 void InitDefaultsWorldChipRankInfoImpl();
 void InitDefaultsWorldChipRankInfo();
+void InitDefaultsGetWorldRankUchipReqImpl();
+void InitDefaultsGetWorldRankUchipReq();
 void InitDefaultsGetWorldRankUchipResImpl();
 void InitDefaultsGetWorldRankUchipRes();
 void InitDefaultsGetSysMsgReqImpl();
@@ -205,6 +207,7 @@ inline void InitDefaults() {
   InitDefaultsRecvLoginBonuesReq();
   InitDefaultsRecvLoginBonuesRes();
   InitDefaultsWorldChipRankInfo();
+  InitDefaultsGetWorldRankUchipReq();
   InitDefaultsGetWorldRankUchipRes();
   InitDefaultsGetSysMsgReq();
   InitDefaultsGetSysMsgRes();
@@ -355,6 +358,9 @@ extern GetUgameInfoReqDefaultTypeInternal _GetUgameInfoReq_default_instance_;
 class GetUgameInfoRes;
 class GetUgameInfoResDefaultTypeInternal;
 extern GetUgameInfoResDefaultTypeInternal _GetUgameInfoRes_default_instance_;
+class GetWorldRankUchipReq;
+class GetWorldRankUchipReqDefaultTypeInternal;
+extern GetWorldRankUchipReqDefaultTypeInternal _GetWorldRankUchipReq_default_instance_;
 class GetWorldRankUchipRes;
 class GetWorldRankUchipResDefaultTypeInternal;
 extern GetWorldRankUchipResDefaultTypeInternal _GetWorldRankUchipRes_default_instance_;
@@ -562,11 +568,12 @@ enum Cmd {
   eGameTotalResult = 64,
   eClickTouZiNumReq = 65,
   eTouZiNumRes = 66,
-  eClickTouZiBombRes = 67
+  eClickTouZiBombRes = 67,
+  eUserGameInfo = 68
 };
 bool Cmd_IsValid(int value);
 const Cmd Cmd_MIN = INVALIDCMD;
-const Cmd Cmd_MAX = eClickTouZiBombRes;
+const Cmd Cmd_MAX = eUserGameInfo;
 const int Cmd_ARRAYSIZE = Cmd_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Cmd_descriptor();
@@ -2296,19 +2303,35 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required sint32 uchip = 1;
+  // required string uchip = 1;
   bool has_uchip() const;
   void clear_uchip();
   static const int kUchipFieldNumber = 1;
-  ::google::protobuf::int32 uchip() const;
-  void set_uchip(::google::protobuf::int32 value);
+  const ::std::string& uchip() const;
+  void set_uchip(const ::std::string& value);
+  #if LANG_CXX11
+  void set_uchip(::std::string&& value);
+  #endif
+  void set_uchip(const char* value);
+  void set_uchip(const char* value, size_t size);
+  ::std::string* mutable_uchip();
+  ::std::string* release_uchip();
+  void set_allocated_uchip(::std::string* uchip);
 
-  // required sint32 uexp = 2;
+  // required string uexp = 2;
   bool has_uexp() const;
   void clear_uexp();
   static const int kUexpFieldNumber = 2;
-  ::google::protobuf::int32 uexp() const;
-  void set_uexp(::google::protobuf::int32 value);
+  const ::std::string& uexp() const;
+  void set_uexp(const ::std::string& value);
+  #if LANG_CXX11
+  void set_uexp(::std::string&& value);
+  #endif
+  void set_uexp(const char* value);
+  void set_uexp(const char* value, size_t size);
+  ::std::string* mutable_uexp();
+  ::std::string* release_uexp();
+  void set_allocated_uexp(::std::string* uexp);
 
   // required sint32 uvip = 3;
   bool has_uvip() const;
@@ -2338,40 +2361,19 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 udata1() const;
   void set_udata1(::google::protobuf::int32 value);
 
-  // required sint32 udata2 = 7;
+  // required bool udata2 = 7;
   bool has_udata2() const;
   void clear_udata2();
   static const int kUdata2FieldNumber = 7;
-  ::google::protobuf::int32 udata2() const;
-  void set_udata2(::google::protobuf::int32 value);
+  bool udata2() const;
+  void set_udata2(bool value);
 
-  // required sint32 udata3 = 8;
+  // required bool udata3 = 8;
   bool has_udata3() const;
   void clear_udata3();
   static const int kUdata3FieldNumber = 8;
-  ::google::protobuf::int32 udata3() const;
-  void set_udata3(::google::protobuf::int32 value);
-
-  // required sint32 bonuesstatus = 9;
-  bool has_bonuesstatus() const;
-  void clear_bonuesstatus();
-  static const int kBonuesstatusFieldNumber = 9;
-  ::google::protobuf::int32 bonuesstatus() const;
-  void set_bonuesstatus(::google::protobuf::int32 value);
-
-  // required sint32 bonues = 10;
-  bool has_bonues() const;
-  void clear_bonues();
-  static const int kBonuesFieldNumber = 10;
-  ::google::protobuf::int32 bonues() const;
-  void set_bonues(::google::protobuf::int32 value);
-
-  // required sint32 days = 11;
-  bool has_days() const;
-  void clear_days();
-  static const int kDaysFieldNumber = 11;
-  ::google::protobuf::int32 days() const;
-  void set_days(::google::protobuf::int32 value);
+  bool udata3() const;
+  void set_udata3(bool value);
 
   // @@protoc_insertion_point(class_scope:UserGameInfo)
  private:
@@ -2391,12 +2393,6 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
   void clear_has_udata2();
   void set_has_udata3();
   void clear_has_udata3();
-  void set_has_bonuesstatus();
-  void clear_has_bonuesstatus();
-  void set_has_bonues();
-  void clear_has_bonues();
-  void set_has_days();
-  void clear_has_days();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -2404,17 +2400,14 @@ class UserGameInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::int32 uchip_;
-  ::google::protobuf::int32 uexp_;
+  ::google::protobuf::internal::ArenaStringPtr uchip_;
+  ::google::protobuf::internal::ArenaStringPtr uexp_;
   ::google::protobuf::int32 uvip_;
   ::google::protobuf::int32 uchip2_;
   ::google::protobuf::int32 uchip3_;
   ::google::protobuf::int32 udata1_;
-  ::google::protobuf::int32 udata2_;
-  ::google::protobuf::int32 udata3_;
-  ::google::protobuf::int32 bonuesstatus_;
-  ::google::protobuf::int32 bonues_;
-  ::google::protobuf::int32 days_;
+  bool udata2_;
+  bool udata3_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsUserGameInfoImpl();
 };
@@ -3013,6 +3006,106 @@ class WorldChipRankInfo : public ::google::protobuf::Message /* @@protoc_inserti
 };
 // -------------------------------------------------------------------
 
+class GetWorldRankUchipReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:GetWorldRankUchipReq) */ {
+ public:
+  GetWorldRankUchipReq();
+  virtual ~GetWorldRankUchipReq();
+
+  GetWorldRankUchipReq(const GetWorldRankUchipReq& from);
+
+  inline GetWorldRankUchipReq& operator=(const GetWorldRankUchipReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  GetWorldRankUchipReq(GetWorldRankUchipReq&& from) noexcept
+    : GetWorldRankUchipReq() {
+    *this = ::std::move(from);
+  }
+
+  inline GetWorldRankUchipReq& operator=(GetWorldRankUchipReq&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GetWorldRankUchipReq& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GetWorldRankUchipReq* internal_default_instance() {
+    return reinterpret_cast<const GetWorldRankUchipReq*>(
+               &_GetWorldRankUchipReq_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    19;
+
+  void Swap(GetWorldRankUchipReq* other);
+  friend void swap(GetWorldRankUchipReq& a, GetWorldRankUchipReq& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GetWorldRankUchipReq* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  GetWorldRankUchipReq* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const GetWorldRankUchipReq& from);
+  void MergeFrom(const GetWorldRankUchipReq& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(GetWorldRankUchipReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:GetWorldRankUchipReq)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_game_2eproto::TableStruct;
+  friend void ::protobuf_game_2eproto::InitDefaultsGetWorldRankUchipReqImpl();
+};
+// -------------------------------------------------------------------
+
 class GetWorldRankUchipRes : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:GetWorldRankUchipRes) */ {
  public:
   GetWorldRankUchipRes();
@@ -3055,7 +3148,7 @@ class GetWorldRankUchipRes : public ::google::protobuf::Message /* @@protoc_inse
                &_GetWorldRankUchipRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    19;
+    20;
 
   void Swap(GetWorldRankUchipRes* other);
   friend void swap(GetWorldRankUchipRes& a, GetWorldRankUchipRes& b) {
@@ -3178,7 +3271,7 @@ class GetSysMsgReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_GetSysMsgReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    20;
+    21;
 
   void Swap(GetSysMsgReq* other);
   friend void swap(GetSysMsgReq& a, GetSysMsgReq& b) {
@@ -3288,7 +3381,7 @@ class GetSysMsgRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_GetSysMsgRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    21;
+    22;
 
   void Swap(GetSysMsgRes* other);
   friend void swap(GetSysMsgRes& a, GetSysMsgRes& b) {
@@ -3434,7 +3527,7 @@ class LoginLogicRes : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_LoginLogicRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    22;
+    23;
 
   void Swap(LoginLogicRes* other);
   friend void swap(LoginLogicRes& a, LoginLogicRes& b) {
@@ -3544,7 +3637,7 @@ class EnterZoneReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_EnterZoneReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    23;
+    24;
 
   void Swap(EnterZoneReq* other);
   friend void swap(EnterZoneReq& a, EnterZoneReq& b) {
@@ -3654,7 +3747,7 @@ class EnterZoneRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_EnterZoneRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    24;
+    25;
 
   void Swap(EnterZoneRes* other);
   friend void swap(EnterZoneRes& a, EnterZoneRes& b) {
@@ -3764,7 +3857,7 @@ class EnterMatch : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_EnterMatch_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    25;
+    26;
 
   void Swap(EnterMatch* other);
   friend void swap(EnterMatch& a, EnterMatch& b) {
@@ -3907,7 +4000,7 @@ class UserArrived : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_UserArrived_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    26;
+    27;
 
   void Swap(UserArrived* other);
   friend void swap(UserArrived& a, UserArrived& b) {
@@ -4170,7 +4263,7 @@ class ExitMatchReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_ExitMatchReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    27;
+    28;
 
   void Swap(ExitMatchReq* other);
   friend void swap(ExitMatchReq& a, ExitMatchReq& b) {
@@ -4270,7 +4363,7 @@ class ExitMatchRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_ExitMatchRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    28;
+    29;
 
   void Swap(ExitMatchRes* other);
   friend void swap(ExitMatchRes& a, ExitMatchRes& b) {
@@ -4380,7 +4473,7 @@ class UserExitMatch : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_UserExitMatch_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    29;
+    30;
 
   void Swap(UserExitMatch* other);
   friend void swap(UserExitMatch& a, UserExitMatch& b) {
@@ -4490,7 +4583,7 @@ class UserRegistReq : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_UserRegistReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    30;
+    31;
 
   void Swap(UserRegistReq* other);
   friend void swap(UserRegistReq& a, UserRegistReq& b) {
@@ -4629,7 +4722,7 @@ class UserRegistRes : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_UserRegistRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    31;
+    32;
 
   void Swap(UserRegistRes* other);
   friend void swap(UserRegistRes& a, UserRegistRes& b) {
@@ -4739,7 +4832,7 @@ class CreateRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_CreateRoomReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    32;
+    33;
 
   void Swap(CreateRoomReq* other);
   friend void swap(CreateRoomReq& a, CreateRoomReq& b) {
@@ -4857,7 +4950,7 @@ class CreateRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_CreateRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    33;
+    34;
 
   void Swap(CreateRoomRes* other);
   friend void swap(CreateRoomRes& a, CreateRoomRes& b) {
@@ -4967,7 +5060,7 @@ class JoinRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_JoinRoomReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    34;
+    35;
 
   void Swap(JoinRoomReq* other);
   friend void swap(JoinRoomReq& a, JoinRoomReq& b) {
@@ -5085,7 +5178,7 @@ class JoinRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_JoinRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    35;
+    36;
 
   void Swap(JoinRoomRes* other);
   friend void swap(JoinRoomRes& a, JoinRoomRes& b) {
@@ -5195,7 +5288,7 @@ class ExitRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_ExitRoomReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    36;
+    37;
 
   void Swap(ExitRoomReq* other);
   friend void swap(ExitRoomReq& a, ExitRoomReq& b) {
@@ -5295,7 +5388,7 @@ class ExitRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_ExitRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    37;
+    38;
 
   void Swap(ExitRoomRes* other);
   friend void swap(ExitRoomRes& a, ExitRoomRes& b) {
@@ -5417,7 +5510,7 @@ class DessolveReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_DessolveReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    38;
+    39;
 
   void Swap(DessolveReq* other);
   friend void swap(DessolveReq& a, DessolveReq& b) {
@@ -5517,7 +5610,7 @@ class DessolveRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_DessolveRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    39;
+    40;
 
   void Swap(DessolveRes* other);
   friend void swap(DessolveRes& a, DessolveRes& b) {
@@ -5627,7 +5720,7 @@ class GetCreateStatusReq : public ::google::protobuf::Message /* @@protoc_insert
                &_GetCreateStatusReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    40;
+    41;
 
   void Swap(GetCreateStatusReq* other);
   friend void swap(GetCreateStatusReq& a, GetCreateStatusReq& b) {
@@ -5727,7 +5820,7 @@ class GetCreateStatusRes : public ::google::protobuf::Message /* @@protoc_insert
                &_GetCreateStatusRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    41;
+    42;
 
   void Swap(GetCreateStatusRes* other);
   friend void swap(GetCreateStatusRes& a, GetCreateStatusRes& b) {
@@ -5837,7 +5930,7 @@ class BackRoomReq : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_BackRoomReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    42;
+    43;
 
   void Swap(BackRoomReq* other);
   friend void swap(BackRoomReq& a, BackRoomReq& b) {
@@ -5937,7 +6030,7 @@ class BackRoomRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_BackRoomRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    43;
+    44;
 
   void Swap(BackRoomRes* other);
   friend void swap(BackRoomRes& a, BackRoomRes& b) {
@@ -6047,7 +6140,7 @@ class UserOffLine : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_UserOffLine_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    44;
+    45;
 
   void Swap(UserOffLine* other);
   friend void swap(UserOffLine& a, UserOffLine& b) {
@@ -6159,7 +6252,7 @@ class UserReconnectedReq : public ::google::protobuf::Message /* @@protoc_insert
                &_UserReconnectedReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    45;
+    46;
 
   void Swap(UserReconnectedReq* other);
   friend void swap(UserReconnectedReq& a, UserReconnectedReq& b) {
@@ -6259,7 +6352,7 @@ class UserReconnectedRes : public ::google::protobuf::Message /* @@protoc_insert
                &_UserReconnectedRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    46;
+    47;
 
   void Swap(UserReconnectedRes* other);
   friend void swap(UserReconnectedRes& a, UserReconnectedRes& b) {
@@ -6369,7 +6462,7 @@ class HeartBeatReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_HeartBeatReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    47;
+    48;
 
   void Swap(HeartBeatReq* other);
   friend void swap(HeartBeatReq& a, HeartBeatReq& b) {
@@ -6469,7 +6562,7 @@ class HeartBeatRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_HeartBeatRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    48;
+    49;
 
   void Swap(HeartBeatRes* other);
   friend void swap(HeartBeatRes& a, HeartBeatRes& b) {
@@ -6579,7 +6672,7 @@ class UserReadyReq : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_UserReadyReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    49;
+    50;
 
   void Swap(UserReadyReq* other);
   friend void swap(UserReadyReq& a, UserReadyReq& b) {
@@ -6689,7 +6782,7 @@ class UserReadyRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_UserReadyRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    50;
+    51;
 
   void Swap(UserReadyRes* other);
   friend void swap(UserReadyRes& a, UserReadyRes& b) {
@@ -6855,7 +6948,7 @@ class GameStart : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_GameStart_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    51;
+    52;
 
   void Swap(GameStart* other);
   friend void swap(GameStart& a, GameStart& b) {
@@ -6965,7 +7058,7 @@ class UdpTest : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_UdpTest_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    52;
+    53;
 
   void Swap(UdpTest* other);
   friend void swap(UdpTest& a, UdpTest& b) {
@@ -7083,7 +7176,7 @@ class LoginLogicReq : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_LoginLogicReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    53;
+    54;
 
   void Swap(LoginLogicReq* other);
   friend void swap(LoginLogicReq& a, LoginLogicReq& b) {
@@ -7183,7 +7276,7 @@ class OptionEvent : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_OptionEvent_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    54;
+    55;
 
   void Swap(OptionEvent* other);
   friend void swap(OptionEvent& a, OptionEvent& b) {
@@ -7326,7 +7419,7 @@ class FrameOpts : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_FrameOpts_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    55;
+    56;
 
   void Swap(FrameOpts* other);
   friend void swap(FrameOpts& a, FrameOpts& b) {
@@ -7449,7 +7542,7 @@ class LogicFrame : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_LogicFrame_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    56;
+    57;
 
   void Swap(LogicFrame* other);
   friend void swap(LogicFrame& a, LogicFrame& b) {
@@ -7572,7 +7665,7 @@ class NextFrameOpts : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_NextFrameOpts_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    57;
+    58;
 
   void Swap(NextFrameOpts* other);
   friend void swap(NextFrameOpts& a, NextFrameOpts& b) {
@@ -7726,7 +7819,7 @@ class CheckLinkGameReq : public ::google::protobuf::Message /* @@protoc_insertio
                &_CheckLinkGameReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    58;
+    59;
 
   void Swap(CheckLinkGameReq* other);
   friend void swap(CheckLinkGameReq& a, CheckLinkGameReq& b) {
@@ -7826,7 +7919,7 @@ class CheckLinkGameRes : public ::google::protobuf::Message /* @@protoc_insertio
                &_CheckLinkGameRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    59;
+    60;
 
   void Swap(CheckLinkGameRes* other);
   friend void swap(CheckLinkGameRes& a, CheckLinkGameRes& b) {
@@ -7936,7 +8029,7 @@ class RoomInfoRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_RoomInfoRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    60;
+    61;
 
   void Swap(RoomInfoRes* other);
   friend void swap(RoomInfoRes& a, RoomInfoRes& b) {
@@ -8054,7 +8147,7 @@ class RoomIdRes : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_RoomIdRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    61;
+    62;
 
   void Swap(RoomIdRes* other);
   friend void swap(RoomIdRes& a, RoomIdRes& b) {
@@ -8172,7 +8265,7 @@ class PlayCountRes : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_PlayCountRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    62;
+    63;
 
   void Swap(PlayCountRes* other);
   friend void swap(PlayCountRes& a, PlayCountRes& b) {
@@ -8311,7 +8404,7 @@ class UserArrivedInfos : public ::google::protobuf::Message /* @@protoc_insertio
                &_UserArrivedInfos_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    63;
+    64;
 
   void Swap(UserArrivedInfos* other);
   friend void swap(UserArrivedInfos& a, UserArrivedInfos& b) {
@@ -8424,7 +8517,7 @@ class UserState : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_UserState_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    64;
+    65;
 
   void Swap(UserState* other);
   friend void swap(UserState& a, UserState& b) {
@@ -8555,7 +8648,7 @@ class AllUserState : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_AllUserState_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    65;
+    66;
 
   void Swap(AllUserState* other);
   friend void swap(AllUserState& a, AllUserState& b) {
@@ -8668,7 +8761,7 @@ class GameResult : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_GameResult_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    66;
+    67;
 
   void Swap(GameResult* other);
   friend void swap(GameResult& a, GameResult& b) {
@@ -8791,7 +8884,7 @@ class GameTotalResult : public ::google::protobuf::Message /* @@protoc_insertion
                &_GameTotalResult_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    67;
+    68;
 
   void Swap(GameTotalResult* other);
   friend void swap(GameTotalResult& a, GameTotalResult& b) {
@@ -8914,7 +9007,7 @@ class ClickTouZiNumReq : public ::google::protobuf::Message /* @@protoc_insertio
                &_ClickTouZiNumReq_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    68;
+    69;
 
   void Swap(ClickTouZiNumReq* other);
   friend void swap(ClickTouZiNumReq& a, ClickTouZiNumReq& b) {
@@ -9037,7 +9130,7 @@ class TouZiNumRes : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_TouZiNumRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    69;
+    70;
 
   void Swap(TouZiNumRes* other);
   friend void swap(TouZiNumRes& a, TouZiNumRes& b) {
@@ -9163,7 +9256,7 @@ class ClickTouZiBombRes : public ::google::protobuf::Message /* @@protoc_inserti
                &_ClickTouZiBombRes_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    70;
+    71;
 
   void Swap(ClickTouZiBombRes* other);
   friend void swap(ClickTouZiBombRes& a, ClickTouZiBombRes& b) {
@@ -10294,7 +10387,7 @@ inline void LoginOutRes::set_status(::google::protobuf::int32 value) {
 
 // UserGameInfo
 
-// required sint32 uchip = 1;
+// required string uchip = 1;
 inline bool UserGameInfo::has_uchip() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -10305,20 +10398,59 @@ inline void UserGameInfo::clear_has_uchip() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void UserGameInfo::clear_uchip() {
-  uchip_ = 0;
+  uchip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_uchip();
 }
-inline ::google::protobuf::int32 UserGameInfo::uchip() const {
+inline const ::std::string& UserGameInfo::uchip() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.uchip)
-  return uchip_;
+  return uchip_.GetNoArena();
 }
-inline void UserGameInfo::set_uchip(::google::protobuf::int32 value) {
+inline void UserGameInfo::set_uchip(const ::std::string& value) {
   set_has_uchip();
-  uchip_ = value;
+  uchip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserGameInfo.uchip)
 }
+#if LANG_CXX11
+inline void UserGameInfo::set_uchip(::std::string&& value) {
+  set_has_uchip();
+  uchip_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserGameInfo.uchip)
+}
+#endif
+inline void UserGameInfo::set_uchip(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_uchip();
+  uchip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserGameInfo.uchip)
+}
+inline void UserGameInfo::set_uchip(const char* value, size_t size) {
+  set_has_uchip();
+  uchip_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserGameInfo.uchip)
+}
+inline ::std::string* UserGameInfo::mutable_uchip() {
+  set_has_uchip();
+  // @@protoc_insertion_point(field_mutable:UserGameInfo.uchip)
+  return uchip_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserGameInfo::release_uchip() {
+  // @@protoc_insertion_point(field_release:UserGameInfo.uchip)
+  clear_has_uchip();
+  return uchip_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserGameInfo::set_allocated_uchip(::std::string* uchip) {
+  if (uchip != NULL) {
+    set_has_uchip();
+  } else {
+    clear_has_uchip();
+  }
+  uchip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uchip);
+  // @@protoc_insertion_point(field_set_allocated:UserGameInfo.uchip)
+}
 
-// required sint32 uexp = 2;
+// required string uexp = 2;
 inline bool UserGameInfo::has_uexp() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -10329,17 +10461,56 @@ inline void UserGameInfo::clear_has_uexp() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserGameInfo::clear_uexp() {
-  uexp_ = 0;
+  uexp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_uexp();
 }
-inline ::google::protobuf::int32 UserGameInfo::uexp() const {
+inline const ::std::string& UserGameInfo::uexp() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.uexp)
-  return uexp_;
+  return uexp_.GetNoArena();
 }
-inline void UserGameInfo::set_uexp(::google::protobuf::int32 value) {
+inline void UserGameInfo::set_uexp(const ::std::string& value) {
   set_has_uexp();
-  uexp_ = value;
+  uexp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:UserGameInfo.uexp)
+}
+#if LANG_CXX11
+inline void UserGameInfo::set_uexp(::std::string&& value) {
+  set_has_uexp();
+  uexp_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserGameInfo.uexp)
+}
+#endif
+inline void UserGameInfo::set_uexp(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_uexp();
+  uexp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserGameInfo.uexp)
+}
+inline void UserGameInfo::set_uexp(const char* value, size_t size) {
+  set_has_uexp();
+  uexp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserGameInfo.uexp)
+}
+inline ::std::string* UserGameInfo::mutable_uexp() {
+  set_has_uexp();
+  // @@protoc_insertion_point(field_mutable:UserGameInfo.uexp)
+  return uexp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserGameInfo::release_uexp() {
+  // @@protoc_insertion_point(field_release:UserGameInfo.uexp)
+  clear_has_uexp();
+  return uexp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserGameInfo::set_allocated_uexp(::std::string* uexp) {
+  if (uexp != NULL) {
+    set_has_uexp();
+  } else {
+    clear_has_uexp();
+  }
+  uexp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uexp);
+  // @@protoc_insertion_point(field_set_allocated:UserGameInfo.uexp)
 }
 
 // required sint32 uvip = 3;
@@ -10438,7 +10609,7 @@ inline void UserGameInfo::set_udata1(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:UserGameInfo.udata1)
 }
 
-// required sint32 udata2 = 7;
+// required bool udata2 = 7;
 inline bool UserGameInfo::has_udata2() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -10449,20 +10620,20 @@ inline void UserGameInfo::clear_has_udata2() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void UserGameInfo::clear_udata2() {
-  udata2_ = 0;
+  udata2_ = false;
   clear_has_udata2();
 }
-inline ::google::protobuf::int32 UserGameInfo::udata2() const {
+inline bool UserGameInfo::udata2() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.udata2)
   return udata2_;
 }
-inline void UserGameInfo::set_udata2(::google::protobuf::int32 value) {
+inline void UserGameInfo::set_udata2(bool value) {
   set_has_udata2();
   udata2_ = value;
   // @@protoc_insertion_point(field_set:UserGameInfo.udata2)
 }
 
-// required sint32 udata3 = 8;
+// required bool udata3 = 8;
 inline bool UserGameInfo::has_udata3() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -10473,89 +10644,17 @@ inline void UserGameInfo::clear_has_udata3() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void UserGameInfo::clear_udata3() {
-  udata3_ = 0;
+  udata3_ = false;
   clear_has_udata3();
 }
-inline ::google::protobuf::int32 UserGameInfo::udata3() const {
+inline bool UserGameInfo::udata3() const {
   // @@protoc_insertion_point(field_get:UserGameInfo.udata3)
   return udata3_;
 }
-inline void UserGameInfo::set_udata3(::google::protobuf::int32 value) {
+inline void UserGameInfo::set_udata3(bool value) {
   set_has_udata3();
   udata3_ = value;
   // @@protoc_insertion_point(field_set:UserGameInfo.udata3)
-}
-
-// required sint32 bonuesstatus = 9;
-inline bool UserGameInfo::has_bonuesstatus() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void UserGameInfo::set_has_bonuesstatus() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void UserGameInfo::clear_has_bonuesstatus() {
-  _has_bits_[0] &= ~0x00000100u;
-}
-inline void UserGameInfo::clear_bonuesstatus() {
-  bonuesstatus_ = 0;
-  clear_has_bonuesstatus();
-}
-inline ::google::protobuf::int32 UserGameInfo::bonuesstatus() const {
-  // @@protoc_insertion_point(field_get:UserGameInfo.bonuesstatus)
-  return bonuesstatus_;
-}
-inline void UserGameInfo::set_bonuesstatus(::google::protobuf::int32 value) {
-  set_has_bonuesstatus();
-  bonuesstatus_ = value;
-  // @@protoc_insertion_point(field_set:UserGameInfo.bonuesstatus)
-}
-
-// required sint32 bonues = 10;
-inline bool UserGameInfo::has_bonues() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
-}
-inline void UserGameInfo::set_has_bonues() {
-  _has_bits_[0] |= 0x00000200u;
-}
-inline void UserGameInfo::clear_has_bonues() {
-  _has_bits_[0] &= ~0x00000200u;
-}
-inline void UserGameInfo::clear_bonues() {
-  bonues_ = 0;
-  clear_has_bonues();
-}
-inline ::google::protobuf::int32 UserGameInfo::bonues() const {
-  // @@protoc_insertion_point(field_get:UserGameInfo.bonues)
-  return bonues_;
-}
-inline void UserGameInfo::set_bonues(::google::protobuf::int32 value) {
-  set_has_bonues();
-  bonues_ = value;
-  // @@protoc_insertion_point(field_set:UserGameInfo.bonues)
-}
-
-// required sint32 days = 11;
-inline bool UserGameInfo::has_days() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
-}
-inline void UserGameInfo::set_has_days() {
-  _has_bits_[0] |= 0x00000400u;
-}
-inline void UserGameInfo::clear_has_days() {
-  _has_bits_[0] &= ~0x00000400u;
-}
-inline void UserGameInfo::clear_days() {
-  days_ = 0;
-  clear_has_days();
-}
-inline ::google::protobuf::int32 UserGameInfo::days() const {
-  // @@protoc_insertion_point(field_get:UserGameInfo.days)
-  return days_;
-}
-inline void UserGameInfo::set_days(::google::protobuf::int32 value) {
-  set_has_days();
-  days_ = value;
-  // @@protoc_insertion_point(field_set:UserGameInfo.days)
 }
 
 // -------------------------------------------------------------------
@@ -10838,6 +10937,10 @@ inline void WorldChipRankInfo::set_uchip(::google::protobuf::int32 value) {
   uchip_ = value;
   // @@protoc_insertion_point(field_set:WorldChipRankInfo.uchip)
 }
+
+// -------------------------------------------------------------------
+
+// GetWorldRankUchipReq
 
 // -------------------------------------------------------------------
 
@@ -13867,6 +13970,8 @@ inline void ClickTouZiBombRes::set_seatid(::google::protobuf::int32 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

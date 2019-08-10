@@ -16,7 +16,21 @@ function SystemServiceProxy:ctor()
 end
 
 function SystemServiceProxy:sendGetUgameInfo()
-	NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)
+	-- NetWork:getInstance():sendMsg(Stype.System,Cmd.eGetUgameInfoReq,nil)
+	--test
+	-- NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eGetUgameInfoReq,nil) --test
+	local msg = { 
+		uchip = "string,uchip",
+		uexp = "黄数城,uexp",
+		uvip  = 102,
+		uchip2  = 103,
+		uchip3 = 104, 
+		udata1  = 105,
+		udata2  = true,
+		udata3 = false,
+	}
+
+	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eUserGameInfo,msg) --test
 end
 
 function SystemServiceProxy:sendGetSystemMsg()

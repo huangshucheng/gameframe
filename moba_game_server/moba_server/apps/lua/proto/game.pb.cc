@@ -114,6 +114,11 @@ class WorldChipRankInfoDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<WorldChipRankInfo>
       _instance;
 } _WorldChipRankInfo_default_instance_;
+class GetWorldRankUchipReqDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<GetWorldRankUchipReq>
+      _instance;
+} _GetWorldRankUchipReq_default_instance_;
 class GetWorldRankUchipResDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<GetWorldRankUchipRes>
@@ -775,6 +780,27 @@ void InitDefaultsWorldChipRankInfoImpl() {
 void InitDefaultsWorldChipRankInfo() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsWorldChipRankInfoImpl);
+}
+
+void InitDefaultsGetWorldRankUchipReqImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  {
+    void* ptr = &::_GetWorldRankUchipReq_default_instance_;
+    new (ptr) ::GetWorldRankUchipReq();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::GetWorldRankUchipReq::InitAsDefaultInstance();
+}
+
+void InitDefaultsGetWorldRankUchipReq() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsGetWorldRankUchipReqImpl);
 }
 
 void InitDefaultsGetWorldRankUchipResImpl() {
@@ -1877,7 +1903,7 @@ void InitDefaultsClickTouZiBombRes() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsClickTouZiBombResImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[71];
+::google::protobuf::Metadata file_level_metadata[72];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[2];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -2005,9 +2031,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserGameInfo, udata1_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserGameInfo, udata2_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserGameInfo, udata3_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserGameInfo, bonuesstatus_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserGameInfo, bonues_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::UserGameInfo, days_),
   0,
   1,
   2,
@@ -2016,9 +2039,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   5,
   6,
   7,
-  8,
-  9,
-  10,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetUgameInfoReq, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetUgameInfoReq, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2060,6 +2080,11 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   2,
   3,
   4,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetWorldRankUchipReq, _has_bits_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetWorldRankUchipReq, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetWorldRankUchipRes, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetWorldRankUchipRes, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2491,64 +2516,65 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 92, 98, sizeof(::AccountUpgradeRes)},
   { 99, 104, sizeof(::LoginOutReq)},
   { 104, 110, sizeof(::LoginOutRes)},
-  { 111, 127, sizeof(::UserGameInfo)},
-  { 138, 143, sizeof(::GetUgameInfoReq)},
-  { 143, 150, sizeof(::GetUgameInfoRes)},
-  { 152, 157, sizeof(::RecvLoginBonuesReq)},
-  { 157, 163, sizeof(::RecvLoginBonuesRes)},
-  { 164, 174, sizeof(::WorldChipRankInfo)},
-  { 179, 186, sizeof(::GetWorldRankUchipRes)},
-  { 188, 194, sizeof(::GetSysMsgReq)},
-  { 195, 203, sizeof(::GetSysMsgRes)},
-  { 206, 212, sizeof(::LoginLogicRes)},
-  { 213, 219, sizeof(::EnterZoneReq)},
-  { 220, 226, sizeof(::EnterZoneRes)},
-  { 227, 236, sizeof(::EnterMatch)},
-  { 240, 257, sizeof(::UserArrived)},
-  { 269, 274, sizeof(::ExitMatchReq)},
-  { 274, 280, sizeof(::ExitMatchRes)},
-  { 281, 287, sizeof(::UserExitMatch)},
-  { 288, 295, sizeof(::UserRegistReq)},
-  { 297, 303, sizeof(::UserRegistRes)},
-  { 304, 310, sizeof(::CreateRoomReq)},
-  { 311, 317, sizeof(::CreateRoomRes)},
-  { 318, 324, sizeof(::JoinRoomReq)},
-  { 325, 331, sizeof(::JoinRoomRes)},
-  { 332, 337, sizeof(::ExitRoomReq)},
-  { 337, 344, sizeof(::ExitRoomRes)},
-  { 346, 351, sizeof(::DessolveReq)},
-  { 351, 357, sizeof(::DessolveRes)},
-  { 358, 363, sizeof(::GetCreateStatusReq)},
-  { 363, 369, sizeof(::GetCreateStatusRes)},
-  { 370, 375, sizeof(::BackRoomReq)},
-  { 375, 381, sizeof(::BackRoomRes)},
-  { 382, 388, sizeof(::UserOffLine)},
-  { 389, 394, sizeof(::UserReconnectedReq)},
-  { 394, 400, sizeof(::UserReconnectedRes)},
-  { 401, 406, sizeof(::HeartBeatReq)},
-  { 406, 412, sizeof(::HeartBeatRes)},
-  { 413, 419, sizeof(::UserReadyReq)},
-  { 420, 430, sizeof(::UserReadyRes)},
-  { 435, 441, sizeof(::GameStart)},
-  { 442, 448, sizeof(::UdpTest)},
-  { 449, 454, sizeof(::LoginLogicReq)},
-  { 454, 463, sizeof(::OptionEvent)},
-  { 467, 474, sizeof(::FrameOpts)},
-  { 476, 483, sizeof(::LogicFrame)},
-  { 485, 494, sizeof(::NextFrameOpts)},
-  { 498, 503, sizeof(::CheckLinkGameReq)},
-  { 503, 509, sizeof(::CheckLinkGameRes)},
-  { 510, 516, sizeof(::RoomInfoRes)},
-  { 517, 523, sizeof(::RoomIdRes)},
-  { 524, 531, sizeof(::PlayCountRes)},
-  { 533, 539, sizeof(::UserArrivedInfos)},
-  { 540, 547, sizeof(::UserState)},
-  { 549, 555, sizeof(::AllUserState)},
-  { 556, 562, sizeof(::GameResult)},
-  { 563, 569, sizeof(::GameTotalResult)},
-  { 570, 577, sizeof(::ClickTouZiNumReq)},
-  { 579, 586, sizeof(::TouZiNumRes)},
-  { 588, 594, sizeof(::ClickTouZiBombRes)},
+  { 111, 124, sizeof(::UserGameInfo)},
+  { 132, 137, sizeof(::GetUgameInfoReq)},
+  { 137, 144, sizeof(::GetUgameInfoRes)},
+  { 146, 151, sizeof(::RecvLoginBonuesReq)},
+  { 151, 157, sizeof(::RecvLoginBonuesRes)},
+  { 158, 168, sizeof(::WorldChipRankInfo)},
+  { 173, 178, sizeof(::GetWorldRankUchipReq)},
+  { 178, 185, sizeof(::GetWorldRankUchipRes)},
+  { 187, 193, sizeof(::GetSysMsgReq)},
+  { 194, 202, sizeof(::GetSysMsgRes)},
+  { 205, 211, sizeof(::LoginLogicRes)},
+  { 212, 218, sizeof(::EnterZoneReq)},
+  { 219, 225, sizeof(::EnterZoneRes)},
+  { 226, 235, sizeof(::EnterMatch)},
+  { 239, 256, sizeof(::UserArrived)},
+  { 268, 273, sizeof(::ExitMatchReq)},
+  { 273, 279, sizeof(::ExitMatchRes)},
+  { 280, 286, sizeof(::UserExitMatch)},
+  { 287, 294, sizeof(::UserRegistReq)},
+  { 296, 302, sizeof(::UserRegistRes)},
+  { 303, 309, sizeof(::CreateRoomReq)},
+  { 310, 316, sizeof(::CreateRoomRes)},
+  { 317, 323, sizeof(::JoinRoomReq)},
+  { 324, 330, sizeof(::JoinRoomRes)},
+  { 331, 336, sizeof(::ExitRoomReq)},
+  { 336, 343, sizeof(::ExitRoomRes)},
+  { 345, 350, sizeof(::DessolveReq)},
+  { 350, 356, sizeof(::DessolveRes)},
+  { 357, 362, sizeof(::GetCreateStatusReq)},
+  { 362, 368, sizeof(::GetCreateStatusRes)},
+  { 369, 374, sizeof(::BackRoomReq)},
+  { 374, 380, sizeof(::BackRoomRes)},
+  { 381, 387, sizeof(::UserOffLine)},
+  { 388, 393, sizeof(::UserReconnectedReq)},
+  { 393, 399, sizeof(::UserReconnectedRes)},
+  { 400, 405, sizeof(::HeartBeatReq)},
+  { 405, 411, sizeof(::HeartBeatRes)},
+  { 412, 418, sizeof(::UserReadyReq)},
+  { 419, 429, sizeof(::UserReadyRes)},
+  { 434, 440, sizeof(::GameStart)},
+  { 441, 447, sizeof(::UdpTest)},
+  { 448, 453, sizeof(::LoginLogicReq)},
+  { 453, 462, sizeof(::OptionEvent)},
+  { 466, 473, sizeof(::FrameOpts)},
+  { 475, 482, sizeof(::LogicFrame)},
+  { 484, 493, sizeof(::NextFrameOpts)},
+  { 497, 502, sizeof(::CheckLinkGameReq)},
+  { 502, 508, sizeof(::CheckLinkGameRes)},
+  { 509, 515, sizeof(::RoomInfoRes)},
+  { 516, 522, sizeof(::RoomIdRes)},
+  { 523, 530, sizeof(::PlayCountRes)},
+  { 532, 538, sizeof(::UserArrivedInfos)},
+  { 539, 546, sizeof(::UserState)},
+  { 548, 554, sizeof(::AllUserState)},
+  { 555, 561, sizeof(::GameResult)},
+  { 562, 568, sizeof(::GameTotalResult)},
+  { 569, 576, sizeof(::ClickTouZiNumReq)},
+  { 578, 585, sizeof(::TouZiNumRes)},
+  { 587, 593, sizeof(::ClickTouZiBombRes)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -2571,6 +2597,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::_RecvLoginBonuesReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_RecvLoginBonuesRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_WorldChipRankInfo_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::_GetWorldRankUchipReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_GetWorldRankUchipRes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_GetSysMsgReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::_GetSysMsgRes_default_instance_),
@@ -2641,7 +2668,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 71);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 72);
 }
 
 void AddDescriptorsImpl() {
@@ -2662,113 +2689,113 @@ void AddDescriptorsImpl() {
       "s\030\001 \002(\021\"3\n\021AccountUpgradeReq\022\r\n\005uname\030\001 "
       "\002(\t\022\017\n\007upwdMd5\030\002 \002(\t\"#\n\021AccountUpgradeRe"
       "s\022\016\n\006status\030\001 \002(\021\"\r\n\013LoginOutReq\"\035\n\013Logi"
-      "nOutRes\022\016\n\006status\030\001 \002(\021\"\275\001\n\014UserGameInfo"
-      "\022\r\n\005uchip\030\001 \002(\021\022\014\n\004uexp\030\002 \002(\021\022\014\n\004uvip\030\003 "
+      "nOutRes\022\016\n\006status\030\001 \002(\021\"\211\001\n\014UserGameInfo"
+      "\022\r\n\005uchip\030\001 \002(\t\022\014\n\004uexp\030\002 \002(\t\022\014\n\004uvip\030\003 "
       "\002(\021\022\016\n\006uchip2\030\004 \002(\021\022\016\n\006uchip3\030\005 \002(\021\022\016\n\006u"
-      "data1\030\006 \002(\021\022\016\n\006udata2\030\007 \002(\021\022\016\n\006udata3\030\010 "
-      "\002(\021\022\024\n\014bonuesstatus\030\t \002(\021\022\016\n\006bonues\030\n \002("
-      "\021\022\014\n\004days\030\013 \002(\021\"\021\n\017GetUgameInfoReq\"\?\n\017Ge"
-      "tUgameInfoRes\022\016\n\006status\030\001 \002(\021\022\034\n\005uinfo\030\002"
-      " \001(\0132\r.UserGameInfo\"\024\n\022RecvLoginBonuesRe"
-      "q\"$\n\022RecvLoginBonuesRes\022\016\n\006status\030\001 \002(\021\""
-      "\\\n\021WorldChipRankInfo\022\r\n\005unick\030\001 \002(\t\022\r\n\005u"
-      "face\030\002 \002(\021\022\014\n\004usex\030\003 \002(\021\022\014\n\004uvip\030\004 \002(\021\022\r"
-      "\n\005uchip\030\005 \002(\021\"L\n\024GetWorldRankUchipRes\022\016\n"
-      "\006status\030\001 \002(\021\022$\n\010rankinfo\030\002 \003(\0132\022.WorldC"
-      "hipRankInfo\"\"\n\014GetSysMsgReq\022\022\n\nversionnu"
-      "m\030\001 \002(\021\"F\n\014GetSysMsgRes\022\016\n\006status\030\001 \002(\021\022"
-      "\022\n\nversionnum\030\002 \002(\021\022\022\n\nsystemmsgs\030\003 \003(\t\""
-      "\037\n\rLoginLogicRes\022\016\n\006status\030\001 \002(\021\"\033\n\014Ente"
-      "rZoneReq\022\013\n\003zid\030\001 \002(\021\"\036\n\014EnterZoneRes\022\016\n"
-      "\006status\030\001 \002(\021\"H\n\nEnterMatch\022\013\n\003zid\030\001 \002(\021"
-      "\022\017\n\007matchid\030\002 \002(\021\022\016\n\006seatid\030\003 \002(\021\022\014\n\004sid"
-      "e\030\004 \002(\021\"\320\001\n\013UserArrived\022\r\n\005unick\030\001 \002(\t\022\r"
-      "\n\005uface\030\002 \002(\021\022\014\n\004usex\030\003 \002(\021\022\016\n\006seatid\030\004 "
-      "\002(\021\022\014\n\004side\030\005 \002(\021\022\016\n\006roomid\030\006 \002(\t\022\016\n\006ish"
-      "ost\030\007 \002(\010\022\021\n\tisoffline\030\010 \002(\010\022\017\n\007brandid\030"
-      "\t \001(\t\022\020\n\010numberid\030\n \001(\t\022\016\n\006areaid\030\013 \001(\t\022"
-      "\021\n\tuserstate\030\014 \001(\021\"\016\n\014ExitMatchReq\"\036\n\014Ex"
-      "itMatchRes\022\016\n\006status\030\001 \002(\021\"\037\n\rUserExitMa"
-      "tch\022\016\n\006seatid\030\001 \002(\021\"/\n\rUserRegistReq\022\r\n\005"
-      "uname\030\001 \002(\t\022\017\n\007upwdmd5\030\002 \002(\t\"\037\n\rUserRegi"
-      "stRes\022\016\n\006status\030\001 \002(\021\"!\n\rCreateRoomReq\022\020"
-      "\n\010roominfo\030\001 \002(\t\"\037\n\rCreateRoomRes\022\016\n\006sta"
-      "tus\030\001 \002(\021\"\035\n\013JoinRoomReq\022\016\n\006roomid\030\001 \002(\t"
-      "\"\035\n\013JoinRoomRes\022\016\n\006status\030\001 \002(\021\"\r\n\013ExitR"
-      "oomReq\"=\n\013ExitRoomRes\022\016\n\006status\030\001 \002(\021\022\036\n"
-      "\010userinfo\030\002 \001(\0132\014.UserArrived\"\r\n\013Dessolv"
-      "eReq\"\035\n\013DessolveRes\022\016\n\006status\030\001 \002(\021\"\024\n\022G"
-      "etCreateStatusReq\"$\n\022GetCreateStatusRes\022"
-      "\016\n\006status\030\001 \002(\021\"\r\n\013BackRoomReq\"\035\n\013BackRo"
-      "omRes\022\016\n\006status\030\001 \002(\021\"-\n\013UserOffLine\022\036\n\010"
-      "userinfo\030\001 \002(\0132\014.UserArrived\"\024\n\022UserReco"
-      "nnectedReq\"$\n\022UserReconnectedRes\022\016\n\006stat"
-      "us\030\001 \002(\021\"\016\n\014HeartBeatReq\"\036\n\014HeartBeatRes"
-      "\022\016\n\006status\030\001 \001(\021\"\"\n\014UserReadyReq\022\022\n\nread"
-      "ystate\030\001 \002(\021\"d\n\014UserReadyRes\022\016\n\006status\030\001"
-      " \002(\021\022\016\n\006seatid\030\002 \001(\021\022\017\n\007brandid\030\003 \001(\t\022\020\n"
-      "\010numberid\030\004 \001(\t\022\021\n\tuserstate\030\005 \001(\021\"\033\n\tGa"
-      "meStart\022\016\n\006status\030\001 \002(\021\"\032\n\007UdpTest\022\017\n\007co"
-      "ntent\030\001 \002(\t\"\017\n\rLoginLogicReq\"D\n\013OptionEv"
-      "ent\022\016\n\006seatid\030\001 \002(\021\022\017\n\007opttype\030\002 \002(\021\022\t\n\001"
-      "x\030\003 \001(\021\022\t\n\001y\030\004 \001(\021\"8\n\tFrameOpts\022\017\n\007frame"
-      "id\030\001 \002(\021\022\032\n\004opts\030\002 \003(\0132\014.OptionEvent\"\?\n\n"
-      "LogicFrame\022\017\n\007frameid\030\001 \002(\021\022 \n\014unsyncfra"
-      "mes\030\002 \003(\0132\n.FrameOpts\"\\\n\rNextFrameOpts\022\017"
-      "\n\007frameid\030\001 \002(\021\022\016\n\006roomid\030\002 \002(\t\022\016\n\006seati"
-      "d\030\003 \002(\021\022\032\n\004opts\030\004 \003(\0132\014.OptionEvent\"\022\n\020C"
-      "heckLinkGameReq\"\"\n\020CheckLinkGameRes\022\016\n\006s"
-      "tatus\030\001 \002(\021\"\037\n\013RoomInfoRes\022\020\n\010roominfo\030\001"
-      " \002(\t\"\033\n\tRoomIdRes\022\016\n\006roomid\030\001 \002(\t\"9\n\014Pla"
-      "yCountRes\022\021\n\tplaycount\030\001 \002(\t\022\026\n\016totalpla"
-      "ycount\030\002 \002(\t\"2\n\020UserArrivedInfos\022\036\n\010user"
-      "info\030\001 \003(\0132\014.UserArrived\".\n\tUserState\022\016\n"
-      "\006seatid\030\001 \002(\021\022\021\n\tuserstate\030\002 \002(\t\"-\n\014AllU"
-      "serState\022\035\n\tuserstate\030\001 \003(\0132\n.UserState\""
-      "\033\n\nGameResult\022\r\n\005score\030\001 \003(\t\" \n\017GameTota"
-      "lResult\022\r\n\005score\030\001 \003(\t\"4\n\020ClickTouZiNumR"
-      "eq\022\016\n\006seatid\030\001 \002(\021\022\020\n\010touzinum\030\002 \002(\021\"2\n\013"
-      "TouZiNumRes\022\021\n\ttouzinums\030\001 \003(\021\022\020\n\010bombnu"
-      "ms\030\002 \003(\021\"#\n\021ClickTouZiBombRes\022\016\n\006seatid\030"
-      "\001 \002(\021*:\n\005Stype\022\020\n\014InvalidStype\020\000\022\010\n\004Auth"
-      "\020\001\022\n\n\006System\020\002\022\t\n\005Logic\020\003*\323\n\n\003Cmd\022\016\n\nINV"
-      "ALIDCMD\020\000\022\022\n\016eGuestLoginReq\020\001\022\022\n\016eGuestL"
-      "oginRes\020\002\022\014\n\010eRelogin\020\003\022\021\n\reUserLostConn"
-      "\020\004\022\023\n\017eEditProfileReq\020\005\022\023\n\017eEditProfileR"
-      "es\020\006\022\026\n\022eAccountUpgradeReq\020\007\022\026\n\022eAccount"
-      "UpgradeRes\020\010\022\022\n\016eUnameLoginReq\020\t\022\022\n\016eUna"
-      "meLoginRes\020\n\022\020\n\014eLoginOutReq\020\013\022\020\n\014eLogin"
-      "OutRes\020\014\022\022\n\016eUserRegistReq\020\r\022\022\n\016eUserReg"
-      "istRes\020\016\022\024\n\020eGetUgameInfoReq\020\017\022\024\n\020eGetUg"
-      "ameInfoRes\020\020\022\027\n\023eRecvLoginBonuesReq\020\021\022\027\n"
-      "\023eRecvLoginBonuesRes\020\022\022\031\n\025eGetWorldRankU"
-      "chipReq\020\023\022\031\n\025eGetWorldRankUchipRes\020\024\022\021\n\r"
-      "eGetSysMsgReq\020\025\022\021\n\reGetSysMsgRes\020\026\022\022\n\016eL"
-      "oginLogicReq\020\027\022\022\n\016eLoginLogicRes\020\030\022\021\n\reE"
-      "nterZoneReq\020\031\022\021\n\reEnterZoneRes\020\032\022\017\n\013eEnt"
-      "erMatch\020\033\022\020\n\014eUserArrived\020\034\022\021\n\reExitMatc"
-      "hReq\020\035\022\021\n\reExitMatchRes\020\036\022\022\n\016eUserExitMa"
-      "tch\020\037\022\022\n\016eCreateRoomReq\020 \022\022\n\016eCreateRoom"
-      "Res\020!\022\020\n\014eJoinRoomReq\020\"\022\020\n\014eJoinRoomRes\020"
-      "#\022\020\n\014eExitRoomReq\020$\022\020\n\014eExitRoomRes\020%\022\020\n"
-      "\014eDessolveReq\020&\022\020\n\014eDessolveRes\020\'\022\027\n\023eGe"
-      "tCreateStatusReq\020(\022\027\n\023eGetCreateStatusRe"
-      "s\020)\022\020\n\014eBackRoomReq\020*\022\020\n\014eBackRoomRes\020+\022"
-      "\020\n\014eUserOffLine\020,\022\021\n\reHeartBeatReq\020-\022\021\n\r"
-      "eHeartBeatRes\020.\022\027\n\023eUserReconnectedReq\020/"
-      "\022\027\n\023eUserReconnectedRes\0200\022\021\n\reUserReadyR"
-      "eq\0201\022\021\n\reUserReadyRes\0202\022\016\n\neGameStart\0203\022"
-      "\014\n\010eUdpTest\0204\022\017\n\013eLogicFrame\0205\022\022\n\016eNextF"
-      "rameOpts\0206\022\025\n\021eCheckLinkGameReq\0207\022\025\n\021eCh"
-      "eckLinkGameRes\0208\022\020\n\014eRoomInfoRes\0209\022\016\n\neR"
-      "oomIdRes\020:\022\021\n\rePlayCountRes\020;\022\025\n\021eUserAr"
-      "rivedInfos\020<\022\016\n\neUserState\020=\022\021\n\reAllUser"
-      "State\020>\022\017\n\013eGameResult\020\?\022\024\n\020eGameTotalRe"
-      "sult\020@\022\025\n\021eClickTouZiNumReq\020A\022\020\n\014eTouZiN"
-      "umRes\020B\022\026\n\022eClickTouZiBombRes\020C"
+      "data1\030\006 \002(\021\022\016\n\006udata2\030\007 \002(\010\022\016\n\006udata3\030\010 "
+      "\002(\010\"\021\n\017GetUgameInfoReq\"\?\n\017GetUgameInfoRe"
+      "s\022\016\n\006status\030\001 \002(\021\022\034\n\005uinfo\030\002 \001(\0132\r.UserG"
+      "ameInfo\"\024\n\022RecvLoginBonuesReq\"$\n\022RecvLog"
+      "inBonuesRes\022\016\n\006status\030\001 \002(\021\"\\\n\021WorldChip"
+      "RankInfo\022\r\n\005unick\030\001 \002(\t\022\r\n\005uface\030\002 \002(\021\022\014"
+      "\n\004usex\030\003 \002(\021\022\014\n\004uvip\030\004 \002(\021\022\r\n\005uchip\030\005 \002("
+      "\021\"\026\n\024GetWorldRankUchipReq\"L\n\024GetWorldRan"
+      "kUchipRes\022\016\n\006status\030\001 \002(\021\022$\n\010rankinfo\030\002 "
+      "\003(\0132\022.WorldChipRankInfo\"\"\n\014GetSysMsgReq\022"
+      "\022\n\nversionnum\030\001 \002(\021\"F\n\014GetSysMsgRes\022\016\n\006s"
+      "tatus\030\001 \002(\021\022\022\n\nversionnum\030\002 \002(\021\022\022\n\nsyste"
+      "mmsgs\030\003 \003(\t\"\037\n\rLoginLogicRes\022\016\n\006status\030\001"
+      " \002(\021\"\033\n\014EnterZoneReq\022\013\n\003zid\030\001 \002(\021\"\036\n\014Ent"
+      "erZoneRes\022\016\n\006status\030\001 \002(\021\"H\n\nEnterMatch\022"
+      "\013\n\003zid\030\001 \002(\021\022\017\n\007matchid\030\002 \002(\021\022\016\n\006seatid\030"
+      "\003 \002(\021\022\014\n\004side\030\004 \002(\021\"\320\001\n\013UserArrived\022\r\n\005u"
+      "nick\030\001 \002(\t\022\r\n\005uface\030\002 \002(\021\022\014\n\004usex\030\003 \002(\021\022"
+      "\016\n\006seatid\030\004 \002(\021\022\014\n\004side\030\005 \002(\021\022\016\n\006roomid\030"
+      "\006 \002(\t\022\016\n\006ishost\030\007 \002(\010\022\021\n\tisoffline\030\010 \002(\010"
+      "\022\017\n\007brandid\030\t \001(\t\022\020\n\010numberid\030\n \001(\t\022\016\n\006a"
+      "reaid\030\013 \001(\t\022\021\n\tuserstate\030\014 \001(\021\"\016\n\014ExitMa"
+      "tchReq\"\036\n\014ExitMatchRes\022\016\n\006status\030\001 \002(\021\"\037"
+      "\n\rUserExitMatch\022\016\n\006seatid\030\001 \002(\021\"/\n\rUserR"
+      "egistReq\022\r\n\005uname\030\001 \002(\t\022\017\n\007upwdmd5\030\002 \002(\t"
+      "\"\037\n\rUserRegistRes\022\016\n\006status\030\001 \002(\021\"!\n\rCre"
+      "ateRoomReq\022\020\n\010roominfo\030\001 \002(\t\"\037\n\rCreateRo"
+      "omRes\022\016\n\006status\030\001 \002(\021\"\035\n\013JoinRoomReq\022\016\n\006"
+      "roomid\030\001 \002(\t\"\035\n\013JoinRoomRes\022\016\n\006status\030\001 "
+      "\002(\021\"\r\n\013ExitRoomReq\"=\n\013ExitRoomRes\022\016\n\006sta"
+      "tus\030\001 \002(\021\022\036\n\010userinfo\030\002 \001(\0132\014.UserArrive"
+      "d\"\r\n\013DessolveReq\"\035\n\013DessolveRes\022\016\n\006statu"
+      "s\030\001 \002(\021\"\024\n\022GetCreateStatusReq\"$\n\022GetCrea"
+      "teStatusRes\022\016\n\006status\030\001 \002(\021\"\r\n\013BackRoomR"
+      "eq\"\035\n\013BackRoomRes\022\016\n\006status\030\001 \002(\021\"-\n\013Use"
+      "rOffLine\022\036\n\010userinfo\030\001 \002(\0132\014.UserArrived"
+      "\"\024\n\022UserReconnectedReq\"$\n\022UserReconnecte"
+      "dRes\022\016\n\006status\030\001 \002(\021\"\016\n\014HeartBeatReq\"\036\n\014"
+      "HeartBeatRes\022\016\n\006status\030\001 \001(\021\"\"\n\014UserRead"
+      "yReq\022\022\n\nreadystate\030\001 \002(\021\"d\n\014UserReadyRes"
+      "\022\016\n\006status\030\001 \002(\021\022\016\n\006seatid\030\002 \001(\021\022\017\n\007bran"
+      "did\030\003 \001(\t\022\020\n\010numberid\030\004 \001(\t\022\021\n\tuserstate"
+      "\030\005 \001(\021\"\033\n\tGameStart\022\016\n\006status\030\001 \002(\021\"\032\n\007U"
+      "dpTest\022\017\n\007content\030\001 \002(\t\"\017\n\rLoginLogicReq"
+      "\"D\n\013OptionEvent\022\016\n\006seatid\030\001 \002(\021\022\017\n\007optty"
+      "pe\030\002 \002(\021\022\t\n\001x\030\003 \001(\021\022\t\n\001y\030\004 \001(\021\"8\n\tFrameO"
+      "pts\022\017\n\007frameid\030\001 \002(\021\022\032\n\004opts\030\002 \003(\0132\014.Opt"
+      "ionEvent\"\?\n\nLogicFrame\022\017\n\007frameid\030\001 \002(\021\022"
+      " \n\014unsyncframes\030\002 \003(\0132\n.FrameOpts\"\\\n\rNex"
+      "tFrameOpts\022\017\n\007frameid\030\001 \002(\021\022\016\n\006roomid\030\002 "
+      "\002(\t\022\016\n\006seatid\030\003 \002(\021\022\032\n\004opts\030\004 \003(\0132\014.Opti"
+      "onEvent\"\022\n\020CheckLinkGameReq\"\"\n\020CheckLink"
+      "GameRes\022\016\n\006status\030\001 \002(\021\"\037\n\013RoomInfoRes\022\020"
+      "\n\010roominfo\030\001 \002(\t\"\033\n\tRoomIdRes\022\016\n\006roomid\030"
+      "\001 \002(\t\"9\n\014PlayCountRes\022\021\n\tplaycount\030\001 \002(\t"
+      "\022\026\n\016totalplaycount\030\002 \002(\t\"2\n\020UserArrivedI"
+      "nfos\022\036\n\010userinfo\030\001 \003(\0132\014.UserArrived\".\n\t"
+      "UserState\022\016\n\006seatid\030\001 \002(\021\022\021\n\tuserstate\030\002"
+      " \002(\t\"-\n\014AllUserState\022\035\n\tuserstate\030\001 \003(\0132"
+      "\n.UserState\"\033\n\nGameResult\022\r\n\005score\030\001 \003(\t"
+      "\" \n\017GameTotalResult\022\r\n\005score\030\001 \003(\t\"4\n\020Cl"
+      "ickTouZiNumReq\022\016\n\006seatid\030\001 \002(\021\022\020\n\010touzin"
+      "um\030\002 \002(\021\"2\n\013TouZiNumRes\022\021\n\ttouzinums\030\001 \003"
+      "(\021\022\020\n\010bombnums\030\002 \003(\021\"#\n\021ClickTouZiBombRe"
+      "s\022\016\n\006seatid\030\001 \002(\021*:\n\005Stype\022\020\n\014InvalidSty"
+      "pe\020\000\022\010\n\004Auth\020\001\022\n\n\006System\020\002\022\t\n\005Logic\020\003*\346\n"
+      "\n\003Cmd\022\016\n\nINVALIDCMD\020\000\022\022\n\016eGuestLoginReq\020"
+      "\001\022\022\n\016eGuestLoginRes\020\002\022\014\n\010eRelogin\020\003\022\021\n\re"
+      "UserLostConn\020\004\022\023\n\017eEditProfileReq\020\005\022\023\n\017e"
+      "EditProfileRes\020\006\022\026\n\022eAccountUpgradeReq\020\007"
+      "\022\026\n\022eAccountUpgradeRes\020\010\022\022\n\016eUnameLoginR"
+      "eq\020\t\022\022\n\016eUnameLoginRes\020\n\022\020\n\014eLoginOutReq"
+      "\020\013\022\020\n\014eLoginOutRes\020\014\022\022\n\016eUserRegistReq\020\r"
+      "\022\022\n\016eUserRegistRes\020\016\022\024\n\020eGetUgameInfoReq"
+      "\020\017\022\024\n\020eGetUgameInfoRes\020\020\022\027\n\023eRecvLoginBo"
+      "nuesReq\020\021\022\027\n\023eRecvLoginBonuesRes\020\022\022\031\n\025eG"
+      "etWorldRankUchipReq\020\023\022\031\n\025eGetWorldRankUc"
+      "hipRes\020\024\022\021\n\reGetSysMsgReq\020\025\022\021\n\reGetSysMs"
+      "gRes\020\026\022\022\n\016eLoginLogicReq\020\027\022\022\n\016eLoginLogi"
+      "cRes\020\030\022\021\n\reEnterZoneReq\020\031\022\021\n\reEnterZoneR"
+      "es\020\032\022\017\n\013eEnterMatch\020\033\022\020\n\014eUserArrived\020\034\022"
+      "\021\n\reExitMatchReq\020\035\022\021\n\reExitMatchRes\020\036\022\022\n"
+      "\016eUserExitMatch\020\037\022\022\n\016eCreateRoomReq\020 \022\022\n"
+      "\016eCreateRoomRes\020!\022\020\n\014eJoinRoomReq\020\"\022\020\n\014e"
+      "JoinRoomRes\020#\022\020\n\014eExitRoomReq\020$\022\020\n\014eExit"
+      "RoomRes\020%\022\020\n\014eDessolveReq\020&\022\020\n\014eDessolve"
+      "Res\020\'\022\027\n\023eGetCreateStatusReq\020(\022\027\n\023eGetCr"
+      "eateStatusRes\020)\022\020\n\014eBackRoomReq\020*\022\020\n\014eBa"
+      "ckRoomRes\020+\022\020\n\014eUserOffLine\020,\022\021\n\reHeartB"
+      "eatReq\020-\022\021\n\reHeartBeatRes\020.\022\027\n\023eUserReco"
+      "nnectedReq\020/\022\027\n\023eUserReconnectedRes\0200\022\021\n"
+      "\reUserReadyReq\0201\022\021\n\reUserReadyRes\0202\022\016\n\ne"
+      "GameStart\0203\022\014\n\010eUdpTest\0204\022\017\n\013eLogicFrame"
+      "\0205\022\022\n\016eNextFrameOpts\0206\022\025\n\021eCheckLinkGame"
+      "Req\0207\022\025\n\021eCheckLinkGameRes\0208\022\020\n\014eRoomInf"
+      "oRes\0209\022\016\n\neRoomIdRes\020:\022\021\n\rePlayCountRes\020"
+      ";\022\025\n\021eUserArrivedInfos\020<\022\016\n\neUserState\020="
+      "\022\021\n\reAllUserState\020>\022\017\n\013eGameResult\020\?\022\024\n\020"
+      "eGameTotalResult\020@\022\025\n\021eClickTouZiNumReq\020"
+      "A\022\020\n\014eTouZiNumRes\020B\022\026\n\022eClickTouZiBombRe"
+      "s\020C\022\021\n\reUserGameInfo\020D"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 4751);
+      descriptor, 4742);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game.proto", &protobuf_RegisterTypes);
 }
@@ -2874,6 +2901,7 @@ bool Cmd_IsValid(int value) {
     case 65:
     case 66:
     case 67:
+    case 68:
       return true;
     default:
       return false;
@@ -6807,9 +6835,6 @@ const int UserGameInfo::kUchip3FieldNumber;
 const int UserGameInfo::kUdata1FieldNumber;
 const int UserGameInfo::kUdata2FieldNumber;
 const int UserGameInfo::kUdata3FieldNumber;
-const int UserGameInfo::kBonuesstatusFieldNumber;
-const int UserGameInfo::kBonuesFieldNumber;
-const int UserGameInfo::kDaysFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 UserGameInfo::UserGameInfo()
@@ -6826,17 +6851,27 @@ UserGameInfo::UserGameInfo(const UserGameInfo& from)
       _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&uchip_, &from.uchip_,
-    static_cast<size_t>(reinterpret_cast<char*>(&days_) -
-    reinterpret_cast<char*>(&uchip_)) + sizeof(days_));
+  uchip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_uchip()) {
+    uchip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uchip_);
+  }
+  uexp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_uexp()) {
+    uexp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uexp_);
+  }
+  ::memcpy(&uvip_, &from.uvip_,
+    static_cast<size_t>(reinterpret_cast<char*>(&udata3_) -
+    reinterpret_cast<char*>(&uvip_)) + sizeof(udata3_));
   // @@protoc_insertion_point(copy_constructor:UserGameInfo)
 }
 
 void UserGameInfo::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&uchip_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&days_) -
-      reinterpret_cast<char*>(&uchip_)) + sizeof(days_));
+  uchip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  uexp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&uvip_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&udata3_) -
+      reinterpret_cast<char*>(&uvip_)) + sizeof(udata3_));
 }
 
 UserGameInfo::~UserGameInfo() {
@@ -6845,6 +6880,8 @@ UserGameInfo::~UserGameInfo() {
 }
 
 void UserGameInfo::SharedDtor() {
+  uchip_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  uexp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void UserGameInfo::SetCachedSize(int size) const {
@@ -6877,15 +6914,20 @@ void UserGameInfo::Clear() {
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 255u) {
-    ::memset(&uchip_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&udata3_) -
-        reinterpret_cast<char*>(&uchip_)) + sizeof(udata3_));
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      GOOGLE_DCHECK(!uchip_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*uchip_.UnsafeRawStringPointer())->clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      GOOGLE_DCHECK(!uexp_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*uexp_.UnsafeRawStringPointer())->clear();
+    }
   }
-  if (cached_has_bits & 1792u) {
-    ::memset(&bonuesstatus_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&days_) -
-        reinterpret_cast<char*>(&bonuesstatus_)) + sizeof(days_));
+  if (cached_has_bits & 252u) {
+    ::memset(&uvip_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&udata3_) -
+        reinterpret_cast<char*>(&uvip_)) + sizeof(udata3_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -6901,28 +6943,32 @@ bool UserGameInfo::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required sint32 uchip = 1;
+      // required string uchip = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          set_has_uchip();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &uchip_)));
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_uchip()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->uchip().data(), static_cast<int>(this->uchip().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserGameInfo.uchip");
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // required sint32 uexp = 2;
+      // required string uexp = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          set_has_uexp();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &uexp_)));
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_uexp()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->uexp().data(), static_cast<int>(this->uexp().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "UserGameInfo.uexp");
         } else {
           goto handle_unusual;
         }
@@ -6985,13 +7031,13 @@ bool UserGameInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // required sint32 udata2 = 7;
+      // required bool udata2 = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
           set_has_udata2();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &udata2_)));
         } else {
           goto handle_unusual;
@@ -6999,56 +7045,14 @@ bool UserGameInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // required sint32 udata3 = 8;
+      // required bool udata3 = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
           set_has_udata3();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &udata3_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required sint32 bonuesstatus = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
-          set_has_bonuesstatus();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &bonuesstatus_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required sint32 bonues = 10;
-      case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(80u /* 80 & 0xFF */)) {
-          set_has_bonues();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &bonues_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required sint32 days = 11;
-      case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(88u /* 88 & 0xFF */)) {
-          set_has_days();
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_SINT32>(
-                 input, &days_)));
         } else {
           goto handle_unusual;
         }
@@ -7082,14 +7086,24 @@ void UserGameInfo::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required sint32 uchip = 1;
+  // required string uchip = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(1, this->uchip(), output);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->uchip().data(), static_cast<int>(this->uchip().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserGameInfo.uchip");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->uchip(), output);
   }
 
-  // required sint32 uexp = 2;
+  // required string uexp = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(2, this->uexp(), output);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->uexp().data(), static_cast<int>(this->uexp().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserGameInfo.uexp");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->uexp(), output);
   }
 
   // required sint32 uvip = 3;
@@ -7112,29 +7126,14 @@ void UserGameInfo::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteSInt32(6, this->udata1(), output);
   }
 
-  // required sint32 udata2 = 7;
+  // required bool udata2 = 7;
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(7, this->udata2(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->udata2(), output);
   }
 
-  // required sint32 udata3 = 8;
+  // required bool udata3 = 8;
   if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(8, this->udata3(), output);
-  }
-
-  // required sint32 bonuesstatus = 9;
-  if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(9, this->bonuesstatus(), output);
-  }
-
-  // required sint32 bonues = 10;
-  if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(10, this->bonues(), output);
-  }
-
-  // required sint32 days = 11;
-  if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteSInt32(11, this->days(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->udata3(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7152,14 +7151,26 @@ void UserGameInfo::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required sint32 uchip = 1;
+  // required string uchip = 1;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(1, this->uchip(), target);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->uchip().data(), static_cast<int>(this->uchip().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserGameInfo.uchip");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->uchip(), target);
   }
 
-  // required sint32 uexp = 2;
+  // required string uexp = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(2, this->uexp(), target);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->uexp().data(), static_cast<int>(this->uexp().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "UserGameInfo.uexp");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->uexp(), target);
   }
 
   // required sint32 uvip = 3;
@@ -7182,29 +7193,14 @@ void UserGameInfo::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(6, this->udata1(), target);
   }
 
-  // required sint32 udata2 = 7;
+  // required bool udata2 = 7;
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(7, this->udata2(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(7, this->udata2(), target);
   }
 
-  // required sint32 udata3 = 8;
+  // required bool udata3 = 8;
   if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(8, this->udata3(), target);
-  }
-
-  // required sint32 bonuesstatus = 9;
-  if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(9, this->bonuesstatus(), target);
-  }
-
-  // required sint32 bonues = 10;
-  if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(10, this->bonues(), target);
-  }
-
-  // required sint32 days = 11;
-  if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteSInt32ToArray(11, this->days(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(8, this->udata3(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7220,16 +7216,16 @@ size_t UserGameInfo::RequiredFieldsByteSizeFallback() const {
   size_t total_size = 0;
 
   if (has_uchip()) {
-    // required sint32 uchip = 1;
+    // required string uchip = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->uchip());
   }
 
   if (has_uexp()) {
-    // required sint32 uexp = 2;
+    // required string uexp = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->uexp());
   }
 
@@ -7262,38 +7258,13 @@ size_t UserGameInfo::RequiredFieldsByteSizeFallback() const {
   }
 
   if (has_udata2()) {
-    // required sint32 udata2 = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->udata2());
+    // required bool udata2 = 7;
+    total_size += 1 + 1;
   }
 
   if (has_udata3()) {
-    // required sint32 udata3 = 8;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->udata3());
-  }
-
-  if (has_bonuesstatus()) {
-    // required sint32 bonuesstatus = 9;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->bonuesstatus());
-  }
-
-  if (has_bonues()) {
-    // required sint32 bonues = 10;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->bonues());
-  }
-
-  if (has_days()) {
-    // required sint32 days = 11;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->days());
+    // required bool udata3 = 8;
+    total_size += 1 + 1;
   }
 
   return total_size;
@@ -7307,15 +7278,15 @@ size_t UserGameInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  if (((_has_bits_[0] & 0x000007ff) ^ 0x000007ff) == 0) {  // All required fields are present.
-    // required sint32 uchip = 1;
+  if (((_has_bits_[0] & 0x000000ff) ^ 0x000000ff) == 0) {  // All required fields are present.
+    // required string uchip = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->uchip());
 
-    // required sint32 uexp = 2;
+    // required string uexp = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->uexp());
 
     // required sint32 uvip = 3;
@@ -7338,30 +7309,11 @@ size_t UserGameInfo::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::SInt32Size(
         this->udata1());
 
-    // required sint32 udata2 = 7;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->udata2());
+    // required bool udata2 = 7;
+    total_size += 1 + 1;
 
-    // required sint32 udata3 = 8;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->udata3());
-
-    // required sint32 bonuesstatus = 9;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->bonuesstatus());
-
-    // required sint32 bonues = 10;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->bonues());
-
-    // required sint32 days = 11;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::SInt32Size(
-        this->days());
+    // required bool udata3 = 8;
+    total_size += 1 + 1;
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -7398,10 +7350,12 @@ void UserGameInfo::MergeFrom(const UserGameInfo& from) {
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 255u) {
     if (cached_has_bits & 0x00000001u) {
-      uchip_ = from.uchip_;
+      set_has_uchip();
+      uchip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uchip_);
     }
     if (cached_has_bits & 0x00000002u) {
-      uexp_ = from.uexp_;
+      set_has_uexp();
+      uexp_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uexp_);
     }
     if (cached_has_bits & 0x00000004u) {
       uvip_ = from.uvip_;
@@ -7423,18 +7377,6 @@ void UserGameInfo::MergeFrom(const UserGameInfo& from) {
     }
     _has_bits_[0] |= cached_has_bits;
   }
-  if (cached_has_bits & 1792u) {
-    if (cached_has_bits & 0x00000100u) {
-      bonuesstatus_ = from.bonuesstatus_;
-    }
-    if (cached_has_bits & 0x00000200u) {
-      bonues_ = from.bonues_;
-    }
-    if (cached_has_bits & 0x00000400u) {
-      days_ = from.days_;
-    }
-    _has_bits_[0] |= cached_has_bits;
-  }
 }
 
 void UserGameInfo::CopyFrom(const ::google::protobuf::Message& from) {
@@ -7452,7 +7394,7 @@ void UserGameInfo::CopyFrom(const UserGameInfo& from) {
 }
 
 bool UserGameInfo::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000007ff) != 0x000007ff) return false;
+  if ((_has_bits_[0] & 0x000000ff) != 0x000000ff) return false;
   return true;
 }
 
@@ -7462,17 +7404,14 @@ void UserGameInfo::Swap(UserGameInfo* other) {
 }
 void UserGameInfo::InternalSwap(UserGameInfo* other) {
   using std::swap;
-  swap(uchip_, other->uchip_);
-  swap(uexp_, other->uexp_);
+  uchip_.Swap(&other->uchip_);
+  uexp_.Swap(&other->uexp_);
   swap(uvip_, other->uvip_);
   swap(uchip2_, other->uchip2_);
   swap(uchip3_, other->uchip3_);
   swap(udata1_, other->udata1_);
   swap(udata2_, other->udata2_);
   swap(udata3_, other->udata3_);
-  swap(bonuesstatus_, other->bonuesstatus_);
-  swap(bonues_, other->bonues_);
-  swap(days_, other->days_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
@@ -8878,6 +8817,203 @@ void WorldChipRankInfo::InternalSwap(WorldChipRankInfo* other) {
 }
 
 ::google::protobuf::Metadata WorldChipRankInfo::GetMetadata() const {
+  protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void GetWorldRankUchipReq::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+GetWorldRankUchipReq::GetWorldRankUchipReq()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_game_2eproto::InitDefaultsGetWorldRankUchipReq();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:GetWorldRankUchipReq)
+}
+GetWorldRankUchipReq::GetWorldRankUchipReq(const GetWorldRankUchipReq& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _has_bits_(from._has_bits_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:GetWorldRankUchipReq)
+}
+
+void GetWorldRankUchipReq::SharedCtor() {
+  _cached_size_ = 0;
+}
+
+GetWorldRankUchipReq::~GetWorldRankUchipReq() {
+  // @@protoc_insertion_point(destructor:GetWorldRankUchipReq)
+  SharedDtor();
+}
+
+void GetWorldRankUchipReq::SharedDtor() {
+}
+
+void GetWorldRankUchipReq::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* GetWorldRankUchipReq::descriptor() {
+  ::protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const GetWorldRankUchipReq& GetWorldRankUchipReq::default_instance() {
+  ::protobuf_game_2eproto::InitDefaultsGetWorldRankUchipReq();
+  return *internal_default_instance();
+}
+
+GetWorldRankUchipReq* GetWorldRankUchipReq::New(::google::protobuf::Arena* arena) const {
+  GetWorldRankUchipReq* n = new GetWorldRankUchipReq;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void GetWorldRankUchipReq::Clear() {
+// @@protoc_insertion_point(message_clear_start:GetWorldRankUchipReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool GetWorldRankUchipReq::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:GetWorldRankUchipReq)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+  handle_unusual:
+    if (tag == 0) {
+      goto success;
+    }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, _internal_metadata_.mutable_unknown_fields()));
+  }
+success:
+  // @@protoc_insertion_point(parse_success:GetWorldRankUchipReq)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:GetWorldRankUchipReq)
+  return false;
+#undef DO_
+}
+
+void GetWorldRankUchipReq::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:GetWorldRankUchipReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:GetWorldRankUchipReq)
+}
+
+::google::protobuf::uint8* GetWorldRankUchipReq::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:GetWorldRankUchipReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:GetWorldRankUchipReq)
+  return target;
+}
+
+size_t GetWorldRankUchipReq::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:GetWorldRankUchipReq)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void GetWorldRankUchipReq::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:GetWorldRankUchipReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GetWorldRankUchipReq* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const GetWorldRankUchipReq>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:GetWorldRankUchipReq)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:GetWorldRankUchipReq)
+    MergeFrom(*source);
+  }
+}
+
+void GetWorldRankUchipReq::MergeFrom(const GetWorldRankUchipReq& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:GetWorldRankUchipReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+}
+
+void GetWorldRankUchipReq::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:GetWorldRankUchipReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GetWorldRankUchipReq::CopyFrom(const GetWorldRankUchipReq& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:GetWorldRankUchipReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GetWorldRankUchipReq::IsInitialized() const {
+  return true;
+}
+
+void GetWorldRankUchipReq::Swap(GetWorldRankUchipReq* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void GetWorldRankUchipReq::InternalSwap(GetWorldRankUchipReq* other) {
+  using std::swap;
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata GetWorldRankUchipReq::GetMetadata() const {
   protobuf_game_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_game_2eproto::file_level_metadata[kIndexInFileMessages];
 }

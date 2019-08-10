@@ -25,6 +25,7 @@ local Stype = require("Stype")
 
 -- 开启网关端口监听
 Netbus.tcp_listen(servers[Stype.Auth].port)
+-- Netbus.ws_listen(servers[Stype.Auth].port)
 print("[Auth Server]>>>>> Start at ".. servers[Stype.Auth].port)
 
 local auth_service = require("auth_server/auth_service")

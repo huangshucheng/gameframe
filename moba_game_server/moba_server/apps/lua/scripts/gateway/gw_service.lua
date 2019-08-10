@@ -116,6 +116,7 @@ local function send_to_client(server_session, raw_cmd)
 	if client_session then 
 		RawCmd.set_utag(raw_cmd, 0)
 		Session.send_raw_cmd(client_session, raw_cmd)
+		print("send to client_session: " .. tostring(client_session))
 
 		if ctype == Cmd.eLoginOutRes then -- 注销得消息，转发给其他得服务器
 			Session.set_uid(client_session, 0)
@@ -271,7 +272,7 @@ local function send_heart_beat()
 	end
 end
 
-Scheduler.schedule(send_heart_beat, 1000, -1, 3000)
+-- Scheduler.schedule(send_heart_beat, 1000, -1, 3000)
 
 gw_service_init()
 

@@ -4,6 +4,7 @@ local LobbyScene = class("LobbyScene")
 local LogicServiceProxy     = require("game.modules.LogicServiceProxy")
 local SocketUDP             = require('game.net.NetWorkUDP')
 local Scheduler             = require("game.utils.scheduler")
+local SystemServiceProxy    = require("game.modules.SystemServiceProxy")
 
 function LobbyScene:onTouchJoinRoomBtn(send,eventType)
     if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
@@ -56,6 +57,7 @@ function LobbyScene:onTouchMessageBtn(send, eventType)
     if not Lobby.UIFunction.isShowTouchEffect(send, eventType) then return end
     Lobby.showPopLayer("RankLayer")
     -- SystemServiceProxy:getInstance():sendGetLoginBonues()--登录奖励  TODO
+    -- SystemServiceProxy:getInstance():sendGetUgameInfo()
     --test 
     --[[
     local str = ''

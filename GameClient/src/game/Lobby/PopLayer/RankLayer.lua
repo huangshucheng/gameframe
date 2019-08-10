@@ -59,8 +59,8 @@ function RankLayer:onEventWorldRankUchipRes(event)
     local list_view = Lobby.UIFunction.seekWidgetByName(self:getCsbNode(),KW_RANK_LIST)
 	Lobby.popLayer('LoadingLayer')
     if data.status == Respones.OK then
-        local rank_info = data.rank_info
-        for i,v in ipairs(rank_info) do
+        local rankinfo = data.rankinfo
+        for i,v in ipairs(rankinfo) do
    			if list_view then
    			    list_view:pushBackDefaultItem()
               	local products = list_view:getItems()

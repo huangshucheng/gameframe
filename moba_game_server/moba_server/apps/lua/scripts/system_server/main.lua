@@ -1,6 +1,7 @@
 Logger.init("logger/system_server/", "system", true)
 
 require("database/mysql_game")
+require("functions")
 
 -- 初始化协议模块
 local proto_type = {

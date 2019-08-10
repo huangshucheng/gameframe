@@ -51,8 +51,9 @@ local function send_rank_info_to_client(s, uid, rank_uids, rank_user_info, rank_
 	end
 	local msg = {Stype.System, Cmd.eGetWorldRankUchipRes, uid, {
 		status = Respones.OK,
-		rank_info = rank_info_body,
+		rankinfo = rank_info_body,
 	}}
+	dump(msg,"rankinfo",5)
 	Session.send_msg(s, msg)
 end
 -- {stype, ctype, utag, body}
