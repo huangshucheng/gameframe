@@ -35,10 +35,10 @@ function GameLogic:on_msg_check_link_game(body,player)
 		users_info[#users_info + 1] = players[i]:get_user_arrived_info()
 	end
 	player:send_msg(Cmd.eCheckLinkGameRes, {status = Respones.OK})
-	player:send_msg(Cmd.eRoomInfoRes, {room_info = self:get_room_info()})
-	player:send_msg(Cmd.eRoomIdRes,{room_id = self:get_room_id()})
-	player:send_msg(Cmd.ePlayCountRes,{play_count = self:get_play_count(),total_play_count = self:get_total_play_count()})
-	player:send_msg(Cmd.eUserArrivedInfos,{user_info = users_info})
+	player:send_msg(Cmd.eRoomInfoRes, {roominfo = self:get_room_info()})
+	player:send_msg(Cmd.eRoomIdRes,{roomid = self:get_room_id()})
+	player:send_msg(Cmd.ePlayCountRes,{playcount = self:get_play_count(),totalplaycount = self:get_total_play_count()})
+	player:send_msg(Cmd.eUserArrivedInfos,{userinfo = users_info})
 	--------------------------------
 	---具体重连逻辑
 	--------------------------------
@@ -54,9 +54,9 @@ function GameLogic:on_msg_reconnect(body,player)
 	end
 	print('on_reconnect,brandid: ' .. player:get_brand_id())
 	player:send_msg(Cmd.eUserReconnectedRes, {status = Respones.OK})
-	player:send_msg(Cmd.eRoomInfoRes, {room_info = self:get_room_info()})
-	player:send_msg(Cmd.eRoomIdRes,{room_id = self:get_room_id()})
-	player:send_msg(Cmd.ePlayCountRes,{play_count = self:get_play_count(),total_play_count = self:get_total_play_count()})
+	player:send_msg(Cmd.eRoomInfoRes, {roominfo = self:get_room_info()})
+	player:send_msg(Cmd.eRoomIdRes,{roomid = self:get_room_id()})
+	player:send_msg(Cmd.ePlayCountRes,{playcount = self:get_play_count(),totalplaycount = self:get_total_play_count()})
 	self:send_user_state()
 	self:send_user_arrived_infos()
 	--------------------------------
@@ -80,7 +80,7 @@ function GameLogic:on_msg_user_ready(body,player)
 		seatid = player:get_seat_id(),
 		brandid = player:get_brand_id(),
 		numberid = player:get_number_id(),
-		user_state = player:get_state(),
+		userstate = player:get_state(),
 	}
 	if ready_state == 1 then -- user send ready
 		if player:get_state() >= Player.STATE.psReady then
@@ -100,7 +100,7 @@ function GameLogic:on_msg_user_ready(body,player)
 		end
 	end
 
-	msg_body.user_state = player:get_state()
+	msg_body.userstate = player:get_state()
 	self:brodcast_in_room(Cmd.eUserReadyRes, msg_body)
 	self:get_room():check_game_start()
 end

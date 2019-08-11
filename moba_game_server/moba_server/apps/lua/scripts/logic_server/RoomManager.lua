@@ -81,6 +81,7 @@ function RoomManager:on_create_room(session, req)
 	local ctype = req[2]
 	local uid 	= req[3]
 	local body 	= req[4]
+	dump(body,"on_create_room");
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	-- print('on_create_room player, numid: ' .. tostring(player:get_brand_id()))
@@ -112,7 +113,7 @@ function RoomManager:on_create_room(session, req)
 	local roomid = generate_room_id()
 
 	room:set_room_id(roomid)
-	room:set_room_info(body.room_info)
+	room:set_room_info(body.roominfo)
 	room:on_parse_game_rule()
 	room:enter_player(player)
 	server_rooms[tostring(roomid)] = room
@@ -207,7 +208,7 @@ function RoomManager:on_join_room(session, req)
 		return
 	end
 
-	local room_id = body.room_id
+	local room_id = body.roomid
 	-- print('hcc>> join_room, room_id: '.. room_id)
 	local room = server_rooms[tostring(room_id)]
 	if not room then
