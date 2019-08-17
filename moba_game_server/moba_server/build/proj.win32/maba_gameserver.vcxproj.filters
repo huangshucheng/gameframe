@@ -358,7 +358,7 @@
     <ClCompile Include="..\..\apps\lua\main.cc">
       <Filter>apps\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\apps\lua\proto\game.pb.cc">
+    <ClCompile Include="..\..\apps\lua\proto\gameprotocol.pb.cc">
       <Filter>apps\lua\proto</Filter>
     </ClCompile>
   </ItemGroup>
@@ -618,7 +618,7 @@
     <ClInclude Include="..\..\lua_wrapper\utils_export_to_lua.h">
       <Filter>lua_wrapper</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\apps\lua\proto\game.pb.h">
+    <ClInclude Include="..\..\apps\lua\proto\gameprotocol.pb.h">
       <Filter>apps\lua\proto</Filter>
     </ClInclude>
   </ItemGroup>

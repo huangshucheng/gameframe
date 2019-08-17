@@ -18,18 +18,13 @@ function LogicServiceProxy:ctor()
 end
 
 function LogicServiceProxy:sendLoginLogicServer()
-	local ip , port = ConfigKeyWord.get_udp_addr()
-    local msg = {
-        udp_ip = ip,
-        udp_port = port,
-    }
- 	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eLoginLogicReq,msg)
+ 	NetWork:getInstance():sendMsg(Stype.Logic,Cmd.eLoginLogicReq)
 end
 
-function LogicServiceProxy:sendCreateRoom(room_info)
-	if type(room_info) ~= 'string' then return end 
+function LogicServiceProxy:sendCreateRoom(roominfo)
+	if type(roominfo) ~= 'string' then return end 
 	local msg = {
-		room_info = room_info 
+		roominfo = roominfo 
 	}
 
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eCreateRoomReq, msg)
@@ -39,21 +34,15 @@ function LogicServiceProxy:sendDessolveRoom()
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eDessolveReq, nil)
 end
 
-function LogicServiceProxy:sendExitRoom(is_force)
-	if is_force == nil then
-		is_force = false
-	end
-	local msg = {
-		is_force_exit = is_force
-	}
-	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eExitRoomReq, msg)
+function LogicServiceProxy:sendExitRoom()
+	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eExitRoomReq)
 	dump(msg,'hcc>>sendExitRoom')
 end
 
 function LogicServiceProxy:sendJoinRoom(roomid)
 	if type(roomid) ~= 'string' then return end 
 	local msg = {
-		room_id = roomid,
+		roomid = roomid,
 	}
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eJoinRoomReq, msg)
 end
@@ -76,14 +65,14 @@ end
 
 function LogicServiceProxy:sendUserReady()
 	local msg = {
-		ready_state = 1,
+		readystate = 1,
 	}
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUserReadyReq, msg)
 end
 
 function LogicServiceProxy:sendUserCancelReady()
 	local msg = {
-		ready_state = 2,
+		readystate = 2,
 	}
 	NetWork:getInstance():sendMsg(Stype.Logic, Cmd.eUserReadyReq, msg)
 end

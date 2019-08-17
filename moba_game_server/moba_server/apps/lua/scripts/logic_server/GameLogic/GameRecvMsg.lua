@@ -71,9 +71,9 @@ function GameLogic:on_msg_user_ready(body,player)
 	if room_id == -1 then
 		return
 	end
-	local ready_state = body.ready_state
+	local readystate = body.readystate
 
-	print('on_user_ready, brandid: ' .. player:get_brand_id() .. ' ,ready_state: ' .. ready_state)
+	print('on_user_ready, brandid: ' .. player:get_brand_id() .. ' ,readystate: ' .. readystate)
 
 	local msg_body ={
 		status = Respones.OK,
@@ -82,7 +82,7 @@ function GameLogic:on_msg_user_ready(body,player)
 		numberid = player:get_number_id(),
 		userstate = player:get_state(),
 	}
-	if ready_state == 1 then -- user send ready
+	if readystate == 1 then -- user send ready
 		if player:get_state() >= Player.STATE.psReady then
 			msg_body.status = Respones.PlayerIsAlreadyReady
 			print('use already ready')
@@ -90,7 +90,7 @@ function GameLogic:on_msg_user_ready(body,player)
 		else
 			player:set_state(Player.STATE.psReady)
 		end
-	elseif ready_state == 2 then -- user send cancel ready
+	elseif readystate == 2 then -- user send cancel ready
 		if player:get_state() == Player.STATE.psReady then
 			player:set_state(Player.STATE.psWait)
 		elseif player:get_state() > Player.STATE.psReady then

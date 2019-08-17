@@ -140,7 +140,7 @@ function RoomManager:on_exit_room(session, req)
 	local room_id = player:get_room_id()
 	local body_msg = {
 		status = Respones.OK,
-		user_info = player:get_user_arrived_info(),
+		userinfo = player:get_user_arrived_info(),
 	}
 
 	if room_id == -1 then
@@ -171,7 +171,7 @@ function RoomManager:on_exit_room(session, req)
 
 	body_msg = {
 		status = Respones.OK,
-		user_info = player:get_user_arrived_info(),
+		userinfo = player:get_user_arrived_info(),
 	}
 
 	local ret = room:exit_player(player)
@@ -223,9 +223,9 @@ function RoomManager:on_join_room(session, req)
 	end
 	player:send_msg(Cmd.eJoinRoomRes,{status = Respones.OK})
 
-	local users_info = {}
-	table.insert(users_info,player:get_user_arrived_info())
-	room:brodcast_in_room(Cmd.eUserArrivedInfos, {user_info = users_info}, player)
+	local usersinfo = {}
+	table.insert(usersinfo,player:get_user_arrived_info())
+	room:brodcast_in_room(Cmd.eUserArrivedInfos, {userinfo = usersinfo}, player)
 	print('join_room usccess brandid: ' .. player:get_brand_id() .. ' ,totalroomnum: ' .. self:get_total_rooms())
 end
 
@@ -316,9 +316,9 @@ function RoomManager:on_back_room(session, req)
 	end
 	player:send_msg(Cmd.eBackRoomRes, {status = Respones.OK})
 
-	local users_info = {}
-	table.insert(users_info,player:get_user_arrived_info())
-	room:brodcast_in_room(Cmd.eUserArrivedInfos, {user_info = users_info}, player)
+	local userinfo = {}
+	table.insert(userinfo,player:get_user_arrived_info())
+	room:brodcast_in_room(Cmd.eUserArrivedInfos, {userinfo = userinfo}, player)
 
 	print('on_back_room usccess brandid: ' .. player:get_brand_id() .. ' ,totalroomnum: ' .. self:get_total_rooms())
 end
@@ -340,7 +340,7 @@ function RoomManager:on_player_disconnect(player)
 
 	player:set_is_offline(true)
 	local body_msg = {
-		user_info = player:get_user_arrived_info(),
+		userinfo = player:get_user_arrived_info(),
 	}
 	room:brodcast_in_room(Cmd.eUserOffLine, body_msg)
 	print("on_player_disconnect brandid: " .. player:get_brand_id())

@@ -48,27 +48,27 @@ end
 function GameScene:onEventRoomInfo(event)
     local data = event._usedata
     local room_info = data.room_info
-    RoomData:getInstance():setRoomInfo(room_info)
+    RoomData:getInstance():setRoomInfo(roominfo)
     self:showRoomInfo()
-    print('room_info: ' .. tostring(room_info))
+    print('room_info: ' .. tostring(roominfo))
 end
 
 function GameScene:onEventRoomId(event)
     local data = event._usedata
     local room_id = data.room_id
-    RoomData:getInstance():setRoomId(room_id)
+    RoomData:getInstance():setRoomId(roomid)
     self:showRoomId()
-    print('room_id: ' .. tostring(room_id))
+    print('room_id: ' .. tostring(roomid))
 end
 
 function GameScene:onEventPlayCount(event)
     local data = event._usedata
-    local play_count = data.play_count
-    local total_play_count = data.total_play_count
-    RoomData:getInstance():setPlayCount(play_count)
-    RoomData:getInstance():setTotalPlayCount(total_play_count)
+    local play_count = data.playcount
+    local total_play_count = data.totalplaycount
+    RoomData:getInstance():setPlayCount(playcount)
+    RoomData:getInstance():setTotalPlayCount(totalplaycount)
     self:showPlayCount()
-    print('play_count: ' .. tostring(play_count) .. ' ,total_play_count: ' .. tostring(total_play_count))
+    print('play_count: ' .. tostring(playcount) .. ' ,total_play_count: ' .. tostring(totalplaycount))
 end
 
 function GameScene:onEventDessolve(event)
@@ -83,14 +83,14 @@ end
 function GameScene:onEventExitRoom(event)
     local data = event._usedata
     if data.status == Respones.OK then
-        local user_info = data.user_info
-        local serverSeat = user_info.seatid
-        local brandid = user_info.brandid
-        local ishost = user_info.ishost
-        local isoffline = user_info.isoffline
+        local userinfo = data.userinfo
+        local serverSeat = userinfo.seatid
+        local brandid = userinfo.brandid
+        local ishost = userinfo.ishost
+        local isoffline = userinfo.isoffline
 
         if ishost or isoffline then
-            RoomData:getInstance():updatePlayerByUserInfo(user_info)
+            RoomData:getInstance():updatePlayerByUserInfo(userinfo)
         else
             RoomData:getInstance():removePlayerBySeatId(serverSeat)
         end
@@ -122,8 +122,8 @@ end
 function GameScene:onEventUserArrivedInfos(event)
     local data = event._usedata
     dump(data,'hcc>>onEventUserArrivedInfos')
-    if next(data.user_info) then
-        for _,info in ipairs(data.user_info) do
+    if next(data.userinfo) then
+        for _,info in ipairs(data.userinfo) do
             RoomData:getInstance():createPlayerByUserInfo(info)
         end
     end
@@ -141,9 +141,9 @@ end
 
 function GameScene:onEventUserOffline(event)
     local data = event._usedata
-    local user_info = data.user_info
-    if next(user_info) then
-        RoomData:getInstance():updatePlayerByUserInfo(user_info)
+    local userinfo = data.userinfo
+    if next(userinfo) then
+        RoomData:getInstance():updatePlayerByUserInfo(userinfo)
     end
     self:showAllExistUserInfo()
     print('onEventUserOffline>> player count: ' .. RoomData:getInstance():getRoomPlayerCount())
@@ -200,11 +200,11 @@ function GameScene:onEventUserReady(event)
     if body.status == Respones.OK then
        local brandid = body.brandid
        local serverSeat = body.seatid
-       local user_state = body.user_state
+       local userstate = body.userstate
        local player = RoomData:getInstance():getPlayerBySeatId(serverSeat)
        if player then
            if player:getBrandId() == brandid then
-                player:setState(user_state)
+                player:setState(userstate)
                 self:showReadyBtn()
                 self:showReadyImag()
            end
@@ -214,11 +214,11 @@ end
 
 function GameScene:onEventUserState(event)
     local body = event._usedata
-    if next(body.users_state) then
-        for index,state in pairs(body.users_state) do
+    if next(body.userstate) then
+        for index,state in pairs(body.userstate) do
             local player = RoomData:getInstance():getPlayerBySeatId(state.seatid)
             if player then
-                player:setState(state.user_state)
+                player:setState(state.userstate)
             end
         end
     end

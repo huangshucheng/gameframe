@@ -6,7 +6,7 @@ ConfigKeyWord.port 				= 6080  --服务端 端口
 ConfigKeyWord.udp_port 			= 8003  --服务端udp端口
 
 ConfigKeyWord.local_ip          = '127.0.0.1'
-ConfigKeyWord.pb_file_name 		= 'game.pb' 
+ConfigKeyWord.pb_file_name 		= 'gameprotocol.pb' 
 
 local UDP_PORT_STR = 'udp_port_str'
 

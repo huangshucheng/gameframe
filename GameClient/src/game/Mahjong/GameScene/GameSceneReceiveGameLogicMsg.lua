@@ -29,9 +29,9 @@ end
 function GameScene:onEventGameTouziNum(event)
 	self:showGameTouZi(true)
 	local data = event._usedata
-	local touzi_nums = data.touzi_nums
-	local bomb_nums = data.bomb_nums
-	self:refreshTouziNum(touzi_nums,bomb_nums)
+	local touzinums = data.touzinums
+	local bombnums = data.bombnums
+	self:refreshTouziNum(touzinums,bombnums)
 	for i = 1 , 4 do
 		local player = RoomData:getInstance():getPlayerBySeatId(i)
 		print('player id ' .. i .. ' ,is>> ' .. tostring(player))

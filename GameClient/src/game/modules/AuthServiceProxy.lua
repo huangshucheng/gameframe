@@ -19,7 +19,7 @@ function AuthServiceProxy:sendGuestLogin(keyStr)
 	if type(keyStr) ~= 'string' or string.len(keyStr) ~= 32 then
 		return
 	end
-	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eGuestLoginReq,{guest_key = keyStr})
+	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eGuestLoginReq,{guestkey = keyStr})
 end
 
 function AuthServiceProxy:sendUnameLogin(unameStr, upwdStr)
@@ -33,7 +33,7 @@ function AuthServiceProxy:sendRegist(unameStr, upwd_md5Str)
 	if type(unameStr) ~= 'string' or type(upwd_md5Str) ~= 'string' then
 		return
 	end
-	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eUserRegistReq,{uname = unameStr, upwd_md5 = upwd_md5Str}) 
+	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eUserRegistReq,{uname = unameStr, upwdmd5 = upwd_md5Str}) 
 end
 
 function AuthServiceProxy:sendEditProfile(unickStr, ufaceStr, usexStr)
@@ -56,7 +56,7 @@ function AuthServiceProxy:sendUpgrade(unameStr, upwd_md5Str)
 	if type(unameStr) ~= 'string' or type(upwd_md5Str) ~= 'string' then
 		return
 	end
-	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eAccountUpgradeReq,{uname = unameStr, upwd_md5 = upwd_md5Str})
+	NetWork:getInstance():sendMsg(Stype.Auth,Cmd.eAccountUpgradeReq,{uname = unameStr, upwdmd5 = upwd_md5Str})
 end
 
 return AuthServiceProxy
