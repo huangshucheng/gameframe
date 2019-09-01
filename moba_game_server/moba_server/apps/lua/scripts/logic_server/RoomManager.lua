@@ -127,13 +127,10 @@ function RoomManager:on_exit_room(session, req)
 	local stype = req[1]
 	local ctype = req[2]
 	local uid 	= req[3]
-	local body = req[4]
-	-- dump(body,'hcc>>on_exit_room')
 
 	local player = PlayerManager:getInstance():get_player_by_uid(uid)
 	if not player then
 		NetWork.send_status(session, Cmd.eExitRoomRes, uid, Respones.PlayerIsNotExist)
-		-- print('hcc>> exit_room 1')
 		return
 	end
 
@@ -151,11 +148,6 @@ function RoomManager:on_exit_room(session, req)
 	local room = server_rooms[tostring(room_id)]
 	if not room then
 		player:send_msg(Cmd.eExitRoomRes, body_msg)
-		return
-	end
-
-	if not body then
-		NetWork.send_status(session, Cmd.eExitRoomRes, uid, Respones.InvalidOpt)
 		return
 	end
 

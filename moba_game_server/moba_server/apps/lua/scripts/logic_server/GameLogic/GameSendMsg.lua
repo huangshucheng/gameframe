@@ -14,7 +14,7 @@ function GameLogic:send_user_state()
 	local tmp_users_state = {}
 	local players = self:get_room_players()
 	for i = 1 , #players do
-		tmp_users_state[#tmp_users_state + 1] = {seatid = players[i]:get_seat_id() , user_state = players[i]:get_state()}
+		tmp_users_state[#tmp_users_state + 1] = {seatid = players[i]:get_seat_id() , userstate = players[i]:get_state()}
 	end
 	local msg = {
 		userstate = tmp_users_state
