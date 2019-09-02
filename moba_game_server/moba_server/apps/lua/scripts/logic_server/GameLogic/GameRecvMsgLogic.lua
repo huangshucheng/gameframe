@@ -15,13 +15,14 @@ function GameLogic:on_msg_click_touzi(body,player)
 	end
 
 	local seatid = tonumber(body.seatid)
-	local touzi_num = tonumber(body.touzi_num)
+	local touzinum = tonumber(body.touzinum)
 
+	print("GameLogic>> " .. tostring(seatid) .. " ,touzi: " .. tostring(touzinum))
  	
 	local tmpidx = nil
 	local tnum = self:get_logic_data():get_touzi_nums()
 	for idx,tn in ipairs(tnum) do
-		if touzi_num == tn then
+		if touzinum == tn then
 			tmpidx = idx
 			break
 		end
@@ -43,7 +44,7 @@ function GameLogic:on_msg_click_touzi(body,player)
 		return false
  	end
  	
- 	if is_bomb_func(touzi_num) then
+ 	if is_bomb_func(touzinum) then
  		self:send_click_bomb_seatid(seatid)
  		self:goto_game_step(self.GameStep.GAME_STEP_END_GAME)
  	end
